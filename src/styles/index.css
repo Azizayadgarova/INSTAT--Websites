@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-inter: 'Inter', sans-serif;
+}
+
+.font-inter {
+	font-family: 'Inter', sans-serif;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+}
+
+.text_font {
+	font-family: 'Inter', sans-serif  !important;
+	font-size: 64px;
+	font-weight: 600;
+}
+/* Bu klass matn ustiga grunge teksturani taqlid qiladi */
+.grunge-text-texture {
+  /* Teksturali grunge rasmini bu yerga yuklang yoki uni taqlid qiling */
+  /* Misol uchun, shunchaki contrast va brightness orqali simulyatsiya */
+  filter: contrast(150%) brightness(120%);
+  position: relative;
+}
+
+/* Kavisli matn elementlari uchun asosiy klass */
+.curved-text-char {
+  position: absolute;
+  transform-origin: bottom center;
+}
+
+@keyframes cardSpin {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+.line-flow {
+  animation: flow 3s linear infinite;
+}
+
+@keyframes flow {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Animatsiyani o'chirishni afzal ko'rgan foydalanuvchilar uchun */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
