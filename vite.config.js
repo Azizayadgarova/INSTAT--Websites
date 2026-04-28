@@ -19,6 +19,9 @@ export default defineConfig({
 		cssCodeSplit: true,
 		assetsInlineLimit: 8192,
 		reportCompressedSize: false,
+		minify: 'esbuild',
+		cssMinify: true,
+		modulePreload: { polyfill: false },
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
@@ -37,6 +40,9 @@ export default defineConfig({
 						id.includes('node_modules/react-router-dom/')
 					) {
 						return 'react-vendor'
+					}
+					if (id.includes('@fontsource')) {
+						return 'fonts'
 					}
 				},
 			},

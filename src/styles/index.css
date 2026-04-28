@@ -45,6 +45,10 @@ body {
   to { stroke-dashoffset: 0; }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* Animatsiyani o'chirishni afzal ko'rgan foydalanuvchilar uchun */
 @media (prefers-reduced-motion: reduce) {
   *,
