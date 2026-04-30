@@ -1,8 +1,8 @@
-import Image1 from '../../assets/Image1.png?format=webp&quality=80'
-import Image2 from '../../assets/Image2.png?format=webp&quality=80'
-import Image3 from '../../assets/Image3.png?format=webp&quality=80'
-import Image4 from '../../assets/Image4.png?format=webp&quality=80'
-import Image5 from '../../assets/Image5.png?format=webp&quality=80'
+import Image1 from '../../assets/Image1.png'
+import Image2 from '../../assets/Image2.png'
+import Image3 from '../../assets/Image3.png'
+import Image4 from '../../assets/Image4.png'
+import Image5 from '../../assets/Image5.png'
 
 export const BUTTON_TEXT = 'Tizimga kirish'
 
