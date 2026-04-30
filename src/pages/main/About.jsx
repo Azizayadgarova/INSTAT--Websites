@@ -75,7 +75,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* ==================== ASOSIY O'ZGARGAN QISM ==================== */}
       <motion.div
         className='relative w-full max-w-[1200px] mt-[50px] md:mt-[90px] px-4 md:px-0'
         initial={{ opacity: 0, y: 30 }}
@@ -105,7 +104,6 @@ const About = () => {
           style={{ height: 'auto' }}
         />
 
-        {/* Asosiy konteyner */}
         <div
           className='relative w-full h-auto md:h-[550px] rounded-[40px] border z-10 overflow-hidden'
           style={{ borderColor: 'rgba(47, 58, 68, 0.5)' }}
@@ -119,7 +117,6 @@ const About = () => {
             className='absolute inset-0 w-full h-full object-cover'
           />
 
-          {/* Desktop versiya (md va undan yuqori) - eski dizayn */}
           <div className="hidden md:block relative w-full h-[550px]">
             <svg className='absolute inset-0 w-full h-full pointer-events-none z-10' viewBox='0 0 1200 550'>
               <g fill='none' stroke={LC} strokeWidth={SW}>
@@ -165,7 +162,6 @@ const About = () => {
               </div>
             </motion.div>
 
-            {/* Desktop kartochkalar */}
             <AboutCard label="Onlayn ta'lim" style={{ left: '75px', top: '85px' }} xFrom={-30} delay={0.65} />
             <AboutCard label="Bo'sh ish o'rinlari" style={{ left: '75px', top: '250px' }} xFrom={-30} delay={0.72} />
             <AboutCard label="Mikro ma'lumotlar" style={{ left: '75px', top: '415px' }} xFrom={-30} delay={0.79} />
@@ -174,7 +170,6 @@ const About = () => {
             <AboutCard label='Elektron jurnal' style={{ right: '75px', top: '415px' }} xFrom={30} delay={0.79} />
           </div>
 
-          {/* ===================== MOBILE VERSIYA ===================== */}
           <div className="md:hidden relative w-full pt-10 pb-12 px-5 flex flex-col items-center">
             <div
               className="absolute inset-0 pointer-events-none"
@@ -183,7 +178,6 @@ const About = () => {
               }}
             />
 
-            {/* Yuqori 3 ta kartochka */}
             <div className="flex flex-col gap-3 w-full z-20">
               {[
                 { label: "Onlayn ta'lim", delay: 0.3 },
@@ -194,13 +188,11 @@ const About = () => {
               ))}
             </div>
 
-            {/* Yuqori connector */}
             <div className="flex flex-col items-center my-4 z-10">
               <div className="w-[2px] h-8 bg-gradient-to-b from-[rgba(43,117,204,0.2)] to-[rgba(43,117,204,0.7)]" />
               <div className="w-2 h-2 rounded-full bg-[rgba(43,117,204,0.7)]" />
             </div>
 
-            {/* Logo doirasi */}
             <motion.div
               className='relative z-20'
               initial={{ opacity: 0, scale: 0.85 }}
@@ -234,13 +226,11 @@ const About = () => {
               </div>
             </motion.div>
 
-            {/* Pastki connector */}
             <div className="flex flex-col items-center my-4 z-10">
               <div className="w-2 h-2 rounded-full bg-[rgba(43,117,204,0.7)]" />
               <div className="w-[2px] h-8 bg-gradient-to-b from-[rgba(43,117,204,0.7)] to-[rgba(43,117,204,0.2)]" />
             </div>
 
-            {/* Pastki 3 ta kartochka */}
             <div className="flex flex-col gap-3 w-full z-20">
               {[
                 { label: 'Raqamli kutubxona', delay: 0.5 },
