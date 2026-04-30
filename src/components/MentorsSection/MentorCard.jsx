@@ -3,9 +3,9 @@ import {
 	motion, AnimatePresence,
 	useMotionValue, useSpring, useTransform, useMotionTemplate,
 } from 'framer-motion'
-import insta from '../../assets/instagram-fill (1).png'
-import facebook from '../../assets/Vector (1).png'
-import twitter from '../../assets/twitter-x-line (1).png'
+import insta from '@/assets/instagram-fill (1).png'
+import facebook from '@/assets/Vector (1).png'
+import twitter from '@/assets/twitter-x-line (1).png'
 import { BASE_W, BASE_H, getCenterX } from './mentors.data'
 
 const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift }) => {

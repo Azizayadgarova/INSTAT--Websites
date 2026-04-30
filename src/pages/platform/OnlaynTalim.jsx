@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button } from '../../components/shared/Button'
-import heroImg from '../../assets/f516843fe3b59d12e4f470312ad04916ab60c75f.jpg'
+import heroImg from '@/assets/f516843fe3b59d12e4f470312ad04916ab60c75f.jpg'
 
 const STATS = [
 	{ value: '200 M+',  label: 'Platformadagi faolik' },

@@ -1,11 +1,11 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logoImg from '../assets/icons/InstatIcon.png'
-import menuIcon from '../assets/menu-line.png'
+import logoImg from '@/assets/icons/InstatIcon.png'
+import menuIcon from '@/assets/menu-line.png'
 import { menuConfig } from '../config/menuConfig'
-import icon1 from '../assets/icons/facebook.png'
-import icon2 from '../assets/icons/instaIcon.png'
-import icon3 from '../assets/icons/social3.png'
+import icon1 from '@/assets/icons/facebook.png'
+import icon2 from '@/assets/icons/instaIcon.png'
+import icon3 from '@/assets/icons/social3.png'
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -35,7 +35,7 @@ const Navbar = () => {
 							border border-[#5FA2F0] text-white'
 						>
 							<img src={menuIcon} alt='Menu' width={16} />
-							Menu
+							Meni
 						</button>
 					</div>
 				</div>

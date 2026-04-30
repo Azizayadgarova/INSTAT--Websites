@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import img from '../assets/Illustration.png'
+import img from '@/assets/Illustration.png'
 
 const stats = [
 	{ number: 10000, suffix: '+', label: 'Foydalanuvchilar' },

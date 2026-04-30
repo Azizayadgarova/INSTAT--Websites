@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 import { memo, useEffect, useRef } from 'react'
-import starImg from '../assets/Star.png'
+import starImg from '@/assets/Star.png'
 import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'

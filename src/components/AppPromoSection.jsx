@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import appstore from '../assets/icons/appstore.png'
-import google from '../assets/googleplay.png'
-import phone2 from '../assets/iPhone 14 Pro (1).png'
-import phone1 from '../assets/iPhone 14 Pro.png'
+import appstore from '@/assets/icons/appstore.png'
+import google from '@/assets/googleplay.png'
+import phone2 from '@/assets/iPhone 14 Pro (1).png'
+import phone1 from '@/assets/iPhone 14 Pro.png'
 
 const AppPromoSection = () => {
   const sectionRef = useRef(null)

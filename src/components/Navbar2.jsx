@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logoImg from '../assets/icons/InstatIcon.png'
-import userIcon from '../assets/icons/user-line.png'
+import logoImg from '@/assets/icons/InstatIcon.png'
+import userIcon from '@/assets/icons/user-line.png'
 
 const NAV_LINKS = [
 	{ label: "Onlayn ta'lim",       path: '/platform/onlayn-talim' },

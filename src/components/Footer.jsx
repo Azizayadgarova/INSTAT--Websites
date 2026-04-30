@@ -1,9 +1,9 @@
 import { memo, useEffect, useRef } from 'react'
-import lobus from '../assets/Countries.png'
-import fotIcon1 from '../assets/icons/fUwXkleZJbkDUDDvw93zVo3gnls.svg fill.png'
-import fotIcon2 from '../assets/EeUrJQfpXibXJa3MotZvgAm9tsY.svg fill.png'
-import fotIcon3 from '../assets/iBEROwOJyQaiqZZ4k8N5Sj51w.svg.png'
-import icon1 from '../assets/icons/InstatIcon.png'
+import lobus from '@/assets/Countries.png'
+import fotIcon1 from '@/assets/icons/fUwXkleZJbkDUDDvw93zVo3gnls.svg fill.png'
+import fotIcon2 from '@/assets/EeUrJQfpXibXJa3MotZvgAm9tsY.svg fill.png'
+import fotIcon3 from '@/assets/iBEROwOJyQaiqZZ4k8N5Sj51w.svg.png'
+import icon1 from '@/assets/icons/InstatIcon.png'
 
 const HEADING = {
 	fontFamily: 'Inter Display, sans-serif',

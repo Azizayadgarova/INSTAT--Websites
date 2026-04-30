@@ -1,6 +1,6 @@
-import bg1 from '../../assets/bg1.jpg?format=webp&quality=72'
-import bg2 from '../../assets/bg2.jpg?format=webp&quality=72'
-import bg3 from '../../assets/bg3.jpg?format=webp&quality=72'
+import bg1 from '@/assets/bg1.jpg'
+import bg2 from '@/assets/bg2.jpg'
+import bg3 from '@/assets/bg3.jpg'
 
 export const slides = [
 	{

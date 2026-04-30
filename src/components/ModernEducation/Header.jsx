@@ -1,4 +1,4 @@
-import bg from '../../assets/bgImg/Background (1).png'
+import bg from '@/assets/bgImg/Background (1).png'
 import AnimatedSection from '../shared/AnimatedSection'
 import ParticleBackground from '../shared/ParticleBackground'
 import Text from '../shared/Text'

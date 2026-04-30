@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import icon1 from '../assets/Group 1707483799 (5).png'
+import icon1 from '@/assets/Group 1707483799 (5).png'
 import Text from './shared/Text'
 
 const TILE_SIZE = 80

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import bg from '../assets/bgImg/Background.svg'
+import bg from '@/assets/bgImg/Background.svg'
 import MentorCard from './MentorsSection/MentorCard'
 import { CONFIGS, mentors, mod } from './MentorsSection/mentors.data'
 import AnimatedSection from './shared/AnimatedSection'
