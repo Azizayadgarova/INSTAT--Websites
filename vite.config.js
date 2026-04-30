@@ -14,11 +14,6 @@ export default defineConfig({
 			svg: { multipass: true },
 		}),
 	],
-	resolve: {
-		alias: {
-			'@': '/src'
-		},
-	},
 	build: {
 		target: 'es2020',
 		cssCodeSplit: true,
