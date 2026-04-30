@@ -1,7 +1,11 @@
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import MainLayout from './../layouts/MainLayout'
+import SecondLayout from './../layouts/SecondLayout'
 import NotFound from '../pages/NotFound'
+
+// Platform pages
+const OnlaynTalim = lazy(() => import('../pages/platform/OnlaynTalim'))
 
 // About pages
 const IshOrinlari = lazy(() => import('../pages/About/IshOrinlari.jsx'))
@@ -102,6 +106,17 @@ export const router = createBrowserRouter([
 					{ path: 'yangiliklar', element: s(Yangiliklar) },
 				],
 			},
+		],
+	},
+	{
+		path: '/platform',
+		element: <SecondLayout />,
+		children: [
+			{ path: 'onlayn-talim',        element: s(OnlaynTalim) },
+			{ path: 'raqamli-kutubxona',   element: <div /> },
+			{ path: 'elektron-jurnal',     element: <div /> },
+			{ path: 'mikro-malumotlar',    element: <div /> },
+			{ path: 'bosh-ish-orinlari',   element: <div /> },
 		],
 	},
 	{

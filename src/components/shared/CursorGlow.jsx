@@ -1,32 +1,54 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 const CursorGlow = () => {
-	const rawX = useMotionValue(-400)
-	const rawY = useMotionValue(-400)
-
-	const x = useSpring(rawX, { stiffness: 55, damping: 16 })
-	const y = useSpring(rawY, { stiffness: 55, damping: 16 })
-
-	const xFast = useSpring(rawX, { stiffness: 200, damping: 28 })
-	const yFast = useSpring(rawY, { stiffness: 200, damping: 28 })
+	const largeRef = useRef(null)
+	const smallRef = useRef(null)
 
 	useEffect(() => {
-		const move = e => {
-			rawX.set(e.clientX - 250)
-			rawY.set(e.clientY - 250)
+		const large = largeRef.current
+		const small = smallRef.current
+		if (!large || !small) return
+
+		let mouseX = -400, mouseY = -400
+		let largeX = -400, largeY = -400
+		let smallX = -400, smallY = -400
+		let rafId
+
+		const onMove = e => {
+			mouseX = e.clientX
+			mouseY = e.clientY
 		}
-		window.addEventListener('mousemove', move)
-		return () => window.removeEventListener('mousemove', move)
-	}, [rawX, rawY])
+
+		const tick = () => {
+			largeX += (mouseX - 250 - largeX) * 0.2
+			largeY += (mouseY - 250 - largeY) * 0.2
+
+			smallX += (mouseX - 50 + 150 - smallX) * 0.8
+			smallY += (mouseY - 50 + 150 - smallY) * 0.8
+
+			large.style.transform = `translate(${largeX}px, ${largeY}px)`
+			small.style.transform = `translate(${smallX}px, ${smallY}px)`
+
+			rafId = requestAnimationFrame(tick)
+		}
+
+		window.addEventListener('mousemove', onMove, { passive: true })
+		rafId = requestAnimationFrame(tick)
+
+		return () => {
+			window.removeEventListener('mousemove', onMove)
+			cancelAnimationFrame(rafId)
+		}
+	}, [])
 
 	return (
 		<>
-			<motion.div
+			<div
+				ref={largeRef}
 				style={{
 					position: 'fixed',
-					left: x,
-					top: y,
+					top: 0,
+					left: 0,
 					width: 500,
 					height: 500,
 					borderRadius: '50%',
@@ -35,23 +57,24 @@ const CursorGlow = () => {
 					pointerEvents: 'none',
 					zIndex: 9990,
 					mixBlendMode: 'screen',
+					willChange: 'transform',
 				}}
 			/>
-			<motion.div
+			<div
+				ref={smallRef}
 				style={{
 					position: 'fixed',
-					left: xFast,
-					top: yFast,
+					top: 0,
+					left: 0,
 					width: 100,
 					height: 100,
-					marginLeft: 150,
-					marginTop: 150,
 					borderRadius: '50%',
 					background:
 						'radial-gradient(circle, rgba(0,230,252,0.22) 0%, rgba(0,180,220,0.08) 50%, transparent 70%)',
 					pointerEvents: 'none',
 					zIndex: 9991,
 					mixBlendMode: 'screen',
+					willChange: 'transform',
 				}}
 			/>
 		</>
