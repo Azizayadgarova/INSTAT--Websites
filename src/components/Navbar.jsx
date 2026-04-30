@@ -22,7 +22,7 @@ const Navbar = () => {
 	return (
 		<>
 			{/* NAVBAR */}
-			<nav className='fixed w-full z-50 backdrop-blur-[10px] bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
+			<nav className='fixed w-full z-50 bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
 				<div className='max-w-[1440px] mx-auto flex items-center justify-between py-[20px] px-[100px]'>
 					<img src={logoImg} alt='Logo' />
 					<div className='flex items-center gap-4'>

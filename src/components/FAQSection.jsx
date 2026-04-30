@@ -3,50 +3,50 @@ import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
 
+const faqData = [
+	{
+		question: 'What is the AI Scheduling Assistant?',
+		answer:
+			'The AI Scheduling Assistant is an advanced tool that uses artificial intelligence to manage your appointments, meetings, and schedules effortlessly.',
+	},
+	{
+		question: 'How does the AI Scheduling Assistant work?',
+		answer:
+			'It analyzes your availability and preferences to suggest the best times for meetings and syncs with your calendars automatically.',
+	},
+	{
+		question: 'Is the AI Scheduling Assistant compatible with my calendar?',
+		answer:
+			'Yes, our AI Scheduling Assistant seamlessly integrates with popular calendar applications like Google Calendar, Outlook, and Apple Calendar, ensuring your schedules are always in sync.',
+	},
+	{
+		question: 'Can the AI Scheduling Assistant manage tasks as well?',
+		answer:
+			'Yes, it can prioritize and schedule tasks to maximize productivity.',
+	},
+	{
+		question: 'How secure is my data with the AI Scheduling Assistant?',
+		answer:
+			'We take your privacy and security seriously. Our AI Scheduling Assistant uses advanced encryption and security protocols to ensure your data is protected at all times.',
+	},
+	{
+		question: 'Can I customize notifications and reminders?',
+		answer:
+			'Yes, you can fully customize alerts, reminders, and notifications.',
+	},
+	{
+		question: 'How do I start with AI Scheduling?',
+		answer: 'Sign up, connect your calendar, and start scheduling instantly.',
+	},
+	{
+		question: 'What are the pricing plans for the AI Scheduling Assistant?',
+		answer:
+			'We offer flexible plans for individuals, teams, and enterprises.',
+	},
+]
+
 const FAQSection = () => {
 	const [openIndex, setOpenIndex] = useState(null)
-
-	const faqData = [
-		{
-			question: 'What is the AI Scheduling Assistant?',
-			answer:
-				'The AI Scheduling Assistant is an advanced tool that uses artificial intelligence to manage your appointments, meetings, and schedules effortlessly.',
-		},
-		{
-			question: 'How does the AI Scheduling Assistant work?',
-			answer:
-				'It analyzes your availability and preferences to suggest the best times for meetings and syncs with your calendars automatically.',
-		},
-		{
-			question: 'Is the AI Scheduling Assistant compatible with my calendar?',
-			answer:
-				'Yes, our AI Scheduling Assistant seamlessly integrates with popular calendar applications like Google Calendar, Outlook, and Apple Calendar, ensuring your schedules are always in sync.',
-		},
-		{
-			question: 'Can the AI Scheduling Assistant manage tasks as well?',
-			answer:
-				'Yes, it can prioritize and schedule tasks to maximize productivity.',
-		},
-		{
-			question: 'How secure is my data with the AI Scheduling Assistant?',
-			answer:
-				'We take your privacy and security seriously. Our AI Scheduling Assistant uses advanced encryption and security protocols to ensure your data is protected at all times.',
-		},
-		{
-			question: 'Can I customize notifications and reminders?',
-			answer:
-				'Yes, you can fully customize alerts, reminders, and notifications.',
-		},
-		{
-			question: 'How do I start with AI Scheduling?',
-			answer: 'Sign up, connect your calendar, and start scheduling instantly.',
-		},
-		{
-			question: 'What are the pricing plans for the AI Scheduling Assistant?',
-			answer:
-				'We offer flexible plans for individuals, teams, and enterprises.',
-		},
-	]
 
 	const toggleFAQ = index =>
 		setOpenIndex(prev => (prev === index ? null : index))

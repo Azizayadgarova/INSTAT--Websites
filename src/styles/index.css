@@ -49,6 +49,13 @@ body {
   box-sizing: border-box;
 }
 
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
 /* Animatsiyani o'chirishni afzal ko'rgan foydalanuvchilar uchun */
 @media (prefers-reduced-motion: reduce) {
   *,

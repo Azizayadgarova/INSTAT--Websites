@@ -31,7 +31,6 @@ const ParticleBackground = memo(({
 				this.size = Math.random() * 1.5 + 0.2
 				this.speedY = Math.random() * 0.15 + 0.05
 				this.opacity = Math.random() * 0.6 + 0.1
-				// fillStyle string qayta ishlatiladi — har draw da string yaratilmaydi
 				this._fill = `rgba(${color}, ${this.opacity})`
 			}
 			update() {

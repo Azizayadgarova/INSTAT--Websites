@@ -4,7 +4,6 @@ import { cards } from './cards'
 import FloatingCard from './FloatingCard'
 import ModernEducationHeader from './Header'
 import ParticleBackground from '../shared/ParticleBackground'
-import bg from '../../assets/bgImg/Background (1).png'
 
 export default function ModernEducation() {
 	const containerRef = useRef(null)
@@ -35,12 +34,10 @@ export default function ModernEducation() {
 			document.body.style.overflow = ''
 		}
 
-		// scrollYProgress 1.0 ga yetganda va smooth hali 0.999 dan past bo'lsa — lock
 		const unsubY = scrollYProgress.on('change', sy => {
 			if (sy >= 0.999 && smooth.get() < 0.999) lockBody()
 		})
 
-		// smooth 0.999 ga yetganda — unlock
 		const unsubS = smooth.on('change', sm => {
 			if (sm >= 0.999) unlockBody()
 		})
@@ -93,23 +90,6 @@ export default function ModernEducation() {
 				</div>
 				<div className='h-[700vh]' />
 			</div>
-			<img
-				src={bg}
-				aria-hidden='true'
-				decoding='async'
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					height: '100%',
-					objectFit: 'cover',
-					objectPosition: 'center top',
-					mixBlendMode: 'screen',
-					pointerEvents: 'none',
-					zIndex: 10,
-				}}
-			/>
 		</div>
 	)
 }

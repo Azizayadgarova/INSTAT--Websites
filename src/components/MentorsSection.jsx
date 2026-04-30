@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import bg from '../assets/bgImg/Background.svg'
 import MentorCard from './MentorsSection/MentorCard'
 import { CONFIGS, mentors, mod } from './MentorsSection/mentors.data'
@@ -11,11 +11,9 @@ const MentorsSection = () => {
 	const [current, setCurrent] = useState(0)
 	const [trackW, setTrackW] = useState(800)
 	const trackRef = useRef(null)
-	const dimScale = trackW <= 1440
-		? Math.min(1, Math.max(0.42, trackW / 900))
-		: Math.min(1.2, 1 + (trackW - 1440) / 2550)
+	const dimScale = Math.min(1, Math.max(0.42, trackW / 900))
 
-	const shift = useCallback(dir => setCurrent(prev => mod(prev + dir, mentors.length)), [])
+	const shift = dir => setCurrent(prev => mod(prev + dir, mentors.length))
 
 	useEffect(() => {
 		const update = () => {
@@ -44,7 +42,7 @@ const MentorsSection = () => {
 			clearInterval(id)
 			observer.disconnect()
 		}
-	}, [shift])
+	}, [])
 
 	return (
 		<section
@@ -54,7 +52,7 @@ const MentorsSection = () => {
 				backgroundSize: '1400px 1200px',
 				backgroundPosition: 'center 10%',
 				backgroundRepeat: 'no-repeat',
-				padding: `${trackW > 1440 ? 100 : 40}px 0 0px`,
+				padding: '40px 0 0px',
 				overflow: 'hidden',
 				position: 'relative',
 				zIndex: 1,

@@ -9,16 +9,27 @@ export default function ModernEducationHeader() {
 			className='relative w-full flex flex-col items-center justify-start font-sans text-white'
 			style={{
 				overflow: 'hidden',
-				paddingTop: '360px',
-				paddingBottom: 0,
-				minHeight: '360px',
+				minHeight: 'auto',
 				backgroundColor: 'rgba(14,18,27,1)',
-				backgroundImage: `url(${bg})`,
-				backgroundSize: 'cover',
-				backgroundPosition: 'center',
-				backgroundRepeat: 'no-repeat',
 			}}
 		>
+			<img
+				src={bg}
+				alt=''
+				style={{
+					position: 'absolute',
+					top: 0,
+					left: '50%',
+					transform: 'translateX(-50%)',
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					objectPosition: 'center top',
+					zIndex: 0,
+					pointerEvents: 'none',
+				}}
+			/>
+
 			<ParticleBackground
 				count={100}
 				height={650}
@@ -26,13 +37,14 @@ export default function ModernEducationHeader() {
 				color='255, 255, 255'
 				zIndex={2}
 			/>
+
 			<AnimatedSection
 				style={{
 					position: 'relative',
 					zIndex: 50,
 					width: '100%',
-					bottom: '295px',
-					marginBottom: '-295px',
+					paddingTop: '40px',
+					paddingBottom: '0',
 				}}
 			>
 				<div className='text-center'>

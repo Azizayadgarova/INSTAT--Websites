@@ -2,7 +2,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef } from 'react'
 
-import studentWebp from '../assets/bg1.jpg?format=webp&quality=75'
+import studentWebp from '../assets/bg1.jpg'
 import phoneImg from '../assets/phone.png'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -17,19 +17,13 @@ const HeroZoom = () => {
 	const bottomTextRef = useRef(null)
 
 	useEffect(() => {
-		const prevOverflowX = document.body.style.overflowX
 		document.body.style.overflowX = 'hidden'
-
-		document.documentElement.style.scrollbarWidth = 'none'
-		const scrollbarStyle = document.createElement('style')
-		scrollbarStyle.innerHTML = '::-webkit-scrollbar { display: none; }'
-		document.head.appendChild(scrollbarStyle)
 
 		const ctx = gsap.context(() => {
 			const screenElement = zoomWrapperRef.current?.querySelector('.screen-box')
 
 			const wrapperW = zoomWrapperRef.current.offsetWidth
-			const initialScale = Math.min(2.2, window.innerWidth / (wrapperW * 0.82))
+			const initialScale = window.innerWidth / (wrapperW * 0.82)
 
 			const tl = gsap.timeline({
 				scrollTrigger: {
@@ -40,11 +34,11 @@ const HeroZoom = () => {
 					pin: true,
 					anticipatePin: 1,
 					invalidateOnRefresh: true,
-					onRefresh: () => {
+					onRefresh: self => {
 						const w = zoomWrapperRef.current?.offsetWidth
 						if (w)
 							gsap.set(zoomWrapperRef.current, {
-								scale: Math.min(2.2, window.innerWidth / (w * 0.82)),
+								scale: window.innerWidth / (w * 0.82),
 							})
 					},
 				},
@@ -55,28 +49,43 @@ const HeroZoom = () => {
 				{ scale: initialScale },
 				{ scale: 1, ease: 'none', duration: 1 },
 			)
+
 				.fromTo(
 					screenElement,
 					{ borderRadius: '0rem' },
 					{ borderRadius: '7rem', ease: 'power2.out', duration: 0.3 },
 					'<',
 				)
+
 				.fromTo(
 					phoneFrameRef.current,
 					{ opacity: 0 },
 					{ opacity: 1, ease: 'power2.out', duration: 0.35 },
 					'<',
 				)
+
 				.to(
 					titleRef.current,
-					{ y: -80, opacity: 0, duration: 0.6, ease: 'power2.out' },
+					{
+						y: -80,
+						opacity: 0,
+						duration: 0.6,
+						ease: 'power2.out',
+					},
 					0,
 				)
+
 				.to(
 					descRef.current,
-					{ y: -60, opacity: 0, duration: 0.6, ease: 'power2.out' },
+					{
+						y: -60,
+						opacity: 0,
+						duration: 0.6,
+						ease: 'power2.out',
+					},
 					0.1,
 				)
+
 				.fromTo(
 					bottomTextRef.current,
 					{ opacity: 0, y: 80 },
@@ -85,19 +94,14 @@ const HeroZoom = () => {
 				)
 		}, containerRef)
 
-		return () => {
-			ctx.revert()
-			document.body.style.overflowX = prevOverflowX
-			document.documentElement.style.scrollbarWidth = ''
-			document.head.removeChild(scrollbarStyle)
-		}
+		return () => ctx.revert()
 	}, [])
 
 	return (
 		<section
 			ref={containerRef}
-			className='relative w-full mb-[600px] h-screen bg-[rgba(14,18,27,1)] flex items-center justify-center overflow-hidden z-[50]'
-			style={{ isolation: 'isolate', clipPath: 'inset(0)' }}
+			className='relative w-full mt-[100px] mb-[700px] h-screen bg-[rgba(14,18,27,1)] flex items-center justify-center overflow-y-hidden z-[50]'
+			style={{ isolation: 'isolate' }}
 		>
 			<div
 				ref={zoomWrapperRef}
@@ -108,6 +112,7 @@ const HeroZoom = () => {
 					<img
 						src={studentWebp}
 						alt='content'
+						fetchPriority='high'
 						decoding='async'
 						className='absolute inset-0 w-full h-[92%] mt-[20px] object-cover'
 					/>
@@ -127,7 +132,7 @@ const HeroZoom = () => {
 							className='text-[32px] font-bold leading-[1.1] tracking-tight'
 						>
 							Zamonaviy kasblarni <br />
-							o'rganishni <span className='text-[#00f2ff]'>bugun boshlang</span>
+							o‘rganishni <span className='text-[#00f2ff]'>bugun boshlang</span>
 						</h1>
 
 						<p
@@ -135,7 +140,7 @@ const HeroZoom = () => {
 							className='mt-6 text-[#BCBCBC] text-[10px] max-w-2xl font-normal mx-auto leading-relaxed opacity-80'
 						>
 							Zamonaviy platforma asosida ishlab chiqilgan onlayn kurslar <br />
-							talabalarga yuqori sifatli ta'lim va qulay o'qish muhitini taqdim
+							talabalarga yuqori sifatli ta'lim va qulay o‘qish muhitini taqdim
 							etadi.
 						</p>
 					</div>
@@ -146,18 +151,18 @@ const HeroZoom = () => {
 					ref={phoneFrameRef}
 					src={phoneImg}
 					alt='iPhone Frame'
-					className='relative z-40 w-full h-full object-contain pointer-events-none'
+					className='relative z-30 w-full h-full object-contain pointer-events-none'
 				/>
 			</div>
 
 			{/* BOTTOM TEXT OUTSIDE PHONE */}
 			<div
 				ref={bottomTextRef}
-				className='absolute bottom-[40px] text-center text-white text-[20px] opacity-0'
+				className='absolute top-[90%] text-center text-white  text-[20px]  opacity-0'
 			>
 				Zamonaviy platforma asosida ishlab chiqilgan{' '}
 				<span className='text-[rgba(0,230,252,1)]'>onlayn kurslar</span>{' '}
-				talabalarga yuqori <br /> sifatli ta'lim va qulay o'qish muhitini taqdim
+				talabalarga yuqori <br /> sifatli ta’lim va qulay o‘qish muhitini taqdim
 				etadi.
 			</div>
 		</section>

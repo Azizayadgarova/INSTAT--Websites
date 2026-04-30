@@ -26,7 +26,6 @@ const ParticleCanvas = memo(() => {
 			pulseSpeed: Math.random() * 0.02 + 0.008,
 		}))
 
-		// Gradient bir marta yaratiladi, har frame drawImage orqali qayta ishlatiladi
 		const G = 20
 		const gCanvas = document.createElement('canvas')
 		gCanvas.width = G

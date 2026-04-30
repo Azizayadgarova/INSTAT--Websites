@@ -2,10 +2,8 @@ import { Button } from '../shared/Button'
 
 const Text = ({ buttonText, title, highlight, subtitle }) => {
 	return (
-		<div className=' z-30 flex flex-col items-center'>
-			<div className=''>
-				<Button text={buttonText} />
-			</div>
+		<div className='z-30 flex flex-col items-center'>
+			<Button text={buttonText} />
 			<div className='text-center mt-[24px]'>
 				<h1 className='text_font pt-[15px] text-[rgba(188,188,188,1)]'>
 					{title}

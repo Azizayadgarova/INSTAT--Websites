@@ -1,7 +1,8 @@
-import React from 'react'
+import { memo } from 'react'
 import { motion, useTransform } from 'framer-motion'
+import { BUTTON_TEXT } from './cards'
 
-const FloatingCard = React.memo(({ card, index, progress }) => {
+const FloatingCard = memo(({ card, index, progress }) => {
 	const step = 0.2
 	const start = index * step
 	const mid = start + step
@@ -82,7 +83,7 @@ const FloatingCard = React.memo(({ card, index, progress }) => {
 					</p>
 
 					<button className='mt-6 w-fit px-6 py-3 rounded-xl bg-white/5 text-white border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)]'>
-						{card.buttonText}
+						{BUTTON_TEXT}
 					</button>
 				</div>
 			</div>

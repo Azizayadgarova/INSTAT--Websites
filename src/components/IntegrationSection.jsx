@@ -9,7 +9,7 @@ import logo5 from '../assets/image 17.png'
 import logo6 from '../assets/Frame 2147238272 (9).png'
 import logo7 from '../assets/image 17 (1).png'
 import centeralIcon from '../assets/Group 1707483799 (5).png'
-import Text from '../components/shared/Text'
+import Text from './shared/Text'
 
 const integrations = [
 	{ id: 1, icon: logo1 },
