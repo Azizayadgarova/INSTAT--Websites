@@ -18,7 +18,7 @@ export const slides = [
 	{
 		title: 'KARYERANGIZDA YANGI',
 		highlight: 'BOSQICH',
-		desc: "Yangi marralarni zabt etish va professional o'sish uchun eng yaxshi vakansiyalar to'plami.",
+		desc: "Yangi marralarni zabt etish va professional o'sish uchun eng yaxshi vakansiyalar to'plami",
 		img: bg3,
 	},
 	{
