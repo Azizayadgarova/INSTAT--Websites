@@ -74,6 +74,20 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift }) =>
 			}}
 		>
 			<motion.div
+				animate={!isActive ? { rotateY: [0, 8, 0, -8, 0] } : { rotateY: 0 }}
+				transition={
+					!isActive
+						? {
+								duration: 5 + Math.abs(cfg.offset) * 0.8,
+								repeat: Infinity,
+								ease: 'easeInOut',
+								delay: Math.abs(cfg.offset) * 0.9,
+						  }
+						: { duration: 0.4 }
+				}
+				style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d' }}
+			>
+			<motion.div
 				ref={cardRef}
 				onMouseMove={handleMouseMove}
 				onMouseEnter={handleMouseEnter}
@@ -223,6 +237,7 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift }) =>
 					</motion.div>
 				)}
 			</AnimatePresence>
+			</motion.div>
 		</div>
 	)
 }

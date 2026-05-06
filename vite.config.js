@@ -19,7 +19,8 @@ export default defineConfig({
 		ViteImageOptimizer({
 			jpg: { quality: 75 },
 			jpeg: { quality: 75 },
-			png: { quality: 75, compressionLevel: 8 },
+			png: { quality: 75, compressionLevel: 9 },
+			webp: { lossless: true },
 			svg: { multipass: true },
 		}),
 	],

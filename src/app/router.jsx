@@ -1,11 +1,13 @@
 import { lazy, Suspense } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import MainLayout from './../layouts/MainLayout'
 import SecondLayout from './../layouts/SecondLayout'
 import NotFound from '../pages/NotFound'
 
 // Platform pages
 const OnlaynTalim = lazy(() => import('../pages/platform/OnlaynTalim'))
+const RaqamliKutibxona = lazy(() => import('../pages/platform/RaqamliKutibxona'))
+
 
 // About pages
 const IshOrinlari = lazy(() => import('../pages/About/IshOrinlari.jsx'))
@@ -112,8 +114,9 @@ export const router = createBrowserRouter([
 		path: '/platform',
 		element: <SecondLayout />,
 		children: [
+			{ index: true, element: <Navigate to='/platform/onlayn-talim' replace /> },
 			{ path: 'onlayn-talim',        element: s(OnlaynTalim) },
-			{ path: 'raqamli-kutubxona',   element: <div /> },
+			{ path: 'raqamli-kutubxona',   element: s(RaqamliKutibxona) },
 			{ path: 'elektron-jurnal',     element: <div /> },
 			{ path: 'mikro-malumotlar',    element: <div /> },
 			{ path: 'bosh-ish-orinlari',   element: <div /> },

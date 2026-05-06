@@ -1,0 +1,194 @@
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { Button2 } from './shared/Button2'
+import Diagram from './ProblemSection/Diagram'
+import { problems } from '../data/problems.data'
+
+const vp = { once: true, amount: 0.15 }
+
+const fadeUp = {
+	hidden: { opacity: 0, y: 32 },
+	visible: (i = 0) => ({
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 },
+	}),
+}
+
+const fadeLeft = {
+	hidden: { opacity: 0, x: -32 },
+	visible: (i = 0) => ({
+		opacity: 1,
+		x: 0,
+		transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.15 },
+	}),
+}
+
+const ProblemSection = () => {
+	const [active, setActive] = useState(0)
+	const [displayIdx, setDisplayIdx] = useState(0)
+
+	useEffect(() => {
+		if (displayIdx === active) return
+		const dir = active > displayIdx ? 1 : -1
+		const isLast = displayIdx + dir === active
+		const t = setTimeout(() => setDisplayIdx(p => p + dir), isLast ? 220 : 130)
+		return () => clearTimeout(t)
+	}, [displayIdx, active])
+
+	const handleSelect = (i) => setActive(i)
+
+	return (
+		<section
+			style={{
+				width: '100%',
+				backgroundColor: 'rgba(22, 27, 38, 1)',
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				position: 'relative',
+				overflow: 'hidden',
+				paddingTop: '0px',
+				paddingBottom: '80px',
+			}}
+		>
+			{/* Header */}
+			<div
+				style={{
+					position: 'relative',
+					zIndex: 1,
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					textAlign: 'center',
+					gap: '20px',
+					padding: '40px 24px 48px',
+				}}
+			>
+				<motion.div variants={fadeUp} initial='hidden' whileInView='visible' viewport={vp} custom={0}>
+					<Button2 text='Foydalanish jarayoni' />
+				</motion.div>
+
+				<motion.h2
+					variants={fadeUp}
+					initial='hidden'
+					whileInView='visible'
+					viewport={vp}
+					custom={1}
+					style={{
+						fontFamily: '"Inter Display", Inter, sans-serif',
+						fontWeight: 600,
+						fontSize: '48px',
+						lineHeight: '58px',
+						color: '#ffffff',
+						margin: 0,
+					}}
+				>
+					Kitob izlashdan charchadingizmi?
+				</motion.h2>
+
+				<motion.p
+					variants={fadeUp}
+					initial='hidden'
+					whileInView='visible'
+					viewport={vp}
+					custom={2}
+					style={{
+						fontFamily: '"Inter Display", Inter, sans-serif',
+						fontWeight: 400,
+						fontSize: '16px',
+						lineHeight: '140%',
+						color: 'rgba(202, 202, 206, 1)',
+						textAlign: 'center',
+						maxWidth: '560px',
+						margin: 0,
+					}}
+				>
+					Biz har bir foydalanuvchi duch keladigan muammolarni yaxshi tushunamiz
+					— ham oflayn, ham onlayn.
+				</motion.p>
+			</div>
+
+			{/* 2-column layout */}
+			<div
+				style={{
+					position: 'relative',
+					zIndex: 1,
+					width: '100%',
+					maxWidth: '1200px',
+					display: 'grid',
+					gridTemplateColumns: '1fr 1fr',
+					gap: '48px',
+					padding: '0 24px',
+					alignItems: 'stretch',
+					boxSizing: 'border-box',
+				}}
+			>
+				{/* Left: clickable items */}
+				<div style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
+					{problems.map((p, i) => (
+						<motion.div
+							key={i}
+							variants={fadeLeft}
+							initial='hidden'
+							whileInView='visible'
+							viewport={vp}
+							custom={i}
+							onClick={() => handleSelect(i)}
+							style={{ position: 'relative', paddingLeft: '20px', cursor: 'pointer' }}
+						>
+							<div
+								style={{
+									position: 'absolute', left: 0, top: 0, bottom: 0,
+									width: '3px', borderRadius: '3px',
+									background: 'rgba(22, 27, 38, 1)',
+								}}
+							/>
+							<motion.div
+								initial={false}
+								animate={{ scaleY: active === i ? 1 : 0, opacity: active === i ? 1 : 0 }}
+								transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+								style={{
+									position: 'absolute', left: 0, top: 0, bottom: 0,
+									width: '3px', borderRadius: '3px',
+									background: 'linear-gradient(180deg, #2B75CC 0%, rgba(43,117,204,0.4) 100%)',
+									transformOrigin: 'top',
+								}}
+							/>
+							<div
+								style={{
+									width: '48px', height: '48px', borderRadius: '10px',
+									backgroundColor: 'rgba(34, 37, 48, 1)',
+									border: '1px solid rgba(255, 255, 255, 0.04)',
+									display: 'flex', alignItems: 'center', justifyContent: 'center',
+									marginBottom: '16px',
+								}}
+							>
+								<img src={p.icon} alt='' style={{ width: '22px', height: '22px', objectFit: 'contain', opacity: 0.9 }} />
+							</div>
+							<h3 style={{
+								fontFamily: '"Inter Display", Inter, sans-serif',
+								fontWeight: 600, fontSize: '24px', lineHeight: '28px',
+								color: '#ffffff', margin: '0 0 10px 0',
+							}}>
+								{p.title}
+							</h3>
+							<p style={{
+								fontFamily: 'Inter, sans-serif',
+								fontWeight: 400, fontSize: '16px', lineHeight: '160%',
+								color: 'rgba(138, 145, 163, 1)', margin: 0,
+							}}>
+								{p.description}
+							</p>
+						</motion.div>
+					))}
+				</div>
+
+				{/* Right: animated diagram */}
+				<Diagram active={displayIdx} direction={active >= displayIdx ? 1 : -1} />
+			</div>
+		</section>
+	)
+}
+
+export default ProblemSection

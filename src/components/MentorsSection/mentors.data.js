@@ -46,18 +46,18 @@ export const mentors = [
 ]
 
 export const CONFIGS = [
-	{ offset: -3, scale: 0.38, z: 1,  opacity: 0.3  },
-	{ offset: -2, scale: 0.55, z: 2,  opacity: 0.5  },
-	{ offset: -1, scale: 0.75, z: 3,  opacity: 0.75 },
-	{ offset:  0, scale: 1.0,  z: 10, opacity: 1.0  },
-	{ offset:  1, scale: 0.75, z: 3,  opacity: 0.75 },
-	{ offset:  2, scale: 0.55, z: 2,  opacity: 0.5  },
-	{ offset:  3, scale: 0.38, z: 1,  opacity: 0.3  },
+	{ offset: -3, scale: 0.38, z: 1,  opacity: 1 },
+	{ offset: -2, scale: 0.55, z: 2,  opacity: 1 },
+	{ offset: -1, scale: 0.75, z: 3,  opacity: 1 },
+	{ offset:  0, scale: 1.0,  z: 10, opacity: 1 },
+	{ offset:  1, scale: 0.75, z: 3,  opacity: 1 },
+	{ offset:  2, scale: 0.55, z: 2,  opacity: 1 },
+	{ offset:  3, scale: 0.38, z: 1,  opacity: 1 },
 ]
 
-export const BASE_W = 364
+export const BASE_W = 330
 export const BASE_H = 364
-export const GAP = 25
+export const GAP = 20
 
 export const mod = (n, m) => ((n % m) + m) % m
 

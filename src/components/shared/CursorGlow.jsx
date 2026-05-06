@@ -9,9 +9,12 @@ const CursorGlow = () => {
 		const small = smallRef.current
 		if (!large || !small) return
 
-		let mouseX = -400, mouseY = -400
-		let largeX = -400, largeY = -400
-		let smallX = -400, smallY = -400
+		let mouseX = -400,
+			mouseY = -400
+		let largeX = -400,
+			largeY = -400
+		let smallX = -400,
+			smallY = -400
 		let rafId
 
 		const onMove = e => {
@@ -53,7 +56,7 @@ const CursorGlow = () => {
 					height: 500,
 					borderRadius: '50%',
 					background:
-						'radial-gradient(circle, rgba(0,230,252,0.06) 0%, rgba(43,117,204,0.025) 45%, transparent 70%)',
+						'radial-gradient(circle, rgba(0,230,252,1) 0%, rgba(0,230,252,1)  45%, transparent 70%)',
 					pointerEvents: 'none',
 					zIndex: 9990,
 					mixBlendMode: 'screen',

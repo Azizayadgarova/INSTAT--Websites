@@ -32,6 +32,10 @@ const AppPromoSection = () => {
 
   return (
     <section className='w-full bg-[#0E121B] pb-[40px] flex justify-center'>
+      <style>{`
+        @keyframes phoneFloat1 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-14px)} }
+        @keyframes phoneFloat2 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+      `}</style>
       <div className='w-full max-w-[1200px] mx-auto px-6'>
 
         <div
@@ -80,38 +84,44 @@ const AppPromoSection = () => {
               top: 'auto',
             }}
           >
-            <img
-              src={phone1}
-              alt='Mobil ilova — old ko&#39;rinish'
-              loading='lazy'
-              decoding='async'
-              className='absolute object-contain z-20'
-              style={{
-                width: '360px',
-                height: '600px',
-                left: '0%',
-                bottom: -49,
-                willChange: 'transform',
-                transform: visible ? 'translateY(0px)' : 'translateY(100%)',
-                transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0s',
-              }}
-            />
-            <img
-              src={phone2}
-              alt='Mobil ilova — orqa ko&#39;rinish'
-              loading='lazy'
-              decoding='async'
-              className='absolute object-contain z-10'
-              style={{
-                width: '267px',
-                height: '460px',
-                right: '5%',
-                bottom: -35,
-                willChange: 'transform',
-                transform: visible ? 'translateY(0px)' : 'translateY(100%)',
-                transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0.18s',
-              }}
-            />
+            <div style={{
+              position: 'absolute', width: '360px', height: '600px',
+              left: '0%', bottom: -49, zIndex: 20,
+              animation: visible ? 'phoneFloat1 3.4s ease-in-out 1.2s infinite' : 'none',
+            }}>
+              <img
+                src={phone1}
+                alt='Mobil ilova — old ko&#39;rinish'
+                loading='lazy'
+                decoding='async'
+                className='object-contain'
+                style={{
+                  width: '100%', height: '100%',
+                  willChange: 'transform',
+                  transform: visible ? 'translateY(0px)' : 'translateY(100%)',
+                  transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0s',
+                }}
+              />
+            </div>
+            <div style={{
+              position: 'absolute', width: '267px', height: '460px',
+              right: '5%', bottom: -35, zIndex: 10,
+              animation: visible ? 'phoneFloat2 3.9s ease-in-out 1.5s infinite' : 'none',
+            }}>
+              <img
+                src={phone2}
+                alt='Mobil ilova — orqa ko&#39;rinish'
+                loading='lazy'
+                decoding='async'
+                className='object-contain'
+                style={{
+                  width: '100%', height: '100%',
+                  willChange: 'transform',
+                  transform: visible ? 'translateY(0px)' : 'translateY(100%)',
+                  transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0.18s',
+                }}
+              />
+            </div>
           </div>
         </div>
 

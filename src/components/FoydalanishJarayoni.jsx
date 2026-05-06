@@ -1,0 +1,256 @@
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion' // eslint-disable-line
+import { useRef, useState } from 'react'
+import bgGlow from '@/assets/bgImg/Background (1).png'
+import icon1 from '@/assets/icons/Vector (2).png'
+import icon2 from '@/assets/icons/Vector (3).png'
+import icon3 from '@/assets/icons/Vector (4).png'
+import icon4 from '@/assets/icons/Vector (5).png'
+import illus1 from '@/assets/Illus.png'
+import illus2 from '@/assets/Illustration (2).png'
+import BlurWords from './shared/BlurWords'
+import { Button2 } from './shared/Button2'
+
+const css = `
+  @keyframes rotateBorder {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes shimmerSweep {
+    0%   { left: -80%; }
+    100% { left: 160%; }
+  }
+`
+
+const leftFeatures = [
+	{
+		icon: icon1,
+		title: 'Keng qamrovli Qidiruv',
+		description:
+			"Janr, muallif yoki kalit so'zlar orqali kitoblarni tez va aniq toping. Shu bilan birga, kam uchraydigan va noyob asarlarni ham kashf etishingiz mumkin.",
+	},
+	{
+		icon: icon2,
+		title: "Moslashuvchan O'qish Tajribasi",
+		description:
+			"Kitoblarni istalgan qurilmada o'qing va o'qish parametrlarini shaxsiy ehtiyojlaringizga moslang. Yorqinlik, shrift va sahifa aylantirishni sozlash orqali maksimal qulaylikka erishing.",
+	},
+]
+
+const rightFeatures = [
+	{
+		icon: icon3,
+		title: 'Xavfsiz va Qulay Xarid',
+		description:
+			"Tanlangan kitobni bir necha soniyada sotib oling yoki bepul asarlardan foydalaning. To'lov jarayoni xavfsiz va tezkor bo'lib, sizga ishonchli xarid imkonini beradi.",
+	},
+	{
+		icon: icon4,
+		title: 'Shaxsiy Kutubxona Boshqaruvi',
+		description:
+			"Sotib olingan va saqlangan kitoblaringizni bitta joyda boshqaring. Kutubxonangizni mavzular bo'yicha tartiblang va istalgan vaqtda tezkor kirish imkoniyatidan foydalaning.",
+	},
+]
+
+const vp = { once: true, amount: 0.2 }
+
+/* ── Magnetic hover wrapper ── */
+const MagneticWrap = ({ children, fromLeft, delay }) => {
+	const ref = useRef(null)
+	const [shimmer, setShimmer] = useState(false)
+
+	const mx = useMotionValue(0)
+	const my = useMotionValue(0)
+	const rx = useSpring(useTransform(my, [-0.5, 0.5], [8, -8]), { stiffness: 220, damping: 22 })
+	const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-8, 8]), { stiffness: 220, damping: 22 })
+
+	const onMove = (e) => {
+		const r = ref.current.getBoundingClientRect()
+		mx.set((e.clientX - r.left) / r.width - 0.5)
+		my.set((e.clientY - r.top) / r.height - 0.5)
+	}
+	const onEnter = () => {
+		setShimmer(false)
+		requestAnimationFrame(() => setShimmer(true))
+	}
+	const onLeave = () => { mx.set(0); my.set(0); setShimmer(false) }
+
+	return (
+		<motion.div
+			initial={{ opacity: 0, rotateY: fromLeft ? 60 : -60, x: fromLeft ? -24 : 24 }}
+			whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
+			viewport={vp}
+			transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay }}
+			style={{ transformStyle: 'preserve-3d', perspective: '900px' }}
+		>
+			<motion.div
+				ref={ref}
+				onMouseMove={onMove}
+				onMouseEnter={onEnter}
+				onMouseLeave={onLeave}
+				style={{
+					rotateX: rx,
+					rotateY: ry,
+					transformStyle: 'preserve-3d',
+					position: 'relative',
+					borderRadius: '17px',
+				}}
+			>
+				{/* Shimmer sweep */}
+				{shimmer && (
+					<div style={{
+						position: 'absolute', inset: 0, borderRadius: '17px',
+						overflow: 'hidden', pointerEvents: 'none', zIndex: 10,
+					}}>
+						<div style={{
+							position: 'absolute', top: '-60%', width: '45%', height: '260%',
+							background: 'linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0) 100%)',
+							transform: 'skewX(-15deg)',
+							animation: 'shimmerSweep 0.65s cubic-bezier(0.22,1,0.36,1) both',
+						}} />
+					</div>
+				)}
+				{children}
+			</motion.div>
+		</motion.div>
+	)
+}
+
+/* ── Static feature card (vizual o'zgarmaydi) ── */
+const FeatureCard = ({ icon, title, description }) => (
+	<div
+		style={{
+			backgroundColor: 'rgba(22, 27, 38, 1)',
+			border: '1px solid rgba(255, 255, 255, 0.08)',
+			borderRadius: '15px',
+			padding: '24px',
+			display: 'flex',
+			flexDirection: 'column',
+			width: '100%',
+			height: '376px',
+			boxSizing: 'border-box',
+		}}
+	>
+		<div style={{
+			width: '76px', height: '76px',
+			backgroundColor: 'rgba(255,255,255,0.04)',
+			borderRadius: '10px',
+			border: '1px solid rgba(255,255,255,0.04)',
+			display: 'flex', alignItems: 'center', justifyContent: 'center',
+			marginBottom: '40px', flexShrink: 0,
+		}}>
+			<img src={icon} alt='' style={{ width: '33px', height: '28px', objectFit: 'contain' }} />
+		</div>
+		<h3 style={{
+			fontFamily: '"Inter Display", Inter, sans-serif',
+			fontWeight: 700, fontSize: '24px', lineHeight: '28px',
+			color: 'rgba(230,230,233,1)', margin: '0 0 12px 0',
+		}}>{title}</h3>
+		<p style={{
+			fontFamily: 'Inter, sans-serif', fontWeight: 400,
+			fontSize: '16px', lineHeight: '22px',
+			color: 'rgba(202, 202, 206, 1)', margin: 0,
+		}}>{description}</p>
+	</div>
+)
+
+
+const FoydalanishJarayoni = () => (
+	<>
+		<style>{css}</style>
+		<section style={{
+			width: '100%',
+			backgroundColor: 'rgba(14, 18, 27, 1)',
+			display: 'flex', flexDirection: 'column', alignItems: 'center',
+			position: 'relative', overflow: 'hidden', paddingBottom: '40px',
+		}}>
+			<img src={bgGlow} alt='' style={{
+				position: 'absolute', top: 0, left: '50%',
+				transform: 'translateX(-50%)', width: '100%', maxWidth: '1200px',
+				pointerEvents: 'none', userSelect: 'none',
+			}} />
+
+			{/* Header */}
+			<div style={{
+				position: 'relative', zIndex: 1, display: 'flex',
+				flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+				paddingTop: '40px', paddingBottom: '48px', gap: '20px',
+			}}>
+				<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={vp} transition={{ duration: 0.5 }}>
+					<Button2 text='Foydalanish jarayoni' />
+				</motion.div>
+
+				<BlurWords
+					text='Platforma Qanday Ishlaydi?'
+					delay={0.1}
+					style={{
+						fontFamily: '"Inter Display", Inter, sans-serif',
+						fontWeight: 600, fontSize: '48px', lineHeight: '58px',
+						color: '#ffffff', display: 'block',
+					}}
+				/>
+
+				<motion.p
+					initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
+					viewport={vp} transition={{ duration: 0.6, delay: 0.5 }}
+					style={{
+						fontFamily: '"Inter Display", Inter, sans-serif',
+						fontWeight: 400, fontSize: '16px', lineHeight: '140%',
+						color: 'rgba(202, 202, 206, 1)', textAlign: 'center',
+						maxWidth: '560px', margin: 0,
+					}}
+				>
+					Raqamli kutubxonadan foydalanish jarayoni — kitob tanlash, xarid
+					qilish va platforma ichida o'qish bosqichlari haqida qisqacha ma'lumot.
+				</motion.p>
+			</div>
+
+			{/* 3-column grid */}
+			<div style={{
+				position: 'relative', zIndex: 1, width: '100%', maxWidth: '1200px',
+				display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
+				gap: '25px', padding: '0 24px',
+			}}>
+				{/* Left */}
+				<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+					{leftFeatures.map((f, i) => (
+						<MagneticWrap key={i} fromLeft delay={i * 0.15}>
+							<FeatureCard {...f} />
+						</MagneticWrap>
+					))}
+				</div>
+
+				{/* Middle — rasmlar */}
+				<div style={{ display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative' }}>
+					{[illus1, illus2].map((src, i) => (
+						<motion.div
+							key={i}
+							initial={{ opacity: 0, scale: 0.97, y: 30 }}
+							whileInView={{ opacity: 1, scale: 1, y: 0 }}
+							viewport={vp}
+							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.2 }}
+							style={{
+								borderRadius: '16px', overflow: 'hidden',
+								width: '100%', height: '376px',
+								border: '1px solid rgba(255,255,255,0.08)',
+							}}
+						>
+							<img src={src} alt='' style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+						</motion.div>
+					))}
+				</div>
+
+				{/* Right */}
+				<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+					{rightFeatures.map((f, i) => (
+						<MagneticWrap key={i} fromLeft={false} delay={i * 0.15}>
+							<FeatureCard {...f} />
+						</MagneticWrap>
+					))}
+				</div>
+			</div>
+		</section>
+	</>
+)
+
+export default FoydalanishJarayoni

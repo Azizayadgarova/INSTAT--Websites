@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
 import logo1 from '@/assets/ClickUp (1).png'
@@ -132,7 +133,7 @@ const IntegrationSection = () => {
 				}}
 			>
 				<div
-					className='relative z-50 flex items-center justify-center overflow-hidden'
+					className='relative z-50 flex items-center justify-center'
 					style={{
 						width: '144px',
 						height: '144px',

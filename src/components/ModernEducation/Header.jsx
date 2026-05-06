@@ -1,9 +1,42 @@
 import bg from '@/assets/bgImg/Background (1).png'
+import { useEffect, useRef, useState } from 'react'
 import AnimatedSection from '../shared/AnimatedSection'
 import ParticleBackground from '../shared/ParticleBackground'
 import Text from '../shared/Text'
 
-export default function ModernEducationHeader() {
+export default function ModernEducationHeader({ headerProps = {} }) {
+	const bgRef = useRef(null)
+	const [bgVisible, setBgVisible] = useState(false)
+
+	useEffect(() => {
+		const el = bgRef.current?.parentElement
+		if (!el) return
+		const observer = new IntersectionObserver(
+			([entry]) => setBgVisible(entry.isIntersecting),
+			{ threshold: 0.05 },
+		)
+		observer.observe(el)
+		return () => observer.disconnect()
+	}, [])
+
+	const {
+		buttonText = 'Bizning platformalar',
+		buttonType,
+		title = 'Barcha imkoniyatlar',
+		highlight = 'bir joyda',
+		highlightColor,
+		subtitle = (
+			<>
+				Beshta platforma orqali o'qish, tadqiqot qilish, bilim olish va
+				professional <br />
+				rivojlanish imkoniyatlari.
+			</>
+		),
+		hideParticles = false,
+		titleStyle,
+		subtitleStyle,
+	} = headerProps
+
 	return (
 		<section
 			className='relative w-full flex flex-col items-center justify-start font-sans text-white'
@@ -14,6 +47,7 @@ export default function ModernEducationHeader() {
 			}}
 		>
 			<img
+				ref={bgRef}
 				src={bg}
 				alt=''
 				style={{
@@ -27,16 +61,20 @@ export default function ModernEducationHeader() {
 					objectPosition: 'center top',
 					zIndex: 0,
 					pointerEvents: 'none',
+					opacity: bgVisible ? 1 : 0,
+					transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
 				}}
 			/>
 
-			<ParticleBackground
-				count={100}
-				height={650}
-				opacity={0.8}
-				color='255, 255, 255'
-				zIndex={2}
-			/>
+			{!hideParticles && (
+				<ParticleBackground
+					count={100}
+					height={650}
+					opacity={0.8}
+					color='255, 255, 255'
+					zIndex={2}
+				/>
+			)}
 
 			<AnimatedSection
 				style={{
@@ -49,16 +87,14 @@ export default function ModernEducationHeader() {
 			>
 				<div className='text-center'>
 					<Text
-						buttonText='Bizning platformalar'
-						title='Barcha imkoniyatlar'
-						highlight='bir joyda'
-						subtitle={
-							<>
-								Beshta platforma orqali o'qish, tadqiqot qilish, bilim olish va
-								professional <br />
-								rivojlanish imkoniyatlari.
-							</>
-						}
+						buttonText={buttonText}
+						buttonType={buttonType}
+						title={title}
+						highlight={highlight}
+						highlightColor={highlightColor}
+						subtitle={subtitle}
+						titleStyle={titleStyle}
+						subtitleStyle={subtitleStyle}
 					/>
 				</div>
 			</AnimatedSection>

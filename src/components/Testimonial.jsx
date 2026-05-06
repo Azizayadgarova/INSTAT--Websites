@@ -55,6 +55,11 @@ const Testimonials = () => {
     }, [])
 
     return (
+        <>
+        <style>{`
+            .testimonial-card { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+            .testimonial-card:hover { border-color: rgba(56,160,255,0.4) !important; box-shadow: 0 0 28px rgba(56,160,255,0.18), inset 0 0 16px rgba(56,160,255,0.05) !important; }
+        `}</style>
         <section style={{
             backgroundColor: 'rgba(14,18,27,1)',
             padding: '40px 0 40px',
@@ -99,12 +104,13 @@ const Testimonials = () => {
                 </div>
             </div>
         </section>
+        </>
     )
 }
 
 const Card = memo(({ item }) => (
     <div
-        className='inline-block'
+        className='inline-block testimonial-card'
         style={{
             width: 'clamp(280px, 75vw, 486px)',
             minHeight: '196px',

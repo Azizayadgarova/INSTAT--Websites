@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useScroll, useTransform, motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
+import ScrollToTop from '../components/shared/ScrollToTop'
 
 const MainLayout = () => {
 	const { scrollYProgress } = useScroll()
@@ -60,6 +61,7 @@ const MainLayout = () => {
 
 	return (
 		<div className='bg-[rgba(14,18,27,1)] min-h-screen'>
+			<ScrollToTop />
 			{/* Custom cursor — ring */}
 			<div
 				ref={ringRef}

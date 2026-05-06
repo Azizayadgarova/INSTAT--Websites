@@ -1,14 +1,17 @@
-import { useEffect, useRef, useState } from 'react'
+import bgOnline from '@/assets/bgImg/Background (1).png'
 import bg from '@/assets/bgImg/Background.svg'
+import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
 import { CONFIGS, mentors, mod } from './MentorsSection/mentors.data'
-import AnimatedSection from './shared/AnimatedSection'
 import ParticleBackground from './shared/ParticleBackground'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
 
-const MentorsSection = () => {
+const MentorsSection = ({ variant }) => {
+	const isOnline = variant === 'online'
 	const [current, setCurrent] = useState(0)
+	const bgRef = useRef(null)
+	const [bgVisible, setBgVisible] = useState(false)
 	const [trackW, setTrackW] = useState(800)
 	const trackRef = useRef(null)
 	const dimScale = Math.min(1, Math.max(0.42, trackW / 900))
@@ -22,6 +25,17 @@ const MentorsSection = () => {
 		update()
 		window.addEventListener('resize', update)
 		return () => window.removeEventListener('resize', update)
+	}, [])
+
+	useEffect(() => {
+		const el = bgRef.current?.parentElement
+		if (!el) return
+		const bgObs = new IntersectionObserver(
+			([entry]) => setBgVisible(entry.isIntersecting),
+			{ threshold: 0.05 },
+		)
+		bgObs.observe(el)
+		return () => bgObs.disconnect()
 	}, [])
 
 	useEffect(() => {
@@ -48,16 +62,16 @@ const MentorsSection = () => {
 		<section
 			style={{
 				backgroundColor: 'rgba(14,18,27,1)',
-				backgroundImage: `url(${bg})`,
-				backgroundSize: '1400px 1200px',
-				backgroundPosition: 'center 10%',
-				backgroundRepeat: 'no-repeat',
-				padding: '40px 0 0px',
+				backgroundImage: isOnline ? undefined : `url(${bg})`,
+				backgroundSize: isOnline ? undefined : '1400px 1200px',
+				backgroundPosition: isOnline ? undefined : 'center 10%',
+				backgroundRepeat: isOnline ? undefined : 'no-repeat',
+				padding: '0px 0 0px',
 				overflow: 'hidden',
 				position: 'relative',
 				zIndex: 1,
 				isolation: 'isolate',
-				minHeight: `${Math.round(Math.max(500, 950 * dimScale))}px`,
+				height: '900px',
 				width: '100%',
 				display: 'flex',
 				flexDirection: 'column',
@@ -65,18 +79,41 @@ const MentorsSection = () => {
 				justifyContent: 'center',
 			}}
 		>
-			<ParticleBackground
-				count={100}
-				height={650}
-				opacity={0.8}
-				color='255, 255, 255'
-				zIndex={1}
-			/>
-			<SectionBackground />
+			{isOnline && (
+				<img
+					ref={bgRef}
+					src={bgOnline}
+					alt=''
+					style={{
+						position: 'absolute',
+						top: 0,
+						left: '50%',
+						transform: 'translateX(-50%)',
+						width: '100%',
+						height: '100%',
+						objectFit: 'cover',
+						objectPosition: 'center top',
+						zIndex: 0,
+						pointerEvents: 'none',
+						opacity: bgVisible ? 1 : 0,
+						transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
+					}}
+				/>
+			)}
+			{!isOnline && (
+				<ParticleBackground
+					count={100}
+					height={650}
+					opacity={0.8}
+					color='255, 255, 255'
+					zIndex={1}
+				/>
+			)}
+			{!isOnline && <SectionBackground />}
 
 			<div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
-				<AnimatedSection>
-					<div style={{ marginBottom: 60 }}>
+				<div>
+					<div style={{ marginBottom: 0 }}>
 						<Text
 							buttonText='Mentorlar'
 							title='Sohasida tajribali mutaxassislar bilan'
@@ -87,6 +124,12 @@ const MentorsSection = () => {
 									mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz.
 								</>
 							}
+							buttonType={isOnline ? 'button2' : 'button1'}
+							titleStyle={
+								isOnline ? { color: '#fff', fontSize: '48px' } : undefined
+							}
+							highlightColor={isOnline ? '#fff' : undefined}
+							subtitleStyle={isOnline ? { fontSize: '16px' } : undefined}
 						/>
 					</div>
 
@@ -121,7 +164,7 @@ const MentorsSection = () => {
 							</div>
 						</div>
 					</div>
-				</AnimatedSection>
+				</div>
 			</div>
 		</section>
 	)

@@ -1,9 +1,9 @@
-import { memo, useEffect, useRef } from 'react'
 import lobus from '@/assets/Countries.png'
-import fotIcon1 from '@/assets/icons/fUwXkleZJbkDUDDvw93zVo3gnls.svg fill.png'
 import fotIcon2 from '@/assets/EeUrJQfpXibXJa3MotZvgAm9tsY.svg fill.png'
 import fotIcon3 from '@/assets/iBEROwOJyQaiqZZ4k8N5Sj51w.svg.png'
+import fotIcon1 from '@/assets/icons/fUwXkleZJbkDUDDvw93zVo3gnls.svg fill.png'
 import icon1 from '@/assets/icons/InstatIcon.png'
+import { memo, useEffect, useRef } from 'react'
 
 const HEADING = {
 	fontFamily: 'Inter Display, sans-serif',
@@ -83,7 +83,7 @@ const GlowText = memo(() => {
 			ref={containerRef}
 			style={{
 				position: 'absolute',
-				bottom: '-80px',
+				bottom: '-30px', // ✅ FIX
 				left: '50%',
 				transform: 'translateX(-50%)',
 				width: '100%',
@@ -211,9 +211,10 @@ const Footer = () => (
 			</div>
 		</div>
 
+		{/* ✅ FIXED HEIGHT */}
 		<div
 			className='relative flex justify-center items-end'
-			style={{ minHeight: '380px', overflow: 'hidden' }}
+			style={{ height: '300px', overflow: 'hidden' }}
 		>
 			<img
 				src={lobus}

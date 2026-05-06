@@ -137,7 +137,7 @@ const TopFooter = () => {
 									<div className='absolute w-[104px] h-[104px] border border-white/10 rounded-[18px]' />
 									<div className='absolute w-[120px] h-[120px] border border-white/[0.06] rounded-[18px]' />
 									<div
-										className='relative z-10 w-[72px] h-[72px] rounded-[16px] flex items-center justify-center border border-white/25 shadow-[0_0_40px_rgba(59,130,246,0.55)]'
+										className='relative z-10 w-[76px] h-[76px] rounded-[16px] flex items-center justify-center border border-white/25 shadow-[0_0_40px_rgba(59,130,246,0.55)]'
 										style={{
 											background:
 												'linear-gradient(180deg,#38A0FF 0%,#2D3D99 100%)',
@@ -146,7 +146,7 @@ const TopFooter = () => {
 										<img
 											src={icon1}
 											alt=''
-											className='w-10 h-10 object-contain'
+											className='w-[56px] h-[46px] object-contain'
 										/>
 									</div>
 								</div>
@@ -161,9 +161,9 @@ const TopFooter = () => {
 										savollaringiz bo'lsa, biz bilan bog'laning
 									</>
 								}
-							>
-								<div
-									className='mx-auto mt-10'
+							/>
+							<div
+								className='mx-auto mt-10'
 									style={{
 										position: 'relative',
 										width: '100%',
@@ -263,7 +263,6 @@ const TopFooter = () => {
 										</button>
 									</form>
 								</div>
-							</Text>
 						</div>
 					</div>
 				</div>

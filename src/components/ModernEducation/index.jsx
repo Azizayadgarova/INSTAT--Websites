@@ -2,10 +2,11 @@ import { useRef, useEffect } from 'react'
 import { useScroll, useSpring } from 'framer-motion'
 import { cards } from './cards'
 import FloatingCard from './FloatingCard'
+import GridCard from './GridCard'
 import ModernEducationHeader from './Header'
 import ParticleBackground from '../shared/ParticleBackground'
 
-export default function ModernEducation() {
+export default function ModernEducation({ headerProps, variant = 'scroll', customCards, cardHeight = 140, hideParticles = false } = {}) {
 	const containerRef = useRef(null)
 
 	const { scrollYProgress } = useScroll({
@@ -19,6 +20,8 @@ export default function ModernEducation() {
 	})
 
 	useEffect(() => {
+		if (variant === 'grid') return
+
 		let lastTouchY = 0
 		let bodyLocked = false
 
@@ -71,25 +74,36 @@ export default function ModernEducation() {
 			window.removeEventListener('touchstart', handleTouchStart)
 			window.removeEventListener('touchmove', handleTouchMove)
 		}
-	}, [scrollYProgress, smooth])
+	}, [variant, scrollYProgress, smooth])
+
+	const displayCards = customCards || cards
 
 	return (
-		<div className='relative bg-[rgba(14,18,27,1)] w-full'>
-			<ModernEducationHeader />
-			<div ref={containerRef} className='relative'>
-				<div className='sticky top-0 h-screen overflow-hidden [perspective:2000px]'>
-					<ParticleBackground count={100} height={650} opacity={0.8} color='255, 255, 255' zIndex={1} />
-					{cards.map((card, index) => (
-						<FloatingCard
-							key={`${card.id}-${index}`}
-							card={card}
-							index={index}
-							progress={smooth}
-						/>
+		<div className='relative bg-[rgba(14,18,27,1)] w-full' style={{ paddingBottom: 0 }}>
+			<ModernEducationHeader headerProps={headerProps} />
+			{variant === 'grid' ? (
+				<div className='w-full py-8 md:py-16'>
+					{displayCards.map((card, i) => (
+						<GridCard key={card.id} card={card} index={i} />
 					))}
 				</div>
-				<div className='h-[700vh]' />
-			</div>
+			) : (
+				<div ref={containerRef} className='relative'>
+					<div className='sticky top-0 h-screen overflow-hidden [perspective:2000px]'>
+						{!hideParticles && <ParticleBackground count={100} height={650} opacity={0.8} color='255, 255, 255' zIndex={1} />}
+						{displayCards.map((card, index) => (
+							<FloatingCard
+								key={`${card.id}-${index}`}
+								card={card}
+								index={index}
+								progress={smooth}
+								totalCards={displayCards.length}
+							/>
+						))}
+					</div>
+					<div style={{ height: `${displayCards.length * cardHeight}vh` }} />
+				</div>
+			)}
 		</div>
 	)
 }
