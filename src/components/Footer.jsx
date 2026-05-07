@@ -83,7 +83,7 @@ const GlowText = memo(() => {
 			ref={containerRef}
 			style={{
 				position: 'absolute',
-				bottom: '-30px', // ✅ FIX
+				bottom: 'calc(210px - clamp(40px, 20vw, 330px))',
 				left: '50%',
 				transform: 'translateX(-50%)',
 				width: '100%',

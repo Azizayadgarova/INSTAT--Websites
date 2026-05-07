@@ -21,7 +21,8 @@ const Testimonials = () => {
     const row2Ref = useRef(null)
 
     const row1 = [...testimonials, ...testimonials, ...testimonials, ...testimonials]
-    const row2 = [...testimonials, ...testimonials, ...testimonials, ...testimonials]
+    const reversed = [...testimonials].reverse()
+    const row2 = [...reversed, ...reversed, ...reversed, ...reversed]
 
     useEffect(() => {
         const createLoop = (el, speed, direction) => {
@@ -56,10 +57,6 @@ const Testimonials = () => {
 
     return (
         <>
-        <style>{`
-            .testimonial-card { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-            .testimonial-card:hover { border-color: rgba(56,160,255,0.4) !important; box-shadow: 0 0 28px rgba(56,160,255,0.18), inset 0 0 16px rgba(56,160,255,0.05) !important; }
-        `}</style>
         <section style={{
             backgroundColor: 'rgba(14,18,27,1)',
             padding: '40px 0 40px',
@@ -106,6 +103,7 @@ const Testimonials = () => {
         </section>
         </>
     )
+
 }
 
 const Card = memo(({ item }) => (

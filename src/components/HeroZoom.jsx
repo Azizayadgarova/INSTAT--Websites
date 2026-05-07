@@ -7,21 +7,6 @@ import phoneImg from '@/assets/phone.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const heroShimmerStyle = `
-  @keyframes heroShimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  .hero-shimmer {
-    background: linear-gradient(90deg, #00f2ff 20%, #ffffff 50%, #00f2ff 80%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: heroShimmer 3s linear infinite;
-  }
-`
-
 const HeroZoom = () => {
 	const containerRef = useRef(null)
 	const zoomWrapperRef = useRef(null)
@@ -49,7 +34,7 @@ const HeroZoom = () => {
 					pin: true,
 					anticipatePin: 1,
 					invalidateOnRefresh: true,
-					onRefresh: _ => {
+					onRefresh: () => {
 						const w = zoomWrapperRef.current?.offsetWidth
 						if (w)
 							gsap.set(zoomWrapperRef.current, {
@@ -109,7 +94,10 @@ const HeroZoom = () => {
 				)
 		}, containerRef)
 
-		return () => ctx.revert()
+		return () => {
+			ctx.revert()
+			document.body.style.overflowX = ''
+		}
 	}, [])
 
 	return (
@@ -118,7 +106,6 @@ const HeroZoom = () => {
 			className='relative w-full mt-[100px] mb-[570px] h-screen bg-[rgba(14,18,27,1)] flex items-center justify-center overflow-y-hidden z-[30]'
 			style={{ isolation: 'isolate' }}
 		>
-			<style>{heroShimmerStyle}</style>
 			<div
 				ref={zoomWrapperRef}
 				className='relative w-full max-w-[95vw] md:max-w-[85vw] lg:max-w-[850px] aspect-[16/9] flex items-center justify-center'

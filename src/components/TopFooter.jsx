@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import icon1 from '@/assets/Group 1707483799 (5).png'
 import Text from './shared/Text'
 
@@ -14,6 +14,16 @@ const PALETTE = [
 ]
 
 const TopFooter = () => {
+	const [email, setEmail] = useState('')
+	const [submitted, setSubmitted] = useState(false)
+
+	const handleSubmit = e => {
+		e.preventDefault()
+		if (!email.trim()) return
+		setSubmitted(true)
+		setEmail('')
+	}
+
 	const cardRef = useRef(null)
 	const gridRef = useRef(null)
 	const stateRef = useRef({
@@ -97,7 +107,6 @@ const TopFooter = () => {
 
 	return (
 		<>
-			<style>{`@keyframes cardSpin{to{transform:rotate(360deg)}}`}</style>
 			<section className='w-full bg-[#0E121B] py-10'>
 				<div className='w-full max-w-[1200px] mx-auto px-6'>
 					<div
@@ -217,51 +226,60 @@ const TopFooter = () => {
 											strokeDasharray='10 45'
 											pathLength='100'
 											style={{
-												animation: 'cardSpin 15s linear infinite',
+												animation: 'borderSpin 15s linear infinite',
 												filter: 'drop-shadow(0 0 2px #69AAFB)',
 											}}
 										/>
 									</svg>
-									<form
-										className='relative z-10 flex items-center w-full h-full px-[6px] py-[6px] gap-1'
-										onSubmit={e => e.preventDefault()}
-									>
-										<input
-											type='email'
-											placeholder='Pochtangizni qoldiring'
-											className='flex-1 bg-transparent border-none outline-none px-4'
-											style={{
-												color: 'rgba(255,255,255,1)',
-												fontFamily: 'Inter Display,sans-serif',
-												fontWeight: 400,
-												fontSize: '16px',
-												lineHeight: '140%',
-												outline: 'none',
-											}}
-										/>
-										<button
-											type='submit'
-											className='whitespace-nowrap transition-all duration-200 hover:brightness-110 active:scale-95'
-											style={{
-												color: 'rgba(255,255,255,1)',
-												fontFamily: 'Inter Display,sans-serif',
-												fontWeight: 400,
-												fontSize: '16px',
-												lineHeight: '140%',
-												width: '87px',
-												height: '44px',
-												borderRadius: '10px',
-												border: '1px solid rgba(28,84,148,1)',
-												padding: '12px',
-												background:
-													'linear-gradient(180deg,#3E8BE6 0%,#1C5FB4 100%)',
-												boxShadow:
-													'0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(14,18,27,0.3) inset, 0px 16px 24px -8px rgba(14,18,27,0.1), 0px 0px 0px 1px rgba(28,84,148,1)',
-											}}
+									{submitted ? (
+										<div className='relative z-10 flex items-center justify-center w-full h-full px-4'>
+											<span style={{ color: 'rgba(105,170,251,1)', fontFamily: 'Inter Display,sans-serif', fontSize: '16px' }}>
+												✓ Email muvaffaqiyatli yuborildi!
+											</span>
+										</div>
+									) : (
+										<form
+											className='relative z-10 flex items-center w-full h-full px-[6px] py-[6px] gap-1'
+											onSubmit={handleSubmit}
 										>
-											Yuborish
-										</button>
-									</form>
+											<input
+												type='email'
+												placeholder='Pochtangizni qoldiring'
+												value={email}
+												onChange={e => setEmail(e.target.value)}
+												required
+												className='flex-1 bg-transparent border-none outline-none px-4'
+												style={{
+													color: 'rgba(255,255,255,1)',
+													fontFamily: 'Inter Display,sans-serif',
+													fontWeight: 400,
+													fontSize: '16px',
+													lineHeight: '140%',
+													outline: 'none',
+												}}
+											/>
+											<button
+												type='submit'
+												className='whitespace-nowrap transition-all duration-200 hover:brightness-110 active:scale-95'
+												style={{
+													color: 'rgba(255,255,255,1)',
+													fontFamily: 'Inter Display,sans-serif',
+													fontWeight: 400,
+													fontSize: '16px',
+													lineHeight: '140%',
+													width: '87px',
+													height: '44px',
+													borderRadius: '10px',
+													border: '1px solid rgba(28,84,148,1)',
+													padding: '12px',
+													background: 'linear-gradient(180deg,#3E8BE6 0%,#1C5FB4 100%)',
+													boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(14,18,27,0.3) inset, 0px 16px 24px -8px rgba(14,18,27,0.1), 0px 0px 0px 1px rgba(28,84,148,1)',
+												}}
+											>
+												Yuborish
+											</button>
+										</form>
+									)}
 								</div>
 						</div>
 					</div>

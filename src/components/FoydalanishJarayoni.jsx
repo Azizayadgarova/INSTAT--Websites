@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion' // eslint-disable-line
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { useRef, useState } from 'react'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import icon1 from '@/assets/icons/Vector (2).png'
@@ -10,17 +10,6 @@ import illus2 from '@/assets/Illustration (2).png'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
 
-const css = `
-  @keyframes rotateBorder {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes shimmerSweep {
-    0%   { left: -80%; }
-    100% { left: 160%; }
-  }
-`
 
 const leftFeatures = [
 	{
@@ -157,7 +146,6 @@ const FeatureCard = ({ icon, title, description }) => (
 
 const FoydalanishJarayoni = () => (
 	<>
-		<style>{css}</style>
 		<section style={{
 			width: '100%',
 			backgroundColor: 'rgba(14, 18, 27, 1)',
@@ -206,9 +194,8 @@ const FoydalanishJarayoni = () => (
 			</div>
 
 			{/* 3-column grid */}
-			<div style={{
+			<div className='grid grid-cols-1 md:grid-cols-3' style={{
 				position: 'relative', zIndex: 1, width: '100%', maxWidth: '1200px',
-				display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
 				gap: '25px', padding: '0 24px',
 			}}>
 				{/* Left */}

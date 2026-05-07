@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
@@ -7,7 +8,9 @@ import { books } from '../data/books.data'
 
 const vp = { once: true, amount: 0.2 }
 
-const ElektronKutubxona = () => (
+const ElektronKutubxona = () => {
+	const navigate = useNavigate()
+	return (
 	<section
 		style={{
 			width: '100%',
@@ -132,11 +135,14 @@ const ElektronKutubxona = () => (
 				color: '#fff',
 				cursor: 'pointer',
 				whiteSpace: 'nowrap',
-			}}>
+			}}
+			onClick={() => navigate('/platform/raqamli-kutubxona')}
+			>
 				Barchasini ko'rish
 			</button>
 		</motion.div>
 	</section>
-)
+	)
+}
 
 export default ElektronKutubxona

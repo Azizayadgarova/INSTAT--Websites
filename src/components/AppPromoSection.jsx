@@ -1,25 +1,12 @@
-import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
-import appstore from '@/assets/icons/appstore.png'
 import google from '@/assets/googleplay.png'
+import appstore from '@/assets/icons/appstore.png'
 import phone2 from '@/assets/iPhone 14 Pro (1).png'
 import phone1 from '@/assets/iPhone 14 Pro.png'
+import { motion } from 'framer-motion'
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 
 const AppPromoSection = () => {
-  const sectionRef = useRef(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true)
-        else setVisible(false)
-      },
-      { threshold: 0.2 },
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+  const [sectionRef, visible] = useIntersectionObserver(0.2)
 
   const textVariant = (delay) => ({
     hidden: { opacity: 0, y: 30 },
@@ -31,11 +18,7 @@ const AppPromoSection = () => {
   })
 
   return (
-    <section className='w-full bg-[#0E121B] pb-[40px] flex justify-center'>
-      <style>{`
-        @keyframes phoneFloat1 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-14px)} }
-        @keyframes phoneFloat2 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
-      `}</style>
+    <section className='w-full bg-[#0E121B] pb-[40px] mt-[40px] flex justify-center'>
       <div className='w-full max-w-[1200px] mx-auto px-6'>
 
         <div

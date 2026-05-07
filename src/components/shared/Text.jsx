@@ -1,5 +1,4 @@
 import { Button } from '../shared/Button'
-import { Button2 } from '../shared/Button2'
 
 const Text = ({
 	buttonText,
@@ -11,16 +10,11 @@ const Text = ({
 	titleStyle,
 	subtitleStyle,
 }) => {
-	const renderButton = () => {
-		if (buttonType === 'button2') {
-			return <Button2 text={buttonText} />
-		}
-		return <Button text={buttonText} />
-	}
+	const variant = buttonType === 'button2' ? 'light' : 'dark'
 
 	return (
 		<div className='z-30 flex flex-col items-center'>
-			{renderButton()}
+			<Button text={buttonText} variant={variant} />
 
 			<div className='text-center '>
 				<h1 className='text_font pt-[15px] text-[rgba(188,188,188,1)]  leading-[1.1]' style={titleStyle}>

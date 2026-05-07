@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
+import TezKunda from '../pages/TezKunda'
 import MainLayout from './../layouts/MainLayout'
 import SecondLayout from './../layouts/SecondLayout'
 import NotFound from '../pages/NotFound'
@@ -117,9 +118,9 @@ export const router = createBrowserRouter([
 			{ index: true, element: <Navigate to='/platform/onlayn-talim' replace /> },
 			{ path: 'onlayn-talim',        element: s(OnlaynTalim) },
 			{ path: 'raqamli-kutubxona',   element: s(RaqamliKutibxona) },
-			{ path: 'elektron-jurnal',     element: <div /> },
-			{ path: 'mikro-malumotlar',    element: <div /> },
-			{ path: 'bosh-ish-orinlari',   element: <div /> },
+			{ path: 'elektron-jurnal',     element: <TezKunda /> },
+			{ path: 'mikro-malumotlar',    element: <TezKunda /> },
+			{ path: 'bosh-ish-orinlari',   element: <TezKunda /> },
 		],
 	},
 	{

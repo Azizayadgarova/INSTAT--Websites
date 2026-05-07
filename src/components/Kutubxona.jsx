@@ -107,14 +107,13 @@ const Kutubxona = () => {
 					step={0.06}
 					style={{ fontWeight: 600, fontSize: '48px', color: '#fff' }}
 				/>
-				<motion.p
-					initial={{ opacity: 0, y: 10 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.2 }}
-					className="text-[#CACACE] text-[16px]"
-				>
-			Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping <br/> va kutubxonada ortiqcha kutmasdan oling!
-				</motion.p>
+				<p className="text-[#CACACE] text-[16px] text-center">
+					<BlurWords
+						text="Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!"
+						delay={0.08}
+						step={0.04}
+					/>
+				</p>
 			</motion.div>
 
 			{/* MAIN */}
