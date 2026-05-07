@@ -23,7 +23,6 @@ export default defineConfig({
 		cssMinify: 'esbuild',
 		modulePreload: { polyfill: false },
 		rollupOptions: {
-			treeshake: 'smallest',
 			output: {
 				manualChunks(id) {
 					if (id.includes('node_modules/three') || id.includes('@react-three')) {
