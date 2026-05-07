@@ -1,5 +1,6 @@
 import bgOnline from '@/assets/bgImg/Background (1).png'
-import bg from '@/assets/bgImg/Background.svg'
+
+const bg = '/bgImg/Background.svg'
 import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
 import { CONFIGS, mentors, mod } from './MentorsSection/mentors.data'
