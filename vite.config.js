@@ -1,7 +1,5 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
-import { imagetools } from 'vite-imagetools'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -15,24 +13,17 @@ export default defineConfig({
 	},
 	plugins: [
 		react(),
-		imagetools(),
-		ViteImageOptimizer({
-			jpg: { quality: 75 },
-			jpeg: { quality: 75 },
-			png: { quality: 75, compressionLevel: 9 },
-			webp: { lossless: true },
-			svg: { multipass: true },
-		}),
 	],
 	build: {
 		target: 'es2020',
 		cssCodeSplit: true,
-		assetsInlineLimit: 8192,
+		assetsInlineLimit: 4096,
 		reportCompressedSize: false,
 		minify: 'esbuild',
-		cssMinify: true,
+		cssMinify: 'esbuild',
 		modulePreload: { polyfill: false },
 		rollupOptions: {
+			treeshake: 'smallest',
 			output: {
 				manualChunks(id) {
 					if (id.includes('node_modules/three') || id.includes('@react-three')) {
