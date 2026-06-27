@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion' // eslint-disable-line no-unused-vars
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import icon1 from '@/assets/icons/Vector (2).png'
 import icon2 from '@/assets/icons/Vector (3).png'
@@ -7,8 +7,8 @@ import icon3 from '@/assets/icons/Vector (4).png'
 import icon4 from '@/assets/icons/Vector (5).png'
 import illus1 from '@/assets/Illus.png'
 import illus2 from '@/assets/Illustration (2).png'
-import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
+import AnimatedSection from './shared/AnimatedSection'
 
 
 const leftFeatures = [
@@ -144,58 +144,84 @@ const FeatureCard = ({ icon, title, description }) => (
 )
 
 
-const FoydalanishJarayoni = () => (
+const FoydalanishJarayoni = () => {
+	const bgRef = useRef(null)
+	const [bgVisible, setBgVisible] = useState(false)
+
+	useEffect(() => {
+		const el = bgRef.current?.parentElement
+		if (!el) return
+		const observer = new IntersectionObserver(
+			([entry]) => setBgVisible(entry.isIntersecting),
+			{ threshold: 0.05 },
+		)
+		observer.observe(el)
+		return () => observer.disconnect()
+	}, [])
+
+	return (
 	<>
 		<section style={{
 			width: '100%',
+			maxWidth: '1440px',
+			margin: '0 auto',
 			backgroundColor: 'rgba(14, 18, 27, 1)',
 			display: 'flex', flexDirection: 'column', alignItems: 'center',
 			position: 'relative', overflow: 'hidden', paddingBottom: '40px',
 		}}>
-			<img src={bgGlow} alt='' style={{
-				position: 'absolute', top: 0, left: '50%',
-				transform: 'translateX(-50%)', width: '100%', maxWidth: '1200px',
-				pointerEvents: 'none', userSelect: 'none',
-			}} />
+			<img
+				ref={bgRef}
+				src={bgGlow}
+				alt=''
+				aria-hidden='true'
+				style={{
+					position: 'absolute',
+					top: 0,
+					left: '50%',
+					transform: 'translateX(-50%)',
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					objectPosition: 'center top',
+					zIndex: 0,
+					pointerEvents: 'none',
+					opacity: bgVisible ? 1 : 0,
+					transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
+				}}
+			/>
 
 			{/* Header */}
-			<div style={{
-				position: 'relative', zIndex: 1, display: 'flex',
-				flexDirection: 'column', alignItems: 'center', textAlign: 'center',
-				paddingTop: '40px', paddingBottom: '48px', gap: '20px',
-			}}>
-				<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={vp} transition={{ duration: 0.5 }}>
+			<AnimatedSection style={{ position: 'relative', zIndex: 1, paddingTop: '40px', paddingBottom: '48px', width: '100%' }}>
+				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
 					<Button2 text='Foydalanish jarayoni' />
-				</motion.div>
 
-				<BlurWords
-					text='Platforma Qanday Ishlaydi?'
-					delay={0.1}
-					style={{
-						fontFamily: '"Inter Display", Inter, sans-serif',
-						fontWeight: 600, fontSize: '48px', lineHeight: '58px',
-						color: '#ffffff', display: 'block',
-					}}
-				/>
+					<h2
+						style={{
+							fontFamily: '"Inter Display", Inter, sans-serif',
+							fontWeight: 600, fontSize: 'clamp(28px,4vw,48px)', lineHeight: 1.1,
+							color: '#ffffff', margin: 0, letterSpacing: '-0.02em',
+						}}
+					>
+						Platforma Qanday Ishlaydi?
+					</h2>
 
-				<motion.p
-					initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
-					viewport={vp} transition={{ duration: 0.6, delay: 0.5 }}
-					style={{
-						fontFamily: '"Inter Display", Inter, sans-serif',
-						fontWeight: 400, fontSize: '16px', lineHeight: '140%',
-						color: 'rgba(202, 202, 206, 1)', textAlign: 'center',
-						maxWidth: '560px', margin: 0,
-					}}
-				>
-					Raqamli kutubxonadan foydalanish jarayoni — kitob tanlash, xarid
-					qilish va platforma ichida o'qish bosqichlari haqida qisqacha ma'lumot.
-				</motion.p>
-			</div>
+					<p
+						style={{
+							fontFamily: '"Inter Display", Inter, sans-serif',
+							fontWeight: 400, fontSize: '16px', lineHeight: '140%',
+							color: 'rgba(202, 202, 206, 1)', textAlign: 'center',
+							maxWidth: '560px', margin: 0,
+						}}
+					>
+						Raqamli kutubxonadan foydalanish jarayoni — kitob tanlash, xarid
+						qilish va platforma ichida o&apos;qish bosqichlari haqida qisqacha ma&apos;lumot.
+					</p>
+				</div>
+			</AnimatedSection>
 
 			{/* 3-column grid */}
 			<div className='grid grid-cols-1 md:grid-cols-3' style={{
-				position: 'relative', zIndex: 1, width: '100%', maxWidth: '1200px',
+				position: 'relative', zIndex: 1, width: '100%', maxWidth: '1440px',
 				gap: '25px', padding: '0 24px',
 			}}>
 				{/* Left */}
@@ -238,6 +264,7 @@ const FoydalanishJarayoni = () => (
 			</div>
 		</section>
 	</>
-)
+	)
+}
 
 export default FoydalanishJarayoni

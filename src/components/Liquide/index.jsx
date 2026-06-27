@@ -2,19 +2,31 @@ import { useMemo } from 'react'
 import { slides } from './slides'
 import { useThreeSlider } from './useThreeSlider'
 
+const preSlides = slides.map(slide => ({
+	...slide,
+	titleChars: slide.title.split('').map((char, j) => ({
+		char,
+		angle: (j - (slide.title.length - 1) / 2) * (90 / (slide.title.length / 2)),
+	})),
+	hlChars: slide.highlight.split('').map((char, j) => ({
+		char,
+		angle: (j - (slide.highlight.length - 1) / 2) * (20 / (slide.highlight.length / 5)),
+	})),
+}))
+
 export default function LiquideSlider() {
 	const s = useMemo(
 		() => Math.min(window.innerWidth / 1200, window.innerHeight / 1000),
 		[],
 	)
-	const { canvasRef, counterRef, overlayRefs } = useThreeSlider(s)
+	const { canvasRef, overlayRefs } = useThreeSlider(s)
 
 	return (
 		<section
 			style={{
 				position: 'relative',
 				width: '100%',
-				height: '100vh',
+				aspectRatio: '1440 / 900',
 				overflow: 'hidden',
 				background: '#000',
 			}}
@@ -24,51 +36,53 @@ export default function LiquideSlider() {
 				style={{ position: 'absolute', top: 0, left: 0 }}
 			/>
 
-			<div
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					height: '35vh',
-					background:
-						'linear-gradient(to bottom, rgba(14,18,27,1) 0%, rgba(0,0,0,0) 100%)',
-					zIndex: 2,
-					pointerEvents: 'none',
-				}}
-			/>
+			<svg width='0' height='0' style={{ position: 'absolute' }} aria-hidden='true'>
+				<filter id='liquide-grain'>
+					<feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' result='noise' />
+					<feDisplacementMap in='SourceGraphic' in2='noise' scale='3' />
+				</filter>
+			</svg>
+
 			<div
 				style={{
 					position: 'absolute',
 					bottom: 0,
 					left: 0,
 					width: '100%',
-					height: '40vh',
+					height: '60vh',
 					background:
-						'linear-gradient(to top, rgba(14,18,27,1)  0%, rgba(0,0,0,0) 100%)',
+						'linear-gradient(to top, rgba(14,18,27,1) 0%, rgba(14,18,27,0.85) 25%, rgba(0,0,0,0) 100%)',
+					zIndex: 2,
+					pointerEvents: 'none',
+				}}
+			/>
+			<div
+				style={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					width: '45%',
+					height: '100%',
+					background:
+						'linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%)',
+					zIndex: 2,
+					pointerEvents: 'none',
+				}}
+			/>
+			<div
+				style={{
+					position: 'absolute',
+					top: 0,
+					right: 0,
+					width: '45%',
+					height: '100%',
+					background:
+						'linear-gradient(to left, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%)',
 					zIndex: 2,
 					pointerEvents: 'none',
 				}}
 			/>
 
-			<div
-				style={{
-					position: 'absolute',
-					top: '50%',
-					width: '100%',
-					padding: '0 3rem',
-					display: 'flex',
-					justifyContent: 'flex-end',
-					color: '#fff',
-					zIndex: 10,
-					pointerEvents: 'none',
-					transform: 'translateY(-50%)',
-					fontFamily: 'sans-serif',
-					fontWeight: 600,
-				}}
-			>
-				<p ref={counterRef} style={{ fontSize: '14px', opacity: 0.4 }} />
-			</div>
 
 			<div
 				style={{
@@ -78,7 +92,7 @@ export default function LiquideSlider() {
 					zIndex: 5,
 				}}
 			>
-				{slides.map((slide, i) => (
+				{preSlides.map((slide, i) => (
 					<div
 						key={i}
 						ref={el => (overlayRefs.current[i] = el)}
@@ -102,33 +116,30 @@ export default function LiquideSlider() {
 								justifyContent: 'center',
 							}}
 						>
-							{slide.title.split('').map((char, j) => {
-								const angle =
-									(j - (slide.title.length - 1) / 2) *
-									(90 / (slide.title.length / 2))
-								return (
-									<span
-										key={j}
-										className='anim-char'
-										data-rot={angle}
-										style={{
-											position: 'absolute',
-											fontWeight: 900,
-											fontSize: `${60 * s}px`,
-											color: '#fff',
-											height: `${380 * s}px`,
-											transformOrigin: 'bottom center',
-											transform: `rotate(${angle}deg)`,
-											whiteSpace: 'pre',
-											display: 'inline-block',
-											transition: 'transform 0.1s ease-out',
-											letterSpacing: '-2px',
-										}}
-									>
-										{char}
-									</span>
-								)
-							})}
+							{slide.titleChars.map(({ char, angle }, j) => (
+								<span
+									key={j}
+									className='anim-char grain-text'
+									data-rot={angle}
+									style={{
+										position: 'absolute',
+										fontFamily: '"Inter Display",Inter,sans-serif',
+										fontWeight: 900,
+										fontSize: `${60 * s}px`,
+										color: '#fff',
+										height: `${380 * s}px`,
+										transformOrigin: 'bottom center',
+										transform: `rotate(${angle}deg)`,
+										whiteSpace: 'pre',
+										display: 'inline-block',
+										textTransform: 'uppercase',
+										letterSpacing: '-2px',
+										transition: 'transform 0.1s ease-out',
+									}}
+								>
+									{char}
+								</span>
+							))}
 						</div>
 
 						<div
@@ -141,45 +152,43 @@ export default function LiquideSlider() {
 								marginTop: `${-75 * s}px`,
 							}}
 						>
-							{slide.highlight.split('').map((char, j) => {
-								const angle =
-									(j - (slide.highlight.length - 1) / 2) *
-									(20 / (slide.highlight.length / 5))
-								return (
-									<span
-										key={j}
-										className='anim-char'
-										data-rot={angle}
-										style={{
-											position: 'absolute',
-											fontWeight: 900,
-											fontStyle: 'italic',
-											fontSize: `${36 * s}px`,
-											color: '#22d3ee',
-											height: `${340 * s}px`,
-											transformOrigin: 'bottom center',
-											transform: `rotate(${angle}deg)`,
-											whiteSpace: 'pre',
-											display: 'inline-block',
-											transition: 'transform 0.1s ease-out',
-										}}
-									>
-										{char}
-									</span>
-								)
-							})}
+							{slide.hlChars.map(({ char, angle }, j) => (
+								<span
+									key={j}
+									className='anim-char grain-text'
+									data-rot={angle}
+									style={{
+										position: 'absolute',
+										fontFamily: '"Inter Display",Inter,sans-serif',
+										fontWeight: 900,
+										fontSize: `${36 * s}px`,
+										color: '#22d3ee',
+										height: `${340 * s}px`,
+										transformOrigin: 'bottom center',
+										transform: `rotate(${angle}deg)`,
+										whiteSpace: 'pre',
+										display: 'inline-block',
+										textTransform: 'uppercase',
+										transition: 'transform 0.1s ease-out',
+									}}
+								>
+									{char}
+								</span>
+							))}
 						</div>
 
 						<p
 							style={{
 								marginTop: `${160 * s}px`,
+								fontFamily: '"Inter Display", Inter, sans-serif',
+								fontWeight: 400,
+								fontSize: '20px',
+								lineHeight: '140%',
+								letterSpacing: '0%',
 								textAlign: 'center',
 								color: 'rgba(225,227,234,1)',
-								fontSize: `${20 * s}px`,
 								maxWidth: '28rem',
 								padding: '0 20px',
-								lineHeight: 1.5,
-								opacity: 0.7,
 							}}
 						>
 							{slide.desc}

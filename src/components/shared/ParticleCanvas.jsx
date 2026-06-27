@@ -13,7 +13,8 @@ const ParticleCanvas = memo(() => {
 			canvas.height = canvas.offsetHeight
 		}
 		resize()
-		window.addEventListener('resize', resize)
+		const ro = new ResizeObserver(() => resize())
+		ro.observe(canvas)
 
 		const particles = Array.from({ length: 20 }, () => ({
 			x: Math.random() * canvas.width,
@@ -40,8 +41,13 @@ const ParticleCanvas = memo(() => {
 		gCtx.fillStyle = grad
 		gCtx.fill()
 
+		const FRAME_INTERVAL = 1000 / 24
+		let lastTime = 0
 		let raf
-		const draw = () => {
+		const draw = (timestamp = 0) => {
+			raf = requestAnimationFrame(draw)
+			if (timestamp - lastTime < FRAME_INTERVAL) return
+			lastTime = timestamp
 			ctx.clearRect(0, 0, canvas.width, canvas.height)
 			ctx.fillStyle = 'rgba(180, 245, 255, 1)'
 			particles.forEach(p => {
@@ -62,7 +68,6 @@ const ParticleCanvas = memo(() => {
 				ctx.fill()
 			})
 			ctx.globalAlpha = 1
-			raf = requestAnimationFrame(draw)
 		}
 
 		raf = requestAnimationFrame(draw)
@@ -70,7 +75,7 @@ const ParticleCanvas = memo(() => {
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (!entry.isIntersecting) { cancelAnimationFrame(raf); raf = null }
-				else if (raf === null) raf = requestAnimationFrame(draw)
+				else if (raf === null) { lastTime = 0; raf = requestAnimationFrame(draw) }
 			},
 			{ threshold: 0 },
 		)
@@ -78,7 +83,7 @@ const ParticleCanvas = memo(() => {
 
 		return () => {
 			cancelAnimationFrame(raf)
-			window.removeEventListener('resize', resize)
+			ro.disconnect()
 			observer.disconnect()
 		}
 	}, [])

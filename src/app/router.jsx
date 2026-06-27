@@ -8,6 +8,9 @@ import NotFound from '../pages/NotFound'
 // Platform pages
 const OnlaynTalim = lazy(() => import('../pages/platform/OnlaynTalim'))
 const RaqamliKutibxona = lazy(() => import('../pages/platform/RaqamliKutibxona'))
+const ElektronJurnalPage   = lazy(() => import('../pages/platform/ElektronJurnalPage'))
+const MikroMalumotlarPage  = lazy(() => import('../pages/platform/MikroMalumotlarPage'))
+const BoshIshOrinlariPage  = lazy(() => import('../pages/platform/BoshIshOrinlariPage'))
 
 
 // About pages
@@ -118,9 +121,9 @@ export const router = createBrowserRouter([
 			{ index: true, element: <Navigate to='/platform/onlayn-talim' replace /> },
 			{ path: 'onlayn-talim',        element: s(OnlaynTalim) },
 			{ path: 'raqamli-kutubxona',   element: s(RaqamliKutibxona) },
-			{ path: 'elektron-jurnal',     element: <TezKunda /> },
-			{ path: 'mikro-malumotlar',    element: <TezKunda /> },
-			{ path: 'bosh-ish-orinlari',   element: <TezKunda /> },
+			{ path: 'elektron-jurnal',     element: s(ElektronJurnalPage) },
+			{ path: 'mikro-malumotlar',    element: s(MikroMalumotlarPage) },
+			{ path: 'bosh-ish-orinlari',   element: s(BoshIshOrinlariPage) },
 		],
 	},
 	{

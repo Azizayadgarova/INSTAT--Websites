@@ -8,7 +8,7 @@ import facebook from '@/assets/Vector (1).png'
 import twitter from '@/assets/twitter-x-line (1).png'
 import { BASE_W, BASE_H, getCenterX } from './mentors.data'
 
-const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift }) => {
+const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hideExtra = false, isMobile = false }) => {
 	const w = BASE_W * cfg.scale * dimScale
 	const h = BASE_H * cfg.scale * dimScale
 	const cx = getCenterX(cfg, trackW / 2, dimScale)
@@ -65,12 +65,13 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift }) =>
 				width: w,
 				height: h,
 				left: cx - w / 2,
-				top: '40%',
+				top: isMobile ? '36%' : '40%',
 				transform: 'translateY(-50%)',
 				zIndex: cfg.z,
 				opacity: cfg.opacity,
-				transition: 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1)',
+				transition: 'all 0.55s cubic-bezier(0.23, 1, 0.32, 1)',
 				perspective: '800px',
+				willChange: 'transform, opacity',
 			}}
 		>
 			<motion.div
@@ -216,24 +217,28 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift }) =>
 						>
 							{mentor.role}
 						</motion.p>
-						<motion.p
-							initial={{ opacity: 0, y: 8 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.45, delay: 0.19, ease: [0.16, 1, 0.3, 1] }}
-							style={{ color: 'rgba(188,188,188,1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
-						>
-							{mentor.exp}
-						</motion.p>
-						<motion.div
-							initial={{ opacity: 0, scale: 0.85 }}
-							animate={{ opacity: 1, scale: 1 }}
-							transition={{ duration: 0.4, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-							style={{ display: 'flex', justifyContent: 'center', gap: 15 }}
-						>
-							<a href='#' aria-label='Instagram'><img src={insta} alt='' aria-hidden='true' loading='lazy' decoding='async' /></a>
-							<a href='#' aria-label='Facebook'><img src={facebook} alt='' aria-hidden='true' loading='lazy' decoding='async' /></a>
-							<a href='#' aria-label='Twitter'><img src={twitter} alt='' aria-hidden='true' loading='lazy' decoding='async' /></a>
-						</motion.div>
+						{!hideExtra && (
+							<>
+							<motion.p
+								initial={{ opacity: 0, y: 8 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.45, delay: 0.19, ease: [0.16, 1, 0.3, 1] }}
+								style={{ color: 'rgba(188,188,188,1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
+							>
+								{mentor.exp}
+							</motion.p>
+							<motion.div
+								initial={{ opacity: 0, scale: 0.85 }}
+								animate={{ opacity: 1, scale: 1 }}
+								transition={{ duration: 0.4, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+								style={{ display: 'flex', justifyContent: 'center', gap: 15 }}
+							>
+								<a href='#' aria-label='Instagram' onClick={e => e.preventDefault()}><img src={insta} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
+								<a href='#' aria-label='Facebook' onClick={e => e.preventDefault()}><img src={facebook} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
+								<a href='#' aria-label='Twitter' onClick={e => e.preventDefault()}><img src={twitter} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
+							</motion.div>
+							</>
+						)}
 					</motion.div>
 				)}
 			</AnimatePresence>

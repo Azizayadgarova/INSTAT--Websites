@@ -2,23 +2,15 @@ import google from '@/assets/googleplay.png'
 import appstore from '@/assets/icons/appstore.png'
 import phone2 from '@/assets/iPhone 14 Pro (1).png'
 import phone1 from '@/assets/iPhone 14 Pro.png'
-import { motion } from 'framer-motion'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+
+const ease = 'cubic-bezier(0.16,1,0.3,1)'
 
 const AppPromoSection = () => {
   const [sectionRef, visible] = useIntersectionObserver(0.2)
 
-  const textVariant = (delay) => ({
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
-    },
-  })
-
   return (
-    <section className='w-full bg-[#0E121B] pb-[40px] mt-[40px] flex justify-center'>
+    <section className='w-full bg-[#0E121B] pb-[120px] md:pb-[40px] mt-[40px] flex justify-center'>
       <div className='w-full max-w-[1200px] mx-auto px-6'>
 
         <div
@@ -26,46 +18,110 @@ const AppPromoSection = () => {
           className='relative bg-[#161B26] rounded-[24px]'
           style={{ minHeight: '480px', overflow: 'visible' }}
         >
-          <div className='flex items-center px-6 md:px-[60px]' style={{ minHeight: '480px' }}>
-            <div className='flex flex-col z-30 w-full md:w-[473px] md:shrink-0 py-10 md:py-[60px]'>
-              <motion.h3
-                initial='hidden'
-                animate={visible ? 'visible' : 'hidden'}
-                variants={textVariant(0.1)}
-                className='font-medium text-white text-[26px] sm:text-[36px] md:text-[48px] leading-[120%] tracking-[-0.02em] m-0'
+          {/* Desktop layout */}
+          <div className='hidden md:flex items-center px-[60px]' style={{ minHeight: '480px' }}>
+            <div className='flex flex-col z-30 w-[473px] shrink-0 py-[60px]'>
+              <h3
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? 'translateY(0)' : 'translateY(30px)',
+                  transition: `opacity 0.8s ${ease} 0.1s, transform 0.8s ${ease} 0.1s`,
+                }}
+                className='font-medium text-white text-[48px] leading-[120%] tracking-[-0.02em] m-0'
               >
                 Mobil ilova bilan <br /> yanada qulayroq!
-              </motion.h3>
-
-              <motion.p
-                initial='hidden'
-                animate={visible ? 'visible' : 'hidden'}
-                variants={textVariant(0.3)}
+              </h3>
+              <p
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? 'translateY(0)' : 'translateY(30px)',
+                  transition: `opacity 0.8s ${ease} 0.3s, transform 0.8s ${ease} 0.3s`,
+                }}
                 className='text-[rgba(188,188,188,1)] mt-4 text-[15px] leading-[150%]'
               >
-                Bizning mobil ilovamiz bilan bilim olish yanada oson. Hoziroq
-                ilovamizni yuklab oling!
-              </motion.p>
-
-              <motion.div
-                initial='hidden'
-                animate={visible ? 'visible' : 'hidden'}
-                variants={textVariant(0.5)}
+                Bizning mobil ilovamiz bilan bilim olish yanada oson. Hoziroq ilovamizni yuklab oling!
+              </p>
+              <div
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? 'translateY(0)' : 'translateY(30px)',
+                  transition: `opacity 0.8s ${ease} 0.5s, transform 0.8s ${ease} 0.5s`,
+                }}
                 className='flex flex-row gap-4 mt-12'
               >
-                <img src={google} alt='Google Play' loading='lazy' decoding='async' className='h-[52px] w-auto object-contain cursor-pointer hover:scale-105 transition-transform' />
-                <img src={appstore} alt='App Store' loading='lazy' decoding='async' className='h-[52px] w-auto object-contain cursor-pointer hover:scale-105 transition-transform' />
-              </motion.div>
+                <img src={google} alt='Google Play' width={160} height={52} loading='lazy' decoding='async' className='h-13 w-auto object-contain cursor-pointer hover:scale-105 transition-transform' />
+                <img src={appstore} alt='App Store' width={160} height={52} loading='lazy' decoding='async' className='h-13 w-auto object-contain cursor-pointer hover:scale-105 transition-transform' />
+              </div>
             </div>
           </div>
 
+          {/* Mobile layout */}
+          <div className='flex flex-col md:hidden px-6 pt-6 pb-0'>
+            <h3
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(30px)',
+                transition: `opacity 0.8s ${ease} 0.1s, transform 0.8s ${ease} 0.1s`,
+              }}
+              className='font-medium text-white text-[26px] leading-[120%] tracking-[-0.02em] m-0 text-center'
+            >
+              Mobil ilova bilan yanada qulayroq!
+            </h3>
+            <p
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(30px)',
+                transition: `opacity 0.8s ${ease} 0.3s, transform 0.8s ${ease} 0.3s`,
+              }}
+              className='text-[rgba(188,188,188,1)] mt-3 text-[13px] leading-[150%] text-center'
+            >
+              Bizning mobil ilovamiz bilan bilim olish yanada oson. Hoziroq ilovamizni yuklab oling!
+            </p>
+            <div
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(30px)',
+                transition: `opacity 0.8s ${ease} 0.5s, transform 0.8s ${ease} 0.5s`,
+              }}
+              className='flex flex-col gap-3 mt-6'
+            >
+              <img src={google} alt='Google Play' loading='lazy' decoding='async' className='w-full max-w-[280px] mx-auto h-[52px] object-contain cursor-pointer hover:scale-105 transition-transform' />
+              <img src={appstore} alt='App Store' loading='lazy' decoding='async' className='w-full max-w-[280px] mx-auto h-[52px] object-contain cursor-pointer hover:scale-105 transition-transform' />
+            </div>
+
+            {/* Mobile phones */}
+            <div className='relative w-full' style={{ marginTop: '24px', height: '280px' }}>
+              <div style={{
+                position: 'absolute',
+                width: '68%',
+                top: -7,
+                left: '-2%',
+                zIndex: 20,
+                transform: visible ? 'translateY(0)' : 'translateY(60px)',
+                opacity: visible ? 1 : 0,
+                transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0.2s, opacity 0.8s ease 0.2s',
+              }}>
+                <img src={phone1} alt='Mobil ilova' loading='lazy' decoding='async' style={{ width: '100%', objectFit: 'contain' }} />
+              </div>
+              <div style={{
+                position: 'absolute',
+                width: '50%',
+                top: 60,
+                right: '-2%',
+                zIndex: 10,
+                transform: visible ? 'translateY(0)' : 'translateY(60px)',
+                opacity: visible ? 1 : 0,
+                transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0.35s, opacity 0.8s ease 0.35s',
+              }}>
+                <img src={phone2} alt='Mobil ilova' loading='lazy' decoding='async' style={{ width: '100%', objectFit: 'contain' }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop phones */}
           <div
             className='hidden md:block absolute right-0 bottom-0 w-[46%] pointer-events-none rounded-br-[24px]'
-            style={{
-              height: '130%',
-              overflow: 'hidden',
-              top: 'auto',
-            }}
+            style={{ height: '130%', overflow: 'hidden', top: 'auto' }}
           >
             <div style={{
               position: 'absolute', width: '360px', height: '600px',

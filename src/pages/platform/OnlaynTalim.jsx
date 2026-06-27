@@ -4,7 +4,6 @@ import groupImg1 from '@/assets/Group 1000002880.png'
 import groupImg2 from '@/assets/Group 1000002880 (1).png'
 import groupImg3 from '@/assets/Rectangle 4412.png'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import AppPromoSection from '../../components/AppPromoSection'
 import FAQSection from '../../components/FAQSection'
 import LazyLoad from '../../components/shared/LazyLoad'
 import Text from '../../components/shared/Text'
@@ -92,13 +91,17 @@ function useCountUp(targetStr, started) {
 		const step = (ts) => {
 			if (!startTs) startTs = ts
 			const p = Math.min((ts - startTs) / duration, 1)
+			if (p >= 1) {
+				setDisplay(targetStr)
+				return
+			}
 			const eased = 1 - Math.pow(2, -10 * p)
 			const cur = Math.floor(eased * rawNum)
 			const formatted = rawNum >= 1000
 				? cur.toLocaleString('fr-FR').replace(/,/g, ' ')
 				: String(cur)
 			setDisplay(formatted + suffix)
-			if (p < 1) requestAnimationFrame(step)
+			requestAnimationFrame(step)
 		}
 		requestAnimationFrame(step)
 	}, [started, targetStr])
@@ -126,8 +129,8 @@ function CirclesBg() {
 		>
 			<defs>
 				<linearGradient id={GRAD_ID} x1='0' y1='0' x2='0' y2='1'>
-					<stop offset='60%' stopColor='#235EA6' stopOpacity='2' />
-					<stop offset='30%' stopColor='#235EA6' stopOpacity='1' />
+					<stop offset='0%' stopColor='rgba(43,117,204,1)' />
+					<stop offset='100%' stopColor='rgba(43,117,204,1)' />
 				</linearGradient>
 			</defs>
 			{CIRCLE_SIZES.map((size, i) => (
@@ -230,10 +233,8 @@ function HeroImage() {
 				alt="Onlayn ta'lim"
 				onMouseEnter={() => setHovered(true)}
 				onMouseLeave={() => setHovered(false)}
+				className='w-full h-55 md:h-149 object-cover'
 				style={{
-					width: '100%',
-					height: '596px',
-					objectFit: 'cover',
 					filter: hovered ? 'grayscale(0%)' : 'grayscale(100%)',
 					transform: hovered ? 'scale(1.03)' : 'scale(1)',
 					transition: 'filter 0.5s ease, transform 0.6s ease',
@@ -267,9 +268,9 @@ function HeroText() {
 				highlight='tizimli rivojlantirish'
 				subtitle={
 					<>
-						Zamonaviy ta'lim metodlari asosida ishlab chiqilgan kurslar
-						orqali <br />
-						bilimlaringizni chuqurlashtiring.
+						Zamonaviy ta'lim metodlari asosida ishlab chiqilgan kurslar orqali
+						<br className='hidden md:block' />
+						{' '}bilimlaringizni chuqurlashtiring
 					</>
 				}
 				buttonType='button2'
@@ -283,35 +284,58 @@ function StatCard({ stat, index, started, isLast }) {
 	const display = useCountUp(stat.value, started)
 	return (
 		<div
-			className='relative flex flex-col items-center justify-center py-[27px] px-4 text-center border-b md:border-b-0 border-black'
+			className='relative flex flex-col items-center justify-center py-[27px] px-4 text-center'
 			style={{
 				opacity: started ? 1 : 0,
 				transform: started ? 'translateY(0)' : 'translateY(28px)',
 				transition: `opacity 0.55s ease ${index * 0.1}s, transform 0.55s cubic-bezier(0.16,1,0.3,1) ${index * 0.1}s`,
 			}}
 		>
-			{/* TOP LEFT NEON */}
-			{index !== 0 && <div className='absolute top-0 left-0 w-1/6 h-[0.8px] bg-gradient-to-r from-[#2B75CC] via-[#2B75CC]/70 to-transparent' />}
-			{/* TOP RIGHT NEON */}
-			{!isLast && <div className='absolute top-0 right-0 w-1/6 h-[1px] bg-gradient-to-l from-[#2B75CC] via-[#2B75CC]/70 to-black' />}
-			{/* BOTTOM LEFT NEON */}
-			{index !== 0 && <div className='absolute bottom-0 left-0 w-1/6 h-[1px] bg-gradient-to-r from-[#2B75CC] via-[#2B75CC]/70 to-black' />}
-			{/* BOTTOM RIGHT NEON */}
-			{!isLast && <div className='absolute bottom-0 right-0 w-1/6 h-[1px] bg-gradient-to-l from-[#2B75CC] via-[#2B75CC]/70 to-black' />}
+			{/* MOBILE: gorizontal chiziq (1-qator pastida) */}
+			{index < 2 && (
+				<div className='md:hidden absolute bottom-0 left-0 right-0 h-px' style={{
+					background: 'linear-gradient(90deg, transparent 0%, #2B75CC 50%, transparent 100%)',
+					boxShadow: '0 0 6px rgba(43,117,204,0.7)',
+				}} />
+			)}
+			{/* MOBILE: vertikal chiziq (chap ustun o'ngida) */}
+			{index % 2 === 0 && (
+				<div className='md:hidden absolute top-0 right-0 w-px h-full' style={{
+					background: 'linear-gradient(180deg, transparent 0%, #2B75CC 50%, transparent 100%)',
+					boxShadow: '0 0 6px rgba(43,117,204,0.7)',
+				}} />
+			)}
+			{/* MOBILE: corner neon — markaz tomonga */}
+			{index === 0 && <div className='md:hidden absolute bottom-0 right-0 w-1/5 h-px' style={{ background: 'linear-gradient(270deg, #2B75CC, transparent)' }} />}
+			{index === 0 && <div className='md:hidden absolute bottom-0 left-0 w-1/5 h-px' style={{ background: 'linear-gradient(90deg, #2B75CC, transparent)' }} />}
+			{index === 1 && <div className='md:hidden absolute bottom-0 left-0 w-1/5 h-px' style={{ background: 'linear-gradient(90deg, #2B75CC, transparent)' }} />}
+			{index === 1 && <div className='md:hidden absolute bottom-0 right-0 w-1/5 h-px' style={{ background: 'linear-gradient(270deg, #2B75CC, transparent)' }} />}
+			{index === 2 && <div className='md:hidden absolute top-0 right-0 w-1/5 h-px' style={{ background: 'linear-gradient(270deg, #2B75CC, transparent)' }} />}
+			{index === 2 && <div className='md:hidden absolute top-0 left-0 w-1/5 h-px' style={{ background: 'linear-gradient(90deg, #2B75CC, transparent)' }} />}
+			{index === 3 && <div className='md:hidden absolute top-0 left-0 w-1/5 h-px' style={{ background: 'linear-gradient(90deg, #2B75CC, transparent)' }} />}
+			{index === 3 && <div className='md:hidden absolute top-0 right-0 w-1/5 h-px' style={{ background: 'linear-gradient(270deg, #2B75CC, transparent)' }} />}
 
-			{/* VERTICAL SEPARATOR — top/bottom glow */}
+			{/* DESKTOP: TOP LEFT NEON */}
+			{index !== 0 && <div className='hidden md:block absolute top-0 left-0 w-1/6 h-px bg-linear-to-r from-[#2B75CC] via-[#2B75CC]/70 to-transparent' />}
+			{/* DESKTOP: TOP RIGHT NEON */}
+			{!isLast && <div className='hidden md:block absolute top-0 right-0 w-1/6 h-px bg-linear-to-l from-[#2B75CC] via-[#2B75CC]/70 to-black' />}
+			{/* DESKTOP: BOTTOM LEFT NEON */}
+			{index !== 0 && <div className='hidden md:block absolute bottom-0 left-0 w-1/6 h-px bg-linear-to-r from-[#2B75CC] via-[#2B75CC]/70 to-black' />}
+			{/* DESKTOP: BOTTOM RIGHT NEON */}
+			{!isLast && <div className='hidden md:block absolute bottom-0 right-0 w-1/6 h-px bg-linear-to-l from-[#2B75CC] via-[#2B75CC]/70 to-black' />}
+
+			{/* DESKTOP: VERTICAL SEPARATOR */}
 			{!isLast && (
-				<div className='hidden md:block absolute top-0 right-0 w-[1px] h-full' style={{
+				<div className='hidden md:block absolute top-0 right-0 w-px h-full' style={{
 					background: 'linear-gradient(180deg, #2B75CC 0%, rgba(43,117,204,0.4) 10%, transparent 28%, transparent 72%, rgba(43,117,204,0.4) 90%, #2B75CC 100%)',
 					boxShadow: '0 0 8px rgba(43,117,204,0.6)',
 				}} />
 			)}
 
-			<h2 style={{
+			<h2 className='text-[28px] md:text-[42px] whitespace-nowrap' style={{
 				fontFamily: '"Inter Display", Inter, sans-serif',
 				fontWeight: 600,
-				fontSize: '42px',
-				lineHeight: '56px',
+				lineHeight: '1.2',
 				letterSpacing: '-0.03em',
 				color: '#fff',
 				marginBottom: '8px',
@@ -333,8 +357,37 @@ function StatCard({ stat, index, started, isLast }) {
 	)
 }
 
+const OT_KF = `
+@keyframes circleRotate {
+	from { transform: translateX(-50%) rotate(0deg); }
+	to   { transform: translateX(-50%) rotate(360deg); }
+}
+@keyframes circlePulse {
+	0%, 100% { stroke-opacity: 0.25; }
+	50%       { stroke-opacity: 0.6; }
+}
+@keyframes glowBreath {
+	0%, 100% { opacity: 0.75; transform: translateX(-50%) scale(1); }
+	50%       { opacity: 1;    transform: translateX(-50%) scale(1.1); }
+}
+@keyframes particleDrift {
+	0%   { transform: translateY(0) translateX(0);    opacity: 0; }
+	8%   { opacity: 1; }
+	92%  { opacity: 1; }
+	100% { transform: translateY(-130px) translateX(14px); opacity: 0; }
+}
+`
+
 export default function OnlaynTalim() {
 	const [statsRef, statsInView] = useInView(0.3)
+
+	useEffect(() => {
+		const el = document.createElement('style')
+		el.setAttribute('data-ot-kf', '1')
+		el.textContent = OT_KF
+		document.head.appendChild(el)
+		return () => document.head.removeChild(el)
+	}, [])
 
 	return (
 		<div
@@ -344,40 +397,8 @@ export default function OnlaynTalim() {
 				minHeight: '100vh',
 			}}
 		>
-			{/* Global keyframes */}
-			<style>{`
-				@keyframes circleRotate {
-					from { transform: translateX(-50%) rotate(0deg); }
-					to   { transform: translateX(-50%) rotate(360deg); }
-				}
-				@keyframes circlePulse {
-					0%, 100% { stroke-opacity: 0.25; }
-					50%       { stroke-opacity: 0.6; }
-				}
-				@keyframes glowBreath {
-					0%, 100% { opacity: 0.75; transform: translateX(-50%) scale(1); }
-					50%       { opacity: 1;    transform: translateX(-50%) scale(1.1); }
-				}
-				@keyframes particleDrift {
-					0%   { transform: translateY(0) translateX(0);    opacity: 0; }
-					8%   { opacity: 1; }
-					92%  { opacity: 1; }
-					100% { transform: translateY(-130px) translateX(14px); opacity: 0; }
-				}
-			`}</style>
-
 			{/* HERO */}
-			<section
-				style={{
-					position: 'relative',
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					padding: '80px 120px 0',
-					gap: '24px',
-					overflow: 'hidden',
-				}}
-			>
+			<section className='relative flex flex-col items-center pt-20 md:pt-25 px-4 md:px-30 pb-0 gap-6 overflow-hidden'>
 				<CirclesBg />
 				<TextGlow />
 				<Particles />
@@ -418,7 +439,7 @@ export default function OnlaynTalim() {
 							highlightColor: "#ffffff",
 							subtitle: <>Bizning platforma orqali siz IT va zamonaviy kasblarni<br />mahalliy va xorijiy mutaxassislar bilan onlayn o’rganasiz.</>,
 							hideParticles: true,
-							titleStyle: { color: "#fff", fontSize: "48px" },
+							titleStyle: { color: "#fff" },
 							subtitleStyle: { fontSize: "16px" },
 						}}
 					/>
@@ -433,11 +454,6 @@ export default function OnlaynTalim() {
 			<LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
 				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
 					<FAQSection hideParticles platformStyle />
-				</Suspense>
-			</LazyLoad>
-			<LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-					<AppPromoSection />
 				</Suspense>
 			</LazyLoad>
 		</div>

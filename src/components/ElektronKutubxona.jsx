@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import BlurWords from './shared/BlurWords'
@@ -10,6 +11,20 @@ const vp = { once: true, amount: 0.2 }
 
 const ElektronKutubxona = () => {
 	const navigate = useNavigate()
+	const bgRef = useRef(null)
+	const [bgVisible, setBgVisible] = useState(false)
+
+	useEffect(() => {
+		const el = bgRef.current?.parentElement
+		if (!el) return
+		const observer = new IntersectionObserver(
+			([entry]) => setBgVisible(entry.isIntersecting),
+			{ threshold: 0.05 },
+		)
+		observer.observe(el)
+		return () => observer.disconnect()
+	}, [])
+
 	return (
 	<section
 		style={{
@@ -25,17 +40,23 @@ const ElektronKutubxona = () => {
 		}}
 	>
 		<img
+			ref={bgRef}
 			src={bgGlow}
 			alt=''
+			aria-hidden='true'
 			style={{
 				position: 'absolute',
 				top: 0,
 				left: '50%',
 				transform: 'translateX(-50%)',
 				width: '100%',
-				maxWidth: '1200px',
+				height: '100%',
+				objectFit: 'cover',
+				objectPosition: 'center top',
+				zIndex: 0,
 				pointerEvents: 'none',
-				userSelect: 'none',
+				opacity: bgVisible ? 1 : 0,
+				transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
 			}}
 		/>
 

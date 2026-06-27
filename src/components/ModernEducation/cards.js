@@ -18,6 +18,7 @@ export const cards = [
 		startX: '-10%',
 		startY: -10,
 		exitX: '-100%',
+		to: '/platform/onlayn-talim',
 	},
 	{
 		id: 2,
@@ -30,6 +31,7 @@ export const cards = [
 		startX: '50%',
 		startY: 30,
 		exitX: '150%',
+		to: '/platform/raqamli-kutubxona',
 	},
 	{
 		id: 3,
@@ -42,6 +44,7 @@ export const cards = [
 		startX: '-55%',
 		startY: 60,
 		exitX: '-180%',
+		to: '/platform/elektron-jurnal',
 	},
 	{
 		id: 4,
@@ -54,6 +57,7 @@ export const cards = [
 		startX: '40%',
 		startY: -100,
 		exitX: '120%',
+		to: '/platform/mikro-malumotlar',
 	},
 	{
 		id: 5,
@@ -66,5 +70,6 @@ export const cards = [
 		startX: '-20%',
 		startY: 20,
 		exitX: '-40%',
+		to: '/platform/bosh-ish-orinlari',
 	},
 ]

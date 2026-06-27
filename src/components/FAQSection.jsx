@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from 'react'
+import { memo, useState } from 'react'
 import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
@@ -47,8 +47,6 @@ const faqData = [
 ]
 
 const FaqCard = memo(({ item, realIndex, isOpen, onToggle, delay, platformStyle }) => {
-	const contentRef = useRef(null)
-
 	return (
 		<AnimatedSection delay={delay}>
 			<div
@@ -86,12 +84,12 @@ const FaqCard = memo(({ item, realIndex, isOpen, onToggle, delay, platformStyle 
 				<div
 					className='overflow-hidden transition-all duration-300 ease-in-out'
 					style={{
-						maxHeight: isOpen ? `${contentRef.current?.scrollHeight ?? 600}px` : '0px',
+						maxHeight: isOpen ? '600px' : '0px',
 						opacity: isOpen ? 1 : 0,
 						transform: isOpen ? 'translateY(0px)' : 'translateY(-10px)',
 					}}
 				>
-					<div ref={contentRef} className='px-5 pb-6 text-gray-400 text-[16px] leading-relaxed pt-4'>
+					<div className='px-5 pb-6 text-gray-400 text-[16px] leading-relaxed pt-4'>
 						{item.answer}
 					</div>
 				</div>
@@ -109,7 +107,7 @@ const FAQSection = ({ hideParticles = false, platformStyle = false }) => {
 	const rightItems = faqData.filter((_, i) => i % 2 !== 0)
 
 	return (
-		<div className='relative overflow-hidden bg-[rgba(14,18,27,1)]'>
+		<div className='relative overflow-hidden bg-[rgba(14,18,27,1)]' style={{ contentVisibility: 'auto', containIntrinsicSize: '0 900px' }}>
 			<SectionBackground hideParticles={hideParticles} />
 
 			<div className='relative z-10 text-white pt-[40px] pb-[60px] flex flex-col items-center'>
@@ -117,6 +115,7 @@ const FAQSection = ({ hideParticles = false, platformStyle = false }) => {
 					<AnimatedSection className='text-center mb-10'>
 						<Text
 							buttonText='FAQ'
+							buttonType={platformStyle ? 'button2' : 'button1'}
 							title={
 								platformStyle ? (
 									'Foydalanuvchilardan izohlar'
@@ -127,6 +126,8 @@ const FAQSection = ({ hideParticles = false, platformStyle = false }) => {
 									</>
 								)
 							}
+							titleStyle={platformStyle ? { color: '#fff', fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.02em' } : undefined}
+							subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
 							highlight=''
 							subtitle={
 								<>

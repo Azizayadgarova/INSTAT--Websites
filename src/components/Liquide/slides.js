@@ -4,34 +4,28 @@ import bg3 from '@/assets/bg3.jpg'
 
 export const slides = [
 	{
-		title: 'ORZUINGIZDAGI ISHNI TOPISH',
-		highlight: 'YANADA OSON',
-		desc: 'Sizga mos vakansiyalarni qidirish, filtrlash va bir necha bosqichda ariza yuborish imkoniyati.',
+		title: "ish o'rinlari tobora kun",
+		highlight: 'sayin oshmoqda!',
+		desc: "Bizning platformamizda 10,000+ faol ish o'rinlari mavjud. Sizga mos ishni topish endi oson va tez!",
 		img: bg1,
 	},
 	{
-		title: 'MALAKALI MUTAXASSISLAR',
-		highlight: 'BIZ BILAN',
-		desc: "O'z sohangizning yetuk kadrlari bilan bir jamoada ishlash va tajriba almashish imkoniyati.",
+		title: '50,000+ foydalanuvchi biz',
+		highlight: 'bilan ishlamoqda',
+		desc: "Ko'plab ish qidiruvchilar platformamizdan foydalangan va o'z ideal ishlarini topishdi. Siz ham ularga qo'shiling!",
 		img: bg2,
 	},
 	{
-		title: 'KARYERANGIZDA YANGI',
-		highlight: 'BOSQICH',
-		desc: "Yangi marralarni zabt etish va professional o'sish uchun eng yaxshi vakansiyalar to'plami",
+		title: 'Har soha uchun',
+		highlight: "ish o'rinlari",
+		desc: "Texnologiya, ta'lim, moliya va boshqa sohalarda yuzlab vakansiyalar mavjud. Sizning qiziqishingiz va tajribangizga mos ishni toping!",
 		img: bg3,
 	},
 	{
-		title: 'MASOFAVIY ISH',
-		highlight: 'ERKINLIK',
-		desc: "Dunyoning istalgan nuqtasidan turib ishlash va o'z vaqtingizni boshqarish imkoniyati.",
+		title: "orzuingizdagi ishni topish",
+		highlight: 'yanada oson',
+		desc: "Sizga mos vakansiyalarni qidirish, filtrlash va bir necha bosqichda ariza yuborish imkoniyati bilan ish qidirish jarayoni tez va samarali bo'ladi.",
 		img: bg2,
-	},
-	{
-		title: 'KELAJAKNI BIRGA',
-		highlight: 'QURAMIZ',
-		desc: 'Innovatsion loyihalarda ishtirok eting va zamonaviy texnologiyalar olamiga biz bilan kiring.',
-		img: bg1,
 	},
 ]
 

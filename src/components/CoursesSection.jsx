@@ -1,4 +1,5 @@
 ﻿import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
+const STARS = [0, 1, 2, 3, 4]
 import bg from '@/assets/bgImg/Background (1).png'
 import StarIcon from '@/assets/Star.png'
 import ClockIcon from '@/assets/icons/time-line.png'
@@ -39,29 +40,16 @@ const CoursesSection = () => {
 				</div>
 
 				<h2
-					style={{
-						fontFamily: '"Inter Display", Inter, sans-serif',
-						fontWeight: 600,
-						fontSize: '48px',
-						lineHeight: '58px',
-						textAlign: 'center',
-						color: 'rgba(255, 255, 255, 1)',
-						marginBottom: '16px',
-					}}
+					className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px] font-semibold text-white text-center mb-4'
+					style={{ fontFamily: '"Inter Display", Inter, sans-serif' }}
 				>
 					Maqsadingizga mos
 					<br /> onlayn kursni tanlang
 				</h2>
 
 				<p
-					style={{
-						fontFamily: '"Inter Display", Inter, sans-serif',
-						fontWeight: 400,
-						fontSize: '16px',
-						lineHeight: '140%',
-						textAlign: 'center',
-						color: 'rgba(255, 255, 255, 1)',
-					}}
+					className='text-[14px] md:text-[16px] leading-[140%] text-center'
+					style={{ fontFamily: '"Inter Display", Inter, sans-serif', fontWeight: 400, color: 'rgba(202,202,206,1)' }}
 				>
 					Boshlang'ichdan professional darajagacha <br />
 					bo'lgan zamonaviy onlayn kurslar
@@ -94,7 +82,7 @@ const CoursesSection = () => {
 								{course.title}
 							</h3>
 							<div className='flex items-center gap-0.5 shrink-0'>
-								{[...Array(5)].map((_, starIdx) => (
+								{STARS.map(starIdx => (
 									<img key={starIdx} src={StarIcon} alt='star' className='w-4 h-4' />
 								))}
 							</div>

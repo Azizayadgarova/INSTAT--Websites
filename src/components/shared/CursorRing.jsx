@@ -1,40 +1,46 @@
 import { useEffect, useRef } from 'react'
 
+const isTouchOnly = () =>
+	typeof window !== 'undefined' &&
+	window.matchMedia('(hover: none) and (pointer: coarse)').matches
+
 const CursorRing = () => {
 	const ringRef = useRef(null)
-	const dotRef = useRef(null)
+	const dotRef  = useRef(null)
 
 	useEffect(() => {
+		if (isTouchOnly()) return
+
 		const ring = ringRef.current
-		const dot = dotRef.current
+		const dot  = dotRef.current
 		if (!ring || !dot) return
 
 		let mouseX = -100, mouseY = -100
-		let ringX = -100, ringY = -100
+		let ringX  = -100, ringY  = -100
 		let targetScale = 1, currentScale = 1
 		let rafId
 
-		const onMove = e => {
-			mouseX = e.clientX
-			mouseY = e.clientY
-		}
-
+		const onMove = e => { mouseX = e.clientX; mouseY = e.clientY }
+		let lastTarget = null
 		const onOver = e => {
+			if (e.target === lastTarget) return
+			lastTarget = e.target
 			const clickable = e.target.closest('a, button, [role="button"], input, select, textarea, label, [tabindex]')
 			targetScale = clickable ? 1.6 : 1
 		}
 
 		const tick = () => {
-			ringX += (mouseX - ringX) * 0.45
-			ringY += (mouseY - ringY) * 0.45
+			if (document.hidden) {
+				rafId = requestAnimationFrame(tick)
+				return
+			}
+
+			ringX += (mouseX - ringX) * 0.25
+			ringY += (mouseY - ringY) * 0.25
 			currentScale += (targetScale - currentScale) * 0.18
 
-			const maxOffset = 15
-			const dx = Math.max(-maxOffset, Math.min(maxOffset, mouseX - ringX))
-			const dy = Math.max(-maxOffset, Math.min(maxOffset, mouseY - ringY))
-
-			ring.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px) scale(${currentScale})`
-			dot.style.transform = `translate(${ringX + dx - 3}px, ${ringY + dy - 3}px)`
+			ring.style.transform = `translate3d(${(ringX - 18) | 0}px, ${(ringY - 18) | 0}px, 0) scale(${currentScale})`
+			dot.style.transform  = `translate3d(${(mouseX - 3) | 0}px, ${(mouseY - 3) | 0}px, 0)`
 
 			rafId = requestAnimationFrame(tick)
 		}
@@ -52,40 +58,24 @@ const CursorRing = () => {
 		}
 	}, [])
 
+	if (isTouchOnly()) return null
+
 	return (
 		<>
-			<div
-				ref={ringRef}
-				style={{
-					position: 'fixed',
-					top: 0,
-					left: 0,
-					width: 36,
-					height: 36,
-					borderRadius: '50%',
-					border: '1.5px solid rgba(0,230,252,0.65)',
-					boxShadow: '0 0 10px rgba(0,230,252,0.25)',
-					pointerEvents: 'none',
-					zIndex: 99999,
-					willChange: 'transform',
-				}}
-			/>
-			<div
-				ref={dotRef}
-				style={{
-					position: 'fixed',
-					top: 0,
-					left: 0,
-					width: 6,
-					height: 6,
-					borderRadius: '50%',
-					background: 'rgba(0,230,252,1)',
-					boxShadow: '0 0 6px rgba(0,230,252,0.8)',
-					pointerEvents: 'none',
-					zIndex: 99999,
-					willChange: 'transform',
-				}}
-			/>
+			<div ref={ringRef} style={{
+				position: 'fixed', top: 0, left: 0,
+				width: 36, height: 36, borderRadius: '50%',
+				border: '1.5px solid rgba(0,230,252,0.65)',
+				pointerEvents: 'none', zIndex: 99999,
+				willChange: 'transform',
+			}} />
+			<div ref={dotRef} style={{
+				position: 'fixed', top: 0, left: 0,
+				width: 6, height: 6, borderRadius: '50%',
+				background: 'rgba(0,230,252,1)',
+				pointerEvents: 'none', zIndex: 99999,
+				willChange: 'transform',
+			}} />
 		</>
 	)
 }

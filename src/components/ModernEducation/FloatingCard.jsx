@@ -1,8 +1,10 @@
 import { memo } from 'react'
-import { motion, useTransform } from 'framer-motion'
+import { motion, useTransform } from 'framer-motion' // eslint-disable-line no-unused-vars
+import { useNavigate } from 'react-router-dom'
 import { BUTTON_TEXT } from './cards'
 
 const FloatingCard = memo(({ card, index, progress, totalCards = 5 }) => {
+	const navigate = useNavigate()
 	const step = 1 / totalCards
 	const start = index * step
 	const mid = start + step
@@ -19,7 +21,7 @@ const FloatingCard = memo(({ card, index, progress, totalCards = 5 }) => {
 
 	const filter = useTransform(
 		[blurValue, grayscaleValue, brightnessValue],
-		([b, g, br]) => `blur(${b}px) grayscale(${g}) brightness(${br})`,
+		([b, g, br]) => `blur(${b | 0}px) grayscale(${+g.toFixed(2)}) brightness(${+br.toFixed(2)})`,
 	)
 
 	const initialYPos = index * 30 + parseInt(card.startY)
@@ -91,7 +93,25 @@ const FloatingCard = memo(({ card, index, progress, totalCards = 5 }) => {
 					</p>
 
 					{!card.plainText && (
-						<button className='mt-6 w-fit px-6 py-3 rounded-xl bg-white/5 text-white border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)]'>
+						<button
+							onClick={() => card.to && navigate(card.to)}
+							className='mt-6 w-fit px-6 py-3 rounded-xl text-white font-medium transition-all duration-300 cursor-pointer'
+							style={{
+								background: 'rgba(255,255,255,0.05)',
+								border: '1px solid rgba(255,255,255,0.15)',
+								boxShadow: 'none',
+							}}
+							onMouseEnter={e => {
+								e.currentTarget.style.background = 'rgba(43,117,204,1)'
+								e.currentTarget.style.border = '1px solid rgba(43,117,204,1)'
+								e.currentTarget.style.boxShadow = '0 0 24px 6px rgba(43,117,204,0.55)'
+							}}
+							onMouseLeave={e => {
+								e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
+								e.currentTarget.style.border = '1px solid rgba(255,255,255,0.15)'
+								e.currentTarget.style.boxShadow = 'none'
+							}}
+						>
 							{BUTTON_TEXT}
 						</button>
 					)}

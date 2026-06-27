@@ -45,24 +45,29 @@ const ParticleBackground = memo(({
 			}
 		}
 
+		const FRAME_INTERVAL = 1000 / 18
+		let lastTime = 0
+
 		const init = () => {
 			resize()
 			particles = Array.from({ length: count }, () => new Particle())
 		}
 
-		const animate = () => {
+		const animate = (timestamp = 0) => {
+			animationFrameId = requestAnimationFrame(animate)
+			if (timestamp - lastTime < FRAME_INTERVAL) return
+			lastTime = timestamp
 			ctx.clearRect(0, 0, canvas.width, canvas.height)
 			particles.forEach(p => {
 				p.update()
 				p.draw()
 			})
-			animationFrameId = requestAnimationFrame(animate)
 		}
 
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
-					if (animationFrameId === null) animate()
+					if (animationFrameId === null) animationFrameId = requestAnimationFrame(animate)
 				} else {
 					cancelAnimationFrame(animationFrameId)
 					animationFrameId = null
@@ -71,12 +76,13 @@ const ParticleBackground = memo(({
 			{ threshold: 0 },
 		)
 
-		window.addEventListener('resize', resize)
+		const ro = new ResizeObserver(() => resize())
+		ro.observe(canvas)
 		init()
 		observer.observe(canvas)
 
 		return () => {
-			window.removeEventListener('resize', resize)
+			ro.disconnect()
 			cancelAnimationFrame(animationFrameId)
 			observer.disconnect()
 		}

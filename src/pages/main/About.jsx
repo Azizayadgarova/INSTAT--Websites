@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { useOutlet } from 'react-router-dom'
+import { Link, NavLink, useOutlet } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageIntro from '../../components/shared/PageIntro'
 import AnimatedSection from '../../components/shared/AnimatedSection'
@@ -11,7 +11,11 @@ import bg from '@/assets/bgImg/Vektor.svg'
 import glowImg from '@/assets/Glow (6).png'
 import instanIcon from '@/assets/logoInstat.png'
 import { Button } from '../../components/shared/Button'
+import sIcon1 from '@/assets/icons/facebook.png'
+import sIcon2 from '@/assets/icons/instaIcon.png'
+import sIcon3 from '@/assets/icons/social3.png'
 
+const IntroAnimation = lazy(() => import('../../components/shared/IntroAnimation'))
 const ModernEducation = lazy(() => import('../../components/ModernEducation'))
 const HeroZoom = lazy(() => import('../../components/HeroZoom'))
 const StatisticComponent = lazy(() => import('../../components/StatisticComponent'))
@@ -19,9 +23,16 @@ const MentorsSection = lazy(() => import('../../components/MentorsSection'))
 const Testimonials = lazy(() => import('../../components/Testimonial'))
 const IntegrationSection = lazy(() => import('../../components/IntegrationSection'))
 const FAQSection = lazy(() => import('../../components/FAQSection'))
-const AppPromoSection = lazy(() => import('../../components/AppPromoSection'))
-const TopFooter = lazy(() => import('../../components/TopFooter'))
-const Footer = lazy(() => import('../../components/Footer'))
+
+const INFO_LINKS = [
+  { label: "Umumiy ma'lumotlar", path: '/about/umumiy-malumot' },
+  { label: 'Tuzilma', path: '/about/tuzilma' },
+  { label: 'Rahbariyat', path: '/about/rahbariyat' },
+  { label: 'Korrupsiyaga qarshi kurashish', path: '/about/qarshi-kurash' },
+  { label: "Bo'sh ish o'rinlari", path: '/about/ish-orinlar' },
+  { label: 'Mehmonhona turidagi yotoqhona', path: '/about/yotoqhona' },
+  { label: 'Odob axloq qoidalari', path: '/about/odob-axloq' },
+]
 
 const LC = 'rgba(43, 117, 204, 0.4)'
 const SW = '1.8'
@@ -29,10 +40,82 @@ const FALLBACK_MD = <div style={{ minHeight: '400px', background: 'rgba(14,18,27
 
 const About = () => {
   const outlet = useOutlet()
-  if (outlet) return outlet
+
+  if (outlet) {
+    return (
+      <div style={{ display: 'flex', background: 'rgba(14,18,27,1)', minHeight: '100vh' }}>
+        <aside style={{
+          width: '260px',
+          flexShrink: 0,
+          borderRight: '1px solid rgba(255,255,255,0.08)',
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
+          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          paddingTop: '100px',
+          paddingLeft: '32px',
+          paddingRight: '24px',
+          paddingBottom: '40px',
+          boxSizing: 'border-box',
+        }}>
+          <Link
+            to="/"
+            style={{
+              display: 'flex', alignItems: 'center', gap: '6px',
+              color: 'rgba(255,255,255,0.6)', textDecoration: 'none',
+              fontSize: '14px', fontFamily: 'Inter, sans-serif',
+              marginBottom: '36px',
+            }}
+          >
+            ← Ortga
+          </Link>
+          <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            {INFO_LINKS.map(link => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                style={({ isActive }) => ({
+                  textDecoration: 'none',
+                  padding: '9px 0 9px 14px',
+                  borderLeft: isActive ? '2px solid #00E6FC' : '2px solid transparent',
+                  color: isActive ? '#fff' : 'rgba(138,145,163,1)',
+                  fontSize: '14px',
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: isActive ? 500 : 400,
+                })}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
+          <div style={{ marginTop: '24px' }}>
+            <p style={{ color: 'rgba(138,145,163,1)', fontSize: '12px', fontFamily: 'Inter, sans-serif', marginBottom: '12px' }}>
+              Share this blog
+            </p>
+            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+              <img src={sIcon2} alt="Instagram" width={20} height={20} />
+              <img src={sIcon3} alt="" width={20} height={20} />
+              <img src={sIcon1} alt="Facebook" width={20} height={20} />
+            </div>
+          </div>
+        </aside>
+        <main style={{ flex: 1, paddingTop: '100px', paddingLeft: '60px', paddingRight: '60px', paddingBottom: '60px' }}>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', fontFamily: 'Inter, sans-serif', marginBottom: '4px' }}>
+            Institut haqida
+          </p>
+          {outlet}
+        </main>
+      </div>
+    )
+  }
 
   return (
     <div className='relative flex items-center flex-col min-h-screen w-full bg-[rgba(14,18,27,1)]'>
+      <Suspense fallback={null}>
+        <IntroAnimation />
+      </Suspense>
       <PageIntro />
       <img
         src={bg}
@@ -84,7 +167,7 @@ const About = () => {
         <ParticleCanvas />
 
         <div
-          className='absolute inset-0 rounded-[40px] blur-[60px] md:blur-[80px] opacity-50 md:opacity-70'
+          className='absolute inset-0 rounded-[40px] blur-xl md:blur-2xl opacity-50 md:opacity-70'
           style={{
             background: `
               radial-gradient(circle at top, rgba(56,160,255,0.8), transparent 70%),
@@ -162,42 +245,43 @@ const About = () => {
               </div>
             </motion.div>
 
-            <AboutCard label="Onlayn ta'lim" style={{ left: '75px', top: '85px' }} xFrom={-30} delay={0.65} />
-            <AboutCard label="Bo'sh ish o'rinlari" style={{ left: '75px', top: '250px' }} xFrom={-30} delay={0.72} />
-            <AboutCard label="Mikro ma'lumotlar" style={{ left: '75px', top: '415px' }} xFrom={-30} delay={0.79} />
-            <AboutCard label='Raqamli kutubxona' style={{ right: '75px', top: '85px' }} xFrom={30} delay={0.65} />
+            <AboutCard label="Onlayn ta'lim" style={{ left: '75px', top: '85px' }} xFrom={-30} delay={0.65} to='/platform/onlayn-talim' />
+            <AboutCard label="Bo'sh ish o'rinlari" style={{ left: '75px', top: '250px' }} xFrom={-30} delay={0.72} to='/platform/bosh-ish-orinlari' />
+            <AboutCard label="Mikro ma'lumotlar" style={{ left: '75px', top: '415px' }} xFrom={-30} delay={0.79} to='/platform/mikro-malumotlar' />
+            <AboutCard label='Raqamli kutubxona' style={{ right: '75px', top: '85px' }} xFrom={30} delay={0.65} to='/platform/raqamli-kutubxona' />
             <AboutCard label='Samaradorlik tizimi' style={{ right: '75px', top: '250px' }} xFrom={30} delay={0.72} />
-            <AboutCard label='Elektron jurnal' style={{ right: '75px', top: '415px' }} xFrom={30} delay={0.79} />
+            <AboutCard label='Elektron jurnal' style={{ right: '75px', top: '415px' }} xFrom={30} delay={0.79} to='/platform/elektron-jurnal' />
           </div>
 
-          <div className="md:hidden relative w-full pt-10 pb-12 px-5 flex flex-col items-center">
+          <div className="md:hidden relative w-full pt-8 pb-10 px-5 flex flex-col items-center">
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse at 50% 50%, rgba(43,117,204,0.15) 0%, transparent 65%)',
+                background: 'radial-gradient(ellipse at 50% 40%, rgba(43,117,204,0.12) 0%, transparent 65%)',
               }}
             />
 
             <div className="flex flex-col gap-3 w-full z-20">
               {[
-                { label: "Onlayn ta'lim", delay: 0.3 },
-                { label: "Bo'sh ish o'rinlari", delay: 0.35 },
-                { label: "Mikro ma'lumotlar", delay: 0.4 },
-              ].map(({ label, delay }) => (
-                <AboutCard key={label} label={label} mobile delay={delay} />
+                { label: "Onlayn ta'lim", delay: 0.25, to: '/platform/onlayn-talim' },
+                { label: "Bo'sh ish o'rinlari", delay: 0.3, to: '/platform/bosh-ish-orinlari' },
+                { label: "Mikro ma'lumotlar", delay: 0.35, to: '/platform/mikro-malumotlar' },
+              ].map(({ label, delay, to }) => (
+                <AboutCard key={label} label={label} mobile delay={delay} to={to} />
               ))}
             </div>
 
-            <div className="flex flex-col items-center my-4 z-10">
-              <div className="w-[2px] h-8 bg-gradient-to-b from-[rgba(43,117,204,0.2)] to-[rgba(43,117,204,0.7)]" />
-              <div className="w-2 h-2 rounded-full bg-[rgba(43,117,204,0.7)]" />
+            <div className="flex flex-col items-center z-10" style={{ margin: '6px 0' }}>
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.3), rgba(43,117,204,0.8))' }} />
+              <div className="w-[6px] h-[6px] rounded-full" style={{ background: 'rgba(43,117,204,0.9)' }} />
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.8), rgba(43,117,204,0.3))' }} />
             </div>
 
             <motion.div
               className='relative z-20'
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.45 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
             >
               <div
                 style={{
@@ -226,18 +310,19 @@ const About = () => {
               </div>
             </motion.div>
 
-            <div className="flex flex-col items-center my-4 z-10">
-              <div className="w-2 h-2 rounded-full bg-[rgba(43,117,204,0.7)]" />
-              <div className="w-[2px] h-8 bg-gradient-to-b from-[rgba(43,117,204,0.7)] to-[rgba(43,117,204,0.2)]" />
+            <div className="flex flex-col items-center z-10" style={{ margin: '6px 0' }}>
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.8), rgba(43,117,204,0.3))' }} />
+              <div className="w-[6px] h-[6px] rounded-full" style={{ background: 'rgba(43,117,204,0.9)' }} />
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.3), rgba(43,117,204,0.8))' }} />
             </div>
 
             <div className="flex flex-col gap-3 w-full z-20">
               {[
-                { label: 'Raqamli kutubxona', delay: 0.5 },
+                { label: 'Raqamli kutubxona', delay: 0.5, to: '/platform/raqamli-kutubxona' },
                 { label: 'Samaradorlik tizimi', delay: 0.55 },
-                { label: 'Elektron jurnal', delay: 0.6 },
-              ].map(({ label, delay }) => (
-                <AboutCard key={label} label={label} mobile delay={delay} />
+                { label: 'Elektron jurnal', delay: 0.6, to: '/platform/elektron-jurnal' },
+              ].map(({ label, delay, to }) => (
+                <AboutCard key={label} label={label} mobile delay={delay} to={to} />
               ))}
             </div>
           </div>
@@ -245,17 +330,23 @@ const About = () => {
       </motion.div>
 
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 0 }}>
-        <Suspense fallback={<div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />}>
-          <AnimatedSection style={{ width: '100%' }}>
-            <StatisticComponent />
-          </AnimatedSection>
-        </Suspense>
-        <Suspense fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
-          <ModernEducation />
-        </Suspense>
-        <Suspense fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
-          <HeroZoom />
-        </Suspense>
+        <LazyLoad fallback={<div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />}>
+          <Suspense fallback={<div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />}>
+            <AnimatedSection style={{ width: '100%' }}>
+              <StatisticComponent />
+            </AnimatedSection>
+          </Suspense>
+        </LazyLoad>
+        <LazyLoad fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
+          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
+            <ModernEducation />
+          </Suspense>
+        </LazyLoad>
+        <LazyLoad fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
+          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
+            <HeroZoom />
+          </Suspense>
+        </LazyLoad>
         <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
           <Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
             <MentorsSection />
@@ -274,22 +365,6 @@ const About = () => {
         <LazyLoad fallback={<div style={{ minHeight: '600px', background: 'rgba(14,18,27,1)' }} />}>
           <Suspense fallback={<div style={{ minHeight: '600px', background: 'rgba(14,18,27,1)' }} />}>
             <FAQSection />
-          </Suspense>
-        </LazyLoad>
-        <div style={{ height: '40px' }} />
-        <LazyLoad fallback={<div style={{ minHeight: '550px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '550px', background: 'rgba(14,18,27,1)' }} />}>
-            <AppPromoSection />
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={FALLBACK_MD}>
-            <TopFooter />
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={FALLBACK_MD}>
-            <Footer />
           </Suspense>
         </LazyLoad>
       </div>

@@ -1,17 +1,40 @@
 import { memo, useId } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
-const AboutCard = memo(({ label, style, delay = 0, xFrom = 0 }) => {
+const AboutCard = memo(({ label, style, delay = 0, xFrom = 0, to, mobile }) => {
 	const uid = useId().replace(/:/g, '')
 	const gradId = `figmaGlowGrad-${uid}`
+	const navigate = useNavigate()
 
 	return (
 		<motion.div
 			className='group'
-			initial={{ opacity: 0, x: xFrom }}
-			animate={{ opacity: 1, x: 0 }}
+			initial={{ opacity: 0, x: mobile ? 0 : xFrom, y: mobile ? 10 : 0 }}
+			animate={{ opacity: 1, x: 0, y: 0 }}
 			transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-			style={{
+			onClick={() => to && navigate(to)}
+			style={mobile ? {
+				position: 'relative',
+				width: '100%',
+				height: '52px',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				borderRadius: '12px',
+				background: 'rgba(22, 27, 38, 0.85)',
+				border: '1.5px solid #2F3A44',
+				backdropFilter: 'blur(10px)',
+				color: 'rgba(251, 251, 251, 1)',
+				fontFamily: 'Inter, sans-serif',
+				fontSize: '16px',
+				fontWeight: 400,
+				lineHeight: '100%',
+				textAlign: 'center',
+				cursor: to ? 'pointer' : 'default',
+				boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+				overflow: 'hidden',
+			} : {
 				position: 'absolute',
 				...style,
 				width: '280px',
@@ -23,9 +46,13 @@ const AboutCard = memo(({ label, style, delay = 0, xFrom = 0 }) => {
 				background: 'rgba(22, 27, 38, 0.85)',
 				border: '1.5px solid #2F3A44',
 				backdropFilter: 'blur(10px)',
-				color: 'rgba(210, 230, 255, 0.95)',
-				fontSize: '16px',
-				fontWeight: 500,
+				color: 'rgba(251, 251, 251, 1)',
+				fontFamily: 'Inter, sans-serif',
+				fontSize: '24px',
+				fontWeight: 400,
+				lineHeight: '100%',
+				letterSpacing: '0%',
+				textAlign: 'center',
 				zIndex: 20,
 				cursor: 'pointer',
 				boxShadow: '0 8px 500px rgba(0, 0, 0, 0.4)',

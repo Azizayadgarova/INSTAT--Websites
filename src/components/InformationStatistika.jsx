@@ -26,6 +26,8 @@ const InformationStatistika = () => {
     <section
       style={{
         width: '100%',
+        maxWidth: '1440px',
+        margin: '24px auto 0',
         height: '223px',
         backgroundColor: 'rgba(14, 18, 27, 1)',
         position: 'relative',
@@ -33,7 +35,6 @@ const InformationStatistika = () => {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        marginTop: '24px',
       }}
     >
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(90deg, rgba(22, 50, 183, 0.15) 0%, #2B75CC 50%, rgba(22, 50, 183, 0.15) 100%)' }} />
@@ -41,7 +42,7 @@ const InformationStatistika = () => {
 
       <div
         style={{
-          width: '1200px',
+          width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',

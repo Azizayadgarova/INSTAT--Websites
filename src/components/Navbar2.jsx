@@ -1,7 +1,8 @@
-import { memo } from 'react'
+import { memo, useState, useCallback, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logoImg from '@/assets/icons/InstatIcon.png'
 import userIcon from '@/assets/icons/user-line.png'
+import menuIcon from '@/assets/menu-line.png'
 
 const NAV_LINKS = [
 	{ label: "Onlayn ta'lim",       path: '/platform/onlayn-talim' },
@@ -13,75 +14,103 @@ const NAV_LINKS = [
 
 const Navbar2 = () => {
 	const { pathname } = useLocation()
+	const [isOpen, setIsOpen] = useState(false)
+
+	const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
+	const closeMenu = useCallback(() => setIsOpen(false), [])
+
+	useEffect(() => {
+		document.body.style.overflow = isOpen ? 'hidden' : ''
+		return () => { document.body.style.overflow = '' }
+	}, [isOpen])
 
 	return (
-		<nav
-			style={{
-				position: 'fixed',
-				width: '100%',
-				zIndex: 50,
-				backgroundColor: 'rgba(18,14,27,0.2)',
-				backdropFilter: 'blur(40px)',
-				WebkitBackdropFilter: 'blur(40px)',
-			}}
-		>
-			<div
+		<>
+			<nav
 				style={{
-					maxWidth: '1440px',
-					margin: '0 auto',
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'space-between',
-					padding: '20px 100px',
+					position: 'fixed',
+					width: '100%',
+					zIndex: 50,
+					backgroundColor: 'rgba(18,14,27,0.2)',
+					backdropFilter: 'blur(40px)',
+					WebkitBackdropFilter: 'blur(40px)',
 				}}
 			>
-				{/* Logo */}
-				<Link to='/'>
-					<img src={logoImg} alt='INSTAT' />
-				</Link>
+				<div className='max-w-360 mx-auto flex items-center justify-between py-5 px-5 md:px-25'>
 
-				{/* Pill nav — gradient border */}
-				<div
-					style={{
-						background: 'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)',
-						borderRadius: '999px',
-						padding: '1px',
-					}}
-				>
+					{/* Logo */}
+					<Link to='/'>
+						<img src={logoImg} alt='INSTAT' className='w-48 md:w-35' height={37} />
+					</Link>
+
+					{/* Pill nav — faqat desktop */}
 					<div
+						className='hidden md:block'
 						style={{
-							background: 'rgba(14,18,27,0.85)',
+							background: 'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)',
 							borderRadius: '999px',
-							height: '44px',
-							paddingTop: '12px',
-							paddingBottom: '12px',
-							paddingLeft: '22px',
-							paddingRight: '22px',
-							display: 'flex',
-							alignItems: 'center',
-							gap: '30px',
-							boxSizing: 'border-box',
+							padding: '1px',
 						}}
 					>
-						{NAV_LINKS.map(link => {
-							const isActive = pathname === link.path || pathname.startsWith(link.path + '/')
-							return (
-								<Link
-									key={link.path}
-									to={link.path}
-									style={{ textDecoration: 'none', position: 'relative' }}
-								>
-									{isActive ? (
-										<span style={{ position: 'relative', display: 'inline-block' }}>
-											{/* Gradient text */}
+						<div
+							style={{
+								background: 'rgba(14,18,27,0.85)',
+								borderRadius: '999px',
+								height: '44px',
+								paddingTop: '12px',
+								paddingBottom: '12px',
+								paddingLeft: '22px',
+								paddingRight: '22px',
+								display: 'flex',
+								alignItems: 'center',
+								gap: '30px',
+								boxSizing: 'border-box',
+							}}
+						>
+							{NAV_LINKS.map(link => {
+								const isActive = pathname === link.path || pathname.startsWith(link.path + '/')
+								return (
+									<Link
+										key={link.path}
+										to={link.path}
+										style={{ textDecoration: 'none', position: 'relative' }}
+									>
+										{isActive ? (
+											<span style={{ position: 'relative', display: 'inline-block' }}>
+												<span
+													style={{
+														background: 'linear-gradient(180deg, #FFFFFF 0%, #00E6FC 20%, #00E6FC 100%)',
+														WebkitBackgroundClip: 'text',
+														WebkitTextFillColor: 'transparent',
+														backgroundClip: 'text',
+														fontFamily: 'Inter, sans-serif',
+														fontWeight: 600,
+														fontSize: '15px',
+														lineHeight: '20px',
+														letterSpacing: '-0.02em',
+														whiteSpace: 'nowrap',
+													}}
+												>
+													{link.label}
+												</span>
+												<span
+													style={{
+														position: 'absolute',
+														bottom: -3,
+														left: 0,
+														right: 0,
+														height: '1.5px',
+														background: '#00E6FC',
+														borderRadius: '1px',
+													}}
+												/>
+											</span>
+										) : (
 											<span
 												style={{
-													background: 'linear-gradient(180deg, #FFFFFF 0%, #00E6FC 20%, #00E6FC 100%)',
-													WebkitBackgroundClip: 'text',
-													WebkitTextFillColor: 'transparent',
-													backgroundClip: 'text',
+													color: 'rgba(255,255,255,0.8)',
 													fontFamily: 'Inter, sans-serif',
-													fontWeight: 600,
+													fontWeight: 500,
 													fontSize: '15px',
 													lineHeight: '20px',
 													letterSpacing: '-0.02em',
@@ -90,62 +119,109 @@ const Navbar2 = () => {
 											>
 												{link.label}
 											</span>
-											{/* Underline */}
-											<span
-												style={{
-													position: 'absolute',
-													bottom: -3,
-													left: 0,
-													right: 0,
-													height: '1.5px',
-													background: '#00E6FC',
-													borderRadius: '1px',
-												}}
-											/>
-										</span>
-									) : (
-										<span
-											style={{
-												color: 'rgba(255,255,255,0.8)',
-												fontFamily: 'Inter, sans-serif',
-												fontWeight: 500,
-												fontSize: '15px',
-												lineHeight: '20px',
-												letterSpacing: '-0.02em',
-												whiteSpace: 'nowrap',
-											}}
-										>
-											{link.label}
-										</span>
-									)}
-								</Link>
+										)}
+									</Link>
+								)
+							})}
+						</div>
+					</div>
+
+					{/* Desktop: Shaxsiy kabinet tugmasi */}
+					<button
+						style={{
+							alignItems: 'center',
+							justifyContent: 'center',
+							borderRadius: '10px',
+							background: 'linear-gradient(180deg, #3E8BE6 0%, #2B6FC4 100%)',
+							border: '1px solid #5FA2F0',
+							color: '#fff',
+							fontFamily: 'Inter, sans-serif',
+							fontSize: '14px',
+							fontWeight: 500,
+							cursor: 'pointer',
+						}}
+						className='hidden md:flex gap-2 px-4 py-2'
+					>
+						<img src={userIcon} alt='user' width={16} height={16} />
+						<span>Shaxsiy kabinet</span>
+					</button>
+
+					{/* Mobile: hamburger tugmasi */}
+					<button
+						onClick={toggleMenu}
+						className='flex md:hidden items-center justify-center w-14 h-14 rounded-[10px]'
+						style={{
+							background: 'linear-gradient(180deg, #3E8BE6 0%, #2B6FC4 100%)',
+							border: '1px solid #5FA2F0',
+							cursor: 'pointer',
+							flexShrink: 0,
+						}}
+					>
+						<img src={menuIcon} alt='Menu' width={22} />
+					</button>
+				</div>
+			</nav>
+
+			{/* Mobile menu overlay */}
+			<div
+				className={`fixed inset-0 transition-all duration-500 md:hidden ${
+					isOpen ? 'visible opacity-100' : 'invisible opacity-0'
+				}`}
+				style={{ zIndex: 999 }}
+			>
+				{/* Panel */}
+				<div
+					className={`absolute right-0 top-0 h-screen w-full bg-[rgba(14,18,27,1)] transition-transform duration-500 flex flex-col ${
+						isOpen ? 'translate-x-0' : 'translate-x-full'
+					}`}
+				>
+					{/* Header */}
+					<div className='flex items-center justify-between px-[8%] pt-6 pb-4 border-b border-white/10'>
+						<span
+							style={{
+								fontFamily: '"Inter Display", Inter, sans-serif',
+								fontWeight: 500,
+								fontSize: '24px',
+								lineHeight: '32px',
+								letterSpacing: '-0.02em',
+								color: '#fff',
+							}}
+						>
+							Menu
+						</span>
+						<button onClick={closeMenu} className='text-white text-2xl leading-none'>
+							✕
+						</button>
+					</div>
+
+					{/* Nav links */}
+					<ul className='flex flex-col px-[8%] pt-6 gap-5'>
+						{NAV_LINKS.map(link => {
+							const isActive = pathname === link.path || pathname.startsWith(link.path + '/')
+							return (
+								<li key={link.path}>
+									<Link
+										to={link.path}
+										onClick={closeMenu}
+										style={{
+											textDecoration: 'none',
+											fontFamily: '"Inter Display", Inter, sans-serif',
+											fontWeight: 600,
+											fontSize: '28px',
+											lineHeight: '36px',
+											letterSpacing: '-0.02em',
+											color: isActive ? 'rgba(0,230,252,1)' : 'rgba(90,98,117,1)',
+										}}
+									>
+										{link.label}
+									</Link>
+								</li>
 							)
 						})}
-					</div>
+					</ul>
 				</div>
-
-				{/* Button — 1-layout menu button stili */}
-				<button
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						gap: '8px',
-						padding: '8px 16px',
-						borderRadius: '10px',
-						background: 'linear-gradient(180deg, #3E8BE6 0%, #2B6FC4 100%)',
-						border: '1px solid #5FA2F0',
-						color: '#fff',
-						fontFamily: 'Inter, sans-serif',
-						fontSize: '14px',
-						fontWeight: 500,
-						cursor: 'none',
-					}}
-				>
-					<img src={userIcon} alt='user' width={16} height={16} />
-					Shaxsiy kabinet
-				</button>
 			</div>
-		</nav>
+		</>
 	)
 }
 

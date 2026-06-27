@@ -37,10 +37,18 @@ const IntegrationSection = () => {
 	const visibleRef = useRef(false)
 	const iconRefs = useRef([])
 	const [containerScale, setContainerScale] = useState(1)
+	const [_isMobile, setIsMobile] = useState(false)
 
 	useEffect(() => {
 		const updateScale = () => {
-			setContainerScale(Math.min(1, Math.max(0.35, (window.innerWidth - 32) / 900)))
+			const w = window.innerWidth
+			const mobile = w < 640
+			setIsMobile(mobile)
+			if (mobile) {
+				setContainerScale(Math.min(0.72, (w - 16) / 700))
+			} else {
+				setContainerScale(Math.min(1, Math.max(0.42, (w - 32) / 900)))
+			}
 		}
 		updateScale()
 		window.addEventListener('resize', updateScale)
@@ -107,7 +115,7 @@ const IntegrationSection = () => {
 		<section
 			ref={sectionRef}
 			className='relative w-full bg-[rgba(14,18,27,1)] flex flex-col items-center justify-start overflow-hidden py-10 font-sans text-white'
-			style={{ perspective: '1200px', minHeight: `${Math.max(880, 600 * containerScale)}px` }}
+			style={{ perspective: '1200px', minHeight: `${Math.max(containerScale < 0.7 ? 500 : 880, 336 + 408 * containerScale)}px` }}
 		>
 			<SectionBackground />
 

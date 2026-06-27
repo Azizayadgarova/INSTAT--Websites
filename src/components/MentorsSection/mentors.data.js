@@ -23,7 +23,7 @@ export const mentors = [
 		name: 'Elena Rodriguez',
 		role: 'Frontend Developer',
 		exp: '4+ yil tajriba',
-		photo: `https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop${UP}`,
+		photo: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop${UP}`,
 	},
 	{
 		name: 'Alex Rivers',

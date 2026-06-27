@@ -101,9 +101,50 @@ const HeroZoom = () => {
 	}, [])
 
 	return (
+		<>
+		{/* MOBILE: statik, animatsiyasiz */}
+		<section className='md:hidden relative w-full bg-[rgba(14,18,27,1)] flex flex-col items-center py-10 px-4 gap-6'>
+			<div className='relative w-full' style={{ aspectRatio: '16/9' }}>
+				<div
+					className='absolute overflow-hidden'
+					style={{
+						top: '8%',
+						left: '1%',
+						width: '98%',
+						height: '84%',
+						borderRadius: '8% / 14%',
+					}}
+				>
+					<img
+						src={studentWebp}
+						alt='content'
+						loading='lazy'
+						decoding='async'
+						className='w-full h-full object-cover'
+					/>
+					<div
+						className='absolute inset-0'
+						style={{ background: 'linear-gradient(0deg, rgba(14,18,27,0.7) 0%, rgba(14,18,27,0.3) 50%, rgba(14,18,27,0) 100%)' }}
+					/>
+				</div>
+				<img
+					src={phoneImg}
+					alt=''
+					className='absolute inset-0 w-full h-full object-contain pointer-events-none z-10'
+				/>
+			</div>
+
+			<p className='text-center text-white leading-relaxed px-2' style={{ fontSize: 'clamp(14px, 4vw, 16px)' }}>
+				Zamonaviy platforma asosida ishlab chiqilgan{' '}
+				<span className='text-[rgba(0,230,252,1)]'>onlayn kurslar</span>{' '}
+				talabalarga yuqori sifatli ta'lim va qulay o'qish muhitini taqdim etadi.
+			</p>
+		</section>
+
+		{/* DESKTOP: GSAP animatsiya, o'zgarishsiz */}
 		<section
 			ref={containerRef}
-			className='relative w-full mt-[100px] mb-[570px] h-screen bg-[rgba(14,18,27,1)] flex items-center justify-center overflow-y-hidden z-[30]'
+			className='max-md:hidden relative w-full mt-[100px] mb-[40px] h-screen bg-[rgba(14,18,27,1)] flex items-center justify-center overflow-y-hidden z-[30]'
 			style={{ isolation: 'isolate' }}
 		>
 			<div
@@ -115,7 +156,7 @@ const HeroZoom = () => {
 					<img
 						src={studentWebp}
 						alt='content'
-						fetchPriority='high'
+						loading='lazy'
 						decoding='async'
 						className='absolute inset-0 w-full h-[92%] mt-[20px] object-cover'
 					/>
@@ -135,7 +176,7 @@ const HeroZoom = () => {
 							className='text-[32px] font-bold leading-[1.1] tracking-tight'
 						>
 							Zamonaviy kasblarni <br />
-							o’rganishni <span className="hero-shimmer">bugun boshlang</span>
+							o’rganishni <span className='hero-shimmer'>bugun boshlang</span>
 						</h1>
 
 						<p
@@ -169,6 +210,7 @@ const HeroZoom = () => {
 				etadi.
 			</div>
 		</section>
+		</>
 	)
 }
 

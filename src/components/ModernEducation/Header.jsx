@@ -28,12 +28,13 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 		subtitle = (
 			<>
 				Beshta platforma orqali o'qish, tadqiqot qilish, bilim olish va
-				professional <br />
+				professional <br className='hidden md:block' />
 				rivojlanish imkoniyatlari.
 			</>
 		),
 		hideParticles = false,
 		titleStyle,
+		titleClassName = '',
 		subtitleStyle,
 	} = headerProps
 
@@ -68,7 +69,7 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 
 			{!hideParticles && (
 				<ParticleBackground
-					count={100}
+					count={40}
 					height={650}
 					opacity={0.8}
 					color='255, 255, 255'
@@ -82,7 +83,7 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 					zIndex: 50,
 					width: '100%',
 					paddingTop: '40px',
-					paddingBottom: '0',
+					paddingBottom: '40px',
 				}}
 			>
 				<div className='text-center'>
@@ -94,6 +95,7 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 						highlightColor={highlightColor}
 						subtitle={subtitle}
 						titleStyle={titleStyle}
+						titleClassName={titleClassName}
 						subtitleStyle={subtitleStyle}
 					/>
 				</div>

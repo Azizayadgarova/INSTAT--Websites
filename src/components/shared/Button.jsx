@@ -5,7 +5,7 @@ const variants = {
 
 export const Button = ({ text, variant = 'dark' }) => {
 	return (
-		<span className={`px-[15px] py-[5px] rounded-[100px] font-inter border-[1px] ${variants[variant]}`}>
+		<span className={`text-[12px] leading-[20px] md:text-base md:leading-normal px-[15px] py-[5px] rounded-[100px] font-inter border-[1px] ${variants[variant]}`}>
 			{text}
 		</span>
 	)

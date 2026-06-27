@@ -15,7 +15,10 @@ const MentorsSection = ({ variant }) => {
 	const [bgVisible, setBgVisible] = useState(false)
 	const [trackW, setTrackW] = useState(800)
 	const trackRef = useRef(null)
-	const dimScale = Math.min(1, Math.max(0.42, trackW / 900))
+	const isMobile = trackW < 640
+	const dimScale = isMobile
+		? Math.min(1, trackW / 568)
+		: Math.min(1, Math.max(0.42, trackW / 900))
 
 	const shift = dir => setCurrent(prev => mod(prev + dir, mentors.length))
 
@@ -67,17 +70,16 @@ const MentorsSection = ({ variant }) => {
 				backgroundSize: isOnline ? undefined : '1400px 1200px',
 				backgroundPosition: isOnline ? undefined : 'center 10%',
 				backgroundRepeat: isOnline ? undefined : 'no-repeat',
-				padding: '0px 0 0px',
+				marginTop: 0,
+				padding: '40px 0 0',
 				overflow: 'hidden',
 				position: 'relative',
 				zIndex: 1,
 				isolation: 'isolate',
-				height: '900px',
 				width: '100%',
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
-				justifyContent: 'center',
 			}}
 		>
 			{isOnline && (
@@ -103,7 +105,7 @@ const MentorsSection = ({ variant }) => {
 			)}
 			{!isOnline && (
 				<ParticleBackground
-					count={100}
+					count={40}
 					height={650}
 					opacity={0.8}
 					color='255, 255, 255'
@@ -121,13 +123,14 @@ const MentorsSection = ({ variant }) => {
 							highlight="o'rganing!"
 							subtitle={
 								<>
-									Bizning platforma orqali siz IT va zamonaviy kasblarni <br />
+									Bizning platforma orqali siz IT va zamonaviy kasblarni{' '}
+									<br className='hidden sm:block' />
 									mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz.
 								</>
 							}
 							buttonType={isOnline ? 'button2' : 'button1'}
 							titleStyle={
-								isOnline ? { color: '#fff', fontSize: '48px' } : undefined
+								isOnline ? { color: '#fff' } : undefined
 							}
 							highlightColor={isOnline ? '#fff' : undefined}
 							subtitleStyle={isOnline ? { fontSize: '16px' } : undefined}
@@ -141,7 +144,7 @@ const MentorsSection = ({ variant }) => {
 							style={{
 								position: 'relative',
 								width: '100%',
-								height: Math.round(Math.max(300, 620 * dimScale)),
+								height: Math.round(Math.max(isMobile ? 480 : 300, 620 * dimScale)),
 							}}
 						>
 							<div
@@ -159,6 +162,7 @@ const MentorsSection = ({ variant }) => {
 											dimScale={dimScale}
 											isActive={cfg.offset === 0}
 											onShift={shift}
+											isMobile={isMobile}
 										/>
 									)
 								})}

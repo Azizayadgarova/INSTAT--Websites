@@ -16,6 +16,7 @@ import FoydalanishJarayoni from '../../components/FoydalanishJarayoni'
 import InformationStatistika from '../../components/InformationStatistika'
 import Kutubxona from '../../components/Kutubxona'
 import ProblemSection from '../../components/ProblemSection'
+import Testimonials from '../../components/Testimonial'
 import Text from '../../components/shared/Text'
 
 const POSITIONS = [
@@ -121,7 +122,7 @@ const ROW2 = [
 const RaqamliKutibxona = () => {
 	const [mounted, setMounted] = useState(false)
 	const [hoveredIndex, setHovered] = useState(null)
-	const [particles, setParticles] = useState([])
+	const [, setParticles] = useState([])
 	const [shimmers, setShimmers] = useState({})
 	const [order, setOrder] = useState(() => IMAGES.map((_, i) => i))
 	const [dragOver, setDragOver] = useState(null)
@@ -138,6 +139,14 @@ const RaqamliKutibxona = () => {
 	const swapRef = useRef({})
 
 	const centerIndex = Math.floor(POSITIONS.length / 2)
+
+	useEffect(() => {
+		const el = document.createElement('style')
+		el.setAttribute('data-rk-kf', '1')
+		el.textContent = keyframes
+		document.head.appendChild(el)
+		return () => document.head.removeChild(el)
+	}, [])
 
 	useEffect(() => {
 		const t = setTimeout(() => setMounted(true), 50)
@@ -260,7 +269,7 @@ const RaqamliKutibxona = () => {
 		setDragOver(null)
 	}, [])
 
-	const handleClick = useCallback((e, i) => {
+	const handleClick = useCallback((e) => {
 		const rect = e.currentTarget.getBoundingClientRect()
 		const cx = e.clientX - rect.left
 		const cy = e.clientY - rect.top
@@ -288,8 +297,6 @@ const RaqamliKutibxona = () => {
 
 	return (
 		<>
-			<style>{keyframes}</style>
-
 			<div
 				ref={sceneRef}
 				style={{
@@ -473,6 +480,8 @@ const RaqamliKutibxona = () => {
 					style={{
 						position: 'relative',
 						width: '100%',
+						maxWidth: '1440px',
+						margin: '0 auto',
 						display: 'flex',
 						flexDirection: 'column',
 						gap: '14px',
@@ -480,37 +489,10 @@ const RaqamliKutibxona = () => {
 						overflow: 'hidden',
 						zIndex: 10,
 						paddingBottom: '0px',
+						WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
+						maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
 					}}
 				>
-					{/* Chap qorayish */}
-					<div
-						style={{
-							position: 'absolute',
-							left: 0,
-							top: 0,
-							bottom: 0,
-							width: '180px',
-							background:
-								'linear-gradient(to right, rgba(4, 6, 12, 1) 0%, rgba(4, 6, 12, 0.85) 40%, rgba(4, 6, 12, 0) 100%)',
-							zIndex: 15,
-							pointerEvents: 'none',
-						}}
-					/>
-
-					{/* O'ng qorayish */}
-					<div
-						style={{
-							position: 'absolute',
-							right: 0,
-							top: 0,
-							bottom: 0,
-							width: '180px',
-							background:
-								'linear-gradient(to left, rgba(4, 6, 12, 1) 0%, rgba(4, 6, 12, 0.85) 40%, rgba(4, 6, 12, 0) 100%)',
-							zIndex: 15,
-							pointerEvents: 'none',
-						}}
-					/>
 
 					{[
 						{ items: ROW1, anim: 'ribbonScroll 40s linear infinite' },
@@ -595,6 +577,7 @@ const RaqamliKutibxona = () => {
 			<ElektronKutubxona />
 			<Kutubxona />
 			<FAQSection hideParticles platformStyle />
+			<Testimonials hideParticles platformStyle />
 		</>
 	)
 }

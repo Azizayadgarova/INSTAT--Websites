@@ -54,10 +54,8 @@ const GlowText = memo(() => {
 		window.addEventListener('scroll', updateCache, { passive: true })
 		window.addEventListener('resize', updateCache, { passive: true })
 
-		const onMove = e => {
+		const applyGlow = (x, y) => {
 			if (rafRef.current) return
-			const x = e.clientX,
-				y = e.clientY
 			rafRef.current = requestAnimationFrame(() => {
 				rafRef.current = null
 				cacheRef.current.forEach(({ s, cx, cy }) => {
@@ -69,11 +67,19 @@ const GlowText = memo(() => {
 			})
 		}
 
+		const onMove = e => applyGlow(e.clientX, e.clientY)
+		const onTouch = e => {
+			const t = e.touches[0]
+			if (t) applyGlow(t.clientX, t.clientY)
+		}
+
 		window.addEventListener('mousemove', onMove, { passive: true })
+		window.addEventListener('touchmove', onTouch, { passive: true })
 		return () => {
 			window.removeEventListener('scroll', updateCache)
 			window.removeEventListener('resize', updateCache)
 			window.removeEventListener('mousemove', onMove)
+			window.removeEventListener('touchmove', onTouch)
 			if (rafRef.current) cancelAnimationFrame(rafRef.current)
 		}
 	}, [])
@@ -81,9 +87,10 @@ const GlowText = memo(() => {
 	return (
 		<div
 			ref={containerRef}
+			className='[--ft-b:calc(50px_-_clamp(40px,20vw,330px))] md:[--ft-b:calc(210px_-_clamp(40px,20vw,330px))]'
 			style={{
 				position: 'absolute',
-				bottom: 'calc(210px - clamp(40px, 20vw, 330px))',
+				bottom: 'var(--ft-b)',
 				left: '50%',
 				transform: 'translateX(-50%)',
 				width: '100%',
@@ -101,7 +108,7 @@ const GlowText = memo(() => {
 					style={{
 						fontFamily: 'Inter Display, sans-serif',
 						fontWeight: 700,
-						fontSize: 'clamp(140px, 20vw, 330px)',
+						fontSize: 'clamp(85px, 20vw, 330px)',
 						lineHeight: 1,
 						color: 'rgba(36,39,48,1)',
 						display: 'inline-block',
@@ -120,11 +127,11 @@ const Footer = () => (
 	<footer className='bg-[#0E121B] relative overflow-hidden'>
 		<div className='max-w-[1200px] mx-auto px-6'>
 			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 py-8 md:py-0'>
-				<div className='flex flex-col sm:col-span-2 md:col-span-1'>
+				<div className='flex flex-col items-end md:items-start sm:col-span-2 md:col-span-1'>
 					<img
 						src={icon1}
 						alt='INSTAT'
-						className='w-auto max-w-[200px] md:max-w-[220px]'
+						className='ml-auto mr-[30px] md:ml-0 md:mr-0 w-auto max-w-[200px] md:max-w-[220px]'
 						style={{
 							height: '36.76px',
 							objectFit: 'contain',
@@ -132,6 +139,7 @@ const Footer = () => (
 						}}
 					/>
 					<p
+						className='text-center md:text-left'
 						style={{
 							...LINK,
 							lineHeight: '26px',
@@ -143,9 +151,10 @@ const Footer = () => (
 					</p>
 				</div>
 
-				<div>
-					<h4 style={HEADING}>Saytlar</h4>
+				<div className='flex flex-col items-center md:items-start'>
+					<h4 className='text-center md:text-left' style={HEADING}>Saytlar</h4>
 					<ul
+						className='items-center md:items-start'
 						style={{
 							marginTop: '20px',
 							display: 'flex',
@@ -157,7 +166,7 @@ const Footer = () => (
 							<li
 								key={item}
 								style={LINK}
-								className='hover:text-white transition'
+								className='text-center md:text-left hover:text-white transition'
 							>
 								{item}
 							</li>
@@ -165,9 +174,10 @@ const Footer = () => (
 					</ul>
 				</div>
 
-				<div>
-					<h4 style={HEADING}>{"Qo'llab quvvatlash"}</h4>
+				<div className='flex flex-col items-center md:items-start'>
+					<h4 className='text-center md:text-left' style={HEADING}>{"Qo'llab quvvatlash"}</h4>
 					<ul
+						className='items-center md:items-start'
 						style={{
 							marginTop: '20px',
 							display: 'flex',
@@ -179,7 +189,7 @@ const Footer = () => (
 							<li
 								key={item}
 								style={LINK}
-								className='hover:text-white transition'
+								className='text-center md:text-left hover:text-white transition'
 							>
 								{item}
 							</li>
@@ -187,9 +197,10 @@ const Footer = () => (
 					</ul>
 				</div>
 
-				<div>
-					<h4 style={HEADING}>Huquqiy</h4>
+				<div className='flex flex-col items-center md:items-start'>
+					<h4 className='text-center md:text-left' style={HEADING}>Huquqiy</h4>
 					<ul
+						className='items-center md:items-start'
 						style={{
 							marginTop: '20px',
 							display: 'flex',
@@ -201,7 +212,7 @@ const Footer = () => (
 							<li
 								key={item}
 								style={LINK}
-								className='hover:text-white transition'
+								className='text-center md:text-left hover:text-white transition'
 							>
 								{item}
 							</li>
@@ -212,21 +223,18 @@ const Footer = () => (
 		</div>
 
 		{/* ✅ FIXED HEIGHT */}
-		<div
-			className='relative flex justify-center items-end'
-			style={{ height: '300px', overflow: 'hidden' }}
-		>
+		<div className='relative flex justify-center items-end h-[200px] md:h-[300px] overflow-hidden'>
 			<img
 				src={lobus}
 				alt=''
 				aria-hidden='true'
-				className='absolute w-full h-full max-w-[1000px] bottom-0'
+				className='absolute w-full h-[80%] md:h-full max-w-[800px] md:max-w-[1000px] bottom-[-50px] md:bottom-0'
 			/>
 			<GlowText />
 		</div>
 
-		<div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 py-8 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10'>
-			<p style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>
+		<div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 pt-[10px] pb-[10px] md:py-8 flex flex-col-reverse md:flex-row justify-center md:justify-between items-center gap-4 relative z-10'>
+			<p className='text-center md:text-left' style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>
 				© Instat Inc. Barcha huquqlar himoyalangan.
 			</p>
 			<div className='flex gap-3'>

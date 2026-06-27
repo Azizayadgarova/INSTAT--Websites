@@ -107,7 +107,7 @@ const TopFooter = () => {
 
 	return (
 		<>
-			<section className='w-full bg-[#0E121B] py-10'>
+			<section className='hidden md:block w-full bg-[#0E121B] py-10'>
 				<div className='w-full max-w-[1200px] mx-auto px-6'>
 					<div
 						ref={cardRef}

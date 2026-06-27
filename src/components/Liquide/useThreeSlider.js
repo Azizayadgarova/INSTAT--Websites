@@ -16,9 +16,13 @@ export function useThreeSlider(s) {
 			powerPreference: 'high-performance',
 		})
 
-		let vpWidth = window.innerWidth
+		const getContainerSize = () => {
+			const rect = canvas.parentElement.getBoundingClientRect()
+			return { width: rect.width, height: rect.height }
+		}
+
+		let { width: vpWidth, height: vpHeight } = getContainerSize()
 		let vpHalfWidth = vpWidth / 2
-		let vpHeight = window.innerHeight
 
 		renderer.setSize(vpWidth, vpHeight)
 		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -194,11 +198,12 @@ export function useThreeSlider(s) {
 		}
 
 		const onWheel = e => {
-			const atEnd = scrollTarget >= maxScroll && e.deltaY > 0
-			const atStart = scrollTarget <= 0 && e.deltaY < 0
-			if (atEnd || atStart) return // sahifa scrolliga ruxsat ber
+			if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return // vertikal scroll — sahifaga tegmaymiz
+			const atEnd = scrollTarget >= maxScroll && e.deltaX > 0
+			const atStart = scrollTarget <= 0 && e.deltaX < 0
+			if (atEnd || atStart) return
 			e.preventDefault()
-			const nextTarget = scrollTarget + e.deltaY * sliderConfig.wheelSpeed
+			const nextTarget = scrollTarget + e.deltaX * sliderConfig.wheelSpeed
 			scrollTarget = Math.max(0, Math.min(nextTarget, maxScroll))
 			needsRender = true
 			clearTimeout(snapTimeout)
@@ -213,9 +218,8 @@ export function useThreeSlider(s) {
 		const onResize = () => {
 			clearTimeout(resizeTimer)
 			resizeTimer = setTimeout(() => {
-				vpWidth = window.innerWidth
+				;({ width: vpWidth, height: vpHeight } = getContainerSize())
 				vpHalfWidth = vpWidth / 2
-				vpHeight = window.innerHeight
 				renderer.setSize(vpWidth, vpHeight)
 				camera.aspect = vpWidth / vpHeight
 				camera.updateProjectionMatrix()
@@ -237,6 +241,20 @@ export function useThreeSlider(s) {
 			}
 		}
 
+		const onViewport = ([entry]) => {
+			if (entry.isIntersecting) {
+				needsRender = true
+				startLoop()
+			} else {
+				stopLoop()
+			}
+		}
+		const viewportObserver = new IntersectionObserver(onViewport, { threshold: 0 })
+		viewportObserver.observe(canvas)
+
+		const containerResizeObserver = new ResizeObserver(onResize)
+		containerResizeObserver.observe(canvas.parentElement)
+
 		canvas.addEventListener('wheel', onWheel, { passive: false })
 		window.addEventListener('resize', onResize)
 		document.addEventListener('visibilitychange', onVisibilityChange)
@@ -244,6 +262,8 @@ export function useThreeSlider(s) {
 
 		return () => {
 			stopLoop()
+			viewportObserver.disconnect()
+			containerResizeObserver.disconnect()
 			clearTimeout(snapTimeout)
 			clearTimeout(resizeTimer)
 			canvas.removeEventListener('wheel', onWheel)

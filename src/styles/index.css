@@ -13,9 +13,19 @@ body {
 }
 
 .text_font {
-	font-family: 'Inter', sans-serif  !important;
-	font-size: 64px;
+	font-family: 'Inter Display', 'Inter', sans-serif !important;
+	font-size: 32px;
 	font-weight: 600;
+	line-height: 40px;
+	letter-spacing: 0px;
+}
+
+@media (min-width: 768px) {
+	.text_font {
+		font-size: 64px;
+		line-height: 1.1;
+		letter-spacing: -2px;
+	}
 }
 /* Bu klass matn ustiga grunge teksturani taqlid qiladi */
 .grunge-text-texture {
@@ -23,6 +33,11 @@ body {
   /* Misol uchun, shunchaki contrast va brightness orqali simulyatsiya */
   filter: contrast(150%) brightness(120%);
   position: relative;
+}
+
+/* Liquide sliderdagi sarlavha harflariga don/grunge tekstura beradi */
+.grain-text {
+  filter: url(#liquide-grain) contrast(160%) brightness(115%);
 }
 
 /* Kavisli matn elementlari uchun asosiy klass */
