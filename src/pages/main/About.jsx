@@ -11,9 +11,11 @@ import bg from '@/assets/bgImg/Vektor.svg'
 import glowImg from '@/assets/Glow (6).png'
 import instanIcon from '@/assets/logoInstat.png'
 import { Button } from '../../components/shared/Button'
-import sIcon1 from '@/assets/icons/facebook.png'
-import sIcon2 from '@/assets/icons/instaIcon.png'
-import sIcon3 from '@/assets/icons/social3.png'
+import sIconInsta from '@/assets/Major Brand Logos [1.1] (1).png'
+import sIconX from '@/assets/Major Brand Logos [1.1].png'
+import sIconFb from '@/assets/Vector (14).png'
+import sIconLn from '@/assets/Vector (15).png'
+import { EASE_SMOOTH } from '../../constants/animations'
 
 const IntroAnimation = lazy(() => import('../../components/shared/IntroAnimation'))
 const ModernEducation = lazy(() => import('../../components/ModernEducation'))
@@ -34,75 +36,117 @@ const INFO_LINKS = [
   { label: 'Odob axloq qoidalari', path: '/about/odob-axloq' },
 ]
 
-const LC = 'rgba(43, 117, 204, 0.4)'
-const SW = '1.8'
-const FALLBACK_MD = <div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />
+const LINE_COLOR = 'rgba(var(--blue-rgb),0.4)'
+const STROKE_WIDTH = '1.8'
+
+const HOME_SECTIONS = [
+  { Component: StatisticComponent, height: '400px', animated: true },
+  { Component: ModernEducation,    height: '100vh' },
+  { Component: HeroZoom,           height: '100vh' },
+  { Component: MentorsSection,     height: '850px' },
+  { Component: Testimonials,       height: '700px', suspenseHeight: '600px' },
+  { Component: IntegrationSection, height: '850px', suspenseHeight: '600px' },
+  { Component: FAQSection,         height: '600px' },
+]
+
+const SectionFallback = ({ height }) => (
+  <div style={{ minHeight: height, background: 'var(--bg-primary)' }} />
+)
 
 const About = () => {
   const outlet = useOutlet()
 
   if (outlet) {
     return (
-      <div style={{ display: 'flex', background: 'rgba(14,18,27,1)', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', background: 'rgba(14, 18, 27, 1)', margin: '0 130px', minHeight: '100vh' }}>
         <aside style={{
-          width: '260px',
+          width: '365px',
           flexShrink: 0,
-          borderRight: '1px solid rgba(255,255,255,0.08)',
           position: 'sticky',
           top: 0,
           height: '100vh',
-          overflowY: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          paddingTop: '100px',
-          paddingLeft: '32px',
-          paddingRight: '24px',
-          paddingBottom: '40px',
-          boxSizing: 'border-box',
+          background: 'rgba(14, 18, 27, 1)',
         }}>
-          <Link
-            to="/"
-            style={{
-              display: 'flex', alignItems: 'center', gap: '6px',
-              color: 'rgba(255,255,255,0.6)', textDecoration: 'none',
-              fontSize: '14px', fontFamily: 'Inter, sans-serif',
-              marginBottom: '36px',
-            }}
-          >
-            ← Ortga
-          </Link>
-          <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-            {INFO_LINKS.map(link => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                style={({ isActive }) => ({
-                  textDecoration: 'none',
-                  padding: '9px 0 9px 14px',
-                  borderLeft: isActive ? '2px solid #00E6FC' : '2px solid transparent',
-                  color: isActive ? '#fff' : 'rgba(138,145,163,1)',
-                  fontSize: '14px',
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: isActive ? 500 : 400,
-                })}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            overflowY: 'auto',
+            paddingTop: '35px',
+            paddingRight: '24px',
+            paddingBottom: '40px',
+            boxSizing: 'border-box',
+          }}>
+            {/* Ortga button */}
+            <div>
+              <Link
+                to="/"
+                className="w-[88px] h-[40px] flex items-center justify-center gap-2 rounded-[10px] px-[10px] mb-9 text-white no-underline text-[14px] font-medium bg-[rgba(43,117,204,0.05)] backdrop-blur-[16px] shadow-[inset_0_2px_6px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(14,18,27,0.3),0_16px_24px_-8px_rgba(14,18,27,0.1),0_0_0_1px_rgba(255,255,255,0.08)] hover:text-white hover:scale-[1.02] transition-all duration-300"
               >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
-          <div style={{ marginTop: '24px' }}>
-            <p style={{ color: 'rgba(138,145,163,1)', fontSize: '12px', fontFamily: 'Inter, sans-serif', marginBottom: '12px' }}>
-              Share this blog
-            </p>
-            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-              <img src={sIcon2} alt="Instagram" width={20} height={20} />
-              <img src={sIcon3} alt="" width={20} height={20} />
-              <img src={sIcon1} alt="Facebook" width={20} height={20} />
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+                  <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>Ortga</span>
+              </Link>
+            </div>
+
+            {/* Nav — har bir link border orqali uzluksiz chiziq hosil qiladi */}
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: 0, alignSelf: 'flex-start', width: '100%' }}>
+              {INFO_LINKS.map(link => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  style={({ isActive }) => ({
+                    textDecoration: 'none',
+                    display: 'block',
+                    padding: '12px 0 12px 12px',
+                    borderLeft: isActive
+                      ? '4px solid rgba(74, 144, 226, 1)'
+                      : '4px solid rgba(34, 37, 48, 1)',
+                    color: isActive ? 'rgba(0, 230, 252, 1)' : 'rgba(255, 255, 255, 1)',
+                    fontFamily: 'Inter Display, sans-serif',
+                    fontWeight: isActive ? 600 : 500,
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    letterSpacing: '-0.02em',
+                    transition: 'color 0.2s, border-color 0.2s',
+                  })}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Share section */}
+            <div style={{ marginTop: '32px', paddingLeft: '18px' }}>
+              <p style={{
+                fontFamily: 'Inter Display, sans-serif',
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '28px',
+                letterSpacing: '-0.02em',
+                color: 'rgba(153, 160, 174, 1)',
+                marginBottom: '12px',
+              }}>
+                Share this blog
+              </p>
+              <div style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
+                {[
+                  { src: sIconInsta, alt: 'Instagram' },
+                  { src: sIconX,     alt: 'X' },
+                  { src: sIconFb,    alt: 'Facebook' },
+                  { src: sIconLn,    alt: 'LinkedIn' },
+                ].map(({ src, alt }) => (
+                  <div key={alt} style={{ width: 24, height: 24, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </aside>
         <main style={{ flex: 1, paddingTop: '100px', paddingLeft: '60px', paddingRight: '60px', paddingBottom: '60px' }}>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', fontFamily: 'Inter, sans-serif', marginBottom: '4px' }}>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', fontFamily: 'var(--font-inter)', marginBottom: '4px' }}>
             Institut haqida
           </p>
           {outlet}
@@ -112,7 +156,7 @@ const About = () => {
   }
 
   return (
-    <div className='relative flex items-center flex-col min-h-screen w-full bg-[rgba(14,18,27,1)]'>
+    <div className='relative flex items-center flex-col min-h-screen w-full bg-[var(--bg-primary)]'>
       <Suspense fallback={null}>
         <IntroAnimation />
       </Suspense>
@@ -127,31 +171,31 @@ const About = () => {
         decoding='async'
         className='absolute inset-0 w-full md:w-[80%] h-[600px] md:h-[969px] mx-auto -z-0 object-cover md:object-fill'
       />
-      <div className='absolute inset-0 bg-[rgba(14,18,27,1)] opacity-40 -z-0' />
+      <div className='absolute inset-0 bg-[var(--bg-primary)] opacity-40 -z-0' />
 
       <div className='pt-[40px] z-30 flex flex-col items-center px-4 w-full'>
         <motion.div
           className='pt-[40px] px-2 text-center'
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: 0.1, ease: EASE_SMOOTH }}
         >
           <Button text="O'zbekiston Respublikasi Prezidenti huzuridagi Statistika agentligi" />
         </motion.div>
 
         <div className='text-center mt-[24px] px-4'>
-          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[rgba(188,188,188,1)]'>
+          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[var(--text-primary)]'>
             "Ma'lumotlar va tahlil ilmi"
             <br />
-            <span className='text-[rgba(0,230,252,1)]'>
+            <span className='text-[var(--color-cyan)]'>
               Raqamli ta'lim platformasi
             </span>
           </h1>
           <motion.p
-            className='text-[rgba(188,188,188,1)] text-[15px] md:text-[18px]'
+            className='text-[var(--text-primary)] text-[15px] md:text-[18px]'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.2, ease: EASE_SMOOTH }}
           >
             Ta'lim, ilm-fan va karyera uchun yagona raqamli platforma
           </motion.p>
@@ -162,7 +206,7 @@ const About = () => {
         className='relative w-full max-w-[1200px] mt-[50px] md:mt-[90px] px-4 md:px-0'
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, delay: 0.5, ease: EASE_SMOOTH }}
       >
         <ParticleCanvas />
 
@@ -202,7 +246,7 @@ const About = () => {
 
           <div className="hidden md:block relative w-full h-[550px]">
             <svg className='absolute inset-0 w-full h-full pointer-events-none z-10' viewBox='0 0 1200 550'>
-              <g fill='none' stroke={LC} strokeWidth={SW}>
+              <g fill='none' stroke={LINE_COLOR} strokeWidth={STROKE_WIDTH}>
                 <path d='M 600 275 C 500 275, 450 110, 355 110' />
                 <path d='M 600 275 L 355 275' />
                 <path d='M 600 275 C 500 275, 450 440, 355 440' />
@@ -216,7 +260,7 @@ const About = () => {
               className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20'
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, delay: 0.6, ease: EASE_SMOOTH }}
             >
               <div
                 style={{
@@ -225,7 +269,7 @@ const About = () => {
                   height: '280px',
                   borderRadius: '50%',
                   padding: '2.33px',
-                  background: 'linear-gradient(180deg, rgba(43,117,204,0.6) 0%, rgba(43,117,204,0) 60%)',
+                  background: 'linear-gradient(180deg, rgba(var(--blue-rgb),0.6) 0%, rgba(var(--blue-rgb),0) 60%)',
                 }}
               >
                 <div
@@ -233,11 +277,11 @@ const About = () => {
                     width: '100%',
                     height: '100%',
                     borderRadius: '50%',
-                    background: 'rgba(22, 27, 38, 1)',
+                    background: 'var(--card-bg)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: 'inset 0px 5px 20px rgba(255, 255, 255, 0.05), 0px -10px 40px rgba(43, 117, 204, 0.2)',
+                    boxShadow: 'inset 0px 5px 20px rgba(255,255,255,0.05), 0px -10px 40px rgba(var(--blue-rgb),0.2)',
                   }}
                 >
                   <img src={instanIcon} alt='logo' className='w-[220px] h-[220px] object-contain relative z-10' />
@@ -257,7 +301,7 @@ const About = () => {
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse at 50% 40%, rgba(43,117,204,0.12) 0%, transparent 65%)',
+                background: 'radial-gradient(ellipse at 50% 40%, rgba(var(--blue-rgb),0.12) 0%, transparent 65%)',
               }}
             />
 
@@ -272,9 +316,9 @@ const About = () => {
             </div>
 
             <div className="flex flex-col items-center z-10" style={{ margin: '6px 0' }}>
-              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.3), rgba(43,117,204,0.8))' }} />
-              <div className="w-[6px] h-[6px] rounded-full" style={{ background: 'rgba(43,117,204,0.9)' }} />
-              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.8), rgba(43,117,204,0.3))' }} />
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(var(--blue-rgb),0.3), rgba(var(--blue-rgb),0.8))' }} />
+              <div className="w-[6px] h-[6px] rounded-full" style={{ background: 'rgba(var(--blue-rgb),0.9)' }} />
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(var(--blue-rgb),0.8), rgba(var(--blue-rgb),0.3))' }} />
             </div>
 
             <motion.div
@@ -290,7 +334,7 @@ const About = () => {
                   height: '150px',
                   borderRadius: '50%',
                   padding: '2.5px',
-                  background: 'linear-gradient(180deg, rgba(43,117,204,0.7) 0%, rgba(43,117,204,0.1) 100%)',
+                  background: 'linear-gradient(180deg, rgba(var(--blue-rgb),0.7) 0%, rgba(var(--blue-rgb),0.1) 100%)',
                 }}
               >
                 <div
@@ -298,11 +342,11 @@ const About = () => {
                     width: '100%',
                     height: '100%',
                     borderRadius: '50%',
-                    background: 'rgba(22, 27, 38, 1)',
+                    background: 'var(--card-bg)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: 'inset 0px 5px 20px rgba(255,255,255,0.05), 0px 0px 40px rgba(43,117,204,0.3)',
+                    boxShadow: 'inset 0px 5px 20px rgba(255,255,255,0.05), 0px 0px 40px rgba(var(--blue-rgb),0.3)',
                   }}
                 >
                   <img src={instanIcon} alt='logo' className='w-[110px] h-[110px] object-contain' />
@@ -311,9 +355,9 @@ const About = () => {
             </motion.div>
 
             <div className="flex flex-col items-center z-10" style={{ margin: '6px 0' }}>
-              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.8), rgba(43,117,204,0.3))' }} />
-              <div className="w-[6px] h-[6px] rounded-full" style={{ background: 'rgba(43,117,204,0.9)' }} />
-              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(43,117,204,0.3), rgba(43,117,204,0.8))' }} />
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(var(--blue-rgb),0.8), rgba(var(--blue-rgb),0.3))' }} />
+              <div className="w-[6px] h-[6px] rounded-full" style={{ background: 'rgba(var(--blue-rgb),0.9)' }} />
+              <div className="w-[1.5px] h-6" style={{ background: 'linear-gradient(to bottom, rgba(var(--blue-rgb),0.3), rgba(var(--blue-rgb),0.8))' }} />
             </div>
 
             <div className="flex flex-col gap-3 w-full z-20">
@@ -330,46 +374,22 @@ const About = () => {
       </motion.div>
 
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 0 }}>
-        <LazyLoad fallback={<div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '400px', background: 'rgba(14,18,27,1)' }} />}>
-            <AnimatedSection style={{ width: '100%' }}>
-              <StatisticComponent />
-            </AnimatedSection>
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
-            <ModernEducation />
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'rgba(14,18,27,1)' }} />}>
-            <HeroZoom />
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-            <MentorsSection />
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '700px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '600px', background: 'rgba(14,18,27,1)' }} />}>
-            <Testimonials />
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '600px', background: 'rgba(14,18,27,1)' }} />}>
-            <IntegrationSection />
-          </Suspense>
-        </LazyLoad>
-        <LazyLoad fallback={<div style={{ minHeight: '600px', background: 'rgba(14,18,27,1)' }} />}>
-          <Suspense fallback={<div style={{ minHeight: '600px', background: 'rgba(14,18,27,1)' }} />}>
-            <FAQSection />
-          </Suspense>
-        </LazyLoad>
+        {HOME_SECTIONS.map(({ Component, height, suspenseHeight, animated }) => {
+          const sh = suspenseHeight || height
+          const content = animated
+            ? <AnimatedSection style={{ width: '100%' }}><Component /></AnimatedSection>
+            : <Component />
+          return (
+            <LazyLoad key={height + Component.name} fallback={<SectionFallback height={height} />}>
+              <Suspense fallback={<SectionFallback height={sh} />}>
+                {content}
+              </Suspense>
+            </LazyLoad>
+          )
+        })}
       </div>
     </div>
   )
 }
 
-export default About;
+export default About

@@ -20,7 +20,7 @@ const LINK = {
 	fontSize: '18px',
 	lineHeight: '28px',
 	letterSpacing: '-0.01em',
-	color: 'rgba(188,188,188,1)',
+	color: 'rgba(var(--text-rgb),1)',
 	cursor: 'pointer',
 }
 
@@ -61,7 +61,7 @@ const GlowText = memo(() => {
 				cacheRef.current.forEach(({ s, cx, cy }) => {
 					s.style.color =
 						Math.hypot(x - cx, y - cy) < 140
-							? 'rgba(188,188,188,1)'
+							? 'rgba(var(--text-rgb),1)'
 							: 'rgba(36,39,48,1)'
 				})
 			})
@@ -124,7 +124,7 @@ const GlowText = memo(() => {
 })
 
 const Footer = () => (
-	<footer className='bg-[#0E121B] relative overflow-hidden'>
+	<footer className='relative overflow-hidden' style={{ background: 'rgba(14, 18, 27, 1)' }}>
 		<div className='max-w-[1200px] mx-auto px-6'>
 			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 py-8 md:py-0'>
 				<div className='flex flex-col items-end md:items-start sm:col-span-2 md:col-span-1'>
@@ -223,7 +223,7 @@ const Footer = () => (
 		</div>
 
 		{/* ✅ FIXED HEIGHT */}
-		<div className='relative flex justify-center items-end h-[200px] md:h-[300px] overflow-hidden'>
+		<div className='relative flex justify-center items-end h-[200px] md:h-[300px] overflow-hidden md:mt-[50px]'>
 			<img
 				src={lobus}
 				alt=''
