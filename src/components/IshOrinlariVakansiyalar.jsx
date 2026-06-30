@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import mapPin from '@/assets/icons/map-pin-line.png'
 import { Button2 } from './shared/Button2'
@@ -43,8 +42,6 @@ const JOBS = [
 	},
 ]
 
-const TOTAL_PAGES = 16
-
 function LocationIcon() {
 	return (
 		<img
@@ -62,7 +59,7 @@ function JobCard({ job }) {
 	return (
 		<div
 			style={{
-				background: 'rgba(22,27,38,1)',
+				background: 'rgba(var(--card-rgb),1)',
 				border: '1px solid rgba(31,37,51,1)',
 				borderRadius: '24px',
 				padding: '24px',
@@ -73,7 +70,7 @@ function JobCard({ job }) {
 		>
 			<h3
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 700,
 					fontSize: '24px',
 					lineHeight: '32px',
@@ -89,7 +86,7 @@ function JobCard({ job }) {
 				<LocationIcon />
 				<span
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
 						fontSize: '16px',
 						lineHeight: '24px',
@@ -102,11 +99,11 @@ function JobCard({ job }) {
 
 			<p
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
 					fontSize: '16px',
 					lineHeight: '24px',
-					color: 'rgba(138,145,163,1)',
+					color: 'rgba(var(--muted-rgb),1)',
 					margin: 0,
 					flex: 1,
 				}}
@@ -125,7 +122,7 @@ function JobCard({ job }) {
 			>
 				<span
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 700,
 						fontSize: '24px',
 						lineHeight: '32px',
@@ -136,7 +133,7 @@ function JobCard({ job }) {
 				</span>
 				<span
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
 						fontSize: '16px',
 						lineHeight: '24px',
@@ -152,12 +149,12 @@ function JobCard({ job }) {
 					width: '100%',
 					height: '44px',
 					borderRadius: '10px',
-					border: '1px solid rgba(43,117,204,0.4)',
-					background: 'rgba(43,117,204,1)',
+					border: '1px solid rgba(var(--blue-rgb),0.4)',
+					background: 'rgba(var(--blue-rgb),1)',
 					color: '#fff',
 					fontSize: '16px',
 					fontWeight: 400,
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					cursor: 'pointer',
 					transition: 'filter .2s',
 					padding: '0 12px',
@@ -175,125 +172,14 @@ function JobCard({ job }) {
 	)
 }
 
-function PagBtn({ children, onClick, active, nav }) {
-	const base = nav
-		? 'transparent'
-		: active
-			? 'rgba(43,117,204,1)'
-			: 'rgba(22,27,38,1)'
-	return (
-		<button
-			onClick={onClick}
-			style={{
-				width: '36px',
-				height: '36px',
-				borderRadius: '8px',
-				border: 'none',
-				background: base,
-				color: active ? '#fff' : 'rgba(150,160,180,1)',
-				fontSize: '14px',
-				fontWeight: active ? 600 : 400,
-				cursor: 'pointer',
-				fontFamily: '"Inter Display",Inter,sans-serif',
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'center',
-				transition: 'background .2s',
-			}}
-		>
-			{children}
-		</button>
-	)
-}
-
-function Pagination({ page, setPage, total }) {
-	const getPages = () => {
-		if (page <= 5) return [1, 2, 3, 4, 5, '...', total]
-		if (page >= total - 4)
-			return [1, '...', total - 4, total - 3, total - 2, total - 1, total]
-		return [1, '...', page - 1, page, page + 1, '...', total]
-	}
-	return (
-		<div
-			style={{
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'space-between',
-				width: '100%',
-			}}
-		>
-			<span
-				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
-					fontSize: '14px',
-					color: 'rgba(100,110,130,1)',
-					minWidth: '60px',
-				}}
-			>
-				Sahifa
-			</span>
-			<div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-				<PagBtn nav onClick={() => setPage(1)}>«</PagBtn>
-				<PagBtn nav onClick={() => setPage(p => Math.max(1, p - 1))}>‹</PagBtn>
-				{getPages().map((p, i) =>
-					p === '...' ? (
-						<span
-							key={`d${i}`}
-							style={{
-								width: '36px',
-								height: '36px',
-								display: 'inline-flex',
-								alignItems: 'center',
-								justifyContent: 'center',
-								color: 'rgba(100,110,130,1)',
-								fontSize: '14px',
-								fontFamily: '"Inter Display",Inter,sans-serif',
-							}}
-						>
-							...
-						</span>
-					) : (
-						<PagBtn key={p} active={p === page} onClick={() => setPage(p)}>
-							{p}
-						</PagBtn>
-					),
-				)}
-				<PagBtn nav onClick={() => setPage(p => Math.min(total, p + 1))}>›</PagBtn>
-				<PagBtn nav onClick={() => setPage(total)}>»</PagBtn>
-			</div>
-			<button
-				onClick={() => setPage(total)}
-				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
-					fontSize: '14px',
-					color: 'rgba(150,160,180,1)',
-					background: 'none',
-					border: 'none',
-					cursor: 'pointer',
-					display: 'flex',
-					alignItems: 'center',
-					gap: '4px',
-					minWidth: '60px',
-					justifyContent: 'flex-end',
-					padding: 0,
-				}}
-			>
-				Barchasini ko'rish <span>›</span>
-			</button>
-		</div>
-	)
-}
-
 const IshOrinlariVakansiyalar = () => {
-	const [page, setPage] = useState(2)
-
 	return (
 		<section
 			style={{
 				width: '100%',
 				maxWidth: '1440px',
 				margin: '0 auto',
-				background: 'rgba(14,18,27,1)',
+				background: 'rgba(var(--bg-rgb),1)',
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
@@ -326,7 +212,7 @@ const IshOrinlariVakansiyalar = () => {
 
 					<h2
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 600,
 							fontSize: 'clamp(28px,4vw,48px)',
 							lineHeight: 1.1,
@@ -340,7 +226,7 @@ const IshOrinlariVakansiyalar = () => {
 
 					<p
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 400,
 							fontSize: '16px',
 							lineHeight: '140%',
@@ -369,10 +255,6 @@ const IshOrinlariVakansiyalar = () => {
 				{JOBS.map((job, i) => (
 					<JobCard key={i} job={job} />
 				))}
-			</div>
-
-			<div style={{ width: '100%', maxWidth: '1200px' }}>
-				<Pagination page={page} setPage={setPage} total={TOTAL_PAGES} />
 			</div>
 		</section>
 	)

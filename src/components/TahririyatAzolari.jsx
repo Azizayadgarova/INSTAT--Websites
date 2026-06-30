@@ -98,7 +98,7 @@ export default function TahririyatAzolari() {
 
 	return (
 		<section style={{
-			backgroundColor: 'rgba(14,18,27,1)',
+			backgroundColor: 'rgba(var(--bg-rgb),1)',
 			marginTop: 0,
 			padding: '40px 0 0',
 			overflow: 'hidden',
@@ -136,20 +136,20 @@ export default function TahririyatAzolari() {
 						borderRadius: '100px', padding: '5px 16px', marginBottom: '20px',
 					}}>
 						<span style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontSize: '13px', fontWeight: 500,
 							color: 'rgba(180,185,200,1)', letterSpacing: '0.02em',
 						}}>Hodimlar</span>
 					</div>
 
 					<h2 style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 600, fontSize: '48px', lineHeight: 1.1,
 						color: '#fff', margin: '0 0 16px', letterSpacing: '-0.02em',
 					}}>Tahririyat a'zolari</h2>
 
 					<p style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 400, fontSize: '16px', lineHeight: 1.65,
 						color: 'rgba(202,202,206,1)',
 						maxWidth: '520px', margin: '0 0 0',

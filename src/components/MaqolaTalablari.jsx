@@ -70,7 +70,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 			}}
 		>
 			<span style={{
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				fontWeight: 700,
 				fontSize: '72px',
 				lineHeight: 1,
@@ -97,7 +97,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 				borderRadius: '14px',
 			}}>
 				<h3 style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 600,
 					fontSize: '30px',
 					lineHeight: 1.3,
@@ -105,7 +105,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 					margin: '0 0 10px',
 				}}>{item.title}</h3>
 				<p style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
 					fontSize: '18px',
 					lineHeight: 1.7,
@@ -134,7 +134,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 				width: '16px',
 				height: '16px',
 				borderRadius: '50%',
-				border: '2px solid rgba(43,117,204,0.85)',
+				border: '2px solid rgba(var(--blue-rgb),0.85)',
 				opacity: 0,
 				pointerEvents: 'none',
 				zIndex: 0,
@@ -148,9 +148,9 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 				width: '16px',
 				height: '16px',
 				borderRadius: '50%',
-				background: 'rgba(43,117,204,1)',
-				border: '2px solid rgba(43,117,204,0.4)',
-				boxShadow: '0 0 10px rgba(43,117,204,0.6)',
+				background: 'rgba(var(--blue-rgb),1)',
+				border: '2px solid rgba(var(--blue-rgb),0.4)',
+				boxShadow: '0 0 10px rgba(var(--blue-rgb),0.6)',
 				zIndex: 1,
 				opacity: 0,
 				transform: 'translateX(-50%) scale(0)',
@@ -260,7 +260,7 @@ export default function MaqolaTalablari() {
 	return (
 		<section style={{
 			width: '100%',
-			background: 'rgba(22,27,38,1)',
+			background: 'rgba(var(--card-rgb),1)',
 			display: 'flex',
 			flexDirection: 'column',
 			alignItems: 'center',
@@ -281,7 +281,7 @@ export default function MaqolaTalablari() {
 					animation: headerVisible ? 'mt_fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0s both' : 'none',
 				}}>
 					<span style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontSize: '12px',
 						fontWeight: 500,
 						color: 'rgba(180,185,200,1)',
@@ -290,7 +290,7 @@ export default function MaqolaTalablari() {
 				</div>
 
 				<h2 style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 600,
 					fontSize: '48px',
 					lineHeight: '58px',
@@ -305,7 +305,7 @@ export default function MaqolaTalablari() {
 				</h2>
 
 				<p style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
 					fontSize: '16px',
 					lineHeight: '140%',

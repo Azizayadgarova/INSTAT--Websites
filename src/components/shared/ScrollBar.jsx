@@ -22,7 +22,7 @@ const ScrollBar = () => {
 				position: 'fixed',
 				top: 0, left: 0, right: 0,
 				height: '2px',
-				background: 'linear-gradient(90deg, rgba(43,117,204,1), rgba(0,230,252,1))',
+				background: 'linear-gradient(90deg, rgba(var(--blue-rgb),1), rgba(var(--cyan-rgb),1))',
 				transformOrigin: '0%',
 				transform: 'scaleX(0)',
 				zIndex: 9999,

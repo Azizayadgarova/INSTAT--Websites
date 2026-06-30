@@ -65,7 +65,7 @@ const MentorsSection = ({ variant }) => {
 	return (
 		<section
 			style={{
-				backgroundColor: 'rgba(14,18,27,1)',
+				backgroundColor: 'rgba(var(--bg-rgb),1)',
 				backgroundImage: isOnline ? undefined : `url(${bg})`,
 				backgroundSize: isOnline ? undefined : '1400px 1200px',
 				backgroundPosition: isOnline ? undefined : 'center 10%',

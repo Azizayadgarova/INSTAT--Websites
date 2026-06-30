@@ -40,7 +40,7 @@ const Navbar2 = () => {
 
 					{/* Logo */}
 					<Link to='/'>
-						<img src={logoImg} alt='INSTAT' className='w-48 md:w-35' height={37} />
+						<img src={logoImg} alt='INSTAT' className='w-52 h-7.5 md:h-auto' style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} />
 					</Link>
 
 					{/* Pill nav — faqat desktop */}
@@ -54,7 +54,7 @@ const Navbar2 = () => {
 					>
 						<div
 							style={{
-								background: 'rgba(14,18,27,0.85)',
+								background: 'rgba(var(--bg-rgb),0.85)',
 								borderRadius: '999px',
 								height: '44px',
 								paddingTop: '12px',
@@ -83,7 +83,7 @@ const Navbar2 = () => {
 														WebkitBackgroundClip: 'text',
 														WebkitTextFillColor: 'transparent',
 														backgroundClip: 'text',
-														fontFamily: 'Inter, sans-serif',
+														fontFamily: 'var(--font-inter)',
 														fontWeight: 600,
 														fontSize: '15px',
 														lineHeight: '20px',
@@ -109,7 +109,7 @@ const Navbar2 = () => {
 											<span
 												style={{
 													color: 'rgba(255,255,255,0.8)',
-													fontFamily: 'Inter, sans-serif',
+													fontFamily: 'var(--font-inter)',
 													fontWeight: 500,
 													fontSize: '15px',
 													lineHeight: '20px',
@@ -135,7 +135,7 @@ const Navbar2 = () => {
 							background: 'linear-gradient(180deg, #3E8BE6 0%, #2B6FC4 100%)',
 							border: '1px solid #5FA2F0',
 							color: '#fff',
-							fontFamily: 'Inter, sans-serif',
+							fontFamily: 'var(--font-inter)',
 							fontSize: '14px',
 							fontWeight: 500,
 							cursor: 'pointer',
@@ -179,7 +179,7 @@ const Navbar2 = () => {
 					<div className='flex items-center justify-between px-[8%] pt-6 pb-4 border-b border-white/10'>
 						<span
 							style={{
-								fontFamily: '"Inter Display", Inter, sans-serif',
+								fontFamily: 'var(--font-display)',
 								fontWeight: 500,
 								fontSize: '24px',
 								lineHeight: '32px',
@@ -205,12 +205,12 @@ const Navbar2 = () => {
 										onClick={closeMenu}
 										style={{
 											textDecoration: 'none',
-											fontFamily: '"Inter Display", Inter, sans-serif',
+											fontFamily: 'var(--font-display)',
 											fontWeight: 600,
 											fontSize: '28px',
 											lineHeight: '36px',
 											letterSpacing: '-0.02em',
-											color: isActive ? 'rgba(0,230,252,1)' : 'rgba(90,98,117,1)',
+											color: isActive ? 'rgba(var(--cyan-rgb),1)' : 'rgba(90,98,117,1)',
 										}}
 									>
 										{link.label}

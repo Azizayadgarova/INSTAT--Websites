@@ -4,8 +4,8 @@ import deviceIcon from '@/assets/icons/device-line.png'
 import timeIcon from '@/assets/icons/time-line.png'
 
 const vp = { once: true, amount: 0.15 }
-const LINE_COLOR = 'rgba(43,117,204,0.7)'
-const LINE_GLOW = 'rgba(43,117,204,0.35)'
+const LINE_COLOR = 'rgba(var(--blue-rgb),0.7)'
+const LINE_GLOW = 'rgba(var(--blue-rgb),0.35)'
 
 /* ── Chiziq bo'ylab harakat qiluvchi nur nuqtasi ── */
 const TravelDot = ({ delay = 0, duration = 2.8, reverse = false }) => (
@@ -17,7 +17,7 @@ const TravelDot = ({ delay = 0, duration = 2.8, reverse = false }) => (
 			height: '5px',
 			borderRadius: '50%',
 			background: '#2B75CC',
-			boxShadow: '0 0 10px 3px rgba(43,117,204,0.8)',
+			boxShadow: '0 0 10px 3px rgba(var(--blue-rgb),0.8)',
 			pointerEvents: 'none',
 			zIndex: 2,
 		}}
@@ -36,7 +36,7 @@ const VerticalDot = ({ delay = 0, reverse = false }) => (
 			height: '5px',
 			borderRadius: '50%',
 			background: '#2B75CC',
-			boxShadow: '0 0 8px 2px rgba(43,117,204,0.7)',
+			boxShadow: '0 0 8px 2px rgba(var(--blue-rgb),0.7)',
 			pointerEvents: 'none',
 			zIndex: 2,
 		}}
@@ -53,8 +53,8 @@ const ScanLine = () => (
 			left: '8%',
 			right: '8%',
 			height: '1px',
-			background: 'linear-gradient(90deg, transparent 0%, rgba(43,117,204,0.4) 30%, rgba(43,117,204,0.9) 50%, rgba(43,117,204,0.4) 70%, transparent 100%)',
-			boxShadow: '0 0 8px rgba(43,117,204,0.5)',
+			background: 'linear-gradient(90deg, transparent 0%, rgba(var(--blue-rgb),0.4) 30%, rgba(var(--blue-rgb),0.9) 50%, rgba(var(--blue-rgb),0.4) 70%, transparent 100%)',
+			boxShadow: '0 0 8px rgba(var(--blue-rgb),0.5)',
 			borderRadius: '1px',
 			pointerEvents: 'none',
 			zIndex: 5,
@@ -66,7 +66,7 @@ const ScanLine = () => (
 
 const IconBox = ({ icon = deviceIcon, index = 0 }) => (
 	<motion.div
-		animate={{ boxShadow: ['0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07)', '0 8px 24px rgba(0,0,0,0.5), 0 0 14px rgba(43,117,204,0.25), inset 0 1px 0 rgba(255,255,255,0.07)', '0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07)'] }}
+		animate={{ boxShadow: ['0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07)', '0 8px 24px rgba(0,0,0,0.5), 0 0 14px rgba(var(--blue-rgb),0.25), inset 0 1px 0 rgba(255,255,255,0.07)', '0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07)'] }}
 		transition={{ duration: 2.5, delay: index * 0.4, repeat: Infinity, ease: 'easeInOut' }}
 		style={{
 			width: '62px', height: '62px', borderRadius: '14px',
@@ -81,7 +81,7 @@ const IconBox = ({ icon = deviceIcon, index = 0 }) => (
 				key={i}
 				style={{
 					position: 'absolute', width: '4px', height: '4px', borderRadius: '50%',
-					background: 'rgba(43,117,204,0.5)', ...pos,
+					background: 'rgba(var(--blue-rgb),0.5)', ...pos,
 				}}
 				animate={{ opacity: [0.2, 0.9, 0.2] }}
 				transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 + i * 0.2, ease: 'easeInOut' }}
@@ -129,10 +129,10 @@ const Layout0 = () => (
 		<IconTreeRow icons={[alertIcon, deviceIcon, timeIcon]} isTop={true} />
 		<div style={{
 			width: '100%', padding: '2px', borderRadius: '7px', flexShrink: 0,
-			background: 'linear-gradient(90deg, rgba(43,48,59,1) 0%, rgba(43,117,204,1) 50%, rgba(43,48,59,1) 100%)',
+			background: 'linear-gradient(90deg, rgba(43,48,59,1) 0%, rgba(var(--blue-rgb),1) 50%, rgba(43,48,59,1) 100%)',
 		}}>
 			<div style={{
-				width: '100%', borderRadius: '5px', backgroundColor: 'rgba(14,18,27,1)',
+				width: '100%', borderRadius: '5px', backgroundColor: 'rgba(var(--bg-rgb),1)',
 				padding: '10px', minHeight: '120px', display: 'flex', gap: '8px', boxSizing: 'border-box',
 			}}>
 				<motion.div
@@ -172,13 +172,13 @@ const Layout1 = () => (
 			padding: '10px 14px', border: '1px solid rgba(255,255,255,0.06)',
 		}}>
 			<motion.div
-				style={{ width: '14px', height: '14px', borderRadius: '50%', background: 'rgba(43,117,204,0.4)', flexShrink: 0 }}
+				style={{ width: '14px', height: '14px', borderRadius: '50%', background: 'rgba(var(--blue-rgb),0.4)', flexShrink: 0 }}
 				animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.9, 0.4] }}
 				transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
 			/>
 			<div style={{ flex: 1, height: '7px', background: 'rgba(255,255,255,0.07)', borderRadius: '4px' }} />
 			<motion.div
-				style={{ width: '36px', height: '7px', background: 'rgba(43,117,204,0.35)', borderRadius: '4px', flexShrink: 0 }}
+				style={{ width: '36px', height: '7px', background: 'rgba(var(--blue-rgb),0.35)', borderRadius: '4px', flexShrink: 0 }}
 				animate={{ opacity: [0.35, 0.8, 0.35] }}
 				transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
 			/>
@@ -249,10 +249,10 @@ const Layout2 = () => (
 				))}
 				<div style={{
 					marginTop: '4px', padding: '5px 10px', borderRadius: '6px', width: 'fit-content',
-					background: 'rgba(43,117,204,0.2)', border: '1px solid rgba(43,117,204,0.3)',
+					background: 'rgba(var(--blue-rgb),0.2)', border: '1px solid rgba(var(--blue-rgb),0.3)',
 				}}>
 					<motion.div
-						style={{ height: '8px', width: '44px', background: 'rgba(43,117,204,0.55)', borderRadius: '3px' }}
+						style={{ height: '8px', width: '44px', background: 'rgba(var(--blue-rgb),0.55)', borderRadius: '3px' }}
 						animate={{ opacity: [0.55, 1, 0.55] }}
 						transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
 					/>
@@ -288,8 +288,8 @@ const Layout2 = () => (
 
 		<div style={{ display: 'flex', gap: '8px' }}>
 			<motion.div
-				style={{ flex: 1, height: '32px', borderRadius: '7px', background: 'rgba(43,117,204,0.25)', border: '1px solid rgba(43,117,204,0.3)' }}
-				animate={{ background: ['rgba(43,117,204,0.25)', 'rgba(43,117,204,0.45)', 'rgba(43,117,204,0.25)'] }}
+				style={{ flex: 1, height: '32px', borderRadius: '7px', background: 'rgba(var(--blue-rgb),0.25)', border: '1px solid rgba(var(--blue-rgb),0.3)' }}
+				animate={{ background: ['rgba(var(--blue-rgb),0.25)', 'rgba(var(--blue-rgb),0.45)', 'rgba(var(--blue-rgb),0.25)'] }}
 				transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
 			/>
 			<div style={{ flex: 1, height: '32px', borderRadius: '7px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }} />
@@ -309,9 +309,9 @@ const Diagram = ({ active = 0, direction = 1 }) => {
 			viewport={vp}
 			animate={{
 				boxShadow: [
-					'0 0 8px 1px rgba(43,117,204,0.10)',
-					'0 0 28px 3px rgba(43,117,204,0.25)',
-					'0 0 8px 1px rgba(43,117,204,0.10)',
+					'0 0 8px 1px rgba(var(--blue-rgb),0.10)',
+					'0 0 28px 3px rgba(var(--blue-rgb),0.25)',
+					'0 0 8px 1px rgba(var(--blue-rgb),0.10)',
 				],
 			}}
 			transition={{
@@ -321,7 +321,7 @@ const Diagram = ({ active = 0, direction = 1 }) => {
 			}}
 			style={{
 				borderRadius: '24px',
-				border: '1px solid rgba(43,117,204,0.2)',
+				border: '1px solid rgba(var(--blue-rgb),0.2)',
 				height: '100%',
 				boxSizing: 'border-box',
 				position: 'relative',
@@ -353,7 +353,7 @@ const Diagram = ({ active = 0, direction = 1 }) => {
 					style={{
 						position: 'absolute',
 						inset: 0,
-						backgroundColor: 'rgba(14, 18, 27, 1)',
+						backgroundColor: 'rgba(var(--bg-rgb),1)',
 						borderRadius: '22px',
 						padding: '28px 24px',
 						boxSizing: 'border-box',

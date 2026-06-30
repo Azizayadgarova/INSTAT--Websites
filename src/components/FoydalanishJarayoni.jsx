@@ -109,7 +109,7 @@ const MagneticWrap = ({ children, fromLeft, delay }) => {
 const FeatureCard = ({ icon, title, description }) => (
 	<div
 		style={{
-			backgroundColor: 'rgba(22, 27, 38, 1)',
+			backgroundColor: 'rgba(var(--card-rgb),1)',
 			border: '1px solid rgba(255, 255, 255, 0.08)',
 			borderRadius: '15px',
 			padding: '24px',
@@ -131,12 +131,12 @@ const FeatureCard = ({ icon, title, description }) => (
 			<img src={icon} alt='' style={{ width: '33px', height: '28px', objectFit: 'contain' }} />
 		</div>
 		<h3 style={{
-			fontFamily: '"Inter Display", Inter, sans-serif',
+			fontFamily: 'var(--font-display)',
 			fontWeight: 700, fontSize: '24px', lineHeight: '28px',
 			color: 'rgba(230,230,233,1)', margin: '0 0 12px 0',
 		}}>{title}</h3>
 		<p style={{
-			fontFamily: 'Inter, sans-serif', fontWeight: 400,
+			fontFamily: 'var(--font-inter)', fontWeight: 400,
 			fontSize: '16px', lineHeight: '22px',
 			color: 'rgba(202, 202, 206, 1)', margin: 0,
 		}}>{description}</p>
@@ -165,7 +165,7 @@ const FoydalanishJarayoni = () => {
 			width: '100%',
 			maxWidth: '1440px',
 			margin: '0 auto',
-			backgroundColor: 'rgba(14, 18, 27, 1)',
+			backgroundColor: 'rgba(var(--bg-rgb),1)',
 			display: 'flex', flexDirection: 'column', alignItems: 'center',
 			position: 'relative', overflow: 'hidden', paddingBottom: '40px',
 		}}>
@@ -197,7 +197,7 @@ const FoydalanishJarayoni = () => {
 
 					<h2
 						style={{
-							fontFamily: '"Inter Display", Inter, sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 600, fontSize: 'clamp(28px,4vw,48px)', lineHeight: 1.1,
 							color: '#ffffff', margin: 0, letterSpacing: '-0.02em',
 						}}
@@ -207,7 +207,7 @@ const FoydalanishJarayoni = () => {
 
 					<p
 						style={{
-							fontFamily: '"Inter Display", Inter, sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 400, fontSize: '16px', lineHeight: '140%',
 							color: 'rgba(202, 202, 206, 1)', textAlign: 'center',
 							maxWidth: '560px', margin: 0,

@@ -9,7 +9,7 @@ const BookCard = ({ book, index }) => (
 		viewport={vp}
 		transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: (index % 4) * 0.08 }}
 		style={{
-			backgroundColor: 'rgba(22, 27, 38, 1)',
+			backgroundColor: 'rgba(var(--card-rgb),1)',
 			borderRadius: '20px',
 			overflow: 'hidden',
 			display: 'flex',
@@ -70,20 +70,20 @@ const BookCard = ({ book, index }) => (
 			}}>
 				<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
 					<span style={{ fontSize: '13px' }}>⭐</span>
-					<span style={{ color: '#fff', fontSize: '13px', fontWeight: 500, fontFamily: 'Inter, sans-serif' }}>
+					<span style={{ color: '#fff', fontSize: '13px', fontWeight: 500, fontFamily: 'var(--font-inter)' }}>
 						{book.rating}
 					</span>
-					<span style={{ color: 'rgba(144,157,162,1)', fontSize: '12px', fontFamily: 'Inter, sans-serif' }}>
+					<span style={{ color: 'rgba(144,157,162,1)', fontSize: '12px', fontFamily: 'var(--font-inter)' }}>
 						({book.reviews})
 					</span>
 				</div>
-				<span style={{ color: 'rgba(144,157,162,1)', fontSize: '12px', fontFamily: 'Inter, sans-serif' }}>
+				<span style={{ color: 'rgba(144,157,162,1)', fontSize: '12px', fontFamily: 'var(--font-inter)' }}>
 					{book.izoh} ta izoh
 				</span>
 			</div>
 
 			<h3 style={{
-				fontFamily: '"Inter Display", Inter, sans-serif',
+				fontFamily: 'var(--font-display)',
 				fontWeight: 600,
 				fontSize: '16px',
 				lineHeight: '22px',
@@ -98,7 +98,7 @@ const BookCard = ({ book, index }) => (
 			</h3>
 
 			<p style={{
-				fontFamily: 'Inter, sans-serif',
+				fontFamily: 'var(--font-inter)',
 				fontWeight: 400,
 				fontSize: '12px',
 				color: 'rgba(144,157,162,1)',

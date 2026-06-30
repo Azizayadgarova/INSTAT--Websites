@@ -42,15 +42,15 @@ const POSITIONS = [
 const IMAGES = [card1, card2, card3, card4, card5]
 
 const CARD_BOX_SHADOW = `
-  0px 16px 35px rgba(14,18,27,0.08),
-  0px 63px 63px rgba(14,18,27,0.06),
-  0px 142px 85px rgba(14,18,27,0.04),
-  0px 252px 101px rgba(14,18,27,0.02)
+  0px 16px 35px rgba(var(--bg-rgb),0.08),
+  0px 63px 63px rgba(var(--bg-rgb),0.06),
+  0px 142px 85px rgba(var(--bg-rgb),0.04),
+  0px 252px 101px rgba(var(--bg-rgb),0.02)
 `
 const HOVER_BOX_SHADOW = `
-  0px 24px 50px rgba(14,18,27,0.22),
-  0px 80px 80px rgba(14,18,27,0.14),
-  0px 160px 100px rgba(14,18,27,0.07)
+  0px 24px 50px rgba(var(--bg-rgb),0.22),
+  0px 80px 80px rgba(var(--bg-rgb),0.14),
+  0px 160px 100px rgba(var(--bg-rgb),0.07)
 `
 
 const keyframes = `
@@ -433,8 +433,8 @@ const RaqamliKutibxona = () => {
 													position: 'absolute',
 													inset: 0,
 													background: isHovered
-														? 'linear-gradient(90deg, rgba(14,18,27,0.15) 0%, rgba(14,18,27,0) 15%, rgba(14,18,27,0) 85%, rgba(14,18,27,0.15) 100%), linear-gradient(180deg, rgba(14,18,27,0) 0%, rgba(14,18,27,0.08) 100%)'
-														: 'linear-gradient(90deg, rgba(14,18,27,0.25) 0%, rgba(14,18,27,0) 15%, rgba(14,18,27,0) 85%, rgba(14,18,27,0.25) 100%), linear-gradient(180deg, rgba(14,18,27,0) 0%, rgba(14,18,27,0.22) 100%)',
+														? 'linear-gradient(90deg, rgba(var(--bg-rgb),0.15) 0%, rgba(var(--bg-rgb),0) 15%, rgba(var(--bg-rgb),0) 85%, rgba(var(--bg-rgb),0.15) 100%), linear-gradient(180deg, rgba(var(--bg-rgb),0) 0%, rgba(var(--bg-rgb),0.08) 100%)'
+														: 'linear-gradient(90deg, rgba(var(--bg-rgb),0.25) 0%, rgba(var(--bg-rgb),0) 15%, rgba(var(--bg-rgb),0) 85%, rgba(var(--bg-rgb),0.25) 100%), linear-gradient(180deg, rgba(var(--bg-rgb),0) 0%, rgba(var(--bg-rgb),0.22) 100%)',
 													transition: 'background 0.4s ease',
 													pointerEvents: 'none',
 												}}
@@ -521,7 +521,7 @@ const RaqamliKutibxona = () => {
 										flexShrink: 0,
 										borderRadius: '40px',
 										border: '1px solid rgba(31, 37, 51, 1)',
-										background: 'rgba(22, 27, 38, 1)',
+										background: 'rgba(var(--card-rgb),1)',
 										backdropFilter: 'blur(20px)',
 										WebkitBackdropFilter: 'blur(20px)',
 										boxShadow: '0px 0px 6px 0px rgba(0, 0, 0, 0.1) inset',
@@ -555,7 +555,7 @@ const RaqamliKutibxona = () => {
 											color: '#ffffff',
 											fontSize: '14px',
 											fontWeight: 500,
-											fontFamily: '"Inter Display", Inter, sans-serif',
+											fontFamily: 'var(--font-display)',
 											whiteSpace: 'nowrap',
 											overflow: 'hidden',
 											textOverflow: 'ellipsis',

@@ -197,8 +197,8 @@ function DataCard({ item }) {
 			onMouseEnter={() => setHov(true)}
 			onMouseLeave={() => setHov(false)}
 			style={{
-				background: hov ? 'rgba(30,36,50,1)' : 'rgba(22,27,38,1)',
-				border: `1px solid ${hov ? 'rgba(43,117,204,0.35)' : 'rgba(31,37,51,1)'}`,
+				background: hov ? 'rgba(30,36,50,1)' : 'rgba(var(--card-rgb),1)',
+				border: `1px solid ${hov ? 'rgba(var(--blue-rgb),0.35)' : 'rgba(31,37,51,1)'}`,
 				borderRadius: '20px',
 				padding: '18px 20px',
 				cursor: 'pointer',
@@ -220,7 +220,7 @@ function DataCard({ item }) {
 			<div style={{ height: '82px', overflow: 'hidden' }}>
 				<h3
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 500,
 						fontSize: '20px',
 						lineHeight: 1.35,
@@ -237,10 +237,10 @@ function DataCard({ item }) {
 				</h3>
 				<span
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontSize: '16px',
 						fontWeight: 400,
-						color: 'rgba(188,188,188,1)',
+						color: 'rgba(var(--text-rgb),1)',
 					}}
 				>
 					{item.category}
@@ -252,7 +252,7 @@ function DataCard({ item }) {
 					<IconPin />
 					<span
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontSize: '14px',
 							color: 'rgba(255,255,255,1)',
 						}}
@@ -264,7 +264,7 @@ function DataCard({ item }) {
 					<IconClock />
 					<span
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontSize: '14px',
 							color: 'rgba(255,255,255,1)',
 						}}
@@ -276,7 +276,7 @@ function DataCard({ item }) {
 					<IconEdit />
 					<span
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontSize: '14px',
 							color: 'rgba(255,255,255,1)',
 						}}
@@ -301,13 +301,13 @@ function PagBtn({ children, onClick, active, nav }) {
 				background: nav
 					? 'transparent'
 					: active
-						? 'rgba(43,117,204,1)'
-						: 'rgba(22,27,38,1)',
+						? 'rgba(var(--blue-rgb),1)'
+						: 'rgba(var(--card-rgb),1)',
 				color: active ? '#fff' : 'rgba(150,160,180,1)',
 				fontSize: '14px',
 				fontWeight: active ? 600 : 400,
 				cursor: 'pointer',
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
@@ -315,11 +315,11 @@ function PagBtn({ children, onClick, active, nav }) {
 			}}
 			onMouseEnter={e => {
 				if (!active && !nav)
-					e.currentTarget.style.background = 'rgba(43,117,204,0.25)'
+					e.currentTarget.style.background = 'rgba(var(--blue-rgb),0.25)'
 			}}
 			onMouseLeave={e => {
 				if (!active && !nav)
-					e.currentTarget.style.background = 'rgba(22,27,38,1)'
+					e.currentTarget.style.background = 'rgba(var(--card-rgb),1)'
 			}}
 		>
 			{children}
@@ -348,7 +348,7 @@ function Pagination({ page, setPage, total }) {
 		>
 			<span
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
 					color: 'rgba(100,110,130,1)',
 					minWidth: '60px',
@@ -395,7 +395,7 @@ function Pagination({ page, setPage, total }) {
 			<button
 				onClick={() => setPage(total)}
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
 					color: 'rgba(150,160,180,1)',
 					background: 'none',
@@ -472,7 +472,7 @@ export default function NufuzliNashrlar() {
 
 						<h2
 							style={{
-								fontFamily: '"Inter Display",Inter,sans-serif',
+								fontFamily: 'var(--font-display)',
 								fontWeight: 600,
 								fontSize: 'clamp(28px,4vw,48px)',
 								color: '#fff',

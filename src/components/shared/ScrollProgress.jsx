@@ -10,8 +10,8 @@ const ScrollProgress = () => {
 				style={{
 					height: '100%',
 					width: fillWidth,
-					background: 'rgba(0, 230, 252, 1)',
-					boxShadow: '0 0 12px 2px rgba(0,230,252,0.7), 0 0 30px 4px rgba(0,230,252,0.4)',
+					background: 'rgba(var(--cyan-rgb),1)',
+					boxShadow: '0 0 12px 2px rgba(var(--cyan-rgb),0.7), 0 0 30px 4px rgba(var(--cyan-rgb),0.4)',
 					borderRadius: '0 2px 2px 0',
 					position: 'relative',
 				}}
@@ -25,8 +25,8 @@ const ScrollProgress = () => {
 						width: '10px',
 						height: '10px',
 						borderRadius: '50%',
-						background: 'rgba(0, 230, 252, 1)',
-						boxShadow: '0 0 8px 3px rgba(0,230,252,0.9), 0 0 20px 6px rgba(0,230,252,0.4)',
+						background: 'rgba(var(--cyan-rgb),1)',
+						boxShadow: '0 0 8px 3px rgba(var(--cyan-rgb),0.9), 0 0 20px 6px rgba(var(--cyan-rgb),0.4)',
 					}}
 				/>
 			</motion.div>

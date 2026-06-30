@@ -1,4 +1,4 @@
-const Hamkorlik = () => {
+﻿const Hamkorlik = () => {
 	return <div>Hamkorlik</div>
 }
 

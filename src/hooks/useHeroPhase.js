@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 
 const KF = `
 @keyframes ripple_btn { 0%{transform:scale(0);opacity:0.8} 100%{transform:scale(4);opacity:0} }

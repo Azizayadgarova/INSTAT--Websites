@@ -8,7 +8,7 @@ const IshOrinlariAfzalliklar = () => (
 			width: '100%',
 			maxWidth: '1440px',
 			margin: '0 auto',
-			background: 'rgba(14,18,27,1)',
+			background: 'rgba(var(--bg-rgb),1)',
 			display: 'flex',
 			flexDirection: 'column',
 			alignItems: 'center',
@@ -41,7 +41,7 @@ const IshOrinlariAfzalliklar = () => (
 
 				<h2
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 600,
 						fontSize: 'clamp(28px,4vw,48px)',
 						lineHeight: 1.1,
@@ -55,7 +55,7 @@ const IshOrinlariAfzalliklar = () => (
 
 				<p
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
 						fontSize: '16px',
 						lineHeight: '140%',

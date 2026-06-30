@@ -285,7 +285,7 @@ export default function IshOrinlariHero() {
         alignItems: 'center', justifyContent: 'center',
         position: 'relative', overflow: 'hidden',
         padding: '100px 24px 160px',
-        minHeight: '640px', background: 'rgba(14,18,27,1)',
+        minHeight: '640px', background: 'rgba(var(--bg-rgb),1)',
       }}
     >
       <ArcBackground tilt={tilt} />
@@ -316,7 +316,7 @@ export default function IshOrinlariHero() {
 
         <div style={show(2)}>
           <h1 style={{
-            fontFamily: '"Inter Display",Inter,sans-serif',
+            fontFamily: 'var(--font-display)',
             fontWeight: 700,
             fontSize: 'clamp(38px, 5.5vw, 70px)',
             lineHeight: 1.08, letterSpacing: '-.03em',
@@ -324,15 +324,15 @@ export default function IshOrinlariHero() {
           }}>
             Eng dolzarb ish o&apos;rinlari
             <br />
-            <span style={{ color: 'rgba(0,230,252,1)' }}>bitta platformada</span>
+            <span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>bitta platformada</span>
           </h1>
         </div>
 
         <div style={show(3)}>
           <p style={{
-            fontFamily: '"Inter Display",Inter,sans-serif',
+            fontFamily: 'var(--font-display)',
             fontWeight: 400, fontSize: '16px', lineHeight: 1.75,
-            color: 'rgba(188,188,188,1)', maxWidth: '500px', margin: 0,
+            color: 'rgba(var(--text-rgb),1)', maxWidth: '500px', margin: 0,
           }}>
             Ish beruvchilar va nomzodlarni bog&apos;lovchi zamonaviy platforma.
             Sizga mos ishni tez toping va karyerangizni rivojlantiring.
@@ -349,17 +349,17 @@ export default function IshOrinlariHero() {
               style={{
                 flex: 1, background: 'transparent', border: 'none', outline: 'none',
                 padding: '0 16px', color: '#fff', fontSize: '16px',
-                fontFamily: '"Inter Display",Inter,sans-serif',
+                fontFamily: 'var(--font-display)',
               }}
             />
             <button
               style={{
-                color: '#fff', fontFamily: '"Inter Display",Inter,sans-serif',
+                color: '#fff', fontFamily: 'var(--font-display)',
                 fontWeight: 400, fontSize: '16px',
                 width: '160px', height: '44px', borderRadius: '10px',
                 border: '1px solid rgba(28,84,148,1)', padding: '12px',
                 background: 'linear-gradient(180deg,#3E8BE6 0%,#1C5FB4 100%)',
-                boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(14,18,27,0.3) inset, 0px 0px 0px 1px rgba(28,84,148,1)',
+                boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(var(--bg-rgb),0.3) inset, 0px 0px 0px 1px rgba(28,84,148,1)',
                 cursor: 'pointer', whiteSpace: 'nowrap', transition: 'filter .2s',
               }}
               onMouseEnter={e => { e.currentTarget.style.filter = 'brightness(1.18)' }}

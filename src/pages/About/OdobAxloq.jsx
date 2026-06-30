@@ -1,4 +1,4 @@
-const OdobAxloq = () => {
+﻿const OdobAxloq = () => {
 	return <div>OdobAxloq</div>
 }
 

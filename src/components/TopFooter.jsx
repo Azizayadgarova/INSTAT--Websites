@@ -81,7 +81,7 @@ const TopFooter = () => {
 				clearTimeout(fadeTimers[idx])
 				delete fadeTimers[idx]
 			}
-			tiles[idx].style.background = `rgba(43,117,204,${(0.22 * a).toFixed(2)})`
+			tiles[idx].style.background = `rgba(var(--blue-rgb),${(0.22 * a).toFixed(2)})`
 			tiles[idx].style.borderColor = `rgba(56,160,255,${(0.3 * a).toFixed(2)})`
 			tiles[idx].style.transition = 'background 0.12s,border-color 0.12s'
 		})
@@ -113,7 +113,7 @@ const TopFooter = () => {
 						ref={cardRef}
 						className='relative w-full rounded-[24px] overflow-hidden text-center'
 						style={{
-							background: 'rgba(14,18,27,1)',
+							background: 'rgba(var(--bg-rgb),1)',
 							minHeight: '548px',
 							padding: 'clamp(40px, 6vw, 60px) clamp(20px, 5vw, 64px)',
 							display: 'flex',
@@ -135,7 +135,7 @@ const TopFooter = () => {
 							style={{
 								zIndex: 2,
 								background:
-									'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(43,117,204,0.18) 0%, transparent 70%), linear-gradient(to bottom, rgba(14,18,27,0) 55%, rgba(14,18,27,1) 100%)',
+									'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(var(--blue-rgb),0.18) 0%, transparent 70%), linear-gradient(to bottom, rgba(var(--bg-rgb),0) 55%, rgba(var(--bg-rgb),1) 100%)',
 							}}
 						/>
 
@@ -181,7 +181,7 @@ const TopFooter = () => {
 										display: 'flex',
 										alignItems: 'center',
 										borderRadius: '12px',
-										background: 'rgba(22,27,38,0.85)',
+										background: 'rgba(var(--card-rgb),0.85)',
 										border: '1.5px solid #2F3A44',
 										backdropFilter: 'blur(10px)',
 										boxShadow: '0px 4px 20px 0px rgba(47,7,106,0.08)',
@@ -273,7 +273,7 @@ const TopFooter = () => {
 													border: '1px solid rgba(28,84,148,1)',
 													padding: '12px',
 													background: 'linear-gradient(180deg,#3E8BE6 0%,#1C5FB4 100%)',
-													boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(14,18,27,0.3) inset, 0px 16px 24px -8px rgba(14,18,27,0.1), 0px 0px 0px 1px rgba(28,84,148,1)',
+													boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(var(--bg-rgb),0.3) inset, 0px 16px 24px -8px rgba(var(--bg-rgb),0.1), 0px 0px 0px 1px rgba(28,84,148,1)',
 												}}
 											>
 												Yuborish

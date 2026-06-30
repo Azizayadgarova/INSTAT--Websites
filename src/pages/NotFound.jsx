@@ -4,7 +4,7 @@ const NotFound = () => {
 	return (
 		<div
 			className='flex flex-col items-center justify-center min-h-screen bg-[rgba(14,18,27,1)]'
-			style={{ fontFamily: 'Inter, sans-serif' }}
+			style={{ fontFamily: 'var(--font-inter)' }}
 		>
 			<h1 className='text-[120px] font-bold text-[rgba(0,230,252,1)] leading-none'>
 				404

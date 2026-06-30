@@ -46,15 +46,15 @@ function PagBtn({ children, onClick, active, nav }) {
 			style={{
 				width: '36px', height: '36px', borderRadius: '8px',
 				border: 'none',
-				background: nav ? 'transparent' : active ? 'rgba(43,117,204,1)' : 'rgba(22,27,38,1)',
+				background: nav ? 'transparent' : active ? 'rgba(var(--blue-rgb),1)' : 'rgba(var(--card-rgb),1)',
 				color: active ? '#fff' : 'rgba(150,160,180,1)',
 				fontSize: '14px', fontWeight: active ? 600 : 400,
-				cursor: 'pointer', fontFamily: '"Inter Display",Inter,sans-serif',
+				cursor: 'pointer', fontFamily: 'var(--font-display)',
 				display: 'flex', alignItems: 'center', justifyContent: 'center',
 				transition: 'background .2s',
 			}}
-			onMouseEnter={e => { if (!active && !nav) e.currentTarget.style.background = 'rgba(43,117,204,0.25)' }}
-			onMouseLeave={e => { if (!active && !nav) e.currentTarget.style.background = 'rgba(22,27,38,1)' }}
+			onMouseEnter={e => { if (!active && !nav) e.currentTarget.style.background = 'rgba(var(--blue-rgb),0.25)' }}
+			onMouseLeave={e => { if (!active && !nav) e.currentTarget.style.background = 'rgba(var(--card-rgb),1)' }}
 		>
 			{children}
 		</button>
@@ -97,11 +97,11 @@ const DatasetCard = memo(function DatasetCard({ d }) {
 			</div>
 			<div style={{
 				flex: 1, padding: '14px 16px 18px',
-				background: 'rgba(22,27,38,1)', overflow: 'hidden',
+				background: 'rgba(var(--card-rgb),1)', overflow: 'hidden',
 				display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
 			}}>
 				<p style={{
-					fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 500,
+					fontFamily: 'var(--font-display)', fontWeight: 500,
 					fontSize: '18px', lineHeight: '120%', color: '#fff',
 					margin: '0 0 8px',
 					display: '-webkit-box', WebkitLineClamp: 2,
@@ -111,16 +111,16 @@ const DatasetCard = memo(function DatasetCard({ d }) {
 				</p>
 				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 					<p style={{
-						fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 400,
-						fontSize: '14px', color: 'rgba(188,188,188,1)', margin: 0,
+						fontFamily: 'var(--font-display)', fontWeight: 400,
+						fontSize: '14px', color: 'rgba(var(--text-rgb),1)', margin: 0,
 					}}>
 						{d.year}
 					</p>
 					<span style={{
 						padding: '3px 10px', borderRadius: '100px', fontSize: '12px', fontWeight: 500,
-						background: 'rgba(43,117,204,0.15)', color: 'rgba(0,230,252,1)',
-						border: '1px solid rgba(0,230,252,0.25)',
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						background: 'rgba(var(--blue-rgb),0.15)', color: 'rgba(var(--cyan-rgb),1)',
+						border: '1px solid rgba(var(--cyan-rgb),0.25)',
+						fontFamily: 'var(--font-display)',
 					}}>
 						{d.format}
 					</span>
@@ -142,9 +142,9 @@ function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setForm
 	}
 	const itemStyle = active => ({
 		padding: '10px 18px', fontSize: '13px', cursor: 'pointer',
-		fontFamily: '"Inter Display",Inter,sans-serif',
-		color: active ? 'rgba(0,230,252,0.9)' : 'rgba(200,205,220,0.75)',
-		background: active ? 'rgba(0,230,252,0.06)' : 'transparent',
+		fontFamily: 'var(--font-display)',
+		color: active ? 'rgba(var(--cyan-rgb),0.9)' : 'rgba(200,205,220,0.75)',
+		background: active ? 'rgba(var(--cyan-rgb),0.06)' : 'transparent',
 		borderBottom: '1px solid rgba(255,255,255,0.04)',
 		transition: 'background 0.15s, color 0.15s',
 	})
@@ -152,7 +152,7 @@ function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setForm
 	return (
 		<div style={{
 			width: '800px', height: '72px', borderRadius: '16px', padding: '12px',
-			boxSizing: 'border-box', gap: '10px', background: 'rgba(22,27,38,1)',
+			boxSizing: 'border-box', gap: '10px', background: 'rgba(var(--card-rgb),1)',
 			border: '1px solid rgba(31,37,51,1)', display: 'flex', alignItems: 'center',
 			marginBottom: '40px', position: 'relative', zIndex: 1,
 		}}>
@@ -161,13 +161,13 @@ function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setForm
 				style={{ position: 'relative', padding: '0 16px', cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
 				onClick={() => { setCatOpen(p => !p); setFmtOpen(false) }}
 			>
-				<div style={{ fontSize: '16px', color: '#fff', marginBottom: '4px', display: 'flex', gap: '40px', alignItems: 'center', fontFamily: '"Inter Display",Inter,sans-serif' }}>
+				<div style={{ fontSize: '16px', color: '#fff', marginBottom: '4px', display: 'flex', gap: '40px', alignItems: 'center', fontFamily: 'var(--font-display)' }}>
 					Soha
 					<svg width='20' height='20' viewBox='0 0 24 24' fill='none'>
 						<path d='M6 9l6 6 6-6' stroke='white' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round' />
 					</svg>
 				</div>
-				<div style={{ fontSize: '14px', color: 'rgba(202,202,206,1)', fontWeight: 500, fontFamily: '"Inter Display",Inter,sans-serif' }}>
+				<div style={{ fontSize: '14px', color: 'rgba(202,202,206,1)', fontWeight: 500, fontFamily: 'var(--font-display)' }}>
 					{category}
 				</div>
 				{catOpen && (
@@ -186,13 +186,13 @@ function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setForm
 				style={{ position: 'relative', flex: 1, padding: '0 16px', cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
 				onClick={() => { setFmtOpen(p => !p); setCatOpen(false) }}
 			>
-				<div style={{ fontSize: '16px', color: '#fff', marginBottom: '3px', fontFamily: '"Inter Display",Inter,sans-serif', display: 'flex', alignItems: 'center', gap: '40px' }}>
+				<div style={{ fontSize: '16px', color: '#fff', marginBottom: '3px', fontFamily: 'var(--font-display)', display: 'flex', alignItems: 'center', gap: '40px' }}>
 					Format
 					<svg width='20' height='20' viewBox='0 0 24 24' fill='none'>
 						<path d='M6 9l6 6 6-6' stroke='white' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round' />
 					</svg>
 				</div>
-				<div style={{ fontSize: '14px', color: 'rgba(202,202,206,1)', fontWeight: 500, fontFamily: '"Inter Display",Inter,sans-serif' }}>
+				<div style={{ fontSize: '14px', color: 'rgba(202,202,206,1)', fontWeight: 500, fontFamily: 'var(--font-display)' }}>
 					{format}
 				</div>
 				{fmtOpen && (
@@ -210,9 +210,9 @@ function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setForm
 					onClick={onSearch}
 					style={{
 						display: 'flex', alignItems: 'center', gap: '6px',
-						background: 'rgba(43,117,204,1)', color: '#fff', border: 'none',
+						background: 'rgba(var(--blue-rgb),1)', color: '#fff', border: 'none',
 						borderRadius: '10px', padding: '12px 24px', fontSize: '14px',
-						fontWeight: 500, cursor: 'pointer', fontFamily: '"Inter Display",Inter,sans-serif',
+						fontWeight: 500, cursor: 'pointer', fontFamily: 'var(--font-display)',
 					}}
 				>
 					<svg width='16' height='16' viewBox='0 0 24 24' fill='none'>
@@ -236,13 +236,13 @@ function Pagination({ page, setPage, total }) {
 	}
 	return (
 		<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '1224px', maxWidth: '100%', position: 'relative', zIndex: 1 }}>
-			<span style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontSize: '14px', color: 'rgba(100,110,130,1)', minWidth: '60px' }}>Sahifa</span>
+			<span style={{ fontFamily: 'var(--font-display)', fontSize: '14px', color: 'rgba(100,110,130,1)', minWidth: '60px' }}>Sahifa</span>
 			<div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
 				<PagBtn nav onClick={() => setPage(1)}>«</PagBtn>
 				<PagBtn nav onClick={() => setPage(p => Math.max(1, p - 1))}>‹</PagBtn>
 				{getPages().map((p, i) =>
 					p === '...' ? (
-						<span key={`d${i}`} style={{ width: '36px', height: '36px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(100,110,130,1)', fontSize: '14px', fontFamily: '"Inter Display",Inter,sans-serif' }}>...</span>
+						<span key={`d${i}`} style={{ width: '36px', height: '36px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(100,110,130,1)', fontSize: '14px', fontFamily: 'var(--font-display)' }}>...</span>
 					) : (
 						<PagBtn key={p} active={p === page} onClick={() => setPage(p)}>{p}</PagBtn>
 					),
@@ -252,7 +252,7 @@ function Pagination({ page, setPage, total }) {
 			</div>
 			<button
 				onClick={() => setPage(total)}
-				style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontSize: '14px', color: 'rgba(150,160,180,1)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', minWidth: '60px', justifyContent: 'flex-end', padding: 0 }}
+				style={{ fontFamily: 'var(--font-display)', fontSize: '14px', color: 'rgba(150,160,180,1)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', minWidth: '60px', justifyContent: 'flex-end', padding: 0 }}
 			>
 				Barchasini ko'rish <span>›</span>
 			</button>
@@ -283,7 +283,7 @@ function DatasetSection() {
 	return (
 		<section style={{
 			width: '100%', maxWidth: '1440px', margin: '0 auto',
-			background: 'rgba(14,18,27,1)', display: 'flex', flexDirection: 'column',
+			background: 'rgba(var(--bg-rgb),1)', display: 'flex', flexDirection: 'column',
 			alignItems: 'center', padding: '40px 0 100px', position: 'relative',
 		}}>
 			<img src={bgGlow} alt='' aria-hidden='true' style={{
@@ -301,7 +301,7 @@ function DatasetSection() {
 					text="Mikro ma'lumotlar katalogi"
 					delay={0.1}
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 600,
+						fontFamily: 'var(--font-display)', fontWeight: 600,
 						fontSize: '48px', lineHeight: '58px', color: '#fff',
 						display: 'block', textAlign: 'center',
 					}}
@@ -310,7 +310,7 @@ function DatasetSection() {
 
 			<p style={{
 				position: 'relative', zIndex: 1,
-				fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 400,
+				fontFamily: 'var(--font-display)', fontWeight: 400,
 				fontSize: '16px', lineHeight: '140%', color: 'rgba(202,202,206,1)',
 				textAlign: 'center', maxWidth: '500px', margin: '16px 0 40px',
 			}}>
@@ -336,7 +336,7 @@ function DatasetSection() {
 				{displayed.length > 0 ? displayed.map((d, i) => (
 					<DatasetCard key={i} d={d} />
 				)) : (
-					<div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0', fontFamily: '"Inter Display",Inter,sans-serif', fontSize: '16px', color: 'rgba(150,160,180,1)' }}>
+					<div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0', fontFamily: 'var(--font-display)', fontSize: '16px', color: 'rgba(150,160,180,1)' }}>
 						Bu tanlov bo'yicha ma'lumot topilmadi
 					</div>
 				)}
@@ -351,24 +351,24 @@ function DatasetSection() {
 
 function MikroStatistika() {
 	return (
-		<section style={{ backgroundColor: 'rgba(22,27,38,1)', width: '100%' }}>
+		<section style={{ backgroundColor: 'rgba(var(--card-rgb),1)', width: '100%' }}>
 			<div style={{ maxWidth: '1440px', margin: '0 auto', padding: '40px 80px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
-				<p style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontSize: '36px', fontWeight: 600, color: 'white', margin: '0 0 24px', letterSpacing: '0.01em' }}>
+				<p style={{ fontFamily: 'var(--font-display)', fontSize: '36px', fontWeight: 600, color: 'white', margin: '0 0 24px', letterSpacing: '0.01em' }}>
 					Statistik ko'rsatkichlar
 				</p>
 				<div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
 					{STATS.map((s, i) => (
 						<div key={i} style={{ paddingRight: i < STATS.length - 1 ? '48px' : 0, paddingLeft: i > 0 ? '48px' : 0 }}>
 							<div style={{ display: 'flex', alignItems: 'center', gap: '2px', margin: '0 0 35px' }}>
-								<span style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontSize: 'clamp(100px, 6vw, 80px)', fontWeight: 600, color: '#fff', lineHeight: 1, letterSpacing: '-0.02em' }}>
+								<span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(100px, 6vw, 80px)', fontWeight: 600, color: '#fff', lineHeight: 1, letterSpacing: '-0.02em' }}>
 									{s.value.replace('+', '').replace('%', '')}
 								</span>
-								<span style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontSize: 'clamp(100px, 3vw, 40px)', fontWeight: 600, color: '#fff', lineHeight: 1 }}>
+								<span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(100px, 3vw, 40px)', fontWeight: 600, color: '#fff', lineHeight: 1 }}>
 									{s.value.includes('%') ? '%' : '+'}
 								</span>
 							</div>
-							<div style={{ height: '1px', background: 'rgba(188,188,188,1)', marginBottom: '25px' }} />
-							<p style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontSize: '18px', fontWeight: 500, color: 'rgba(90,98,117,1)', margin: 0 }}>
+							<div style={{ height: '1px', background: 'rgba(var(--text-rgb),1)', marginBottom: '25px' }} />
+							<p style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 500, color: 'rgba(90,98,117,1)', margin: 0 }}>
 								{s.label}
 							</p>
 						</div>
@@ -406,16 +406,16 @@ function HeroSection() {
 			}}>
 				<Button text='Platforma haqida' variant='dark' />
 				<h1 style={{
-					fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 600,
+					fontFamily: 'var(--font-display)', fontWeight: 600,
 					fontSize: '64px', lineHeight: 1.05, letterSpacing: '-.03em',
 					color: '#fff', maxWidth: '1100px', margin: 0,
 				}}>
 					Tadqiqot uchun <br />
-					<span style={{ color: 'rgba(0,230,252,1)' }}>mikro ma'lumotlar</span>
+					<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>mikro ma'lumotlar</span>
 				</h1>
 				<p style={{
-					fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 400,
-					fontSize: '16px', lineHeight: 1.6, color: 'rgba(188,188,188,1)',
+					fontFamily: 'var(--font-display)', fontWeight: 400,
+					fontSize: '16px', lineHeight: 1.6, color: 'rgba(var(--text-rgb),1)',
 					maxWidth: '480px', margin: 0,
 				}}>
 					Individual darajadagi statistik ma'lumotlar to'plamlari — tadqiqot, tahlil
@@ -437,12 +437,12 @@ function HeroSection() {
 				].map((f, i) => (
 					<div key={i} style={{
 						width: '220px', padding: '24px', borderRadius: '16px',
-						background: 'rgba(22,27,38,0.75)', border: '1px solid rgba(255,255,255,0.08)',
+						background: 'rgba(var(--card-rgb),0.75)', border: '1px solid rgba(255,255,255,0.08)',
 						backdropFilter: 'blur(12px)', textAlign: 'center',
 					}}>
 						<div style={{ fontSize: '28px', marginBottom: '12px' }}>{f.icon}</div>
-						<p style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 600, fontSize: '16px', color: '#fff', margin: '0 0 6px' }}>{f.title}</p>
-						<p style={{ fontFamily: '"Inter Display",Inter,sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(188,188,188,1)', margin: 0 }}>{f.desc}</p>
+						<p style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '16px', color: '#fff', margin: '0 0 6px' }}>{f.title}</p>
+						<p style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '13px', color: 'rgba(var(--text-rgb),1)', margin: 0 }}>{f.desc}</p>
 					</div>
 				))}
 			</div>

@@ -51,7 +51,7 @@ export default function LiquideSlider() {
 					width: '100%',
 					height: '60vh',
 					background:
-						'linear-gradient(to top, rgba(14,18,27,1) 0%, rgba(14,18,27,0.85) 25%, rgba(0,0,0,0) 100%)',
+						'linear-gradient(to top, rgba(var(--bg-rgb),1) 0%, rgba(var(--bg-rgb),0.85) 25%, rgba(0,0,0,0) 100%)',
 					zIndex: 2,
 					pointerEvents: 'none',
 				}}
@@ -123,7 +123,7 @@ export default function LiquideSlider() {
 									data-rot={angle}
 									style={{
 										position: 'absolute',
-										fontFamily: '"Inter Display",Inter,sans-serif',
+										fontFamily: 'var(--font-display)',
 										fontWeight: 900,
 										fontSize: `${60 * s}px`,
 										color: '#fff',
@@ -159,7 +159,7 @@ export default function LiquideSlider() {
 									data-rot={angle}
 									style={{
 										position: 'absolute',
-										fontFamily: '"Inter Display",Inter,sans-serif',
+										fontFamily: 'var(--font-display)',
 										fontWeight: 900,
 										fontSize: `${36 * s}px`,
 										color: '#22d3ee',
@@ -180,7 +180,7 @@ export default function LiquideSlider() {
 						<p
 							style={{
 								marginTop: `${160 * s}px`,
-								fontFamily: '"Inter Display", Inter, sans-serif',
+								fontFamily: 'var(--font-display)',
 								fontWeight: 400,
 								fontSize: '20px',
 								lineHeight: '140%',

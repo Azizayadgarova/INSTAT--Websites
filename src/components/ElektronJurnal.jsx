@@ -134,8 +134,8 @@ function PagBtn({ children, onClick, active, nav }) {
 	const base = nav
 		? 'transparent'
 		: active
-			? 'rgba(43,117,204,1)'
-			: 'rgba(22,27,38,1)'
+			? 'rgba(var(--blue-rgb),1)'
+			: 'rgba(var(--card-rgb),1)'
 	return (
 		<button
 			onClick={onClick}
@@ -149,7 +149,7 @@ function PagBtn({ children, onClick, active, nav }) {
 				fontSize: '14px',
 				fontWeight: active ? 600 : 400,
 				cursor: 'pointer',
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
@@ -157,11 +157,11 @@ function PagBtn({ children, onClick, active, nav }) {
 			}}
 			onMouseEnter={e => {
 				if (!active && !nav)
-					e.currentTarget.style.background = 'rgba(43,117,204,0.25)'
+					e.currentTarget.style.background = 'rgba(var(--blue-rgb),0.25)'
 			}}
 			onMouseLeave={e => {
 				if (!active && !nav)
-					e.currentTarget.style.background = 'rgba(22,27,38,1)'
+					e.currentTarget.style.background = 'rgba(var(--card-rgb),1)'
 			}}
 		>
 			{children}
@@ -235,7 +235,7 @@ const JournalCard = memo(function JournalCard({ j }) {
 				style={{
 					flex: 1,
 					padding: '14px 16px 18px',
-					background: 'rgba(22,27,38,1)',
+					background: 'rgba(var(--card-rgb),1)',
 					overflow: 'hidden',
 					display: 'flex',
 					flexDirection: 'column',
@@ -244,7 +244,7 @@ const JournalCard = memo(function JournalCard({ j }) {
 			>
 				<p
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 500,
 						fontSize: '20px',
 						lineHeight: '120%',
@@ -262,11 +262,11 @@ const JournalCard = memo(function JournalCard({ j }) {
 				</p>
 				<p
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
 						fontSize: '16px',
 						lineHeight: '120%',
-						color: 'rgba(188,188,188,1)',
+						color: 'rgba(var(--text-rgb),1)',
 						margin: 0,
 					}}
 				>
@@ -308,9 +308,9 @@ function FilterRow({
 		padding: '10px 18px',
 		fontSize: '13px',
 		cursor: 'pointer',
-		fontFamily: '"Inter Display",Inter,sans-serif',
-		color: active ? 'rgba(0,230,252,0.9)' : 'rgba(200,205,220,0.75)',
-		background: active ? 'rgba(0,230,252,0.06)' : 'transparent',
+		fontFamily: 'var(--font-display)',
+		color: active ? 'rgba(var(--cyan-rgb),0.9)' : 'rgba(200,205,220,0.75)',
+		background: active ? 'rgba(var(--cyan-rgb),0.06)' : 'transparent',
 		borderBottom: '1px solid rgba(255,255,255,0.04)',
 		transition: 'background 0.15s, color 0.15s',
 	})
@@ -324,7 +324,7 @@ function FilterRow({
 				padding: '12px',
 				boxSizing: 'border-box',
 				gap: '10px',
-				background: 'rgba(22,27,38,1)',
+				background: 'rgba(var(--card-rgb),1)',
 				border: '1px solid rgba(31,37,51,1)',
 				display: 'flex',
 				alignItems: 'center',
@@ -358,7 +358,7 @@ function FilterRow({
 						display: 'flex',
 						gap: '75px',
 						alignItems: 'center',
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 					}}
 				>
 					Mualliflar{' '}
@@ -380,7 +380,7 @@ function FilterRow({
 						display: 'flex',
 						alignItems: 'center',
 						gap: '8px',
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 					}}
 				>
 					{author}
@@ -435,7 +435,7 @@ function FilterRow({
 						fontSize: '16px',
 						color: 'white',
 						marginBottom: '3px',
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						display: 'flex',
 						alignItems: 'center',
 						gap: '46px',
@@ -460,7 +460,7 @@ function FilterRow({
 						display: 'flex',
 						alignItems: 'center',
 						gap: '8px',
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 					}}
 				>
 					{category}
@@ -494,7 +494,7 @@ function FilterRow({
 						display: 'flex',
 						alignItems: 'center',
 						gap: '6px',
-						background: 'rgba(43,117,204,1)',
+						background: 'rgba(var(--blue-rgb),1)',
 						color: '#fff',
 						border: 'none',
 						borderRadius: '10px',
@@ -502,7 +502,7 @@ function FilterRow({
 						fontSize: '14px',
 						fontWeight: 500,
 						cursor: 'pointer',
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 					}}
 				>
 					<svg width='16' height='16' viewBox='0 0 24 24' fill='none'>
@@ -545,7 +545,7 @@ function Pagination({ page, setPage, total }) {
 		>
 			<span
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
 					color: 'rgba(100,110,130,1)',
 					minWidth: '60px',
@@ -572,7 +572,7 @@ function Pagination({ page, setPage, total }) {
 								justifyContent: 'center',
 								color: 'rgba(100,110,130,1)',
 								fontSize: '14px',
-								fontFamily: '"Inter Display",Inter,sans-serif',
+								fontFamily: 'var(--font-display)',
 							}}
 						>
 							...
@@ -593,7 +593,7 @@ function Pagination({ page, setPage, total }) {
 			<button
 				onClick={() => setPage(total)}
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
 					color: 'rgba(150,160,180,1)',
 					background: 'none',
@@ -639,7 +639,7 @@ function JurnallarSection() {
 				width: '100%',
 				maxWidth: '1440px',
 				margin: '0 auto',
-				background: 'rgba(14,18,27,1)',
+				background: 'rgba(var(--bg-rgb),1)',
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
@@ -671,7 +671,7 @@ function JurnallarSection() {
 
 					<h2
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 600,
 							fontSize: 'clamp(28px,4vw,48px)',
 							lineHeight: 1.1,
@@ -685,7 +685,7 @@ function JurnallarSection() {
 
 					<p
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 400,
 							fontSize: '16px',
 							lineHeight: '140%',
@@ -730,7 +730,7 @@ function JurnallarSection() {
 				)) : (
 					<div style={{
 						gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0',
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontSize: '16px', color: 'rgba(150,160,180,1)',
 					}}>
 						Bu tanlov bo'yicha jurnal topilmadi
@@ -769,13 +769,13 @@ const CarouselCard = memo(function CarouselCard({
 	const borderBg = isH
 		? 'linear-gradient(270deg,#00e6fc,#2b75cc,#7b8fff,#00e6fc)'
 		: tf.abs < 0.5
-			? 'linear-gradient(270deg,rgba(0,230,252,.6),rgba(43,117,204,.5),rgba(0,230,252,.6))'
-			: 'linear-gradient(270deg,rgba(43,117,204,.35),rgba(0,230,252,.2),rgba(43,117,204,.35))'
+			? 'linear-gradient(270deg,rgba(var(--cyan-rgb),.6),rgba(var(--blue-rgb),.5),rgba(var(--cyan-rgb),.6))'
+			: 'linear-gradient(270deg,rgba(var(--blue-rgb),.35),rgba(var(--cyan-rgb),.2),rgba(var(--blue-rgb),.35))'
 
 	const boxShadow = isH
-		? '0 60px 140px rgba(0,0,0,.95), 0 0 90px rgba(0,230,252,.35)'
+		? '0 60px 140px rgba(0,0,0,.95), 0 0 90px rgba(var(--cyan-rgb),.35)'
 		: tf.abs < 0.5
-			? '0 30px 80px rgba(0,0,0,.75), 0 0 40px rgba(0,230,252,.15)'
+			? '0 30px 80px rgba(0,0,0,.75), 0 0 40px rgba(var(--cyan-rgb),.15)'
 			: '0 20px 50px rgba(0,0,0,.6)'
 
 	return (
@@ -802,8 +802,8 @@ const CarouselCard = memo(function CarouselCard({
 					height: '22px',
 					borderRadius: '50%',
 					background: isH
-						? 'radial-gradient(ellipse,rgba(0,230,252,.75) 0%,transparent 70%)'
-						: 'radial-gradient(ellipse,rgba(43,117,204,.38) 0%,transparent 70%)',
+						? 'radial-gradient(ellipse,rgba(var(--cyan-rgb),.75) 0%,transparent 70%)'
+						: 'radial-gradient(ellipse,rgba(var(--blue-rgb),.38) 0%,transparent 70%)',
 					filter: 'blur(10px)',
 					transform: 'translateX(-50%)',
 					animation: 'ej_glow 3s ease-in-out infinite',
@@ -822,9 +822,9 @@ const CarouselCard = memo(function CarouselCard({
 					backgroundSize: '400% 400%',
 					animation: 'ej_border 2.5s ease infinite',
 					boxShadow: isH
-						? '0 0 40px rgba(0,230,252,.55)'
+						? '0 0 40px rgba(var(--cyan-rgb),.55)'
 						: tf.abs < 0.5
-							? '0 0 20px rgba(0,230,252,.25)'
+							? '0 0 20px rgba(var(--cyan-rgb),.25)'
 							: 'none',
 					transition: 'box-shadow .3s',
 				}}
@@ -881,7 +881,7 @@ const CarouselCard = memo(function CarouselCard({
 									position: 'absolute',
 									inset: 0,
 									backgroundImage:
-										'linear-gradient(135deg,rgba(0,230,252,.1) 0%,rgba(123,143,255,.08) 50%,rgba(43,117,204,.1) 100%)',
+										'linear-gradient(135deg,rgba(var(--cyan-rgb),.1) 0%,rgba(123,143,255,.08) 50%,rgba(var(--blue-rgb),.1) 100%)',
 									backgroundSize: '200% 200%',
 									animation: 'ej_holo 3s linear infinite',
 									mixBlendMode: 'screen',
@@ -914,7 +914,7 @@ const CarouselCard = memo(function CarouselCard({
 									width: 60,
 									height: 60,
 									borderRadius: '50%',
-									border: '2px solid rgba(0,230,252,.85)',
+									border: '2px solid rgba(var(--cyan-rgb),.85)',
 									animation: 'ej_ripple .7s ease-out both',
 									pointerEvents: 'none',
 								}}
@@ -929,7 +929,7 @@ const CarouselCard = memo(function CarouselCard({
 								inset: 0,
 								borderRadius: '20px',
 								boxShadow: isH
-									? 'inset 0 0 0 1.5px rgba(0,230,252,.75)'
+									? 'inset 0 0 0 1.5px rgba(var(--cyan-rgb),.75)'
 									: 'none',
 								transition: 'box-shadow .3s',
 								pointerEvents: 'none',
@@ -959,7 +959,7 @@ const CarouselCard = memo(function CarouselCard({
 							backfaceVisibility: 'hidden',
 							transform: 'rotateY(180deg)',
 							background:
-								'linear-gradient(145deg,rgba(14,18,27,1) 0%,rgba(22,34,58,1) 60%,rgba(10,30,50,1) 100%)',
+								'linear-gradient(145deg,rgba(var(--bg-rgb),1) 0%,rgba(22,34,58,1) 60%,rgba(10,30,50,1) 100%)',
 							display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center',
@@ -979,7 +979,7 @@ const CarouselCard = memo(function CarouselCard({
 								height: '170px',
 								borderRadius: '50%',
 								background:
-									'radial-gradient(circle,rgba(0,230,252,.2) 0%,transparent 70%)',
+									'radial-gradient(circle,rgba(var(--cyan-rgb),.2) 0%,transparent 70%)',
 								pointerEvents: 'none',
 							}}
 						/>
@@ -989,8 +989,8 @@ const CarouselCard = memo(function CarouselCard({
 								height: '62px',
 								borderRadius: '14px',
 								zIndex: 1,
-								background: 'rgba(0,230,252,.08)',
-								border: '1px solid rgba(0,230,252,.3)',
+								background: 'rgba(var(--cyan-rgb),.08)',
+								border: '1px solid rgba(var(--cyan-rgb),.3)',
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'center',
@@ -999,7 +999,7 @@ const CarouselCard = memo(function CarouselCard({
 							<svg width='26' height='26' viewBox='0 0 24 24' fill='none'>
 								<path
 									d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'
-									stroke='rgba(0,230,252,1)'
+									stroke='rgba(var(--cyan-rgb),1)'
 									strokeWidth='1.8'
 									strokeLinecap='round'
 									strokeLinejoin='round'
@@ -1008,7 +1008,7 @@ const CarouselCard = memo(function CarouselCard({
 						</div>
 						<h3
 							style={{
-								fontFamily: '"Inter Display",Inter,sans-serif',
+								fontFamily: 'var(--font-display)',
 								fontWeight: 700,
 								fontSize: '19px',
 								lineHeight: 1.2,
@@ -1025,7 +1025,7 @@ const CarouselCard = memo(function CarouselCard({
 								fontWeight: 400,
 								fontSize: '13px',
 								lineHeight: 1.6,
-								color: 'rgba(188,188,188,1)',
+								color: 'rgba(var(--text-rgb),1)',
 								margin: 0,
 								zIndex: 1,
 							}}
@@ -1038,12 +1038,12 @@ const CarouselCard = memo(function CarouselCard({
 								borderRadius: '100px',
 								zIndex: 1,
 								background:
-									'linear-gradient(90deg,rgba(0,230,252,.15),rgba(43,117,204,.15))',
-								border: '1px solid rgba(0,230,252,.35)',
-								color: 'rgba(0,230,252,1)',
+									'linear-gradient(90deg,rgba(var(--cyan-rgb),.15),rgba(var(--blue-rgb),.15))',
+								border: '1px solid rgba(var(--cyan-rgb),.35)',
+								color: 'rgba(var(--cyan-rgb),1)',
 								fontSize: '13px',
 								fontWeight: 600,
-								fontFamily: '"Inter Display",Inter,sans-serif',
+								fontFamily: 'var(--font-display)',
 							}}
 						>
 							Batafsil →
@@ -1243,7 +1243,7 @@ function HeroSection() {
 					<Button text='Platforma haqida' variant='dark' />
 					<h1
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 600,
 							fontSize: '64px',
 							lineHeight: 1.05,
@@ -1255,15 +1255,15 @@ function HeroSection() {
 					>
 						Ilmiy jurnallar va maqolalar uchun
 						<br />
-						<span style={{ color: 'rgba(0,230,252,1)' }}>yagona platforma</span>
+						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>yagona platforma</span>
 					</h1>
 					<p
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 400,
 							fontSize: '16px',
 							lineHeight: 1.6,
-							color: 'rgba(188,188,188,1)',
+							color: 'rgba(var(--text-rgb),1)',
 							maxWidth: '480px',
 							margin: 0,
 						}}
@@ -1328,14 +1328,14 @@ function HeroSection() {
 							display: 'flex',
 							alignItems: 'center',
 							gap: '8px',
-							backgroundColor: 'rgba(43,117,204,1)',
+							backgroundColor: 'rgba(var(--blue-rgb),1)',
 							color: '#fff',
 							border: 'none',
 							borderRadius: '100px',
 							padding: '14px 28px',
 							fontSize: '16px',
 							fontWeight: 500,
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							cursor: 'pointer',
 							transition: 'opacity .2s, transform .2s',
 						}}

@@ -29,7 +29,7 @@ const InformationStatistika = () => {
         maxWidth: '1440px',
         margin: '24px auto 0',
         height: '223px',
-        backgroundColor: 'rgba(14, 18, 27, 1)',
+        backgroundColor: 'rgba(var(--bg-rgb),1)',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
@@ -72,7 +72,7 @@ const InformationStatistika = () => {
               }} />
 
               <p style={{
-                fontFamily: '"Inter Display", Inter, sans-serif',
+                fontFamily: 'var(--font-display)',
                 fontWeight: 600,
                 fontSize: '48px',
                 lineHeight: '56px',
@@ -84,7 +84,7 @@ const InformationStatistika = () => {
               </p>
 
               <p style={{
-                fontFamily: '"Inter Display", Inter, sans-serif',
+                fontFamily: 'var(--font-display)',
                 fontWeight: 500,
                 fontSize: '16px',
                 lineHeight: '24px',
@@ -96,7 +96,7 @@ const InformationStatistika = () => {
               </p>
 
               <p style={{
-                fontFamily: 'Inter, sans-serif',
+                fontFamily: 'var(--font-inter)',
                 fontWeight: 500,
                 fontSize: '14px',
                 lineHeight: '20px',

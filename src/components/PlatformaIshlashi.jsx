@@ -9,7 +9,7 @@ import icon04 from '@/assets/icons/Vector (10).png'
 import ellipseImg from '@/assets/icons/Ellipse 2.png'
 
 const vp = { once: true, amount: 0.25 }
-const BG = 'rgba(22, 27, 38, 1)'
+const BG = 'rgba(var(--card-rgb),1)'
 
 const ROW_H = 220
 const GAP_H = 120
@@ -137,27 +137,27 @@ const QadamBadge = ({ id, alignRight, delay = 0 }) => (
 		}}
 	>
 		<span style={{
-			fontFamily: '"Belgro", "Inter Display", Inter, sans-serif',
+			fontFamily: '"Belgro", var(--font-display)',
 			fontWeight: 900,
 			fontStyle: 'normal',
 			fontSize: 96,
 			lineHeight: '85px',
 			letterSpacing: '0%',
 			verticalAlign: 'bottom',
-			color: 'rgba(43, 117, 204, 1)',
+			color: 'rgba(var(--blue-rgb),1)',
 			display: 'block',
 		}}>
 			{id}
 		</span>
 		<span style={{
-			fontFamily: '"Belgro", "Inter Display", Inter, sans-serif',
+			fontFamily: '"Belgro", var(--font-display)',
 			fontWeight: 900,
 			fontStyle: 'normal',
 			fontSize: 32,
 			lineHeight: '28px',
 			letterSpacing: '0%',
 			verticalAlign: 'bottom',
-			color: 'rgba(138, 145, 163, 1)',
+			color: 'rgba(var(--muted-rgb),1)',
 			textTransform: 'uppercase',
 			marginTop: 4,
 			display: 'block',
@@ -174,7 +174,7 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 		viewport={vp}
 		transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay }}
 		style={{
-			background: 'rgba(14, 18, 27, 1)',
+			background: 'rgba(var(--bg-rgb),1)',
 			borderRadius: 298,
 			padding: '28px 32px 28px 48px',
 			boxSizing: 'border-box',
@@ -185,7 +185,7 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 			{icon && !fromLeft && <IconCircle icon={icon} floatDelay={0} />}
 			<div style={{ flex: 1 }}>
 				<h3 style={{
-					fontFamily: '"Inter Display", Inter, sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 700, fontSize: 20, lineHeight: 1.35,
 					color: 'rgba(225, 225, 232, 1)',
 					margin: '0 0 12px 0',
@@ -193,7 +193,7 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 					{title}
 				</h3>
 				<p style={{
-					fontFamily: 'Inter, sans-serif',
+					fontFamily: 'var(--font-inter)',
 					fontWeight: 400, fontSize: 14, lineHeight: 1.7,
 					color: 'rgba(140, 140, 158, 1)',
 					margin: 0,
@@ -223,7 +223,7 @@ const PlatformaIshlashi = () => (
 				text="Platforma qanday ishlaydi"
 				delay={0.1}
 				style={{
-					fontFamily: '"Inter Display", Inter, sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 600, fontSize: 52, lineHeight: 1.08,
 					color: '#ffffff', display: 'block',
 				}}
@@ -233,7 +233,7 @@ const PlatformaIshlashi = () => (
 				initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
 				viewport={vp} transition={{ duration: 0.6, delay: 0.45 }}
 				style={{
-					fontFamily: 'Inter, sans-serif', fontWeight: 400,
+					fontFamily: 'var(--font-inter)', fontWeight: 400,
 					fontSize: 16, lineHeight: 1.65,
 					color: 'rgba(140, 140, 158, 1)', maxWidth: 540, margin: '0 auto',
 				}}

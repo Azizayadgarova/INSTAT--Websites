@@ -1,6 +1,7 @@
 import { memo, useId } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { EASE_SMOOTH } from '../../constants/animations'
 
 const AboutCard = memo(({ label, style, delay = 0, xFrom = 0, to, mobile }) => {
 	const uid = useId().replace(/:/g, '')
@@ -12,7 +13,7 @@ const AboutCard = memo(({ label, style, delay = 0, xFrom = 0, to, mobile }) => {
 			className='group'
 			initial={{ opacity: 0, x: mobile ? 0 : xFrom, y: mobile ? 10 : 0 }}
 			animate={{ opacity: 1, x: 0, y: 0 }}
-			transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+			transition={{ duration: 0.5, delay, ease: EASE_SMOOTH }}
 			onClick={() => to && navigate(to)}
 			style={mobile ? {
 				position: 'relative',
@@ -22,11 +23,11 @@ const AboutCard = memo(({ label, style, delay = 0, xFrom = 0, to, mobile }) => {
 				alignItems: 'center',
 				justifyContent: 'center',
 				borderRadius: '12px',
-				background: 'rgba(22, 27, 38, 0.85)',
+				background: 'rgba(var(--card-rgb),0.85)',
 				border: '1.5px solid #2F3A44',
 				backdropFilter: 'blur(10px)',
 				color: 'rgba(251, 251, 251, 1)',
-				fontFamily: 'Inter, sans-serif',
+				fontFamily: 'var(--font-inter)',
 				fontSize: '16px',
 				fontWeight: 400,
 				lineHeight: '100%',
@@ -43,11 +44,11 @@ const AboutCard = memo(({ label, style, delay = 0, xFrom = 0, to, mobile }) => {
 				alignItems: 'center',
 				justifyContent: 'center',
 				borderRadius: '12px',
-				background: 'rgba(22, 27, 38, 0.85)',
+				background: 'rgba(var(--card-rgb),0.85)',
 				border: '1.5px solid #2F3A44',
 				backdropFilter: 'blur(10px)',
 				color: 'rgba(251, 251, 251, 1)',
-				fontFamily: 'Inter, sans-serif',
+				fontFamily: 'var(--font-inter)',
 				fontSize: '24px',
 				fontWeight: 400,
 				lineHeight: '100%',

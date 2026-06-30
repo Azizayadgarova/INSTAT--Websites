@@ -31,13 +31,13 @@ function PagBtn({ children, onClick, active, nav }) {
 				background: nav
 					? 'transparent'
 					: active
-						? 'rgba(43,117,204,1)'
-						: 'rgba(22,27,38,1)',
+						? 'rgba(var(--blue-rgb),1)'
+						: 'rgba(var(--card-rgb),1)',
 				color: active ? '#fff' : 'rgba(150,160,180,1)',
 				fontSize: '14px',
 				fontWeight: active ? 600 : 400,
 				cursor: 'pointer',
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
@@ -45,11 +45,11 @@ function PagBtn({ children, onClick, active, nav }) {
 			}}
 			onMouseEnter={e => {
 				if (!active && !nav)
-					e.currentTarget.style.background = 'rgba(43,117,204,0.25)'
+					e.currentTarget.style.background = 'rgba(var(--blue-rgb),0.25)'
 			}}
 			onMouseLeave={e => {
 				if (!active && !nav)
-					e.currentTarget.style.background = 'rgba(22,27,38,1)'
+					e.currentTarget.style.background = 'rgba(var(--card-rgb),1)'
 			}}
 		>
 			{children}
@@ -78,7 +78,7 @@ function Pagination({ page, setPage, total }) {
 		>
 			<span
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
 					color: 'rgba(100,110,130,1)',
 					minWidth: '60px',
@@ -117,7 +117,7 @@ function Pagination({ page, setPage, total }) {
 			<button
 				onClick={() => setPage(total)}
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
 					color: 'rgba(150,160,180,1)',
 					background: 'none',
@@ -182,9 +182,9 @@ export default function IshOrinlariKategoriyalar() {
 							borderRadius: '100px',
 							border: '1px solid rgba(255,255,255,0.1)',
 							background: 'rgba(255,255,255,0.04)',
-							color: 'rgba(188,188,188,1)',
+							color: 'rgba(var(--text-rgb),1)',
 							fontSize: '13px',
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 						}}
 					>
 						Kategoriyalar
@@ -192,7 +192,7 @@ export default function IshOrinlariKategoriyalar() {
 
 					<h2
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 700,
 							fontSize: 'clamp(28px, 3.5vw, 48px)',
 							lineHeight: 1.1,
@@ -206,11 +206,11 @@ export default function IshOrinlariKategoriyalar() {
 
 					<p
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 400,
 							fontSize: '16px',
 							lineHeight: 1.65,
-							color: 'rgba(138,145,163,1)',
+							color: 'rgba(var(--muted-rgb),1)',
 							maxWidth: '480px',
 							margin: 0,
 						}}
@@ -236,7 +236,7 @@ export default function IshOrinlariKategoriyalar() {
 						style={{
 							width: 276,
 							height: 188,
-							background: 'rgba(22,27,38,1)',
+							background: 'rgba(var(--card-rgb),1)',
 							borderRadius: 12,
 							padding: 24,
 							boxSizing: 'border-box',
@@ -250,7 +250,7 @@ export default function IshOrinlariKategoriyalar() {
 							e.currentTarget.style.background = 'rgba(30,37,52,1)'
 						}}
 						onMouseLeave={e => {
-							e.currentTarget.style.background = 'rgba(22,27,38,1)'
+							e.currentTarget.style.background = 'rgba(var(--card-rgb),1)'
 						}}
 					>
 						{/* Icon */}
@@ -264,7 +264,7 @@ export default function IshOrinlariKategoriyalar() {
 						<div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
 							<span
 								style={{
-									fontFamily: '"Inter Display",Inter,sans-serif',
+									fontFamily: 'var(--font-display)',
 									fontWeight: 500,
 									fontSize: 24,
 									lineHeight: '24px',
@@ -288,11 +288,11 @@ export default function IshOrinlariKategoriyalar() {
 							>
 								<span
 									style={{
-										fontFamily: '"Inter Display",Inter,sans-serif',
+										fontFamily: 'var(--font-display)',
 										fontWeight: 400,
 										fontSize: 20,
 										lineHeight: '28px',
-										color: 'rgba(138,145,163,1)',
+										color: 'rgba(var(--muted-rgb),1)',
 									}}
 								>
 									{cat.count}

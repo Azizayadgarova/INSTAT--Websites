@@ -1,4 +1,4 @@
-const IshOrinlari = () => {
+﻿const IshOrinlari = () => {
 	return <div>IshOrinlari</div>
 }
 

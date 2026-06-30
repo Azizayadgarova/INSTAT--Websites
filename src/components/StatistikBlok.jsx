@@ -161,7 +161,7 @@ const StatistikBlok = () => {
 									height: '210px',
 									borderRadius: '50%',
 							
-									background: 'rgba(22,27,38,1)',
+									background: 'rgba(var(--card-rgb),1)',
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',

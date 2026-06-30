@@ -1,4 +1,4 @@
-import MikroMalumotlarHero from '../../components/MikroMalumotlarHero'
+﻿import MikroMalumotlarHero from '../../components/MikroMalumotlarHero'
 import MikroImkoniyatlar   from '../../components/MikroImkoniyatlar'
 import PlatformaIshlashi   from '../../components/PlatformaIshlashi'
 import StatistikBlok       from '../../components/StatistikBlok'

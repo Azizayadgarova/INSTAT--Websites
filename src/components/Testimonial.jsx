@@ -81,7 +81,7 @@ const Testimonials = ({ hideBackground = false, hideParticles = false, platformS
     return (
         <>
         <section ref={sectionRef} style={{
-            backgroundColor: 'rgba(14,18,27,1)',
+            backgroundColor: 'rgba(var(--bg-rgb),1)',
             padding: '40px 0 80px',
             overflow: 'hidden',
             position: 'relative',
@@ -142,7 +142,7 @@ const Card = memo(({ item }) => (
             minHeight: '196px',
             borderRadius: '16px',
             padding: '24px',
-            border: '1px solid rgba(22, 27, 38, 1)',
+            border: '1px solid rgba(var(--card-rgb),1)',
             background: 'linear-gradient(180deg, #272B37 0%, #181B25 24%)',
             display: 'flex',
             flexDirection: 'column',
@@ -170,7 +170,7 @@ const Card = memo(({ item }) => (
         <p
             className='text-[16px] leading-relaxed italic whitespace-normal'
             style={{
-                color: 'rgba(188, 188, 188, 1)',
+                color: 'rgba(var(--text-rgb),1)',
                 display: '-webkit-box',
                 WebkitLineClamp: 2,
                 WebkitBoxOrient: 'vertical',

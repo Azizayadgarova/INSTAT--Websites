@@ -25,7 +25,7 @@ const ProblemSection = () => {
 		<section
 			style={{
 				width: '100%',
-				backgroundColor: 'rgba(22, 27, 38, 1)',
+				backgroundColor: 'rgba(var(--card-rgb),1)',
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
@@ -59,7 +59,7 @@ const ProblemSection = () => {
 					viewport={vp}
 					custom={1}
 					style={{
-						fontFamily: '"Inter Display", Inter, sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 600,
 						fontSize: '48px',
 						lineHeight: '58px',
@@ -77,7 +77,7 @@ const ProblemSection = () => {
 					viewport={vp}
 					custom={2}
 					style={{
-						fontFamily: '"Inter Display", Inter, sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
 						fontSize: '16px',
 						lineHeight: '140%',
@@ -124,7 +124,7 @@ const ProblemSection = () => {
 								style={{
 									position: 'absolute', left: 0, top: 0, bottom: 0,
 									width: '3px', borderRadius: '3px',
-									background: 'rgba(22, 27, 38, 1)',
+									background: 'rgba(var(--card-rgb),1)',
 								}}
 							/>
 							<motion.div
@@ -134,7 +134,7 @@ const ProblemSection = () => {
 								style={{
 									position: 'absolute', left: 0, top: 0, bottom: 0,
 									width: '3px', borderRadius: '3px',
-									background: 'linear-gradient(180deg, #2B75CC 0%, rgba(43,117,204,0.4) 100%)',
+									background: 'linear-gradient(180deg, #2B75CC 0%, rgba(var(--blue-rgb),0.4) 100%)',
 									transformOrigin: 'top',
 								}}
 							/>
@@ -150,16 +150,16 @@ const ProblemSection = () => {
 								<img src={p.icon} alt='' style={{ width: '22px', height: '22px', objectFit: 'contain', opacity: 0.9 }} />
 							</div>
 							<h3 style={{
-								fontFamily: '"Inter Display", Inter, sans-serif',
+								fontFamily: 'var(--font-display)',
 								fontWeight: 600, fontSize: '24px', lineHeight: '28px',
 								color: '#ffffff', margin: '0 0 10px 0',
 							}}>
 								{p.title}
 							</h3>
 							<p style={{
-								fontFamily: 'Inter, sans-serif',
+								fontFamily: 'var(--font-inter)',
 								fontWeight: 400, fontSize: '16px', lineHeight: '160%',
-								color: 'rgba(138, 145, 163, 1)', margin: 0,
+								color: 'rgba(var(--muted-rgb),1)', margin: 0,
 							}}>
 								{p.description}
 							</p>

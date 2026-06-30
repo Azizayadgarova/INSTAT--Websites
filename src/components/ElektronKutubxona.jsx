@@ -29,7 +29,7 @@ const ElektronKutubxona = () => {
 	<section
 		style={{
 			width: '100%',
-			backgroundColor: 'rgba(14, 18, 27, 1)',
+			backgroundColor: 'rgba(var(--bg-rgb),1)',
 			display: 'flex',
 			flexDirection: 'column',
 			alignItems: 'center',
@@ -89,7 +89,7 @@ const ElektronKutubxona = () => {
 				delay={0.1}
 				step={0.08}
 				style={{
-					fontFamily: '"Inter Display", Inter, sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 600,
 					fontSize: '48px',
 					lineHeight: '58px',
@@ -104,7 +104,7 @@ const ElektronKutubxona = () => {
 				viewport={vp}
 				transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
 				style={{
-					fontFamily: '"Inter Display", Inter, sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
 					fontSize: '16px',
 					lineHeight: '140%',
@@ -146,11 +146,11 @@ const ElektronKutubxona = () => {
 				height: '48px',
 				padding: '0 28px',
 				borderRadius: '12px',
-				background: 'rgba(43, 117, 204, 1)',
+				background: 'rgba(var(--blue-rgb),1)',
 				border: '1px solid transparent',
 				outline: '1px solid rgba(28, 84, 148, 1)',
-				boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(14,18,27,0.3) inset, 0px 16px 24px -8px rgba(14,18,27,0.1)',
-				fontFamily: '"Inter Display", Inter, sans-serif',
+				boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(var(--bg-rgb),0.3) inset, 0px 16px 24px -8px rgba(var(--bg-rgb),0.1)',
+				fontFamily: 'var(--font-display)',
 				fontWeight: 600,
 				fontSize: '16px',
 				color: '#fff',

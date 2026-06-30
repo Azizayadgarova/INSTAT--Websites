@@ -102,9 +102,9 @@ const FloatingCard = memo(({ card, index, progress, totalCards = 5 }) => {
 								boxShadow: 'none',
 							}}
 							onMouseEnter={e => {
-								e.currentTarget.style.background = 'rgba(43,117,204,1)'
-								e.currentTarget.style.border = '1px solid rgba(43,117,204,1)'
-								e.currentTarget.style.boxShadow = '0 0 24px 6px rgba(43,117,204,0.55)'
+								e.currentTarget.style.background = 'rgba(var(--blue-rgb),1)'
+								e.currentTarget.style.border = '1px solid rgba(var(--blue-rgb),1)'
+								e.currentTarget.style.boxShadow = '0 0 24px 6px rgba(var(--blue-rgb),0.55)'
 							}}
 							onMouseLeave={e => {
 								e.currentTarget.style.background = 'rgba(255,255,255,0.05)'

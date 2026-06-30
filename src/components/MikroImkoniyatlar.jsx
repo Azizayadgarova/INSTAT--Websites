@@ -9,7 +9,7 @@ const vp = { once: true, amount: 0.2 }
 
 const darkCard = {
 	borderRadius: '20px',
-	background: 'rgba(22,27,38,1)',
+	background: 'rgba(var(--card-rgb),1)',
 	border: 'none',
 	boxSizing: 'border-box',
 	overflow: 'hidden',
@@ -38,7 +38,7 @@ export default function MikroImkoniyatlar() {
 
 	const enter = (k) => () => setHov((h) => ({ ...h, [k]: true }))
 	const leave = (k) => () => setHov((h) => ({ ...h, [k]: false }))
-	const dc = (k) => (hov[k] ? 'rgba(215,235,255,0.88)' : 'rgba(188,188,188,1)')
+	const dc = (k) => (hov[k] ? 'rgba(215,235,255,0.88)' : 'rgba(var(--text-rgb),1)')
 
 	return (
 		<section
@@ -79,7 +79,7 @@ export default function MikroImkoniyatlar() {
 
 						<h2
 							style={{
-								fontFamily: '"Inter Display",Inter,sans-serif',
+								fontFamily: 'var(--font-display)',
 								fontWeight: 600,
 								fontSize: 'clamp(28px,4vw,48px)',
 								color: '#fff',
@@ -168,7 +168,7 @@ export default function MikroImkoniyatlar() {
 						>
 							<h3
 								style={{
-									fontFamily: '"Inter Display",Inter,sans-serif',
+									fontFamily: 'var(--font-display)',
 									fontWeight: 600,
 									fontSize: '30px',
 									color: '#fff',
@@ -228,7 +228,7 @@ export default function MikroImkoniyatlar() {
 							<div style={{ position: 'relative', zIndex: 1 }}>
 								<h3
 									style={{
-										fontFamily: '"Inter Display",Inter,sans-serif',
+										fontFamily: 'var(--font-display)',
 										fontWeight: 500,
 										fontSize: '32px',
 										color: '#fff',
@@ -281,7 +281,7 @@ export default function MikroImkoniyatlar() {
 								<div style={{ position: 'relative', zIndex: 1 }}>
 									<h3
 										style={{
-											fontFamily: '"Inter Display",Inter,sans-serif',
+											fontFamily: 'var(--font-display)',
 											fontWeight: 500,
 											fontSize: '32px',
 											color: '#fff',
@@ -331,7 +331,7 @@ export default function MikroImkoniyatlar() {
 								<div style={{ position: 'relative', zIndex: 1 }}>
 									<h3
 										style={{
-											fontFamily: '"Inter Display",Inter,sans-serif',
+											fontFamily: 'var(--font-display)',
 											fontWeight: 500,
 											fontSize: '32px',
 											color: '#fff',
@@ -383,7 +383,7 @@ export default function MikroImkoniyatlar() {
 						<div style={{ position: 'relative', zIndex: 1 }}>
 							<h3
 								style={{
-									fontFamily: '"Inter Display",Inter,sans-serif',
+									fontFamily: 'var(--font-display)',
 									fontWeight: 500,
 									fontSize: '32px',
 									color: '#fff',
@@ -431,7 +431,7 @@ export default function MikroImkoniyatlar() {
 						<div style={{ position: 'relative', zIndex: 1 }}>
 							<h3
 								style={{
-									fontFamily: '"Inter Display",Inter,sans-serif',
+									fontFamily: 'var(--font-display)',
 									fontWeight: 500,
 									fontSize: '32px',
 									color: '#fff',

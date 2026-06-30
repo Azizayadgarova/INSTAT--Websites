@@ -1,4 +1,4 @@
-const Tadbirlar = () => {
+﻿const Tadbirlar = () => {
 	return <div>Tadbirlar</div>
 }
 

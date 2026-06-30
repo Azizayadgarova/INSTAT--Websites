@@ -45,7 +45,7 @@ function StatItem({ stat, animate }) {
 			<div style={{ display: 'flex', alignItems: 'center', gap: '2px', margin: '0 0 35px' }}>
 				<span
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontSize: 'clamp(52px, 6vw, 96px)',
 						fontWeight: 600,
 						color: '#fff',
@@ -57,7 +57,7 @@ function StatItem({ stat, animate }) {
 				</span>
 				<span
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontSize: 'clamp(30px, 3vw, 52px)',
 						fontWeight: 600,
 						color: '#fff',
@@ -67,10 +67,10 @@ function StatItem({ stat, animate }) {
 					+
 				</span>
 			</div>
-			<div style={{ height: '1px', background: 'rgba(188,188,188,1)', marginBottom: '25px' }} />
+			<div style={{ height: '1px', background: 'rgba(var(--text-rgb),1)', marginBottom: '25px' }} />
 			<p
 				style={{
-					fontFamily: '"Inter Display",Inter,sans-serif',
+					fontFamily: 'var(--font-display)',
 					fontSize: 'clamp(14px, 1.2vw, 18px)',
 					fontWeight: 500,
 					color: 'rgba(90,98,117,1)',
@@ -97,7 +97,7 @@ export default function JurnalStatistika() {
 	}, [])
 
 	return (
-		<section ref={sectionRef} style={{ backgroundColor: 'rgba(22,27,38,1)', width: '100%' }}>
+		<section ref={sectionRef} style={{ backgroundColor: 'rgba(var(--card-rgb),1)', width: '100%' }}>
 			<div
 				style={{
 					maxWidth: '1440px',
@@ -110,7 +110,7 @@ export default function JurnalStatistika() {
 			>
 				<p
 					style={{
-						fontFamily: '"Inter Display",Inter,sans-serif',
+						fontFamily: 'var(--font-display)',
 						fontSize: 'clamp(22px, 2.5vw, 36px)',
 						fontWeight: 600,
 						color: 'white',

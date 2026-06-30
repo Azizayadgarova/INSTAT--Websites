@@ -33,7 +33,7 @@ const ParticleCanvas = memo(() => {
 		gCanvas.height = G
 		const gCtx = gCanvas.getContext('2d')
 		const grad = gCtx.createRadialGradient(G / 2, G / 2, 0, G / 2, G / 2, G / 2)
-		grad.addColorStop(0, 'rgba(0, 230, 252, 1)')
+		grad.addColorStop(0, 'rgba(0,230,252,1)')
 		grad.addColorStop(0.5, 'rgba(0, 180, 220, 0.4)')
 		grad.addColorStop(1, 'rgba(0, 180, 220, 0)')
 		gCtx.beginPath()

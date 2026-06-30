@@ -24,7 +24,7 @@ const CARDS = [
 const Card = ({ title, desc, index, visible }) => (
 	<div
 		style={{
-			background: 'rgba(22,27,38,1)',
+			background: 'rgba(var(--card-rgb),1)',
 			borderRadius: '20px',
 			padding: '64px 24px 24px',
 			display: 'flex',
@@ -38,7 +38,7 @@ const Card = ({ title, desc, index, visible }) => (
 	>
 		<h4
 			style={{
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				fontWeight: 500,
 				fontSize: '32px',
 				lineHeight: '40px',
@@ -51,12 +51,12 @@ const Card = ({ title, desc, index, visible }) => (
 		</h4>
 		<p
 			style={{
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				fontWeight: 500,
 				fontSize: '18px',
 				lineHeight: '24px',
 				letterSpacing: '0%',
-				color: 'rgba(188,188,188,1)',
+				color: 'rgba(var(--text-rgb),1)',
 				margin: 0,
 			}}
 		>
@@ -90,7 +90,7 @@ const IshOrinlariRasmlar = () => {
 				width: '100%',
 				maxWidth: '1440px',
 				margin: '0 auto',
-				background: 'rgba(14,18,27,1)',
+				background: 'rgba(var(--bg-rgb),1)',
 				boxSizing: 'border-box',
 				padding: '40px 120px',
 				display: 'flex',
@@ -134,7 +134,7 @@ const IshOrinlariRasmlar = () => {
 				>
 					<h3
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 500,
 							fontSize: '32px',
 							lineHeight: '40px',
@@ -147,7 +147,7 @@ const IshOrinlariRasmlar = () => {
 					</h3>
 					<p
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 500,
 							fontSize: '18px',
 							lineHeight: '24px',

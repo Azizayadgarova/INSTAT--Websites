@@ -20,7 +20,7 @@ const LINK = {
 	fontSize: '18px',
 	lineHeight: '28px',
 	letterSpacing: '-0.01em',
-	color: 'rgba(var(--text-rgb),1)',
+	color: 'rgba(188,188,188,1)',
 	cursor: 'pointer',
 }
 
@@ -61,7 +61,7 @@ const GlowText = memo(() => {
 				cacheRef.current.forEach(({ s, cx, cy }) => {
 					s.style.color =
 						Math.hypot(x - cx, y - cy) < 140
-							? 'rgba(var(--text-rgb),1)'
+							? 'rgba(188,188,188,1)'
 							: 'rgba(36,39,48,1)'
 				})
 			})
@@ -87,7 +87,7 @@ const GlowText = memo(() => {
 	return (
 		<div
 			ref={containerRef}
-			className='[--ft-b:calc(50px_-_clamp(40px,20vw,330px))] md:[--ft-b:calc(210px_-_clamp(40px,20vw,330px))]'
+			className='[--ft-b:calc(57px-clamp(40px,20vw,330px))] md:[--ft-b:calc(210px-clamp(40px,20vw,330px))]'
 			style={{
 				position: 'absolute',
 				bottom: 'var(--ft-b)',
@@ -126,7 +126,7 @@ const GlowText = memo(() => {
 const Footer = () => (
 	<footer className='relative overflow-hidden' style={{ background: 'rgba(14, 18, 27, 1)' }}>
 		<div className='max-w-[1200px] mx-auto px-6'>
-			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 py-8 md:py-0'>
+			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 pt-8 pb-[40px] md:pt-10 md:pb-0'>
 				<div className='flex flex-col items-end md:items-start sm:col-span-2 md:col-span-1'>
 					<img
 						src={icon1}
@@ -147,7 +147,8 @@ const Footer = () => (
 							marginTop: '20px',
 						}}
 					>
-						Kadrlar malakasini oshirish va statistik tadqiqotlar instituti
+						Kadrlar malakasini oshirish va statistik{' '}
+						<span style={{ whiteSpace: 'nowrap' }}>tadqiqotlar instituti</span>
 					</p>
 				</div>
 
@@ -228,12 +229,12 @@ const Footer = () => (
 				src={lobus}
 				alt=''
 				aria-hidden='true'
-				className='absolute w-full h-[80%] md:h-full max-w-[800px] md:max-w-[1000px] bottom-[-50px] md:bottom-0'
+				className='absolute w-full h-[80%] md:h-full max-w-[800px] md:max-w-[1000px] bottom-[-20px] md:bottom-0'
 			/>
 			<GlowText />
 		</div>
 
-		<div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 pt-[10px] pb-[10px] md:py-8 flex flex-col-reverse md:flex-row justify-center md:justify-between items-center gap-4 relative z-10'>
+<div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 pt-[10px] pb-[10px] md:py-8 flex flex-col-reverse md:flex-row justify-center md:justify-between items-center gap-4 relative z-10'>
 			<p className='text-center md:text-left' style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>
 				© Instat Inc. Barcha huquqlar himoyalangan.
 			</p>

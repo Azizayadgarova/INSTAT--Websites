@@ -1,10 +1,18 @@
 import { useEffect, useRef } from 'react'
 
+const isTouchDevice = () =>
+	typeof window !== 'undefined' && (
+		'ontouchstart' in window ||
+		navigator.maxTouchPoints > 0 ||
+		window.matchMedia('(pointer: coarse)').matches
+	)
+
 const CursorGlow = () => {
 	const largeRef = useRef(null)
 	const smallRef = useRef(null)
 
 	useEffect(() => {
+		if (isTouchDevice()) return
 		const large = largeRef.current
 		const small = smallRef.current
 		if (!large || !small) return
@@ -44,6 +52,8 @@ const CursorGlow = () => {
 		}
 	}, [])
 
+	if (isTouchDevice()) return null
+
 	return (
 		<>
 			<div
@@ -56,7 +66,7 @@ const CursorGlow = () => {
 					height: 500,
 					borderRadius: '50%',
 					background:
-						'radial-gradient(circle, rgba(0,230,252,1) 0%, rgba(0,230,252,1)  45%, transparent 70%)',
+						'radial-gradient(circle, rgba(var(--cyan-rgb),1) 0%, rgba(var(--cyan-rgb),1)  45%, transparent 70%)',
 					pointerEvents: 'none',
 					zIndex: 9990,
 					mixBlendMode: 'screen',
@@ -73,7 +83,7 @@ const CursorGlow = () => {
 					height: 100,
 					borderRadius: '50%',
 					background:
-						'radial-gradient(circle, rgba(0,230,252,0.22) 0%, rgba(0,180,220,0.08) 50%, transparent 70%)',
+						'radial-gradient(circle, rgba(var(--cyan-rgb),0.22) 0%, rgba(0,180,220,0.08) 50%, transparent 70%)',
 					pointerEvents: 'none',
 					zIndex: 9991,
 					mixBlendMode: 'screen',

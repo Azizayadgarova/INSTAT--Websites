@@ -1,4 +1,4 @@
-import alertIcon from '@/assets/icons/alert-line.png'
+﻿import alertIcon from '@/assets/icons/alert-line.png'
 import deviceIcon from '@/assets/icons/device-line.png'
 
 export const problems = [

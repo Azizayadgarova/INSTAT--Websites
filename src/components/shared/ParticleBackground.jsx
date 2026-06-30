@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from 'react'
+﻿import { memo, useEffect, useRef } from 'react'
 
 const ParticleBackground = memo(({
 	count = 100,

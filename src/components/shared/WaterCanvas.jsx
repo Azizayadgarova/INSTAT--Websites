@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+﻿import { useEffect, useRef } from 'react'
 import heroBg from '@/assets/bgImg/hero 2.png'
 
 export default function WaterCanvas() {

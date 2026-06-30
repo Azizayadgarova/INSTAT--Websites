@@ -47,7 +47,7 @@ const TiltCard = ({ src }) => {
 	const shine = useTransform(
 		[shineX, shineY],
 		([sx, sy]) =>
-			`radial-gradient(circle at ${sx}% ${sy}%, rgba(255,255,255,0.22) 0%, rgba(43,117,204,0.08) 40%, transparent 65%)`
+			`radial-gradient(circle at ${sx}% ${sy}%, rgba(255,255,255,0.22) 0%, rgba(var(--blue-rgb),0.08) 40%, transparent 65%)`
 	)
 
 	const onMove = (e) => {
@@ -192,7 +192,7 @@ const Kutubxona = () => {
 							>
 								<h3
 									style={{
-										fontFamily: '"Inter Display", Inter, sans-serif',
+										fontFamily: 'var(--font-display)',
 										fontWeight: isActive ? 600 : 600,
 										fontSize: isActive ? '56px' : '48px',
 										lineHeight: isActive ? '58px' : '58px',
@@ -207,7 +207,7 @@ const Kutubxona = () => {
 
 								<span
 									style={{
-										fontFamily: '"Inter Display", Inter, sans-serif',
+										fontFamily: 'var(--font-display)',
 										fontWeight: 500,
 										fontSize: '32px',
 										lineHeight: '40px',
@@ -238,12 +238,12 @@ const Kutubxona = () => {
 												animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
 												transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
 												style={{
-													fontFamily: '"Inter Display", Inter, sans-serif',
+													fontFamily: 'var(--font-display)',
 													fontWeight: 500,
 													fontSize: '24px',
 													lineHeight: '32px',
 													letterSpacing: '-0.015em',
-													color: 'rgba(138, 145, 163, 1)',
+													color: 'rgba(var(--muted-rgb),1)',
 												}}
 											>
 												{item.desc}

@@ -1,4 +1,4 @@
-import bg from '@/assets/bgImg/Background (1).png'
+﻿import bg from '@/assets/bgImg/Background (1).png'
 import { useEffect, useRef, useState } from 'react'
 import AnimatedSection from '../shared/AnimatedSection'
 import ParticleBackground from '../shared/ParticleBackground'
@@ -44,7 +44,7 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 			style={{
 				overflow: 'hidden',
 				minHeight: 'auto',
-				backgroundColor: 'rgba(14,18,27,1)',
+				backgroundColor: 'rgba(var(--bg-rgb),1)',
 			}}
 		>
 			<img

@@ -1,4 +1,4 @@
-const QarshiKurash = () => {
+﻿const QarshiKurash = () => {
 	return <div>QarshiKurash</div>
 }
 

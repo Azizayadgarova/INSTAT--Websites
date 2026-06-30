@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
+import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 const STARS = [0, 1, 2, 3, 4]
 import bg from '@/assets/bgImg/Background (1).png'
 import StarIcon from '@/assets/Star.png'
@@ -41,7 +41,7 @@ const CoursesSection = () => {
 
 				<h2
 					className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px] font-semibold text-white text-center mb-4'
-					style={{ fontFamily: '"Inter Display", Inter, sans-serif' }}
+					style={{ fontFamily: 'var(--font-display)' }}
 				>
 					Maqsadingizga mos
 					<br /> onlayn kursni tanlang
@@ -49,7 +49,7 @@ const CoursesSection = () => {
 
 				<p
 					className='text-[14px] md:text-[16px] leading-[140%] text-center'
-					style={{ fontFamily: '"Inter Display", Inter, sans-serif', fontWeight: 400, color: 'rgba(202,202,206,1)' }}
+					style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: 'rgba(202,202,206,1)' }}
 				>
 					Boshlang'ichdan professional darajagacha <br />
 					bo'lgan zamonaviy onlayn kurslar
@@ -111,10 +111,10 @@ const CoursesSection = () => {
 						height: '48px',
 						borderRadius: '12px',
 						padding: '14px',
-						background: 'rgba(43, 117, 204, 1)',
+						background: 'rgba(var(--blue-rgb),1)',
 						outline: '1px solid rgba(28, 84, 148, 1)',
 						boxShadow:
-							'0px 2px 6px 0px rgba(255, 255, 255, 0.25) inset, 0px -2px 4px 0px rgba(14, 18, 27, 0.3) inset, 0px 16px 24px -8px rgba(14, 18, 27, 0.1)',
+							'0px 2px 6px 0px rgba(255, 255, 255, 0.25) inset, 0px -2px 4px 0px rgba(var(--bg-rgb),0.3) inset, 0px 16px 24px -8px rgba(var(--bg-rgb),0.1)',
 						fontWeight: 600,
 						fontSize: '16px',
 						color: '#fff',

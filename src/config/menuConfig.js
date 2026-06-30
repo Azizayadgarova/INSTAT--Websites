@@ -1,4 +1,4 @@
-export const menuConfig = {
+﻿export const menuConfig = {
 	about: {
 		title: 'Institut haqida',
 		base: '/about',

@@ -10,13 +10,13 @@ const AppPromoSection = () => {
   const [sectionRef, visible] = useIntersectionObserver(0.2)
 
   return (
-    <section className='w-full bg-[#0E121B] pb-[120px] md:pb-[40px] mt-[40px] flex justify-center'>
+    <section className='w-full bg-[#0E121B] pb-[20px] md:pb-[40px] mt-[40px] flex justify-center'>
       <div className='w-full max-w-[1200px] mx-auto px-6'>
 
         <div
           ref={sectionRef}
-          className='relative bg-[#161B26] rounded-[24px]'
-          style={{ minHeight: '480px', overflow: 'visible' }}
+          className='relative bg-[#161B26] rounded-[24px] md:min-h-[480px]'
+          style={{ overflow: 'visible' }}
         >
           {/* Desktop layout */}
           <div className='hidden md:flex items-center px-[60px]' style={{ minHeight: '480px' }}>
@@ -90,11 +90,11 @@ const AppPromoSection = () => {
             </div>
 
             {/* Mobile phones */}
-            <div className='relative w-full' style={{ marginTop: '24px', height: '280px' }}>
+            <div className='relative w-full' style={{ marginTop: '34px', height: '330px' }}>
               <div style={{
                 position: 'absolute',
                 width: '68%',
-                top: -7,
+                top: 3,
                 left: '-2%',
                 zIndex: 20,
                 transform: visible ? 'translateY(0)' : 'translateY(60px)',
@@ -106,7 +106,7 @@ const AppPromoSection = () => {
               <div style={{
                 position: 'absolute',
                 width: '50%',
-                top: 60,
+                top: 80,
                 right: '-2%',
                 zIndex: 10,
                 transform: visible ? 'translateY(0)' : 'translateY(60px)',

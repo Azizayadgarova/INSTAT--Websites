@@ -21,7 +21,7 @@ function MobileCard({ card }) {
       </div>
       <h3
         style={{
-          fontFamily: '"Inter Display", Inter, sans-serif',
+          fontFamily: 'var(--font-display)',
           fontWeight: 600,
           fontSize: '26px',
           lineHeight: '36px',
@@ -38,13 +38,13 @@ function MobileCard({ card }) {
       </h3>
       <p
         style={{
-          fontFamily: '"Inter Display", Inter, sans-serif',
+          fontFamily: 'var(--font-display)',
           fontWeight: 500,
           fontSize: '14px',
           lineHeight: '20px',
           letterSpacing: '-0.02em',
           textAlign: 'center',
-          color: 'rgba(138, 145, 163, 1)',
+          color: 'rgba(var(--muted-rgb),1)',
           margin: 0,
         }}
       >

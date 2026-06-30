@@ -1,15 +1,18 @@
 import { useEffect, useRef } from 'react'
 
-const isTouchOnly = () =>
-	typeof window !== 'undefined' &&
-	window.matchMedia('(hover: none) and (pointer: coarse)').matches
+const isTouchDevice = () =>
+	typeof window !== 'undefined' && (
+		'ontouchstart' in window ||
+		navigator.maxTouchPoints > 0 ||
+		window.matchMedia('(pointer: coarse)').matches
+	)
 
 const CursorRing = () => {
 	const ringRef = useRef(null)
 	const dotRef  = useRef(null)
 
 	useEffect(() => {
-		if (isTouchOnly()) return
+		if (isTouchDevice()) return
 
 		const ring = ringRef.current
 		const dot  = dotRef.current
@@ -58,21 +61,21 @@ const CursorRing = () => {
 		}
 	}, [])
 
-	if (isTouchOnly()) return null
+	if (isTouchDevice()) return null
 
 	return (
 		<>
 			<div ref={ringRef} style={{
 				position: 'fixed', top: 0, left: 0,
 				width: 36, height: 36, borderRadius: '50%',
-				border: '1.5px solid rgba(0,230,252,0.65)',
+				border: '1.5px solid rgba(var(--cyan-rgb),0.65)',
 				pointerEvents: 'none', zIndex: 99999,
 				willChange: 'transform',
 			}} />
 			<div ref={dotRef} style={{
 				position: 'fixed', top: 0, left: 0,
 				width: 6, height: 6, borderRadius: '50%',
-				background: 'rgba(0,230,252,1)',
+				background: 'rgba(var(--cyan-rgb),1)',
 				pointerEvents: 'none', zIndex: 99999,
 				willChange: 'transform',
 			}} />

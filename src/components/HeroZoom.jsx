@@ -124,7 +124,7 @@ const HeroZoom = () => {
 					/>
 					<div
 						className='absolute inset-0'
-						style={{ background: 'linear-gradient(0deg, rgba(14,18,27,0.7) 0%, rgba(14,18,27,0.3) 50%, rgba(14,18,27,0) 100%)' }}
+						style={{ background: 'linear-gradient(0deg, rgba(var(--bg-rgb),0.7) 0%, rgba(var(--bg-rgb),0.3) 50%, rgba(var(--bg-rgb),0) 100%)' }}
 					/>
 				</div>
 				<img
@@ -165,7 +165,7 @@ const HeroZoom = () => {
 						className='absolute inset-0 z-10'
 						style={{
 							background:
-								'linear-gradient(0deg, rgba(14,18,27,0.9) 0%, rgba(14,18,27,0.5) 46.15%, rgba(14,18,27,0) 100%)',
+								'linear-gradient(0deg, rgba(var(--bg-rgb),0.9) 0%, rgba(var(--bg-rgb),0.5) 46.15%, rgba(var(--bg-rgb),0) 100%)',
 						}}
 					/>
 

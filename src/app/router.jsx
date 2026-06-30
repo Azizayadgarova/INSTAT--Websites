@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+﻿import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import TezKunda from '../pages/TezKunda'
 import MainLayout from './../layouts/MainLayout'
@@ -45,7 +45,7 @@ const Tadbirlar = lazy(() => import('../pages/matbuot/Tadbirlar'))
 const Yangiliklar = lazy(() => import('../pages/matbuot/Yangiliklar'))
 
 const PageFallback = () => (
-	<div style={{ background: 'rgba(14,18,27,1)', minHeight: '100vh' }} />
+	<div style={{ background: 'rgba(var(--bg-rgb),1)', minHeight: '100vh' }} />
 )
 
 const s = Component => (

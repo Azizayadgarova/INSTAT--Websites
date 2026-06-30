@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+﻿import { lazy, Suspense } from 'react'
 import BoshIshStatistika from '../../components/BoshIshStatistika'
 import IshOrinlariHero from '../../components/IshOrinlariHero'
 import IshOrinlariKategoriyalar from '../../components/IshOrinlariKategoriyalar'

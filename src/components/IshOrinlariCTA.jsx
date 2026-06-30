@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-const BG = 'rgba(14,18,27,1)'
+const BG = 'rgba(var(--bg-rgb),1)'
 const vp = { once: true, amount: 0.18 }
 
 export default function IshOrinlariCTA() {
@@ -14,7 +14,7 @@ export default function IshOrinlariCTA() {
 					transition={{ duration: 0.6 }}
 					style={{
 						background: 'rgba(17,22,34,1)',
-						border: '1px solid rgba(43,117,204,0.25)',
+						border: '1px solid rgba(var(--blue-rgb),0.25)',
 						borderRadius: '24px',
 						padding: 'clamp(40px, 5vw, 72px)',
 						textAlign: 'center',
@@ -27,14 +27,14 @@ export default function IshOrinlariCTA() {
 						top: '50%', left: '50%',
 						transform: 'translate(-50%, -50%)',
 						width: '600px', height: '200px',
-						background: 'radial-gradient(ellipse at center, rgba(0,230,252,0.1) 0%, transparent 70%)',
+						background: 'radial-gradient(ellipse at center, rgba(var(--cyan-rgb),0.1) 0%, transparent 70%)',
 						filter: 'blur(40px)',
 						pointerEvents: 'none',
 					}} />
 
 					<div style={{ position: 'relative', zIndex: 2 }}>
 						<h2 style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 700, fontSize: 'clamp(24px, 3.5vw, 42px)',
 							color: '#fff', margin: '0 0 16px',
 							letterSpacing: '-0.02em',
@@ -43,7 +43,7 @@ export default function IshOrinlariCTA() {
 						</h2>
 						<p style={{
 							fontFamily: 'Inter,sans-serif',
-							fontSize: '15px', color: 'rgba(188,188,188,1)',
+							fontSize: '15px', color: 'rgba(var(--text-rgb),1)',
 							maxWidth: '480px', margin: '0 auto 36px',
 							lineHeight: 1.75,
 						}}>
@@ -54,11 +54,11 @@ export default function IshOrinlariCTA() {
 								style={{
 									height: '48px', padding: '0 32px',
 									borderRadius: '12px',
-									background: 'rgba(43,117,204,1)',
+									background: 'rgba(var(--blue-rgb),1)',
 									border: '1px solid rgba(255,255,255,0.15)',
 									boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.2) inset, 0px 0px 0px 1px rgba(28,84,148,1)',
 									color: '#fff', fontSize: '14px', fontWeight: 600,
-									fontFamily: '"Inter Display",Inter,sans-serif',
+									fontFamily: 'var(--font-display)',
 									cursor: 'pointer',
 									transition: 'transform .2s, filter .2s',
 								}}
@@ -73,8 +73,8 @@ export default function IshOrinlariCTA() {
 									borderRadius: '12px',
 									background: 'rgba(31,37,51,1)',
 									border: '1px solid rgba(255,255,255,0.08)',
-									color: 'rgba(188,188,188,1)', fontSize: '14px', fontWeight: 500,
-									fontFamily: '"Inter Display",Inter,sans-serif',
+									color: 'rgba(var(--text-rgb),1)', fontSize: '14px', fontWeight: 500,
+									fontFamily: 'var(--font-display)',
 									cursor: 'pointer',
 									transition: 'transform .2s, background .2s',
 								}}

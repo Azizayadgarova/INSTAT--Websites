@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Link, NavLink, useOutlet } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageIntro from '../../components/shared/PageIntro'
@@ -49,6 +49,48 @@ const HOME_SECTIONS = [
   { Component: FAQSection,         height: '600px' },
 ]
 
+const NavItem = ({ link }) => {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <NavLink
+      to={link.path}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ textDecoration: 'none', display: 'block' }}
+    >
+      {({ isActive }) => (
+        <div style={{ display: 'flex', alignItems: 'center', padding: '0', position: 'relative' }}>
+          {/* Indicator line */}
+          <div style={{
+            width: '4px',
+            height: '40px',
+            borderRadius: isActive ? '999px' : '0',
+            background: isActive ? 'rgba(74, 144, 226, 1)' : 'rgba(34, 37, 48, 1)',
+            flexShrink: 0,
+            transition: 'background 0.2s',
+          }} />
+          <div style={{
+            marginLeft: '8px',
+            padding: '8px 12px',
+            borderRadius: '4px',
+            background: hovered && !isActive ? 'rgba(14, 18, 27, 1)' : 'transparent',
+            color: isActive ? 'rgba(0, 230, 252, 1)' : 'rgba(255, 255, 255, 1)',
+            fontFamily: 'Inter Display, sans-serif',
+            fontWeight: isActive ? 600 : 500,
+            fontSize: '16px',
+            lineHeight: '24px',
+            letterSpacing: '-0.02em',
+            transition: 'background 0.2s, color 0.2s',
+            width: '100%',
+          }}>
+            {link.label}
+          </div>
+        </div>
+      )}
+    </NavLink>
+  )
+}
+
 const SectionFallback = ({ height }) => (
   <div style={{ minHeight: height, background: 'var(--bg-primary)' }} />
 )
@@ -58,14 +100,15 @@ const About = () => {
 
   if (outlet) {
     return (
-      <div style={{ display: 'flex', background: 'rgba(14, 18, 27, 1)', margin: '0 130px', minHeight: '100vh' }}>
+      <div style={{ background: 'rgba(22, 27, 38, 1)', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', margin: '0 130px' }}>
         <aside style={{
           width: '365px',
           flexShrink: 0,
           position: 'sticky',
-          top: 0,
-          height: '100vh',
-          background: 'rgba(14, 18, 27, 1)',
+          top: '80px',
+          height: 'calc(100vh - 80px)',
+          background: 'rgba(22, 27, 38, 1)',
         }}>
           <div style={{
             display: 'flex',
@@ -73,7 +116,7 @@ const About = () => {
             height: '100%',
             overflowY: 'auto',
             paddingTop: '35px',
-            paddingRight: '24px',
+            paddingRight: '0px',
             paddingBottom: '40px',
             boxSizing: 'border-box',
           }}>
@@ -93,32 +136,12 @@ const About = () => {
             {/* Nav — har bir link border orqali uzluksiz chiziq hosil qiladi */}
             <nav style={{ display: 'flex', flexDirection: 'column', gap: 0, alignSelf: 'flex-start', width: '100%' }}>
               {INFO_LINKS.map(link => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  style={({ isActive }) => ({
-                    textDecoration: 'none',
-                    display: 'block',
-                    padding: '12px 0 12px 12px',
-                    borderLeft: isActive
-                      ? '4px solid rgba(74, 144, 226, 1)'
-                      : '4px solid rgba(34, 37, 48, 1)',
-                    color: isActive ? 'rgba(0, 230, 252, 1)' : 'rgba(255, 255, 255, 1)',
-                    fontFamily: 'Inter Display, sans-serif',
-                    fontWeight: isActive ? 600 : 500,
-                    fontSize: '16px',
-                    lineHeight: '24px',
-                    letterSpacing: '-0.02em',
-                    transition: 'color 0.2s, border-color 0.2s',
-                  })}
-                >
-                  {link.label}
-                </NavLink>
+                <NavItem key={link.path} link={link} />
               ))}
             </nav>
 
             {/* Share section */}
-            <div style={{ marginTop: '32px', paddingLeft: '18px' }}>
+            <div style={{ marginTop: '32px', paddingLeft: '6px' }}>
               <p style={{
                 fontFamily: 'Inter Display, sans-serif',
                 fontWeight: 400,
@@ -145,18 +168,16 @@ const About = () => {
             </div>
           </div>
         </aside>
-        <main style={{ flex: 1, paddingTop: '100px', paddingLeft: '60px', paddingRight: '60px', paddingBottom: '60px' }}>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', fontFamily: 'var(--font-inter)', marginBottom: '4px' }}>
-            Institut haqida
-          </p>
+        <main style={{ flex: 1, paddingTop: '0', paddingLeft: '30px', paddingRight: '60px', paddingBottom: '60px' }}>
           {outlet}
         </main>
+      </div>
       </div>
     )
   }
 
   return (
-    <div className='relative flex items-center flex-col min-h-screen w-full bg-[var(--bg-primary)]'>
+    <div className='relative flex items-center flex-col min-h-screen w-full bg-[rgba(14,18,27,1)]'>
       <Suspense fallback={null}>
         <IntroAnimation />
       </Suspense>
@@ -171,7 +192,7 @@ const About = () => {
         decoding='async'
         className='absolute inset-0 w-full md:w-[80%] h-[600px] md:h-[969px] mx-auto -z-0 object-cover md:object-fill'
       />
-      <div className='absolute inset-0 bg-[var(--bg-primary)] opacity-40 -z-0' />
+      <div className='absolute inset-0 bg-[rgba(14,18,27,1)] opacity-40 -z-0' />
 
       <div className='pt-[40px] z-30 flex flex-col items-center px-4 w-full'>
         <motion.div
@@ -184,15 +205,15 @@ const About = () => {
         </motion.div>
 
         <div className='text-center mt-[24px] px-4'>
-          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[var(--text-primary)]'>
+          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[rgba(188,188,188,1)]'>
             "Ma'lumotlar va tahlil ilmi"
             <br />
-            <span className='text-[var(--color-cyan)]'>
+            <span className='text-[rgba(0,230,252,1)]'>
               Raqamli ta'lim platformasi
             </span>
           </h1>
           <motion.p
-            className='text-[var(--text-primary)] text-[15px] md:text-[18px]'
+            className='text-[rgba(188,188,188,1)] text-[15px] md:text-[18px]'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2, ease: EASE_SMOOTH }}

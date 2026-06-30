@@ -73,8 +73,8 @@ const NumberCircle = ({ id, reverse }) => (
 			transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
 			style={{
 				width: 270, height: 270, borderRadius: '50%',
-				background: 'linear-gradient(180deg, rgba(43,117,204,1) 0%, rgba(0,102,204,1) 100%)',
-				boxShadow: 'inset 0 -4px 10px rgba(0,0,0,0.35), inset 0 2px 5px rgba(255,255,255,0.22), 0 0 40px rgba(43,117,204,0.22)',
+				background: 'linear-gradient(180deg, rgba(var(--blue-rgb),1) 0%, rgba(0,102,204,1) 100%)',
+				boxShadow: 'inset 0 -4px 10px rgba(0,0,0,0.35), inset 0 2px 5px rgba(255,255,255,0.22), 0 0 40px rgba(var(--blue-rgb),0.22)',
 				display: 'flex', alignItems: 'center', justifyContent: 'center',
 				marginLeft:  reverse ? 25 : 85,
 				marginRight: reverse ? 85 : 25,
@@ -82,7 +82,7 @@ const NumberCircle = ({ id, reverse }) => (
 			}}
 		>
 			<span style={{
-				fontFamily: '"Belgro","Inter Display",Inter,sans-serif',
+				fontFamily: '"Belgro",var(--font-display)',
 				fontWeight: 900, fontSize: 96, lineHeight: '85px',
 				color: 'rgba(116,178,251,0.81)', userSelect: 'none',
 			}}>
@@ -111,7 +111,7 @@ const TextBlock = ({ title, desc, reverse }) => (
 		<motion.h3
 			variants={reverse ? titleVR : titleV}
 			style={{
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				fontWeight: 600, fontSize: 32, lineHeight: '40px',
 				color: 'rgba(255,255,255,1)', margin: 0,
 			}}
@@ -121,9 +121,9 @@ const TextBlock = ({ title, desc, reverse }) => (
 		<motion.p
 			variants={reverse ? descVR : descV}
 			style={{
-				fontFamily: '"Inter Display",Inter,sans-serif',
+				fontFamily: 'var(--font-display)',
 				fontWeight: 500, fontSize: 18, lineHeight: '28px',
-				color: 'rgba(188,188,188,1)', margin: 0,
+				color: 'rgba(var(--text-rgb),1)', margin: 0,
 			}}
 		>
 			{desc}
@@ -141,12 +141,12 @@ const StepCard = ({ step }) => {
 		<motion.div
 			variants={cardV}
 			whileHover={{
-				boxShadow: '0 0 0 1.5px rgba(43,117,204,0.5), 0 32px 80px rgba(0,0,0,0.4)',
+				boxShadow: '0 0 0 1.5px rgba(var(--blue-rgb),0.5), 0 32px 80px rgba(0,0,0,0.4)',
 				scale: 1.013,
 				transition: { duration: 0.28, ease: 'easeOut' },
 			}}
 			style={{
-				background: 'rgba(14,18,27,1)',
+				background: 'rgba(var(--bg-rgb),1)',
 				borderRadius: 836,
 				paddingTop: 40, paddingRight: 70, paddingBottom: 40, paddingLeft: 90,
 				display: 'flex', flexDirection: 'row', alignItems: 'center',
@@ -165,7 +165,7 @@ const StepCard = ({ step }) => {
 
 /* ── Asosiy komponent ── */
 const IshOrinlariJarayon = () => (
-	<section style={{ width: '100%', background: 'rgba(22,27,38,1)' }}>
+	<section style={{ width: '100%', background: 'rgba(var(--card-rgb),1)' }}>
 		<div style={{
 			maxWidth: 1440, margin: '0 auto',
 			padding: '40px 120px', boxSizing: 'border-box',
@@ -179,7 +179,7 @@ const IshOrinlariJarayon = () => (
 
 					<h2
 						style={{
-							fontFamily: '"Inter Display",Inter,sans-serif',
+							fontFamily: 'var(--font-display)',
 							fontWeight: 600, fontSize: 'clamp(32px, 3.6vw, 52px)',
 							lineHeight: 1.08, color: '#ffffff', margin: 0,
 							letterSpacing: '-0.02em',

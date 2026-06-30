@@ -7,6 +7,7 @@ import insta from '@/assets/instagram-fill (1).png'
 import facebook from '@/assets/Vector (1).png'
 import twitter from '@/assets/twitter-x-line (1).png'
 import { BASE_W, BASE_H, getCenterX } from './mentors.data'
+import { EASE_SMOOTH } from '../../constants/animations'
 
 const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hideExtra = false, isMobile = false }) => {
 	const w = BASE_W * cfg.scale * dimScale
@@ -104,7 +105,7 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 					rotateY,
 					scale,
 					boxShadow: isHovered
-						? '0 60px 120px -20px rgba(0,0,0,1), 0 0 0 1.5px rgba(255,255,255,0.15), 0 0 100px rgba(43,117,204,0.4), inset 0 2px 0 rgba(255,255,255,0.2)'
+						? '0 60px 120px -20px rgba(0,0,0,1), 0 0 0 1.5px rgba(255,255,255,0.15), 0 0 100px rgba(var(--blue-rgb),0.4), inset 0 2px 0 rgba(255,255,255,0.2)'
 						: isActive
 						? '0 30px 60px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.07)'
 						: 'none',
@@ -173,7 +174,7 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 				{isActive && (
 					<div style={{
 						position: 'absolute', bottom: 0, left: 0, right: 0, height: '55%',
-						background: 'linear-gradient(to top, rgba(14,18,27,0.7) 0%, transparent 100%)',
+						background: 'linear-gradient(to top, rgba(var(--bg-rgb),0.7) 0%, transparent 100%)',
 						pointerEvents: 'none',
 					}} />
 				)}
@@ -198,13 +199,13 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 						initial={{ opacity: 0, y: 14, filter: 'blur(8px)' }}
 						animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
 						exit={{ opacity: 0, y: -8, filter: 'blur(6px)' }}
-						transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+						transition={{ duration: 0.55, ease: EASE_SMOOTH }}
 						style={{ position: 'absolute', top: '110%', left: 0, width: '100%', textAlign: 'center' }}
 					>
 						<motion.h3
 							initial={{ opacity: 0, y: 10 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.45, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+							transition={{ duration: 0.45, delay: 0.08, ease: EASE_SMOOTH }}
 							style={{ color: 'rgba(255,255,255,1)', fontSize: Math.max(14, 20 * dimScale), margin: '0 0 4px 0' }}
 						>
 							{mentor.name}
@@ -212,8 +213,8 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 						<motion.p
 							initial={{ opacity: 0, y: 8 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.45, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
-							style={{ color: 'rgba(188,188,188,1)', fontSize: Math.max(11, 15 * dimScale), margin: '0 0 4px 0' }}
+							transition={{ duration: 0.45, delay: 0.14, ease: EASE_SMOOTH }}
+							style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(11, 15 * dimScale), margin: '0 0 4px 0' }}
 						>
 							{mentor.role}
 						</motion.p>
@@ -222,15 +223,15 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 							<motion.p
 								initial={{ opacity: 0, y: 8 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.45, delay: 0.19, ease: [0.16, 1, 0.3, 1] }}
-								style={{ color: 'rgba(188,188,188,1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
+								transition={{ duration: 0.45, delay: 0.19, ease: EASE_SMOOTH }}
+								style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
 							>
 								{mentor.exp}
 							</motion.p>
 							<motion.div
 								initial={{ opacity: 0, scale: 0.85 }}
 								animate={{ opacity: 1, scale: 1 }}
-								transition={{ duration: 0.4, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+								transition={{ duration: 0.4, delay: 0.25, ease: EASE_SMOOTH }}
 								style={{ display: 'flex', justifyContent: 'center', gap: 15 }}
 							>
 								<a href='#' aria-label='Instagram' onClick={e => e.preventDefault()}><img src={insta} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>

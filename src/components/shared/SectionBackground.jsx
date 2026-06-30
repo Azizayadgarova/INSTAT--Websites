@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react'
+﻿import { memo, useEffect, useRef, useState } from 'react'
 import bg1 from '@/assets/bgImg/Background (1).png'
 import ParticleBackground from './ParticleBackground'
 

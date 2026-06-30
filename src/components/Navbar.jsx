@@ -3,9 +3,44 @@ import { Link } from 'react-router-dom'
 import logoImg from '@/assets/icons/InstatIcon.png'
 import menuIcon from '@/assets/menu-line.png'
 import { menuConfig } from '../config/menuConfig'
-import icon1 from '@/assets/icons/facebook.png'
-import icon2 from '@/assets/icons/instaIcon.png'
-import icon3 from '@/assets/icons/social3.png'
+const SocialLinkedin = () => (
+	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+		<rect width='24' height='24' rx='5' fill='#0A66C2' />
+		<circle cx='8.5' cy='8.5' r='1.2' fill='#fff' />
+		<rect x='7.5' y='11' width='2' height='6' rx='0.6' fill='#fff' />
+		<path d='M12 11h1.8v1c.3-.6 1-1.1 2-1.1 1.8 0 2.4 1.1 2.4 2.8V17h-2v-3c0-.8-.3-1.4-1-1.4-.8 0-1.2.6-1.2 1.4v3H12V11z' fill='#fff' />
+	</svg>
+)
+
+const SocialX = () => (
+	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+		<rect width='24' height='24' rx='5' fill='#000' />
+		<path d='M14 6.5h2l-4.3 4.9L17 17.5h-4l-2.8-3.6-3.2 3.6H5l4.6-5.3L7 6.5h4.1l2.5 3.4L14 6.5zm-.7 9.7h1.1L10.5 7.7H9.3l4 8.5z' fill='#fff' />
+	</svg>
+)
+
+const SocialFacebook = () => (
+	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+		<rect width='24' height='24' rx='5' fill='#1877F2' />
+		<path d='M13.5 12.5h1.4l.4-2H13.5v-1.1c0-.5.3-1 1-1H15V6.5s-.7-.1-1.3-.1c-1.4 0-2.3.9-2.3 2.4V10.5H9.5v2H11.5v4.5h2v-4.5z' fill='#fff' />
+	</svg>
+)
+
+const SocialInstagram = () => (
+	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+		<rect width='24' height='24' rx='5' fill='url(#ig-nav)' />
+		<defs>
+			<linearGradient id='ig-nav' x1='24' y1='0' x2='0' y2='24' gradientUnits='userSpaceOnUse'>
+				<stop stopColor='#833AB4' />
+				<stop offset='0.5' stopColor='#C13584' />
+				<stop offset='1' stopColor='#FD1D1D' />
+			</linearGradient>
+		</defs>
+		<rect x='6.5' y='6.5' width='11' height='11' rx='3' stroke='#fff' strokeWidth='1.3' />
+		<circle cx='12' cy='12' r='2.8' stroke='#fff' strokeWidth='1.3' />
+		<circle cx='15.5' cy='8.5' r='0.8' fill='#fff' />
+	</svg>
+)
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -27,9 +62,8 @@ const Navbar = () => {
 					<img
 						src={logoImg}
 						alt='Logo'
-						className='w-[98px] md:w-[208px]'
-						height={30}
-						style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1 }}
+						className='w-52 h-7.5 md:h-auto'
+						style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }}
 					/>
 					<div className='flex items-center gap-4'>
 						<Link to='/about/umumiy-malumot' className='hidden md:block text-[14px] text-white' style={{ textDecoration: 'none' }}>Tizimga kirish</Link>
@@ -76,7 +110,7 @@ const Navbar = () => {
 					<div className='flex md:hidden items-center justify-between px-[8%] pt-6 pb-2'>
 						<span
 							style={{
-								fontFamily: '"Inter Display", Inter, sans-serif',
+								fontFamily: 'var(--font-display)',
 								fontWeight: 500,
 								fontSize: '24px',
 								lineHeight: '32px',
@@ -203,9 +237,10 @@ const Navbar = () => {
 							</div>
 							<div>
 								<div className='flex gap-4 mt-1'>
-									<img src={icon3} alt="" width={24} height={24} />
-									<img src={icon1} alt="" width={24} height={24} />
-									<img src={icon2} alt="" width={24} height={24} />
+									<SocialLinkedin />
+									<SocialX />
+									<SocialFacebook />
+									<SocialInstagram />
 								</div>
 							</div>
 						</div>
@@ -227,9 +262,10 @@ const Navbar = () => {
 							<div>
 								<p className='mb-3 text-[rgba(138,145,163,1)]'>Ijtimoiy tarmoqlar</p>
 								<div className='flex gap-4'>
-									<img src={icon3} alt="" width={24} height={24} />
-									<img src={icon1} alt="" width={24} height={24} />
-									<img src={icon2} alt="" width={24} height={24} />
+									<SocialLinkedin />
+									<SocialX />
+									<SocialFacebook />
+									<SocialInstagram />
 								</div>
 							</div>
 						</div>
