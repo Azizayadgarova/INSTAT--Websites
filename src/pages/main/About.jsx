@@ -1,7 +1,6 @@
 import { lazy, Suspense, useState } from 'react'
 import { Link, NavLink, useOutlet } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import PageIntro from '../../components/shared/PageIntro'
 import AnimatedSection from '../../components/shared/AnimatedSection'
 import ParticleCanvas from '../../components/shared/ParticleCanvas'
 import AboutCard from '../../components/shared/AboutCard'
@@ -17,7 +16,6 @@ import sIconFb from '@/assets/Vector (14).png'
 import sIconLn from '@/assets/Vector (15).png'
 import { EASE_SMOOTH } from '../../constants/animations'
 
-const IntroAnimation = lazy(() => import('../../components/shared/IntroAnimation'))
 const ModernEducation = lazy(() => import('../../components/ModernEducation'))
 const HeroZoom = lazy(() => import('../../components/HeroZoom'))
 const StatisticComponent = lazy(() => import('../../components/StatisticComponent'))
@@ -178,10 +176,6 @@ const About = () => {
 
   return (
     <div className='relative flex items-center flex-col min-h-screen w-full bg-[rgba(14,18,27,1)]'>
-      <Suspense fallback={null}>
-        <IntroAnimation />
-      </Suspense>
-      <PageIntro />
       <img
         src={bg}
         alt=''

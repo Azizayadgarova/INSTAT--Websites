@@ -207,7 +207,7 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 )
 
 const PlatformaIshlashi = () => (
-	<section style={{ width: '100%', background: BG, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+	<section style={{ width: '100%', background: BG, display: 'flex', flexDirection: 'column', alignItems: 'center', overflowX: 'hidden' }}>
 
 		{/* Header */}
 		<div style={{
@@ -222,127 +222,156 @@ const PlatformaIshlashi = () => (
 			<BlurWords
 				text="Platforma qanday ishlaydi"
 				delay={0.1}
-				style={{
-					fontFamily: 'var(--font-display)',
-					fontWeight: 600, fontSize: 52, lineHeight: 1.08,
-					color: '#ffffff', display: 'block',
-				}}
+				className='text-[32px] md:text-[52px]'
+				style={{ fontFamily: 'var(--font-display)', fontWeight: 600, lineHeight: 1.08, color: '#ffffff', display: 'block' }}
 			/>
 
 			<motion.p
 				initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
 				viewport={vp} transition={{ duration: 0.6, delay: 0.45 }}
-				style={{
-					fontFamily: 'var(--font-inter)', fontWeight: 400,
-					fontSize: 16, lineHeight: 1.65,
-					color: 'rgba(140, 140, 158, 1)', maxWidth: 540, margin: '0 auto',
-				}}
+				className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[540px]'
+				style={{ fontFamily: 'var(--font-inter)', fontWeight: 400, lineHeight: 1.65, color: 'rgba(140, 140, 158, 1)', margin: '0 auto' }}
 			>
 				Platformadan foydalanish jarayoni oddiy va qulay bo&apos;lib, foydalanuvchilar bir
 				necha qadam orqali kerakli statistik ma&apos;lumotlarga ega bo&apos;lishlari mumkin.
 			</motion.p>
 		</div>
 
-		{/* Steps */}
-		<div style={{ width: '100%', maxWidth: 1440, padding: '0 120px 0', boxSizing: 'border-box' }}>
+		{/* ── Mobile layout ── */}
+		<div className='md:hidden' style={{ alignSelf: 'stretch', padding: '40px 20px', boxSizing: 'border-box' }}>
+			{steps.map((step, i) => (
+				<motion.div
+					key={step.id}
+					initial={{ opacity: 0, y: 24 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={vp}
+					transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+					style={{ marginBottom: i < steps.length - 1 ? 24 : 0, width: '100%', boxSizing: 'border-box' }}
+				>
+					{/* Yuqori qator: badgeRight → icon chap / badge o'ng, aks holda aksi */}
+					<div style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						flexDirection: step.badgeRight ? 'row' : 'row-reverse',
+						marginBottom: 10,
+					}}>
+						{/* Icon doira */}
+						<div style={{
+							width: 64, height: 64,
+							borderRadius: 333,
+							background: 'linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.0) 100%)',
+							border: '1px solid rgba(255,255,255,0.15)',
+							display: 'flex', alignItems: 'center', justifyContent: 'center',
+							flexShrink: 0,
+							padding: 0,
+							boxSizing: 'border-box',
+						}}>
+							<img src={step.icon} alt='' style={{ width: 24, height: 24, objectFit: 'contain' }} />
+						</div>
+
+						{/* 01 / QADAM badge — vertikal stack */}
+						<div style={{
+							display: 'flex',
+							flexDirection: 'column',
+							alignItems: step.badgeRight ? 'flex-end' : 'flex-start',
+							gap: 0,
+						}}>
+							<span style={{
+								fontFamily: '"Belgro", var(--font-display)',
+								fontWeight: 900,
+								fontSize: 32,
+								lineHeight: '54px',
+								letterSpacing: '0%',
+								verticalAlign: 'bottom',
+								color: 'rgba(var(--blue-rgb),1)',
+								display: 'block',
+							}}>
+								{step.id}
+							</span>
+							<span style={{
+								fontFamily: '"Belgro", var(--font-display)',
+								fontWeight: 900,
+								fontSize: 12,
+								lineHeight: '28px',
+								letterSpacing: '0%',
+								verticalAlign: 'bottom',
+								color: 'rgba(var(--muted-rgb),1)',
+								textTransform: 'uppercase',
+								display: 'block',
+							}}>
+								QADAM
+							</span>
+						</div>
+					</div>
+
+					{/* Matn kartasi */}
+					<div style={{
+						background: 'rgba(var(--bg-rgb),1)',
+						borderRadius: 20,
+						padding: '18px 20px',
+						border: '1px solid rgba(255,255,255,0.04)',
+					}}>
+						<h3 style={{
+							fontFamily: 'var(--font-display)',
+							fontWeight: 700,
+							fontSize: 16,
+							lineHeight: 1.4,
+							color: 'rgba(225,225,232,1)',
+							margin: '0 0 10px',
+						}}>
+							{step.title}
+						</h3>
+						<p style={{
+							fontFamily: 'var(--font-inter)',
+							fontWeight: 400,
+							fontSize: 13,
+							lineHeight: 1.65,
+							color: 'rgba(140,140,158,1)',
+							margin: 0,
+						}}>
+							{step.description}
+						</p>
+					</div>
+				</motion.div>
+			))}
+		</div>
+
+		{/* ── Desktop layout (unchanged) ── */}
+		<div className='hidden md:block w-full' style={{ maxWidth: 1440, padding: '0 120px 0', boxSizing: 'border-box' }}>
 			<div style={{ position: 'relative', width: '100%', minHeight: ICON_YS[steps.length - 1] + ROW_H + GAP_H + 60 }}>
 
-				{/* Snake start dot */}
 				<SnakeDot top={ICON_YS[0]} />
-
-				{/* Snake end dot */}
 				<SnakeDot top={ICON_YS[steps.length - 1] + ROW_H + GAP_H} />
 
-				{/* Uzluksiz ilon izi — icon markazlarini bog'laydi */}
 				<svg
-					style={{
-						position: 'absolute', top: 0, left: 0,
-						width: '100%', height: TOTAL_H,
-						pointerEvents: 'none', zIndex: 0, overflow: 'visible',
-					}}
+					style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: TOTAL_H, pointerEvents: 'none', zIndex: 0, overflow: 'visible' }}
 					viewBox={`0 0 1200 ${TOTAL_H}`}
 					preserveAspectRatio="none"
 				>
-					{/* Soya qatlam */}
-					<motion.path
-						d={SNAKE}
-						stroke="rgba(255,255,255,0.08)"
-						strokeWidth="3"
-						strokeDasharray="32 32"
-						fill="none"
-						strokeLinecap="round"
-						animate={{ strokeDashoffset: [0, -64] }}
-						transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }}
-					/>
-					{/* Asosiy chiziq */}
-					<motion.path
-						d={SNAKE}
-						stroke="rgba(255,255,255,0.55)"
-						strokeWidth="2"
-						strokeDasharray="32 32"
-						fill="none"
-						strokeLinecap="round"
-						animate={{ strokeDashoffset: [0, -64] }}
-						transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }}
-					/>
+					<motion.path d={SNAKE} stroke="rgba(255,255,255,0.08)" strokeWidth="3" strokeDasharray="32 32" fill="none" strokeLinecap="round" animate={{ strokeDashoffset: [0, -64] }} transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }} />
+					<motion.path d={SNAKE} stroke="rgba(255,255,255,0.55)" strokeWidth="2" strokeDasharray="32 32" fill="none" strokeLinecap="round" animate={{ strokeDashoffset: [0, -64] }} transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }} />
 				</svg>
 
-				{/* Peak nuqtadagi dot rasm + yonidagi badge */}
 				{BADGE_POS.map((bp, i) => (
 					<div key={bp.id}>
-						{/* Dot — peak nuqtasida markazlangan */}
-						<div style={{
-							position: 'absolute',
-							left: `${bp.xPct}%`,
-							top: bp.y,
-							transform: 'translate(-50%, -50%)',
-							zIndex: 4,
-						}}>
+						<div style={{ position: 'absolute', left: `${bp.xPct}%`, top: bp.y, transform: 'translate(-50%, -50%)', zIndex: 4 }}>
 							<img src={dotImg} alt="" style={{ width: 28, height: 28, display: 'block' }} />
 						</div>
-						{/* Badge — dot yonida (o'ng peaklar uchun o'ngga, chap uchun chapga) */}
-						<div style={{
-							position: 'absolute',
-							left: `${bp.xPct}%`,
-							top: bp.y,
-							transform: bp.alignRight
-								? 'translateX(24px) translateY(-50%)'
-								: 'translateX(calc(-100% - 24px)) translateY(-50%)',
-							zIndex: 3,
-						}}>
+						<div style={{ position: 'absolute', left: `${bp.xPct}%`, top: bp.y, transform: bp.alignRight ? 'translateX(24px) translateY(-50%)' : 'translateX(calc(-100% - 24px)) translateY(-50%)', zIndex: 3 }}>
 							<QadamBadge id={bp.id} alignRight={bp.alignRight} delay={0.15 * i} />
 						</div>
 					</div>
 				))}
 
 				{steps.map((step, index) => (
-					<div
-						key={step.id}
-						style={{
-							position: 'relative',
-							zIndex: 1,
-							height: ROW_H,
-							marginBottom: index < steps.length - 1 ? GAP_H : 0,
-						}}
-					>
+					<div key={step.id} style={{ position: 'relative', zIndex: 1, height: ROW_H, marginBottom: index < steps.length - 1 ? GAP_H : 0 }}>
 						{step.badgeRight ? (
-							<div style={{
-								position: 'absolute',
-								left: '40px',
-								right: '370px',
-								top: 'calc(50% + 170px)',
-								transform: 'translateY(-50%)',
-							}}>
+							<div style={{ position: 'absolute', left: '40px', right: '370px', top: 'calc(50% + 170px)', transform: 'translateY(-50%)' }}>
 								<TextCard title={step.title} description={step.description} fromLeft delay={0.05} icon={step.icon} />
 							</div>
 						) : (
-							<div style={{
-								position: 'absolute',
-								left: 'calc(50% - 290px)',
-								right: '100px',
-								top: 'calc(50% + 170px)',
-								transform: 'translateY(-50%)',
-							}}>
+							<div style={{ position: 'absolute', left: 'calc(50% - 290px)', right: '100px', top: 'calc(50% + 170px)', transform: 'translateY(-50%)' }}>
 								<TextCard title={step.title} description={step.description} fromLeft={false} delay={0.05} icon={step.icon} />
 							</div>
 						)}

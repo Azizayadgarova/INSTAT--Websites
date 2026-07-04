@@ -1,12 +1,12 @@
 import bgOnline from '@/assets/bgImg/Background (1).png'
-
-const bg = '/bgImg/Background.svg'
 import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
 import { CONFIGS, mentors, mod } from './MentorsSection/mentors.data'
 import ParticleBackground from './shared/ParticleBackground'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
+
+const bg = '/bgImg/Background.svg'
 
 const MentorsSection = ({ variant }) => {
 	const isOnline = variant === 'online'

@@ -82,6 +82,10 @@ const keyframes = `
     0%   { transform: translateX(-50%); }
     100% { transform: translateX(0); }
   }
+  @media (max-width: 767px) {
+    .rk-cards-scene { zoom: 0.72; }
+    .rk-card-outer { display: none; }
+  }
 `
 
 const PARTICLE_COLORS = ['#534AB7', '#0F6E56', '#993C1D', '#993556', '#185FA5']
@@ -338,6 +342,7 @@ const RaqamliKutibxona = () => {
 				</div>
 
 				<div
+					className="rk-cards-scene"
 					style={{
 						position: 'relative',
 						width: '900px',
@@ -366,10 +371,12 @@ const RaqamliKutibxona = () => {
 					{order.map((cardIdx, i) => {
 						const pos = POSITIONS[i]
 						const isHovered = hoveredIndex === i
+						const isOuter = i === 0 || i === POSITIONS.length - 1
 
 						return (
 							<div
 								key={cardIdx}
+								className={isOuter ? 'rk-card-outer' : undefined}
 								style={{
 									position: 'absolute',
 									left: '50%',

@@ -88,11 +88,10 @@ const ElektronKutubxona = () => {
 				text='Kitoblar katalogi'
 				delay={0.1}
 				step={0.08}
+				className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px]'
 				style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 600,
-					fontSize: '48px',
-					lineHeight: '58px',
 					color: '#ffffff',
 					display: 'block',
 				}}
@@ -103,10 +102,10 @@ const ElektronKutubxona = () => {
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={vp}
 				transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
+				className='text-[14px] max-w-[327px] md:text-[16px] md:max-w-none'
 				style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
-					fontSize: '16px',
 					lineHeight: '140%',
 					color: 'rgba(202, 202, 206, 1)',
 					textAlign: 'center',
@@ -119,16 +118,17 @@ const ElektronKutubxona = () => {
 		</div>
 
 		{/* Books grid */}
-		<div style={{
-			position: 'relative',
-			zIndex: 1,
-			width: '100%',
-			maxWidth: '1200px',
-			padding: '0 24px',
-			display: 'grid',
-			gridTemplateColumns: 'repeat(4, 1fr)',
-			gap: '20px',
-		}}>
+		<div
+			className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+			style={{
+				position: 'relative',
+				zIndex: 1,
+				width: '100%',
+				maxWidth: '1200px',
+				padding: '0 24px',
+				gap: '20px',
+			}}
+		>
 			{books.map((book, i) => (
 				<BookCard key={book.id} book={book} index={i} />
 			))}

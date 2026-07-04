@@ -58,11 +58,10 @@ const ProblemSection = () => {
 					whileInView='visible'
 					viewport={vp}
 					custom={1}
+					className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px]'
 					style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 600,
-						fontSize: '48px',
-						lineHeight: '58px',
 						color: '#ffffff',
 						margin: 0,
 					}}
@@ -76,14 +75,13 @@ const ProblemSection = () => {
 					whileInView='visible'
 					viewport={vp}
 					custom={2}
+					className='text-[14px] max-w-[327px] md:text-[16px] md:max-w-[560px]'
 					style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
-						fontSize: '16px',
 						lineHeight: '140%',
 						color: 'rgba(202, 202, 206, 1)',
 						textAlign: 'center',
-						maxWidth: '560px',
 						margin: 0,
 					}}
 				>
@@ -94,21 +92,24 @@ const ProblemSection = () => {
 
 			{/* 2-column layout */}
 			<div
+				className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-[48px]'
 				style={{
 					position: 'relative',
 					zIndex: 1,
 					width: '100%',
 					maxWidth: '1200px',
-					display: 'grid',
-					gridTemplateColumns: '1fr 1fr',
-					gap: '48px',
 					padding: '0 24px',
 					alignItems: 'stretch',
 					boxSizing: 'border-box',
 				}}
 			>
-				{/* Left: clickable items */}
-				<div style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
+				{/* Diagram — mobile da birinchi (DOM da birinchi), desktop da o'ngga */}
+				<div className='md:order-last' style={{ minHeight: '340px' }}>
+					<Diagram active={displayIdx} direction={active >= displayIdx ? 1 : -1} />
+				</div>
+
+				{/* Muammo ro'yxati — mobile da ikkinchi, desktop da chapga */}
+				<div className='md:order-first' style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
 					{problems.map((p, i) => (
 						<motion.div
 							key={i}
@@ -166,9 +167,6 @@ const ProblemSection = () => {
 						</motion.div>
 					))}
 				</div>
-
-				{/* Right: animated diagram */}
-				<Diagram active={displayIdx} direction={active >= displayIdx ? 1 : -1} />
 			</div>
 		</section>
 	)

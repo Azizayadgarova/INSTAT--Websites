@@ -29,7 +29,7 @@ const Text = ({
 					) : null}
 				</h1>
 
-				<p className='text-[rgba(202,202,206,1)] md:text-[rgba(188,188,188,1)] mt-6 text-[14px] leading-[140%] md:text-[18px] md:leading-normal font-inter max-w-[260px] md:max-w-none mx-auto' style={subtitleStyle}>
+				<p className='text-[rgba(202,202,206,1)] md:text-[rgba(188,188,188,1)] mt-6 text-[14px] leading-[24px] tracking-[-0.2px] md:text-[18px] md:leading-normal md:tracking-normal font-inter max-w-[327px] md:max-w-none mx-auto' style={subtitleStyle}>
 					{subtitle}
 				</p>
 			</div>

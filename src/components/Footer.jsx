@@ -131,6 +131,8 @@ const Footer = () => (
 					<img
 						src={icon1}
 						alt='INSTAT'
+						width={220}
+						height={37}
 						className='ml-auto mr-[30px] md:ml-0 md:mr-0 w-auto max-w-[200px] md:max-w-[220px]'
 						style={{
 							height: '36.76px',

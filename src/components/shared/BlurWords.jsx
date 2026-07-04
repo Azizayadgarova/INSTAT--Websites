@@ -2,8 +2,8 @@
 
 const vp = { once: true, amount: 0.2 }
 
-const BlurWords = ({ text, style, delay = 0, step = 0.07 }) => (
-	<span style={style}>
+const BlurWords = ({ text, style, className, delay = 0, step = 0.07 }) => (
+	<span style={style} className={className}>
 		{text.split(' ').map((word, i) => (
 			<motion.span
 				key={i}

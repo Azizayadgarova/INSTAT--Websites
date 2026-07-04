@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
-const STARS = [0, 1, 2, 3, 4]
 import bg from '@/assets/bgImg/Background (1).png'
+
+const STARS = [0, 1, 2, 3, 4]
 import StarIcon from '@/assets/Star.png'
 import ClockIcon from '@/assets/icons/time-line.png'
 import { Button2 } from './shared/Button2'

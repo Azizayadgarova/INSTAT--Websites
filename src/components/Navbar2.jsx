@@ -40,7 +40,7 @@ const Navbar2 = () => {
 
 					{/* Logo */}
 					<Link to='/'>
-						<img src={logoImg} alt='INSTAT' className='w-52 h-7.5 md:h-auto' style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} />
+						<img src={logoImg} alt='INSTAT' fetchPriority='high' width={208} height={30} className='w-52 h-7.5 md:h-auto' style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} />
 					</Link>
 
 					{/* Pill nav — faqat desktop */}

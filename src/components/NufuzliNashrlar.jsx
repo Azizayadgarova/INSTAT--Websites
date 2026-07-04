@@ -205,7 +205,7 @@ function DataCard({ item }) {
 				display: 'flex',
 				flexDirection: 'column',
 				gap: '8px',
-				width: '282px',
+				width: '100%',
 				minHeight: '198px',
 				height: '100%',
 				boxSizing: 'border-box',
@@ -338,15 +338,16 @@ function Pagination({ page, setPage, total }) {
 
 	return (
 		<div
+			className='justify-center md:justify-between'
 			style={{
 				display: 'flex',
 				alignItems: 'center',
-				justifyContent: 'space-between',
 				width: '100%',
 				maxWidth: '1200px',
 			}}
 		>
 			<span
+				className='hidden md:inline'
 				style={{
 					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
@@ -357,9 +358,9 @@ function Pagination({ page, setPage, total }) {
 				Sahifa
 			</span>
 			<div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-				<PagBtn nav onClick={() => setPage(1)}>
-					«
-				</PagBtn>
+				<span className='hidden md:contents'>
+					<PagBtn nav onClick={() => setPage(1)}>«</PagBtn>
+				</span>
 				<PagBtn nav onClick={() => setPage(p => Math.max(1, p - 1))}>
 					‹
 				</PagBtn>
@@ -388,11 +389,12 @@ function Pagination({ page, setPage, total }) {
 				<PagBtn nav onClick={() => setPage(p => Math.min(total, p + 1))}>
 					›
 				</PagBtn>
-				<PagBtn nav onClick={() => setPage(total)}>
-					»
-				</PagBtn>
+				<span className='hidden md:contents'>
+					<PagBtn nav onClick={() => setPage(total)}>»</PagBtn>
+				</span>
 			</div>
 			<button
+				className='hidden md:flex'
 				onClick={() => setPage(total)}
 				style={{
 					fontFamily: 'var(--font-display)',
@@ -401,7 +403,6 @@ function Pagination({ page, setPage, total }) {
 					background: 'none',
 					border: 'none',
 					cursor: 'pointer',
-					display: 'flex',
 					alignItems: 'center',
 					gap: '4px',
 					minWidth: '120px',
@@ -426,10 +427,10 @@ export default function NufuzliNashrlar() {
 
 	return (
 		<section
+			className='px-4 md:px-[60px] lg:px-[120px] pt-10 pb-[100px]'
 			style={{
 				position: 'relative',
 				background: 'rgba(10,15,26,1)',
-				padding: '40px 120px 100px',
 				width: '100%',
 				boxSizing: 'border-box',
 				overflow: 'hidden',
@@ -501,9 +502,8 @@ export default function NufuzliNashrlar() {
 
 				{/* Grid */}
 				<div
+					className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
 					style={{
-						display: 'grid',
-						gridTemplateColumns: 'repeat(4, 282px)',
 						gap: '20px',
 						width: '100%',
 						marginBottom: '48px',

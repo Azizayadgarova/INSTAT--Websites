@@ -205,13 +205,12 @@ export default function IshOrinlariKategoriyalar() {
 					</h2>
 
 					<p
+						className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[480px]'
 						style={{
 							fontFamily: 'var(--font-display)',
 							fontWeight: 400,
-							fontSize: '16px',
 							lineHeight: 1.65,
 							color: 'rgba(var(--muted-rgb),1)',
-							maxWidth: '480px',
 							margin: 0,
 						}}
 					>
@@ -223,26 +222,26 @@ export default function IshOrinlariKategoriyalar() {
 
 			{/* Grid */}
 			<div
+				className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
 				style={{
-					display: 'grid',
-					gridTemplateColumns: 'repeat(4, 276px)',
-					gap: '16px',
+					gap: '12px',
 					marginBottom: '40px',
+					width: '100%',
+					maxWidth: '1200px',
 				}}
 			>
 				{CATEGORIES.map((cat, i) => (
 					<div
 						key={i}
 						style={{
-							width: 276,
-							height: 188,
+							width: '100%',
 							background: 'rgba(var(--card-rgb),1)',
 							borderRadius: 12,
-							padding: 24,
+							padding: '20px',
 							boxSizing: 'border-box',
 							display: 'flex',
 							flexDirection: 'column',
-							gap: 32,
+							gap: 20,
 							cursor: 'pointer',
 							transition: 'background .18s',
 						}}
@@ -257,22 +256,19 @@ export default function IshOrinlariKategoriyalar() {
 						<img
 							src={briefcaseIcon}
 							alt=''
-							style={{ width: 40, height: 40, objectFit: 'contain' }}
+							style={{ width: 32, height: 32, objectFit: 'contain' }}
 						/>
 
 						{/* Text group */}
-						<div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+						<div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
 							<span
+								className='text-[16px] md:text-[18px]'
 								style={{
 									fontFamily: 'var(--font-display)',
 									fontWeight: 500,
-									fontSize: 24,
-									lineHeight: '24px',
+									lineHeight: '22px',
 									color: 'rgba(255,255,255,1)',
 									display: 'block',
-									whiteSpace: 'nowrap',
-									overflow: 'hidden',
-									textOverflow: 'ellipsis',
 								}}
 							>
 								{cat.name}
@@ -283,15 +279,14 @@ export default function IshOrinlariKategoriyalar() {
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'space-between',
-									marginTop: '12px',
+									marginTop: '8px',
 								}}
 							>
 								<span
+									className='text-[13px] md:text-[15px]'
 									style={{
 										fontFamily: 'var(--font-display)',
 										fontWeight: 400,
-										fontSize: 20,
-										lineHeight: '28px',
 										color: 'rgba(var(--muted-rgb),1)',
 									}}
 								>
@@ -306,9 +301,8 @@ export default function IshOrinlariKategoriyalar() {
 										alignItems: 'center',
 										justifyContent: 'center',
 										color: 'rgba(255,255,255,0.7)',
-										fontSize: 18,
+										fontSize: 16,
 										fontWeight: 'bold',
-
 										flexShrink: 0,
 									}}
 								>

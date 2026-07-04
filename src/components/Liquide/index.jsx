@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { slides } from './slides'
 import { useThreeSlider } from './useThreeSlider'
 
@@ -15,9 +15,22 @@ const preSlides = slides.map(slide => ({
 }))
 
 export default function LiquideSlider() {
+	const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+	const [winSize, setWinSize] = useState(() => ({ w: window.innerWidth, h: window.innerHeight }))
+	useEffect(() => {
+		const handler = () => {
+			setIsMobile(window.innerWidth < 768)
+			setWinSize({ w: window.innerWidth, h: window.innerHeight })
+		}
+		window.addEventListener('resize', handler, { passive: true })
+		return () => window.removeEventListener('resize', handler)
+	}, [])
+
 	const s = useMemo(
-		() => Math.min(window.innerWidth / 1200, window.innerHeight / 1000),
-		[],
+		() => isMobile
+			? Math.min(winSize.w / 600, winSize.h / 700)
+			: Math.min(winSize.w / 1200, winSize.h / 1000),
+		[isMobile, winSize],
 	)
 	const { canvasRef, overlayRefs } = useThreeSlider(s)
 
@@ -26,7 +39,7 @@ export default function LiquideSlider() {
 			style={{
 				position: 'relative',
 				width: '100%',
-				aspectRatio: '1440 / 900',
+				aspectRatio: isMobile ? '375 / 840' : '1440 / 900',
 				overflow: 'hidden',
 				background: '#000',
 			}}
@@ -98,7 +111,7 @@ export default function LiquideSlider() {
 						ref={el => (overlayRefs.current[i] = el)}
 						style={{
 							position: 'absolute',
-							top: '58%',
+							top: isMobile ? '52%' : '58%',
 							left: 0,
 							width: '100%',
 							display: 'flex',
@@ -111,7 +124,7 @@ export default function LiquideSlider() {
 							style={{
 								position: 'relative',
 								width: '100%',
-								height: `${200 * s}px`,
+								height: isMobile ? '100px' : `${200 * s}px`,
 								display: 'flex',
 								justifyContent: 'center',
 							}}
@@ -125,15 +138,15 @@ export default function LiquideSlider() {
 										position: 'absolute',
 										fontFamily: 'var(--font-display)',
 										fontWeight: 900,
-										fontSize: `${60 * s}px`,
+										fontSize: isMobile ? '18px' : `${60 * s}px`,
 										color: '#fff',
-										height: `${380 * s}px`,
+										height: isMobile ? '140px' : `${380 * s}px`,
 										transformOrigin: 'bottom center',
 										transform: `rotate(${angle}deg)`,
 										whiteSpace: 'pre',
 										display: 'inline-block',
 										textTransform: 'uppercase',
-										letterSpacing: '-2px',
+										letterSpacing: '-1px',
 										transition: 'transform 0.1s ease-out',
 									}}
 								>
@@ -146,10 +159,10 @@ export default function LiquideSlider() {
 							style={{
 								position: 'relative',
 								width: '100%',
-								height: `${80 * s}px`,
+								height: isMobile ? '40px' : `${80 * s}px`,
 								display: 'flex',
 								justifyContent: 'center',
-								marginTop: `${-75 * s}px`,
+								marginTop: isMobile ? '-38px' : `${-75 * s}px`,
 							}}
 						>
 							{slide.hlChars.map(({ char, angle }, j) => (
@@ -161,9 +174,9 @@ export default function LiquideSlider() {
 										position: 'absolute',
 										fontFamily: 'var(--font-display)',
 										fontWeight: 900,
-										fontSize: `${36 * s}px`,
+										fontSize: isMobile ? '13px' : `${36 * s}px`,
 										color: '#22d3ee',
-										height: `${340 * s}px`,
+										height: isMobile ? '120px' : `${340 * s}px`,
 										transformOrigin: 'bottom center',
 										transform: `rotate(${angle}deg)`,
 										whiteSpace: 'pre',
@@ -179,15 +192,15 @@ export default function LiquideSlider() {
 
 						<p
 							style={{
-								marginTop: `${160 * s}px`,
+								marginTop: isMobile ? '80px' : `${160 * s}px`,
 								fontFamily: 'var(--font-display)',
 								fontWeight: 400,
-								fontSize: '20px',
+								fontSize: isMobile ? '13px' : '20px',
 								lineHeight: '140%',
 								letterSpacing: '0%',
 								textAlign: 'center',
 								color: 'rgba(225,227,234,1)',
-								maxWidth: '28rem',
+								maxWidth: isMobile ? '85%' : '28rem',
 								padding: '0 20px',
 							}}
 						>

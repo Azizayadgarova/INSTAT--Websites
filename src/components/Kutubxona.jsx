@@ -58,7 +58,13 @@ const TiltCard = ({ src }) => {
 	const onLeave = () => { mx.set(0); my.set(0) }
 
 	return (
-		<div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={{ perspective: 900, flexShrink: 0 }}>
+		<div
+			ref={ref}
+			onMouseMove={onMove}
+			onMouseLeave={onLeave}
+			className='w-full h-[220px] md:w-[500px] md:h-[320px] flex-shrink-0'
+			style={{ perspective: 900 }}
+		>
 			<motion.div
 				initial={{ opacity: 0, rotateX: 35, y: -50, scale: 0.85 }}
 				animate={{ opacity: 1, rotateX: 0, y: 0, scale: 1 }}
@@ -67,8 +73,8 @@ const TiltCard = ({ src }) => {
 					rotateX,
 					rotateY,
 					transformStyle: 'preserve-3d',
-					width: 500,
-					height: 320,
+					width: '100%',
+					height: '100%',
 					borderRadius: 16,
 					overflow: 'hidden',
 					position: 'relative',
@@ -161,9 +167,10 @@ const Kutubxona = () => {
 					text="Oflayn kutubxona – to'liq nazorat"
 					delay={0.08}
 					step={0.06}
-					style={{ fontWeight: 600, fontSize: '48px', color: '#fff' }}
+					className='text-[32px] md:text-[48px]'
+					style={{ fontWeight: 600, color: '#fff' }}
 				/>
-				<p className="text-[#CACACE] text-[16px] text-center">
+				<p className="text-[#CACACE] text-[14px] md:text-[16px] max-w-[327px] md:max-w-none text-center">
 					<BlurWords
 						text="Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!"
 						delay={0.08}
@@ -172,13 +179,13 @@ const Kutubxona = () => {
 				</p>
 			</motion.div>
 
-			<div className="z-10 w-full max-w-275 px-6">
+<div className="z-10 w-full max-w-275 px-6">
 				{data.map((item, i) => {
 					const isActive = i === active
 					return (
 						<motion.div
 							key={i}
-							className="cursor-pointer"
+							className={`cursor-pointer border-b border-white/8 ${i === 0 ? 'border-t' : ''}`}
 							onClick={() => setActive(i)}
 							initial={{ opacity: 0, y: 24 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -193,13 +200,13 @@ const Kutubxona = () => {
 								<h3
 									style={{
 										fontFamily: 'var(--font-display)',
-										fontWeight: isActive ? 600 : 600,
-										fontSize: isActive ? '56px' : '48px',
-										lineHeight: isActive ? '58px' : '58px',
+										fontWeight: 600,
+										fontSize: isActive ? 'clamp(28px, 7vw, 56px)' : 'clamp(18px, 5vw, 48px)',
+										lineHeight: 1.1,
 										letterSpacing: '0em',
 										color: isActive ? '#ffffff' : 'rgba(90, 98, 117, 1)',
 										transition:
-											'color 0.3s ease, font-size 0.35s ease, line-height 0.35s ease, font-weight 0.3s ease',
+											'color 0.3s ease, font-size 0.35s ease, font-weight 0.3s ease',
 									}}
 								>
 									{item.title}
@@ -209,11 +216,11 @@ const Kutubxona = () => {
 									style={{
 										fontFamily: 'var(--font-display)',
 										fontWeight: 500,
-										fontSize: '32px',
+										fontSize: 'clamp(16px, 4vw, 32px)',
 										lineHeight: '40px',
 										letterSpacing: '-0.005em',
 										color: isActive ? 'rgba(255, 255, 255, 1)' : 'rgba(90, 98, 117, 1)',
-										marginLeft: 24,
+										marginLeft: 16,
 										flexShrink: 0,
 									}}
 								>
@@ -231,7 +238,27 @@ const Kutubxona = () => {
 										transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
 										className="overflow-hidden"
 									>
-										<div className="flex gap-10 pb-10 items-start pl-2 pt-0" style={{ marginTop: 0 }}>
+										{/* Mobile: rasm to'liq kenglik + matn pastda */}
+										<div className="md:hidden flex flex-col gap-4 pb-6">
+											<TiltCard src={item.img} />
+											<motion.p
+												initial={{ opacity: 0, y: -16 }}
+												animate={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.4, delay: 0.18 }}
+												style={{
+													fontFamily: 'var(--font-display)',
+													fontWeight: 400,
+													fontSize: '14px',
+													lineHeight: '1.65',
+													color: 'rgba(var(--muted-rgb),1)',
+												}}
+											>
+												{item.desc}
+											</motion.p>
+										</div>
+
+										{/* Desktop: rasm + matn yonma-yon */}
+										<div className="hidden md:flex gap-10 pb-10 items-start pl-2 pt-0">
 											<TiltCard src={item.img} />
 											<motion.p
 												initial={{ opacity: 0, y: -40, filter: 'blur(10px)' }}

@@ -140,25 +140,53 @@ const StepCard = ({ step }) => {
 	return (
 		<motion.div
 			variants={cardV}
-			whileHover={{
-				boxShadow: '0 0 0 1.5px rgba(var(--blue-rgb),0.5), 0 32px 80px rgba(0,0,0,0.4)',
-				scale: 1.013,
-				transition: { duration: 0.28, ease: 'easeOut' },
-			}}
-			style={{
-				background: 'rgba(var(--bg-rgb),1)',
-				borderRadius: 836,
-				paddingTop: 40, paddingRight: 70, paddingBottom: 40, paddingLeft: 90,
-				display: 'flex', flexDirection: 'row', alignItems: 'center',
-				overflow: 'visible', boxSizing: 'border-box',
-				width: '100%', maxWidth: 1200, height: 248, alignSelf: 'center',
-				cursor: 'default',
-			}}
+			style={{ width: '100%', maxWidth: 1200, alignSelf: 'center', boxSizing: 'border-box' }}
 		>
-			{step.reverse
-				? <>{icon}{circle}{text}</>
-				: <>{text}{circle}{icon}</>
-			}
+			{/* Mobile */}
+			<div className='md:hidden flex rounded-[20px] p-6'
+				style={{ background: 'rgba(var(--bg-rgb),1)', alignItems: 'flex-start', gap: 16 }}>
+				<div style={{
+					width: 52, height: 52, borderRadius: '50%',
+					background: 'linear-gradient(180deg, rgba(var(--blue-rgb),1) 0%, rgba(0,102,204,1) 100%)',
+					boxShadow: 'inset 0 -4px 10px rgba(0,0,0,0.35), inset 0 2px 5px rgba(255,255,255,0.22)',
+					display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+				}}>
+					<span style={{ fontFamily: '"Belgro",var(--font-display)', fontWeight: 900, fontSize: 22, color: 'rgba(116,178,251,0.81)', userSelect: 'none' }}>
+						{step.id}
+					</span>
+				</div>
+				<div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+					<h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 24, lineHeight: '32px', color: 'rgba(255,255,255,1)', margin: 0, letterSpacing: 0 }}>
+						{step.title}
+					</h3>
+					<p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 14, lineHeight: '20px', letterSpacing: 0, color: 'rgba(var(--text-rgb),1)', margin: 0 }}>
+						{step.desc}
+					</p>
+				</div>
+			</div>
+
+			{/* Desktop */}
+			<motion.div
+				className='hidden md:flex'
+				whileHover={{
+					boxShadow: '0 0 0 1.5px rgba(var(--blue-rgb),0.5), 0 32px 80px rgba(0,0,0,0.4)',
+					scale: 1.013,
+					transition: { duration: 0.28, ease: 'easeOut' },
+				}}
+				style={{
+					background: 'rgba(var(--bg-rgb),1)',
+					borderRadius: 836,
+					paddingTop: 40, paddingRight: 70, paddingBottom: 40, paddingLeft: 90,
+					flexDirection: 'row', alignItems: 'center',
+					overflow: 'visible', boxSizing: 'border-box',
+					width: '100%', height: 248, cursor: 'default',
+				}}
+			>
+				{step.reverse
+					? <>{icon}{circle}{text}</>
+					: <>{text}{circle}{icon}</>
+				}
+			</motion.div>
 		</motion.div>
 	)
 }
@@ -166,9 +194,9 @@ const StepCard = ({ step }) => {
 /* ── Asosiy komponent ── */
 const IshOrinlariJarayon = () => (
 	<section style={{ width: '100%', background: 'rgba(var(--card-rgb),1)' }}>
-		<div style={{
+		<div className='px-4 md:px-[60px] lg:px-[120px] pt-10 pb-10' style={{
 			maxWidth: 1440, margin: '0 auto',
-			padding: '40px 120px', boxSizing: 'border-box',
+			boxSizing: 'border-box',
 			display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
 		}}>
 
@@ -178,10 +206,10 @@ const IshOrinlariJarayon = () => (
 					<Button text="Jarayon" variant="light" />
 
 					<h2
+						className='text-[32px] md:text-[52px]'
 						style={{
 							fontFamily: 'var(--font-display)',
-							fontWeight: 600, fontSize: 'clamp(32px, 3.6vw, 52px)',
-							lineHeight: 1.08, color: '#ffffff', margin: 0,
+							fontWeight: 600, lineHeight: 1.08, color: '#ffffff', margin: 0,
 							letterSpacing: '-0.02em',
 						}}
 					>
@@ -189,10 +217,11 @@ const IshOrinlariJarayon = () => (
 					</h2>
 
 					<p
+						className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[540px]'
 						style={{
 							fontFamily: 'Inter,sans-serif', fontWeight: 400,
-							fontSize: 16, lineHeight: '26px',
-							color: 'rgba(140,140,158,1)', margin: 0, maxWidth: 540,
+							lineHeight: '26px',
+							color: 'rgba(140,140,158,1)', margin: 0,
 						}}
 					>
 						Bir necha oddiy qadam orqali ish toping yoki kerakli xodimni yollang
@@ -206,9 +235,10 @@ const IshOrinlariJarayon = () => (
 				initial="hidden"
 				whileInView="show"
 				viewport={{ once: true, amount: 0.1 }}
+				className='gap-4 md:gap-[55px]'
 				style={{
 					width: '100%', display: 'flex', flexDirection: 'column',
-					alignItems: 'center', gap: 55,
+					alignItems: 'center',
 				}}
 			>
 				{STEPS.map((step) => (

@@ -1,17 +1,28 @@
-import { lazy, Suspense, useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import CursorRing from '../components/shared/CursorRing'
 import ScrollToTop from '../components/shared/ScrollToTop'
-import TopFooter from '../components/TopFooter'
-import Footer from '../components/Footer'
 
+const CursorRing    = lazy(() => import('../components/shared/CursorRing'))
+const TopFooter     = lazy(() => import('../components/TopFooter'))
+const Footer        = lazy(() => import('../components/Footer'))
 const AppPromoSection = lazy(() => import('../components/AppPromoSection'))
 
 const MainLayout = () => {
 	const { pathname } = useLocation()
 	const isHome = pathname === '/'
 	const progressRef = useRef(null)
+	const [mountCursor, setMountCursor] = useState(false)
+
+	useEffect(() => {
+		const mount = () => setMountCursor(true)
+		if (document.readyState === 'complete') {
+			const t = setTimeout(mount, 300)
+			return () => clearTimeout(t)
+		}
+		window.addEventListener('load', mount, { once: true })
+		return () => window.removeEventListener('load', mount)
+	}, [])
 
 	useEffect(() => {
 		const bar = progressRef.current
@@ -28,7 +39,7 @@ const MainLayout = () => {
 	return (
 		<div className='bg-[rgba(14,18,27,1)] min-h-screen'>
 			<ScrollToTop />
-			<CursorRing />
+			{mountCursor && <Suspense fallback={null}><CursorRing /></Suspense>}
 
 			{/* Global scroll progress */}
 			<div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '3px', zIndex: 9999, background: 'rgba(255,255,255,0.05)' }}>
@@ -69,8 +80,8 @@ const MainLayout = () => {
 					<AppPromoSection />
 				</Suspense>
 			)}
-			{isHome && <TopFooter />}
-			<Footer />
+			{isHome && <Suspense fallback={null}><TopFooter /></Suspense>}
+			<Suspense fallback={null}><Footer /></Suspense>
 		</div>
 	)
 }

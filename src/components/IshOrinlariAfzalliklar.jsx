@@ -54,13 +54,12 @@ const IshOrinlariAfzalliklar = () => (
 				</h2>
 
 				<p
+					className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[600px]'
 					style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
-						fontSize: '16px',
 						lineHeight: '140%',
 						color: 'rgba(202,202,206,1)',
-						maxWidth: '600px',
 						margin: 0,
 					}}
 				>

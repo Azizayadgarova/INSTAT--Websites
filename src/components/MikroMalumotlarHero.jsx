@@ -46,8 +46,8 @@ export default function MikroMalumotlarHero() {
 					<h1 style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 700,
-						fontSize: 'clamp(38px, 5.5vw, 70px)',
-						lineHeight: 1.08, letterSpacing: '-.03em',
+						fontSize: 'clamp(32px, 8.33vw, 64px)',
+						lineHeight: 1.1, letterSpacing: '-.03em',
 						color: '#fff', margin: 0,
 					}}>
 						Rasmiy statistika uchun

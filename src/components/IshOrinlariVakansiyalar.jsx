@@ -58,22 +58,21 @@ function LocationIcon() {
 function JobCard({ job }) {
 	return (
 		<div
+			className='p-4 md:p-6 gap-4 md:gap-6'
 			style={{
 				background: 'rgba(var(--card-rgb),1)',
 				border: '1px solid rgba(31,37,51,1)',
 				borderRadius: '24px',
-				padding: '24px',
 				display: 'flex',
 				flexDirection: 'column',
-				gap: '24px',
 			}}
 		>
 			<h3
+				className='text-[18px] md:text-[24px]'
 				style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 700,
-					fontSize: '24px',
-					lineHeight: '32px',
+					lineHeight: '1.3',
 					letterSpacing: '0%',
 					color: 'rgba(255,255,255,1)',
 					margin: 0,
@@ -85,10 +84,10 @@ function JobCard({ job }) {
 			<div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
 				<LocationIcon />
 				<span
+					className='text-[13px] md:text-[16px]'
 					style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
-						fontSize: '16px',
 						lineHeight: '24px',
 						color: 'rgba(90,98,117,1)',
 					}}
@@ -98,11 +97,11 @@ function JobCard({ job }) {
 			</div>
 
 			<p
+				className='text-[13px] md:text-[16px]'
 				style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
-					fontSize: '16px',
-					lineHeight: '24px',
+					lineHeight: '1.6',
 					color: 'rgba(var(--muted-rgb),1)',
 					margin: 0,
 					flex: 1,
@@ -121,10 +120,10 @@ function JobCard({ job }) {
 				}}
 			>
 				<span
+					className='text-[18px] md:text-[24px]'
 					style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 700,
-						fontSize: '24px',
 						lineHeight: '32px',
 						color: 'rgba(225,227,230,1)',
 					}}
@@ -132,10 +131,10 @@ function JobCard({ job }) {
 					{job.price}
 				</span>
 				<span
+					className='text-[13px] md:text-[16px]'
 					style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400,
-						fontSize: '16px',
 						lineHeight: '24px',
 						color: 'rgba(255,255,255,1)',
 					}}
@@ -211,10 +210,10 @@ const IshOrinlariVakansiyalar = () => {
 					<Button2 text='Vakansiyalar' />
 
 					<h2
+						className='text-[28px] md:text-[48px]'
 						style={{
 							fontFamily: 'var(--font-display)',
 							fontWeight: 600,
-							fontSize: 'clamp(28px,4vw,48px)',
 							lineHeight: 1.1,
 							color: '#fff',
 							margin: 0,
@@ -225,13 +224,12 @@ const IshOrinlariVakansiyalar = () => {
 					</h2>
 
 					<p
+						className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[620px]'
 						style={{
 							fontFamily: 'var(--font-display)',
 							fontWeight: 400,
-							fontSize: '16px',
 							lineHeight: '140%',
 							color: 'rgba(202,202,206,1)',
-							maxWidth: '620px',
 							margin: 0,
 						}}
 					>
@@ -243,11 +241,10 @@ const IshOrinlariVakansiyalar = () => {
 			</AnimatedSection>
 
 			<div
+				className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
 				style={{
 					width: '100%',
 					maxWidth: '1200px',
-					display: 'grid',
-					gridTemplateColumns: 'repeat(3, 1fr)',
 					gap: '24px',
 					marginBottom: '48px',
 				}}

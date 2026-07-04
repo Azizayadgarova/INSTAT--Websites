@@ -142,17 +142,17 @@ export default function TahririyatAzolari() {
 						}}>Hodimlar</span>
 					</div>
 
-					<h2 style={{
+					<h2 className='text-[32px] md:text-[48px] px-4 md:px-0' style={{
 						fontFamily: 'var(--font-display)',
-						fontWeight: 600, fontSize: '48px', lineHeight: 1.1,
+						fontWeight: 600, lineHeight: 1.1,
 						color: '#fff', margin: '0 0 16px', letterSpacing: '-0.02em',
 					}}>Tahririyat a'zolari</h2>
 
-					<p style={{
+					<p className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[520px] px-4 md:px-0' style={{
 						fontFamily: 'var(--font-display)',
-						fontWeight: 400, fontSize: '16px', lineHeight: 1.65,
+						fontWeight: 400, lineHeight: 1.65,
 						color: 'rgba(202,202,206,1)',
-						maxWidth: '520px', margin: '0 0 0',
+						margin: '0 0 0',
 					}}>
 						Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.
 					</p>

@@ -54,6 +54,75 @@ function useInView(threshold = 0.15) {
 	return [ref, visible]
 }
 
+function useMobile(bp = 768) {
+	const [mob, setMob] = useState(false)
+	useEffect(() => {
+		const check = () => setMob(window.innerWidth < bp)
+		check()
+		window.addEventListener('resize', check, { passive: true })
+		return () => window.removeEventListener('resize', check)
+	}, [bp])
+	return mob
+}
+
+// Mobile: barcha narsalar doimiy ko'rinadi (scroll animatsiyasiz)
+function MobileItem({ item, idx }) {
+	return (
+		<div style={{
+			position: 'relative',
+			paddingLeft: '36px',
+			marginBottom: idx < ITEMS.length - 1 ? '40px' : 0,
+		}}>
+			{/* Dot */}
+			<div style={{
+				position: 'absolute',
+				left: '0px',
+				top: '8px',
+				width: '14px',
+				height: '14px',
+				borderRadius: '50%',
+				background: 'rgba(var(--blue-rgb),1)',
+				border: '2px solid rgba(var(--blue-rgb),0.4)',
+				boxShadow: '0 0 10px rgba(var(--blue-rgb),0.6)',
+				zIndex: 1,
+			}}/>
+
+			{/* Number */}
+			<div style={{ marginBottom: '6px' }}>
+				<span style={{
+					fontFamily: 'var(--font-display)',
+					fontWeight: 700,
+					fontSize: '52px',
+					lineHeight: 1,
+					color: '#ffffff',
+					letterSpacing: '-0.04em',
+					userSelect: 'none',
+				}}>{item.num}</span>
+			</div>
+
+			{/* Content */}
+			<div>
+				<h3 style={{
+					fontFamily: 'var(--font-display)',
+					fontWeight: 600,
+					fontSize: '20px',
+					lineHeight: 1.3,
+					color: '#ffffff',
+					margin: '0 0 8px',
+				}}>{item.title}</h3>
+				<p style={{
+					fontFamily: 'var(--font-display)',
+					fontWeight: 400,
+					fontSize: '15px',
+					lineHeight: 1.7,
+					color: 'rgba(160,165,185,1)',
+					margin: 0,
+				}}>{item.desc}</p>
+			</div>
+		</div>
+	)
+}
+
 function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 	const numBlock = (
 		<div
@@ -92,10 +161,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 				willChange: 'transform, opacity',
 			}}
 		>
-			<div style={{
-				padding: '16px 20px',
-				borderRadius: '14px',
-			}}>
+			<div style={{ padding: '16px 20px', borderRadius: '14px' }}>
 				<h3 style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 600,
@@ -164,13 +230,14 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 
 export default function MaqolaTalablari() {
 	const [headerRef, headerVisible] = useInView(0.3)
-	const timelineRef  = useRef(null)
-	const lineElRef    = useRef(null)
-	const dotRefs      = useRef([])
-	const pulseRefs    = useRef([])
-	const numRefs      = useRef([])
-	const contentRefs  = useRef([])
-	const prevReached  = useRef([])
+	const isMobile    = useMobile()
+	const timelineRef = useRef(null)
+	const lineElRef   = useRef(null)
+	const dotRefs     = useRef([])
+	const pulseRefs   = useRef([])
+	const numRefs     = useRef([])
+	const contentRefs = useRef([])
+	const prevReached = useRef([])
 
 	useEffect(() => {
 		const el = document.createElement('style')
@@ -180,6 +247,7 @@ export default function MaqolaTalablari() {
 		return () => document.head.removeChild(el)
 	}, [])
 
+	// Desktop scroll animation (mobile da ishlamaydi)
 	useEffect(() => {
 		const onScroll = () => {
 			const tl   = timelineRef.current
@@ -205,11 +273,11 @@ export default function MaqolaTalablari() {
 				const reached = dr.top + dr.height / 2 < vh * 0.82
 				const was     = prevReached.current[idx]
 
-				// Dot
 				dot.style.opacity   = reached ? 1 : 0
-				dot.style.transform = reached ? 'translateX(-50%) scale(1)' : 'translateX(-50%) scale(0)'
+				dot.style.transform = reached
+					? 'translateX(-50%) scale(1)'
+					: 'translateX(-50%) scale(0)'
 
-				// Pulse — faqat yangi paydo bo'lganda
 				if (pulse) {
 					if (reached && !was) {
 						pulse.style.animation = 'none'
@@ -220,7 +288,6 @@ export default function MaqolaTalablari() {
 					}
 				}
 
-				// Num
 				if (numEl) {
 					const dir = item.flip ? 1 : -1
 					if (reached) {
@@ -234,7 +301,6 @@ export default function MaqolaTalablari() {
 					}
 				}
 
-				// Content
 				if (conEl) {
 					const dir = item.flip ? -1 : 1
 					if (reached) {
@@ -252,10 +318,12 @@ export default function MaqolaTalablari() {
 			})
 		}
 
+		if (isMobile) return  // mobileda scroll animatsiya yo'q
+
 		window.addEventListener('scroll', onScroll, { passive: true })
 		onScroll()
 		return () => window.removeEventListener('scroll', onScroll)
-	}, [])
+	}, [isMobile])
 
 	return (
 		<section style={{
@@ -267,8 +335,15 @@ export default function MaqolaTalablari() {
 			padding: '40px 0 80px',
 			boxSizing: 'border-box',
 		}}>
-				{/* Header */}
-			<div ref={headerRef} style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
+			{/* Header */}
+			<div ref={headerRef} style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				width: '100%',
+				padding: '0 20px',
+				boxSizing: 'border-box',
+			}}>
 				<div style={{
 					display: 'inline-flex',
 					alignItems: 'center',
@@ -292,8 +367,8 @@ export default function MaqolaTalablari() {
 				<h2 style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 600,
-					fontSize: '48px',
-					lineHeight: '58px',
+					fontSize: isMobile ? '30px' : '48px',
+					lineHeight: isMobile ? '38px' : '58px',
 					color: '#ffffff',
 					textAlign: 'center',
 					margin: '0 0 14px',
@@ -304,54 +379,78 @@ export default function MaqolaTalablari() {
 					Maqola nashri talablari
 				</h2>
 
-				<p style={{
+				<p className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[500px]' style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
-					fontSize: '16px',
 					lineHeight: '140%',
 					color: 'rgba(202,202,206,1)',
 					textAlign: 'center',
-					maxWidth: '500px',
 					margin: '0px 0 48px',
 					opacity:   headerVisible ? 1 : 0,
 					animation: headerVisible ? 'mt_fadeUp 0.7s cubic-bezier(.22,1,.36,1) 0.2s both' : 'none',
 				}}>
-					Maqolangiz platformada e'lon qilinishi uchun quyidagi majburiy talablarga to'liq mos bo'lishi shart.
+					Maqolangiz platformada e&apos;lon qilinishi uchun quyidagi majburiy talablarga to&apos;liq mos bo&apos;lishi shart.
 				</p>
 			</div>
 
-			{/* Timeline */}
-			<div ref={timelineRef} style={{
-				position: 'relative',
-				width: '100%',
-				maxWidth: '1000px',
-				padding: '0 24px',
-				boxSizing: 'border-box',
-			}}>
-				<div ref={lineElRef} style={{
-					position: 'absolute',
-					left: '50%',
-					top: '20px',
-					bottom: 0,
-					width: '1px',
-					background: 'rgba(230,233,234,1)',
-					transformOrigin: 'top center',
-					transform: 'translateX(-50%) scaleY(0)',
-					opacity: 0,
-				}}/>
+			{/* Mobile timeline — hamma narsa darhol ko'rinadi */}
+			{isMobile && (
+				<div style={{
+					position: 'relative',
+					width: '100%',
+					padding: '0 20px',
+					boxSizing: 'border-box',
+				}}>
+					{/* Left vertical line */}
+					<div style={{
+						position: 'absolute',
+						left: '27px',
+						top: '12px',
+						bottom: 0,
+						width: '1px',
+						background: 'rgba(230,233,234,0.4)',
+					}}/>
 
-				{ITEMS.map((item, idx) => (
-					<AnimatedItem
-						key={idx}
-						item={item}
-						idx={idx}
-						dotRef={el     => dotRefs.current[idx]     = el}
-						pulseRef={el   => pulseRefs.current[idx]   = el}
-						numRef={el     => numRefs.current[idx]     = el}
-						contentRef={el => contentRefs.current[idx] = el}
-					/>
-				))}
-			</div>
+					{ITEMS.map((item, idx) => (
+						<MobileItem key={idx} item={item} idx={idx} />
+					))}
+				</div>
+			)}
+
+			{/* Desktop timeline — scroll animatsiyali */}
+			{!isMobile && (
+				<div ref={timelineRef} style={{
+					position: 'relative',
+					width: '100%',
+					maxWidth: '1000px',
+					padding: '0 24px',
+					boxSizing: 'border-box',
+				}}>
+					<div ref={lineElRef} style={{
+						position: 'absolute',
+						left: '50%',
+						top: '20px',
+						bottom: 0,
+						width: '1px',
+						background: 'rgba(230,233,234,1)',
+						transformOrigin: 'top center',
+						transform: 'translateX(-50%) scaleY(0)',
+						opacity: 0,
+					}}/>
+
+					{ITEMS.map((item, idx) => (
+						<AnimatedItem
+							key={idx}
+							item={item}
+							idx={idx}
+							dotRef={el     => dotRefs.current[idx]     = el}
+							pulseRef={el   => pulseRefs.current[idx]   = el}
+							numRef={el     => numRefs.current[idx]     = el}
+							contentRef={el => contentRefs.current[idx] = el}
+						/>
+					))}
+				</div>
+			)}
 		</section>
 	)
 }

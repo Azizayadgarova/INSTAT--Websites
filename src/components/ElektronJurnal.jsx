@@ -95,6 +95,7 @@ const KF = `
 @keyframes ej_border  { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 @keyframes ej_p       { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0} }
 @keyframes ej_fadeUp  { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+@media (max-width: 767px) { .ej-carousel { transform: scale(0.72); transform-origin: center top; } }
 `
 
 function wrapOffset(raw) {
@@ -174,10 +175,11 @@ function PagBtn({ children, onClick, active, nav }) {
 const JournalCard = memo(function JournalCard({ j }) {
 	return (
 		<div
+			className='w-[282px] md:w-full mx-auto md:mx-0'
 			style={{
-				width: '282px',
 				height: '342px',
 				borderRadius: '20px',
+				backgroundColor: 'rgba(22,27,38,1)',
 				boxShadow: '0px 1px 5px 0px rgba(29,36,45,0.2)',
 				overflow: 'hidden',
 				cursor: 'pointer',
@@ -317,14 +319,14 @@ function FilterRow({
 
 	return (
 		<div
+			className='w-[327px] md:w-full mx-auto md:mx-0'
 			style={{
-				width: '800px',
 				height: '72px',
 				borderRadius: '16px',
 				padding: '12px',
 				boxSizing: 'border-box',
 				gap: '10px',
-				background: 'rgba(var(--card-rgb),1)',
+				background: 'rgba(22,27,38,1)',
 				border: '1px solid rgba(31,37,51,1)',
 				display: 'flex',
 				alignItems: 'center',
@@ -405,6 +407,7 @@ function FilterRow({
 			</div>
 
 			<div
+				className='hidden md:block'
 				style={{
 					width: '1px',
 					height: '30px',
@@ -415,15 +418,13 @@ function FilterRow({
 
 			{/* Categories */}
 			<div
+				className='hidden md:flex flex-col justify-center'
 				style={{
 					position: 'relative',
 					flex: 1,
 					padding: '0 16px',
 					cursor: 'pointer',
 					height: '100%',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
 				}}
 				onClick={() => {
 					setCatOpen(p => !p)
@@ -490,19 +491,19 @@ function FilterRow({
 			<div style={{ flexShrink: 0 }}>
 				<button
 					onClick={onSearch}
+					className='h-[48px] rounded-[12px] md:rounded-[10px] px-[14px] md:px-[24px]'
 					style={{
 						display: 'flex',
 						alignItems: 'center',
-						gap: '6px',
-						background: 'rgba(var(--blue-rgb),1)',
+						gap: '4px',
+						background: 'rgba(43,117,204,1)',
 						color: '#fff',
-						border: 'none',
-						borderRadius: '10px',
-						padding: '12px 24px',
+						border: '1px solid rgba(255,255,255,0.15)',
 						fontSize: '14px',
 						fontWeight: 500,
 						cursor: 'pointer',
 						fontFamily: 'var(--font-display)',
+						flexShrink: 0,
 					}}
 				>
 					<svg width='16' height='16' viewBox='0 0 24 24' fill='none'>
@@ -533,17 +534,18 @@ function Pagination({ page, setPage, total }) {
 	}
 	return (
 		<div
+			className='justify-center md:justify-between'
 			style={{
 				display: 'flex',
 				alignItems: 'center',
-				justifyContent: 'space-between',
-				width: '1224px',
-				maxWidth: '100%',
+				width: '100%',
+				maxWidth: '1224px',
 				position: 'relative',
 				zIndex: 1,
 			}}
 		>
 			<span
+				className='hidden md:inline'
 				style={{
 					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
@@ -554,9 +556,9 @@ function Pagination({ page, setPage, total }) {
 				Sahifa
 			</span>
 			<div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-				<PagBtn nav onClick={() => setPage(1)}>
-					«
-				</PagBtn>
+				<span className='hidden md:contents'>
+					<PagBtn nav onClick={() => setPage(1)}>«</PagBtn>
+				</span>
 				<PagBtn nav onClick={() => setPage(p => Math.max(1, p - 1))}>
 					‹
 				</PagBtn>
@@ -586,11 +588,12 @@ function Pagination({ page, setPage, total }) {
 				<PagBtn nav onClick={() => setPage(p => Math.min(total, p + 1))}>
 					›
 				</PagBtn>
-				<PagBtn nav onClick={() => setPage(total)}>
-					»
-				</PagBtn>
+				<span className='hidden md:contents'>
+					<PagBtn nav onClick={() => setPage(total)}>»</PagBtn>
+				</span>
 			</div>
 			<button
+				className='hidden md:flex'
 				onClick={() => setPage(total)}
 				style={{
 					fontFamily: 'var(--font-display)',
@@ -599,7 +602,6 @@ function Pagination({ page, setPage, total }) {
 					background: 'none',
 					border: 'none',
 					cursor: 'pointer',
-					display: 'flex',
 					alignItems: 'center',
 					gap: '4px',
 					minWidth: '60px',
@@ -700,7 +702,7 @@ function JurnallarSection() {
 				</div>
 			</AnimatedSection>
 
-			<div style={{ position: 'relative', zIndex: 10, width: '800px' }}>
+			<div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '800px' }}>
 				<FilterRow
 					author={author}
 					setAuthor={setAuthor}
@@ -715,14 +717,14 @@ function JurnallarSection() {
 			</div>
 
 			<div
+				className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center md:justify-items-stretch'
 				style={{
-					display: 'grid',
-					gridTemplateColumns: 'repeat(4, 282px)',
-					gap: '32px',
-					justifyContent: 'center',
+					gap: '20px',
 					marginBottom: '48px',
 					position: 'relative',
 					zIndex: 1,
+					width: '100%',
+					maxWidth: '1200px',
 				}}
 			>
 				{displayed.length > 0 ? displayed.map((j, i) => (
@@ -1057,7 +1059,19 @@ const CarouselCard = memo(function CarouselCard({
 
 // ─── Hero section (isolated so 60fps RAF re-renders don't affect rest of page) ─
 
+function useIsMobile(bp = 768) {
+	const [mob, setMob] = useState(false)
+	useEffect(() => {
+		const check = () => setMob(window.innerWidth < bp)
+		check()
+		window.addEventListener('resize', check, { passive: true })
+		return () => window.removeEventListener('resize', check)
+	}, [bp])
+	return mob
+}
+
 function HeroSection() {
+	const isMobile = useIsMobile()
 	const [visible, setVisible] = useState(false)
 	const [flipped, setFlipped] = useState({})
 	const [hovered, setHovered] = useState(null)
@@ -1245,8 +1259,8 @@ function HeroSection() {
 						style={{
 							fontFamily: 'var(--font-display)',
 							fontWeight: 600,
-							fontSize: '64px',
-							lineHeight: 1.05,
+							fontSize: 'clamp(32px, 8.33vw, 64px)',
+							lineHeight: 1.1,
 							letterSpacing: '-.03em',
 							color: '#fff',
 							maxWidth: '1100px',
@@ -1275,11 +1289,12 @@ function HeroSection() {
 
 				{/* Carousel */}
 				<div
+					className='ej-carousel'
 					style={{
 						position: 'relative',
 						width: '100%',
-						height: '480px',
-						marginTop: '52px',
+						height: isMobile ? `${C_H}px` : '480px',
+						marginTop: isMobile ? '32px' : '52px',
 						perspective: '1100px',
 						perspectiveOrigin: '50% 38%',
 						opacity: visible ? 1 : 0,

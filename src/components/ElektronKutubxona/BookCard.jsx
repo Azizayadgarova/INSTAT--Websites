@@ -50,7 +50,8 @@ const BookCard = ({ book, index }) => (
 				style={{
 					position: 'absolute',
 					top: '47px',
-					left: '52.98px',
+					left: '50%',
+					transform: 'translateX(-50%)',
 					width: '176px',
 					height: '220px',
 					objectFit: 'cover',
