@@ -13,7 +13,7 @@ const testimonials = [
 ]
 
 const StarIcon = () => (
-    <img src={starImg} width='16' height='16' alt='' aria-hidden='true' style={{ display: 'inline-block' }} />
+    <img src={starImg} width='16' height='16' alt='' aria-hidden='true' style={{ display: 'inline-block' }} loading='lazy' decoding='async' />
 )
 
 const Testimonials = ({ hideBackground = false, hideParticles = false, platformStyle = false }) => {

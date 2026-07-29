@@ -1,8 +1,11 @@
-import heroImg from '@/assets/f516843fe3b59d12e4f470312ad04916ab60c75f.jpg'
-import groupImg0 from '@/assets/Group 1000002879.png'
-import groupImg1 from '@/assets/Group 1000002880.png'
-import groupImg2 from '@/assets/Group 1000002880 (1).png'
-import groupImg3 from '@/assets/Rectangle 4412.png'
+import { useTranslation } from 'react-i18next'
+import { useSiteData } from '@/hooks/useSiteData'
+import { pickLang } from '@/utils/siteContent'
+import heroImg from '@/assets/f516843fe3b59d12e4f470312ad04916ab60c75f.webp'
+import groupImg0 from '@/assets/Group 1000002879.webp'
+import groupImg1 from '@/assets/Group 1000002880.webp'
+import groupImg2 from '@/assets/Group 1000002880 (1).webp'
+import groupImg3 from '@/assets/Rectangle 4412.webp'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import FAQSection from '../../components/FAQSection'
 import LazyLoad from '../../components/shared/LazyLoad'
@@ -50,11 +53,11 @@ const ONLAYN_CARDS = [
 	},
 ]
 
-const STATS = [
-	{ value: '200 M+', label: 'Platformadagi faollik' },
-	{ value: '45 000+', label: "O'quvchilar soni" },
-	{ value: '120+', label: 'Mavjud kurslar' },
-	{ value: '8 500+', label: 'Muvaffaqiyatli bitiruvchilar' },
+const STATS_FALLBACK = [
+	{ key: 'education_activeness', value: '200 M+', label: 'Platformadagi faollik' },
+	{ key: 'education_students_count', value: '45 000+', label: "O'quvchilar soni" },
+	{ key: 'education_courses_count', value: '120+', label: 'Mavjud kurslar' },
+	{ key: 'education_graduates_count', value: '8 500+', label: 'Muvaffaqiyatli bitiruvchilar' },
 ]
 
 const CIRCLE_SIZES = [1130, 850, 570, 300]
@@ -126,8 +129,8 @@ function CirclesBg() {
 		>
 			<defs>
 				<linearGradient id={GRAD_ID} x1='0' y1='0' x2='0' y2='1'>
-					<stop offset='0%' stopColor='rgba(43,117,204,1)' />
-					<stop offset='100%' stopColor='rgba(43,117,204,1)' />
+					<stop offset='0%' stopColor='rgba(var(--blue-rgb),1)' />
+					<stop offset='100%' stopColor='rgba(var(--blue-rgb),1)' />
 				</linearGradient>
 			</defs>
 			{CIRCLE_SIZES.map((size, i) => (
@@ -162,7 +165,7 @@ function TextGlow() {
 				width: '1300px',
 				height: '200px',
 				background:
-					'radial-gradient(circle at center, rgba(0,230,252,0.4) 0%, rgba(0,230,252,0.2) 40%, rgba(0,230,252,0.07) 65%, transparent 85%)',
+					'radial-gradient(circle at center, rgba(var(--cyan-rgb),0.4) 0%, rgba(var(--cyan-rgb),0.2) 40%, rgba(var(--cyan-rgb),0.07) 65%, transparent 85%)',
 				filter: 'blur(55px)',
 				pointerEvents: 'none',
 				zIndex: 0,
@@ -193,7 +196,7 @@ function Particles() {
 						width: p.size,
 						height: p.size,
 						borderRadius: '50%',
-						background: 'rgba(0,230,252,0.55)',
+						background: 'rgba(var(--cyan-rgb),0.55)',
 						animation: `particleDrift ${p.dur} linear ${p.delay} infinite`,
 					}}
 				/>
@@ -237,14 +240,18 @@ function HeroImage() {
 }
 
 function HeroText() {
-	const [visible, setVisible] = useState(false)
-	useEffect(() => {
+    const {
+        t
+    } = useTranslation();
+
+    const [visible, setVisible] = useState(false)
+    useEffect(() => {
 		const t = setTimeout(() => setVisible(true), 80)
 		return () => clearTimeout(t)
 	}, [])
 
-	return (
-		<div
+    return (
+        <div
 			style={{
 				position: 'relative',
 				zIndex: 1,
@@ -253,21 +260,18 @@ function HeroText() {
 				transition: 'opacity 0.85s ease 0.1s, transform 0.85s cubic-bezier(0.16,1,0.3,1) 0.1s',
 			}}
 		>
-			<Text
+            <Text
 				buttonText="Onlayn ta'lim"
-				title="Bilim va ko'nikmalarni"
+				title={t("pages.onlaynTalim.bilim_va_konikmalarni")}
 				highlight='tizimli rivojlantirish'
 				subtitle={
-					<>
-						Zamonaviy ta'lim metodlari asosida ishlab chiqilgan kurslar orqali
-						<br className='hidden md:block' />
-						{' '}bilimlaringizni chuqurlashtiring
-					</>
+					<>{t("pages.onlaynTalim.zamonaviy_talim_metodlari_asosida")}<br className='hidden md:block' />
+						{' '}{t("pages.onlaynTalim.bilimlaringizni_chuqurlashtiring")}</>
 				}
 				buttonType='button2'
 			/>
-		</div>
-	)
+        </div>
+    );
 }
 
 function StatCard({ stat, index, started, isLast }) {
@@ -284,13 +288,13 @@ function StatCard({ stat, index, started, isLast }) {
 			{index < 2 && (
 				<div className='md:hidden absolute bottom-0 left-0 right-0 h-px' style={{
 					background: 'linear-gradient(90deg, transparent 0%, #2B75CC 50%, transparent 100%)',
-					boxShadow: '0 0 6px rgba(43,117,204,0.7)',
+					boxShadow: '0 0 6px rgba(var(--blue-rgb),0.7)',
 				}} />
 			)}
 			{index % 2 === 0 && (
 				<div className='md:hidden absolute top-0 right-0 w-px h-full' style={{
 					background: 'linear-gradient(180deg, transparent 0%, #2B75CC 50%, transparent 100%)',
-					boxShadow: '0 0 6px rgba(43,117,204,0.7)',
+					boxShadow: '0 0 6px rgba(var(--blue-rgb),0.7)',
 				}} />
 			)}
 			{index === 0 && <div className='md:hidden absolute bottom-0 right-0 w-1/5 h-px' style={{ background: 'linear-gradient(270deg, #2B75CC, transparent)' }} />}
@@ -309,8 +313,8 @@ function StatCard({ stat, index, started, isLast }) {
 
 			{!isLast && (
 				<div className='hidden md:block absolute top-0 right-0 w-px h-full' style={{
-					background: 'linear-gradient(180deg, #2B75CC 0%, rgba(43,117,204,0.4) 10%, transparent 28%, transparent 72%, rgba(43,117,204,0.4) 90%, #2B75CC 100%)',
-					boxShadow: '0 0 8px rgba(43,117,204,0.6)',
+					background: 'linear-gradient(180deg, #2B75CC 0%, rgba(var(--blue-rgb),0.4) 10%, transparent 28%, transparent 72%, rgba(var(--blue-rgb),0.4) 90%, #2B75CC 100%)',
+					boxShadow: '0 0 8px rgba(var(--blue-rgb),0.6)',
 				}} />
 			)}
 
@@ -330,7 +334,7 @@ function StatCard({ stat, index, started, isLast }) {
 				fontSize: '16px',
 				lineHeight: '22px',
 				letterSpacing: '-0.02em',
-				color: 'rgba(188,188,188,1)',
+				color: 'rgba(var(--text-rgb),1)',
 				textAlign: 'center',
 			}}>
 				{stat.label}
@@ -361,9 +365,19 @@ const OT_KF = `
 `
 
 export default function OnlaynTalim() {
-	const [statsRef, statsInView] = useInView(0.3)
+	const { t, i18n: _i18n } = useTranslation()
+	const _lang = _i18n.resolvedLanguage ?? 'uz'
+	const { data: _eduKv } = useSiteData(d => d.byModuleKey.education ?? {})
+	const STATS = STATS_FALLBACK.map(item => {
+		const src = _eduKv?.[item.key]
+		if (!src) return item
+		const raw = pickLang(src, _lang).replace(/\s+/g, ' ').trim()
+		return raw ? { ...item, value: /[+MK]/i.test(raw) ? raw : `${raw}+`, label: src.label?.trim() || item.label } : item
+	})
 
-	useEffect(() => {
+    const [statsRef, statsInView] = useInView(0.3)
+
+    useEffect(() => {
 		const el = document.createElement('style')
 		el.setAttribute('data-ot-kf', '1')
 		el.textContent = OT_KF
@@ -371,16 +385,16 @@ export default function OnlaynTalim() {
 		return () => document.head.removeChild(el)
 	}, [])
 
-	return (
-		<div
+    return (
+        <div
 			style={{
 				color: '#fff',
-				background: 'rgba(14, 18, 27, 1)',
+				background: 'rgba(var(--bg-rgb),1)',
 				minHeight: '100vh',
 			}}
 		>
-			{/* HERO */}
-			<section className='relative flex flex-col items-center pt-20 md:pt-25 px-4 md:px-30 pb-0 gap-6 overflow-hidden'>
+            {/* HERO */}
+            <section className='relative flex flex-col items-center pt-20 md:pt-25 px-4 md:px-30 pb-0 gap-6 overflow-hidden'>
 				<CirclesBg />
 				<TextGlow />
 				<Particles />
@@ -391,20 +405,18 @@ export default function OnlaynTalim() {
 					<HeroImage />
 				</div>
 			</section>
-
-			{/* STATS */}
-			<div ref={statsRef} className='w-full flex justify-center relative z-10 mt-[40px] px-4'>
+            {/* STATS */}
+            <div ref={statsRef} className='w-full flex justify-center relative z-10 mt-[40px] px-4'>
 				<div className='w-full max-w-[1000px]'>
 					<div className='grid grid-cols-2 md:grid-cols-4'>
 						{STATS.map((stat, i) => (
-							<StatCard key={i} stat={stat} index={i} started={statsInView} isLast={i === STATS.length - 1} />
+							<StatCard key={stat.label} stat={stat} index={i} started={statsInView} isLast={i === STATS.length - 1} />
 						))}
 					</div>
 				</div>
 			</div>
-
-			<LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
+            <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
+				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 					<ModernEducation
 						customCards={ONLAYN_CARDS}
 						cardHeight={100}
@@ -415,7 +427,7 @@ export default function OnlaynTalim() {
 							title: "Zamonaviy ta'lim,",
 							highlight: "Global imkoniyatlar!",
 							highlightColor: "#ffffff",
-							subtitle: <>Bizning platforma orqali siz IT va zamonaviy kasblarni<br />mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz.</>,
+							subtitle: <>{t("pages.onlaynTalim.bizning_platforma_orqali_siz")}<br />{t("pages.onlaynTalim.mahalliy_va_xorijiy_mutaxassislar")}</>,
 							hideParticles: true,
 							titleStyle: { color: "#fff" },
 							subtitleStyle: { fontSize: "16px" },
@@ -423,17 +435,17 @@ export default function OnlaynTalim() {
 					/>
 				</Suspense>
 			</LazyLoad>
-			<CoursesSection />
-			<LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
+            <CoursesSection />
+            <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
+				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 					<MentorsSection variant='online' />
 				</Suspense>
 			</LazyLoad>
-			<LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
-				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(14,18,27,1)' }} />}>
+            <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
+				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 					<FAQSection hideParticles platformStyle />
 				</Suspense>
 			</LazyLoad>
-		</div>
-	)
+        </div>
+    );
 }

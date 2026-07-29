@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import bottomBg from '@/assets/bgImg/Background (1).png'
 import WaterCanvas from './shared/WaterCanvas'
 import RippleButton from './shared/RippleButton'
@@ -5,10 +6,14 @@ import { Button } from './shared/Button'
 import { useHeroPhase } from '../hooks/useHeroPhase'
 
 export default function MikroMalumotlarHero() {
-	const { show } = useHeroPhase()
+    const {
+        t
+    } = useTranslation();
 
-	return (
-		<section style={{
+    const { show } = useHeroPhase()
+
+    return (
+        <section style={{
 			width: '100%',
 			display: 'flex', flexDirection: 'column',
 			alignItems: 'center',
@@ -17,22 +22,19 @@ export default function MikroMalumotlarHero() {
 			paddingBottom: '85px',
 			background: '#0a0f1a',
 		}}>
-			<WaterCanvas />
-
-			<img src={bottomBg} alt='' style={{
+            <WaterCanvas />
+            <img src={bottomBg} alt='' style={{
 				position: 'absolute', bottom: 0, left: 0,
 				width: '100%', height: '800px', objectFit: 'cover', display: 'block',
 				zIndex: 4, pointerEvents: 'none',
-			}} />
-
-			<div style={{
+			}} loading='lazy' decoding='async' />
+            <div style={{
 				position: 'absolute', bottom: 0, left: 0, right: 0,
 				height: '220px',
 				background: 'linear-gradient(to bottom, transparent 0%, #0a0f1a 100%)',
 				zIndex: 3, pointerEvents: 'none',
 			}} />
-
-			<div style={{
+            <div style={{
 				display: 'flex', flexDirection: 'column',
 				alignItems: 'center', textAlign: 'center',
 				gap: '28px', zIndex: 10, position: 'relative',
@@ -49,10 +51,8 @@ export default function MikroMalumotlarHero() {
 						fontSize: 'clamp(32px, 8.33vw, 64px)',
 						lineHeight: 1.1, letterSpacing: '-.03em',
 						color: '#fff', margin: 0,
-					}}>
-						Rasmiy statistika uchun
-						<br />
-						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>raqamli platforma</span>
+					}}>{t("components.mikroMalumotlarHero.rasmiy_statistika_uchun")}<br />
+						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{t("components.mikroMalumotlarHero.raqamli_platforma")}</span>
 					</h1>
 				</div>
 
@@ -61,10 +61,7 @@ export default function MikroMalumotlarHero() {
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400, fontSize: '16px', lineHeight: 1.75,
 						color: 'rgba(var(--text-rgb),1)', maxWidth: '500px', margin: 0,
-					}}>
-						Mikro-ma'lumotlar laboratoriyasi foydalanuvchilarga O'zbekiston
-						Respublikasining rasmiy statistik ma'lumotlariga xavfsiz va qulay kirish.
-					</p>
+					}}>{t("components.mikroMalumotlarHero.mikro_malumotlar_laboratoriyasi_foydalan")}</p>
 				</div>
 
 				<div style={{ display: 'flex', gap: '12px', ...show(4) }}>
@@ -87,9 +84,7 @@ export default function MikroMalumotlarHero() {
 						}}
 						onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.07)'; e.currentTarget.style.filter = 'brightness(1.18)' }}
 						onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.filter = 'brightness(1)' }}
-					>
-						Ariza yuborish
-					</RippleButton>
+					>{t("components.mikroMalumotlarHero.ariza_yuborish")}</RippleButton>
 
 					<RippleButton
 						style={{
@@ -110,11 +105,9 @@ export default function MikroMalumotlarHero() {
 						}}
 						onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; e.currentTarget.style.background = 'rgba(43,55,80,1)' }}
 						onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.background = 'rgba(31,37,51,1)' }}
-					>
-						Statistik shablonlar
-					</RippleButton>
+					>{t("components.mikroMalumotlarHero.statistik_shablonlar")}</RippleButton>
 				</div>
 			</div>
-		</section>
-	)
+        </section>
+    );
 }

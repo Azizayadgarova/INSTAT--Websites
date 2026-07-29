@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import lobus from '@/assets/Countries.png'
 import fotIcon2 from '@/assets/EeUrJQfpXibXJa3MotZvgAm9tsY.svg fill.png'
 import fotIcon3 from '@/assets/iBEROwOJyQaiqZZ4k8N5Sj51w.svg.png'
@@ -20,7 +21,7 @@ const LINK = {
 	fontSize: '18px',
 	lineHeight: '28px',
 	letterSpacing: '-0.01em',
-	color: 'rgba(188,188,188,1)',
+	color: 'rgba(var(--text-rgb),1)',
 	cursor: 'pointer',
 }
 
@@ -61,7 +62,7 @@ const GlowText = memo(() => {
 				cacheRef.current.forEach(({ s, cx, cy }) => {
 					s.style.color =
 						Math.hypot(x - cx, y - cy) < 140
-							? 'rgba(188,188,188,1)'
+							? 'rgba(var(--text-rgb),1)'
 							: 'rgba(36,39,48,1)'
 				})
 			})
@@ -123,139 +124,138 @@ const GlowText = memo(() => {
 	)
 })
 
-const Footer = () => (
-	<footer className='relative overflow-hidden' style={{ background: 'rgba(14, 18, 27, 1)' }}>
-		<div className='max-w-[1200px] mx-auto px-6'>
-			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 pt-8 pb-[40px] md:pt-10 md:pb-0'>
-				<div className='flex flex-col items-end md:items-start sm:col-span-2 md:col-span-1'>
-					<img
-						src={icon1}
-						alt='INSTAT'
-						width={220}
-						height={37}
-						className='ml-auto mr-[30px] md:ml-0 md:mr-0 w-auto max-w-[200px] md:max-w-[220px]'
-						style={{
-							height: '36.76px',
-							objectFit: 'contain',
-							filter: 'brightness(0) invert(1)',
-						}}
-					/>
-					<p
-						className='text-center md:text-left'
-						style={{
-							...LINK,
-							lineHeight: '26px',
-							letterSpacing: '-0.02em',
-							marginTop: '20px',
-						}}
-					>
-						Kadrlar malakasini oshirish va statistik{' '}
-						<span style={{ whiteSpace: 'nowrap' }}>tadqiqotlar instituti</span>
-					</p>
-				</div>
+const Footer = () => {
+    const {
+        t
+    } = useTranslation();
 
-				<div className='flex flex-col items-center md:items-start'>
-					<h4 className='text-center md:text-left' style={HEADING}>Saytlar</h4>
-					<ul
-						className='items-center md:items-start'
-						style={{
-							marginTop: '20px',
-							display: 'flex',
-							flexDirection: 'column',
-							gap: '14px',
-						}}
-					>
-						{saytlar.map(item => (
-							<li
-								key={item}
-								style={LINK}
-								className='text-center md:text-left hover:text-white transition'
-							>
-								{item}
-							</li>
-						))}
-					</ul>
-				</div>
+    return (
+        <footer className='relative overflow-hidden' style={{ background: 'rgba(var(--bg-rgb),1)' }}>
+            <div className='max-w-[1200px] mx-auto px-6'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 pt-8 pb-[40px] md:pt-10 md:pb-0'>
+                    <div className='flex flex-col items-end md:items-start sm:col-span-2 md:col-span-1'>
+                        <img
+                            src={icon1}
+                            alt='INSTAT'
+                            width={220}
+                            height={37}
+                            className='ml-auto mr-[80px] md:ml-0 md:mr-0 w-auto max-w-[200px] md:max-w-[220px]'
+                            style={{
+                                height: '36.76px',
+                                objectFit: 'contain',
+                                filter: 'brightness(0) invert(1)',
+                            }} loading='lazy' decoding='async' />
+                        <p
+                            className='text-center md:text-left'
+                            style={{
+                                ...LINK,
+                                lineHeight: '26px',
+                                letterSpacing: '-0.02em',
+                                marginTop: '20px',
+                            }}
+                        >{t("components.footer.kadrlar_malakasini_oshirish_va")}{' '}
+                            <span style={{ whiteSpace: 'nowrap' }}>{t("components.footer.tadqiqotlar_instituti")}</span>
+                        </p>
+                    </div>
 
-				<div className='flex flex-col items-center md:items-start'>
-					<h4 className='text-center md:text-left' style={HEADING}>{"Qo'llab quvvatlash"}</h4>
-					<ul
-						className='items-center md:items-start'
-						style={{
-							marginTop: '20px',
-							display: 'flex',
-							flexDirection: 'column',
-							gap: '14px',
-						}}
-					>
-						{support.map(item => (
-							<li
-								key={item}
-								style={LINK}
-								className='text-center md:text-left hover:text-white transition'
-							>
-								{item}
-							</li>
-						))}
-					</ul>
-				</div>
+                    <div className='flex flex-col items-center md:items-start'>
+                        <h4 className='text-center md:text-left' style={HEADING}>{t("components.footer.saytlar")}</h4>
+                        <ul
+                            className='items-center md:items-start'
+                            style={{
+                                marginTop: '20px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '14px',
+                            }}
+                        >
+                            {saytlar.map(item => (
+                                <li
+                                    key={item}
+                                    style={LINK}
+                                    className='text-center md:text-left hover:text-white transition'
+                                >
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-				<div className='flex flex-col items-center md:items-start'>
-					<h4 className='text-center md:text-left' style={HEADING}>Huquqiy</h4>
-					<ul
-						className='items-center md:items-start'
-						style={{
-							marginTop: '20px',
-							display: 'flex',
-							flexDirection: 'column',
-							gap: '14px',
-						}}
-					>
-						{huquqiy.map(item => (
-							<li
-								key={item}
-								style={LINK}
-								className='text-center md:text-left hover:text-white transition'
-							>
-								{item}
-							</li>
-						))}
-					</ul>
-				</div>
-			</div>
-		</div>
+                    <div className='flex flex-col items-center md:items-start'>
+                        <h4 className='text-center md:text-left' style={HEADING}>{"Qo'llab quvvatlash"}</h4>
+                        <ul
+                            className='items-center md:items-start'
+                            style={{
+                                marginTop: '20px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '14px',
+                            }}
+                        >
+                            {support.map(item => (
+                                <li
+                                    key={item}
+                                    style={LINK}
+                                    className='text-center md:text-left hover:text-white transition'
+                                >
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-		{/* ✅ FIXED HEIGHT */}
-		<div className='relative flex justify-center items-end h-[200px] md:h-[300px] overflow-hidden md:mt-[50px]'>
-			<img
-				src={lobus}
-				alt=''
-				aria-hidden='true'
-				className='absolute w-full h-[80%] md:h-full max-w-[800px] md:max-w-[1000px] bottom-[-20px] md:bottom-0'
-			/>
-			<GlowText />
-		</div>
-
-<div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 pt-[10px] pb-[10px] md:py-8 flex flex-col-reverse md:flex-row justify-center md:justify-between items-center gap-4 relative z-10'>
-			<p className='text-center md:text-left' style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>
-				© Instat Inc. Barcha huquqlar himoyalangan.
-			</p>
-			<div className='flex gap-3'>
-				{SOCIAL.map((icon, i) => (
-					<div
-						key={i}
-						className='w-10 h-10 rounded-xl flex items-center justify-center hover:opacity-80 transition'
-						style={{
-							background:
-								'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)',
-						}}
-					>
-						<img src={icon} alt='' className='w-5 h-5' />
-					</div>
-				))}
-			</div>
-		</div>
-	</footer>
-)
+                    <div className='flex flex-col items-center md:items-start'>
+                        <h4 className='text-center md:text-left' style={HEADING}>{t("components.footer.huquqiy")}</h4>
+                        <ul
+                            className='items-center md:items-start'
+                            style={{
+                                marginTop: '20px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '14px',
+                            }}
+                        >
+                            {huquqiy.map(item => (
+                                <li
+                                    key={item}
+                                    style={LINK}
+                                    className='text-center md:text-left hover:text-white transition'
+                                >
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {/* ✅ FIXED HEIGHT */}
+            <div className='relative flex justify-center items-end h-[200px] md:h-[300px] overflow-hidden md:mt-[50px]'>
+                <img
+                    src={lobus}
+                    alt=''
+                    aria-hidden='true'
+                    className='absolute w-full h-[80%] md:h-full max-w-[800px] md:max-w-[1000px] bottom-[-20px] md:bottom-0' loading='lazy' decoding='async' />
+                <GlowText />
+            </div>
+            <div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 pt-[10px] pb-[10px] md:py-8 flex flex-col-reverse md:flex-row justify-center md:justify-between items-center gap-4 relative z-10'>
+                        <p className='text-center md:text-left' style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>{t("components.footer.instat_inc_barcha_huquqlar")}</p>
+                        <div className='flex gap-3'>
+                            {SOCIAL.map((icon, i) => (
+                                <div
+                                    key={i}
+                                    className='w-10 h-10 rounded-xl flex items-center justify-center hover:opacity-80 transition'
+                                    style={{
+                                        background:
+                                            'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)',
+                                    }}
+                                >
+                                    <img src={icon} alt='' className='w-5 h-5' loading='lazy' decoding='async' />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+        </footer>
+    );
+}
 
 export default Footer

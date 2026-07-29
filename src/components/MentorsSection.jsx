@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import bgOnline from '@/assets/bgImg/Background (1).png'
 import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
-import { CONFIGS, mentors, mod } from './MentorsSection/mentors.data'
+import { CONFIGS, mod } from './MentorsSection/mentors.data'
+import { useMentors } from '@/hooks/useMentors'
 import ParticleBackground from './shared/ParticleBackground'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
@@ -9,20 +11,34 @@ import Text from './shared/Text'
 const bg = '/bgImg/Background.svg'
 
 const MentorsSection = ({ variant }) => {
-	const isOnline = variant === 'online'
-	const [current, setCurrent] = useState(0)
-	const bgRef = useRef(null)
-	const [bgVisible, setBgVisible] = useState(false)
-	const [trackW, setTrackW] = useState(800)
-	const trackRef = useRef(null)
-	const isMobile = trackW < 640
-	const dimScale = isMobile
+    const {
+        t
+    } = useTranslation();
+
+    const isOnline = variant === 'online'
+    const [current, setCurrent] = useState(0)
+    const bgRef = useRef(null)
+    const [bgVisible, setBgVisible] = useState(false)
+    const [trackW, setTrackW] = useState(800)
+    const trackRef = useRef(null)
+    const isMobile = trackW < 640
+    const dimScale = isMobile
 		? Math.min(1, trackW / 568)
 		: Math.min(1, Math.max(0.42, trackW / 900))
 
-	const shift = dir => setCurrent(prev => mod(prev + dir, mentors.length))
+    const { items: mentors } = useMentors()
 
-	useEffect(() => {
+    // Avtomatik aylantirish intervali birinchi renderdagi `shift` ni ushlab
+    // qoladi — ro'yxat API'dan kelib uzunligi o'zgarganda ham to'g'ri
+    // hisoblanishi uchun uzunlikni ref orqali o'qiymiz.
+    const countRef = useRef(mentors.length)
+    useEffect(() => {
+		countRef.current = mentors.length
+	}, [mentors.length])
+
+    const shift = dir => setCurrent(prev => mod(prev + dir, countRef.current))
+
+    useEffect(() => {
 		const update = () => {
 			if (trackRef.current) setTrackW(trackRef.current.offsetWidth)
 		}
@@ -31,7 +47,7 @@ const MentorsSection = ({ variant }) => {
 		return () => window.removeEventListener('resize', update)
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		const el = bgRef.current?.parentElement
 		if (!el) return
 		const bgObs = new IntersectionObserver(
@@ -42,7 +58,7 @@ const MentorsSection = ({ variant }) => {
 		return () => bgObs.disconnect()
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		let id = null
 		const observer = new IntersectionObserver(
 			([entry]) => {
@@ -62,8 +78,8 @@ const MentorsSection = ({ variant }) => {
 		}
 	}, [])
 
-	return (
-		<section
+    return (
+        <section
 			style={{
 				backgroundColor: 'rgba(var(--bg-rgb),1)',
 				backgroundImage: isOnline ? undefined : `url(${bg})`,
@@ -82,7 +98,7 @@ const MentorsSection = ({ variant }) => {
 				alignItems: 'center',
 			}}
 		>
-			{isOnline && (
+            {isOnline && (
 				<img
 					ref={bgRef}
 					src={bgOnline}
@@ -100,10 +116,9 @@ const MentorsSection = ({ variant }) => {
 						pointerEvents: 'none',
 						opacity: bgVisible ? 1 : 0,
 						transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
-					}}
-				/>
+					}} loading='lazy' decoding='async' />
 			)}
-			{!isOnline && (
+            {!isOnline && (
 				<ParticleBackground
 					count={40}
 					height={650}
@@ -112,21 +127,17 @@ const MentorsSection = ({ variant }) => {
 					zIndex={1}
 				/>
 			)}
-			{!isOnline && <SectionBackground />}
-
-			<div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
+            {!isOnline && <SectionBackground />}
+            <div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
 				<div>
 					<div style={{ marginBottom: 0 }}>
 						<Text
 							buttonText='Mentorlar'
-							title='Sohasida tajribali mutaxassislar bilan'
+							title={t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")}
 							highlight="o'rganing!"
 							subtitle={
-								<>
-									Bizning platforma orqali siz IT va zamonaviy kasblarni{' '}
-									<br className='hidden sm:block' />
-									mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz.
-								</>
+								<>{t("components.mentorsSection.bizning_platforma_orqali_siz")}{' '}
+									<br className='hidden sm:block' />{t("components.mentorsSection.mahalliy_va_xorijiy_mutaxassislar")}</>
 							}
 							buttonType={isOnline ? 'button2' : 'button1'}
 							titleStyle={
@@ -171,8 +182,8 @@ const MentorsSection = ({ variant }) => {
 					</div>
 				</div>
 			</div>
-		</section>
-	)
+        </section>
+    );
 }
 
 export default MentorsSection

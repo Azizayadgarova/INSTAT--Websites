@@ -1,5 +1,5 @@
-import { useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useCallback, useRef } from 'react'
 import { EASE_SMOOTH } from '../../constants/animations'
 
 const AnimatedSection = ({ children, delay = 0, className, style }) => {

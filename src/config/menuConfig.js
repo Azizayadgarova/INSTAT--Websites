@@ -1,54 +1,52 @@
-﻿export const menuConfig = {
+/**
+ * Menyu strukturasi. Matnlar bu yerda emas — i18n fayllarida (src/i18n/*.json),
+ * `menu.<section>.<path>` kalitlari orqali. Tarjimasi bilan olish uchun `useMenu()`.
+ */
+export const menuConfig = {
 	about: {
-		title: 'Institut haqida',
 		base: '/about',
-		links: [
-			{ name: 'Umumiy ma’lumot', path: 'umumiy-malumot' },
-			{ name: 'Tuzilma', path: 'tuzilma' },
-			{ name: 'Rahbariyat', path: 'rahbariyat' },
-			{ name: 'Korrupsiyaga qarshi kurashish', path: 'qarshi-kurash' },
-			{ name: 'Bo‘sh ish o‘rinlari', path: 'ish-orinlar' },
-			{ name: 'Mehmonhona turidagi yotoqhona', path: 'yotoqhona' },
-			{ name: 'Odob axloq qoidalari', path: 'odob-axloq' },
+		paths: [
+			'umumiy-malumot',
+			'tuzilma',
+			'rahbariyat',
+			'qarshi-kurash',
+			'ish-orinlar',
+			'yotoqhona',
+			'odob-axloq',
 		],
 	},
 	axborot: {
-		title: 'Axborot resurslari',
 		base: '/information-resurses',
-		links: [
-			{ name: '"Statistika" axborot tizimi', path: 'axborot-tizimi' },
-			{
-				name: 'Barqaror rivojlanish maqsadlari',
-				path: 'rivojlanish-maqsadlari',
-			},
-			{ name: 'Gender statistikasi', path: 'gender-statistika' },
-			{ name: 'aholini ro‘yxatga olish', path: 'royhatga-olish' },
-			{
-				name: 'Qishloq xo‘jaligi sohasida ro‘yxatdan o‘tkazish',
-				path: 'qishloq-xojaligi',
-			},
-			{ name: 'Ochiq ma’lumotlar portali', path: 'ochiq-malumotlar' },
-			{
-				name: 'Statistika agentligining uslubiy materiallari',
-				path: 'statistika-agentligi',
-			},
+		paths: [
+			'axborot-tizimi',
+			'rivojlanish-maqsadlari',
+			'gender-statistika',
+			'royhatga-olish',
+			'qishloq-xojaligi',
+			'ochiq-malumotlar',
+			'statistika-agentligi',
 		],
 	},
 	science: {
-		title: 'Ilm-fan',
 		base: '/science',
-		links: [
-			{ name: 'Ilmiy tadqiqot dasturi', path: 'ilmiy-tadqiqot' },
-			{ name: 'Oliy ta’limdan keyingi ta’lim', path: 'oliy-talim' },
-		],
+		paths: ['ilmiy-tadqiqot', 'oliy-talim'],
 	},
 	media: {
-		title: 'Matbuot xizmati',
 		base: '/media-servises',
-		links: [
-			{ name: 'Institut yangiliklari', path: 'yangiliklar' },
-			{ name: 'Rejalashtirilayotgan tadbirlar', path: 'tadbirlar' },
-			{ name: 'Halqaro hamkorlik', path: 'hamkorlik' },
-		],
+		paths: ['yangiliklar', 'tadbirlar', 'hamkorlik'],
 	},
 }
+
+/** Sitemap generatsiyasi va router uchun tekis ro‘yxat */
+export const allRoutes = [
+	'/',
+	...Object.values(menuConfig).flatMap(({ base, paths }) => [
+		base,
+		...paths.map(p => `${base}/${p}`),
+	]),
+	'/platform/onlayn-talim',
+	'/platform/raqamli-kutubxona',
+	'/platform/elektron-jurnal',
+	'/platform/mikro-malumotlar',
+	'/platform/bosh-ish-orinlari',
+]

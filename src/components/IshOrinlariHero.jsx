@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { Button } from './shared/Button'
 import { useHeroPhase } from '../hooks/useHeroPhase'
@@ -48,6 +49,10 @@ function useMouseParallax(ref) {
 }
 
 export default function IshOrinlariHero() {
+  const {
+    t
+  } = useTranslation();
+
   const { show } = useHeroPhase()
   const [email, setEmail] = useState('')
   const sectionRef = useRef(null)
@@ -89,7 +94,6 @@ export default function IshOrinlariHero() {
           <ArcBackground tilt={tilt} isMobile={isMobile} />
         </Suspense>
       )}
-
       {/* Cursor glow — transform only to avoid CLS */}
       <div style={{
         position: 'absolute',
@@ -102,7 +106,6 @@ export default function IshOrinlariHero() {
         pointerEvents: 'none',
         zIndex: 2,
       }} />
-
       <div style={{
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', textAlign: 'center',
@@ -120,10 +123,8 @@ export default function IshOrinlariHero() {
             fontSize: 'clamp(32px, 8.33vw, 64px)',
             lineHeight: 1.1, letterSpacing: '-.03em',
             color: '#fff', margin: 0,
-          }}>
-            Eng dolzarb ish o&apos;rinlari
-            <br />
-            <span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>bitta platformada</span>
+          }}>{t("components.ishOrinlariHero.eng_dolzarb_ish_orinlari")}<br />
+            <span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{t("components.ishOrinlariHero.bitta_platformada")}</span>
           </h1>
         </div>
 
@@ -132,10 +133,7 @@ export default function IshOrinlariHero() {
             fontFamily: 'var(--font-display)',
             fontWeight: 400, fontSize: '16px', lineHeight: 1.75,
             color: 'rgba(var(--text-rgb),1)', maxWidth: '500px', margin: 0,
-          }}>
-            Ish beruvchilar va nomzodlarni bog&apos;lovchi zamonaviy platforma.
-            Sizga mos ishni tez toping va karyerangizni rivojlantiring.
-          </p>
+          }}>{t("components.ishOrinlariHero.ish_beruvchilar_va_nomzodlarni")}</p>
         </div>
 
         <div style={{ ...show(4), position: 'relative', width: '100%', maxWidth: isMobile ? '100%' : '477px', height: isMobile ? '44px' : '52px', marginTop: '50px', display: 'flex', alignItems: 'center', borderRadius: '12px', background: isMobile ? 'rgba(33,43,59,1)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0px 4px 20px 0px rgba(47,7,106,0.08)', backdropFilter: 'blur(10px)', overflow: 'hidden' }}>
@@ -144,7 +142,7 @@ export default function IshOrinlariHero() {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="Pochtangizni qoldiring"
+              placeholder={t("components.ishOrinlariHero.pochtangizni_qoldiring")}
               style={{
                 flex: 1, background: 'transparent', border: 'none', outline: 'none',
                 padding: '0 12px', color: '#fff', fontSize: isMobile ? '14px' : '16px',
@@ -169,12 +167,10 @@ export default function IshOrinlariHero() {
               }}
               onMouseEnter={e => { e.currentTarget.style.filter = 'brightness(1.18)' }}
               onMouseLeave={e => { e.currentTarget.style.filter = 'brightness(1)' }}
-            >
-              Vakansiya izlash
-            </button>
+            >{t("components.ishOrinlariHero.vakansiya_izlash")}</button>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

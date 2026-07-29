@@ -1,35 +1,44 @@
-import img1 from '@/assets/2.png'
-import img2 from '@/assets/3.png'
-import img3 from '@/assets/4.png'
-import img4 from '@/assets/5.png'
-import img5 from '@/assets/6.png'
+import img1 from '@/assets/2.webp'
+import img2 from '@/assets/3.webp'
+import img3 from '@/assets/4.webp'
+import img4 from '@/assets/5.webp'
+import img5 from '@/assets/6.webp'
 import bgGlow from '@/assets/bgImg/Background (1).png'
-import { memo, useEffect, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import FAQSection from './FAQSection'
 import Testimonial from './Testimonial'
 import BlurWords from './shared/BlurWords'
 import { Button } from './shared/Button'
 import { Button2 } from './shared/Button2'
+import AsyncBoundary from './shared/AsyncBoundary'
+import { dataReportsApi } from '@/api/resources.api'
+import { pickField } from '@/utils/siteContent'
+import { useApiResource } from '@/hooks/useApiResource'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const DATASETS = [
-	{ img: img1, title: "Aholini ro'yxatga olish ma'lumotlari",      year: '2023 yil', category: 'Demografiya',        format: 'CSV, XLSX' },
-	{ img: img2, title: "Mehnat bozori mikro ma'lumotlari",           year: '2022 yil', category: 'Mehnat',             format: 'CSV, SPSS' },
-	{ img: img3, title: "Kichik va o'rta biznes registri",            year: '2023 yil', category: 'Tadbirkorlik',       format: 'XLSX, JSON' },
-	{ img: img4, title: "Qishloq xo'jaligi ro'yxati",                year: '2021 yil', category: "Qishloq xo'jaligi", format: 'CSV, XLSX' },
-	{ img: img5, title: "Ta'lim statistikasi to'plami",              year: '2023 yil', category: "Ta'lim",             format: 'CSV, SPSS' },
-	{ img: img1, title: 'Sog\'liqni saqlash indikatorlari',          year: '2022 yil', category: 'Sog\'liq',           format: 'CSV, XLSX' },
-	{ img: img2, title: 'Uy xo\'jaliklari so\'rovi natijalari',      year: '2023 yil', category: 'Ijtimoiy',           format: 'CSV, SPSS' },
-	{ img: img3, title: 'Sanoat korxonalari ma\'lumotlari',          year: '2022 yil', category: 'Sanoat',             format: 'XLSX, JSON' },
-	{ img: img4, title: 'Narxlar monitoringi to\'plami',             year: '2023 yil', category: 'Iqtisodiyot',        format: 'CSV, XLSX' },
-	{ img: img5, title: 'Tashqi savdo statistikasi',                 year: '2022 yil', category: 'Savdo',              format: 'CSV, JSON' },
-	{ img: img1, title: 'Uy joyi va kommunal xizmatlar',             year: '2021 yil', category: 'Ijtimoiy',           format: 'CSV, XLSX' },
-	{ img: img2, title: 'Transport infratuzilmasi ko\'rsatkichlari', year: '2023 yil', category: 'Transport',           format: 'XLSX, JSON' },
-]
+// API data-reports rasm bermaydi — rotatsiyada shu placeholder'lar ishlatiladi
+const PLACEHOLDER_IMAGES = [img1, img2, img3, img4, img5]
 
-const CATEGORIES = ['Demografiya', 'Mehnat', 'Tadbirkorlik', "Qishloq xo'jaligi", "Ta'lim", "Sog'liq", 'Ijtimoiy', 'Sanoat']
-const FORMATS    = ['CSV', 'XLSX', 'SPSS', 'JSON']
+/** DataReport (backend) -> DatasetCard uchun kerakli shakl */
+const toDataset = (report, i, lang) => {
+	const extensions = Array.from(
+		new Set((report.options ?? []).map(o => (o.file_extension || '').replace('.', '').toUpperCase()).filter(Boolean)),
+	)
+	const year = report.created_at ? new Date(report.created_at).getFullYear() : null
+	return {
+		id: report.id,
+		img: PLACEHOLDER_IMAGES[i % PLACEHOLDER_IMAGES.length],
+		title: report.name,
+		year: year ? `${year} yil` : '',
+		category: pickField(report.category ?? {}, 'name', lang) || "Noma'lum",
+		format: extensions.length ? extensions.join(', ') : "Noma'lum",
+	}
+}
+
+const FALLBACK_CATEGORIES = ['Demografiya', 'Mehnat', 'Tadbirkorlik', "Qishloq xo'jaligi", "Ta'lim", "Sog'liq", 'Ijtimoiy', 'Sanoat']
+const FALLBACK_FORMATS = ['CSV', 'XLSX', 'SPSS', 'JSON']
 
 const STATS = [
 	{ value: '340+', label: "Ma'lumotlar to'plami" },
@@ -132,7 +141,7 @@ const DatasetCard = memo(function DatasetCard({ d }) {
 
 // ─── Filter bar ───────────────────────────────────────────────────────────────
 
-function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setFormat, fmtOpen, setFmtOpen, onSearch }) {
+function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setFormat, fmtOpen, setFmtOpen, onSearch, categories, formats }) {
 	const dropStyle = {
 		position: 'absolute', top: 'calc(100% + 8px)', left: 0, zIndex: 200,
 		background: 'rgba(18,22,32,0.85)', backdropFilter: 'blur(16px)',
@@ -172,7 +181,7 @@ function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setForm
 				</div>
 				{catOpen && (
 					<div style={{ ...dropStyle, minWidth: '200px' }}>
-						{CATEGORIES.map(c => (
+						{categories.map(c => (
 							<div key={c} style={itemStyle(c === category)} onClick={e => { e.stopPropagation(); setCategory(c); setCatOpen(false) }}>{c}</div>
 						))}
 					</div>
@@ -197,7 +206,7 @@ function FilterRow({ category, setCategory, catOpen, setCatOpen, format, setForm
 				</div>
 				{fmtOpen && (
 					<div style={{ ...dropStyle, minWidth: '160px' }}>
-						{FORMATS.map(f => (
+						{formats.map(f => (
 							<div key={f} style={itemStyle(f === format)} onClick={e => { e.stopPropagation(); setFormat(f); setFmtOpen(false) }}>{f}</div>
 						))}
 					</div>
@@ -263,22 +272,52 @@ function Pagination({ page, setPage, total }) {
 // ─── Dataset section ──────────────────────────────────────────────────────────
 
 function DatasetSection() {
+	const { i18n } = useTranslation()
+	const lang = i18n.resolvedLanguage ?? 'uz'
+
+	// data-reports: kategoriya turi "micro-data" bo'lganlarni olamiz
+	const { data, loading, error, retry } = useApiResource(
+		() => dataReportsApi.getAll({ per_page: 100 }),
+		[],
+	)
+
+	const datasets = useMemo(
+		() => (data?.items ?? []).map((report, i) => toDataset(report, i, lang)),
+		[data, lang],
+	)
+
+	const categories = useMemo(() => {
+		const unique = Array.from(new Set(datasets.map(d => d.category))).filter(Boolean)
+		return unique.length ? unique : FALLBACK_CATEGORIES
+	}, [datasets])
+
+	const formats = useMemo(() => {
+		const unique = Array.from(new Set(datasets.flatMap(d => d.format.split(', ')))).filter(Boolean)
+		return unique.length ? unique : FALLBACK_FORMATS
+	}, [datasets])
+
 	const [page, setPage]           = useState(1)
-	const [category, setCategory]   = useState(CATEGORIES[0])
+	const [category, setCategory]   = useState(null)
 	const [catOpen, setCatOpen]     = useState(false)
-	const [format, setFormat]       = useState(FORMATS[0])
+	const [format, setFormat]       = useState(null)
 	const [fmtOpen, setFmtOpen]     = useState(false)
-	const [filtered, setFiltered]   = useState(DATASETS)
+	const [filtered, setFiltered]   = useState(null)
+
+	// Foydalanuvchi hali tanlamagan bo'lsa — birinchi mavjud qiymat ko'rsatiladi
+	// (bu faqat render uchun, state emas — useEffect kerak emas)
+	const activeCategory = category ?? categories[0] ?? null
+	const activeFormat = format ?? formats[0] ?? null
 
 	const PER_PAGE = 8
 
 	const handleSearch = () => {
-		const result = DATASETS.filter(d => d.category === category && d.format.includes(format))
-		setFiltered(result.length ? result : DATASETS)
+		const result = datasets.filter(d => d.category === activeCategory && d.format.includes(activeFormat))
+		setFiltered(result.length ? result : datasets)
 		setPage(1)
 	}
 
-	const displayed = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE)
+	const visible = filtered ?? datasets
+	const displayed = visible.slice((page - 1) * PER_PAGE, page * PER_PAGE)
 
 	return (
 		<section style={{
@@ -320,29 +359,45 @@ function DatasetSection() {
 
 			<div style={{ position: 'relative', zIndex: 10, width: '800px' }}>
 				<FilterRow
-					category={category} setCategory={setCategory}
+					category={activeCategory} setCategory={setCategory}
 					catOpen={catOpen} setCatOpen={setCatOpen}
-					format={format} setFormat={setFormat}
+					format={activeFormat} setFormat={setFormat}
 					fmtOpen={fmtOpen} setFmtOpen={setFmtOpen}
 					onSearch={handleSearch}
+					categories={categories}
+					formats={formats}
 				/>
 			</div>
 
-			<div style={{
-				display: 'grid', gridTemplateColumns: 'repeat(4, 282px)',
-				gap: '32px', justifyContent: 'center', marginBottom: '48px',
-				position: 'relative', zIndex: 1,
-			}}>
-				{displayed.length > 0 ? displayed.map((d, i) => (
-					<DatasetCard key={i} d={d} />
-				)) : (
-					<div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0', fontFamily: 'var(--font-display)', fontSize: '16px', color: 'rgba(150,160,180,1)' }}>
-						Bu tanlov bo'yicha ma'lumot topilmadi
+			<AsyncBoundary
+				loading={loading}
+				error={error}
+				onRetry={retry}
+				isEmpty={!loading && !error && datasets.length === 0}
+				skeleton={
+					<div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 282px)', gap: '32px', justifyContent: 'center', marginBottom: '48px', position: 'relative', zIndex: 1 }}>
+						{[0, 1, 2, 3].map(i => (
+							<div key={i} style={{ width: 282, height: 342, borderRadius: 20, background: 'rgba(var(--card-rgb),1)' }} />
+						))}
 					</div>
-				)}
-			</div>
+				}
+			>
+				<div style={{
+					display: 'grid', gridTemplateColumns: 'repeat(4, 282px)',
+					gap: '32px', justifyContent: 'center', marginBottom: '48px',
+					position: 'relative', zIndex: 1,
+				}}>
+					{displayed.length > 0 ? displayed.map((d, i) => (
+						<DatasetCard key={d.id ?? i} d={d} />
+					)) : (
+						<div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0', fontFamily: 'var(--font-display)', fontSize: '16px', color: 'rgba(150,160,180,1)' }}>
+							Bu tanlov bo'yicha ma'lumot topilmadi
+						</div>
+					)}
+				</div>
 
-			<Pagination page={page} setPage={setPage} total={Math.ceil(filtered.length / PER_PAGE)} />
+				<Pagination page={page} setPage={setPage} total={Math.max(1, Math.ceil(visible.length / PER_PAGE))} />
+			</AsyncBoundary>
 		</section>
 	)
 }
@@ -394,7 +449,7 @@ function HeroSection() {
 
 	return (
 		<section style={{
-			width: '100%', backgroundImage: 'url(/BG.png)', backgroundSize: 'cover',
+			width: '100%', backgroundImage: 'url(/BG.webp)', backgroundSize: 'cover',
 			backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
 			display: 'flex', flexDirection: 'column', alignItems: 'center',
 			position: 'relative', overflow: 'hidden', paddingTop: '160px',

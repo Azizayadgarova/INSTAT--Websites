@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import icon1 from '@/assets/Group 1707483799 (5).png'
 import Text from './shared/Text'
@@ -14,19 +15,23 @@ const PALETTE = [
 ]
 
 const TopFooter = () => {
-	const [email, setEmail] = useState('')
-	const [submitted, setSubmitted] = useState(false)
+    const {
+        t
+    } = useTranslation();
 
-	const handleSubmit = e => {
+    const [email, setEmail] = useState('')
+    const [submitted, setSubmitted] = useState(false)
+
+    const handleSubmit = e => {
 		e.preventDefault()
 		if (!email.trim()) return
 		setSubmitted(true)
 		setEmail('')
 	}
 
-	const cardRef = useRef(null)
-	const gridRef = useRef(null)
-	const stateRef = useRef({
+    const cardRef = useRef(null)
+    const gridRef = useRef(null)
+    const stateRef = useRef({
 		cols: 0,
 		rows: 0,
 		tiles: [],
@@ -34,7 +39,7 @@ const TopFooter = () => {
 		fadeTimers: {},
 	})
 
-	const buildGrid = () => {
+    const buildGrid = () => {
 		const card = cardRef.current
 		const grid = gridRef.current
 		if (!card || !grid) return
@@ -59,7 +64,7 @@ const TopFooter = () => {
 		stateRef.current = { cols, rows, tiles, defaults, fadeTimers: {} }
 	}
 
-	const handleMouseMove = e => {
+    const handleMouseMove = e => {
 		const { cols, rows, tiles, fadeTimers } = stateRef.current
 		const rect = cardRef.current?.getBoundingClientRect()
 		if (!rect) return
@@ -87,7 +92,7 @@ const TopFooter = () => {
 		})
 	}
 
-	const handleMouseLeave = () => {
+    const handleMouseLeave = () => {
 		const { tiles, defaults, fadeTimers } = stateRef.current
 		tiles.forEach((tile, idx) => {
 			if (fadeTimers[idx]) return
@@ -98,16 +103,16 @@ const TopFooter = () => {
 		})
 	}
 
-	useEffect(() => {
+    useEffect(() => {
 		requestAnimationFrame(buildGrid)
 		const ro = new ResizeObserver(buildGrid)
 		if (cardRef.current) ro.observe(cardRef.current)
 		return () => ro.disconnect()
 	}, [])
 
-	return (
-		<>
-			<section className='hidden md:block w-full bg-[#0E121B] py-10'>
+    return (
+        <>
+            <section className='hidden md:block w-full bg-[#0E121B] py-10'>
 				<div className='w-full max-w-[1200px] mx-auto px-6'>
 					<div
 						ref={cardRef}
@@ -155,20 +160,16 @@ const TopFooter = () => {
 										<img
 											src={icon1}
 											alt=''
-											className='w-[56px] h-[46px] object-contain'
-										/>
+											className='w-[56px] h-[46px] object-contain' loading='lazy' decoding='async' />
 									</div>
 								</div>
 							</div>
 
 							<Text
-								title='Savollaringiz bormi?'
+								title={t("components.topFooter.savollaringiz_bormi")}
 								highlight="Biz bilan bog'laning"
 								subtitle={
-									<>
-										Kurslar, ro'yxatdan o'tish yoki hamkorlik <br /> bo'yicha
-										savollaringiz bo'lsa, biz bilan bog'laning
-									</>
+									<>{t("components.topFooter.kurslar_royxatdan_otish_yoki")}<br />{t("components.topFooter.boyicha_savollaringiz_bolsa_biz")}</>
 								}
 							/>
 							<div
@@ -233,9 +234,7 @@ const TopFooter = () => {
 									</svg>
 									{submitted ? (
 										<div className='relative z-10 flex items-center justify-center w-full h-full px-4'>
-											<span style={{ color: 'rgba(105,170,251,1)', fontFamily: 'Inter Display,sans-serif', fontSize: '16px' }}>
-												✓ Email muvaffaqiyatli yuborildi!
-											</span>
+											<span style={{ color: 'rgba(105,170,251,1)', fontFamily: 'Inter Display,sans-serif', fontSize: '16px' }}>{t("components.topFooter.email_muvaffaqiyatli_yuborildi")}</span>
 										</div>
 									) : (
 										<form
@@ -244,7 +243,7 @@ const TopFooter = () => {
 										>
 											<input
 												type='email'
-												placeholder='Pochtangizni qoldiring'
+												placeholder={t("components.topFooter.pochtangizni_qoldiring")}
 												value={email}
 												onChange={e => setEmail(e.target.value)}
 												required
@@ -275,9 +274,7 @@ const TopFooter = () => {
 													background: 'linear-gradient(180deg,#3E8BE6 0%,#1C5FB4 100%)',
 													boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(var(--bg-rgb),0.3) inset, 0px 16px 24px -8px rgba(var(--bg-rgb),0.1), 0px 0px 0px 1px rgba(28,84,148,1)',
 												}}
-											>
-												Yuborish
-											</button>
+											>{t("components.topFooter.yuborish")}</button>
 										</form>
 									)}
 								</div>
@@ -285,8 +282,8 @@ const TopFooter = () => {
 					</div>
 				</div>
 			</section>
-		</>
-	)
+        </>
+    );
 }
 
 export default TopFooter

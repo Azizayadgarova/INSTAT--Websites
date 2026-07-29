@@ -1,5 +1,6 @@
-import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
+import React from 'react'
 import bgImage from '@/assets/Union.png'
 import bgMobile from '@/assets/Union (2).png'
 
@@ -52,11 +53,14 @@ const mobilePositions = [
 ]
 
 const StatistikBlok = () => {
-	return (
-		<section style={{ width: '100%' }}>
+    const {
+        t
+    } = useTranslation();
 
-			{/* DESKTOP */}
-			<div
+    return (
+        <section style={{ width: '100%' }}>
+            {/* DESKTOP */}
+            <div
 				className='hidden md:block'
 				style={{
 					width: '1100px',
@@ -104,9 +108,7 @@ const StatistikBlok = () => {
 							color: '#fff',
 							margin: 0,
 						}}
-					>
-						Statistik blok
-					</motion.h2>
+					>{t("components.statistikBlok.statistik_blok")}</motion.h2>
 
 					<div
 						style={{
@@ -116,7 +118,7 @@ const StatistikBlok = () => {
 						}}
 					>
 						{stats.map((item, index) => (
-							<React.Fragment key={index}>
+							<React.Fragment key={item.label}>
 								{/* Label */}
 								<motion.div
 									initial={{ opacity: 0 }}
@@ -171,9 +173,8 @@ const StatistikBlok = () => {
 					</div>
 				</div>
 			</div>
-
-			{/* MOBILE */}
-			<div
+            {/* MOBILE */}
+            <div
 				className='block md:hidden'
 				style={{
 					position: 'relative',
@@ -196,8 +197,7 @@ const StatistikBlok = () => {
 						height: '667px',
 						zIndex: 0,
 						pointerEvents: 'none',
-					}}
-				/>
+					}} loading='lazy' decoding='async' />
 
 				{/* Title */}
 				<motion.h2
@@ -216,15 +216,13 @@ const StatistikBlok = () => {
 						color: '#fff',
 						margin: 0,
 					}}
-				>
-					Statistik blok
-				</motion.h2>
+				>{t("components.statistikBlok.statistik_blok")}</motion.h2>
 
 				{/* Circles & labels */}
 				{stats.map((item, index) => {
 					const pos = mobilePositions[index]
 					return (
-						<React.Fragment key={index}>
+						<React.Fragment key={item.label}>
 							{/* Circle */}
 							<motion.div
 								initial={{ opacity: 0, scale: 0.8 }}
@@ -281,9 +279,8 @@ const StatistikBlok = () => {
 					)
 				})}
 			</div>
-
-		</section>
-	)
+        </section>
+    );
 }
 
 export default StatistikBlok

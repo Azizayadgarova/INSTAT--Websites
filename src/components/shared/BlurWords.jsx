@@ -1,5 +1,4 @@
-﻿import { motion } from 'framer-motion'
-
+import { motion } from 'framer-motion'
 const vp = { once: true, amount: 0.2 }
 
 const BlurWords = ({ text, style, className, delay = 0, step = 0.07 }) => (

@@ -1,4 +1,4 @@
-import heroImg from '@/assets/Image (2).png'
+import heroImg from '@/assets/Image (2).webp'
 
 const stats = [
 	{ value: '200 M+', label: 'Platformadagi faollik' },

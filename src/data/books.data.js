@@ -1,4 +1,4 @@
-﻿export const books = [
+export const books = [
 	{ id: 1, title: "Boy ota, kambag'al ota", category: 'Biznes va Rivojlanish', rating: 4.8, reviews: 756, izoh: 46, image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&q=80' },
 	{ id: 2, title: 'Motivatsiya formulasi', category: 'Psixologiya', rating: 4.5, reviews: 1249, izoh: 86, image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&q=80' },
 	{ id: 3, title: 'Brending strategiyasi', category: "San'at va Dizayn", rating: 4.7, reviews: 890, izoh: 32, image: 'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&q=80' },

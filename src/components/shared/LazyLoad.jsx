@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const LazyLoad = ({ children, fallback, rootMargin = '400px' }) => {
 	const [visible, setVisible] = useState(false)

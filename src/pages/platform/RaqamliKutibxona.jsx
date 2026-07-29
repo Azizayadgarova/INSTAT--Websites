@@ -1,14 +1,15 @@
-import bgImage from '@/assets/bgImg/Ai-boom 2.png'
-import img1 from '@/assets/image1.png'
-import img2 from '@/assets/image2.png'
-import img3 from '@/assets/image3.png'
-import img4 from '@/assets/image4.png'
-import img5 from '@/assets/image5.png'
-import card2 from '@/assets/Right v2 (1).png'
-import card3 from '@/assets/Right v2 (2).png'
-import card4 from '@/assets/Right v2 (3).png'
-import card5 from '@/assets/Right v2 (4).png'
-import card1 from '@/assets/Right v2.png'
+import { useTranslation } from 'react-i18next'
+import bgImage from '@/assets/bgImg/Ai-boom 2.webp'
+import img1 from '@/assets/image1.webp'
+import img2 from '@/assets/image2.webp'
+import img3 from '@/assets/image3.webp'
+import img4 from '@/assets/image4.webp'
+import img5 from '@/assets/image5.webp'
+import card2 from '@/assets/Right v2 (1).webp'
+import card3 from '@/assets/Right v2 (2).webp'
+import card4 from '@/assets/Right v2 (3).webp'
+import card5 from '@/assets/Right v2 (4).webp'
+import card1 from '@/assets/Right v2.webp'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import ElektronKutubxona from '../../components/ElektronKutubxona'
 import FAQSection from '../../components/FAQSection'
@@ -124,27 +125,31 @@ const ROW2 = [
 ]
 
 const RaqamliKutibxona = () => {
-	const [mounted, setMounted] = useState(false)
-	const [hoveredIndex, setHovered] = useState(null)
-	const [, setParticles] = useState([])
-	const [shimmers, setShimmers] = useState({})
-	const [order, setOrder] = useState(() => IMAGES.map((_, i) => i))
-	const [dragOver, setDragOver] = useState(null)
+    const {
+        t
+    } = useTranslation();
 
-	const sceneRef = useRef(null)
-	const mouseRef = useRef({ mx: 0, my: 0 })
-	const rafRef = useRef(null)
-	const cardRefs = useRef([])
-	const floatRefs = useRef([])
-	const tRef = useRef(0)
-	const lastRef = useRef(0)
-	const hoveredRef = useRef(null)
-	const dragIndexRef = useRef(null)
-	const swapRef = useRef({})
+    const [mounted, setMounted] = useState(false)
+    const [hoveredIndex, setHovered] = useState(null)
+    const [, setParticles] = useState([])
+    const [shimmers, setShimmers] = useState({})
+    const [order, setOrder] = useState(() => IMAGES.map((_, i) => i))
+    const [dragOver, setDragOver] = useState(null)
 
-	const centerIndex = Math.floor(POSITIONS.length / 2)
+    const sceneRef = useRef(null)
+    const mouseRef = useRef({ mx: 0, my: 0 })
+    const rafRef = useRef(null)
+    const cardRefs = useRef([])
+    const floatRefs = useRef([])
+    const tRef = useRef(0)
+    const lastRef = useRef(0)
+    const hoveredRef = useRef(null)
+    const dragIndexRef = useRef(null)
+    const swapRef = useRef({})
 
-	useEffect(() => {
+    const centerIndex = Math.floor(POSITIONS.length / 2)
+
+    useEffect(() => {
 		const el = document.createElement('style')
 		el.setAttribute('data-rk-kf', '1')
 		el.textContent = keyframes
@@ -152,12 +157,12 @@ const RaqamliKutibxona = () => {
 		return () => document.head.removeChild(el)
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		const t = setTimeout(() => setMounted(true), 50)
 		return () => clearTimeout(t)
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		const el = sceneRef.current
 		if (!el) return
 
@@ -180,7 +185,7 @@ const RaqamliKutibxona = () => {
 		}
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		if (!mounted) return
 
 		const loop = ts => {
@@ -241,20 +246,20 @@ const RaqamliKutibxona = () => {
 		return () => cancelAnimationFrame(rafRef.current)
 	}, [mounted])
 
-	const handleEnter = useCallback(i => {
+    const handleEnter = useCallback(i => {
 		setHovered(i)
 		hoveredRef.current = i
 		setShimmers(prev => ({ ...prev, [i]: false }))
 		requestAnimationFrame(() => setShimmers(prev => ({ ...prev, [i]: true })))
 	}, [])
 
-	const handleLeave = useCallback(i => {
+    const handleLeave = useCallback(i => {
 		setHovered(null)
 		hoveredRef.current = null
 		setShimmers(prev => ({ ...prev, [i]: false }))
 	}, [])
 
-	const handleDrop = useCallback(dropIdx => {
+    const handleDrop = useCallback(dropIdx => {
 		const dragIdx = dragIndexRef.current
 		if (dragIdx === null || dragIdx === dropIdx) {
 			setDragOver(null)
@@ -273,7 +278,7 @@ const RaqamliKutibxona = () => {
 		setDragOver(null)
 	}, [])
 
-	const handleClick = useCallback((e) => {
+    const handleClick = useCallback((e) => {
 		const rect = e.currentTarget.getBoundingClientRect()
 		const cx = e.clientX - rect.left
 		const cy = e.clientY - rect.top
@@ -299,9 +304,9 @@ const RaqamliKutibxona = () => {
 		)
 	}, [])
 
-	return (
-		<>
-			<div
+    return (
+        <>
+            <div
 				ref={sceneRef}
 				style={{
 					width: '100%',
@@ -328,14 +333,10 @@ const RaqamliKutibxona = () => {
 				>
 					<Text
 						buttonText='Platforma haqida'
-						title='Minglab elektron kitoblar'
+						title={t("pages.raqamliKutibxona.minglab_elektron_kitoblar")}
 						highlight='-bir platformada'
 						subtitle={
-							<>
-								Onlayn kitoblarni sotib oling, bepul asarlarni kashf eting va
-								ularni qulay o'qish rejimida <br />
-								istalgan qurilmada o'qing.
-							</>
+							<>{t("pages.raqamliKutibxona.onlayn_kitoblarni_sotib_oling")}<br />{t("pages.raqamliKutibxona.istalgan_qurilmada_oqing")}</>
 						}
 						buttonType='button2'
 					/>
@@ -433,8 +434,7 @@ const RaqamliKutibxona = () => {
 													transition:
 														'transform 0.5s cubic-bezier(0.22,1,0.36,1)',
 													display: 'block',
-												}}
-											/>
+												}} loading='lazy' decoding='async' />
 											<div
 												style={{
 													position: 'absolute',
@@ -516,9 +516,11 @@ const RaqamliKutibxona = () => {
 								willChange: 'transform',
 							}}
 						>
+							{/* Lenta bir xil elementlarni takrorlaydi va tartibi hech qachon o'zgarmaydi —
+							    bu yerda indeks kalit to'g'ri yechim */}
 							{row.items.map((item, i) => (
 								<div
-									key={i}
+									key={`${item.label}-${i}`}
 									style={{
 										display: 'flex',
 										alignItems: 'center',
@@ -554,8 +556,7 @@ const RaqamliKutibxona = () => {
 												height: '100%',
 												objectFit: 'cover',
 												display: 'block',
-											}}
-										/>
+											}} loading='lazy' decoding='async' />
 									</div>
 									<span
 										style={{
@@ -578,15 +579,15 @@ const RaqamliKutibxona = () => {
 					))}
 				</div>
 			</div>
-			<InformationStatistika />
-			<FoydalanishJarayoni />
-			<ProblemSection />
-			<ElektronKutubxona />
-			<Kutubxona />
-			<FAQSection hideParticles platformStyle />
-			<Testimonials hideParticles platformStyle />
-		</>
-	)
+            <InformationStatistika />
+            <FoydalanishJarayoni />
+            <ProblemSection />
+            <ElektronKutubxona />
+            <Kutubxona />
+            <FAQSection hideParticles platformStyle />
+            <Testimonials hideParticles platformStyle />
+        </>
+    );
 }
 
 export default RaqamliKutibxona

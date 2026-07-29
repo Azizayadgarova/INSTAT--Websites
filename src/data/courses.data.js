@@ -1,4 +1,4 @@
-﻿export const courses = [
+export const courses = [
 	{
 		id: 1,
 		title: 'Milliy hisoblar tizimi',

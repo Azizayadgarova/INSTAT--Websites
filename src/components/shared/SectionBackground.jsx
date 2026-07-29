@@ -1,4 +1,4 @@
-﻿import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import bg1 from '@/assets/bgImg/Background (1).png'
 import ParticleBackground from './ParticleBackground'
 
@@ -30,8 +30,7 @@ const SectionBackground = memo(({ hideParticles = false, hideBg = false }) => {
 						zIndex: 3,
 						opacity: visible ? 1 : 0,
 						transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
-					}}
-				/>
+					}} loading='lazy' decoding='async' />
 			)}
 			{!hideParticles && !hideBg && (
 				<ParticleBackground

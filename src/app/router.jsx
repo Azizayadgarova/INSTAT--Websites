@@ -1,9 +1,9 @@
-﻿import { lazy, Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-import TezKunda from '../pages/TezKunda'
 import MainLayout from './../layouts/MainLayout'
 import SecondLayout from './../layouts/SecondLayout'
 import NotFound from '../pages/NotFound'
+import ErrorBoundary from '../components/shared/ErrorBoundary'
 
 // Platform pages
 const OnlaynTalim = lazy(() => import('../pages/platform/OnlaynTalim'))
@@ -54,10 +54,16 @@ const s = Component => (
 	</Suspense>
 )
 
-export const router = createBrowserRouter([
+// Marshrutlar alohida eksport qilinadi — testlarda createMemoryRouter bilan ishlatiladi
+export const routes = [
 	{
 		path: '/',
 		element: <MainLayout />,
+		errorElement: (
+			<ErrorBoundary>
+				<NotFound />
+			</ErrorBoundary>
+		),
 		children: [
 			// Default home page
 			{ index: true, element: s(About) },
@@ -117,6 +123,11 @@ export const router = createBrowserRouter([
 	{
 		path: '/platform',
 		element: <SecondLayout />,
+		errorElement: (
+			<ErrorBoundary>
+				<NotFound />
+			</ErrorBoundary>
+		),
 		children: [
 			{ index: true, element: <Navigate to='/platform/onlayn-talim' replace /> },
 			{ path: 'onlayn-talim',        element: s(OnlaynTalim) },
@@ -130,4 +141,6 @@ export const router = createBrowserRouter([
 		path: '*',
 		element: <NotFound />,
 	},
-])
+]
+
+export const router = createBrowserRouter(routes)

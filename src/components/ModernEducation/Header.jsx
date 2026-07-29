@@ -1,10 +1,13 @@
-﻿import bg from '@/assets/bgImg/Background (1).png'
+import bg from '@/assets/bgImg/Background (1).png'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import AnimatedSection from '../shared/AnimatedSection'
 import ParticleBackground from '../shared/ParticleBackground'
 import Text from '../shared/Text'
 
-export default function ModernEducationHeader({ headerProps = {} }) {
+export default function ModernEducationHeader({ headerProps = {}, children }) {
+	const { t } = useTranslation()
+
 	const bgRef = useRef(null)
 	const [bgVisible, setBgVisible] = useState(false)
 
@@ -27,9 +30,9 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 		highlightColor,
 		subtitle = (
 			<>
-				Beshta platforma orqali o'qish, tadqiqot qilish, bilim olish va
-				professional <br className='hidden md:block' />
-				rivojlanish imkoniyatlari.
+				{t('components.header.beshta_platforma_orqali_oqish')}
+				<br className='hidden md:block' />
+				{t('components.header.rivojlanish_imkoniyatlari')}
 			</>
 		),
 		hideParticles = false,
@@ -42,40 +45,52 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 		<section
 			className='relative w-full flex flex-col items-center justify-start font-sans text-white'
 			style={{
-				overflow: 'hidden',
-				minHeight: 'auto',
+				minHeight: 380,
 				backgroundColor: 'rgba(var(--bg-rgb),1)',
 			}}
 		>
-			<img
-				ref={bgRef}
-				src={bg}
-				alt=''
+			<div
 				style={{
 					position: 'absolute',
 					top: 0,
-					left: '50%',
-					transform: 'translateX(-50%)',
+					left: 0,
 					width: '100%',
-					height: '100%',
-					objectFit: 'cover',
-					objectPosition: 'center top',
+					height: 'calc(380px + 100vh)',
+					overflow: 'hidden',
 					zIndex: 0,
 					pointerEvents: 'none',
-					opacity: bgVisible ? 1 : 0,
-					transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
 				}}
-			/>
-
-			{!hideParticles && (
-				<ParticleBackground
-					count={40}
-					height={650}
-					opacity={0.8}
-					color='255, 255, 255'
-					zIndex={2}
+			>
+				<img
+					ref={bgRef}
+					src={bg}
+					alt=''
+					style={{
+						position: 'absolute',
+						top: 0,
+						left: '50%',
+						transform: 'translateX(-50%)',
+						width: '100%',
+						height: '100%',
+						objectFit: 'cover',
+						objectPosition: 'center top',
+						opacity: bgVisible ? 1 : 0,
+						transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
+					}}
+					loading='lazy'
+					decoding='async'
 				/>
-			)}
+
+				{!hideParticles && (
+					<ParticleBackground
+						count={40}
+						height={650}
+						opacity={0.8}
+						color='255, 255, 255'
+						zIndex={2}
+					/>
+				)}
+			</div>
 
 			<AnimatedSection
 				style={{
@@ -100,6 +115,12 @@ export default function ModernEducationHeader({ headerProps = {} }) {
 					/>
 				</div>
 			</AnimatedSection>
+
+			{children && (
+				<div style={{ position: 'relative', zIndex: 50, width: '100%' }}>
+					{children}
+				</div>
+			)}
 		</section>
 	)
 }

@@ -1,122 +1,11 @@
+import { useTranslation } from 'react-i18next'
+import { useDataText } from '@/hooks/useDataText'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { useState } from 'react'
 import { Button2 } from './shared/Button2'
 import AnimatedSection from './shared/AnimatedSection'
 
-const ALL_DATA = [
-	{
-		title: "Aholi soni va demografik o'sish",
-		category: 'Demografiya',
-		location: "O'zbekiston, hududlar kesimida",
-		years: '2000 — 2024',
-		published: '2025 yil mart',
-	},
-	{
-		title: "Tug'ilish va o'lim statistikasi",
-		category: 'Demografiya',
-		location: "O'zbekiston",
-		years: '2005 — 2024',
-		published: '2025 yil fevral',
-	},
-	{
-		title: "YaIM va iqtisodiy o'sish ko'rsatkichlari",
-		category: 'Iqtisodiyot',
-		location: "O'zbekiston",
-		years: '2005 — 2024',
-		published: '2025 yil fevral',
-	},
-	{
-		title: 'Bandlik va ishsizlik darajasi',
-		category: 'Mehnat bozori',
-		location: "O'zbekiston, hududlar kesimida",
-		years: '2010 — 2024',
-		published: '2025 yil fevral',
-	},
-	{
-		title: "Inflyatsiya va iste'mol narxlari indeksi",
-		category: 'Iqtisodiyot',
-		location: "O'zbekiston, hududlar kesimida",
-		years: '2010 — 2024',
-		published: '2025 yil yanvar',
-	},
-	{
-		title: "O'rtacha ish haqi statistikasi",
-		category: 'Mehnat bozori',
-		location: "O'zbekiston, viloyatlar kesimida",
-		years: '2012 — 2024',
-		published: '2025 yil mart',
-	},
-	{
-		title: 'Transport vositalari soni',
-		category: 'Transport',
-		location: "O'zbekiston",
-		years: '2008 — 2024',
-		published: '2025 yil fevral',
-	},
-	{
-		title: "Yo'lovchi va yuk tashish statistikasi",
-		category: 'Transport',
-		location: "O'zbekiston, hududlar kesimida",
-		years: '2010 — 2024',
-		published: '2025 yil mart',
-	},
-	{
-		title: "Qishloq xo'jaligi mahsulotlari hajmi",
-		category: "Qishloq xo'j",
-		location: "O'zbekiston, viloyatlar kesimida",
-		years: '2003 — 2024',
-		published: '2025 yil fevral',
-	},
-	{
-		title: 'Eksport va import dinamikasi',
-		category: 'Tashqi savdo',
-		location: "O'zbekiston",
-		years: '2000 — 2024',
-		published: '2025 yil mart',
-	},
-	{
-		title: 'Davlat byudjeti daromad va xarajatlari',
-		category: 'Moliya',
-		location: "O'zbekiston",
-		years: '2005 — 2024',
-		published: '2025 yil yanvar',
-	},
-	{
-		title: 'Sanoat ishlab chiqarish indeksi',
-		category: 'Sanoat',
-		location: "O'zbekiston, hududlar kesimida",
-		years: '2007 — 2024',
-		published: '2025 yil fevral',
-	},
-	{
-		title: "Ta'lim muassasalari va o'quvchilar soni",
-		category: "Ta'lim",
-		location: "O'zbekiston, viloyatlar kesimida",
-		years: '2000 — 2024',
-		published: '2025 yil mart',
-	},
-	{
-		title: 'Aholining real daromadlari',
-		category: 'Iqtisodiyot',
-		location: "O'zbekiston, hududlar kesimida",
-		years: '2010 — 2024',
-		published: '2025 yil fevral',
-	},
-	{
-		title: "Kichik va o'rta biznes statistikasi",
-		category: 'Tadbirkorlik',
-		location: "O'zbekiston",
-		years: '2015 — 2024',
-		published: '2025 yil yanvar',
-	},
-	{
-		title: 'Turizm va mehmonxona statistikasi',
-		category: 'Turizm',
-		location: "O'zbekiston, viloyatlar kesimida",
-		years: '2018 — 2024',
-		published: '2025 yil mart',
-	},
-]
+import { ALL_DATA } from '@/data/publications.data'
 
 const ITEMS_PER_PAGE = 8
 
@@ -190,6 +79,7 @@ function IconEdit() {
 }
 
 function DataCard({ item }) {
+	const dt = useDataText('publications')
 	const [hov, setHov] = useState(false)
 
 	return (
@@ -233,7 +123,7 @@ function DataCard({ item }) {
 						overflow: 'hidden',
 					}}
 				>
-					{item.title}
+					{dt(item, 'title')}
 				</h3>
 				<span
 					style={{
@@ -243,7 +133,7 @@ function DataCard({ item }) {
 						color: 'rgba(var(--text-rgb),1)',
 					}}
 				>
-					{item.category}
+					{dt(item, 'category')}
 				</span>
 			</div>
 
@@ -257,7 +147,7 @@ function DataCard({ item }) {
 							color: 'rgba(255,255,255,1)',
 						}}
 					>
-						{item.location}
+						{dt(item, 'location')}
 					</span>
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -281,7 +171,7 @@ function DataCard({ item }) {
 							color: 'rgba(255,255,255,1)',
 						}}
 					>
-						{item.published}
+						{dt(item, 'published')}
 					</span>
 				</div>
 			</div>
@@ -328,7 +218,11 @@ function PagBtn({ children, onClick, active, nav }) {
 }
 
 function Pagination({ page, setPage, total }) {
-	const getPages = () => {
+    const {
+        t
+    } = useTranslation();
+
+    const getPages = () => {
 		if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
 		if (page <= 4) return [1, 2, 3, 4, 5, '...', total]
 		if (page >= total - 3)
@@ -336,8 +230,8 @@ function Pagination({ page, setPage, total }) {
 		return [1, '...', page - 1, page, page + 1, '...', total]
 	}
 
-	return (
-		<div
+    return (
+        <div
 			className='justify-center md:justify-between'
 			style={{
 				display: 'flex',
@@ -346,7 +240,7 @@ function Pagination({ page, setPage, total }) {
 				maxWidth: '1200px',
 			}}
 		>
-			<span
+            <span
 				className='hidden md:inline'
 				style={{
 					fontFamily: 'var(--font-display)',
@@ -354,10 +248,8 @@ function Pagination({ page, setPage, total }) {
 					color: 'rgba(100,110,130,1)',
 					minWidth: '60px',
 				}}
-			>
-				Sahifa
-			</span>
-			<div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+			>{t("components.nufuzliNashrlar.sahifa")}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
 				<span className='hidden md:contents'>
 					<PagBtn nav onClick={() => setPage(1)}>«</PagBtn>
 				</span>
@@ -393,7 +285,7 @@ function Pagination({ page, setPage, total }) {
 					<PagBtn nav onClick={() => setPage(total)}>»</PagBtn>
 				</span>
 			</div>
-			<button
+            <button
 				className='hidden md:flex'
 				onClick={() => setPage(total)}
 				style={{
@@ -409,24 +301,27 @@ function Pagination({ page, setPage, total }) {
 					justifyContent: 'flex-end',
 					padding: 0,
 				}}
-			>
-				Barchasini ko'rish <span>›</span>
+			>{t("components.nufuzliNashrlar.barchasini_korish")}<span>›</span>
 			</button>
-		</div>
-	)
+        </div>
+    );
 }
 
 export default function NufuzliNashrlar() {
-	const [page, setPage] = useState(1)
+    const {
+        t
+    } = useTranslation();
 
-	const totalPages = Math.ceil(ALL_DATA.length / ITEMS_PER_PAGE)
-	const displayed = ALL_DATA.slice(
+    const [page, setPage] = useState(1)
+
+    const totalPages = Math.ceil(ALL_DATA.length / ITEMS_PER_PAGE)
+    const displayed = ALL_DATA.slice(
 		(page - 1) * ITEMS_PER_PAGE,
 		page * ITEMS_PER_PAGE,
 	)
 
-	return (
-		<section
+    return (
+        <section
 			className='px-4 md:px-[60px] lg:px-[120px] pt-10 pb-[100px]'
 			style={{
 				position: 'relative',
@@ -436,7 +331,7 @@ export default function NufuzliNashrlar() {
 				overflow: 'hidden',
 			}}
 		>
-			<img
+            <img
 				src={bgGlow}
 				alt=''
 				aria-hidden='true'
@@ -452,10 +347,8 @@ export default function NufuzliNashrlar() {
 					pointerEvents: 'none',
 					zIndex: 0,
 					opacity: 0.6,
-				}}
-			/>
-
-			<div
+				}} loading='lazy' decoding='async' />
+            <div
 				style={{
 					maxWidth: '1200px',
 					margin: '0 auto',
@@ -480,9 +373,7 @@ export default function NufuzliNashrlar() {
 								margin: 0,
 								letterSpacing: '-0.02em',
 							}}
-						>
-							Nufuzli jurnallar va so&apos;nggi nashrlar
-						</h2>
+						>{t("components.nufuzliNashrlar.nufuzli_jurnallar_va_songgi")}</h2>
 
 						<p
 							style={{
@@ -493,10 +384,7 @@ export default function NufuzliNashrlar() {
 								maxWidth: '480px',
 								margin: 0,
 							}}
-						>
-							Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning
-							eng yangi sonlari bilan tanishing.
-						</p>
+						>{t("components.nufuzliNashrlar.platformada_chop_etilayotgan_yetakchi")}</p>
 					</div>
 				</AnimatedSection>
 
@@ -509,14 +397,14 @@ export default function NufuzliNashrlar() {
 						marginBottom: '48px',
 					}}
 				>
-					{displayed.map((item, i) => (
-						<DataCard key={i} item={item} />
+					{displayed.map(item => (
+						<DataCard key={item.id} item={item} />
 					))}
 				</div>
 
 				{/* Pagination */}
 				<Pagination page={page} setPage={setPage} total={totalPages} />
 			</div>
-		</section>
-	)
+        </section>
+    );
 }

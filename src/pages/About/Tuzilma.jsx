@@ -1,3 +1,7 @@
+import { useTranslation } from 'react-i18next'
+import { useContacts } from '@/hooks/useContacts'
+import { useSiteData } from '@/hooks/useSiteData'
+import { pickPath } from '@/utils/siteContent'
 import sIcon1 from '@/assets/icons/Major Brand Logos [1.1] (2).png'
 import sIcon2 from '@/assets/icons/Major Brand Logos [1.1] (3).png'
 import sIcon3 from '@/assets/icons/Major Brand Logos [1.1] (4).png'
@@ -50,13 +54,21 @@ const SOCIAL_LABEL = {
 	margin: 0,
 }
 
+/** Uzluksiz transport matnini turlar bo'yicha alohida qatorlarga ajratadi. */
+const splitTransport = raw =>
+	String(raw)
+		.replace(/(Avtobus|Trolleybus|Trolleybuslar|Tramvay|Marshrut\s*taks(?:i)?|Marshrutka|Metro)\s*:/gi, '\n$1:')
+		.split('\n')
+		.map(s => s.trim())
+		.filter(Boolean)
+
 const IconSquare = ({ children }) => (
 	<div
 		style={{
 			width: '32px',
 			height: '32px',
 			borderRadius: '8px',
-			background: 'rgba(43, 117, 204, 1)',
+			background: 'rgba(var(--blue-rgb),1)',
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -162,220 +174,318 @@ const LinkedinSocial = () => (
 	</svg>
 )
 
-const Tuzilma = () => (
-	<div
-		style={{ maxWidth: '900px', margin: '0 auto', padding: '59px 16px 80px' }}
-	>
-		{/* Badge */}
-		<div style={{ marginBottom: '20px', display: 'inline-flex' }}>
-			<span
-				style={{
-					display: 'inline-flex',
-					alignItems: 'center',
-					padding: '4px 16px',
-					borderRadius: '8px',
-					background: 'rgba(255, 255, 255, 0.04)',
-					fontFamily: 'Inter Display, sans-serif',
-					fontWeight: 600,
-					fontSize: '16px',
-					lineHeight: '28px',
-					letterSpacing: '-0.02em',
-					color: 'rgba(255, 255, 255, 1)',
-				}}
-			>
-				Kontakt
-			</span>
-		</div>
+const Tuzilma = () => {
+    const {
+        t
+    } = useTranslation();
 
-		<div
-			style={{
-				display: 'grid',
-				gridTemplateColumns: '286px 501px',
-				gap: '24px',
-			}}
-		>
-			{/* Card 1 */}
-			<div
-				style={{
-					background: 'rgba(31, 37, 51, 1)',
-					width: '286px',
-					height: '441px',
-					borderRadius: '16px',
-					padding: '16px',
-					opacity: 1,
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'space-between',
-					boxSizing: 'border-box',
-				}}
-			>
-				<div>
-					<h3 style={TITLE}>Biz bilan bog'laning</h3>
+    const contacts = useContacts()
+    const structureImg = useSiteData(d => pickPath(d.byModuleKey.structure?.structure)).data
 
-					<div
-						style={{
-							marginTop: '24px',
-							display: 'flex',
-							flexDirection: 'column',
-							gap: '16px',
-						}}
-					>
-						{/* Telefon */}
-						<div
-							style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}
-						>
-							<IconSquare>
-								<PhoneIcon />
-							</IconSquare>
-							<p style={LABEL}>Telefon</p>
-							<a href='tel:+998991234567' style={LINK}>
-								+998991234567
-							</a>
-						</div>
+    return (
+        <div
+            style={{ maxWidth: '900px', margin: '0 auto', padding: '59px 16px 80px' }}
+        >
+            {/* Badge */}
+            <div style={{ marginBottom: '20px', display: 'inline-flex' }}>
+                <span
+                    style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        padding: '4px 16px',
+                        borderRadius: '8px',
+                        background: 'rgba(255, 255, 255, 0.04)',
+                        fontFamily: 'Inter Display, sans-serif',
+                        fontWeight: 600,
+                        fontSize: '16px',
+                        lineHeight: '28px',
+                        letterSpacing: '-0.02em',
+                        color: 'rgba(255, 255, 255, 1)',
+                    }}
+                >{t("pages.tuzilma.kontakt")}</span>
+            </div>
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-[286px_501px]'>
+                {/* Card 1 */}
+                <div
+                    style={{
+                        background: 'rgba(31, 37, 51, 1)',
+                        width: '100%',
+                        minHeight: '441px',
+                        borderRadius: '16px',
+                        padding: '16px',
+                        opacity: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        gap: '20px',
+                        boxSizing: 'border-box',
+                    }}
+                >
+                    <div>
+                        <h3 style={TITLE}>{t("pages.tuzilma.biz_bilan_boglaning")}</h3>
 
-						{/* Email */}
-						<div
-							style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}
-						>
-							<IconSquare>
-								<EmailIcon />
-							</IconSquare>
-							<p style={LABEL}>e-mail</p>
-							<a href='mailto:Hilolmed@gmail.com' style={LINK}>
-								Hilolmed@gmail
-							</a>
-						</div>
-					</div>
-				</div>
+                        <div
+                            style={{
+                                marginTop: '24px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '16px',
+                            }}
+                        >
+                            {/* Telefon */}
+                            <div
+                                style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}
+                            >
+                                <IconSquare>
+                                    <PhoneIcon />
+                                </IconSquare>
+                                <p style={{ ...LABEL, marginTop: '8px' }}>{t("pages.tuzilma.telefon")}</p>
+                                <a href={contacts.phoneHref} style={LINK}>
+                                    {contacts.phone}
+                                </a>
+                            </div>
 
-				{/* Ijtimoiy tarmoqlar */}
-				<div>
-					<p style={SOCIAL_LABEL}>Ijtimoiy tarmoqlar</p>
-					<div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
-						{[
-							{ src: sIcon1, href: 'https://instagram.com/instat.uz', alt: 'Instagram', size: 40 },
-							{ src: sIcon2, href: 'https://x.com/instat_uz', alt: 'X', size: 40 },
-							{ src: sIcon3, href: 'https://facebook.com/instat.uz', alt: 'Facebook', size: 40 },
-							{ src: sIcon4, href: 'https://linkedin.com/company/instat-uz', alt: 'LinkedIn', size: 32, mt: 4 },
-						].map(({ src, href, alt, size, mt = 0 }) => (
-							<a key={alt} href={href} target='_blank' rel='noopener noreferrer'
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'center',
-									width: `${size}px`,
-									height: `${size}px`,
-									borderRadius: '8px',
-									overflow: 'hidden',
-									flexShrink: 0,
-									marginTop: `${mt}px`,
-								}}
-							>
-								<img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-							</a>
-						))}
-					</div>
-				</div>
-			</div>
+                            {/* Email */}
+                            <div
+                                style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}
+                            >
+                                <IconSquare>
+                                    <EmailIcon />
+                                </IconSquare>
+                                <p style={{ ...LABEL, marginTop: '8px' }}>{t("pages.tuzilma.e_mail")}</p>
+                                <a href={contacts.emailHref} style={LINK}>
+                                    {contacts.email}
+                                </a>
+                            </div>
 
-			{/* Card 2: Manzil */}
-			<div
-				style={{
-					background: 'rgba(31, 37, 51, 1)',
-					width: '501px',
-					height: '441px',
-					borderRadius: '16px',
-					padding: '16px',
-					gap: '16px',
-					opacity: 1,
-					display: 'flex',
-					flexDirection: 'column',
-					boxSizing: 'border-box',
-				}}
-			>
-				<h3
-					style={{
-						fontFamily: 'Inter Display, sans-serif',
-						fontWeight: 600,
-						fontSize: '24px',
-						lineHeight: '32px',
-						letterSpacing: '-0.03em',
-						color: 'rgba(242, 243, 244, 1)',
-						margin: 0,
-					}}
-				>
-					Manzil
-				</h3>
+                            {/* Faks */}
+                            {contacts.fax && (
+                                <div
+                                    style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}
+                                >
+                                    <IconSquare>
+                                        <PhoneIcon />
+                                    </IconSquare>
+                                    <p style={{ ...LABEL, marginTop: '8px' }}>{t("pages.tuzilma.faks")}</p>
+                                    <a href={contacts.faxHref} style={LINK}>
+                                        {contacts.fax}
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    </div>
 
-				<div
-					style={{
-						width: '469px',
-						height: '296px',
-						borderRadius: '24px',
-						gap: '18px',
-						opacity: 1,
-						overflow: 'hidden',
-						flexShrink: 0,
-						boxSizing: 'border-box',
-					}}
-				>
-					<iframe
-						title='INSTAT manzili'
-						src='https://www.google.com/maps?q=Toshkent+shahri+Shayxontohur+tumani+Navoiy+ko%27chasi+30-uy&output=embed'
-						width='100%'
-						height='100%'
-						style={{ border: 0, display: 'block', borderRadius: '8px' }}
-						loading='lazy'
-						referrerPolicy='no-referrer-when-downgrade'
-					/>
-				</div>
+                    {/* Ijtimoiy tarmoqlar */}
+                    <div>
+                        <p style={SOCIAL_LABEL}>{t("pages.tuzilma.ijtimoiy_tarmoqlar")}</p>
+                        <div style={{ display: 'flex', gap: '29px', marginTop: '12px' }}>
+                            {[
+                                { src: sIcon1, href: contacts.social.instagram, alt: 'Instagram', size: 40 },
+                                { src: sIcon2, href: contacts.social.twitter, alt: 'X', size: 40 },
+                                { src: sIcon3, href: contacts.social.facebook, alt: 'Facebook', size: 40 },
+                                { src: sIcon4, href: contacts.social.linkedin, alt: 'LinkedIn', size: 32, mt: 4 },
+                            ].map(({ src, href, alt, size, mt = 0 }) => (
+                                <a key={alt} href={href} target='_blank' rel='noopener noreferrer'
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        width: `${size}px`,
+                                        height: `${size}px`,
+                                        borderRadius: '8px',
+                                        overflow: 'hidden',
+                                        flexShrink: 0,
+                                        marginTop: `${mt}px`,
+                                    }}
+                                >
+                                    <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading='lazy' decoding='async' />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
 
-				<div
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						gap: '10px',
-					}}
-				>
-					<div
-						style={{
-							width: '32px',
-							height: '32px',
-							borderRadius: '8px',
-							background: 'rgba(43, 117, 204, 1)',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							flexShrink: 0,
-						}}
-					>
-						<svg width='16' height='16' viewBox='0 0 24 24' fill='none'>
-							<path
-								d='M12 22s7-7.2 7-12a7 7 0 10-14 0c0 4.8 7 12 7 12z'
-								stroke='#fff'
-								strokeWidth='1.5'
-								strokeLinejoin='round'
-							/>
-							<circle cx='12' cy='10' r='2.5' stroke='#fff' strokeWidth='1.5' />
-						</svg>
-					</div>
-					<p
-						style={{
-							fontFamily: 'Inter Display, sans-serif',
-							fontWeight: 500,
-							fontSize: '20px',
-							lineHeight: '28px',
-							letterSpacing: '0',
-							color: 'rgba(242, 243, 244, 1)',
-							margin: 0,
-						}}
-					>
-						Toshkent shahri, Shayxontohur tumani, Navoiy ko'chasi, 30-uy
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-)
+                {/* Card 2: Manzil */}
+                <div
+                    style={{
+                        background: 'rgba(31, 37, 51, 1)',
+                        width: '100%',
+                        minHeight: '441px',
+                        borderRadius: '16px',
+                        padding: '16px',
+                        gap: '16px',
+                        opacity: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        boxSizing: 'border-box',
+                    }}
+                >
+                    <h3
+                        style={{
+                            fontFamily: 'Inter Display, sans-serif',
+                            fontWeight: 600,
+                            fontSize: '24px',
+                            lineHeight: '32px',
+                            letterSpacing: '-0.03em',
+                            color: 'rgba(242, 243, 244, 1)',
+                            margin: 0,
+                        }}
+                    >{t("pages.tuzilma.manzil")}</h3>
+
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '296px',
+                            borderRadius: '24px',
+                            gap: '18px',
+                            opacity: 1,
+                            overflow: 'hidden',
+                            flexShrink: 0,
+                            boxSizing: 'border-box',
+                        }}
+                    >
+                        <iframe
+                            title={t("pages.tuzilma.instat_manzili")}
+                            src='https://www.google.com/maps?q=Toshkent+shahri+Shayxontohur+tumani+Navoiy+ko%27chasi+30-uy&output=embed'
+                            width='100%'
+                            height='100%'
+                            style={{ border: 0, display: 'block', borderRadius: '8px' }}
+                            loading='lazy'
+                            referrerPolicy='no-referrer-when-downgrade'
+                        />
+                    </div>
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '10px',
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: '32px',
+                                height: '32px',
+                                borderRadius: '8px',
+                                background: 'rgba(var(--blue-rgb),1)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexShrink: 0,
+                            }}
+                        >
+                            <svg width='16' height='16' viewBox='0 0 24 24' fill='none'>
+                                <path
+                                    d='M12 22s7-7.2 7-12a7 7 0 10-14 0c0 4.8 7 12 7 12z'
+                                    stroke='#fff'
+                                    strokeWidth='1.5'
+                                    strokeLinejoin='round'
+                                />
+                                <circle cx='12' cy='10' r='2.5' stroke='#fff' strokeWidth='1.5' />
+                            </svg>
+                        </div>
+                        <p
+                            style={{
+                                fontFamily: 'Inter Display, sans-serif',
+                                fontWeight: 500,
+                                fontSize: '20px',
+                                lineHeight: '28px',
+                                letterSpacing: '0',
+                                color: 'rgba(242, 243, 244, 1)',
+                                margin: 0,
+                            }}
+                        >{t("pages.tuzilma.toshkent_shahri_shayxontohur_tumani")}</p>
+                    </div>
+
+                    {/* Transport yo'nalishlari */}
+                    {contacts.transport && (
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: '10px',
+                            }}
+                        >
+                            <div
+                                style={{
+                                    width: '32px',
+                                    height: '32px',
+                                    borderRadius: '8px',
+                                    background: 'rgba(var(--blue-rgb),1)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                }}
+                            >
+                                <svg width='16' height='16' viewBox='0 0 24 24' fill='none'>
+                                    <rect x='5' y='4' width='14' height='13' rx='3' stroke='#fff' strokeWidth='1.5' />
+                                    <path d='M5 12h14' stroke='#fff' strokeWidth='1.5' />
+                                    <path d='M8 20l1.5-3M16 20l-1.5-3' stroke='#fff' strokeWidth='1.5' strokeLinecap='round' />
+                                    <circle cx='8.5' cy='14.5' r='1' fill='#fff' />
+                                    <circle cx='15.5' cy='14.5' r='1' fill='#fff' />
+                                </svg>
+                            </div>
+                            <div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    {splitTransport(contacts.transport).map((line, i) => {
+                                        const idx = line.indexOf(':')
+                                        const rest = idx >= 0 ? line.slice(idx + 1).trim() : line
+                                        return (
+                                            <p
+                                                key={i}
+                                                style={{
+                                                    fontFamily: 'Inter Display, sans-serif',
+                                                    fontWeight: 500,
+                                                    fontSize: '20px',
+                                                    lineHeight: '28px',
+                                                    letterSpacing: '0',
+                                                    verticalAlign: 'middle',
+                                                    color: 'rgba(242, 243, 244, 1)',
+                                                    margin: 0,
+                                                }}
+                                            >
+                                                {rest}
+                                            </p>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Tashkiliy tuzilma rasmi (API: module=structure) */}
+            {structureImg && (
+                <div
+                    style={{
+                        marginTop: '24px',
+                        background: 'rgba(31, 37, 51, 1)',
+                        borderRadius: '16px',
+                        padding: '16px',
+                        boxSizing: 'border-box',
+                    }}
+                >
+                    <h3 style={{ ...TITLE, marginBottom: '16px' }}>{t("pages.tuzilma.tuzilma_rasmi")}</h3>
+                    <a href={structureImg} target='_blank' rel='noopener noreferrer'>
+                        <img
+                            src={structureImg}
+                            alt={t("pages.tuzilma.tuzilma_rasmi")}
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                                display: 'block',
+                                borderRadius: '12px',
+                            }}
+                            loading='lazy'
+                            decoding='async'
+                        />
+                    </a>
+                </div>
+            )}
+        </div>
+    );
+}
 
 export default Tuzilma

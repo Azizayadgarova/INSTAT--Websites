@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 
 const STATS = [
@@ -144,10 +145,14 @@ function StatItem({ stat, animate }) {
 }
 
 export default function JurnalStatistika() {
-	const [animate, setAnimate] = useState(false)
-	const sectionRef = useRef(null)
+    const {
+        t
+    } = useTranslation();
 
-	useEffect(() => {
+    const [animate, setAnimate] = useState(false)
+    const sectionRef = useRef(null)
+
+    useEffect(() => {
 		const obs = new IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
@@ -161,12 +166,12 @@ export default function JurnalStatistika() {
 		return () => obs.disconnect()
 	}, [])
 
-	return (
-		<section
+    return (
+        <section
 			ref={sectionRef}
 			style={{ backgroundColor: 'rgba(var(--card-rgb),1)', width: '100%' }}
 		>
-			<div
+            <div
 				className='w-full max-w-[1440px] mx-auto px-6 py-10'
 				style={{
 					boxSizing: 'border-box',
@@ -186,14 +191,12 @@ export default function JurnalStatistika() {
 						transform: animate ? 'translateY(0)' : 'translateY(16px)',
 						transition: 'opacity 0.5s ease, transform 0.5s ease',
 					}}
-				>
-					Statistik blok
-				</p>
+				>{t("components.jurnalStatistika.statistik_blok")}</p>
 
 				<div className='grid grid-cols-1 md:grid-cols-3 md:gap-[42px]'>
 					{STATS.map((s, i) => (
 						<div
-							key={i}
+							key={s.label}
 							style={{ transitionDelay: `${i * 0.12}s` }}
 						>
 							<StatItem stat={s} animate={animate} />
@@ -201,6 +204,6 @@ export default function JurnalStatistika() {
 					))}
 				</div>
 			</div>
-		</section>
-	)
+        </section>
+    );
 }

@@ -1,6 +1,7 @@
+import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion'
 import { lazy, Suspense, useState } from 'react'
 import { Link, NavLink, useOutlet } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import AnimatedSection from '../../components/shared/AnimatedSection'
 import ParticleCanvas from '../../components/shared/ParticleCanvas'
 import AboutCard from '../../components/shared/AboutCard'
@@ -37,14 +38,17 @@ const INFO_LINKS = [
 const LINE_COLOR = 'rgba(var(--blue-rgb),0.4)'
 const STROKE_WIDTH = '1.8'
 
+// `id` — barqaror React key. Ilgari `height + Component.name` ishlatilgan edi,
+// lekin lazy() komponentida `.name` = undefined bo'lib, ikki seksiya bir xil
+// kalit ("100vhundefined") olardi va React ularni chalkashtirardi.
 const HOME_SECTIONS = [
-  { Component: StatisticComponent, height: '400px', animated: true },
-  { Component: ModernEducation,    height: '100vh' },
-  { Component: HeroZoom,           height: '100vh' },
-  { Component: MentorsSection,     height: '850px' },
-  { Component: Testimonials,       height: '700px', suspenseHeight: '600px' },
-  { Component: IntegrationSection, height: '850px', suspenseHeight: '600px' },
-  { Component: FAQSection,         height: '600px' },
+  { id: 'statistics',  Component: StatisticComponent, height: '400px', animated: true },
+  { id: 'education',   Component: ModernEducation,    height: '100vh' },
+  { id: 'hero-zoom',   Component: HeroZoom,           height: '100vh' },
+  { id: 'mentors',     Component: MentorsSection,     height: '850px' },
+  { id: 'testimonials',Component: Testimonials,       height: '700px', suspenseHeight: '600px' },
+  { id: 'integration', Component: IntegrationSection, height: '850px', suspenseHeight: '600px' },
+  { id: 'faq',         Component: FAQSection,         height: '600px' },
 ]
 
 const NavItem = ({ link }) => {
@@ -71,8 +75,8 @@ const NavItem = ({ link }) => {
             marginLeft: '8px',
             padding: '8px 12px',
             borderRadius: '4px',
-            background: hovered && !isActive ? 'rgba(14, 18, 27, 1)' : 'transparent',
-            color: isActive ? 'rgba(0, 230, 252, 1)' : 'rgba(255, 255, 255, 1)',
+            background: hovered && !isActive ? 'rgba(var(--bg-rgb),1)' : 'transparent',
+            color: isActive ? 'rgba(var(--cyan-rgb),1)' : 'rgba(255, 255, 255, 1)',
             fontFamily: 'Inter Display, sans-serif',
             fontWeight: isActive ? 600 : 500,
             fontSize: '16px',
@@ -94,88 +98,86 @@ const SectionFallback = ({ height }) => (
 )
 
 const About = () => {
+  const {
+    t
+  } = useTranslation();
+
   const outlet = useOutlet()
 
   if (outlet) {
     return (
-      <div style={{ background: 'rgba(22, 27, 38, 1)', minHeight: '100vh' }}>
-      <div style={{ display: 'flex', margin: '0 130px' }}>
-        <aside style={{
-          width: '365px',
-          flexShrink: 0,
-          position: 'sticky',
-          top: '80px',
-          height: 'calc(100vh - 80px)',
-          background: 'rgba(22, 27, 38, 1)',
-        }}>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100%',
-            overflowY: 'auto',
-            paddingTop: '35px',
-            paddingRight: '0px',
-            paddingBottom: '40px',
-            boxSizing: 'border-box',
-          }}>
-            {/* Ortga button */}
-            <div>
-              <Link
-                to="/"
-                className="w-[88px] h-[40px] flex items-center justify-center gap-2 rounded-[10px] px-[10px] mb-9 text-white no-underline text-[14px] font-medium bg-[rgba(43,117,204,0.05)] backdrop-blur-[16px] shadow-[inset_0_2px_6px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(14,18,27,0.3),0_16px_24px_-8px_rgba(14,18,27,0.1),0_0_0_1px_rgba(255,255,255,0.08)] hover:text-white hover:scale-[1.02] transition-all duration-300"
-              >
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-                  <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <span>Ortga</span>
-              </Link>
-            </div>
+      <div style={{ background: 'rgba(var(--card-rgb),1)', minHeight: '100vh' }}>
+        <div className='mx-auto flex max-w-[1440px] flex-col gap-6 px-5 py-8 md:flex-row md:gap-0 md:px-[60px] lg:px-[130px]'>
+          <aside
+            className='w-full flex-shrink-0 md:sticky md:top-20 md:h-[calc(100vh-80px)] md:w-[320px] lg:w-[365px]'
+            style={{ background: 'rgba(var(--card-rgb),1)' }}
+          >
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+              overflowY: 'auto',
+              paddingTop: '35px',
+              paddingRight: '0px',
+              paddingBottom: '40px',
+              boxSizing: 'border-box',
+            }}>
+              {/* Ortga button */}
+              <div>
+                <Link
+                  to="/"
+                  className="w-[88px] h-[40px] flex items-center justify-center gap-2 rounded-[10px] px-[10px] mb-9 text-white no-underline text-[14px] font-medium bg-[rgba(var(--blue-rgb),0.05)] backdrop-blur-[16px] shadow-[inset_0_2px_6px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(var(--bg-rgb),0.3),0_16px_24px_-8px_rgba(var(--bg-rgb),0.1),0_0_0_1px_rgba(255,255,255,0.08)] hover:text-white hover:scale-[1.02] transition-all duration-300"
+                >
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span>{t("pages.about.ortga")}</span>
+                </Link>
+              </div>
 
-            {/* Nav — har bir link border orqali uzluksiz chiziq hosil qiladi */}
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: 0, alignSelf: 'flex-start', width: '100%' }}>
-              {INFO_LINKS.map(link => (
-                <NavItem key={link.path} link={link} />
-              ))}
-            </nav>
-
-            {/* Share section */}
-            <div style={{ marginTop: '32px', paddingLeft: '6px' }}>
-              <p style={{
-                fontFamily: 'Inter Display, sans-serif',
-                fontWeight: 400,
-                fontSize: '16px',
-                lineHeight: '28px',
-                letterSpacing: '-0.02em',
-                color: 'rgba(153, 160, 174, 1)',
-                marginBottom: '12px',
-              }}>
-                Share this blog
-              </p>
-              <div style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
-                {[
-                  { src: sIconInsta, alt: 'Instagram' },
-                  { src: sIconX,     alt: 'X' },
-                  { src: sIconFb,    alt: 'Facebook' },
-                  { src: sIconLn,    alt: 'LinkedIn' },
-                ].map(({ src, alt }) => (
-                  <div key={alt} style={{ width: 24, height: 24, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-                  </div>
+              {/* Nav — har bir link border orqali uzluksiz chiziq hosil qiladi */}
+              <nav style={{ display: 'flex', flexDirection: 'column', gap: 0, alignSelf: 'flex-start', width: '100%' }}>
+                {INFO_LINKS.map(link => (
+                  <NavItem key={link.path} link={link} />
                 ))}
+              </nav>
+
+              {/* Share section */}
+              <div style={{ marginTop: '32px', paddingLeft: '6px' }}>
+                <p style={{
+                  fontFamily: 'Inter Display, sans-serif',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  letterSpacing: '-0.02em',
+                  color: 'rgba(153, 160, 174, 1)',
+                  marginBottom: '12px',
+                }}>{t("pages.about.share_this_blog")}</p>
+                <div style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
+                  {[
+                    { src: sIconInsta, alt: 'Instagram' },
+                    { src: sIconX,     alt: 'X' },
+                    { src: sIconFb,    alt: 'Facebook' },
+                    { src: sIconLn,    alt: 'LinkedIn' },
+                  ].map(({ src, alt }) => (
+                    <div key={alt} style={{ width: 24, height: 24, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} loading='lazy' decoding='async' />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </aside>
-        <main style={{ flex: 1, paddingTop: '0', paddingLeft: '30px', paddingRight: '60px', paddingBottom: '60px' }}>
-          {outlet}
-        </main>
+          </aside>
+          <main className='min-w-0 flex-1 pb-[60px] md:pl-[30px] md:pr-[60px]'>
+            {outlet}
+          </main>
+        </div>
       </div>
-      </div>
-    )
+    );
   }
 
   return (
-    <div className='relative flex items-center flex-col min-h-screen w-full bg-[rgba(14,18,27,1)]'>
+    <div className='relative flex items-center flex-col min-h-screen w-full bg-[rgba(var(--bg-rgb),1)]'>
       <img
         src={bg}
         alt=''
@@ -183,11 +185,9 @@ const About = () => {
         width={1440}
         height={700}
         fetchpriority='high'
-        decoding='async'
-        className='absolute inset-0 w-full md:w-[80%] h-[600px] md:h-[969px] mx-auto -z-0 object-cover md:object-fill'
-      />
-      <div className='absolute inset-0 bg-[rgba(14,18,27,1)] opacity-40 -z-0' />
-
+       
+        className='absolute inset-0 w-full md:w-[80%] h-[600px] md:h-[969px] mx-auto -z-0 object-cover md:object-fill' decoding='async' />
+      <div className='absolute inset-0 bg-[rgba(var(--bg-rgb),1)] opacity-40 -z-0' />
       <div className='pt-[40px] z-30 flex flex-col items-center px-4 w-full'>
         <motion.div
           className='pt-[40px] px-2 text-center'
@@ -199,24 +199,17 @@ const About = () => {
         </motion.div>
 
         <div className='text-center mt-[24px] px-4'>
-          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[rgba(188,188,188,1)]'>
-            "Ma'lumotlar va tahlil ilmi"
-            <br />
-            <span className='text-[rgba(0,230,252,1)]'>
-              Raqamli ta'lim platformasi
-            </span>
+          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[rgba(var(--text-rgb),1)]'>{t("pages.about.malumotlar_va_tahlil_ilmi")}<br />
+            <span className='text-[rgba(var(--cyan-rgb),1)]'>{t("pages.about.raqamli_talim_platformasi")}</span>
           </h1>
           <motion.p
-            className='text-[rgba(188,188,188,1)] text-[15px] md:text-[18px]'
+            className='text-[rgba(var(--text-rgb),1)] text-[15px] md:text-[18px]'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2, ease: EASE_SMOOTH }}
-          >
-            Ta'lim, ilm-fan va karyera uchun yagona raqamli platforma
-          </motion.p>
+          >{t("pages.about.talim_ilm_fan_va")}</motion.p>
         </div>
       </div>
-
       <motion.div
         className='relative w-full max-w-[1200px] mt-[50px] md:mt-[90px] px-4 md:px-0'
         initial={{ opacity: 0, y: 30 }}
@@ -255,18 +248,15 @@ const About = () => {
             alt=''
             aria-hidden='true'
             fetchpriority='high'
-            decoding='async'
-            className='absolute inset-0 w-full h-full object-cover'
-          />
+           
+            className='absolute inset-0 w-full h-full object-cover' decoding='async' />
 
           <div className="hidden md:block relative w-full h-[550px]">
             <svg className='absolute inset-0 w-full h-full pointer-events-none z-10' viewBox='0 0 1200 550'>
               <g fill='none' stroke={LINE_COLOR} strokeWidth={STROKE_WIDTH}>
                 <path d='M 600 275 C 500 275, 450 110, 355 110' />
-                <path d='M 600 275 L 355 275' />
                 <path d='M 600 275 C 500 275, 450 440, 355 440' />
                 <path d='M 600 275 C 700 275, 750 110, 845 110' />
-                <path d='M 600 275 L 845 275' />
                 <path d='M 600 275 C 700 275, 750 440, 845 440' />
               </g>
             </svg>
@@ -299,16 +289,14 @@ const About = () => {
                     boxShadow: 'inset 0px 5px 20px rgba(255,255,255,0.05), 0px -10px 40px rgba(var(--blue-rgb),0.2)',
                   }}
                 >
-                  <img src={instanIcon} alt='logo' className='w-[220px] h-[220px] object-contain relative z-10' />
+                  <img src={instanIcon} alt='logo' className='w-[220px] h-[220px] object-contain relative z-10' loading='lazy' decoding='async' />
                 </div>
               </div>
             </motion.div>
 
             <AboutCard label="Onlayn ta'lim" style={{ left: '75px', top: '85px' }} xFrom={-30} delay={0.65} to='/platform/onlayn-talim' />
-            <AboutCard label="Bo'sh ish o'rinlari" style={{ left: '75px', top: '250px' }} xFrom={-30} delay={0.72} to='/platform/bosh-ish-orinlari' />
             <AboutCard label="Mikro ma'lumotlar" style={{ left: '75px', top: '415px' }} xFrom={-30} delay={0.79} to='/platform/mikro-malumotlar' />
             <AboutCard label='Raqamli kutubxona' style={{ right: '75px', top: '85px' }} xFrom={30} delay={0.65} to='/platform/raqamli-kutubxona' />
-            <AboutCard label='Samaradorlik tizimi' style={{ right: '75px', top: '250px' }} xFrom={30} delay={0.72} />
             <AboutCard label='Elektron jurnal' style={{ right: '75px', top: '415px' }} xFrom={30} delay={0.79} to='/platform/elektron-jurnal' />
           </div>
 
@@ -323,7 +311,6 @@ const About = () => {
             <div className="flex flex-col gap-3 w-full z-20">
               {[
                 { label: "Onlayn ta'lim", delay: 0.25, to: '/platform/onlayn-talim' },
-                { label: "Bo'sh ish o'rinlari", delay: 0.3, to: '/platform/bosh-ish-orinlari' },
                 { label: "Mikro ma'lumotlar", delay: 0.35, to: '/platform/mikro-malumotlar' },
               ].map(({ label, delay, to }) => (
                 <AboutCard key={label} label={label} mobile delay={delay} to={to} />
@@ -364,7 +351,7 @@ const About = () => {
                     boxShadow: 'inset 0px 5px 20px rgba(255,255,255,0.05), 0px 0px 40px rgba(var(--blue-rgb),0.3)',
                   }}
                 >
-                  <img src={instanIcon} alt='logo' className='w-[110px] h-[110px] object-contain' />
+                  <img src={instanIcon} alt='logo' className='w-[110px] h-[110px] object-contain' loading='lazy' decoding='async' />
                 </div>
               </div>
             </motion.div>
@@ -378,7 +365,6 @@ const About = () => {
             <div className="flex flex-col gap-3 w-full z-20">
               {[
                 { label: 'Raqamli kutubxona', delay: 0.5, to: '/platform/raqamli-kutubxona' },
-                { label: 'Samaradorlik tizimi', delay: 0.55 },
                 { label: 'Elektron jurnal', delay: 0.6, to: '/platform/elektron-jurnal' },
               ].map(({ label, delay, to }) => (
                 <AboutCard key={label} label={label} mobile delay={delay} to={to} />
@@ -387,15 +373,14 @@ const About = () => {
           </div>
         </div>
       </motion.div>
-
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 0 }}>
-        {HOME_SECTIONS.map(({ Component, height, suspenseHeight, animated }) => {
+        {HOME_SECTIONS.map(({ id, Component, height, suspenseHeight, animated }) => {
           const sh = suspenseHeight || height
           const content = animated
             ? <AnimatedSection style={{ width: '100%' }}><Component /></AnimatedSection>
             : <Component />
           return (
-            <LazyLoad key={height + Component.name} fallback={<SectionFallback height={height} />}>
+            <LazyLoad key={id} fallback={<SectionFallback height={height} />}>
               <Suspense fallback={<SectionFallback height={sh} />}>
                 {content}
               </Suspense>
@@ -404,7 +389,7 @@ const About = () => {
         })}
       </div>
     </div>
-  )
+  );
 }
 
 export default About

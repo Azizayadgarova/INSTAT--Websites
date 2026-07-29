@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { useState } from 'react'
 import briefcaseIcon from '../assets/icons/briefcase-2-line.png'
@@ -58,7 +59,11 @@ function PagBtn({ children, onClick, active, nav }) {
 }
 
 function Pagination({ page, setPage, total }) {
-	const getPages = () => {
+    const {
+        t
+    } = useTranslation();
+
+    const getPages = () => {
 		if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
 		if (page <= 4) return [1, 2, 3, 4, 5, '...', total]
 		if (page >= total - 3)
@@ -66,8 +71,8 @@ function Pagination({ page, setPage, total }) {
 		return [1, '...', page - 1, page, page + 1, '...', total]
 	}
 
-	return (
-		<div
+    return (
+        <div
 			style={{
 				display: 'flex',
 				alignItems: 'center',
@@ -76,17 +81,15 @@ function Pagination({ page, setPage, total }) {
 				maxWidth: '1200px',
 			}}
 		>
-			<span
+            <span
 				style={{
 					fontFamily: 'var(--font-display)',
 					fontSize: '14px',
 					color: 'rgba(100,110,130,1)',
 					minWidth: '60px',
 				}}
-			>
-				Sahifa
-			</span>
-			<div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+			>{t("components.ishOrinlariKategoriyalar.sahifa")}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
 				<PagBtn nav onClick={() => setPage(1)}>«</PagBtn>
 				<PagBtn nav onClick={() => setPage(p => Math.max(1, p - 1))}>‹</PagBtn>
 				{getPages().map((p, i) =>
@@ -114,7 +117,7 @@ function Pagination({ page, setPage, total }) {
 				<PagBtn nav onClick={() => setPage(p => Math.min(total, p + 1))}>›</PagBtn>
 				<PagBtn nav onClick={() => setPage(total)}>»</PagBtn>
 			</div>
-			<button
+            <button
 				onClick={() => setPage(total)}
 				style={{
 					fontFamily: 'var(--font-display)',
@@ -130,21 +133,24 @@ function Pagination({ page, setPage, total }) {
 					justifyContent: 'flex-end',
 					padding: 0,
 				}}
-			>
-				Barchasini ko&apos;rish <span>›</span>
+			>{t("components.ishOrinlariKategoriyalar.barchasini_korish")}<span>›</span>
 			</button>
-		</div>
-	)
+        </div>
+    );
 }
 
 export default function IshOrinlariKategoriyalar() {
-	const [page, setPage] = useState(2)
+    const {
+        t
+    } = useTranslation();
 
-	return (
-		<section
+    const [page, setPage] = useState(2)
+
+    return (
+        <section
 			style={{
 				position: 'relative',
-				background: '#0E121B',
+				background: 'var(--bg-primary)',
 				padding: '40px 24px 80px',
 				display: 'flex',
 				flexDirection: 'column',
@@ -152,8 +158,8 @@ export default function IshOrinlariKategoriyalar() {
 				overflow: 'hidden',
 			}}
 		>
-			{/* Background glow */}
-			<img
+            {/* Background glow */}
+            <img
 				src={bgGlow}
 				alt=''
 				aria-hidden='true'
@@ -169,11 +175,9 @@ export default function IshOrinlariKategoriyalar() {
 					pointerEvents: 'none',
 					zIndex: 0,
 					opacity: 0.6,
-				}}
-			/>
-
-			{/* Header */}
-			<AnimatedSection style={{ position: 'relative', zIndex: 1, marginBottom: '48px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+				}} loading='lazy' decoding='async' />
+            {/* Header */}
+            <AnimatedSection style={{ position: 'relative', zIndex: 1, marginBottom: '48px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
 					<span
 						style={{
@@ -186,9 +190,7 @@ export default function IshOrinlariKategoriyalar() {
 							fontSize: '13px',
 							fontFamily: 'var(--font-display)',
 						}}
-					>
-						Kategoriyalar
-					</span>
+					>{t("components.ishOrinlariKategoriyalar.kategoriyalar")}</span>
 
 					<h2
 						style={{
@@ -200,9 +202,7 @@ export default function IshOrinlariKategoriyalar() {
 							color: '#fff',
 							margin: 0,
 						}}
-					>
-						Siz uchun mos kategoriyani tanlang
-					</h2>
+					>{t("components.ishOrinlariKategoriyalar.siz_uchun_mos_kategoriyani")}</h2>
 
 					<p
 						className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[480px]'
@@ -213,15 +213,11 @@ export default function IshOrinlariKategoriyalar() {
 							color: 'rgba(var(--muted-rgb),1)',
 							margin: 0,
 						}}
-					>
-						Eng talab yuqori bo&apos;lgan kategoriyalar orasidan o&apos;zingizga
-						mos ishni toping va faoliyatingizni rivojlantiring
-					</p>
+					>{t("components.ishOrinlariKategoriyalar.eng_talab_yuqori_bolgan")}</p>
 				</div>
 			</AnimatedSection>
-
-			{/* Grid */}
-			<div
+            {/* Grid */}
+            <div
 				className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
 				style={{
 					gap: '12px',
@@ -230,9 +226,9 @@ export default function IshOrinlariKategoriyalar() {
 					maxWidth: '1200px',
 				}}
 			>
-				{CATEGORIES.map((cat, i) => (
+				{CATEGORIES.map(cat => (
 					<div
-						key={i}
+						key={cat.name}
 						style={{
 							width: '100%',
 							background: 'rgba(var(--card-rgb),1)',
@@ -256,8 +252,7 @@ export default function IshOrinlariKategoriyalar() {
 						<img
 							src={briefcaseIcon}
 							alt=''
-							style={{ width: 32, height: 32, objectFit: 'contain' }}
-						/>
+							style={{ width: 32, height: 32, objectFit: 'contain' }} loading='lazy' decoding='async' />
 
 						{/* Text group */}
 						<div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -313,9 +308,8 @@ export default function IshOrinlariKategoriyalar() {
 					</div>
 				))}
 			</div>
-
-			{/* Pagination */}
-			<Pagination page={page} setPage={setPage} total={TOTAL_PAGES} />
-		</section>
-	)
+            {/* Pagination */}
+            <Pagination page={page} setPage={setPage} total={TOTAL_PAGES} />
+        </section>
+    );
 }

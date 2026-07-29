@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { memo, useState, useCallback, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logoImg from '@/assets/icons/InstatIcon.png'
@@ -13,20 +14,24 @@ const NAV_LINKS = [
 ]
 
 const Navbar2 = () => {
-	const { pathname } = useLocation()
-	const [isOpen, setIsOpen] = useState(false)
+    const {
+        t
+    } = useTranslation();
 
-	const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
-	const closeMenu = useCallback(() => setIsOpen(false), [])
+    const { pathname } = useLocation()
+    const [isOpen, setIsOpen] = useState(false)
 
-	useEffect(() => {
+    const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
+    const closeMenu = useCallback(() => setIsOpen(false), [])
+
+    useEffect(() => {
 		document.body.style.overflow = isOpen ? 'hidden' : ''
 		return () => { document.body.style.overflow = '' }
 	}, [isOpen])
 
-	return (
-		<>
-			<nav
+    return (
+        <>
+            <nav
 				style={{
 					position: 'fixed',
 					width: '100%',
@@ -40,7 +45,7 @@ const Navbar2 = () => {
 
 					{/* Logo */}
 					<Link to='/'>
-						<img src={logoImg} alt='INSTAT' fetchPriority='high' width={208} height={30} className='w-52 h-7.5 md:h-auto' style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} />
+						<img src={logoImg} alt='INSTAT' fetchpriority='high' width={208} height={30} className='w-52 h-7.5 md:h-auto' style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} decoding='async' />
 					</Link>
 
 					{/* Pill nav — faqat desktop */}
@@ -100,7 +105,7 @@ const Navbar2 = () => {
 														left: 0,
 														right: 0,
 														height: '1.5px',
-														background: '#00E6FC',
+														background: 'var(--color-cyan)',
 														borderRadius: '1px',
 													}}
 												/>
@@ -142,8 +147,8 @@ const Navbar2 = () => {
 						}}
 						className='hidden md:flex gap-2 px-4 py-2'
 					>
-						<img src={userIcon} alt='user' width={16} height={16} />
-						<span>Shaxsiy kabinet</span>
+						<img src={userIcon} alt='user' width={16} height={16} loading='lazy' decoding='async' />
+						<span>{t("components.navbar2.shaxsiy_kabinet")}</span>
 					</button>
 
 					{/* Mobile: hamburger tugmasi */}
@@ -157,13 +162,12 @@ const Navbar2 = () => {
 							flexShrink: 0,
 						}}
 					>
-						<img src={menuIcon} alt='Menu' width={22} />
+						<img src={menuIcon} alt='Menu' width={22} loading='lazy' decoding='async' />
 					</button>
 				</div>
 			</nav>
-
-			{/* Mobile menu overlay */}
-			<div
+            {/* Mobile menu overlay */}
+            <div
 				className={`fixed inset-0 transition-all duration-500 md:hidden ${
 					isOpen ? 'visible opacity-100' : 'invisible opacity-0'
 				}`}
@@ -171,7 +175,7 @@ const Navbar2 = () => {
 			>
 				{/* Panel */}
 				<div
-					className={`absolute right-0 top-0 h-screen w-full bg-[rgba(14,18,27,1)] transition-transform duration-500 flex flex-col ${
+					className={`absolute right-0 top-0 h-screen w-full bg-[rgba(var(--bg-rgb),1)] transition-transform duration-500 flex flex-col ${
 						isOpen ? 'translate-x-0' : 'translate-x-full'
 					}`}
 				>
@@ -186,9 +190,7 @@ const Navbar2 = () => {
 								letterSpacing: '-0.02em',
 								color: '#fff',
 							}}
-						>
-							Menu
-						</span>
+						>{t("components.navbar2.menu")}</span>
 						<button onClick={closeMenu} className='text-white text-2xl leading-none'>
 							✕
 						</button>
@@ -221,8 +223,8 @@ const Navbar2 = () => {
 					</ul>
 				</div>
 			</div>
-		</>
-	)
+        </>
+    );
 }
 
 export default memo(Navbar2)

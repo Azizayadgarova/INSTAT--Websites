@@ -72,7 +72,7 @@ const FloatingCard = memo(({ card, index, progress, totalCards = 5 }) => {
 
 				<div className='flex flex-col px-4 max-w-lg'>
 					{!card.plainText && (
-						<span className='px-4 py-1.5 mb-3 text-xs w-fit font-medium text-[rgba(0,230,252,1)] bg-[rgba(22,27,38,1)] rounded-full border-none backdrop-blur-sm'>
+						<span className='px-4 py-1.5 mb-3 text-xs w-fit font-medium text-[rgba(var(--cyan-rgb),1)] bg-[rgba(var(--card-rgb),1)] rounded-full border-none backdrop-blur-sm'>
 							{card.tags}
 						</span>
 					)}

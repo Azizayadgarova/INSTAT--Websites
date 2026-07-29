@@ -1,8 +1,8 @@
-import img1 from '@/assets/2.png'
-import img2 from '@/assets/3.png'
-import img3 from '@/assets/4.png'
-import img4 from '@/assets/5.png'
-import img5 from '@/assets/6.png'
+import img1 from '@/assets/2.webp'
+import img2 from '@/assets/3.webp'
+import img3 from '@/assets/4.webp'
+import img4 from '@/assets/5.webp'
+import img5 from '@/assets/6.webp'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import FAQSection from './FAQSection'
@@ -77,13 +77,12 @@ const CATEGORIES = [
 // ─── Carousel constants ───────────────────────────────────────────────────────
 
 const N = CARDS.length
-const SPEED = 0.006
+const SPEED = 0.004
 const C_W = 294
 const C_H = 390
-const SPREAD_X = 320
-const ROT_Y = 52
-const SPREAD_Z = 160
-const STAIR_Y = 110
+const RADIUS = 360          // radius of the 3D ring
+const ANGLE_STEP = 360 / N  // angular gap between cards on the ring
+const DRAG_PER_CARD = 150   // px of horizontal drag to advance one card
 const PCOLORS = ['#00e6fc', '#2b75cc', '#fff', '#00c9ff', '#7b8fff']
 let _pid = 0
 
@@ -664,8 +663,7 @@ function JurnallarSection() {
 					objectPosition: 'center top',
 					zIndex: 0,
 					pointerEvents: 'none',
-				}}
-			/>
+				}} loading='lazy' decoding='async' />
 
 			<AnimatedSection style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
 				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
@@ -1088,6 +1086,12 @@ function HeroSection() {
 	const sectionRef  = useRef(null)
 	const visibleRef  = useRef(false)
 
+	// Hand-drag (rotate the ring by pointer)
+	const draggingRef     = useRef(false)
+	const dragStartXRef   = useRef(0)
+	const dragStartIdxRef = useRef(0)
+	const movedRef        = useRef(false)
+
 	useEffect(() => {
 		const el = document.createElement('style')
 		el.setAttribute('data-ej-kf', '1')
@@ -1103,24 +1107,26 @@ function HeroSection() {
 
 	useEffect(() => {
 		const loop = () => {
-			if (!pausedRef.current) indexRef.current = (indexRef.current + SPEED) % N
+			// Auto-rotate unless hovered or being dragged by hand
+			if (!pausedRef.current && !draggingRef.current)
+				indexRef.current = (indexRef.current + SPEED) % N
 			const ci = indexRef.current
 			const tfs = CARDS.map((_, i) => {
-				const raw = i - ci
-				const off = wrapOffset(raw)
-				const abs = Math.abs(off)
-				const sign = Math.sign(off)
-				const t = Math.min(abs / 2, 1)
-				const tSq = t * t
+				const off = wrapOffset(i - ci)
+				const angle = off * ANGLE_STEP        // this card's angle on the ring
+				const rad = (angle * Math.PI) / 180
+				const cos = Math.cos(rad)
+				const sin = Math.sin(rad)
+				const depth = (cos + 1) / 2           // 1 = front, 0 = directly behind
 				return {
-					rotY: sign * Math.min(abs * ROT_Y, ROT_Y),
-					transX: off * SPREAD_X,
-					transZ: -abs * SPREAD_Z,
-					transY: tSq * STAIR_Y,
-					scale: 1 - tSq * 0.28,
-					opac: abs > 2.2 ? 0 : 1 - Math.min(abs * 0.28, 0.6),
-					zIdx: Math.round((1 - abs) * 50) + 50,
-					abs,
+					rotY: angle,                      // card faces outward along the ring
+					transX: sin * RADIUS,             // circular X placement
+					transZ: (cos - 1) * RADIUS,       // front card at Z=0, rest curve back
+					transY: 0,
+					scale: 0.82 + depth * 0.18,
+					opac: 0.35 + depth * 0.65,
+					zIdx: Math.round(depth * 100),
+					abs: Math.abs(off),
 				}
 			})
 			setTransforms(tfs)
@@ -1151,6 +1157,7 @@ function HeroSection() {
 	}, [])
 
 	const onMove = useCallback((e, i) => {
+		if (draggingRef.current) return
 		const el = cardRefs.current[i]
 		if (!el) return
 		const r = el.getBoundingClientRect()
@@ -1167,6 +1174,7 @@ function HeroSection() {
 	}, [])
 
 	const onEnter = useCallback((e, i) => {
+		if (draggingRef.current) return
 		pausedRef.current = true
 		setHovered(i)
 		setShimmer(p => ({ ...p, [i]: false }))
@@ -1192,6 +1200,7 @@ function HeroSection() {
 	}, [])
 
 	const onClick = useCallback((e, i) => {
+		if (movedRef.current) return   // ignore click that was actually a drag
 		setFlipped(p => ({ ...p, [i]: !p[i] }))
 		const el = cardRefs.current[i]
 		if (!el) return
@@ -1221,12 +1230,39 @@ function HeroSection() {
 		[],
 	)
 
+	// ── Hand-drag: rotate the ring by pointer (mouse + touch) ──
+	const onDragStart = useCallback(e => {
+		draggingRef.current = true
+		movedRef.current = false
+		dragStartXRef.current = e.clientX
+		dragStartIdxRef.current = indexRef.current
+		pausedRef.current = true
+		setHovered(null)
+		e.currentTarget.setPointerCapture?.(e.pointerId)
+	}, [])
+
+	const onDragMove = useCallback(e => {
+		if (!draggingRef.current) return
+		const dx = e.clientX - dragStartXRef.current
+		if (Math.abs(dx) > 4) movedRef.current = true
+		// drag left → advance forward through the ring
+		let idx = dragStartIdxRef.current - dx / DRAG_PER_CARD
+		indexRef.current = ((idx % N) + N) % N
+	}, [])
+
+	const onDragEnd = useCallback(e => {
+		if (!draggingRef.current) return
+		draggingRef.current = false
+		pausedRef.current = false
+		e.currentTarget?.releasePointerCapture?.(e.pointerId)
+	}, [])
+
 	return (
 		<section
 			ref={sectionRef}
 				style={{
 					width: '100%',
-					backgroundImage: 'url(/BG.png)',
+					backgroundImage: 'url(/BG.webp)',
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',
@@ -1290,6 +1326,10 @@ function HeroSection() {
 				{/* Carousel */}
 				<div
 					className='ej-carousel'
+					onPointerDown={onDragStart}
+					onPointerMove={onDragMove}
+					onPointerUp={onDragEnd}
+					onPointerCancel={onDragEnd}
 					style={{
 						position: 'relative',
 						width: '100%',
@@ -1299,6 +1339,10 @@ function HeroSection() {
 						perspectiveOrigin: '50% 38%',
 						opacity: visible ? 1 : 0,
 						transition: 'opacity 1s ease .3s',
+						cursor: 'grab',
+						touchAction: 'pan-y',
+						userSelect: 'none',
+						WebkitUserSelect: 'none',
 					}}
 				>
 					{CARDS.map((card, i) => {

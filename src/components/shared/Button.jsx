@@ -1,4 +1,4 @@
-﻿const variants = {
+const variants = {
 	dark: 'bg-[rgb(22,32,49)] border-[rgb(33,44,61)] text-[rgba(244,244,245,1)]',
 	light: 'bg-[rgba(255,255,255,0.04)] border-[rgba(255,255,255,0.04)] text-white',
 }

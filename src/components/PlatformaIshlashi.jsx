@@ -1,12 +1,12 @@
+import dotImg from '@/assets/Group 1707483848.png'
+import ellipseImg from '@/assets/icons/Ellipse 2.png'
+import icon02 from '@/assets/icons/search-line.png'
+import icon04 from '@/assets/icons/Vector (10).png'
+import icon01 from '@/assets/icons/Vector (8).png'
+import icon03 from '@/assets/icons/Vector (9).png'
 import { motion } from 'framer-motion'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
-import dotImg from '@/assets/Group 1707483848.png'
-import icon01 from '@/assets/icons/Vector (8).png'
-import icon02 from '@/assets/icons/search-line.png'
-import icon03 from '@/assets/icons/Vector (9).png'
-import icon04 from '@/assets/icons/Vector (10).png'
-import ellipseImg from '@/assets/icons/Ellipse 2.png'
 
 const vp = { once: true, amount: 0.25 }
 const BG = 'rgba(var(--card-rgb),1)'
@@ -207,7 +207,7 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 )
 
 const PlatformaIshlashi = () => (
-	<section style={{ width: '100%', background: BG, display: 'flex', flexDirection: 'column', alignItems: 'center', overflowX: 'hidden' }}>
+	<section style={{ width: '100%', background: BG, display: 'flex', flexDirection: 'column', alignItems: 'center', overflowX: 'clip' }}>
 
 		{/* Header */}
 		<div style={{

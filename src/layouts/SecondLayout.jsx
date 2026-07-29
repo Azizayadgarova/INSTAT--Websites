@@ -19,7 +19,7 @@ const SecondLayout = () => {
 	}, [])
 
 	return (
-		<div className='bg-[rgba(14,18,27,1)] min-h-screen'>
+		<div className='bg-[rgba(var(--bg-rgb),1)] min-h-screen'>
 			<ScrollToTop />
 			{mountCursor && <Suspense fallback={null}><CursorRing /></Suspense>}
 			<Navbar2 />

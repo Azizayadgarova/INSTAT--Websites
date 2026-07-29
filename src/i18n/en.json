@@ -1,0 +1,592 @@
+{
+  "common": {
+    "back": "Back",
+    "home": "Back to home",
+    "loading": "Loading...",
+    "comingSoon": "This section is coming soon",
+    "comingSoonHint": "The materials are being prepared and will be published here shortly.",
+    "language": "Language",
+    "download": "Download",
+    "openResource": "Open resource"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "text": "An unexpected error occurred while loading the page. Please try reloading.",
+    "reload": "Reload page",
+    "notFound": "Page not found"
+  },
+  "menu": {
+    "about": {
+      "title": "About the Institute",
+      "umumiy-malumot": "General informations",
+      "tuzilma": "Structure",
+      "rahbariyat": "Management",
+      "qarshi-kurash": "Anti-corruption",
+      "ish-orinlar": "Vacancies",
+      "yotoqhona": "Hotel-type dormitory",
+      "odob-axloq": "Code of ethics"
+    },
+    "axborot": {
+      "title": "Information resources",
+      "axborot-tizimi": "“Statistika” information system",
+      "rivojlanish-maqsadlari": "Sustainable Development Goals",
+      "gender-statistika": "Gender statistics",
+      "royhatga-olish": "Population census",
+      "qishloq-xojaligi": "Agricultural census",
+      "ochiq-malumotlar": "Open data portal",
+      "statistika-agentligi": "Methodological materials of the Statistics Agency"
+    },
+    "science": {
+      "title": "Science",
+      "ilmiy-tadqiqot": "Research programme",
+      "oliy-talim": "Postgraduate education"
+    },
+    "media": {
+      "title": "Press service",
+      "yangiliklar": "Institute news",
+      "tadbirlar": "Upcoming events",
+      "hamkorlik": "International cooperation"
+    }
+  },
+  "seo": {
+    "siteName": "INSTAT",
+    "defaultTitle": "National Statistics Committee of Uzbekistan | Digital Education Platform",
+    "defaultDescription": "The official digital education platform: online courses, scientific resources, microdata and career opportunities."
+  },
+  "components": {
+    "topFooter": {
+      "savollaringiz_bormi": "Have questions?",
+      "kurslar_royxatdan_otish_yoki": "Courses, registration or partnership —",
+      "boyicha_savollaringiz_bolsa_biz": "if you have any questions, get in touch with us",
+      "email_muvaffaqiyatli_yuborildi": "✓ Email sent successfully!",
+      "pochtangizni_qoldiring": "Leave your email",
+      "yuborish": "Send"
+    },
+    "mikroMalumotlarHero": {
+      "rasmiy_statistika_uchun": "A digital platform for",
+      "raqamli_platforma": "official statistics",
+      "mikro_malumotlar_laboratoriyasi_foydalan": "The microdata laboratory gives users secure and convenient access to the official statistical data of the Republic of Uzbekistan.",
+      "ariza_yuborish": "Submit a request",
+      "statistik_shablonlar": "Statistical templates"
+    },
+    "platformaIshlashi": {
+      "qadam": "STEP",
+      "platformadan_foydalanish_jarayoni_oddiy": "Using the platform is simple and convenient — users can reach the statistical data they need in just a few steps."
+    },
+    "tahririyatAzolari": {
+      "hodimlar": "Staff",
+      "tahririyat_azolari": "Editorial board",
+      "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues."
+    },
+    "ishOrinlariVakansiyalar": {
+      "oy": "/mo",
+      "ariza_yuborish": "Apply",
+      "karyerangiz_uchun_eng_yaxshi": "The best choice for your career",
+      "eng_saralangan_vakansiyalarni_bir": "Find the best vacancies in one place. Identify the right job, apply quickly and take your career to the next level."
+    },
+    "jurnalStatistika": {
+      "statistik_blok": "Statistics"
+    },
+    "mentorsSection": {
+      "sohasida_tajribali_mutaxassislar_bilan": "Learn from experienced professionals",
+      "bizning_platforma_orqali_siz": "Through our platform you can study IT and modern professions",
+      "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts."
+    },
+    "mikroImkoniyatlar": {
+      "platformaning_asosiy_imkoniyatlari": "Key platform capabilities",
+      "mikro_malumotlar_laboratoriyasi_foydalan": "The microdata laboratory offers modern, convenient tools for working effectively with statistical data.",
+      "har_bir_detalni_aniqlik": "See every detail clearly",
+      "katta_hajmdagi_mikro_malumotlarni": "Analyse large volumes of microdata in depth with modern analytical tools and uncover important trends.",
+      "tadqiqotlar_uchun_tayyor_platforma": "A platform ready for research",
+      "statistik_modellar_eksperimental_tahlill": "An environment purpose-built for statistical models, experimental analysis and scientific work.",
+      "soniyalar_ichida_natija": "Results in seconds",
+      "kuchli_hisoblash_tizimi_orqali": "A powerful computing system delivers data instantly.",
+      "doimiy_yangilanadigan_manbalar": "Continuously updated sources",
+      "turli_sohalarga_oid_dolzarb": "An up-to-date, reliable microdata base covering a wide range of fields",
+      "murakkab_malumotlarni_sodda_korinishda": "Complex data, made simple",
+      "interaktiv_grafiklar_va_dashboardlar": "Present results clearly and visually through interactive charts and dashboards.",
+      "ishonchli_himoya_tizimi": "Reliable protection",
+      "barcha_malumotlar_zamonaviy_xavfsizlik": "All data is protected in line with modern security standards"
+    },
+    "elektronKutubxona": {
+      "platformamizdagi_barcha_elektron_kitobla": "Discover every e-book on our platform in one place. Filter by genre, rating and price, and pick the right title with ease.",
+      "barchasini_korish": "View all"
+    },
+    "bookCard": {
+      "ta_izoh": "reviews"
+    },
+    "nufuzliNashrlar": {
+      "sahifa": "Page",
+      "barchasini_korish": "View all",
+      "nufuzli_jurnallar_va_songgi": "Leading journals and latest publications",
+      "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues."
+    },
+    "coursesSection": {
+      "maqsadingizga_mos": "Choose the online course",
+      "onlayn_kursni_tanlang": "that fits your goal",
+      "boshlangichdan_professional_darajagacha": "Modern online courses —",
+      "bolgan_zamonaviy_onlayn_kurslar": "from beginner to professional level",
+      "soat": "h",
+      "0_uzs": "0 UZS",
+      "barcha_kurslar": "All courses"
+    },
+    "ishOrinlariAfzalliklar": {
+      "platforma_orqali_ish_topish": "Finding a job through the platform is now easy and effective",
+      "platforma_sizning_qiziqishlaringiz_va": "The platform helps you quickly find company vacancies that match your interests and skills. Apply in a few clicks,"
+    },
+    "footer": {
+      "kadrlar_malakasini_oshirish_va": "Institute for Professional Development and",
+      "tadqiqotlar_instituti": "Statistical Research",
+      "saytlar": "Websites",
+      "huquqiy": "Legal",
+      "instat_inc_barcha_huquqlar": "© Instat Inc. All rights reserved."
+    },
+    "ishOrinlariKategoriyalar": {
+      "sahifa": "Page",
+      "barchasini_korish": "View all",
+      "kategoriyalar": "Categories",
+      "siz_uchun_mos_kategoriyani": "Pick the category that suits you",
+      "eng_talab_yuqori_bolgan": "Find a job among the most in-demand categories and grow your career"
+    },
+    "navbar2": {
+      "shaxsiy_kabinet": "My account",
+      "menu": "Menu"
+    },
+    "ishOrinlariHero": {
+      "eng_dolzarb_ish_orinlari": "The most relevant jobs,",
+      "bitta_platformada": "all on one platform",
+      "ish_beruvchilar_va_nomzodlarni": "A modern platform connecting employers and candidates. Find the right job quickly and grow your career.",
+      "pochtangizni_qoldiring": "Leave your email",
+      "vakansiya_izlash": "Search vacancies"
+    },
+    "mentorCard": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
+    },
+    "appPromoSection": {
+      "mobil_ilova_bilan": "Even better with",
+      "yanada_qulayroq": "the mobile app!",
+      "bizning_mobil_ilovamiz_bilan": "Learning is even easier with our mobile app. Download it today!",
+      "mobil_ilova_bilan_yanada": "Even better with the mobile app!"
+    },
+    "statistikBlok": {
+      "statistik_blok": "Statistics"
+    },
+    "navbar": {
+      "tizimga_kirish": "Sign in",
+      "menyu": "Menu",
+      "menu": "Menu",
+      "ichki_bolimlar": "Sections",
+      "telefon_raqam": "Phone",
+      "elektron_pochta": "Email",
+      "manzil": "Address",
+      "ijtimoiy_tarmoqlar": "Social media"
+    },
+    "foydalanishJarayoni": {
+      "platforma_qanday_ishlaydi": "How does the platform work?",
+      "raqamli_kutubxonadan_foydalanish_jarayon": "How to use the digital library — a short overview of selecting, purchasing and reading a book within the platform."
+    },
+    "ishOrinlariRasmlar": {
+      "mos_vakansiyalarni_tez_toping": "Find matching vacancies fast",
+      "sizning_qiziqishlaringiz_konikmalaringiz": "Find company vacancies matching your interests, skills and experience in a matter of seconds.",
+      "sizning_qiziqishlaringiz_konikmalaringiz_2": "Find company vacancies matching your interests, skills and experience in a matter of seconds. The platform surfaces precise, up-to-date openings without endless searching."
+    },
+    "integrationSection": {
+      "integratsiyalashgan": "Integrated",
+      "talim_jarayonini_qulay_va": "Integrations that make learning convenient and effective"
+    },
+    "carouselCard": {
+      "batafsil": "Learn more →"
+    },
+    "pagination": {
+      "sahifa": "Page",
+      "barchasini_korish": "View all"
+    },
+    "filterRow": {
+      "mualliflar": "Authors",
+      "kategoriyalar": "Categories",
+      "izlash": "Search"
+    },
+    "heroSection": {
+      "ilmiy_jurnallar_va_maqolalar": "A single platform for scientific",
+      "yagona_platforma": "journals and articles",
+      "recenzentdan_otgan_ilmiy_maqolalar": "Peer-reviewed articles, respected journals and publishing opportunities aligned with international standards — all in one place.",
+      "maqola_yuborish": "Submit an article"
+    },
+    "jurnallarSection": {
+      "nufuzli_jurnallar_va_songgi": "Leading journals and latest publications",
+      "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues.",
+      "bu_tanlov_boyicha_jurnal": "No journals found for this selection"
+    },
+    "problemSection": {
+      "kitob_izlashdan_charchadingizmi": "Tired of hunting for books?",
+      "biz_har_bir_foydalanuvchi": "We understand the problems every user runs into — both offline and online."
+    },
+    "fAQSection": {
+      "kop_beriladigan": "Frequently asked",
+      "savollar": "questions",
+      "platforma_va_onlayn_kurslar": "Answers to the most common questions",
+      "eng_kop_beriladigan_savollarga": "about the platform and online courses"
+    },
+    "heroZoom": {
+      "zamonaviy_platforma_asosida_ishlab": "Built on a modern platform,",
+      "onlayn_kurslar": "online courses",
+      "talabalarga_yuqori_sifatli_talim": "give students a high-quality education and a comfortable learning environment.",
+      "zamonaviy_kasblarni": "Start learning",
+      "organishni": "modern professions",
+      "bugun_boshlang": "today",
+      "zamonaviy_platforma_asosida_ishlab_2": "Online courses built on a modern platform",
+      "talabalarga_yuqori_sifatli_talim_2": "give students a high-quality education and a comfortable learning environment.",
+      "talabalarga_yuqori": "give students a",
+      "sifatli_talim_va_qulay": "high-quality education and a comfortable learning environment."
+    },
+    "header": {
+      "beshta_platforma_orqali_oqish": "Five platforms for studying, research, learning and professional",
+      "rivojlanish_imkoniyatlari": "development."
+    },
+    "ishOrinlariJarayon": {
+      "platformadan_qanday_foydalaniladi": "How to use the platform",
+      "bir_necha_oddiy_qadam": "Find a job or hire the right person in a few simple steps"
+    },
+    "maqolaTalablari": {
+      "talablar": "Requirements",
+      "maqola_nashri_talablari": "Article publication requirements",
+      "maqolangiz_platformada_elon_qilinishi": "To be published on the platform, your article must fully meet the following mandatory requirements."
+    },
+    "sidebarLayout": {
+      "ortga": "Back",
+      "share_this_blog": "Share this page"
+    }
+  },
+  "pages": {
+    "raqamliKutibxona": {
+      "minglab_elektron_kitoblar": "Thousands of e-books",
+      "onlayn_kitoblarni_sotib_oling": "Buy books online, discover free titles and read them comfortably",
+      "istalgan_qurilmada_oqing": "on any device."
+    },
+    "onlaynTalim": {
+      "bilim_va_konikmalarni": "Deepen your knowledge",
+      "zamonaviy_talim_metodlari_asosida": "and skills through courses built on",
+      "bilimlaringizni_chuqurlashtiring": "modern teaching methods",
+      "bizning_platforma_orqali_siz": "Through our platform you can study IT and modern professions",
+      "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts."
+    },
+    "ishOrinlari": {
+      "ishorinlari": "Vacancies"
+    },
+    "rahbariyat": {
+      "tel": "Tel:",
+      "e_mail": "E-mail:",
+      "fuqarolarni_qabul_qilish": "Public reception:",
+      "rahbariyat_haqida": "About the management",
+      "institut_faoliyati_ozbekiston_respublika": "The institute operates under Resolution No. PQ-103 of the President of the Republic of Uzbekistan, dated 13 March 2025, on measures to achieve high effectiveness by upgrading the qualifications of national statistical system specialists and further accelerating the adoption of digital technologies in the field.",
+      "institut_ozbekiston_respublikasi_milliy": "The institute is a state educational and research institution within the unified system of the National Statistics Committee of the Republic of Uzbekistan and reports to the Committee in its activities."
+    },
+    "qarshiKurash": {
+      "qarshikurash": "Anti-corruption"
+    },
+    "odobAxloq": {
+      "odobaxloq": "Code of ethics"
+    },
+    "tuzilma": {
+      "kontakt": "Contact",
+      "biz_bilan_boglaning": "Get in touch",
+      "telefon": "Phone",
+      "e_mail": "e-mail",
+      "ijtimoiy_tarmoqlar": "Social media",
+      "manzil": "Address",
+      "instat_manzili": "INSTAT address",
+      "toshkent_shahri_shayxontohur_tumani": "30 Navoi Street, Shaykhantakhur district, Tashkent",
+      "faks": "Fax",
+      "transport": "Transport routes",
+      "tuzilma_rasmi": "Organizational structure"
+    },
+    "umumiyMalumot": {
+      "upcoming_events": "UPCOMING EVENTS",
+      "yangiliklar": "News"
+    },
+    "yotoqxona": {
+      "yotoqhona": "Dormitory"
+    },
+    "about": {
+      "ortga": "Back",
+      "share_this_blog": "Share this page",
+      "malumotlar_va_tahlil_ilmi": "“Data and analytics science”",
+      "raqamli_talim_platformasi": "Digital education platform",
+      "talim_ilm_fan_va": "A single digital platform for education, science and careers"
+    },
+    "mediaServise": {
+      "ortga": "Back",
+      "share_this_blog": "Share this page"
+    },
+    "science": {
+      "ortga": "Back",
+      "share_this_blog": "Share this page"
+    }
+  },
+  "data": {
+    "jobs": {
+      "jobs-1": {
+        "title": "Frontend Developer",
+        "city": "Tashkent",
+        "desc": "Building modern web applications and user interfaces. Experience with React or Vue is required."
+      },
+      "jobs-2": {
+        "title": "UX/UI Designer",
+        "city": "Tashkent",
+        "desc": "Creating convenient, modern designs for mobile and web applications. Strong command of Figma and Adobe tools required."
+      },
+      "jobs-3": {
+        "title": "SMM Manager",
+        "city": "Samarkand",
+        "desc": "Running social media, building a content plan and managing ad campaigns. Creative thinking is essential."
+      },
+      "jobs-4": {
+        "title": "Driver",
+        "city": "Tashkent Region",
+        "desc": "Requires timely delivery of cargo, care of the vehicle and compliance with safety rules."
+      },
+      "jobs-5": {
+        "title": "Nurse",
+        "city": "Tashkent",
+        "desc": "Providing medical care to patients, carrying out doctors' instructions and maintaining records."
+      },
+      "jobs-6": {
+        "title": "Civil Engineer",
+        "city": "Bukhara",
+        "desc": "Overseeing construction projects, working with drawings and managing processes."
+      }
+    },
+    "faq": {
+      "faq-1": {
+        "question": "What is the INSTAT platform?",
+        "answer": "INSTAT is the Institute for Professional Development and Statistical Research under the Statistics Agency of the President of the Republic of Uzbekistan. The platform brings together online courses, an e-library and statistical data."
+      },
+      "faq-2": {
+        "question": "What courses are available on the platform?",
+        "answer": "Courses cover the system of national accounts, statistical methodology, industrial statistics, gender statistics, investment statistics and many other areas — for both beginner and professional levels."
+      },
+      "faq-3": {
+        "question": "How do I enrol in a course?",
+        "answer": "To register, click “Sign up”, enter your details and confirm your email. After that you can enrol in any course."
+      },
+      "faq-4": {
+        "question": "Are the courses paid or free?",
+        "answer": "The platform's core courses are free. Some specialised courses and certification programmes may be paid; prices are shown on each course page."
+      },
+      "faq-5": {
+        "question": "How do I use the e-library?",
+        "answer": "Once registered, you gain access to more than 50,000 books and research materials in the e-library. Books can be read online or downloaded."
+      },
+      "faq-6": {
+        "question": "Are there mobile apps?",
+        "answer": "Yes, INSTAT has mobile apps for iOS and Android. Download them from Google Play or the App Store and access all course materials from your device."
+      },
+      "faq-7": {
+        "question": "Is a certificate issued?",
+        "answer": "Participants who complete a course receive an official certificate. It is issued electronically and can be verified through the link provided."
+      },
+      "faq-8": {
+        "question": "Where do I go with further questions?",
+        "answer": "You can reach us at info@instat.uz or by phone at (+998 71) 202-11-10. Working hours: Monday–Friday, 9:00–18:00."
+      }
+    },
+    "articleRequirements": {
+      "article-requirements-1": {
+        "title": "Follow the standard structure",
+        "desc": "The article must be 2,500–3,000 words and include the sections: Introduction, Literature review, Research methodology, Analysis and results, Conclusions and recommendations."
+      },
+      "article-requirements-2": {
+        "title": "A UDC code is mandatory",
+        "desc": "Every article must be assigned a UDC code (via udc.online). The title must be precise, academic and fully reflect the content."
+      },
+      "article-requirements-3": {
+        "title": "Complete author details",
+        "desc": "Full name, academic degree, position, organisation, city/country, email and phone number must be given in the language of the main text."
+      },
+      "article-requirements-4": {
+        "title": "Abstract in three languages",
+        "desc": "The abstract must be provided in Uzbek, Russian and English (250–300 words). Provide 15–20 keywords in Uzbek and English."
+      },
+      "article-requirements-5": {
+        "title": "Results and conclusions must be substantiated",
+        "desc": "Methods must be described precisely enough to be reproducible, results must be evidence-based, and the conclusion must offer clear scientific findings and practical recommendations."
+      }
+    },
+    "publications": {
+      "publications-1": {
+        "title": "Population size and demographic growth",
+        "category": "Demographics",
+        "location": "Uzbekistan, by region",
+        "published": "March 2025"
+      },
+      "publications-2": {
+        "title": "Birth and death statistics",
+        "category": "Demographics",
+        "location": "Uzbekistan",
+        "published": "February 2025"
+      },
+      "publications-3": {
+        "title": "GDP and economic growth indicators",
+        "category": "Economy",
+        "location": "Uzbekistan",
+        "published": "February 2025"
+      },
+      "publications-4": {
+        "title": "Employment and unemployment rate",
+        "category": "Labour market",
+        "location": "Uzbekistan, by region",
+        "published": "February 2025"
+      },
+      "publications-5": {
+        "title": "Inflation and the consumer price index",
+        "category": "Economy",
+        "location": "Uzbekistan, by region",
+        "published": "January 2025"
+      },
+      "publications-6": {
+        "title": "Average wage statistics",
+        "category": "Labour market",
+        "location": "Uzbekistan, by province",
+        "published": "March 2025"
+      },
+      "publications-7": {
+        "title": "Number of vehicles",
+        "category": "Transport",
+        "location": "Uzbekistan",
+        "published": "February 2025"
+      },
+      "publications-8": {
+        "title": "Passenger and freight transport statistics",
+        "category": "Transport",
+        "location": "Uzbekistan, by region",
+        "published": "March 2025"
+      },
+      "publications-9": {
+        "title": "Volume of agricultural output",
+        "category": "Agriculture",
+        "location": "Uzbekistan, by province",
+        "published": "February 2025"
+      },
+      "publications-10": {
+        "title": "Export and import dynamics",
+        "category": "Foreign trade",
+        "location": "Uzbekistan",
+        "published": "March 2025"
+      },
+      "publications-11": {
+        "title": "State budget revenues and expenditures",
+        "category": "Finance",
+        "location": "Uzbekistan",
+        "published": "January 2025"
+      },
+      "publications-12": {
+        "title": "Industrial production index",
+        "category": "Industry",
+        "location": "Uzbekistan, by region",
+        "published": "February 2025"
+      },
+      "publications-13": {
+        "title": "Number of educational institutions and students",
+        "category": "Education",
+        "location": "Uzbekistan, by province",
+        "published": "March 2025"
+      },
+      "publications-14": {
+        "title": "Real household income",
+        "category": "Economy",
+        "location": "Uzbekistan, by region",
+        "published": "February 2025"
+      },
+      "publications-15": {
+        "title": "Small and medium business statistics",
+        "category": "Entrepreneurship",
+        "location": "Uzbekistan",
+        "published": "January 2025"
+      },
+      "publications-16": {
+        "title": "Tourism and hospitality statistics",
+        "category": "Tourism",
+        "location": "Uzbekistan, by province",
+        "published": "March 2025"
+      }
+    },
+    "journals": {
+      "journal-1": {
+        "title": "Construction in Uzbekistan",
+        "author": "Afzal Pulatov",
+        "category": "Industry"
+      },
+      "journal-2": {
+        "title": "Small business in Uzbekistan",
+        "author": "Dilnoza Yusupova",
+        "category": "Macroeconomics"
+      },
+      "journal-3": {
+        "title": "Women and men",
+        "author": "Malika Xasanova",
+        "category": "Demographics"
+      },
+      "journal-4": {
+        "title": "Uzbekistan in figures",
+        "author": "Jahongir Toshmatov",
+        "category": "Macroeconomics"
+      },
+      "journal-5": {
+        "title": "Development of the information society in Uzbekistan",
+        "author": "Afzal Pulatov",
+        "category": "Education"
+      },
+      "journal-6": {
+        "title": "Science and innovation in Uzbekistan",
+        "author": "Dilnoza Yusupova",
+        "category": "Education"
+      },
+      "journal-7": {
+        "title": "Transport and communications in Uzbekistan",
+        "author": "Jahongir Toshmatov",
+        "category": "Industry"
+      },
+      "journal-8": {
+        "title": "Industry of Uzbekistan",
+        "author": "Malika Xasanova",
+        "category": "Industry"
+      },
+      "journal-9": {
+        "title": "Agriculture in Uzbekistan",
+        "author": "Afzal Pulatov",
+        "category": "Agriculture"
+      },
+      "journal-10": {
+        "title": "Analysis of demographic change",
+        "author": "Malika Xasanova",
+        "category": "Demographics"
+      },
+      "journal-11": {
+        "title": "Development of the national education system",
+        "author": "Dilnoza Yusupova",
+        "category": "Education"
+      },
+      "journal-12": {
+        "title": "Agricultural statistics",
+        "author": "Jahongir Toshmatov",
+        "category": "Agriculture"
+      }
+    },
+    "problems": {
+      "problem-1": {
+        "title": "Searching takes far too long",
+        "description": "You come to the library and spend 20–30 minutes looking for the book you need. Shelves are not always logically ordered, staff may be busy, and navigation is awkward."
+      },
+      "problem-2": {
+        "title": "No certainty the book is available",
+        "description": "It is hard to know in advance whether the book you need is in the library, whether it is available and which section it sits in."
+      },
+      "problem-3": {
+        "title": "Paid books are a risky choice",
+        "description": "On online platforms it is hard to fully judge a book's content and style before buying. It \\"
+      }
+    }
+  }
+}

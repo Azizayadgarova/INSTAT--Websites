@@ -1,6 +1,6 @@
-﻿import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import img from '@/assets/Illustration.png'
+import img from '@/assets/Illustration.webp'
 
 const stats = [
 	{ number: 10000, suffix: '+', label: 'Foydalanuvchilar' },
@@ -68,7 +68,7 @@ const StatisticComponent = () => {
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap justify-center gap-[38px] z-10 px-4">
 				{stats.map((stat, index) => (
 					<motion.div
-						key={index}
+						key={stat.label}
 						className="flex flex-col items-center"
 						initial={{ opacity: 0, y: 40 }}
 						animate={inView ? { opacity: 1, y: 0 } : {}}

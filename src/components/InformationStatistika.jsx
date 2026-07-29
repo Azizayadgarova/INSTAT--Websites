@@ -44,7 +44,7 @@ const InformationStatistika = () => {
       <div className="hidden md:flex items-center w-full" style={{ height: '223px', padding: '0 40px' }}>
         <div className="grid grid-cols-4 w-full h-full relative">
           {stats.map((stat, index) => (
-            <div key={index} className="relative px-8 flex flex-col" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
+            <div key={stat.label} className="relative px-8 flex flex-col" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
               {index === 0 && (
                 <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '1px', background: BORDER }} />
               )}
@@ -67,7 +67,7 @@ const InformationStatistika = () => {
       {/* MOBILE: vertikal ro'yxat */}
       <div className="flex md:hidden flex-col w-full">
         {stats.map((stat, index) => (
-          <div key={index} className="relative flex flex-col px-6 py-7">
+          <div key={stat.label} className="relative flex flex-col px-6 py-7">
             {/* har bir stat pastida chiziq (oxirgisidan tashqari) */}
             {index < stats.length - 1 && (
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: BORDER_H }} />

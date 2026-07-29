@@ -1,8 +1,7 @@
+import { useTranslation } from 'react-i18next'
 import { memo, useRef, useState } from 'react'
-import {
-	motion, AnimatePresence,
-	useMotionValue, useSpring, useTransform, useMotionTemplate,
-} from 'framer-motion'
+import { motion, AnimatePresence,
+	useMotionValue, useSpring, useTransform, useMotionTemplate, } from 'framer-motion'
 import insta from '@/assets/instagram-fill (1).png'
 import facebook from '@/assets/Vector (1).png'
 import twitter from '@/assets/twitter-x-line (1).png'
@@ -10,56 +9,67 @@ import { BASE_W, BASE_H, getCenterX } from './mentors.data'
 import { EASE_SMOOTH } from '../../constants/animations'
 
 const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hideExtra = false, isMobile = false }) => {
-	const w = BASE_W * cfg.scale * dimScale
-	const h = BASE_H * cfg.scale * dimScale
-	const cx = getCenterX(cfg, trackW / 2, dimScale)
-	const cardRef = useRef(null)
-	const [isHovered, setIsHovered] = useState(false)
+    const {
+        t
+    } = useTranslation();
 
-	const mx = useMotionValue(0.5)
-	const my = useMotionValue(0.5)
-	const scaleBase = useMotionValue(1)
+    const w = BASE_W * cfg.scale * dimScale
+    const h = BASE_H * cfg.scale * dimScale
+    const cx = getCenterX(cfg, trackW / 2, dimScale)
+    const cardRef = useRef(null)
+    const [isHovered, setIsHovered] = useState(false)
 
-	const rotateX = useSpring(useTransform(my, [0, 1], [-14, 14]), { stiffness: 400, damping: 30 })
-	const rotateY = useSpring(useTransform(mx, [0, 1], [14, -14]), { stiffness: 400, damping: 30 })
-	const scale   = useSpring(scaleBase, { stiffness: 400, damping: 30 })
+    const initials = (mentor.name ?? '')
+		.split(' ')
+		.filter(Boolean)
+		.slice(0, 2)
+		.map(part => part[0].toUpperCase())
+		.join('')
 
-	const l1x = useTransform(mx, [0, 1], [14, -14])
-	const l1y = useTransform(my, [0, 1], [14, -14])
-	const l2x = useTransform(mx, [0, 1], [-11, 11])
-	const l2y = useTransform(my, [0, 1], [-11, 11])
+    const mx = useMotionValue(0.5)
+    const my = useMotionValue(0.5)
+    const scaleBase = useMotionValue(1)
 
-	const glowX  = useTransform(mx, v => `${v * 100}%`)
-	const glowY  = useTransform(my, v => `${v * 100}%`)
-	const glowBg = useMotionTemplate`radial-gradient(circle at ${glowX} ${glowY}, rgba(255,255,255,0.18) 0%, transparent 50%)`
+    const rotateX = useSpring(useTransform(my, [0, 1], [-14, 14]), { stiffness: 400, damping: 30 })
+    const rotateY = useSpring(useTransform(mx, [0, 1], [14, -14]), { stiffness: 400, damping: 30 })
+    const scale   = useSpring(scaleBase, { stiffness: 400, damping: 30 })
 
-	const chromaticAngle = useTransform(rotateY, v => `${135 + v}deg`)
-	const chromatic      = useMotionTemplate`linear-gradient(${chromaticAngle}, rgba(56,160,255,0.18) 0%, transparent 40%, transparent 60%, rgba(45,61,153,0.18) 100%)`
+    const l1x = useTransform(mx, [0, 1], [14, -14])
+    const l1y = useTransform(my, [0, 1], [14, -14])
+    const l2x = useTransform(mx, [0, 1], [-11, 11])
+    const l2y = useTransform(my, [0, 1], [-11, 11])
 
-	const shineSkew = useTransform(rotateY, v => `skewY(${v * 0.25}deg)`)
+    const glowX  = useTransform(mx, v => `${v * 100}%`)
+    const glowY  = useTransform(my, v => `${v * 100}%`)
+    const glowBg = useMotionTemplate`radial-gradient(circle at ${glowX} ${glowY}, rgba(255,255,255,0.18) 0%, transparent 50%)`
 
-	const handleMouseMove = e => {
+    const chromaticAngle = useTransform(rotateY, v => `${135 + v}deg`)
+    const chromatic      = useMotionTemplate`linear-gradient(${chromaticAngle}, rgba(56,160,255,0.18) 0%, transparent 40%, transparent 60%, rgba(45,61,153,0.18) 100%)`
+
+    const shineSkew = useTransform(rotateY, v => `skewY(${v * 0.25}deg)`)
+
+    const handleMouseMove = e => {
 		if (!isActive || !cardRef.current) return
 		const rect = cardRef.current.getBoundingClientRect()
 		mx.set((e.clientX - rect.left) / rect.width)
 		my.set((e.clientY - rect.top) / rect.height)
 	}
 
-	const handleMouseEnter = () => {
+    const handleMouseEnter = () => {
 		if (!isActive) return
 		setIsHovered(true)
 		scaleBase.set(1.07)
 	}
 
-	const handleMouseLeave = () => {
+    const handleMouseLeave = () => {
 		setIsHovered(false)
 		mx.set(0.5)
 		my.set(0.5)
 		scaleBase.set(1)
 	}
 
-	return (
-		<div
+    return (
+        <div
 			onClick={() => !isActive && onShift(cfg.offset)}
 			style={{
 				position: 'absolute',
@@ -75,7 +85,7 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 				willChange: 'transform, opacity',
 			}}
 		>
-			<motion.div
+            <motion.div
 				animate={!isActive ? { rotateY: [0, 8, 0, -8, 0] } : { rotateY: 0 }}
 				transition={
 					!isActive
@@ -120,19 +130,42 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 						transition: 'scale 0.12s ease',
 					}}
 				>
-					<img
-						src={mentor.photo}
-						alt={mentor.name}
-						loading='lazy'
-						decoding='async'
-						style={{
-							width: '100%',
-							height: '100%',
-							objectFit: 'cover',
-							filter: isActive ? 'none' : 'grayscale(1) brightness(0.5)',
-							transition: 'filter 0.5s ease',
-						}}
-					/>
+					{mentor.photo ? (
+						<img
+							src={mentor.photo}
+							alt={mentor.name}
+							loading='lazy'
+							decoding='async'
+							style={{
+								width: '100%',
+								height: '100%',
+								objectFit: 'cover',
+								filter: isActive ? 'none' : 'grayscale(1) brightness(0.5)',
+								transition: 'filter 0.5s ease',
+							}}
+						/>
+					) : (
+						// Avatar yo'q (backendda `avatar: null`) — bosh harflar bilan o'rin egallaymiz
+						<div
+							aria-label={mentor.name}
+							style={{
+								width: '100%',
+								height: '100%',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+								background: 'linear-gradient(160deg, #1B2130 0%, #0E121B 100%)',
+								color: 'rgba(255,255,255,0.45)',
+								fontSize: Math.max(20, 64 * cfg.scale * dimScale),
+								fontWeight: 500,
+								letterSpacing: '0.04em',
+								filter: isActive ? 'none' : 'grayscale(1) brightness(0.5)',
+								transition: 'filter 0.5s ease',
+							}}
+						>
+							{initials}
+						</div>
+					)}
 				</motion.div>
 
 				{isActive && (
@@ -210,42 +243,48 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 						>
 							{mentor.name}
 						</motion.h3>
-						<motion.p
-							initial={{ opacity: 0, y: 8 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.45, delay: 0.14, ease: EASE_SMOOTH }}
-							style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(11, 15 * dimScale), margin: '0 0 4px 0' }}
-						>
-							{mentor.role}
-						</motion.p>
-						{!hideExtra && (
-							<>
+						{mentor.role && (
 							<motion.p
 								initial={{ opacity: 0, y: 8 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.45, delay: 0.19, ease: EASE_SMOOTH }}
-								style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
+								transition={{ duration: 0.45, delay: 0.14, ease: EASE_SMOOTH }}
+								style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(11, 15 * dimScale), margin: '0 0 4px 0' }}
 							>
-								{mentor.exp}
+								{mentor.role}
 							</motion.p>
+						)}
+						{!hideExtra && (
+							<>
+							{mentor.exp && (
+								<motion.p
+									initial={{ opacity: 0, y: 8 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.45, delay: 0.19, ease: EASE_SMOOTH }}
+									style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
+								>
+									{mentor.exp}
+								</motion.p>
+							)}
+							{mentor.socials && (
 							<motion.div
 								initial={{ opacity: 0, scale: 0.85 }}
 								animate={{ opacity: 1, scale: 1 }}
 								transition={{ duration: 0.4, delay: 0.25, ease: EASE_SMOOTH }}
 								style={{ display: 'flex', justifyContent: 'center', gap: 15 }}
 							>
-								<a href='#' aria-label='Instagram' onClick={e => e.preventDefault()}><img src={insta} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
-								<a href='#' aria-label='Facebook' onClick={e => e.preventDefault()}><img src={facebook} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
-								<a href='#' aria-label='Twitter' onClick={e => e.preventDefault()}><img src={twitter} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
+								<a href='#' aria-label={t("components.mentorCard.instagram")} onClick={e => e.preventDefault()}><img src={insta} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
+								<a href='#' aria-label={t("components.mentorCard.facebook")} onClick={e => e.preventDefault()}><img src={facebook} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
+								<a href='#' aria-label={t("components.mentorCard.twitter")} onClick={e => e.preventDefault()}><img src={twitter} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
 							</motion.div>
+							)}
 							</>
 						)}
 					</motion.div>
 				)}
 			</AnimatePresence>
 			</motion.div>
-		</div>
-	)
+        </div>
+    );
 }
 
 export default memo(MentorCard)

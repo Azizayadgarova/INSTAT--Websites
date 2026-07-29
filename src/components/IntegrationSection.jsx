@@ -1,5 +1,5 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
 import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
 import logo1 from '@/assets/ClickUp (1).png'
@@ -30,16 +30,20 @@ const baseAngles = integrations.map((_, i) => i * (180 / total))
 const circleCenterY = -(radius - arcRadius)
 
 const IntegrationSection = () => {
-	const sectionRef = useRef(null)
-	const angleRef = useRef(0)
-	const rafRef = useRef(null)
-	const pausedRef = useRef(false)
-	const visibleRef = useRef(false)
-	const iconRefs = useRef([])
-	const [containerScale, setContainerScale] = useState(1)
-	const [_isMobile, setIsMobile] = useState(false)
+    const {
+        t
+    } = useTranslation();
 
-	useEffect(() => {
+    const sectionRef = useRef(null)
+    const angleRef = useRef(0)
+    const rafRef = useRef(null)
+    const pausedRef = useRef(false)
+    const visibleRef = useRef(false)
+    const iconRefs = useRef([])
+    const [containerScale, setContainerScale] = useState(1)
+    const [_isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
 		const updateScale = () => {
 			const w = window.innerWidth
 			const mobile = w < 640
@@ -55,7 +59,7 @@ const IntegrationSection = () => {
 		return () => window.removeEventListener('resize', updateScale)
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		const speed = 0.08
 
 		const updateIcons = (angle) => {
@@ -111,28 +115,26 @@ const IntegrationSection = () => {
 		}
 	}, [])
 
-	return (
-		<section
+    return (
+        <section
 			ref={sectionRef}
-			className='relative w-full bg-[rgba(14,18,27,1)] flex flex-col items-center justify-start overflow-hidden py-10 font-sans text-white'
+			className='relative w-full bg-[rgba(var(--bg-rgb),1)] flex flex-col items-center justify-start overflow-hidden py-10 font-sans text-white'
 			style={{ perspective: '1200px', minHeight: `${Math.max(containerScale < 0.7 ? 500 : 880, 336 + 408 * containerScale)}px` }}
 		>
-			<SectionBackground />
-
-			<AnimatedSection style={{ position: 'relative', zIndex: 50, width: '100%' }}>
+            <SectionBackground />
+            <AnimatedSection style={{ position: 'relative', zIndex: 50, width: '100%' }}>
 				<div className='text-center mb-14'>
 					<Text
 						buttonText='Platforma haqida'
-						title='Integratsiyalashgan'
+						title={t("components.integrationSection.integratsiyalashgan")}
 						highlight='platformalar'
 						subtitle={
-							<>Ta'lim jarayonini qulay va samarali qiluvchi integratsiyalar</>
+							<>{t("components.integrationSection.talim_jarayonini_qulay_va")}</>
 						}
 					/>
 				</div>
 			</AnimatedSection>
-
-			<div
+            <div
 				className='relative w-full max-w-[900px] flex justify-center'
 				style={{
 					transformStyle: 'preserve-3d',
@@ -229,8 +231,8 @@ const IntegrationSection = () => {
 					))}
 				</div>
 			</div>
-		</section>
-	)
+        </section>
+    );
 }
 
 export default IntegrationSection

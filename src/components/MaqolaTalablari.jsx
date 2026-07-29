@@ -1,37 +1,8 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 
-const ITEMS = [
-	{
-		num: '01',
-		title: 'Standart strukturaga rioya qiling',
-		desc: "Maqola 2500–3000 so'zdan iborat bo'lishi va quyidagi bo'limlarni o'z ichiga olishi kerak: Kirish, Adabiyotlar tahlili, Tadqiqot metodologiyasi, Tahlil va natijalar, Xulosa va takliflar.",
-		flip: false,
-	},
-	{
-		num: '02',
-		title: 'UDK raqami majburiy',
-		desc: "Har bir maqolaga UDK kodi qo'yiladi (udc.online orqali). Maqola sarlavhasi aniq, ilmiy va mazmunni to'liq aks ettirishi lozim.",
-		flip: true,
-	},
-	{
-		num: '03',
-		title: "Muallif ma'lumotlari to'liq ko'rsatilishi",
-		desc: "Ism-familiya, ilmiy daraja, lavozim, tashkilot, shahar/davlat, e-mail va telefon raqam asosiy matn tilida ko'rsatilishi shart.",
-		flip: false,
-	},
-	{
-		num: '04',
-		title: '3 tilda annotatsiya',
-		desc: "Annotatsiya o'zbek, rus va ingliz tillarida (250–300 so'z) beriladi. Kalit so'zlar 15–20 ta miqdorda o'zbek va ingliz tillarida taqdim etiladi.",
-		flip: true,
-	},
-	{
-		num: '05',
-		title: "Natijalar va xulosalar asoslangan bo'lishi kerak",
-		desc: "Metodlar takrorlanadigan darajada aniq yoziladi, natijalar dalillar bilan ko'rsatiladi va yakunda aniq ilmiy xulosa hamda amaliy takliflar beriladi.",
-		flip: false,
-	},
-]
+import { ITEMS } from '@/data/article-requirements.data'
+import { useDataText } from '@/hooks/useDataText'
 
 const KF = `
 @keyframes mt_fadeUp { from { opacity:0; transform:translateY(32px) } to { opacity:1; transform:translateY(0) } }
@@ -67,6 +38,7 @@ function useMobile(bp = 768) {
 
 // Mobile: barcha narsalar doimiy ko'rinadi (scroll animatsiyasiz)
 function MobileItem({ item, idx }) {
+	const dt = useDataText('articleRequirements')
 	return (
 		<div style={{
 			position: 'relative',
@@ -109,7 +81,7 @@ function MobileItem({ item, idx }) {
 					lineHeight: 1.3,
 					color: '#ffffff',
 					margin: '0 0 8px',
-				}}>{item.title}</h3>
+				}}>{dt(item, 'title')}</h3>
 				<p style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
@@ -117,13 +89,14 @@ function MobileItem({ item, idx }) {
 					lineHeight: 1.7,
 					color: 'rgba(160,165,185,1)',
 					margin: 0,
-				}}>{item.desc}</p>
+				}}>{dt(item, 'desc')}</p>
 			</div>
 		</div>
 	)
 }
 
 function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
+	const dt = useDataText('articleRequirements')
 	const numBlock = (
 		<div
 			ref={numRef}
@@ -169,7 +142,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 					lineHeight: 1.3,
 					color: '#ffffff',
 					margin: '0 0 10px',
-				}}>{item.title}</h3>
+				}}>{dt(item, 'title')}</h3>
 				<p style={{
 					fontFamily: 'var(--font-display)',
 					fontWeight: 400,
@@ -177,7 +150,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 					lineHeight: 1.7,
 					color: 'rgba(160,165,185,1)',
 					margin: 0,
-				}}>{item.desc}</p>
+				}}>{dt(item, 'desc')}</p>
 			</div>
 		</div>
 	)
@@ -229,17 +202,21 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 }
 
 export default function MaqolaTalablari() {
-	const [headerRef, headerVisible] = useInView(0.3)
-	const isMobile    = useMobile()
-	const timelineRef = useRef(null)
-	const lineElRef   = useRef(null)
-	const dotRefs     = useRef([])
-	const pulseRefs   = useRef([])
-	const numRefs     = useRef([])
-	const contentRefs = useRef([])
-	const prevReached = useRef([])
+    const {
+        t
+    } = useTranslation();
 
-	useEffect(() => {
+    const [headerRef, headerVisible] = useInView(0.3)
+    const isMobile    = useMobile()
+    const timelineRef = useRef(null)
+    const lineElRef   = useRef(null)
+    const dotRefs     = useRef([])
+    const pulseRefs   = useRef([])
+    const numRefs     = useRef([])
+    const contentRefs = useRef([])
+    const prevReached = useRef([])
+
+    useEffect(() => {
 		const el = document.createElement('style')
 		el.setAttribute('data-mt-kf', '1')
 		el.textContent = KF
@@ -247,8 +224,8 @@ export default function MaqolaTalablari() {
 		return () => document.head.removeChild(el)
 	}, [])
 
-	// Desktop scroll animation (mobile da ishlamaydi)
-	useEffect(() => {
+    // Desktop scroll animation (mobile da ishlamaydi)
+    useEffect(() => {
 		const onScroll = () => {
 			const tl   = timelineRef.current
 			const line = lineElRef.current
@@ -325,8 +302,8 @@ export default function MaqolaTalablari() {
 		return () => window.removeEventListener('scroll', onScroll)
 	}, [isMobile])
 
-	return (
-		<section style={{
+    return (
+        <section style={{
 			width: '100%',
 			background: 'rgba(var(--card-rgb),1)',
 			display: 'flex',
@@ -335,8 +312,8 @@ export default function MaqolaTalablari() {
 			padding: '40px 0 80px',
 			boxSizing: 'border-box',
 		}}>
-			{/* Header */}
-			<div ref={headerRef} style={{
+            {/* Header */}
+            <div ref={headerRef} style={{
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
@@ -361,7 +338,7 @@ export default function MaqolaTalablari() {
 						fontWeight: 500,
 						color: 'rgba(180,185,200,1)',
 						letterSpacing: '0.02em',
-					}}>Talablar</span>
+					}}>{t("components.maqolaTalablari.talablar")}</span>
 				</div>
 
 				<h2 style={{
@@ -375,9 +352,7 @@ export default function MaqolaTalablari() {
 					letterSpacing: '-0.02em',
 					opacity:   headerVisible ? 1 : 0,
 					animation: headerVisible ? 'mt_fadeUp 0.7s cubic-bezier(.22,1,.36,1) 0.1s both' : 'none',
-				}}>
-					Maqola nashri talablari
-				</h2>
+				}}>{t("components.maqolaTalablari.maqola_nashri_talablari")}</h2>
 
 				<p className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[500px]' style={{
 					fontFamily: 'var(--font-display)',
@@ -388,13 +363,10 @@ export default function MaqolaTalablari() {
 					margin: '0px 0 48px',
 					opacity:   headerVisible ? 1 : 0,
 					animation: headerVisible ? 'mt_fadeUp 0.7s cubic-bezier(.22,1,.36,1) 0.2s both' : 'none',
-				}}>
-					Maqolangiz platformada e&apos;lon qilinishi uchun quyidagi majburiy talablarga to&apos;liq mos bo&apos;lishi shart.
-				</p>
+				}}>{t("components.maqolaTalablari.maqolangiz_platformada_elon_qilinishi")}</p>
 			</div>
-
-			{/* Mobile timeline — hamma narsa darhol ko'rinadi */}
-			{isMobile && (
+            {/* Mobile timeline — hamma narsa darhol ko'rinadi */}
+            {isMobile && (
 				<div style={{
 					position: 'relative',
 					width: '100%',
@@ -412,13 +384,12 @@ export default function MaqolaTalablari() {
 					}}/>
 
 					{ITEMS.map((item, idx) => (
-						<MobileItem key={idx} item={item} idx={idx} />
+						<MobileItem key={item.title} item={item} idx={idx} />
 					))}
 				</div>
 			)}
-
-			{/* Desktop timeline — scroll animatsiyali */}
-			{!isMobile && (
+            {/* Desktop timeline — scroll animatsiyali */}
+            {!isMobile && (
 				<div ref={timelineRef} style={{
 					position: 'relative',
 					width: '100%',
@@ -440,7 +411,7 @@ export default function MaqolaTalablari() {
 
 					{ITEMS.map((item, idx) => (
 						<AnimatedItem
-							key={idx}
+							key={item.title}
 							item={item}
 							idx={idx}
 							dotRef={el     => dotRefs.current[idx]     = el}
@@ -451,6 +422,6 @@ export default function MaqolaTalablari() {
 					))}
 				</div>
 			)}
-		</section>
-	)
+        </section>
+    );
 }

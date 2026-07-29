@@ -1,22 +1,27 @@
+import { useTranslation } from 'react-i18next'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef } from 'react'
 
-import studentWebp from '@/assets/bg1.jpg'
+import studentWebp from '@/assets/bg1.webp'
 import phoneImg from '@/assets/phone.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const HeroZoom = () => {
-	const containerRef = useRef(null)
-	const zoomWrapperRef = useRef(null)
-	const phoneFrameRef = useRef(null)
+    const {
+        t
+    } = useTranslation();
 
-	const titleRef = useRef(null)
-	const descRef = useRef(null)
-	const bottomTextRef = useRef(null)
+    const containerRef = useRef(null)
+    const zoomWrapperRef = useRef(null)
+    const phoneFrameRef = useRef(null)
 
-	useEffect(() => {
+    const titleRef = useRef(null)
+    const descRef = useRef(null)
+    const bottomTextRef = useRef(null)
+
+    useEffect(() => {
 		document.body.style.overflowX = 'hidden'
 
 		const ctx = gsap.context(() => {
@@ -100,118 +105,102 @@ const HeroZoom = () => {
 		}
 	}, [])
 
-	return (
-		<>
-		{/* MOBILE: statik, animatsiyasiz */}
-		<section className='md:hidden relative w-full bg-[rgba(14,18,27,1)] flex flex-col items-center py-10 px-4 gap-6'>
-			<div className='relative w-full' style={{ aspectRatio: '16/9' }}>
-				<div
-					className='absolute overflow-hidden'
-					style={{
-						top: '8%',
-						left: '1%',
-						width: '98%',
-						height: '84%',
-						borderRadius: '8% / 14%',
-					}}
-				>
-					<img
-						src={studentWebp}
-						alt='content'
-						loading='lazy'
-						decoding='async'
-						className='w-full h-full object-cover'
-					/>
-					<div
-						className='absolute inset-0'
-						style={{ background: 'linear-gradient(0deg, rgba(var(--bg-rgb),0.7) 0%, rgba(var(--bg-rgb),0.3) 50%, rgba(var(--bg-rgb),0) 100%)' }}
-					/>
-				</div>
-				<img
-					src={phoneImg}
-					alt=''
-					className='absolute inset-0 w-full h-full object-contain pointer-events-none z-10'
-				/>
-			</div>
+    return (
+        <>
+            {/* MOBILE: statik, animatsiyasiz */}
+            <section className='md:hidden relative w-full bg-[rgba(var(--bg-rgb),1)] flex flex-col items-center py-10 px-4 gap-6'>
+                <div className='relative w-full' style={{ aspectRatio: '16/9' }}>
+                    <div
+                        className='absolute overflow-hidden'
+                        style={{
+                            top: '8%',
+                            left: '1%',
+                            width: '98%',
+                            height: '84%',
+                            borderRadius: '8% / 14%',
+                        }}
+                    >
+                        <img
+                            src={studentWebp}
+                            alt='content'
+                            loading='lazy'
+                            decoding='async'
+                            className='w-full h-full object-cover'
+                        />
+                        <div
+                            className='absolute inset-0'
+                            style={{ background: 'linear-gradient(0deg, rgba(var(--bg-rgb),0.7) 0%, rgba(var(--bg-rgb),0.3) 50%, rgba(var(--bg-rgb),0) 100%)' }}
+                        />
+                    </div>
+                    <img
+                        src={phoneImg}
+                        alt=''
+                        className='absolute inset-0 w-full h-full object-contain pointer-events-none z-10' loading='lazy' decoding='async' />
+                </div>
 
-			<p className='text-center text-white leading-relaxed px-2' style={{ fontSize: 'clamp(14px, 4vw, 16px)' }}>
-				Zamonaviy platforma asosida ishlab chiqilgan{' '}
-				<span className='text-[rgba(0,230,252,1)]'>onlayn kurslar</span>{' '}
-				talabalarga yuqori sifatli ta'lim va qulay o'qish muhitini taqdim etadi.
-			</p>
-		</section>
+                <p className='text-center text-white leading-relaxed px-2' style={{ fontSize: 'clamp(14px, 4vw, 16px)' }}>{t("components.heroZoom.zamonaviy_platforma_asosida_ishlab")}{' '}
+                    <span className='text-[rgba(var(--cyan-rgb),1)]'>{t("components.heroZoom.onlayn_kurslar")}</span>{' '}{t("components.heroZoom.talabalarga_yuqori_sifatli_talim")}</p>
+            </section>
+            {/* DESKTOP: GSAP animatsiya, o'zgarishsiz */}
+            <section
+                ref={containerRef}
+                className='max-md:hidden relative w-full mt-[100px] mb-[40px] h-screen bg-[rgba(var(--bg-rgb),1)] flex items-center justify-center overflow-y-hidden z-[30]'
+                style={{ isolation: 'isolate' }}
+            >
+                <div
+                    ref={zoomWrapperRef}
+                    className='relative w-full max-w-[95vw] md:max-w-[85vw] lg:max-w-[850px] aspect-[16/9] flex items-center justify-center'
+                >
+                    {/* SCREEN */}
+                    <div className='screen-box absolute top-[5%] left-[1%] w-[98%] h-[90%] overflow-hidden shadow-2xl z-10'>
+                        <img
+                            src={studentWebp}
+                            alt='content'
+                            loading='lazy'
+                            decoding='async'
+                            className='absolute inset-0 w-full h-[92%] mt-[20px] object-cover'
+                        />
 
-		{/* DESKTOP: GSAP animatsiya, o'zgarishsiz */}
-		<section
-			ref={containerRef}
-			className='max-md:hidden relative w-full mt-[100px] mb-[40px] h-screen bg-[rgba(14,18,27,1)] flex items-center justify-center overflow-y-hidden z-[30]'
-			style={{ isolation: 'isolate' }}
-		>
-			<div
-				ref={zoomWrapperRef}
-				className='relative w-full max-w-[95vw] md:max-w-[85vw] lg:max-w-[850px] aspect-[16/9] flex items-center justify-center'
-			>
-				{/* SCREEN */}
-				<div className='screen-box absolute top-[5%] left-[1%] w-[98%] h-[90%] overflow-hidden shadow-2xl z-10'>
-					<img
-						src={studentWebp}
-						alt='content'
-						loading='lazy'
-						decoding='async'
-						className='absolute inset-0 w-full h-[92%] mt-[20px] object-cover'
-					/>
+                        <div
+                            className='absolute inset-0 z-10'
+                            style={{
+                                background:
+                                    'linear-gradient(0deg, rgba(var(--bg-rgb),0.9) 0%, rgba(var(--bg-rgb),0.5) 46.15%, rgba(var(--bg-rgb),0) 100%)',
+                            }}
+                        />
 
-					<div
-						className='absolute inset-0 z-10'
-						style={{
-							background:
-								'linear-gradient(0deg, rgba(var(--bg-rgb),0.9) 0%, rgba(var(--bg-rgb),0.5) 46.15%, rgba(var(--bg-rgb),0) 100%)',
-						}}
-					/>
+                        {/* TOP TEXT */}
+                        <div className='relative z-20 flex flex-col items-center justify-center mt-[15px] h-full text-center text-white px-4 max-w-5xl mx-auto'>
+                            <h1
+                                ref={titleRef}
+                                className='text-[32px] font-bold leading-[1.1] tracking-tight'
+                            >{t("components.heroZoom.zamonaviy_kasblarni")}<br />{t("components.heroZoom.organishni")}<span className='hero-shimmer'>{t("components.heroZoom.bugun_boshlang")}</span>
+                            </h1>
 
-					{/* TOP TEXT */}
-					<div className='relative z-20 flex flex-col items-center justify-center mt-[15px] h-full text-center text-white px-4 max-w-5xl mx-auto'>
-						<h1
-							ref={titleRef}
-							className='text-[32px] font-bold leading-[1.1] tracking-tight'
-						>
-							Zamonaviy kasblarni <br />
-							o’rganishni <span className='hero-shimmer'>bugun boshlang</span>
-						</h1>
+                            <p
+                                ref={descRef}
+                                className='mt-6 text-[#BCBCBC] text-[10px] max-w-2xl font-normal mx-auto leading-relaxed opacity-80'
+                            >{t("components.heroZoom.zamonaviy_platforma_asosida_ishlab_2")}<br />{t("components.heroZoom.talabalarga_yuqori_sifatli_talim_2")}</p>
+                        </div>
+                    </div>
 
-						<p
-							ref={descRef}
-							className='mt-6 text-[#BCBCBC] text-[10px] max-w-2xl font-normal mx-auto leading-relaxed opacity-80'
-						>
-							Zamonaviy platforma asosida ishlab chiqilgan onlayn kurslar <br />
-							talabalarga yuqori sifatli ta'lim va qulay o‘qish muhitini taqdim
-							etadi.
-						</p>
-					</div>
-				</div>
+                    {/* PHONE FRAME */}
+                    <img
+                        ref={phoneFrameRef}
+                        src={phoneImg}
+                        alt='iPhone Frame'
+                        className='relative z-30 w-full h-full object-contain pointer-events-none' loading='lazy' decoding='async' />
+                </div>
 
-				{/* PHONE FRAME */}
-				<img
-					ref={phoneFrameRef}
-					src={phoneImg}
-					alt='iPhone Frame'
-					className='relative z-30 w-full h-full object-contain pointer-events-none'
-				/>
-			</div>
-
-			{/* BOTTOM TEXT OUTSIDE PHONE */}
-			<div
-				ref={bottomTextRef}
-				className='absolute top-[90%] text-center text-white  text-[20px]  opacity-0'
-			>
-				Zamonaviy platforma asosida ishlab chiqilgan{' '}
-				<span className='text-[rgba(0,230,252,1)]'>onlayn kurslar</span>{' '}
-				talabalarga yuqori <br /> sifatli ta’lim va qulay o‘qish muhitini taqdim
-				etadi.
-			</div>
-		</section>
-		</>
-	)
+                {/* BOTTOM TEXT OUTSIDE PHONE */}
+                <div
+                    ref={bottomTextRef}
+                    className='absolute top-[90%] text-center text-white  text-[20px]  opacity-0'
+                >{t("components.heroZoom.zamonaviy_platforma_asosida_ishlab")}{' '}
+                    <span className='text-[rgba(var(--cyan-rgb),1)]'>{t("components.heroZoom.onlayn_kurslar")}</span>{' '}{t("components.heroZoom.talabalarga_yuqori")}<br />{t("components.heroZoom.sifatli_talim_va_qulay")}</div>
+            </section>
+        </>
+    );
 }
 
 export default HeroZoom

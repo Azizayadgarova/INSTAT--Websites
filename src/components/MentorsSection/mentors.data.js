@@ -1,4 +1,4 @@
-﻿const UP = '&auto=format&q=75&fm=webp'
+const UP = '&auto=format&q=75&fm=webp'
 
 export const mentors = [
 	{

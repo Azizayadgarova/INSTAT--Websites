@@ -127,42 +127,43 @@ export default function ModernEducation({ headerProps, variant = 'scroll', custo
 	const displayCards = customCards || cards
 
 	return (
-		<div className='relative bg-[rgba(14,18,27,1)] w-full' style={{ paddingBottom: 0 }}>
-			<ModernEducationHeader headerProps={headerProps} />
+		<div className='relative isolate bg-[rgba(var(--bg-rgb),1)] w-full' style={{ paddingBottom: 0 }}>
+			<ModernEducationHeader headerProps={headerProps}>
+				{/* MOBILE: oddiy vertikal ro'yxat, animatsiyasiz */}
+				<div className='flex md:hidden flex-col gap-10 w-full px-5 pb-10'>
+					{displayCards.map((card) => (
+						<MobileCard key={card.id} card={card} />
+					))}
+				</div>
 
-			{/* MOBILE: oddiy vertikal ro'yxat, animatsiyasiz */}
-			<div className='flex md:hidden flex-col gap-10 w-full px-5 pb-10'>
-				{displayCards.map((card) => (
-					<MobileCard key={card.id} card={card} />
-				))}
-			</div>
-
-			{/* DESKTOP: scroll animation, o'zgarishsiz */}
-			<div className='hidden md:block'>
-				{variant === 'grid' ? (
-					<div className='w-full py-8 md:py-16'>
-						{displayCards.map((card, i) => (
-							<GridCard key={card.id} card={card} index={i} />
-						))}
-					</div>
-				) : (
-					<div ref={containerRef} className='relative' style={{ position: 'relative' }}>
-						<div className='sticky top-0 h-screen overflow-hidden [perspective:2000px]'>
-							{!hideParticles && <ParticleBackground count={40} height={650} opacity={0.8} color='255, 255, 255' zIndex={1} />}
-							{displayCards.map((card, index) => (
-								<FloatingCard
-									key={`${card.id}-${index}`}
-									card={card}
-									index={index}
-									progress={smooth}
-									totalCards={displayCards.length}
-								/>
+				{/* DESKTOP: scroll animation, o'zgarishsiz */}
+				<div className='hidden md:block'>
+					{variant === 'grid' ? (
+						<div className='w-full py-8 md:py-16'>
+							{displayCards.map((card, i) => (
+								<GridCard key={card.id} card={card} index={i} />
 							))}
 						</div>
-						<div style={{ height: `${displayCards.length * cardHeight}vh` }} />
-					</div>
-				)}
-			</div>
+					) : (
+						<div ref={containerRef} className='relative' style={{ position: 'relative' }}>
+							<div className='sticky top-0 h-screen overflow-hidden [perspective:2000px]'>
+								{!hideParticles && <ParticleBackground count={40} height={650} opacity={0.8} color='255, 255, 255' zIndex={1} />}
+								{displayCards.map((card, index) => (
+									<FloatingCard
+										key={`${card.id}-${index}`}
+										card={card}
+										index={index}
+										progress={smooth}
+										totalCards={displayCards.length}
+									/>
+								))}
+							</div>
+							<div style={{ height: `${displayCards.length * cardHeight}vh` }} />
+						</div>
+					)}
+				</div>
+			</ModernEducationHeader>
 		</div>
 	)
 }
+

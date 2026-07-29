@@ -1,0 +1,592 @@
+{
+	"common": {
+		"back": "Ortga",
+		"home": "Bosh sahifaga qaytish",
+		"loading": "Yuklanmoqda...",
+		"comingSoon": "Bu bo‘lim tez kunda ishga tushadi",
+		"comingSoonHint": "Materiallar tayyorlanmoqda. Tez orada shu yerda e’lon qilinadi.",
+		"language": "Til",
+		"download": "Yuklab olish",
+		"openResource": "Resursga o‘tish"
+	},
+	"error": {
+		"title": "Xatolik yuz berdi",
+		"text": "Sahifani yuklashda kutilmagan xatolik yuz berdi. Sahifani yangilab ko‘ring.",
+		"reload": "Sahifani yangilash",
+		"notFound": "Sahifa topilmadi"
+	},
+	"menu": {
+		"about": {
+			"title": "Institut haqida",
+			"umumiy-malumot": "Umumiy ma’lumotlar",
+			"tuzilma": "Tuzilma",
+			"rahbariyat": "Rahbariyat",
+			"qarshi-kurash": "Korrupsiyaga qarshi kurashish",
+			"ish-orinlar": "Bo‘sh ish o‘rinlari",
+			"yotoqhona": "Mehmonhona turidagi yotoqxona",
+			"odob-axloq": "Odob-axloq qoidalari"
+		},
+		"axborot": {
+			"title": "Axborot resurslari",
+			"axborot-tizimi": "“Statistika” axborot tizimi",
+			"rivojlanish-maqsadlari": "Barqaror rivojlanish maqsadlari",
+			"gender-statistika": "Gender statistikasi",
+			"royhatga-olish": "Aholini ro‘yxatga olish",
+			"qishloq-xojaligi": "Qishloq xo‘jaligi sohasida ro‘yxatdan o‘tkazish",
+			"ochiq-malumotlar": "Ochiq ma’lumotlar portali",
+			"statistika-agentligi": "Statistika agentligining uslubiy materiallari"
+		},
+		"science": {
+			"title": "Ilm-fan",
+			"ilmiy-tadqiqot": "Ilmiy tadqiqot dasturi",
+			"oliy-talim": "Oliy ta’limdan keyingi ta’lim"
+		},
+		"media": {
+			"title": "Matbuot xizmati",
+			"yangiliklar": "Institut yangiliklari",
+			"tadbirlar": "Rejalashtirilayotgan tadbirlar",
+			"hamkorlik": "Xalqaro hamkorlik"
+		}
+	},
+	"seo": {
+		"siteName": "INSTAT",
+		"defaultTitle": "O‘zbekiston Milliy Statistika Qo‘mitasi | Raqamli Ta’lim Platformasi",
+		"defaultDescription": "O‘zbekiston Respublikasi Milliy Statistika Qo‘mitasining rasmiy raqamli ta’lim platformasi. Onlayn kurslar, ilmiy manbalar, mikroma’lumotlar va karyera imkoniyatlari bir joyda."
+	},
+	"components": {
+		"topFooter": {
+			"savollaringiz_bormi": "Savollaringiz bormi?",
+			"kurslar_royxatdan_otish_yoki": "Kurslar, ro'yxatdan o'tish yoki hamkorlik",
+			"boyicha_savollaringiz_bolsa_biz": "bo'yicha savollaringiz bo'lsa, biz bilan bog'laning",
+			"email_muvaffaqiyatli_yuborildi": "✓ Email muvaffaqiyatli yuborildi!",
+			"pochtangizni_qoldiring": "Pochtangizni qoldiring",
+			"yuborish": "Yuborish"
+		},
+		"mikroMalumotlarHero": {
+			"rasmiy_statistika_uchun": "Rasmiy statistika uchun",
+			"raqamli_platforma": "raqamli platforma",
+			"mikro_malumotlar_laboratoriyasi_foydalan": "Mikro-ma'lumotlar laboratoriyasi foydalanuvchilarga O'zbekiston Respublikasining rasmiy statistik ma'lumotlariga xavfsiz va qulay kirish.",
+			"ariza_yuborish": "Ariza yuborish",
+			"statistik_shablonlar": "Statistik shablonlar"
+		},
+		"platformaIshlashi": {
+			"qadam": "QADAM",
+			"platformadan_foydalanish_jarayoni_oddiy": "Platformadan foydalanish jarayoni oddiy va qulay bo'lib, foydalanuvchilar bir necha qadam orqali kerakli statistik ma'lumotlarga ega bo'lishlari mumkin."
+		},
+		"tahririyatAzolari": {
+			"hodimlar": "Hodimlar",
+			"tahririyat_azolari": "Tahririyat a'zolari",
+			"platformada_chop_etilayotgan_yetakchi": "Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing."
+		},
+		"ishOrinlariVakansiyalar": {
+			"oy": "/oy",
+			"ariza_yuborish": "Ariza yuborish",
+			"karyerangiz_uchun_eng_yaxshi": "Karyerangiz uchun eng yaxshi tanlov",
+			"eng_saralangan_vakansiyalarni_bir": "Eng saralangan vakansiyalarni bir joyda toping. Platformamiz orqali mos ishni aniqlang, tezkor murojaat yuboring va karyerangizni keyingi bosqichga olib chiqing."
+		},
+		"jurnalStatistika": {
+			"statistik_blok": "Statistik blok"
+		},
+		"mentorsSection": {
+			"sohasida_tajribali_mutaxassislar_bilan": "Sohasida tajribali mutaxassislar bilan",
+			"bizning_platforma_orqali_siz": "Bizning platforma orqali siz IT va zamonaviy kasblarni",
+			"mahalliy_va_xorijiy_mutaxassislar": "mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz."
+		},
+		"mikroImkoniyatlar": {
+			"platformaning_asosiy_imkoniyatlari": "Platformaning asosiy imkoniyatlari",
+			"mikro_malumotlar_laboratoriyasi_foydalan": "Mikro-ma'lumotlar laboratoriyasi foydalanuvchilarga statistik ma'lumotlardan samarali foydalanish uchun zamonaviy va qulay imkoniyatlarni taqdim etadi.",
+			"har_bir_detalni_aniqlik": "Har bir detalni aniqlik bilan ko'ring",
+			"katta_hajmdagi_mikro_malumotlarni": "Katta hajmdagi mikro ma'lumotlarni zamonaviy analitik vositalar yordamida chuqur tahlil qiling va muhim tendensiyalarni aniqlang.",
+			"tadqiqotlar_uchun_tayyor_platforma": "Tadqiqotlar uchun tayyor platforma",
+			"statistik_modellar_eksperimental_tahlill": "Statistik modellar, eksperimental tahlillar va ilmiy ishlanmalar uchun maxsus ishlab chiqilgan muhit.",
+			"soniyalar_ichida_natija": "Soniyalar ichida natija",
+			"kuchli_hisoblash_tizimi_orqali": "Kuchli hisoblash tizimi orqali ma'lumotlarni tezkor olish imkoniyati.",
+			"doimiy_yangilanadigan_manbalar": "Doimiy yangilanadigan manbalar",
+			"turli_sohalarga_oid_dolzarb": "Turli sohalarga oid dolzarb va ishonchli mikro ma'lumotlar bazasi",
+			"murakkab_malumotlarni_sodda_korinishda": "Murakkab ma'lumotlarni sodda ko'rinishda",
+			"interaktiv_grafiklar_va_dashboardlar": "Interaktiv grafiklar va dashboardlar orqali natijalarni tushunarli va vizual tarzda namoyish eting.",
+			"ishonchli_himoya_tizimi": "Ishonchli himoya tizimi",
+			"barcha_malumotlar_zamonaviy_xavfsizlik": "Barcha ma'lumotlar zamonaviy xavfsizlik standartlari asosida himoyalangan"
+		},
+		"elektronKutubxona": {
+			"platformamizdagi_barcha_elektron_kitobla": "Platformamizdagi barcha elektron kitoblarni bir joyda kashf eting. Janr, reyting va narx bo'yicha saralab, o'zingizga mos asarni oson tanlang.",
+			"barchasini_korish": "Barchasini ko'rish"
+		},
+		"bookCard": {
+			"ta_izoh": "ta izoh"
+		},
+		"nufuzliNashrlar": {
+			"sahifa": "Sahifa",
+			"barchasini_korish": "Barchasini ko'rish",
+			"nufuzli_jurnallar_va_songgi": "Nufuzli jurnallar va so'nggi nashrlar",
+			"platformada_chop_etilayotgan_yetakchi": "Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing."
+		},
+		"coursesSection": {
+			"maqsadingizga_mos": "Maqsadingizga mos",
+			"onlayn_kursni_tanlang": "onlayn kursni tanlang",
+			"boshlangichdan_professional_darajagacha": "Boshlang'ichdan professional darajagacha",
+			"bolgan_zamonaviy_onlayn_kurslar": "bo'lgan zamonaviy onlayn kurslar",
+			"soat": "soat",
+			"0_uzs": "0 UZS",
+			"barcha_kurslar": "Barcha kurslar"
+		},
+		"ishOrinlariAfzalliklar": {
+			"platforma_orqali_ish_topish": "Platforma orqali ish topish endi oson va samarali",
+			"platforma_sizning_qiziqishlaringiz_va": "Platforma sizning qiziqishlaringiz va ko'nikmalaringizga mos keladigan firma vakansiyalarini tez topishga yordam beradi. Bir necha klik bilan ariza yuboring,"
+		},
+		"footer": {
+			"kadrlar_malakasini_oshirish_va": "Kadrlar malakasini oshirish va statistik",
+			"tadqiqotlar_instituti": "tadqiqotlar instituti",
+			"saytlar": "Saytlar",
+			"huquqiy": "Huquqiy",
+			"instat_inc_barcha_huquqlar": "© Instat Inc. Barcha huquqlar himoyalangan."
+		},
+		"ishOrinlariKategoriyalar": {
+			"sahifa": "Sahifa",
+			"barchasini_korish": "Barchasini ko'rish",
+			"kategoriyalar": "Kategoriyalar",
+			"siz_uchun_mos_kategoriyani": "Siz uchun mos kategoriyani tanlang",
+			"eng_talab_yuqori_bolgan": "Eng talab yuqori bo'lgan kategoriyalar orasidan o'zingizga mos ishni toping va faoliyatingizni rivojlantiring"
+		},
+		"navbar2": {
+			"shaxsiy_kabinet": "Shaxsiy kabinet",
+			"menu": "Menu"
+		},
+		"ishOrinlariHero": {
+			"eng_dolzarb_ish_orinlari": "Eng dolzarb ish o'rinlari",
+			"bitta_platformada": "bitta platformada",
+			"ish_beruvchilar_va_nomzodlarni": "Ish beruvchilar va nomzodlarni bog'lovchi zamonaviy platforma. Sizga mos ishni tez toping va karyerangizni rivojlantiring.",
+			"pochtangizni_qoldiring": "Pochtangizni qoldiring",
+			"vakansiya_izlash": "Vakansiya izlash"
+		},
+		"mentorCard": {
+			"instagram": "Instagram",
+			"facebook": "Facebook",
+			"twitter": "Twitter"
+		},
+		"appPromoSection": {
+			"mobil_ilova_bilan": "Mobil ilova bilan",
+			"yanada_qulayroq": "yanada qulayroq!",
+			"bizning_mobil_ilovamiz_bilan": "Bizning mobil ilovamiz bilan bilim olish yanada oson. Hoziroq ilovamizni yuklab oling!",
+			"mobil_ilova_bilan_yanada": "Mobil ilova bilan yanada qulayroq!"
+		},
+		"statistikBlok": {
+			"statistik_blok": "Statistik blok"
+		},
+		"navbar": {
+			"tizimga_kirish": "Tizimga kirish",
+			"menyu": "Menyu",
+			"menu": "Menu",
+			"ichki_bolimlar": "Ichki bo'limlar",
+			"telefon_raqam": "Telefon raqam",
+			"elektron_pochta": "Elektron pochta",
+			"manzil": "Manzil",
+			"ijtimoiy_tarmoqlar": "Ijtimoiy tarmoqlar"
+		},
+		"foydalanishJarayoni": {
+			"platforma_qanday_ishlaydi": "Platforma Qanday Ishlaydi?",
+			"raqamli_kutubxonadan_foydalanish_jarayon": "Raqamli kutubxonadan foydalanish jarayoni — kitob tanlash, xarid qilish va platforma ichida o'qish bosqichlari haqida qisqacha ma'lumot."
+		},
+		"ishOrinlariRasmlar": {
+			"mos_vakansiyalarni_tez_toping": "Mos vakansiyalarni tez toping",
+			"sizning_qiziqishlaringiz_konikmalaringiz": "Sizning qiziqishlaringiz, ko'nikmalaringiz va tajribangizga mos keladigan firma vakansiyalarini bir necha soniya ichida toping.",
+			"sizning_qiziqishlaringiz_konikmalaringiz_2": "Sizning qiziqishlaringiz, ko'nikmalaringiz va tajribangizga mos keladigan firma vakansiyalarini bir necha soniya ichida toping. Bu platforma ortiqcha qidiruvsiz, aniq va dolzarb ishlarni ko'rish imkonini beradi."
+		},
+		"integrationSection": {
+			"integratsiyalashgan": "Integratsiyalashgan",
+			"talim_jarayonini_qulay_va": "Ta'lim jarayonini qulay va samarali qiluvchi integratsiyalar"
+		},
+		"carouselCard": {
+			"batafsil": "Batafsil →"
+		},
+		"pagination": {
+			"sahifa": "Sahifa",
+			"barchasini_korish": "Barchasini ko'rish"
+		},
+		"filterRow": {
+			"mualliflar": "Mualliflar",
+			"kategoriyalar": "Kategoriyalar",
+			"izlash": "Izlash"
+		},
+		"heroSection": {
+			"ilmiy_jurnallar_va_maqolalar": "Ilmiy jurnallar va maqolalar uchun",
+			"yagona_platforma": "yagona platforma",
+			"recenzentdan_otgan_ilmiy_maqolalar": "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda.",
+			"maqola_yuborish": "Maqola yuborish"
+		},
+		"jurnallarSection": {
+			"nufuzli_jurnallar_va_songgi": "Nufuzli jurnallar va so'nggi nashrlar",
+			"platformada_chop_etilayotgan_yetakchi": "Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.",
+			"bu_tanlov_boyicha_jurnal": "Bu tanlov bo'yicha jurnal topilmadi"
+		},
+		"problemSection": {
+			"kitob_izlashdan_charchadingizmi": "Kitob izlashdan charchadingizmi?",
+			"biz_har_bir_foydalanuvchi": "Biz har bir foydalanuvchi duch keladigan muammolarni yaxshi tushunamiz — ham oflayn, ham onlayn."
+		},
+		"fAQSection": {
+			"kop_beriladigan": "Ko'p beriladigan",
+			"savollar": "savollar",
+			"platforma_va_onlayn_kurslar": "Platforma va onlayn kurslar bo'yicha",
+			"eng_kop_beriladigan_savollarga": "eng ko'p beriladigan savollarga javoblar"
+		},
+		"heroZoom": {
+			"zamonaviy_platforma_asosida_ishlab": "Zamonaviy platforma asosida ishlab chiqilgan",
+			"onlayn_kurslar": "onlayn kurslar",
+			"talabalarga_yuqori_sifatli_talim": "talabalarga yuqori sifatli ta'lim va qulay o'qish muhitini taqdim etadi.",
+			"zamonaviy_kasblarni": "Zamonaviy kasblarni",
+			"organishni": "o’rganishni",
+			"bugun_boshlang": "bugun boshlang",
+			"zamonaviy_platforma_asosida_ishlab_2": "Zamonaviy platforma asosida ishlab chiqilgan onlayn kurslar",
+			"talabalarga_yuqori_sifatli_talim_2": "talabalarga yuqori sifatli ta'lim va qulay o‘qish muhitini taqdim etadi.",
+			"talabalarga_yuqori": "talabalarga yuqori",
+			"sifatli_talim_va_qulay": "sifatli ta’lim va qulay o‘qish muhitini taqdim etadi."
+		},
+		"header": {
+			"beshta_platforma_orqali_oqish": "Beshta platforma orqali o'qish, tadqiqot qilish, bilim olish va professional",
+			"rivojlanish_imkoniyatlari": "rivojlanish imkoniyatlari."
+		},
+		"ishOrinlariJarayon": {
+			"platformadan_qanday_foydalaniladi": "Platformadan qanday foydalaniladi",
+			"bir_necha_oddiy_qadam": "Bir necha oddiy qadam orqali ish toping yoki kerakli xodimni yollang"
+		},
+		"maqolaTalablari": {
+			"talablar": "Talablar",
+			"maqola_nashri_talablari": "Maqola nashri talablari",
+			"maqolangiz_platformada_elon_qilinishi": "Maqolangiz platformada e'lon qilinishi uchun quyidagi majburiy talablarga to'liq mos bo'lishi shart."
+		},
+		"sidebarLayout": {
+			"ortga": "Ortga",
+			"share_this_blog": "Share this blog"
+		}
+	},
+	"pages": {
+		"raqamliKutibxona": {
+			"minglab_elektron_kitoblar": "Minglab elektron kitoblar",
+			"onlayn_kitoblarni_sotib_oling": "Onlayn kitoblarni sotib oling, bepul asarlarni kashf eting va ularni qulay o'qish rejimida",
+			"istalgan_qurilmada_oqing": "istalgan qurilmada o'qing."
+		},
+		"onlaynTalim": {
+			"bilim_va_konikmalarni": "Bilim va ko'nikmalarni",
+			"zamonaviy_talim_metodlari_asosida": "Zamonaviy ta'lim metodlari asosida ishlab chiqilgan kurslar orqali",
+			"bilimlaringizni_chuqurlashtiring": "bilimlaringizni chuqurlashtiring",
+			"bizning_platforma_orqali_siz": "Bizning platforma orqali siz IT va zamonaviy kasblarni",
+			"mahalliy_va_xorijiy_mutaxassislar": "mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz."
+		},
+		"ishOrinlari": {
+			"ishorinlari": "IshOrinlari"
+		},
+		"rahbariyat": {
+			"tel": "Tel:",
+			"e_mail": "E-mail:",
+			"fuqarolarni_qabul_qilish": "Fuqarolarni qabul qilish:",
+			"rahbariyat_haqida": "Rahbariyat haqida",
+			"institut_faoliyati_ozbekiston_respublika": "Institut faoliyati O'zbekiston Respublikasi Prezidentining 2025-yil 13-martdagi \"Milliy statistika tizimi mutaxassislari malakasini oshirish hamda sohaga raqamli texnologiyalarni joriy etishni yanada jadallashtirish orqali yuqori samaradorlikka erishish chora-tadbirlari to'g'risida\" PQ-103-son qaroriga muvofiq yuritiladi.",
+			"institut_ozbekiston_respublikasi_milliy": "Institut O'zbekiston Respublikasi Milliy statistika qo'mitasining yagona tizimiga kiruvchi davlat ta'lim va ilmiy tadqiqot muassasasi hisoblanadi va o'z faoliyatida Milliy statistika qo'mitasiga bo'ysunadi."
+		},
+		"qarshiKurash": {
+			"qarshikurash": "QarshiKurash"
+		},
+		"odobAxloq": {
+			"odobaxloq": "OdobAxloq"
+		},
+		"tuzilma": {
+			"kontakt": "Kontakt",
+			"biz_bilan_boglaning": "Biz bilan bog'laning",
+			"telefon": "Telefon",
+			"e_mail": "e-mail",
+			"ijtimoiy_tarmoqlar": "Ijtimoiy tarmoqlar",
+			"manzil": "Manzil",
+			"instat_manzili": "INSTAT manzili",
+			"toshkent_shahri_shayxontohur_tumani": "Toshkent shahri, Shayxontohur tumani, Navoiy ko'chasi, 30-uy",
+			"faks": "Faks",
+			"transport": "Transport yo'nalishlari",
+			"tuzilma_rasmi": "Tashkiliy tuzilma"
+		},
+		"umumiyMalumot": {
+			"upcoming_events": "UPCOMING EVENTS",
+			"yangiliklar": "Yangiliklar"
+		},
+		"yotoqxona": {
+			"yotoqhona": "Yotoqhona"
+		},
+		"about": {
+			"ortga": "Ortga",
+			"share_this_blog": "Share this blog",
+			"malumotlar_va_tahlil_ilmi": "\"Ma'lumotlar va tahlil ilmi\"",
+			"raqamli_talim_platformasi": "Raqamli ta'lim platformasi",
+			"talim_ilm_fan_va": "Ta'lim, ilm-fan va karyera uchun yagona raqamli platforma"
+		},
+		"mediaServise": {
+			"ortga": "Ortga",
+			"share_this_blog": "Share this blog"
+		},
+		"science": {
+			"ortga": "Ortga",
+			"share_this_blog": "Share this blog"
+		}
+	},
+	"data": {
+		"jobs": {
+			"jobs-1": {
+				"title": "Frontend Dasturchi",
+				"city": "Toshkent",
+				"desc": "Zamonaviy web ilovalarni ishlab chiqish, foydalanuvchi interfeysini yaratish. React yoki Vue bilan ishlash tajribasi talab qilinadi."
+			},
+			"jobs-2": {
+				"title": "UX/UI Dizayner",
+				"city": "Toshkent",
+				"desc": "Mobil va web ilovalar uchun qulay va zamonaviy dizaynlar yaratish. Figma va Adobe vositalarini yaxshi bilish zarur."
+			},
+			"jobs-3": {
+				"title": "SMM Menejer",
+				"city": "Samarqand",
+				"desc": "Ijtimoiy tarmoqlarni yuritish, kontent reja tuzish va reklama kampaniyalarini boshqarish. Kreativ fikrlash muhim."
+			},
+			"jobs-4": {
+				"title": "Haydovchi",
+				"city": "Toshkent viloyati",
+				"desc": "Yuklarni o'z vaqtida yetkazib berish, transport vositasini nazorat qilish va xavfsizlik qoidalariga amal qilish talab etiladi."
+			},
+			"jobs-5": {
+				"title": "Hamshira",
+				"city": "Toshkent",
+				"desc": "Bemorlarga tibbiy yordam ko'rsatish, shifokor ko'rsatmalarini bajarish va hujjatlarni yuritish."
+			},
+			"jobs-6": {
+				"title": "Qurilish muhandisi",
+				"city": "Buxoro",
+				"desc": "Qurilish loyihalarini nazorat qilish, chizmalar bilan ishlash va jarayonlarni boshqarish."
+			}
+		},
+		"faq": {
+			"faq-1": {
+				"question": "INSTAT platformasi nima?",
+				"answer": "INSTAT — O'zbekiston Respublikasi Prezidenti huzuridagi Statistika agentligining kadrlar malakasini oshirish va statistik tadqiqotlar instituti. Platforma onlayn kurslar, elektron kutubxona va statistik ma'lumotlarni bir yerda taqdim etadi."
+			},
+			"faq-2": {
+				"question": "Platformada qanday kurslar mavjud?",
+				"answer": "Milliy hisoblar tizimi, statistika uslubiyoti, sanoat statistikasi, gender statistikasi, investitsiyalar statistikasi va boshqa ko'plab mutaxassislik kurslari mavjud. Kurslar boshlang'ich va professional darajalar uchun mo'ljallangan."
+			},
+			"faq-3": {
+				"question": "Kurslarga ro'yxatdan qanday o'tiladi?",
+				"answer": "Platformada ro'yxatdan o'tish uchun «Ro'yxatdan o'tish» tugmasini bosing, ma'lumotlaringizni kiriting va elektron pochtangizni tasdiqlang. So'ngra istalgan kursga yozilishingiz mumkin."
+			},
+			"faq-4": {
+				"question": "Kurslar pullikmi yoki bepulmi?",
+				"answer": "Platformadagi asosiy kurslar bepul taqdim etiladi. Ba'zi maxsus kurslar va sertifikatlash dasturlari pullik bo'lishi mumkin. Narxlar har bir kurs sahifasida ko'rsatiladi."
+			},
+			"faq-5": {
+				"question": "Elektron kutubxonadan qanday foydalanish mumkin?",
+				"answer": "Ro'yxatdan o'tgandan so'ng, elektron kutubxonaga kirish orqali 50 000 dan ortiq kitob va tadqiqot materiallaridan foydalanishingiz mumkin. Kitoblarni onlayn o'qish yoki yuklab olish imkoniyati mavjud."
+			},
+			"faq-6": {
+				"question": "Mobil ilovalar mavjudmi?",
+				"answer": "Ha, INSTAT platformasining iOS va Android uchun mobil ilovalari mavjud. Google Play va App Store orqali yuklab olishingiz mumkin va barcha kurs materiallariga qurilmangizdan foydalanishingiz mumkin."
+			},
+			"faq-7": {
+				"question": "Sertifikat beriladimi?",
+				"answer": "Kursni muvaffaqiyatli tugatgan ishtirokchilarga rasmiy sertifikat beriladi. Sertifikat elektron formatda yuboriladi va berilgan havola orqali tekshirilishi mumkin."
+			},
+			"faq-8": {
+				"question": "Qo'shimcha savollar uchun qayerga murojaat qilish kerak?",
+				"answer": "Savollar yuzasidan info@instat.uz elektron pochta manzili yoki (+998 71) 202-11-10 telefon raqami orqali biz bilan bog'lanishingiz mumkin. Ish vaqti: Dushanba–Juma, 9:00–18:00."
+			}
+		},
+		"articleRequirements": {
+			"article-requirements-1": {
+				"title": "Standart strukturaga rioya qiling",
+				"desc": "Maqola 2500–3000 so'zdan iborat bo'lishi va quyidagi bo'limlarni o'z ichiga olishi kerak: Kirish, Adabiyotlar tahlili, Tadqiqot metodologiyasi, Tahlil va natijalar, Xulosa va takliflar."
+			},
+			"article-requirements-2": {
+				"title": "UDK raqami majburiy",
+				"desc": "Har bir maqolaga UDK kodi qo'yiladi (udc.online orqali). Maqola sarlavhasi aniq, ilmiy va mazmunni to'liq aks ettirishi lozim."
+			},
+			"article-requirements-3": {
+				"title": "Muallif ma'lumotlari to'liq ko'rsatilishi",
+				"desc": "Ism-familiya, ilmiy daraja, lavozim, tashkilot, shahar/davlat, e-mail va telefon raqam asosiy matn tilida ko'rsatilishi shart."
+			},
+			"article-requirements-4": {
+				"title": "3 tilda annotatsiya",
+				"desc": "Annotatsiya o'zbek, rus va ingliz tillarida (250–300 so'z) beriladi. Kalit so'zlar 15–20 ta miqdorda o'zbek va ingliz tillarida taqdim etiladi."
+			},
+			"article-requirements-5": {
+				"title": "Natijalar va xulosalar asoslangan bo'lishi kerak",
+				"desc": "Metodlar takrorlanadigan darajada aniq yoziladi, natijalar dalillar bilan ko'rsatiladi va yakunda aniq ilmiy xulosa hamda amaliy takliflar beriladi."
+			}
+		},
+		"publications": {
+			"publications-1": {
+				"title": "Aholi soni va demografik o'sish",
+				"category": "Demografiya",
+				"location": "O'zbekiston, hududlar kesimida",
+				"published": "2025 yil mart"
+			},
+			"publications-2": {
+				"title": "Tug'ilish va o'lim statistikasi",
+				"category": "Demografiya",
+				"location": "O'zbekiston",
+				"published": "2025 yil fevral"
+			},
+			"publications-3": {
+				"title": "YaIM va iqtisodiy o'sish ko'rsatkichlari",
+				"category": "Iqtisodiyot",
+				"location": "O'zbekiston",
+				"published": "2025 yil fevral"
+			},
+			"publications-4": {
+				"title": "Bandlik va ishsizlik darajasi",
+				"category": "Mehnat bozori",
+				"location": "O'zbekiston, hududlar kesimida",
+				"published": "2025 yil fevral"
+			},
+			"publications-5": {
+				"title": "Inflyatsiya va iste'mol narxlari indeksi",
+				"category": "Iqtisodiyot",
+				"location": "O'zbekiston, hududlar kesimida",
+				"published": "2025 yil yanvar"
+			},
+			"publications-6": {
+				"title": "O'rtacha ish haqi statistikasi",
+				"category": "Mehnat bozori",
+				"location": "O'zbekiston, viloyatlar kesimida",
+				"published": "2025 yil mart"
+			},
+			"publications-7": {
+				"title": "Transport vositalari soni",
+				"category": "Transport",
+				"location": "O'zbekiston",
+				"published": "2025 yil fevral"
+			},
+			"publications-8": {
+				"title": "Yo'lovchi va yuk tashish statistikasi",
+				"category": "Transport",
+				"location": "O'zbekiston, hududlar kesimida",
+				"published": "2025 yil mart"
+			},
+			"publications-9": {
+				"title": "Qishloq xo'jaligi mahsulotlari hajmi",
+				"category": "Qishloq xo'j",
+				"location": "O'zbekiston, viloyatlar kesimida",
+				"published": "2025 yil fevral"
+			},
+			"publications-10": {
+				"title": "Eksport va import dinamikasi",
+				"category": "Tashqi savdo",
+				"location": "O'zbekiston",
+				"published": "2025 yil mart"
+			},
+			"publications-11": {
+				"title": "Davlat byudjeti daromad va xarajatlari",
+				"category": "Moliya",
+				"location": "O'zbekiston",
+				"published": "2025 yil yanvar"
+			},
+			"publications-12": {
+				"title": "Sanoat ishlab chiqarish indeksi",
+				"category": "Sanoat",
+				"location": "O'zbekiston, hududlar kesimida",
+				"published": "2025 yil fevral"
+			},
+			"publications-13": {
+				"title": "Ta'lim muassasalari va o'quvchilar soni",
+				"category": "Ta'lim",
+				"location": "O'zbekiston, viloyatlar kesimida",
+				"published": "2025 yil mart"
+			},
+			"publications-14": {
+				"title": "Aholining real daromadlari",
+				"category": "Iqtisodiyot",
+				"location": "O'zbekiston, hududlar kesimida",
+				"published": "2025 yil fevral"
+			},
+			"publications-15": {
+				"title": "Kichik va o'rta biznes statistikasi",
+				"category": "Tadbirkorlik",
+				"location": "O'zbekiston",
+				"published": "2025 yil yanvar"
+			},
+			"publications-16": {
+				"title": "Turizm va mehmonxona statistikasi",
+				"category": "Turizm",
+				"location": "O'zbekiston, viloyatlar kesimida",
+				"published": "2025 yil mart"
+			}
+		},
+		"journals": {
+			"journal-1": {
+				"title": "O'zbekistonda qurilish",
+				"author": "Afzal Pulatov",
+				"category": "Sanoat"
+			},
+			"journal-2": {
+				"title": "O'zbekistonda kichik tadbirkorlik",
+				"author": "Dilnoza Yusupova",
+				"category": "Makroiqtisodiyot"
+			},
+			"journal-3": {
+				"title": "Ayollar va erkaklar",
+				"author": "Malika Xasanova",
+				"category": "Demografiya"
+			},
+			"journal-4": {
+				"title": "O'zbekiston raqamlarda",
+				"author": "Jahongir Toshmatov",
+				"category": "Makroiqtisodiyot"
+			},
+			"journal-5": {
+				"title": "O'zbekistonda axborotlashgan jamiyat rivojlanishi",
+				"author": "Afzal Pulatov",
+				"category": "Ta'lim"
+			},
+			"journal-6": {
+				"title": "O'zbekistonda ilm-fan va innovatsion faoliyat",
+				"author": "Dilnoza Yusupova",
+				"category": "Ta'lim"
+			},
+			"journal-7": {
+				"title": "O'zbekistonda transport va aloqa",
+				"author": "Jahongir Toshmatov",
+				"category": "Sanoat"
+			},
+			"journal-8": {
+				"title": "O'zbekiston sanoati",
+				"author": "Malika Xasanova",
+				"category": "Sanoat"
+			},
+			"journal-9": {
+				"title": "O'zbekistonda qishloq xo'jaligi",
+				"author": "Afzal Pulatov",
+				"category": "Qishloq xo'jaligi"
+			},
+			"journal-10": {
+				"title": "Demografik o'zgarishlar tahlili",
+				"author": "Malika Xasanova",
+				"category": "Demografiya"
+			},
+			"journal-11": {
+				"title": "Milliy ta'lim tizimi rivojlanishi",
+				"author": "Dilnoza Yusupova",
+				"category": "Ta'lim"
+			},
+			"journal-12": {
+				"title": "Qishloq xo'jaligi statistikasi",
+				"author": "Jahongir Toshmatov",
+				"category": "Qishloq xo'jaligi"
+			}
+		},
+		"problems": {
+			"problem-1": {
+				"title": "Qidiruv juda ko'p vaqt oladi",
+				"description": "Kutubxonaga kelasiz va kerakli kitobni topish uchun 20–30 daqiqa vaqt sarflaysiz. Javonlar har doim ham tushunarli tartibda emas, xodimlar band bo'lishi mumkin, navigatsiya esa qulay emas."
+			},
+			"problem-2": {
+				"title": "Kitob mavjudligiga ishonch yo'q",
+				"description": "Kerakli kitob kutubxonada bormi, hozir mavjudmi va qaysi bo'limda joylashganini oldindan bilish qiyin."
+			},
+			"problem-3": {
+				"title": "Pullik kitoblar — xavfli tanlov",
+				"description": "Onlayn platformalarda kitobni sotib olishdan oldin uning mazmuni va uslubini to'liq baholash qiyin. Uni \\"
+			}
+		}
+	}
+}

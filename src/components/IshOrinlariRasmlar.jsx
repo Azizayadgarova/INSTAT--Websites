@@ -1,5 +1,6 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
-import img1 from '@/assets/Group 1707483863.png'
+import img1 from '@/assets/Group 1707483863.webp'
 import img2 from '@/assets/icons/Union (1).png'
 import imgMobileBg from '@/assets/Union (3).png'
 
@@ -23,10 +24,14 @@ const CARDS = [
 ]
 
 const IshOrinlariRasmlar = () => {
-	const sectionRef = useRef(null)
-	const [visible, setVisible] = useState(false)
+    const {
+        t
+    } = useTranslation();
 
-	useEffect(() => {
+    const sectionRef = useRef(null)
+    const [visible, setVisible] = useState(false)
+
+    useEffect(() => {
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
@@ -40,8 +45,8 @@ const IshOrinlariRasmlar = () => {
 		return () => observer.disconnect()
 	}, [])
 
-	return (
-		<section
+    return (
+        <section
 			ref={sectionRef}
 			style={{
 				width: '100%',
@@ -51,8 +56,8 @@ const IshOrinlariRasmlar = () => {
 				boxSizing: 'border-box',
 			}}
 		>
-			{/* DESKTOP */}
-			<div
+            {/* DESKTOP */}
+            <div
 				className='hidden md:flex'
 				style={{
 					alignItems: 'center',
@@ -103,9 +108,7 @@ const IshOrinlariRasmlar = () => {
 								color: 'rgba(255,255,255,1)',
 								margin: 0,
 							}}
-						>
-							Mos vakansiyalarni tez toping
-						</h3>
+						>{t("components.ishOrinlariRasmlar.mos_vakansiyalarni_tez_toping")}</h3>
 						<p
 							style={{
 								fontFamily: 'var(--font-display)',
@@ -115,10 +118,7 @@ const IshOrinlariRasmlar = () => {
 								color: 'rgba(202,202,206,1)',
 								margin: 0,
 							}}
-						>
-							Sizning qiziqishlaringiz, ko'nikmalaringiz va tajribangizga mos
-							keladigan firma vakansiyalarini bir necha soniya ichida toping.
-						</p>
+						>{t("components.ishOrinlariRasmlar.sizning_qiziqishlaringiz_konikmalaringiz")}</p>
 					</div>
 				</div>
 
@@ -135,8 +135,7 @@ const IshOrinlariRasmlar = () => {
 							objectFit: 'cover',
 							zIndex: 0,
 							pointerEvents: 'none',
-						}}
-					/>
+						}} loading='lazy' decoding='async' />
 					<div
 						style={{
 							position: 'relative',
@@ -176,9 +175,8 @@ const IshOrinlariRasmlar = () => {
 					</div>
 				</div>
 			</div>
-
-			{/* MOBILE */}
-			<div className='block md:hidden' style={{ position: 'relative', minHeight: '1024px' }}>
+            {/* MOBILE */}
+            <div className='block md:hidden' style={{ position: 'relative', minHeight: '1024px' }}>
 
 				{/* Union(3).png — aniq koordinatalar */}
 				<img
@@ -196,8 +194,7 @@ const IshOrinlariRasmlar = () => {
 						opacity: 1,
 						zIndex: 0,
 						pointerEvents: 'none',
-					}}
-				/>
+					}} loading='lazy' decoding='async' />
 
 				{/* Rasm card */}
 				<div style={{ padding: '20px 16px 0', display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
@@ -216,8 +213,7 @@ const IshOrinlariRasmlar = () => {
 						<img
 							src={img1}
 							alt=''
-							style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-						/>
+							style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading='lazy' decoding='async' />
 						<div
 							style={{
 								position: 'absolute',
@@ -231,12 +227,8 @@ const IshOrinlariRasmlar = () => {
 								background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 100%)',
 							}}
 						>
-							<h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '28px', lineHeight: '36px', letterSpacing: 0, color: '#fff', margin: 0 }}>
-								Mos vakansiyalarni tez toping
-							</h3>
-							<p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '14px', lineHeight: '20px', letterSpacing: 0, color: 'rgba(202,202,206,1)', margin: 0 }}>
-								Sizning qiziqishlaringiz, ko'nikmalaringiz va tajribangizga mos keladigan firma vakansiyalarini bir necha soniya ichida toping. Bu platforma ortiqcha qidiruvsiz, aniq va dolzarb ishlarni ko'rish imkonini beradi.
-							</p>
+							<h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '28px', lineHeight: '36px', letterSpacing: 0, color: '#fff', margin: 0 }}>{t("components.ishOrinlariRasmlar.mos_vakansiyalarni_tez_toping")}</h3>
+							<p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '14px', lineHeight: '20px', letterSpacing: 0, color: 'rgba(202,202,206,1)', margin: 0 }}>{t("components.ishOrinlariRasmlar.sizning_qiziqishlaringiz_konikmalaringiz_2")}</p>
 						</div>
 					</div>
 				</div>
@@ -268,8 +260,8 @@ const IshOrinlariRasmlar = () => {
 					))}
 				</div>
 			</div>
-		</section>
-	)
+        </section>
+    );
 }
 
 export default IshOrinlariRasmlar

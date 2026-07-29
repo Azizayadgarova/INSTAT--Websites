@@ -1,5 +1,5 @@
-﻿import { useEffect, useRef } from 'react'
-import heroBg from '@/assets/bgImg/hero 2.png'
+import { useEffect, useRef } from 'react'
+import heroBg from '@/assets/bgImg/hero 2.webp'
 
 export default function WaterCanvas() {
 	const canvasRef = useRef(null)
@@ -9,6 +9,8 @@ export default function WaterCanvas() {
 		const canvas = canvasRef.current
 		if (!canvas) return
 		const ctx = canvas.getContext('2d', { willReadFrequently: true })
+		// Kanvas konteksti mavjud emas (eski brauzer / GPU bloklangan) — jimgina chiqamiz
+		if (!ctx) return
 
 		const SCALE = 0.75
 		let W, H, buf1, buf2, srcPixels, outImg, alive = true
@@ -21,6 +23,8 @@ export default function WaterCanvas() {
 			const off = document.createElement('canvas')
 			off.width = W; off.height = H
 			const octx = off.getContext('2d')
+			// Kanvas konteksti mavjud emas (eski brauzer / GPU bloklangan) — jimgina chiqamiz
+			if (!octx) return
 			octx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight * 0.8, 0, 0, W, H)
 			srcPixels = octx.getImageData(0, 0, W, H).data.slice()
 			buf1   = new Int16Array(W * H)

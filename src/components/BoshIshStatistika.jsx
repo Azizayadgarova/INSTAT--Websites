@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
 const stats = [
   { value: "700+", label: "Ever wondered" },
@@ -14,7 +14,7 @@ const BoshIshStatistika = () => {
         <div className="grid grid-cols-2 md:grid-cols-4">
           {stats.map((item, index) => (
             <motion.div
-              key={index}
+              key={item.value}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -28,7 +28,7 @@ const BoshIshStatistika = () => {
               <h2 className="text-white text-[36px] md:text-5xl font-semibold">
                 {item.value}
               </h2>
-              <p className="text-[rgba(138,145,163,1)] text-sm md:text-base mt-2">
+              <p className="text-[rgba(var(--muted-rgb),1)] text-sm md:text-base mt-2">
                 {item.label}
               </p>
             </motion.div>

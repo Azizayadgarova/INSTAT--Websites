@@ -7,6 +7,8 @@ const ParticleCanvas = memo(() => {
 		const canvas = canvasRef.current
 		if (!canvas) return
 		const ctx = canvas.getContext('2d')
+		// Kanvas konteksti mavjud emas (eski brauzer / GPU bloklangan) — jimgina chiqamiz
+		if (!ctx) return
 
 		const resize = () => {
 			canvas.width = canvas.offsetWidth
@@ -32,6 +34,8 @@ const ParticleCanvas = memo(() => {
 		gCanvas.width = G
 		gCanvas.height = G
 		const gCtx = gCanvas.getContext('2d')
+		// Kanvas konteksti mavjud emas (eski brauzer / GPU bloklangan) — jimgina chiqamiz
+		if (!gCtx) return
 		const grad = gCtx.createRadialGradient(G / 2, G / 2, 0, G / 2, G / 2, G / 2)
 		grad.addColorStop(0, 'rgba(0,230,252,1)')
 		grad.addColorStop(0.5, 'rgba(0, 180, 220, 0.4)')

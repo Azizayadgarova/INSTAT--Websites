@@ -107,7 +107,7 @@ export default function LiquideSlider() {
 			>
 				{preSlides.map((slide, i) => (
 					<div
-						key={i}
+						key={slide.id ?? slide.title ?? i}
 						ref={el => (overlayRefs.current[i] = el)}
 						style={{
 							position: 'absolute',

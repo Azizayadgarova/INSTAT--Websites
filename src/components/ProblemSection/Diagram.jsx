@@ -16,7 +16,7 @@ const TravelDot = ({ delay = 0, duration = 2.8, reverse = false }) => (
 			width: '5px',
 			height: '5px',
 			borderRadius: '50%',
-			background: '#2B75CC',
+			background: 'var(--color-blue)',
 			boxShadow: '0 0 10px 3px rgba(var(--blue-rgb),0.8)',
 			pointerEvents: 'none',
 			zIndex: 2,
@@ -35,7 +35,7 @@ const VerticalDot = ({ delay = 0, reverse = false }) => (
 			width: '5px',
 			height: '5px',
 			borderRadius: '50%',
-			background: '#2B75CC',
+			background: 'var(--color-blue)',
 			boxShadow: '0 0 8px 2px rgba(var(--blue-rgb),0.7)',
 			pointerEvents: 'none',
 			zIndex: 2,
@@ -87,7 +87,7 @@ const IconBox = ({ icon = deviceIcon, index = 0 }) => (
 				transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 + i * 0.2, ease: 'easeInOut' }}
 			/>
 		))}
-		<img src={icon} alt='' style={{ width: '26px', height: '26px', objectFit: 'contain', opacity: 0.9 }} />
+		<img src={icon} alt='' style={{ width: '26px', height: '26px', objectFit: 'contain', opacity: 0.9 }} loading='lazy' decoding='async' />
 	</motion.div>
 )
 

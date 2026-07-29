@@ -1,11 +1,14 @@
+import { useTranslation } from 'react-i18next'
 import bgOnline from '@/assets/bgImg/Background (1).png'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
 import { BASE_H, BASE_W, CONFIGS, mod } from './MentorsSection/mentors.data'
+import { reviewAuthorsApi } from '@/api/resources.api'
+import { useApiResource } from '@/hooks/useApiResource'
 
 const PX = '?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop'
 
-const members = [
+const FALLBACK_MEMBERS = [
 	{
 		name: 'Ziyayev Zohidjon Muratovich',
 		role: "Bosh muharrir o'rinbosari",
@@ -50,33 +53,57 @@ const members = [
 	},
 ]
 
-export default function TahririyatAzolari() {
-	const [current, setCurrent]     = useState(0)
-	const [bgVisible, setBgVisible] = useState(false)
-	const [trackW, setTrackW]       = useState(800)
-	const bgRef    = useRef(null)
-	const trackRef = useRef(null)
-	const timerRef = useRef(null)
-	const dimScale = Math.min(1, Math.max(0.42, trackW / 900))
+/**
+ * review-authors backend'da rasm bermaydi — shuning uchun ism-familiya
+ * bosh harflaridan avtomatik avatar generatsiya qilinadi (ui-avatars.com).
+ */
+const toMember = author => {
+	const name = [author.first_name, author.last_name].filter(Boolean).join(' ').trim() || "Noma'lum"
+	return {
+		name,
+		role: author.academic_degree?.name || "Taqrizchi",
+		exp: author.review ? `${author.review} ta taqriz` : (author.organization || ''),
+		photo: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1F2533&color=fff&size=400&bold=true`,
+	}
+}
 
-	const startTimer = () => {
+export default function TahririyatAzolari() {
+    const {
+        t
+    } = useTranslation();
+
+    const { data } = useApiResource(() => reviewAuthorsApi.getAll(), [])
+    const members = useMemo(() => {
+	    const items = data?.items ?? []
+	    return items.length ? items.map(toMember) : FALLBACK_MEMBERS
+    }, [data])
+
+    const [current, setCurrent]     = useState(0)
+    const [bgVisible, setBgVisible] = useState(false)
+    const [trackW, setTrackW]       = useState(800)
+    const bgRef    = useRef(null)
+    const trackRef = useRef(null)
+    const timerRef = useRef(null)
+    const dimScale = Math.min(1, Math.max(0.42, trackW / 900))
+
+    const startTimer = () => {
 		clearInterval(timerRef.current)
 		timerRef.current = setInterval(() => {
 			setCurrent(prev => mod(prev + 1, members.length))
 		}, 3500)
 	}
 
-	const shift = dir => {
+    const shift = dir => {
 		setCurrent(prev => mod(prev + dir, members.length))
 		startTimer()
 	}
 
-	useEffect(() => {
+    useEffect(() => {
 		startTimer()
 		return () => clearInterval(timerRef.current)
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		const update = () => {
 			if (trackRef.current) setTrackW(trackRef.current.offsetWidth)
 		}
@@ -85,7 +112,7 @@ export default function TahririyatAzolari() {
 		return () => window.removeEventListener('resize', update)
 	}, [])
 
-	useEffect(() => {
+    useEffect(() => {
 		const el = bgRef.current?.parentElement
 		if (!el) return
 		const obs = new IntersectionObserver(
@@ -96,8 +123,8 @@ export default function TahririyatAzolari() {
 		return () => obs.disconnect()
 	}, [])
 
-	return (
-		<section style={{
+    return (
+        <section style={{
 			backgroundColor: 'rgba(var(--bg-rgb),1)',
 			marginTop: 0,
 			padding: '40px 0 0',
@@ -110,7 +137,7 @@ export default function TahririyatAzolari() {
 			flexDirection: 'column',
 			alignItems: 'center',
 		}}>
-			<img
+            <img
 				ref={bgRef}
 				src={bgOnline}
 				alt=''
@@ -123,10 +150,8 @@ export default function TahririyatAzolari() {
 					zIndex: 0, pointerEvents: 'none',
 					opacity: bgVisible ? 1 : 0,
 					transition: 'opacity 2.4s cubic-bezier(0.16,1,0.3,1)',
-				}}
-			/>
-
-			<div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
+				}} loading='lazy' decoding='async' />
+            <div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
 				{/* Header */}
 				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: 0 }}>
 					<div style={{
@@ -139,23 +164,21 @@ export default function TahririyatAzolari() {
 							fontFamily: 'var(--font-display)',
 							fontSize: '13px', fontWeight: 500,
 							color: 'rgba(180,185,200,1)', letterSpacing: '0.02em',
-						}}>Hodimlar</span>
+						}}>{t("components.tahririyatAzolari.hodimlar")}</span>
 					</div>
 
 					<h2 className='text-[32px] md:text-[48px] px-4 md:px-0' style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 600, lineHeight: 1.1,
 						color: '#fff', margin: '0 0 16px', letterSpacing: '-0.02em',
-					}}>Tahririyat a'zolari</h2>
+					}}>{t("components.tahririyatAzolari.tahririyat_azolari")}</h2>
 
 					<p className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[520px] px-4 md:px-0' style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400, lineHeight: 1.65,
 						color: 'rgba(202,202,206,1)',
 						margin: '0 0 0',
-					}}>
-						Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.
-					</p>
+					}}>{t("components.tahririyatAzolari.platformada_chop_etilayotgan_yetakchi")}</p>
 				</div>
 
 				{/* Carousel */}
@@ -188,6 +211,6 @@ export default function TahririyatAzolari() {
 					</div>
 				</div>
 			</div>
-		</section>
-	)
+        </section>
+    );
 }

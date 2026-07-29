@@ -34,7 +34,7 @@ const data = [
 	},
 ]
 
-const TiltCard = ({ src }) => {
+const TiltCard = ({ src, alt = '' }) => {
 	const ref = useRef(null)
 	const mx = useMotionValue(0)
 	const my = useMotionValue(0)
@@ -83,8 +83,7 @@ const TiltCard = ({ src }) => {
 			>
 				<img
 					src={src}
-					style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-				/>
+					style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} alt={alt} loading='lazy' decoding='async' />
 				<motion.div
 					style={{
 						position: 'absolute', inset: 0,
@@ -152,8 +151,7 @@ const Kutubxona = () => {
 					pointerEvents: 'none',
 					opacity: bgVisible ? 1 : 0,
 					transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
-				}}
-			/>
+				}} loading='lazy' decoding='async' />
 
 			<motion.div
 				initial={{ opacity: 0, y: 40 }}
@@ -184,7 +182,7 @@ const Kutubxona = () => {
 					const isActive = i === active
 					return (
 						<motion.div
-							key={i}
+							key={item.id}
 							className={`cursor-pointer border-b border-white/8 ${i === 0 ? 'border-t' : ''}`}
 							onClick={() => setActive(i)}
 							initial={{ opacity: 0, y: 24 }}
@@ -240,7 +238,7 @@ const Kutubxona = () => {
 									>
 										{/* Mobile: rasm to'liq kenglik + matn pastda */}
 										<div className="md:hidden flex flex-col gap-4 pb-6">
-											<TiltCard src={item.img} />
+											<TiltCard src={item.img} alt={item.title} />
 											<motion.p
 												initial={{ opacity: 0, y: -16 }}
 												animate={{ opacity: 1, y: 0 }}
@@ -259,7 +257,7 @@ const Kutubxona = () => {
 
 										{/* Desktop: rasm + matn yonma-yon */}
 										<div className="hidden md:flex gap-10 pb-10 items-start pl-2 pt-0">
-											<TiltCard src={item.img} />
+											<TiltCard src={item.img} alt={item.title} />
 											<motion.p
 												initial={{ opacity: 0, y: -40, filter: 'blur(10px)' }}
 												animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}

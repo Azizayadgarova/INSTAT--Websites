@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { Button } from './shared/Button'
 import AnimatedSection from './shared/AnimatedSection'
@@ -100,7 +101,7 @@ const IconBox = ({ src }) => (
 			transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
 			style={{ width: 80, height: 80, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
 		>
-			<img src={src} alt="" style={{ width: 80, height: 80, objectFit: 'contain' }} />
+			<img src={src} alt="" style={{ width: 80, height: 80, objectFit: 'contain' }} loading='lazy' decoding='async' />
 		</motion.div>
 	</motion.div>
 )
@@ -192,62 +193,64 @@ const StepCard = ({ step }) => {
 }
 
 /* ── Asosiy komponent ── */
-const IshOrinlariJarayon = () => (
-	<section style={{ width: '100%', background: 'rgba(var(--card-rgb),1)' }}>
-		<div className='px-4 md:px-[60px] lg:px-[120px] pt-10 pb-10' style={{
-			maxWidth: 1440, margin: '0 auto',
-			boxSizing: 'border-box',
-			display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
-		}}>
+const IshOrinlariJarayon = () => {
+    const {
+        t
+    } = useTranslation();
 
-			{/* Header */}
-			<AnimatedSection style={{ width: '100%', marginBottom: 32 }}>
-				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 20 }}>
-					<Button text="Jarayon" variant="light" />
+    return (
+        <section style={{ width: '100%', background: 'rgba(var(--card-rgb),1)' }}>
+            <div className='px-4 md:px-[60px] lg:px-[120px] pt-10 pb-10' style={{
+                maxWidth: 1440, margin: '0 auto',
+                boxSizing: 'border-box',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+            }}>
 
-					<h2
-						className='text-[32px] md:text-[52px]'
-						style={{
-							fontFamily: 'var(--font-display)',
-							fontWeight: 600, lineHeight: 1.08, color: '#ffffff', margin: 0,
-							letterSpacing: '-0.02em',
-						}}
-					>
-						Platformadan qanday foydalaniladi
-					</h2>
+                {/* Header */}
+                <AnimatedSection style={{ width: '100%', marginBottom: 32 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 20 }}>
+                        <Button text="Jarayon" variant="light" />
 
-					<p
-						className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[540px]'
-						style={{
-							fontFamily: 'Inter,sans-serif', fontWeight: 400,
-							lineHeight: '26px',
-							color: 'rgba(140,140,158,1)', margin: 0,
-						}}
-					>
-						Bir necha oddiy qadam orqali ish toping yoki kerakli xodimni yollang
-					</p>
-				</div>
-			</AnimatedSection>
+                        <h2
+                            className='text-[32px] md:text-[52px]'
+                            style={{
+                                fontFamily: 'var(--font-display)',
+                                fontWeight: 600, lineHeight: 1.08, color: '#ffffff', margin: 0,
+                                letterSpacing: '-0.02em',
+                            }}
+                        >{t("components.ishOrinlariJarayon.platformadan_qanday_foydalaniladi")}</h2>
 
-			{/* Steps — stagger container */}
-			<motion.div
-				variants={listV}
-				initial="hidden"
-				whileInView="show"
-				viewport={{ once: true, amount: 0.1 }}
-				className='gap-4 md:gap-[55px]'
-				style={{
-					width: '100%', display: 'flex', flexDirection: 'column',
-					alignItems: 'center',
-				}}
-			>
-				{STEPS.map((step) => (
-					<StepCard key={step.id} step={step} />
-				))}
-			</motion.div>
+                        <p
+                            className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[540px]'
+                            style={{
+                                fontFamily: 'Inter,sans-serif', fontWeight: 400,
+                                lineHeight: '26px',
+                                color: 'rgba(140,140,158,1)', margin: 0,
+                            }}
+                        >{t("components.ishOrinlariJarayon.bir_necha_oddiy_qadam")}</p>
+                    </div>
+                </AnimatedSection>
 
-		</div>
-	</section>
-)
+                {/* Steps — stagger container */}
+                <motion.div
+                    variants={listV}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.1 }}
+                    className='gap-4 md:gap-[55px]'
+                    style={{
+                        width: '100%', display: 'flex', flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    {STEPS.map((step) => (
+                        <StepCard key={step.id} step={step} />
+                    ))}
+                </motion.div>
+
+            </div>
+        </section>
+    );
+}
 
 export default IshOrinlariJarayon

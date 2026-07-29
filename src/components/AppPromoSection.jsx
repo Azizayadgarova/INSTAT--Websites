@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import google from '@/assets/googleplay.png'
 import appstore from '@/assets/icons/appstore.png'
 import phone2 from '@/assets/iPhone 14 Pro (1).png'
@@ -7,6 +8,10 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 const ease = 'cubic-bezier(0.16,1,0.3,1)'
 
 const AppPromoSection = () => {
+  const {
+    t
+  } = useTranslation();
+
   const [sectionRef, visible] = useIntersectionObserver(0.2)
 
   return (
@@ -28,19 +33,15 @@ const AppPromoSection = () => {
                   transition: `opacity 0.8s ${ease} 0.1s, transform 0.8s ${ease} 0.1s`,
                 }}
                 className='font-medium text-white text-[48px] leading-[120%] tracking-[-0.02em] m-0'
-              >
-                Mobil ilova bilan <br /> yanada qulayroq!
-              </h3>
+              >{t("components.appPromoSection.mobil_ilova_bilan")}<br />{t("components.appPromoSection.yanada_qulayroq")}</h3>
               <p
                 style={{
                   opacity: visible ? 1 : 0,
                   transform: visible ? 'translateY(0)' : 'translateY(30px)',
                   transition: `opacity 0.8s ${ease} 0.3s, transform 0.8s ${ease} 0.3s`,
                 }}
-                className='text-[rgba(188,188,188,1)] mt-4 text-[15px] leading-[150%]'
-              >
-                Bizning mobil ilovamiz bilan bilim olish yanada oson. Hoziroq ilovamizni yuklab oling!
-              </p>
+                className='text-[rgba(var(--text-rgb),1)] mt-4 text-[15px] leading-[150%]'
+              >{t("components.appPromoSection.bizning_mobil_ilovamiz_bilan")}</p>
               <div
                 style={{
                   opacity: visible ? 1 : 0,
@@ -64,19 +65,15 @@ const AppPromoSection = () => {
                 transition: `opacity 0.8s ${ease} 0.1s, transform 0.8s ${ease} 0.1s`,
               }}
               className='font-medium text-white text-[26px] leading-[120%] tracking-[-0.02em] m-0 text-center'
-            >
-              Mobil ilova bilan yanada qulayroq!
-            </h3>
+            >{t("components.appPromoSection.mobil_ilova_bilan_yanada")}</h3>
             <p
               style={{
                 opacity: visible ? 1 : 0,
                 transform: visible ? 'translateY(0)' : 'translateY(30px)',
                 transition: `opacity 0.8s ${ease} 0.3s, transform 0.8s ${ease} 0.3s`,
               }}
-              className='text-[rgba(188,188,188,1)] mt-3 text-[13px] leading-[150%] text-center'
-            >
-              Bizning mobil ilovamiz bilan bilim olish yanada oson. Hoziroq ilovamizni yuklab oling!
-            </p>
+              className='text-[rgba(var(--text-rgb),1)] mt-3 text-[13px] leading-[150%] text-center'
+            >{t("components.appPromoSection.bizning_mobil_ilovamiz_bilan")}</p>
             <div
               style={{
                 opacity: visible ? 1 : 0,
@@ -166,7 +163,7 @@ const AppPromoSection = () => {
 
       </div>
     </section>
-  )
+  );
 }
 
 export default AppPromoSection

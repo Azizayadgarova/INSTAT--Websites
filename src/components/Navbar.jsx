@@ -1,75 +1,50 @@
+import { useTranslation } from 'react-i18next'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import logoImg from '@/assets/icons/InstatIcon.png'
 import menuIcon from '@/assets/menu-line.png'
-import { menuConfig } from '../config/menuConfig'
-const SocialLinkedin = () => (
-	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
-		<rect width='24' height='24' rx='5' fill='#0A66C2' />
-		<circle cx='8.5' cy='8.5' r='1.2' fill='#fff' />
-		<rect x='7.5' y='11' width='2' height='6' rx='0.6' fill='#fff' />
-		<path d='M12 11h1.8v1c.3-.6 1-1.1 2-1.1 1.8 0 2.4 1.1 2.4 2.8V17h-2v-3c0-.8-.3-1.4-1-1.4-.8 0-1.2.6-1.2 1.4v3H12V11z' fill='#fff' />
-	</svg>
-)
-
-const SocialX = () => (
-	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
-		<rect width='24' height='24' rx='5' fill='#000' />
-		<path d='M14 6.5h2l-4.3 4.9L17 17.5h-4l-2.8-3.6-3.2 3.6H5l4.6-5.3L7 6.5h4.1l2.5 3.4L14 6.5zm-.7 9.7h1.1L10.5 7.7H9.3l4 8.5z' fill='#fff' />
-	</svg>
-)
-
-const SocialFacebook = () => (
-	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
-		<rect width='24' height='24' rx='5' fill='#1877F2' />
-		<path d='M13.5 12.5h1.4l.4-2H13.5v-1.1c0-.5.3-1 1-1H15V6.5s-.7-.1-1.3-.1c-1.4 0-2.3.9-2.3 2.4V10.5H9.5v2H11.5v4.5h2v-4.5z' fill='#fff' />
-	</svg>
-)
-
-const SocialInstagram = () => (
-	<svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
-		<rect width='24' height='24' rx='5' fill='url(#ig-nav)' />
-		<defs>
-			<linearGradient id='ig-nav' x1='24' y1='0' x2='0' y2='24' gradientUnits='userSpaceOnUse'>
-				<stop stopColor='#833AB4' />
-				<stop offset='0.5' stopColor='#C13584' />
-				<stop offset='1' stopColor='#FD1D1D' />
-			</linearGradient>
-		</defs>
-		<rect x='6.5' y='6.5' width='11' height='11' rx='3' stroke='#fff' strokeWidth='1.3' />
-		<circle cx='12' cy='12' r='2.8' stroke='#fff' strokeWidth='1.3' />
-		<circle cx='15.5' cy='8.5' r='0.8' fill='#fff' />
-	</svg>
-)
+import { useContacts } from '../hooks/useContacts'
+import { useMenu } from '../hooks/useMenu'
+import LanguageSwitcher from './shared/LanguageSwitcher'
+import facebook from '../assets/icons/facebook.png'
+import instagram from '../assets/icons/instaIcon.png'
+import twitter from '../assets/icons/social3.png'
 
 const Navbar = () => {
-	const [isOpen, setIsOpen] = useState(false)
-	const [activeMenu, setActiveMenu] = useState('axborot')
-	const [activeLinkIndex, setActiveLinkIndex] = useState(null)
+	const contacts = useContacts()
+    const {
+        t
+    } = useTranslation();
 
-	const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
-	const closeMenu = useCallback(() => setIsOpen(false), [])
+    const menuConfig = useMenu()
 
-	useEffect(() => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [activeMenu, setActiveMenu] = useState('axborot')
+    const [activeLinkIndex, setActiveLinkIndex] = useState(null)
+
+    const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
+    const closeMenu = useCallback(() => setIsOpen(false), [])
+
+    useEffect(() => {
 		document.body.style.overflow = isOpen ? 'hidden' : ''
 	}, [isOpen])
 
-	return (
-		<>
-			{/* NAVBAR */}
-			<nav className='fixed w-full z-50 bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
+    return (
+        <>
+            {/* NAVBAR */}
+            <nav className='fixed w-full z-50 bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
 				<div className='max-w-[1440px] mx-auto flex items-center justify-between py-[20px] px-5 md:px-[100px]'>
 					<img
 						src={logoImg}
 						alt='Logo'
-						fetchPriority='high'
+						fetchpriority='high'
 						width={208}
 						height={30}
 						className='w-52 h-7.5 md:h-auto'
-						style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }}
-					/>
+						style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} decoding='async' />
 					<div className='flex items-center gap-4'>
-						<Link to='/about/umumiy-malumot' className='hidden md:block text-[14px] text-white' style={{ textDecoration: 'none' }}>Tizimga kirish</Link>
+						<LanguageSwitcher compact />
+						<Link to='/about/umumiy-malumot' className='hidden md:block text-[14px] text-white' style={{ textDecoration: 'none' }}>{t("components.navbar.tizimga_kirish")}</Link>
 						<div className="hidden lg:block w-[1px] h-[22px] bg-white/40" />
 						<button
 							onClick={toggleMenu}
@@ -78,15 +53,14 @@ const Navbar = () => {
 							border border-[#5FA2F0] text-white
 							w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2'
 						>
-							<img src={menuIcon} alt='Menu' width={16} />
-							<span className='hidden md:inline'>Meni</span>
+							<img src={menuIcon} alt='Menu' width={16} loading='lazy' decoding='async' />
+							<span className='hidden md:inline'>{t("components.navbar.menyu")}</span>
 						</button>
 					</div>
 				</div>
 			</nav>
-
-			{/* MENU OVERLAY */}
-			<div
+            {/* MENU OVERLAY */}
+            <div
 				className={`fixed inset-0 z-[999] transition-all duration-500 ${
 					isOpen ? 'visible opacity-100' : 'invisible opacity-0'
 				}`}
@@ -104,7 +78,7 @@ const Navbar = () => {
 				{/* RIGHT PANEL — mobile: full width, desktop: 65% */}
 				<div
 					className={`absolute right-0 top-0 h-screen w-full md:w-[65%]
-					bg-[rgba(14,18,27,1)]
+					bg-[rgba(var(--bg-rgb),1)]
 					transition-transform duration-500
 					flex flex-col justify-between overflow-y-auto
 					${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -120,9 +94,7 @@ const Navbar = () => {
 								letterSpacing: '-0.02em',
 								color: '#fff',
 							}}
-						>
-							Menu
-						</span>
+						>{t("components.navbar.menu")}</span>
 						<button onClick={closeMenu} className='text-white text-2xl leading-none'>
 							✕
 						</button>
@@ -143,9 +115,7 @@ const Navbar = () => {
 							{/* Menu ro'yxati */}
 							<div className='md:min-w-[220px]'>
 								{/* Desktop "Menu" label */}
-								<p className='hidden md:block text-white mb-[20px] font-inter font-medium text-[16px] tracking-wide'>
-									Menu
-								</p>
+								<p className='hidden md:block text-white mb-[20px] font-inter font-medium text-[16px] tracking-wide'>{t("components.navbar.menu")}</p>
 								<ul className='space-y-[12px]'>
 									{Object.entries(menuConfig).map(([key, item]) => (
 										<li key={key}>
@@ -168,7 +138,7 @@ const Navbar = () => {
 												<ul className='md:hidden mt-[12px] mb-[4px] space-y-[10px] pl-[2px]'>
 													{item.links.map((link, i) => (
 														<li
-															key={i}
+															key={link.path}
 															onClick={() => setActiveLinkIndex(i)}
 															style={{
 																color: activeLinkIndex === i ? 'white' : 'rgba(90,98,117,1)',
@@ -192,13 +162,11 @@ const Navbar = () => {
 
 							{/* Desktop: alohida o'ng ustun */}
 							<div className='hidden md:block flex-1'>
-								<p className='text-white font-medium mb-[20px] font-inter text-[16px]'>
-									Ichki bo'limlar
-								</p>
+								<p className='text-white font-medium mb-[20px] font-inter text-[16px]'>{t("components.navbar.ichki_bolimlar")}</p>
 								<ul className='space-y-[14px]'>
 									{menuConfig[activeMenu]?.links.map((link, i) => (
 										<li
-											key={i}
+											key={link.path}
 											onClick={() => setActiveLinkIndex(i)}
 											style={{
 												transform: isOpen ? 'translateX(0)' : 'translateX(50px)',
@@ -227,56 +195,66 @@ const Navbar = () => {
 						{/* Mobile: vertikal stack */}
 						<div className='flex flex-col gap-[18px] md:hidden'>
 							<div>
-								<p className='mb-1 text-[rgba(138,145,163,1)]'>Telefon raqam</p>
-								<p className='text-white'>+44 207 112 82 85</p>
+								<p className='mb-1 text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.telefon_raqam")}</p>
+								<a href={contacts.phoneHref} className='text-white hover:underline'>{contacts.phone}</a>
 							</div>
 							<div>
-								<p className='mb-1 text-[rgba(138,145,163,1)]'>Elektron pochta</p>
-								<p className='text-white'>hello@lecalc.io</p>
+								<p className='mb-1 text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.elektron_pochta")}</p>
+								<a href={contacts.emailHref} className='text-white hover:underline'>{contacts.email}</a>
 							</div>
 							<div>
-								<p className='mb-1 text-[rgba(138,145,163,1)]'>Manzil</p>
-								<p className='text-white'>508 Bridle Avenue Newnan, GA 30263</p>
+								<p className='mb-1 text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.manzil")}</p>
+								<p className='text-white'>{contacts.address.full}</p>
 							</div>
 							<div>
 								<div className='flex gap-4 mt-1'>
-									<SocialLinkedin />
-									<SocialX />
-									<SocialFacebook />
-									<SocialInstagram />
+										{[
+										{ src: twitter, label: 'X (Twitter)', href: contacts.social.twitter },
+										{ src: facebook, label: 'Facebook', href: contacts.social.facebook },
+										{ src: instagram, label: 'Instagram', href: contacts.social.instagram },
+									].map(({ src, label, href }) => (
+										<a key={label} href={href} target='_blank' rel='noopener noreferrer' aria-label={label}>
+											<img src={src} alt={label} className='w-6 h-6' loading='lazy' decoding='async' />
+										</a>
+									))}
 								</div>
 							</div>
 						</div>
 
 						{/* Desktop: gorizontal */}
-						<div className='hidden md:flex justify-between items-start'>
+						<div className='hidden md:grid grid-cols-[auto_auto_minmax(0,1fr)_auto] gap-x-12 items-start'>
 							<div>
-								<p className='mb-3 text-[rgba(138,145,163,1)]'>Telefon raqam</p>
-								<p className='text-white'>+44 207 112 82 85</p>
+								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.telefon_raqam")}</p>
+								<a href={contacts.phoneHref} className='whitespace-nowrap text-white hover:underline'>{contacts.phone}</a>
 							</div>
 							<div>
-								<p className='mb-3 text-[rgba(138,145,163,1)]'>Elektron pochta</p>
-								<p className='text-white'>hello@lecalc.io</p>
+								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.elektron_pochta")}</p>
+								<a href={contacts.emailHref} className='whitespace-nowrap text-white hover:underline'>{contacts.email}</a>
 							</div>
 							<div>
-								<p className='mb-3 text-[rgba(138,145,163,1)]'>Manzil</p>
-								<p className='text-white'>508 Bridle Avenue Newnan,<br />GA 30263</p>
+								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.manzil")}</p>
+								<p className='max-w-[320px] text-white'>{contacts.address.line1}{contacts.address.line2 && <><br />{contacts.address.line2}</>}</p>
 							</div>
 							<div>
-								<p className='mb-3 text-[rgba(138,145,163,1)]'>Ijtimoiy tarmoqlar</p>
+								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.ijtimoiy_tarmoqlar")}</p>
 								<div className='flex gap-4'>
-									<SocialLinkedin />
-									<SocialX />
-									<SocialFacebook />
-									<SocialInstagram />
+									{[
+										{ src: twitter, label: 'X (Twitter)', href: contacts.social.twitter },
+										{ src: facebook, label: 'Facebook', href: contacts.social.facebook },
+										{ src: instagram, label: 'Instagram', href: contacts.social.instagram },
+									].map(({ src, label, href }) => (
+										<a key={label} href={href} target='_blank' rel='noopener noreferrer' aria-label={label}>
+											<img src={src} alt={label} className='w-6 h-6' loading='lazy' decoding='async' />
+										</a>
+									))}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</>
-	)
+        </>
+    );
 }
 
 export default memo(Navbar)

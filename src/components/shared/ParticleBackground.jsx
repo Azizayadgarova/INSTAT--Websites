@@ -1,4 +1,4 @@
-﻿import { memo, useEffect, useRef } from 'react'
+import { memo, useEffect, useRef } from 'react'
 
 const ParticleBackground = memo(({
 	count = 100,
@@ -13,6 +13,8 @@ const ParticleBackground = memo(({
 	useEffect(() => {
 		const canvas = canvasRef.current
 		const ctx = canvas.getContext('2d')
+		// Kanvas konteksti mavjud emas (eski brauzer / GPU bloklangan) — jimgina chiqamiz
+		if (!ctx) return
 		let animationFrameId = null
 		let particles = []
 

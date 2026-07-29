@@ -1,4 +1,4 @@
-﻿import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 function useInView(threshold = 0.2) {
 	const ref = useRef(null)

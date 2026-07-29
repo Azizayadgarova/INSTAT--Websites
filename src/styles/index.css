@@ -1,3 +1,7 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/900.css';
 @import 'tailwindcss';
 
 @theme {
@@ -161,3 +165,42 @@ body {
     scroll-behavior: auto !important;
   }
 }
+/* Skeleton */
+.instat-skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 37%, rgba(255,255,255,0.04) 63%); background-size: 400% 100%; animation: instat-shimmer 1.4s ease infinite; }
+@keyframes instat-shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+@media (prefers-reduced-motion: reduce) { .instat-skeleton { animation: none; } }
+
+/* Backend HTML tipografiyasi */
+.instat-rich { color: rgba(var(--text-rgb),1); line-height: 1.75; font-size: 16px; }
+.instat-rich p { margin: 0 0 14px; }
+.instat-rich strong { color: #fff; font-weight: 600; }
+.instat-rich ul, .instat-rich ol { margin: 0 0 14px; padding-left: 22px; }
+.instat-rich li { margin-bottom: 8px; }
+.instat-rich a { color: rgba(var(--cyan-rgb),1); text-decoration: underline; }
+.instat-rich .ql-align-center { text-align: center; }
+.instat-rich .ql-align-justify { text-align: justify; }
+.instat-rich .ql-align-right { text-align: right; }
+
+/* --- Gradient sarlavha (Figma: Gradient/Text/Heading) --- */
+/* --- Gradient sarlavha (Figma: Gradient/Text/Heading) --- */
+.gradient-heading {
+	font-family: 'Inter Display', var(--font-inter), sans-serif;
+	font-weight: 600;
+	font-size: 48px;
+	line-height: 56px;
+	letter-spacing: -0.03em;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(153, 160, 174, 1) 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+	margin: 0;
+}
+@media (max-width: 768px) {
+	.gradient-heading { font-size: 32px; line-height: 40px; }
+}
+
+/* Umumiy ma'lumot sahifasi — zich, chegarasiz matn (Figma) */
+.umumiy-malumot-text { max-width: 980px; }
+.umumiy-malumot-text p { margin: 0 0 16px; font-size: 16px; line-height: 1.6; }
+.umumiy-malumot-text strong { color: #fff; font-weight: 600; }

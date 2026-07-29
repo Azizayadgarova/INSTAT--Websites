@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+import { useDataText } from '@/hooks/useDataText'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Button2 } from './shared/Button2'
@@ -8,10 +10,15 @@ import { fadeUp, fadeLeft, VP_LOW } from '../constants/animations'
 const vp = VP_LOW
 
 const ProblemSection = () => {
-	const [active, setActive] = useState(0)
-	const [displayIdx, setDisplayIdx] = useState(0)
+	const dt = useDataText('problems')
+    const {
+        t
+    } = useTranslation();
 
-	useEffect(() => {
+    const [active, setActive] = useState(0)
+    const [displayIdx, setDisplayIdx] = useState(0)
+
+    useEffect(() => {
 		if (displayIdx === active) return
 		const dir = active > displayIdx ? 1 : -1
 		const isLast = displayIdx + dir === active
@@ -19,10 +26,10 @@ const ProblemSection = () => {
 		return () => clearTimeout(t)
 	}, [displayIdx, active])
 
-	const handleSelect = (i) => setActive(i)
+    const handleSelect = (i) => setActive(i)
 
-	return (
-		<section
+    return (
+        <section
 			style={{
 				width: '100%',
 				backgroundColor: 'rgba(var(--card-rgb),1)',
@@ -35,8 +42,8 @@ const ProblemSection = () => {
 				paddingBottom: '80px',
 			}}
 		>
-			{/* Header */}
-			<div
+            {/* Header */}
+            <div
 				style={{
 					position: 'relative',
 					zIndex: 1,
@@ -65,9 +72,7 @@ const ProblemSection = () => {
 						color: '#ffffff',
 						margin: 0,
 					}}
-				>
-					Kitob izlashdan charchadingizmi?
-				</motion.h2>
+				>{t("components.problemSection.kitob_izlashdan_charchadingizmi")}</motion.h2>
 
 				<motion.p
 					variants={fadeUp}
@@ -84,14 +89,10 @@ const ProblemSection = () => {
 						textAlign: 'center',
 						margin: 0,
 					}}
-				>
-					Biz har bir foydalanuvchi duch keladigan muammolarni yaxshi tushunamiz
-					— ham oflayn, ham onlayn.
-				</motion.p>
+				>{t("components.problemSection.biz_har_bir_foydalanuvchi")}</motion.p>
 			</div>
-
-			{/* 2-column layout */}
-			<div
+            {/* 2-column layout */}
+            <div
 				className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-[48px]'
 				style={{
 					position: 'relative',
@@ -112,7 +113,7 @@ const ProblemSection = () => {
 				<div className='md:order-first' style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
 					{problems.map((p, i) => (
 						<motion.div
-							key={i}
+							key={dt(p, 'title')}
 							variants={fadeLeft}
 							initial='hidden'
 							whileInView='visible'
@@ -148,28 +149,28 @@ const ProblemSection = () => {
 									marginBottom: '16px',
 								}}
 							>
-								<img src={p.icon} alt='' style={{ width: '22px', height: '22px', objectFit: 'contain', opacity: 0.9 }} />
+								<img src={p.icon} alt='' style={{ width: '22px', height: '22px', objectFit: 'contain', opacity: 0.9 }} loading='lazy' decoding='async' />
 							</div>
 							<h3 style={{
 								fontFamily: 'var(--font-display)',
 								fontWeight: 600, fontSize: '24px', lineHeight: '28px',
 								color: '#ffffff', margin: '0 0 10px 0',
 							}}>
-								{p.title}
+								{dt(p, 'title')}
 							</h3>
 							<p style={{
 								fontFamily: 'var(--font-inter)',
 								fontWeight: 400, fontSize: '16px', lineHeight: '160%',
 								color: 'rgba(var(--muted-rgb),1)', margin: 0,
 							}}>
-								{p.description}
+								{dt(p, 'description')}
 							</p>
 						</motion.div>
 					))}
 				</div>
 			</div>
-		</section>
-	)
+        </section>
+    );
 }
 
 export default ProblemSection

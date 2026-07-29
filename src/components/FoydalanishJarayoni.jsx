@@ -1,10 +1,11 @@
+import { useTranslation } from 'react-i18next'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import icon1 from '@/assets/icons/Vector (2).png'
 import icon2 from '@/assets/icons/Vector (3).png'
 import icon3 from '@/assets/icons/Vector (4).png'
 import icon4 from '@/assets/icons/Vector (5).png'
-import illus1 from '@/assets/Illus.png'
-import illus2 from '@/assets/Illustration (2).png'
+import illus1 from '@/assets/Illus.webp'
+import illus2 from '@/assets/Illustration (2).webp'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { useEffect, useRef, useState } from 'react'
 import AnimatedSection from './shared/AnimatedSection'
@@ -164,8 +165,7 @@ const FeatureCard = ({ icon, title, description }) => (
 			<img
 				src={icon}
 				alt=''
-				style={{ width: '33px', height: '28px', objectFit: 'contain' }}
-			/>
+				style={{ width: '33px', height: '28px', objectFit: 'contain' }} loading='lazy' decoding='async' />
 		</div>
 		<h3
 			style={{
@@ -195,10 +195,14 @@ const FeatureCard = ({ icon, title, description }) => (
 )
 
 const FoydalanishJarayoni = () => {
-	const bgRef = useRef(null)
-	const [bgVisible, setBgVisible] = useState(false)
+    const {
+        t
+    } = useTranslation();
 
-	useEffect(() => {
+    const bgRef = useRef(null)
+    const [bgVisible, setBgVisible] = useState(false)
+
+    useEffect(() => {
 		const el = bgRef.current?.parentElement
 		if (!el) return
 		const observer = new IntersectionObserver(
@@ -209,9 +213,9 @@ const FoydalanishJarayoni = () => {
 		return () => observer.disconnect()
 	}, [])
 
-	return (
-		<>
-			<section
+    return (
+        <>
+            <section
 				style={{
 					width: '100%',
 					maxWidth: '1440px',
@@ -243,8 +247,7 @@ const FoydalanishJarayoni = () => {
 						pointerEvents: 'none',
 						opacity: bgVisible ? 1 : 0,
 						transition: 'opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1)',
-					}}
-				/>
+					}} loading='lazy' decoding='async' />
 
 				{/* Header */}
 				<AnimatedSection
@@ -276,9 +279,7 @@ const FoydalanishJarayoni = () => {
 								margin: 0,
 								letterSpacing: '-0.02em',
 							}}
-						>
-							Platforma Qanday Ishlaydi?
-						</h2>
+						>{t("components.foydalanishJarayoni.platforma_qanday_ishlaydi")}</h2>
 
 						<p
 							className='text-[14px] max-w-[327px] md:text-[16px] md:max-w-[560px]'
@@ -290,11 +291,7 @@ const FoydalanishJarayoni = () => {
 								textAlign: 'center',
 								margin: 0,
 							}}
-						>
-							Raqamli kutubxonadan foydalanish jarayoni — kitob tanlash, xarid
-							qilish va platforma ichida o&apos;qish bosqichlari haqida qisqacha
-							ma&apos;lumot.
-						</p>
+						>{t("components.foydalanishJarayoni.raqamli_kutubxonadan_foydalanish_jarayon")}</p>
 					</div>
 				</AnimatedSection>
 
@@ -326,7 +323,7 @@ const FoydalanishJarayoni = () => {
 						transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0 }}
 						style={{ borderRadius: '16px', overflow: 'hidden', width: '100%', height: '376px', border: '1px solid rgba(255,255,255,0.08)' }}
 					>
-						<img src={illus1} alt='' style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+						<img src={illus1} alt='' style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading='lazy' decoding='async' />
 					</motion.div>
 
 					{/* 3 — right[0]: desktop col-3 row-1 */}
@@ -352,7 +349,7 @@ const FoydalanishJarayoni = () => {
 						transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
 						style={{ borderRadius: '16px', overflow: 'hidden', width: '100%', height: '376px', border: '1px solid rgba(255,255,255,0.08)' }}
 					>
-						<img src={illus2} alt='' style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+						<img src={illus2} alt='' style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading='lazy' decoding='async' />
 					</motion.div>
 
 					{/* 6 — right[1]: desktop col-3 row-2 */}
@@ -363,8 +360,8 @@ const FoydalanishJarayoni = () => {
 					</div>
 				</div>
 			</section>
-		</>
-	)
+        </>
+    );
 }
 
 export default FoydalanishJarayoni

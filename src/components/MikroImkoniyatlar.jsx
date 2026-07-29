@@ -1,5 +1,6 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
-import rectImg from '@/assets/Rectangle 3442.png'
+import rectImg from '@/assets/Rectangle 3442.webp'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { Button2 } from './shared/Button2'
@@ -34,20 +35,24 @@ const BlueOverlay = ({ visible }) => (
 )
 
 export default function MikroImkoniyatlar() {
-	const [hov, setHov] = useState({
+    const {
+        t
+    } = useTranslation();
+
+    const [hov, setHov] = useState({
 		img: false, top: false, mid: false, blue: false, botL: false, botR: false,
 	})
 
-	const enter = k => () => setHov(h => ({ ...h, [k]: true }))
-	const leave = k => () => setHov(h => ({ ...h, [k]: false }))
-	const dc = k => hov[k] ? 'rgba(215,235,255,0.88)' : 'rgba(var(--text-rgb),1)'
+    const enter = k => () => setHov(h => ({ ...h, [k]: true }))
+    const leave = k => () => setHov(h => ({ ...h, [k]: false }))
+    const dc = k => hov[k] ? 'rgba(215,235,255,0.88)' : 'rgba(var(--text-rgb),1)'
 
-	return (
-		<section
+    return (
+        <section
 			className='relative w-full py-10 px-4 md:py-10 md:px-[120px] overflow-hidden'
 			style={{ background: '#0A0F1A', boxSizing: 'border-box' }}
 		>
-			<img
+            <img
 				src={bgGlow}
 				alt=''
 				aria-hidden='true'
@@ -57,10 +62,8 @@ export default function MikroImkoniyatlar() {
 					width: '100%', height: '100%',
 					objectFit: 'cover', objectPosition: 'center top',
 					pointerEvents: 'none', zIndex: 0, opacity: 0.7,
-				}}
-			/>
-
-			<div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
+				}} loading='lazy' decoding='async' />
+            <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
 
 				{/* ── Header ── */}
 				<AnimatedSection style={{ marginBottom: '32px' }}>
@@ -73,20 +76,14 @@ export default function MikroImkoniyatlar() {
 								fontWeight: 600, color: '#fff',
 								margin: 0, letterSpacing: '-0.02em', lineHeight: 1.25,
 							}}
-						>
-							Platformaning asosiy imkoniyatlari
-						</h2>
+						>{t("components.mikroImkoniyatlar.platformaning_asosiy_imkoniyatlari")}</h2>
 						<p
 							className='text-[14px] md:text-[15px] max-w-full md:max-w-[540px]'
 							style={{
 								fontFamily: 'Inter,sans-serif',
 								lineHeight: 1.7, color: 'rgba(155,163,185,1)', margin: 0,
 							}}
-						>
-							Mikro-ma&apos;lumotlar laboratoriyasi foydalanuvchilarga statistik
-							ma&apos;lumotlardan samarali foydalanish uchun zamonaviy va qulay
-							imkoniyatlarni taqdim etadi.
-						</p>
+						>{t("components.mikroImkoniyatlar.mikro_malumotlar_laboratoriyasi_foydalan")}</p>
 					</div>
 				</AnimatedSection>
 
@@ -107,8 +104,7 @@ export default function MikroImkoniyatlar() {
 					>
 						<img
 							src={rectImg} alt=''
-							style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-						/>
+							style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} loading='lazy' decoding='async' />
 						<motion.div
 							animate={{ opacity: hov.img ? 0 : 1 }}
 							transition={{ duration: 0.35, ease: 'easeInOut' }}
@@ -122,17 +118,11 @@ export default function MikroImkoniyatlar() {
 							<h3
 								className='text-[20px] md:text-[30px]'
 								style={{ fontFamily: 'var(--font-display)', fontWeight: 600, color: '#fff', margin: '0 0 6px', lineHeight: 1.2 }}
-							>
-								Har bir detalni aniqlik bilan ko&apos;ring
-							</h3>
+							>{t("components.mikroImkoniyatlar.har_bir_detalni_aniqlik")}</h3>
 							<p
 								className='text-[13px] md:text-[15px]'
 								style={{ fontFamily: 'Inter,sans-serif', lineHeight: 1.65, color: dc('img'), margin: 0, transition: 'color 0.35s ease' }}
-							>
-								Katta hajmdagi mikro ma&apos;lumotlarni zamonaviy analitik
-								vositalar yordamida chuqur tahlil qiling va muhim
-								tendensiyalarni aniqlang.
-							</p>
+							>{t("components.mikroImkoniyatlar.katta_hajmdagi_mikro_malumotlarni")}</p>
 						</div>
 					</motion.div>
 
@@ -156,16 +146,11 @@ export default function MikroImkoniyatlar() {
 								<h3
 									className='text-[20px] md:text-[32px]'
 									style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: '#fff', margin: '0 0 8px', lineHeight: 1.2 }}
-								>
-									Tadqiqotlar uchun tayyor platforma
-								</h3>
+								>{t("components.mikroImkoniyatlar.tadqiqotlar_uchun_tayyor_platforma")}</h3>
 								<p
 									className='text-[14px] md:text-[18px]'
 									style={{ fontFamily: 'Inter,sans-serif', lineHeight: 1.68, color: dc('top'), margin: 0, maxWidth: '520px', transition: 'color 0.35s ease' }}
-								>
-									Statistik modellar, eksperimental tahlillar va ilmiy ishlanmalar
-									uchun maxsus ishlab chiqilgan muhit.
-								</p>
+								>{t("components.mikroImkoniyatlar.statistik_modellar_eksperimental_tahlill")}</p>
 							</div>
 						</motion.div>
 
@@ -188,16 +173,11 @@ export default function MikroImkoniyatlar() {
 									<h3
 										className='text-[17px] md:text-[32px]'
 										style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: '#fff', margin: '0 0 6px', lineHeight: 1.2 }}
-									>
-										Soniyalar ichida natija
-									</h3>
+									>{t("components.mikroImkoniyatlar.soniyalar_ichida_natija")}</h3>
 									<p
 										className='text-[13px] md:text-[18px]'
 										style={{ fontFamily: 'Inter,sans-serif', lineHeight: 1.68, color: dc('mid'), margin: 0, transition: 'color 0.35s ease' }}
-									>
-										Kuchli hisoblash tizimi orqali ma&apos;lumotlarni tezkor olish
-										imkoniyati.
-									</p>
+									>{t("components.mikroImkoniyatlar.kuchli_hisoblash_tizimi_orqali")}</p>
 								</div>
 							</motion.div>
 
@@ -218,16 +198,11 @@ export default function MikroImkoniyatlar() {
 									<h3
 										className='text-[17px] md:text-[32px]'
 										style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: '#fff', margin: '0 0 6px', lineHeight: 1.2 }}
-									>
-										Doimiy yangilanadigan manbalar
-									</h3>
+									>{t("components.mikroImkoniyatlar.doimiy_yangilanadigan_manbalar")}</h3>
 									<p
 										className='text-[13px] md:text-[14px]'
 										style={{ fontFamily: 'Inter,sans-serif', lineHeight: 1.68, color: dc('blue'), margin: 0, transition: 'color 0.35s ease' }}
-									>
-										Turli sohalarga oid dolzarb va ishonchli mikro
-										ma&apos;lumotlar bazasi
-									</p>
+									>{t("components.mikroImkoniyatlar.turli_sohalarga_oid_dolzarb")}</p>
 								</div>
 							</motion.div>
 						</div>
@@ -253,16 +228,11 @@ export default function MikroImkoniyatlar() {
 							<h3
 								className='text-[20px] md:text-[32px] w-full md:w-[500px]'
 								style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: '#fff', margin: '0 0 8px', lineHeight: 1.25 }}
-							>
-								Murakkab ma&apos;lumotlarni sodda ko&apos;rinishda
-							</h3>
+							>{t("components.mikroImkoniyatlar.murakkab_malumotlarni_sodda_korinishda")}</h3>
 							<p
 								className='text-[14px] md:text-[18px] w-full md:w-[500px]'
 								style={{ fontFamily: 'Inter,sans-serif', lineHeight: 1.68, color: dc('botL'), margin: 0, transition: 'color 0.35s ease' }}
-							>
-								Interaktiv grafiklar va dashboardlar orqali natijalarni tushunarli
-								va vizual tarzda namoyish eting.
-							</p>
+							>{t("components.mikroImkoniyatlar.interaktiv_grafiklar_va_dashboardlar")}</p>
 						</div>
 					</motion.div>
 
@@ -282,9 +252,7 @@ export default function MikroImkoniyatlar() {
 							<h3
 								className='text-[20px] md:text-[32px]'
 								style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: '#fff', margin: '0 0 8px', lineHeight: 1.25 }}
-							>
-								Ishonchli himoya tizimi
-							</h3>
+							>{t("components.mikroImkoniyatlar.ishonchli_himoya_tizimi")}</h3>
 							<p
 								className='text-[14px] md:text-[18px]'
 								style={{
@@ -292,15 +260,12 @@ export default function MikroImkoniyatlar() {
 									color: hov.botR ? 'rgba(215,235,255,0.88)' : 'rgba(155,163,185,1)',
 									margin: 0, transition: 'color 0.35s ease',
 								}}
-							>
-								Barcha ma&apos;lumotlar zamonaviy xavfsizlik standartlari asosida
-								himoyalangan
-							</p>
+							>{t("components.mikroImkoniyatlar.barcha_malumotlar_zamonaviy_xavfsizlik")}</p>
 						</div>
 					</motion.div>
 				</div>
 
 			</div>
-		</section>
-	)
+        </section>
+    );
 }
