@@ -1,20 +1,26 @@
+import { useSiteText } from '@/hooks/useSiteText'
+
 const stats = [
   {
+    key: "library_books_number",
     number: "50 000+",
     label: "KITOBLAR",
     description: "Bizda klassikadan tortib zamonaviy bestsellerlargacha bo'lgan barcha mavzular mavjud."
   },
   {
+    key: "library_countries_number",
     number: "120+",
     label: "MAMLAKATLAR",
     description: "Foydalanuvchilar butun dunyodan bilim o'rganmoqda va baham ko'rmoqda."
   },
   {
+    key: "library_authors_number",
     number: "1 500+",
     label: "MUALLIFLAR",
     description: "Nashriyotlar va mustaqil mualliflar bilan bevosita hamkorlik qilamiz."
   },
   {
+    key: "library_downloads_number",
     number: "2 mln+",
     label: "YUKLAB OLISHLAR",
     description: "Bizning kitoblarimiz millionlab odamlarning bilim olishiga yordam berdi."
@@ -25,6 +31,10 @@ const BORDER = 'linear-gradient(180deg, rgba(22,50,183,0.15) 0%, #2B75CC 50%, rg
 const BORDER_H = 'linear-gradient(90deg, rgba(22,50,183,0.15) 0%, #2B75CC 50%, rgba(22,50,183,0.15) 100%)'
 
 const InformationStatistika = () => {
+  // Raqamlar backend'dan — site-data (module: library). Kalit topilmasa fallback.
+  const st = useSiteText('library')
+  const resolvedStats = stats.map(s => ({ ...s, number: st(s.key, s.number) }))
+
   return (
     <section
       style={{
@@ -43,7 +53,7 @@ const InformationStatistika = () => {
       {/* DESKTOP: 4 ustun, 223px balandlik */}
       <div className="hidden md:flex items-center w-full" style={{ height: '223px', padding: '0 40px' }}>
         <div className="grid grid-cols-4 w-full h-full relative">
-          {stats.map((stat, index) => (
+          {resolvedStats.map((stat, index) => (
             <div key={stat.label} className="relative px-8 flex flex-col" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
               {index === 0 && (
                 <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '1px', background: BORDER }} />

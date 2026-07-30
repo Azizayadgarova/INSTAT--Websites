@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next'
-import { useDataText } from '@/hooks/useDataText'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { useState } from 'react'
 import { Button2 } from './shared/Button2'
 import AnimatedSection from './shared/AnimatedSection'
 
 import { ALL_DATA } from '@/data/publications.data'
+import { useDataReports } from '@/hooks/useDataReports'
+import { useSiteText } from '@/hooks/useSiteText'
 
 const ITEMS_PER_PAGE = 8
 
@@ -79,7 +80,6 @@ function IconEdit() {
 }
 
 function DataCard({ item }) {
-	const dt = useDataText('publications')
 	const [hov, setHov] = useState(false)
 
 	return (
@@ -123,7 +123,7 @@ function DataCard({ item }) {
 						overflow: 'hidden',
 					}}
 				>
-					{dt(item, 'title')}
+					{item.title}
 				</h3>
 				<span
 					style={{
@@ -133,7 +133,7 @@ function DataCard({ item }) {
 						color: 'rgba(var(--text-rgb),1)',
 					}}
 				>
-					{dt(item, 'category')}
+					{item.category}
 				</span>
 			</div>
 
@@ -147,7 +147,7 @@ function DataCard({ item }) {
 							color: 'rgba(255,255,255,1)',
 						}}
 					>
-						{dt(item, 'location')}
+						{item.location}
 					</span>
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -171,7 +171,7 @@ function DataCard({ item }) {
 							color: 'rgba(255,255,255,1)',
 						}}
 					>
-						{dt(item, 'published')}
+						{item.published}
 					</span>
 				</div>
 			</div>
@@ -313,11 +313,17 @@ export default function NufuzliNashrlar() {
     } = useTranslation();
 
     const [page, setPage] = useState(1)
+    const st = useSiteText('micro_data')
 
-    const totalPages = Math.ceil(ALL_DATA.length / ITEMS_PER_PAGE)
-    const displayed = ALL_DATA.slice(
-		(page - 1) * ITEMS_PER_PAGE,
-		page * ITEMS_PER_PAGE,
+    // Nufuzli nashrlar — /api/data-reports/ (fallback: ALL_DATA)
+    const { items: allData } = useDataReports(ALL_DATA)
+
+    const totalPages = Math.max(1, Math.ceil(allData.length / ITEMS_PER_PAGE))
+    // Ma'lumot API'dan kelib uzunligi o'zgarsa `page` chegaradan chiqmasin
+    const safePage = Math.min(page, totalPages)
+    const displayed = allData.slice(
+		(safePage - 1) * ITEMS_PER_PAGE,
+		safePage * ITEMS_PER_PAGE,
 	)
 
     return (
@@ -373,7 +379,7 @@ export default function NufuzliNashrlar() {
 								margin: 0,
 								letterSpacing: '-0.02em',
 							}}
-						>{t("components.nufuzliNashrlar.nufuzli_jurnallar_va_songgi")}</h2>
+						>{st('micro_data_title5', t("components.nufuzliNashrlar.nufuzli_jurnallar_va_songgi"))}</h2>
 
 						<p
 							style={{
@@ -384,7 +390,7 @@ export default function NufuzliNashrlar() {
 								maxWidth: '480px',
 								margin: 0,
 							}}
-						>{t("components.nufuzliNashrlar.platformada_chop_etilayotgan_yetakchi")}</p>
+						>{st('micro_data_description5', t("components.nufuzliNashrlar.platformada_chop_etilayotgan_yetakchi"))}</p>
 					</div>
 				</AnimatedSection>
 
@@ -403,7 +409,7 @@ export default function NufuzliNashrlar() {
 				</div>
 
 				{/* Pagination */}
-				<Pagination page={page} setPage={setPage} total={totalPages} />
+				<Pagination page={safePage} setPage={setPage} total={totalPages} />
 			</div>
         </section>
     );

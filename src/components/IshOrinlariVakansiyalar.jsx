@@ -4,8 +4,7 @@ import mapPin from '@/assets/icons/map-pin-line.png'
 import { Button2 } from './shared/Button2'
 import AnimatedSection from './shared/AnimatedSection'
 
-import { JOBS } from '@/data/jobs.data'
-import { useDataText } from '@/hooks/useDataText'
+import { useVacancies } from '@/hooks/useVacancies'
 
 function LocationIcon() {
 	return (
@@ -20,7 +19,6 @@ function LocationIcon() {
 }
 
 function JobCard({ job }) {
-	const dt = useDataText('jobs')
     const {
         t
     } = useTranslation();
@@ -47,7 +45,7 @@ function JobCard({ job }) {
 					margin: 0,
 				}}
 			>
-				{dt(job, 'title')}
+				{job.position}
 			</h3>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
 				<LocationIcon />
@@ -60,7 +58,7 @@ function JobCard({ job }) {
 						color: 'rgba(90,98,117,1)',
 					}}
 				>
-					{dt(job, 'city')}
+					{job.direction}
 				</span>
 			</div>
             <p
@@ -74,7 +72,7 @@ function JobCard({ job }) {
 					flex: 1,
 				}}
 			>
-				{dt(job, 'desc')}
+				{job.requirements}
 			</p>
             <div
 				style={{
@@ -94,7 +92,7 @@ function JobCard({ job }) {
 						color: 'rgba(225,227,230,1)',
 					}}
 				>
-					{job.price}
+					{job.salary}
 				</span>
 				<span
 					className='text-[13px] md:text-[16px]'
@@ -136,6 +134,9 @@ const IshOrinlariVakansiyalar = () => {
     const {
         t
     } = useTranslation();
+
+    // Vakansiyalar — /api/site-vacancies/items/all/ (fallback: JOBS -> useVacancies ichida)
+    const { items: jobs } = useVacancies()
 
     return (
         <section
@@ -205,7 +206,7 @@ const IshOrinlariVakansiyalar = () => {
 					marginBottom: '48px',
 				}}
 			>
-				{JOBS.map(job => (
+				{jobs.map(job => (
 					<JobCard key={job.id} job={job} />
 				))}
 			</div>

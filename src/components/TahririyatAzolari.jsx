@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import bgOnline from '@/assets/bgImg/Background (1).png'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
-import { BASE_H, BASE_W, CONFIGS, mod } from './MentorsSection/mentors.data'
-import { reviewAuthorsApi } from '@/api/resources.api'
-import { useApiResource } from '@/hooks/useApiResource'
+import { CONFIGS, mod } from './MentorsSection/mentors.data'
+import { useArticleEditors } from '@/hooks/useArticleEditors'
+import { useSiteText } from '@/hooks/useSiteText'
 
 const PX = '?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop'
 
@@ -53,30 +53,14 @@ const FALLBACK_MEMBERS = [
 	},
 ]
 
-/**
- * review-authors backend'da rasm bermaydi — shuning uchun ism-familiya
- * bosh harflaridan avtomatik avatar generatsiya qilinadi (ui-avatars.com).
- */
-const toMember = author => {
-	const name = [author.first_name, author.last_name].filter(Boolean).join(' ').trim() || "Noma'lum"
-	return {
-		name,
-		role: author.academic_degree?.name || "Taqrizchi",
-		exp: author.review ? `${author.review} ta taqriz` : (author.organization || ''),
-		photo: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1F2533&color=fff&size=400&bold=true`,
-	}
-}
-
 export default function TahririyatAzolari() {
     const {
         t
     } = useTranslation();
 
-    const { data } = useApiResource(() => reviewAuthorsApi.getAll(), [])
-    const members = useMemo(() => {
-	    const items = data?.items ?? []
-	    return items.length ? items.map(toMember) : FALLBACK_MEMBERS
-    }, [data])
+    // Tahririyat a'zolari — /api/site-article-editors (fallback: FALLBACK_MEMBERS)
+    const { items: members } = useArticleEditors(FALLBACK_MEMBERS)
+    const st = useSiteText('article')
 
     const [current, setCurrent]     = useState(0)
     const [bgVisible, setBgVisible] = useState(false)
@@ -171,14 +155,14 @@ export default function TahririyatAzolari() {
 						fontFamily: 'var(--font-display)',
 						fontWeight: 600, lineHeight: 1.1,
 						color: '#fff', margin: '0 0 16px', letterSpacing: '-0.02em',
-					}}>{t("components.tahririyatAzolari.tahririyat_azolari")}</h2>
+					}}>{st('article_title5', t("components.tahririyatAzolari.tahririyat_azolari"))}</h2>
 
 					<p className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[520px] px-4 md:px-0' style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400, lineHeight: 1.65,
 						color: 'rgba(202,202,206,1)',
 						margin: '0 0 0',
-					}}>{t("components.tahririyatAzolari.platformada_chop_etilayotgan_yetakchi")}</p>
+					}}>{st('article_description5', t("components.tahririyatAzolari.platformada_chop_etilayotgan_yetakchi"))}</p>
 				</div>
 
 				{/* Carousel */}

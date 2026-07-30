@@ -14,6 +14,11 @@ import { Button2 } from './shared/Button2'
 import Text from './shared/Text'
 import Testimonial from './Testimonial'
 import AnimatedSection from './shared/AnimatedSection'
+import { useArticleFeatures } from '@/hooks/useArticleFeatures'
+import { useTranslation } from 'react-i18next'
+import { useSiteData } from '@/hooks/useSiteData'
+import { pickLang } from '@/utils/siteContent'
+import { useSiteText } from '@/hooks/useSiteText'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -617,6 +622,7 @@ function Pagination({ page, setPage, total }) {
 // ─── Jurnallar section ────────────────────────────────────────────────────────
 
 function JurnallarSection() {
+	const st = useSiteText('article')
 	const [page, setPage]           = useState(1)
 	const [author, setAuthor]       = useState(AUTHORS[0])
 	const [category, setCategory]   = useState(CATEGORIES[0])
@@ -680,7 +686,7 @@ function JurnallarSection() {
 							letterSpacing: '-0.02em',
 						}}
 					>
-						Nufuzli jurnallar va so&apos;nggi nashrlar
+						{st('article_title3', "Nufuzli jurnallar va so'nggi nashrlar")}
 					</h2>
 
 					<p
@@ -694,8 +700,7 @@ function JurnallarSection() {
 							margin: 0,
 						}}
 					>
-						Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng
-						yangi sonlari bilan tanishing.
+						{st('article_description3', 'Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.')}
 					</p>
 				</div>
 			</AnimatedSection>
@@ -1070,6 +1075,15 @@ function useIsMobile(bp = 768) {
 
 function HeroSection() {
 	const isMobile = useIsMobile()
+	// Hero karusel kartalari — /api/site-article-features (fallback: CARDS)
+	const { items: cards } = useArticleFeatures(CARDS)
+	// Sarlavha/tavsif backend'dan — site-data (module: article)
+	const { i18n } = useTranslation()
+	const lang = i18n.resolvedLanguage ?? 'uz'
+	const { data: artKv } = useSiteData(d => d.byModuleKey.article ?? {})
+	const heroT1 = pickLang(artKv?.article_title1, lang) || 'Ilmiy jurnallar va maqolalar uchun'
+	const heroT2 = pickLang(artKv?.article_title2, lang) || 'yagona platforma'
+	const heroSub = pickLang(artKv?.article_description1, lang) || "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda."
 	const [visible, setVisible] = useState(false)
 	const [flipped, setFlipped] = useState({})
 	const [hovered, setHovered] = useState(null)
@@ -1303,9 +1317,9 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						Ilmiy jurnallar va maqolalar uchun
+						{heroT1}
 						<br />
-						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>yagona platforma</span>
+						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{heroT2}</span>
 					</h1>
 					<p
 						style={{
@@ -1318,8 +1332,7 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro
-						standartlarga mos nashr imkoniyatlari — barchasi bir joyda.
+						{heroSub}
 					</p>
 				</div>
 
@@ -1345,7 +1358,7 @@ function HeroSection() {
 						WebkitUserSelect: 'none',
 					}}
 				>
-					{CARDS.map((card, i) => {
+					{cards.map((card, i) => {
 						const tf = transforms[i]
 						if (!tf) return null
 						return (
@@ -1433,8 +1446,8 @@ export default function ElektronJurnal() {
 			<MaqolaTalablari />
 			<TahririyatAzolari />
 			<JurnalStatistika />
-			<FAQSection hideParticles platformStyle />
-			<Testimonial hideParticles platformStyle />
+			<FAQSection hideParticles platformStyle module='articles' />
+			<Testimonial hideParticles platformStyle source='article' />
 		</>
 	)
 }

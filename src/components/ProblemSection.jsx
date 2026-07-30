@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useDataText } from '@/hooks/useDataText'
+import { useSiteText } from '@/hooks/useSiteText'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Button2 } from './shared/Button2'
@@ -14,6 +15,7 @@ const ProblemSection = () => {
     const {
         t
     } = useTranslation();
+    const st = useSiteText('library')
 
     const [active, setActive] = useState(0)
     const [displayIdx, setDisplayIdx] = useState(0)
@@ -72,7 +74,7 @@ const ProblemSection = () => {
 						color: '#ffffff',
 						margin: 0,
 					}}
-				>{t("components.problemSection.kitob_izlashdan_charchadingizmi")}</motion.h2>
+				>{st('library_title4', t("components.problemSection.kitob_izlashdan_charchadingizmi"))}</motion.h2>
 
 				<motion.p
 					variants={fadeUp}
@@ -89,7 +91,7 @@ const ProblemSection = () => {
 						textAlign: 'center',
 						margin: 0,
 					}}
-				>{t("components.problemSection.biz_har_bir_foydalanuvchi")}</motion.p>
+				>{st('library_description4', t("components.problemSection.biz_har_bir_foydalanuvchi"))}</motion.p>
 			</div>
             {/* 2-column layout */}
             <div

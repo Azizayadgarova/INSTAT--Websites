@@ -14,8 +14,8 @@ const MikroMalumotlarPage = () => {
 			<PlatformaIshlashi />
 			<NufuzliNashrlar />
 			<StatistikBlok />
-			<FAQSection hideParticles platformStyle />
-			<Testimonial hideParticles platformStyle />
+			<FAQSection hideParticles platformStyle module='micro_data' />
+			<Testimonial hideParticles platformStyle source='micro' />
 		</>
 	)
 }

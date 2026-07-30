@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { useSiteData } from '@/hooks/useSiteData'
+import { pickLang } from '@/utils/siteContent'
 import bgImage from '@/assets/bgImg/Ai-boom 2.webp'
 import img1 from '@/assets/image1.webp'
 import img2 from '@/assets/image2.webp'
@@ -126,8 +128,15 @@ const ROW2 = [
 
 const RaqamliKutibxona = () => {
     const {
-        t
+        t, i18n
     } = useTranslation();
+    const lang = i18n.resolvedLanguage ?? 'uz'
+
+    // Hero matni backend'dan — site-data (module: library). Kalit topilmasa i18n fallback.
+    const { data: libKv } = useSiteData(d => d.byModuleKey.library ?? {})
+    const heroTitle = pickLang(libKv?.library_title1, lang) || t("pages.raqamliKutibxona.minglab_elektron_kitoblar")
+    const heroHighlight = pickLang(libKv?.library_title2, lang) || '-bir platformada'
+    const heroSubtitleApi = pickLang(libKv?.library_description1, lang)
 
     const [mounted, setMounted] = useState(false)
     const [hoveredIndex, setHovered] = useState(null)
@@ -333,11 +342,12 @@ const RaqamliKutibxona = () => {
 				>
 					<Text
 						buttonText='Platforma haqida'
-						title={t("pages.raqamliKutibxona.minglab_elektron_kitoblar")}
-						highlight='-bir platformada'
+						title={heroTitle}
+						highlight={heroHighlight}
 						subtitle={
-							<>{t("pages.raqamliKutibxona.onlayn_kitoblarni_sotib_oling")}<br />{t("pages.raqamliKutibxona.istalgan_qurilmada_oqing")}</>
+							heroSubtitleApi || <>{t("pages.raqamliKutibxona.onlayn_kitoblarni_sotib_oling")}<br />{t("pages.raqamliKutibxona.istalgan_qurilmada_oqing")}</>
 						}
+						subtitleStyle={{ maxWidth: 680 }}
 						buttonType='button2'
 					/>
 				</div>
@@ -584,8 +594,8 @@ const RaqamliKutibxona = () => {
             <ProblemSection />
             <ElektronKutubxona />
             <Kutubxona />
-            <FAQSection hideParticles platformStyle />
-            <Testimonials hideParticles platformStyle />
+            <FAQSection hideParticles platformStyle module='library' />
+            <Testimonials hideParticles platformStyle source='library' />
         </>
     );
 }

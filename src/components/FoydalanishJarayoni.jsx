@@ -10,6 +10,8 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion' 
 import { useEffect, useRef, useState } from 'react'
 import AnimatedSection from './shared/AnimatedSection'
 import { Button2 } from './shared/Button2'
+import { useLibraryFeatures } from '@/hooks/useLibraryFeatures'
+import { useSiteText } from '@/hooks/useSiteText'
 
 const leftFeatures = [
 	{
@@ -40,6 +42,10 @@ const rightFeatures = [
 			"Sotib olingan va saqlangan kitoblaringizni bitta joyda boshqaring. Kutubxonangizni mavzular bo'yicha tartiblang va istalgan vaqtda tezkor kirish imkoniyatidan foydalaning.",
 	},
 ]
+
+// Vizual tartib (grid): left[0], right[0], left[1], right[1].
+// site-library-features API matni shu tartibda slotlar ustiga qo'yiladi.
+const FEATURE_SLOTS = [leftFeatures[0], rightFeatures[0], leftFeatures[1], rightFeatures[1]]
 
 const vp = { once: true, amount: 0.2 }
 
@@ -202,6 +208,11 @@ const FoydalanishJarayoni = () => {
     const bgRef = useRef(null)
     const [bgVisible, setBgVisible] = useState(false)
 
+    // "Platforma qanday ishlaydi" kartalari — /api/site-library-features (fallback: FEATURE_SLOTS)
+    const { items: features } = useLibraryFeatures(FEATURE_SLOTS)
+    // Boʻlim sarlavhasi — site-data (module: library)
+    const st = useSiteText('library')
+
     useEffect(() => {
 		const el = bgRef.current?.parentElement
 		if (!el) return
@@ -279,7 +290,7 @@ const FoydalanishJarayoni = () => {
 								margin: 0,
 								letterSpacing: '-0.02em',
 							}}
-						>{t("components.foydalanishJarayoni.platforma_qanday_ishlaydi")}</h2>
+						>{st('library_title3', t("components.foydalanishJarayoni.platforma_qanday_ishlaydi"))}</h2>
 
 						<p
 							className='text-[14px] max-w-[327px] md:text-[16px] md:max-w-[560px]'
@@ -291,7 +302,7 @@ const FoydalanishJarayoni = () => {
 								textAlign: 'center',
 								margin: 0,
 							}}
-						>{t("components.foydalanishJarayoni.raqamli_kutubxonadan_foydalanish_jarayon")}</p>
+						>{st('library_description3', t("components.foydalanishJarayoni.raqamli_kutubxonadan_foydalanish_jarayon"))}</p>
 					</div>
 				</AnimatedSection>
 
@@ -310,7 +321,7 @@ const FoydalanishJarayoni = () => {
 					{/* 1 — left[0]: desktop col-1 row-1 */}
 					<div className='lg:col-start-1 lg:row-start-1'>
 						<MagneticWrap fromLeft delay={0}>
-							<FeatureCard {...leftFeatures[0]} />
+							<FeatureCard {...features[0]} />
 						</MagneticWrap>
 					</div>
 
@@ -329,14 +340,14 @@ const FoydalanishJarayoni = () => {
 					{/* 3 — right[0]: desktop col-3 row-1 */}
 					<div className='lg:col-start-3 lg:row-start-1'>
 						<MagneticWrap fromLeft={false} delay={0}>
-							<FeatureCard {...rightFeatures[0]} />
+							<FeatureCard {...features[1]} />
 						</MagneticWrap>
 					</div>
 
 					{/* 4 — left[1]: desktop col-1 row-2 */}
 					<div className='lg:col-start-1 lg:row-start-2'>
 						<MagneticWrap fromLeft delay={0.15}>
-							<FeatureCard {...leftFeatures[1]} />
+							<FeatureCard {...features[2]} />
 						</MagneticWrap>
 					</div>
 
@@ -355,7 +366,7 @@ const FoydalanishJarayoni = () => {
 					{/* 6 — right[1]: desktop col-3 row-2 */}
 					<div className='lg:col-start-3 lg:row-start-2'>
 						<MagneticWrap fromLeft={false} delay={0.15}>
-							<FeatureCard {...rightFeatures[1]} />
+							<FeatureCard {...features[3]} />
 						</MagneticWrap>
 					</div>
 				</div>

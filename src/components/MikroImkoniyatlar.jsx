@@ -5,6 +5,7 @@ import bgGlow from '@/assets/bgImg/Background (1).png'
 import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { Button2 } from './shared/Button2'
 import AnimatedSection from './shared/AnimatedSection'
+import { useSiteText } from '@/hooks/useSiteText'
 
 const vp = { once: true, amount: 0.2 }
 
@@ -38,6 +39,7 @@ export default function MikroImkoniyatlar() {
     const {
         t
     } = useTranslation();
+    const st = useSiteText('micro_data')
 
     const [hov, setHov] = useState({
 		img: false, top: false, mid: false, blue: false, botL: false, botR: false,
@@ -76,14 +78,14 @@ export default function MikroImkoniyatlar() {
 								fontWeight: 600, color: '#fff',
 								margin: 0, letterSpacing: '-0.02em', lineHeight: 1.25,
 							}}
-						>{t("components.mikroImkoniyatlar.platformaning_asosiy_imkoniyatlari")}</h2>
+						>{st('micro_data_title3', t("components.mikroImkoniyatlar.platformaning_asosiy_imkoniyatlari"))}</h2>
 						<p
 							className='text-[14px] md:text-[15px] max-w-full md:max-w-[540px]'
 							style={{
 								fontFamily: 'Inter,sans-serif',
 								lineHeight: 1.7, color: 'rgba(155,163,185,1)', margin: 0,
 							}}
-						>{t("components.mikroImkoniyatlar.mikro_malumotlar_laboratoriyasi_foydalan")}</p>
+						>{st('micro_data_description3', t("components.mikroImkoniyatlar.mikro_malumotlar_laboratoriyasi_foydalan"))}</p>
 					</div>
 				</AnimatedSection>
 

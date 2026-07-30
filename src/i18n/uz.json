@@ -80,6 +80,8 @@
 		},
 		"ishOrinlariVakansiyalar": {
 			"oy": "/oy",
+			"stavka": "Stavka",
+			"qoshimcha_haq": "Qo'shimcha haq",
 			"ariza_yuborish": "Ariza yuborish",
 			"karyerangiz_uchun_eng_yaxshi": "Karyerangiz uchun eng yaxshi tanlov",
 			"eng_saralangan_vakansiyalarni_bir": "Eng saralangan vakansiyalarni bir joyda toping. Platformamiz orqali mos ishni aniqlang, tezkor murojaat yuboring va karyerangizni keyingi bosqichga olib chiqing."

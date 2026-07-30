@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
 import { CONFIGS, mod } from './MentorsSection/mentors.data'
 import { useMentors } from '@/hooks/useMentors'
+import { useSiteText } from '@/hooks/useSiteText'
 import ParticleBackground from './shared/ParticleBackground'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
@@ -16,6 +17,10 @@ const MentorsSection = ({ variant }) => {
     } = useTranslation();
 
     const isOnline = variant === 'online'
+    // Boʻlim sarlavhasi (faqat online variant) — site-data (module: education)
+    const st = useSiteText('education')
+    const _title = isOnline ? st('education_title5') : ''
+    const _subtitle = isOnline ? st('education_description5') : ''
     const [current, setCurrent] = useState(0)
     const bgRef = useRef(null)
     const [bgVisible, setBgVisible] = useState(false)
@@ -26,7 +31,7 @@ const MentorsSection = ({ variant }) => {
 		? Math.min(1, trackW / 568)
 		: Math.min(1, Math.max(0.42, trackW / 900))
 
-    const { items: mentors } = useMentors()
+    const { items: mentors } = useMentors(variant)
 
     // Avtomatik aylantirish intervali birinchi renderdagi `shift` ni ushlab
     // qoladi — ro'yxat API'dan kelib uzunligi o'zgarganda ham to'g'ri
@@ -133,18 +138,21 @@ const MentorsSection = ({ variant }) => {
 					<div style={{ marginBottom: 0 }}>
 						<Text
 							buttonText='Mentorlar'
-							title={t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")}
-							highlight="o'rganing!"
+							title={_title || t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")}
+							highlight={_title ? '' : "o'rganing!"}
 							subtitle={
-								<>{t("components.mentorsSection.bizning_platforma_orqali_siz")}{' '}
+								_subtitle || <>{t("components.mentorsSection.bizning_platforma_orqali_siz")}{' '}
 									<br className='hidden sm:block' />{t("components.mentorsSection.mahalliy_va_xorijiy_mutaxassislar")}</>
 							}
 							buttonType={isOnline ? 'button2' : 'button1'}
+							titleClassName={
+								isOnline ? 'mx-auto max-w-[720px] md:!text-[48px] md:!leading-[1.15]' : ''
+							}
 							titleStyle={
 								isOnline ? { color: '#fff' } : undefined
 							}
 							highlightColor={isOnline ? '#fff' : undefined}
-							subtitleStyle={isOnline ? { fontSize: '16px' } : undefined}
+							subtitleStyle={isOnline ? { fontSize: '16px', maxWidth: '560px' } : undefined}
 						/>
 					</div>
 

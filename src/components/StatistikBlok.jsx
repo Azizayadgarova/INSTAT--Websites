@@ -3,29 +3,36 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import bgImage from '@/assets/Union.png'
 import bgMobile from '@/assets/Union (2).png'
+import { useSiteData } from '@/hooks/useSiteData'
+import { pickLang } from '@/utils/siteContent'
 
 const vp = { once: true, amount: 0.2 }
 
+// `key` — site-data (module: micro_data) kaliti; `value` — API bo'sh bo'lsa fallback
 const stats = [
 	{
-		value: '120+',
+		key: 'micro_data_set',
+		value: '500',
 		label: "Statistik ma'lumotlar\nto'plami",
 		circle: { top: 300, left: -42 },
 		labelStyle: { top: 180, left: -55, width: 320 ,  },
 	},
 	{
-		value: '500+',
+		key: 'micro_data_period',
+		value: '25 yil',
 		label: "Ma'lumotlar davri",
 		circle: { top: 95, left: 242 },
 		labelStyle: { top: 172, left: 510, width: 280 },
 	},
 	{
-		value: '25 yil',
+		key: 'micro_data_indicator',
+		value: '120',
 		label: "Statistik ko'rsatkichlar",
 		circle: { top: 300, left: 528 },
 		labelStyle: { top: 400, left: 200, width: 300},
 	},
 	{
+		key: 'micro_data_region',
 		value: '14',
 		label: 'Hududiy qamrov',
 		circle: { top: 95, left: 810 },
@@ -54,8 +61,17 @@ const mobilePositions = [
 
 const StatistikBlok = () => {
     const {
-        t
+        t, i18n
     } = useTranslation();
+    const lang = i18n.resolvedLanguage ?? 'uz'
+
+    // Qiymatlar backend'dan — site-data (module: micro_data). Kalit topilmasa fallback.
+    const { data: kv } = useSiteData(d => d.byModuleKey.micro_data ?? {})
+    const resolvedStats = stats.map(item => {
+        const src = kv?.[item.key]
+        const val = src ? pickLang(src, lang) : ''
+        return { ...item, value: val || item.value }
+    })
 
     return (
         <section style={{ width: '100%' }}>
@@ -117,7 +133,7 @@ const StatistikBlok = () => {
 							height: '550px',
 						}}
 					>
-						{stats.map((item, index) => (
+						{resolvedStats.map((item, index) => (
 							<React.Fragment key={item.label}>
 								{/* Label */}
 								<motion.div
@@ -162,7 +178,7 @@ const StatistikBlok = () => {
 										alignItems: 'center',
 										justifyContent: 'center',
 										color: '#fff',
-										fontSize: item.value === '25 yil' ? '44px' : '54px',
+										fontSize: String(item.value).length > 4 ? '44px' : '54px',
 										fontWeight: 600,
 									}}
 								>
@@ -219,7 +235,7 @@ const StatistikBlok = () => {
 				>{t("components.statistikBlok.statistik_blok")}</motion.h2>
 
 				{/* Circles & labels */}
-				{stats.map((item, index) => {
+				{resolvedStats.map((item, index) => {
 					const pos = mobilePositions[index]
 					return (
 						<React.Fragment key={item.label}>
@@ -242,7 +258,7 @@ const StatistikBlok = () => {
 									alignItems: 'center',
 									justifyContent: 'center',
 									color: '#fff',
-									fontSize: item.value === '25 yil' ? '24px' : '30px',
+									fontSize: String(item.value).length > 4 ? '24px' : '30px',
 									fontWeight: 700,
 									fontFamily: 'var(--font-display)',
 									zIndex: 2,

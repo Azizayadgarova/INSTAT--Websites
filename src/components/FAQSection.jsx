@@ -90,7 +90,8 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 									</>
 								)
 							}
-							titleStyle={platformStyle ? { color: '#fff', fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.02em' } : undefined}
+							titleStyle={platformStyle ? { color: '#fff', letterSpacing: '-0.02em' } : undefined}
+							titleClassName={platformStyle ? '!text-[28px] md:!text-[44px]' : ''}
 							subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
 							highlight=''
 							subtitle={

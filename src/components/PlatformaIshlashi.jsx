@@ -7,6 +7,9 @@ import icon03 from '@/assets/icons/Vector (9).png'
 import { motion } from 'framer-motion'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
+import { siteMicroDataInstructionsApi } from '@/api/siteContent.api'
+import { useSiteInstructions } from '@/hooks/useSiteInstructions'
+import { useSiteText } from '@/hooks/useSiteText'
 
 const vp = { once: true, amount: 0.25 }
 const BG = 'rgba(var(--card-rgb),1)'
@@ -206,7 +209,13 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 	</motion.div>
 )
 
-const PlatformaIshlashi = () => (
+const PlatformaIshlashi = () => {
+	// Bosqichlar matni — /api/site-micro-data-instructions (fallback: steps).
+	// Geometriya (SNAKE/BADGE_POS/ICON_YS) statik `steps` dan — qat'iy 4 slot.
+	const { items } = useSiteInstructions(siteMicroDataInstructionsApi, steps, { descKey: 'description' })
+	const st = useSiteText('micro_data')
+
+	return (
 	<section style={{ width: '100%', background: BG, display: 'flex', flexDirection: 'column', alignItems: 'center', overflowX: 'clip' }}>
 
 		{/* Header */}
@@ -220,7 +229,7 @@ const PlatformaIshlashi = () => (
 			</motion.div>
 
 			<BlurWords
-				text="Platforma qanday ishlaydi"
+				text={st('micro_data_title4', 'Platforma qanday ishlaydi')}
 				delay={0.1}
 				className='text-[32px] md:text-[52px]'
 				style={{ fontFamily: 'var(--font-display)', fontWeight: 600, lineHeight: 1.08, color: '#ffffff', display: 'block' }}
@@ -232,14 +241,13 @@ const PlatformaIshlashi = () => (
 				className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[540px]'
 				style={{ fontFamily: 'var(--font-inter)', fontWeight: 400, lineHeight: 1.65, color: 'rgba(140, 140, 158, 1)', margin: '0 auto' }}
 			>
-				Platformadan foydalanish jarayoni oddiy va qulay bo&apos;lib, foydalanuvchilar bir
-				necha qadam orqali kerakli statistik ma&apos;lumotlarga ega bo&apos;lishlari mumkin.
+				{st('micro_data_description4', "Platformadan foydalanish jarayoni oddiy va qulay bo'lib, foydalanuvchilar bir necha qadam orqali kerakli statistik ma'lumotlarga ega bo'lishlari mumkin.")}
 			</motion.p>
 		</div>
 
 		{/* ── Mobile layout ── */}
 		<div className='md:hidden' style={{ alignSelf: 'stretch', padding: '40px 20px', boxSizing: 'border-box' }}>
-			{steps.map((step, i) => (
+			{items.map((step, i) => (
 				<motion.div
 					key={step.id}
 					initial={{ opacity: 0, y: 24 }}
@@ -364,8 +372,8 @@ const PlatformaIshlashi = () => (
 					</div>
 				))}
 
-				{steps.map((step, index) => (
-					<div key={step.id} style={{ position: 'relative', zIndex: 1, height: ROW_H, marginBottom: index < steps.length - 1 ? GAP_H : 0 }}>
+				{items.map((step, index) => (
+					<div key={step.id} style={{ position: 'relative', zIndex: 1, height: ROW_H, marginBottom: index < items.length - 1 ? GAP_H : 0 }}>
 						{step.badgeRight ? (
 							<div style={{ position: 'absolute', left: '40px', right: '370px', top: 'calc(50% + 170px)', transform: 'translateY(-50%)' }}>
 								<TextCard title={step.title} description={step.description} fromLeft delay={0.05} icon={step.icon} />
@@ -380,6 +388,7 @@ const PlatformaIshlashi = () => (
 			</div>
 		</div>
 	</section>
-)
+	)
+}
 
 export default PlatformaIshlashi

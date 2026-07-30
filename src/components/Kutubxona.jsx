@@ -3,11 +3,13 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
+import { useLibraryInstructions } from '@/hooks/useLibraryInstructions'
+import { useSiteText } from '@/hooks/useSiteText'
 
 const vp = { once: true, amount: 0.1 }
 const DURATION = 4000
 
-const data = [
+const FALLBACK_STEPS = [
 	{
 		id: '01',
 		title: 'Onlayn qidiruv',
@@ -110,11 +112,18 @@ const Kutubxona = () => {
 	const bgRef = useRef(null)
 	const [bgVisible, setBgVisible] = useState(false)
 
+	// "Oflayn kutubxona" bosqichlari — /api/site-library-instructions (fallback: FALLBACK_STEPS)
+	const { items: steps } = useLibraryInstructions(FALLBACK_STEPS)
+	// Boʻlim sarlavhasi — site-data (module: library)
+	const st = useSiteText('library')
+	// steps uzunligi API'dan o'zgarsa `active` chegaradan chiqmasligi uchun klamp
+	const activeIdx = steps.length ? active % steps.length : 0
+
 	useEffect(() => {
-		if (paused) return
-		const t = setTimeout(() => setActive(a => (a + 1) % data.length), DURATION)
+		if (paused || steps.length === 0) return
+		const t = setTimeout(() => setActive(a => (a + 1) % steps.length), DURATION)
 		return () => clearTimeout(t)
-	}, [active, paused])
+	}, [active, paused, steps.length])
 
 	useEffect(() => {
 		const el = bgRef.current?.parentElement
@@ -162,15 +171,15 @@ const Kutubxona = () => {
 			>
 				<Button2 text="Kutubxona" />
 				<BlurWords
-					text="Oflayn kutubxona – to'liq nazorat"
+					text={st('library_title6', "Oflayn kutubxona – to'liq nazorat")}
 					delay={0.08}
 					step={0.06}
 					className='text-[32px] md:text-[48px]'
 					style={{ fontWeight: 600, color: '#fff' }}
 				/>
-				<p className="text-[#CACACE] text-[14px] md:text-[16px] max-w-[327px] md:max-w-none text-center">
+				<p className="text-[#CACACE] text-[14px] md:text-[16px] max-w-[327px] md:max-w-160 mx-auto text-center">
 					<BlurWords
-						text="Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!"
+						text={st('library_description6', "Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!")}
 						delay={0.08}
 						step={0.04}
 					/>
@@ -178,8 +187,8 @@ const Kutubxona = () => {
 			</motion.div>
 
 <div className="z-10 w-full max-w-275 px-6">
-				{data.map((item, i) => {
-					const isActive = i === active
+				{steps.map((item, i) => {
+					const isActive = i === activeIdx
 					return (
 						<motion.div
 							key={item.id}

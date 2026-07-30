@@ -6,6 +6,8 @@ import icon01 from '@/assets/user-3-line.png'
 import icon02 from '@/assets/Vector (11).png'
 import icon03 from '@/assets/send-plane-line.png'
 import icon04 from '@/assets/Vector (12).png'
+import { siteVacancyInstructionsApi } from '@/api/siteContent.api'
+import { useSiteInstructions } from '@/hooks/useSiteInstructions'
 
 const STEPS = [
 	{
@@ -198,6 +200,9 @@ const IshOrinlariJarayon = () => {
         t
     } = useTranslation();
 
+    // Jarayon bosqichlari — /api/site-vacancy-instructions (fallback: STEPS)
+    const { items: steps } = useSiteInstructions(siteVacancyInstructionsApi, STEPS, { descKey: 'desc' })
+
     return (
         <section style={{ width: '100%', background: 'rgba(var(--card-rgb),1)' }}>
             <div className='px-4 md:px-[60px] lg:px-[120px] pt-10 pb-10' style={{
@@ -243,7 +248,7 @@ const IshOrinlariJarayon = () => {
                         alignItems: 'center',
                     }}
                 >
-                    {STEPS.map((step) => (
+                    {steps.map((step) => (
                         <StepCard key={step.id} step={step} />
                     ))}
                 </motion.div>

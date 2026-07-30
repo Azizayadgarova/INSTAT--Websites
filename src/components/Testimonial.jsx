@@ -4,6 +4,7 @@ import starImg from '@/assets/Star.png'
 import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
+import { useFeedbacks } from '@/hooks/useFeedbacks'
 
 const testimonials = [
     { id: 1, name: 'Dilnoza Rahmonova',  user: '@dilnozrakhmonova13', text: "Online va oflayn ta'lim imkoniyatlari juda qulay. Darslarni istalgan vaqtda ko'rib chiqish va materiallarni yuklab olish imkoniyati mavjud. Platforma orqali bilimlarimni sezilarli darajada oshirdim.", img: 'https://i.pravatar.cc/150?u=1', stars: 5 },
@@ -16,13 +17,25 @@ const StarIcon = () => (
     <img src={starImg} width='16' height='16' alt='' aria-hidden='true' style={{ display: 'inline-block' }} loading='lazy' decoding='async' />
 )
 
-const Testimonials = ({ hideBackground = false, hideParticles = false, platformStyle = false }) => {
+const Testimonials = ({ hideBackground = false, hideParticles = false, platformStyle = false, source }) => {
     const row1Ref = useRef(null)
     const row2Ref = useRef(null)
     const sectionRef = useRef(null)
 
-    const row1 = [...testimonials, ...testimonials, ...testimonials]
-    const reversed = [...testimonials].reverse()
+    // source='library' | 'article' | 'micro' -> tegishli feedbacks API; aks holda statik
+    const { items } = useFeedbacks(testimonials, source)
+
+    // 1 ta fikr bo'lsa ham qator to'lib tursin — bazani ekranga yetguncha takrorlaymiz,
+    // so'ng uzluksiz loop uchun 3 nusxaga ko'paytiramiz.
+    const MIN_CARDS = 6
+    const filled = items.length
+        ? Array.from({ length: Math.ceil(MIN_CARDS / items.length) }, () => items).flat()
+        : items
+    const setLen = filled.length
+    const loopDur = Math.max(20, setLen * 6) // px/sek ~ bir xil qolsin
+
+    const row1 = [...filled, ...filled, ...filled]
+    const reversed = [...filled].reverse()
     const row2 = [...reversed, ...reversed, ...reversed]
 
     useEffect(() => {
@@ -56,8 +69,8 @@ const Testimonials = ({ hideBackground = false, hideParticles = false, platformS
             }
         }
 
-        createLoop(row1Ref.current, 25, 'left', testimonials.length)
-        createLoop(row2Ref.current, 25, 'right', reversed.length)
+        createLoop(row1Ref.current, loopDur, 'left', setLen)
+        createLoop(row2Ref.current, loopDur, 'right', setLen)
 
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -76,7 +89,7 @@ const Testimonials = ({ hideBackground = false, hideParticles = false, platformS
             gsap.killTweensOf([row1Ref.current, row2Ref.current])
             observer.disconnect()
         }
-    }, [])
+    }, [setLen, loopDur])
 
     return (
         <>
@@ -94,8 +107,9 @@ const Testimonials = ({ hideBackground = false, hideParticles = false, platformS
                     buttonText={platformStyle ? 'Fikrlar' : 'Talabalar fikri'}
                     buttonType={platformStyle ? 'button2' : 'button1'}
                     title={platformStyle ? 'Foydalanuvchilar fikri' : "Biz bilan o'qigan talabalar"}
-                    titleStyle={platformStyle ? { color: '#fff', fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.02em' } : undefined}
-                    subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
+                    titleStyle={platformStyle ? { color: '#fff', letterSpacing: '-0.02em' } : undefined}
+                    titleClassName={platformStyle ? '!text-[28px] md:!text-[44px]' : ''}
+                    subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)', maxWidth: 700 } : undefined}
                     highlight={platformStyle ? '' : 'nimani deydi?'}
                     subtitle={
                         platformStyle

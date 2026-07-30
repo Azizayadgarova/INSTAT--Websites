@@ -10,10 +10,11 @@ export const useMenu = () => {
 	const { t, i18n } = useTranslation()
 
 	return useMemo(() => {
-		const entries = Object.entries(menuConfig).map(([section, { base, paths }]) => [
+		const entries = Object.entries(menuConfig).map(([section, { base, paths, direct }]) => [
 			section,
 			{
 				base,
+				direct: Boolean(direct) || paths.length === 0,
 				title: t(`menu.${section}.title`),
 				links: paths.map(path => ({ path, name: t(`menu.${section}.${path}`) })),
 			},

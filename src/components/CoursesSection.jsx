@@ -9,6 +9,7 @@ import { Button2 } from './shared/Button2'
 import { coursesApi } from '@/api/resources.api'
 import { pickField } from '@/utils/siteContent'
 import { useApiResource } from '@/hooks/useApiResource'
+import { useSiteText } from '@/hooks/useSiteText'
 import AsyncBoundary from './shared/AsyncBoundary'
 import Skeleton from './shared/Skeleton'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
@@ -29,6 +30,9 @@ const CoursesSkeleton = () => (
 const CoursesSection = () => {
 	const { t, i18n } = useTranslation()
 	const lang = i18n.resolvedLanguage ?? 'uz'
+	const st = useSiteText('education')
+	const _title = st('education_title4')
+	const _subtitle = st('education_description4')
 	const [sectionRef, bgVisible] = useIntersectionObserver(0.05)
 	const navigate = useNavigate()
 
@@ -66,12 +70,12 @@ const CoursesSection = () => {
 				<h2
 					className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px] font-semibold text-white text-center mb-4'
 					style={{ fontFamily: 'var(--font-display)' }}
-				>{t("components.coursesSection.maqsadingizga_mos")}<br />{t("components.coursesSection.onlayn_kursni_tanlang")}</h2>
+				>{_title || <>{t("components.coursesSection.maqsadingizga_mos")}<br />{t("components.coursesSection.onlayn_kursni_tanlang")}</>}</h2>
 
 				<p
 					className='text-[14px] md:text-[16px] leading-[140%] text-center'
 					style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: 'rgba(202,202,206,1)' }}
-				>{t("components.coursesSection.boshlangichdan_professional_darajagacha")}<br />{t("components.coursesSection.bolgan_zamonaviy_onlayn_kurslar")}</p>
+				>{_subtitle || <>{t("components.coursesSection.boshlangichdan_professional_darajagacha")}<br />{t("components.coursesSection.bolgan_zamonaviy_onlayn_kurslar")}</>}</p>
 			</div>
             <AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={!loading && !error && courses.length === 0} skeleton={<CoursesSkeleton />}>
 				<div className='relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 lg:px-24 items-stretch'>

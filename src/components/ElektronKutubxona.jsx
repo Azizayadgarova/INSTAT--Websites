@@ -9,10 +9,24 @@ import BookCard from './ElektronKutubxona/BookCard'
 import { booksApi } from '@/api/resources.api'
 import { pickField, mediaUrl } from '@/utils/siteContent'
 import { useApiResource } from '@/hooks/useApiResource'
+import { useSiteText } from '@/hooks/useSiteText'
 import AsyncBoundary from './shared/AsyncBoundary'
 import Skeleton from './shared/Skeleton'
 
 const vp = { once: true, amount: 0.2 }
+
+// Books API ishlamay turganda ko'rsatiladigan statik zaxira ro'yxat (hozircha).
+// API tuzalgach avtomatik yana backend'dan olinadi.
+const FALLBACK_BOOKS = [
+	{ id: 'fb-1', title: "O'zbekiston tarixi", category: 'Tarix', image: '', rating: 4.8, reviews: 120, izoh: 45 },
+	{ id: 'fb-2', title: "Ona tili grammatikasi", category: 'Til va adabiyot', image: '', rating: 4.6, reviews: 98, izoh: 32 },
+	{ id: 'fb-3', title: "Statistika asoslari", category: 'Iqtisodiyot', image: '', rating: 4.9, reviews: 210, izoh: 76 },
+	{ id: 'fb-4', title: "Zamonaviy matematika", category: 'Aniq fanlar', image: '', rating: 4.7, reviews: 150, izoh: 54 },
+	{ id: 'fb-5', title: "Demografiya va aholi", category: 'Ijtimoiy fanlar', image: '', rating: 4.5, reviews: 88, izoh: 27 },
+	{ id: 'fb-6', title: "Axborot texnologiyalari", category: 'IT', image: '', rating: 4.8, reviews: 175, izoh: 61 },
+	{ id: 'fb-7', title: "Iqtisodiy geografiya", category: 'Geografiya', image: '', rating: 4.4, reviews: 64, izoh: 19 },
+	{ id: 'fb-8', title: "Milliy hisoblar tizimi", category: 'Iqtisodiyot', image: '', rating: 4.9, reviews: 132, izoh: 48 },
+]
 
 /** API'dan kelgan kitobni BookCard kutgan shaklga o'giradi. */
 const mapBook = (book, lang) => ({
@@ -48,12 +62,15 @@ const ElektronKutubxona = () => {
         t, i18n
     } = useTranslation();
     const lang = i18n.resolvedLanguage ?? 'uz'
+    const st = useSiteText('library')
 
-    const { data, loading, error, retry } = useApiResource(
+    const { data, loading, retry } = useApiResource(
 		() => booksApi.getAll({ per_page: 8 }),
 		[],
 	)
-	const books = (data?.items ?? []).map(b => mapBook(b, lang))
+	// API xato bersa yoki bo'sh bo'lsa — statik zaxira (hozircha xatolik ko'rsatilmaydi)
+	const apiBooks = (data?.items ?? []).map(b => mapBook(b, lang))
+	const books = apiBooks.length ? apiBooks : FALLBACK_BOOKS
 
     const navigate = useNavigate()
     const bgRef = useRef(null)
@@ -128,7 +145,7 @@ const ElektronKutubxona = () => {
                 </motion.div>
 
                 <BlurWords
-                    text='Kitoblar katalogi'
+                    text={st('library_title5', 'Kitoblar katalogi')}
                     delay={0.1}
                     step={0.08}
                     className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px]'
@@ -145,24 +162,24 @@ const ElektronKutubxona = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={vp}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
-                    className='text-[14px] max-w-[327px] md:text-[16px] md:max-w-none'
+                    className='text-[14px] max-w-[327px] md:text-[16px] md:max-w-160 mx-auto'
                     style={{
                         fontFamily: 'var(--font-display)',
                         fontWeight: 400,
                         lineHeight: '140%',
                         color: 'rgba(202, 202, 206, 1)',
                         textAlign: 'center',
-                        margin: 0,
+                        margin: '0 auto',
                     }}
-                >{t("components.elektronKutubxona.platformamizdagi_barcha_elektron_kitobla")}</motion.p>
+                >{st('library_description5', t("components.elektronKutubxona.platformamizdagi_barcha_elektron_kitobla"))}</motion.p>
             </div>
             {/* Books grid */}
             <div style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <AsyncBoundary
                     loading={loading}
-                    error={error}
+                    error={null}
                     onRetry={retry}
-                    isEmpty={!loading && !error && books.length === 0}
+                    isEmpty={false}
                     skeleton={<BooksSkeleton />}
                 >
                     <div
