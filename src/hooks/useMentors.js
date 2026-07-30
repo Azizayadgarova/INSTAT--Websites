@@ -51,12 +51,11 @@ export const useMentors = (variant = 'default') => {
 			: // teachers — {items:[{first_name,last_name,avatar}]}
 				(data?.items ?? [])
 					.map(user => ({
-						id: user.id,
-						name: [user.first_name, user.last_name].filter(Boolean).join(' ').trim() || user.username || '',
-						photo: user.avatar || null,
-						// Backendda hozircha yo'q — bo'sh qoldiramiz, MentorCard ularni yashiradi
-						role: '',
-						exp: '',
+						id: user.id ?? `edu-mentor-${i}`,
+						name: pick(user, 'name'),
+						role: pick(user, 'direction'),
+						exp: user.experience ? `${user.experience}+ yil tajriba` : '',
+						photo: mediaUrl(user.image) || null,
 						socials: false,
 					}))
 					.filter(item => item.name)
