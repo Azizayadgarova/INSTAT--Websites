@@ -72,7 +72,7 @@ export const courseGroupsApi = createResourceApi('course-groups')
  */
 export const teachersApi = {
 	getAll: async (params = {}) => {
-		const { data } = await api.get('/site-main-managers', { params })
+		const { data } = await api.get('/site-main-managers/items/all/', { params })
 		return {
 			items: Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : [],
 			meta: data?.meta ?? null,
