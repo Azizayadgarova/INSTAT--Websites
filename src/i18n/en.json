@@ -151,7 +151,17 @@
       "tadqiqotlar_instituti": "Statistical Research",
       "saytlar": "Websites",
       "huquqiy": "Legal",
-      "instat_inc_barcha_huquqlar": "© Instat Inc. All rights reserved."
+      "instat_inc_barcha_huquqlar": "© Instat Inc. All rights reserved.",
+      "onlayn_kurslar": "Online courses",
+      "raqamli_kutubxona": "Digital library",
+      "elektron_jurnal": "E-journal",
+      "mikro_malumotlar": "Microdata",
+      "qollab_quvvatlash": "Support",
+      "faq": "FAQ",
+      "biz_bilan_boglanish": "Contact us",
+      "maxfiylik_siyosati": "Privacy policy",
+      "xizmat_shartlari": "Terms of service",
+      "cookie_siyosati": "Cookie policy"
     },
     "ishOrinlariKategoriyalar": {
       "sahifa": "Page",
@@ -162,7 +172,12 @@
     },
     "navbar2": {
       "shaxsiy_kabinet": "My account",
-      "menu": "Menu"
+      "menu": "Menu",
+      "onlayn_talim": "Online education",
+      "raqamli_kutubxona": "Digital library",
+      "elektron_jurnal": "E-journal",
+      "mikro_malumotlar": "Microdata",
+      "bosh_ish_orinlari": "Job openings"
     },
     "ishOrinlariHero": {
       "eng_dolzarb_ish_orinlari": "The most relevant jobs,",
@@ -285,7 +300,15 @@
       "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts."
     },
     "ishOrinlari": {
-      "ishorinlari": "Vacancies"
+      "ishorinlari": "Vacancies",
+      "sarlavha": "Job openings",
+      "tavsif": "Explore the current vacancies at our institute",
+      "lavozim": "Position",
+      "bolim": "Department",
+      "ish_haqi": "Salary",
+      "ish_tartibi": "Work schedule",
+      "talablar": "Requirements",
+      "bosh_orin_yoq": "There are no open positions right now"
     },
     "rahbariyat": {
       "tel": "Tel:",

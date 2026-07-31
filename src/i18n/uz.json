@@ -151,7 +151,17 @@
 			"tadqiqotlar_instituti": "tadqiqotlar instituti",
 			"saytlar": "Saytlar",
 			"huquqiy": "Huquqiy",
-			"instat_inc_barcha_huquqlar": "© Instat Inc. Barcha huquqlar himoyalangan."
+			"instat_inc_barcha_huquqlar": "© Instat Inc. Barcha huquqlar himoyalangan.",
+			"onlayn_kurslar": "Onlayn kurslar",
+			"raqamli_kutubxona": "Raqamli kutubxona",
+			"elektron_jurnal": "Elektron jurnal",
+			"mikro_malumotlar": "Mikro ma'lumotlar",
+			"qollab_quvvatlash": "Qo'llab quvvatlash",
+			"faq": "FAQ",
+			"biz_bilan_boglanish": "Biz bilan bog'lanish",
+			"maxfiylik_siyosati": "Maxfiylik siyosati",
+			"xizmat_shartlari": "Xizmat shartlari",
+			"cookie_siyosati": "Cookie siyosati"
 		},
 		"ishOrinlariKategoriyalar": {
 			"sahifa": "Sahifa",
@@ -162,7 +172,12 @@
 		},
 		"navbar2": {
 			"shaxsiy_kabinet": "Shaxsiy kabinet",
-			"menu": "Menu"
+			"menu": "Menu",
+			"onlayn_talim": "Onlayn ta'lim",
+			"raqamli_kutubxona": "Raqamli kutubxona",
+			"elektron_jurnal": "Elektron jurnal",
+			"mikro_malumotlar": "Mikro ma'lumotlar",
+			"bosh_ish_orinlari": "Bo'sh ish o'rinlari"
 		},
 		"ishOrinlariHero": {
 			"eng_dolzarb_ish_orinlari": "Eng dolzarb ish o'rinlari",
@@ -285,7 +300,15 @@
 			"mahalliy_va_xorijiy_mutaxassislar": "mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz."
 		},
 		"ishOrinlari": {
-			"ishorinlari": "IshOrinlari"
+			"ishorinlari": "IshOrinlari",
+			"sarlavha": "Bo'sh ish o'rinlari",
+			"tavsif": "Institutimizdagi mavjud vakansiyalar bilan tanishing",
+			"lavozim": "Lavozim",
+			"bolim": "Bo'lim",
+			"ish_haqi": "Ish haqi",
+			"ish_tartibi": "Ish tartibi",
+			"talablar": "Talablar",
+			"bosh_orin_yoq": "Hozircha bo'sh ish o'rinlari mavjud emas"
 		},
 		"rahbariyat": {
 			"tel": "Tel:",

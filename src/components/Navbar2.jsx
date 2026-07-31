@@ -6,12 +6,12 @@ import userIcon from '@/assets/icons/user-line.png'
 import menuIcon from '@/assets/menu-line.png'
 import LanguageSwitcher from "@/components/shared/LanguageSwitcher.jsx";
 
-const NAV_LINKS = [
-	{ label: "Onlayn ta'lim",       path: '/platform/onlayn-talim' },
-	{ label: 'Raqamli kutubxona',   path: '/platform/raqamli-kutubxona' },
-	{ label: 'Elektron jurnal',     path: '/platform/elektron-jurnal' },
-	{ label: "Mikro ma'lumotlar",   path: '/platform/mikro-malumotlar' },
-	{ label: "Bo'sh ish o'rinlari", path: '/platform/bosh-ish-orinlari' },
+const NAV_LINK_PATHS = [
+	{ key: 'onlayn_talim',       path: '/platform/onlayn-talim' },
+	{ key: 'raqamli_kutubxona',  path: '/platform/raqamli-kutubxona' },
+	{ key: 'elektron_jurnal',    path: '/platform/elektron-jurnal' },
+	{ key: 'mikro_malumotlar',   path: '/platform/mikro-malumotlar' },
+	{ key: 'bosh_ish_orinlari',  path: '/platform/bosh-ish-orinlari' },
 ]
 
 function handleLogin()
@@ -26,6 +26,11 @@ const Navbar2 = () => {
 
     const { pathname } = useLocation()
     const [isOpen, setIsOpen] = useState(false)
+
+    const NAV_LINKS = NAV_LINK_PATHS.map(link => ({
+		path: link.path,
+		label: t(`components.navbar2.${link.key}`),
+	}))
 
     const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
     const closeMenu = useCallback(() => setIsOpen(false), [])

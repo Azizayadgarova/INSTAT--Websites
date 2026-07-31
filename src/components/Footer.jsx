@@ -27,26 +27,14 @@ const LINK = {
 }
 
 const LETTERS = 'INSTAT'.split('')
-const saytlar = [
-	{
-		to: "/platform/onlayn-talim",
-		label: "Onlayn kurslar",
-	},
-	{
-		to: "/platform/raqamli-kutubxona",
-		label: "Raqamli kutubxona",
-	},
-	{
-		to: "/platform/elektron-jurnal",
-		label: "Elektron jurnal",
-	},
-	{
-		to: "/platform/mikro-malumotlar",
-		label: "Mikro ma'lumotlar",
-	},
+const SAYTLAR_PATHS = [
+	{ to: '/platform/onlayn-talim',      key: 'onlayn_kurslar' },
+	{ to: '/platform/raqamli-kutubxona', key: 'raqamli_kutubxona' },
+	{ to: '/platform/elektron-jurnal',   key: 'elektron_jurnal' },
+	{ to: '/platform/mikro-malumotlar',  key: 'mikro_malumotlar' },
 ]
-const support = ['FAQ', "Biz bilan bog'lanish"]
-const huquqiy = ['Maxfiylik siyosati', 'Xizmat shartlari', 'Cookie siyosati']
+const SUPPORT_KEYS = ['faq', 'biz_bilan_boglanish']
+const HUQUQIY_KEYS = ['maxfiylik_siyosati', 'xizmat_shartlari', 'cookie_siyosati']
 const SOCIAL = [fotIcon1, fotIcon3, fotIcon2]
 
 const GlowText = memo(() => {
@@ -142,6 +130,10 @@ const Footer = () => {
         t
     } = useTranslation();
 
+    const saytlar = SAYTLAR_PATHS.map(item => ({ to: item.to, label: t(`components.footer.${item.key}`) }))
+    const support = SUPPORT_KEYS.map(key => t(`components.footer.${key}`))
+    const huquqiy = HUQUQIY_KEYS.map(key => t(`components.footer.${key}`))
+
     return (
         <footer className='relative overflow-hidden' style={{ background: 'rgba(var(--bg-rgb),1)' }}>
             <div className='max-w-[1200px] mx-auto px-6'>
@@ -195,7 +187,7 @@ const Footer = () => {
                     </div>
 
                     <div className='flex flex-col items-center md:items-start'>
-                        <h4 className='text-center md:text-left' style={HEADING}>{"Qo'llab quvvatlash"}</h4>
+                        <h4 className='text-center md:text-left' style={HEADING}>{t("components.footer.qollab_quvvatlash")}</h4>
                         <ul
                             className='items-center md:items-start'
                             style={{

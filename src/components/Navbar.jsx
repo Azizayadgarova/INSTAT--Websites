@@ -9,6 +9,7 @@ import LanguageSwitcher from './shared/LanguageSwitcher'
 import facebook from '../assets/icons/facebook.png'
 import instagram from '../assets/icons/instaIcon.png'
 import twitter from '../assets/icons/social3.png'
+import useSectionText from "@/hooks/useSectionText.js";
 
 const Navbar = () => {
 	const contacts = useContacts()
@@ -24,6 +25,7 @@ const Navbar = () => {
 
     const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
     const closeMenu = useCallback(() => setIsOpen(false), [])
+	const st = useSectionText('all')
 
     useEffect(() => {
 		document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -196,11 +198,11 @@ const Navbar = () => {
 						<div className='flex flex-col gap-[18px] md:hidden'>
 							<div>
 								<p className='mb-1 text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.telefon_raqam")}</p>
-								<a href={contacts.phoneHref} className='text-white hover:underline'>{contacts.phone}</a>
+								<a href={st('phone_number', contacts.phoneHref)} className='text-white hover:underline'>{contacts.phone}</a>
 							</div>
 							<div>
 								<p className='mb-1 text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.elektron_pochta")}</p>
-								<a href={contacts.emailHref} className='text-white hover:underline'>{contacts.email}</a>
+								<a href={st('email', contacts.emailHref)} className='text-white hover:underline'>{contacts.email}</a>
 							</div>
 							<div>
 								<p className='mb-1 text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.manzil")}</p>
@@ -225,23 +227,23 @@ const Navbar = () => {
 						<div className='hidden md:grid grid-cols-[auto_auto_minmax(0,1fr)_auto] gap-x-12 items-start'>
 							<div>
 								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.telefon_raqam")}</p>
-								<a href={contacts.phoneHref} className='whitespace-nowrap text-white hover:underline'>{contacts.phone}</a>
+								<a href={st('phone_number', contacts.phoneHref)} className='whitespace-nowrap text-white hover:underline'>{st('phone_number', contacts.phoneHref)}</a>
 							</div>
 							<div>
 								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.elektron_pochta")}</p>
-								<a href={contacts.emailHref} className='whitespace-nowrap text-white hover:underline'>{contacts.email}</a>
+								<a href={st('email', contacts.emailHref)} className='whitespace-nowrap text-white hover:underline'>{contacts.email}</a>
 							</div>
 							<div>
 								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.manzil")}</p>
-								<p className='max-w-[320px] text-white'>{contacts.address.line1}{contacts.address.line2 && <><br />{contacts.address.line2}</>}</p>
+								<p className='max-w-[320px] text-white'>{st('address', "")}</p>
 							</div>
 							<div>
 								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.ijtimoiy_tarmoqlar")}</p>
 								<div className='flex gap-4'>
 									{[
-										{ src: twitter, label: 'X (Twitter)', href: contacts.social.twitter },
-										{ src: facebook, label: 'Facebook', href: contacts.social.facebook },
-										{ src: instagram, label: 'Instagram', href: contacts.social.instagram },
+										{ src: twitter, label: 'X (Twitter)', href: st('twitter', contacts.social.twitter) },
+										{ src: facebook, label: 'Facebook', href:   st('facebook', contacts.social.facebook) },
+										{ src: instagram, label: 'Instagram', href: st('instagram', contacts.social.instagram) },
 									].map(({ src, label, href }) => (
 										<a key={label} href={href} target='_blank' rel='noopener noreferrer' aria-label={label}>
 											<img src={src} alt={label} className='w-6 h-6' loading='lazy' decoding='async' />

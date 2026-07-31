@@ -151,7 +151,17 @@
       "tadqiqotlar_instituti": "и статистических исследований",
       "saytlar": "Сайты",
       "huquqiy": "Правовая информация",
-      "instat_inc_barcha_huquqlar": "© Instat Inc. Все права защищены."
+      "instat_inc_barcha_huquqlar": "© Instat Inc. Все права защищены.",
+      "onlayn_kurslar": "Онлайн-курсы",
+      "raqamli_kutubxona": "Цифровая библиотека",
+      "elektron_jurnal": "Электронный журнал",
+      "mikro_malumotlar": "Микроданные",
+      "qollab_quvvatlash": "Поддержка",
+      "faq": "Часто задаваемые вопросы",
+      "biz_bilan_boglanish": "Связаться с нами",
+      "maxfiylik_siyosati": "Политика конфиденциальности",
+      "xizmat_shartlari": "Условия использования",
+      "cookie_siyosati": "Политика cookie"
     },
     "ishOrinlariKategoriyalar": {
       "sahifa": "Страница",
@@ -162,7 +172,12 @@
     },
     "navbar2": {
       "shaxsiy_kabinet": "Личный кабинет",
-      "menu": "Меню"
+      "menu": "Меню",
+      "onlayn_talim": "Онлайн-обучение",
+      "raqamli_kutubxona": "Цифровая библиотека",
+      "elektron_jurnal": "Электронный журнал",
+      "mikro_malumotlar": "Микроданные",
+      "bosh_ish_orinlari": "Вакансии"
     },
     "ishOrinlariHero": {
       "eng_dolzarb_ish_orinlari": "Самые актуальные вакансии",
@@ -285,7 +300,15 @@
       "mahalliy_va_xorijiy_mutaxassislar": "онлайн, вместе с местными и зарубежными экспертами."
     },
     "ishOrinlari": {
-      "ishorinlari": "Вакансии"
+      "ishorinlari": "Вакансии",
+      "sarlavha": "Вакансии",
+      "tavsif": "Ознакомьтесь с текущими вакансиями нашего института",
+      "lavozim": "Должность",
+      "bolim": "Отдел",
+      "ish_haqi": "Зарплата",
+      "ish_tartibi": "График работы",
+      "talablar": "Требования",
+      "bosh_orin_yoq": "На данный момент вакансий нет"
     },
     "rahbariyat": {
       "tel": "Тел.:",

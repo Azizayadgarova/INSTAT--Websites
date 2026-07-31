@@ -296,10 +296,10 @@ const About = () => {
               </div>
             </motion.div>
 
-            <AboutCard label="Onlayn ta'lim" style={{ left: '75px', top: '85px' }} xFrom={-30} delay={0.65} to='/platform/onlayn-talim' />
-            <AboutCard label="Mikro ma'lumotlar" style={{ left: '75px', top: '415px' }} xFrom={-30} delay={0.79} to='/platform/mikro-malumotlar' />
-            <AboutCard label='Raqamli kutubxona' style={{ right: '75px', top: '85px' }} xFrom={30} delay={0.65} to='/platform/raqamli-kutubxona' />
-            <AboutCard label='Elektron jurnal' style={{ right: '75px', top: '415px' }} xFrom={30} delay={0.79} to='/platform/elektron-jurnal' />
+            <AboutCard label={t('components.navbar2.onlayn_talim')} style={{ left: '75px', top: '85px' }} xFrom={-30} delay={0.65} to='/platform/onlayn-talim' />
+            <AboutCard label={t('components.navbar2.mikro_malumotlar')} style={{ left: '75px', top: '415px' }} xFrom={-30} delay={0.79} to='/platform/mikro-malumotlar' />
+            <AboutCard label={t('components.navbar2.raqamli_kutubxona')} style={{ right: '75px', top: '85px' }} xFrom={30} delay={0.65} to='/platform/raqamli-kutubxona' />
+            <AboutCard label={t('components.navbar2.elektron_jurnal')} style={{ right: '75px', top: '415px' }} xFrom={30} delay={0.79} to='/platform/elektron-jurnal' />
           </div>
 
           <div className="md:hidden relative w-full pt-8 pb-10 px-5 flex flex-col items-center">
@@ -312,8 +312,8 @@ const About = () => {
 
             <div className="flex flex-col gap-3 w-full z-20">
               {[
-                { label: "Onlayn ta'lim", delay: 0.25, to: '/platform/onlayn-talim' },
-                { label: "Mikro ma'lumotlar", delay: 0.35, to: '/platform/mikro-malumotlar' },
+                { label: t('components.navbar2.onlayn_talim'), delay: 0.25, to: '/platform/onlayn-talim' },
+                { label: t('components.navbar2.mikro_malumotlar'), delay: 0.35, to: '/platform/mikro-malumotlar' },
               ].map(({ label, delay, to }) => (
                 <AboutCard key={label} label={label} mobile delay={delay} to={to} />
               ))}
@@ -366,8 +366,8 @@ const About = () => {
 
             <div className="flex flex-col gap-3 w-full z-20">
               {[
-                { label: 'Raqamli kutubxona', delay: 0.5, to: '/platform/raqamli-kutubxona' },
-                { label: 'Elektron jurnal', delay: 0.6, to: '/platform/elektron-jurnal' },
+                { label: t('components.navbar2.raqamli_kutubxona'), delay: 0.5, to: '/platform/raqamli-kutubxona' },
+                { label: t('components.navbar2.elektron_jurnal'), delay: 0.6, to: '/platform/elektron-jurnal' },
               ].map(({ label, delay, to }) => (
                 <AboutCard key={label} label={label} mobile delay={delay} to={to} />
               ))}
