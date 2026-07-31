@@ -29,7 +29,9 @@ const toBook = (book, i, lang) => ({
 	id: book.id,
 	title: pickField(book, 'name', lang),
 	category: pickField(book.category ?? {}, 'name', lang),
-	image: COVER_PLACEHOLDERS[i % COVER_PLACEHOLDERS.length],
+	image: book.book_thumbnails?.length ? import.meta.env.VITE_API_STORAGE_URL + "/" + book.book_thumbnails[0]?.file : COVER_PLACEHOLDERS[i % COVER_PLACEHOLDERS.length],
+    stars_sum: book.stars_sum,
+    comments_count: book.comments_count,
 })
 
 const ElektronKutubxona = () => {

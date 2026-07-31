@@ -16,6 +16,7 @@ import sIconX from '@/assets/Major Brand Logos [1.1].png'
 import sIconFb from '@/assets/Vector (14).png'
 import sIconLn from '@/assets/Vector (15).png'
 import { EASE_SMOOTH } from '../../constants/animations'
+import useSectionText from "@/hooks/useSectionText.js";
 
 const ModernEducation = lazy(() => import('../../components/ModernEducation'))
 const HeroZoom = lazy(() => import('../../components/HeroZoom'))
@@ -103,6 +104,7 @@ const About = () => {
   } = useTranslation();
 
   const outlet = useOutlet()
+    const st = useSectionText('main')
 
   if (outlet) {
     return (
@@ -199,8 +201,8 @@ const About = () => {
         </motion.div>
 
         <div className='text-center mt-[24px] px-4'>
-          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[rgba(var(--text-rgb),1)]'>{t("pages.about.malumotlar_va_tahlil_ilmi")}<br />
-            <span className='text-[rgba(var(--cyan-rgb),1)]'>{t("pages.about.raqamli_talim_platformasi")}</span>
+          <h1 className='font-poppins text-[32px] sm:text-[48px] md:text-[64px] font-semibold pt-[15px] text-[rgba(var(--text-rgb),1)]'>{ st('main_title1', t("pages.about.malumotlar_va_tahlil_ilmi"))}<br />
+            <span className='text-[rgba(var(--cyan-rgb),1)]'>{st('main_title2', t("pages.about.raqamli_talim_platformasi"))}</span>
           </h1>
           <motion.p
             className='text-[rgba(var(--text-rgb),1)] text-[15px] md:text-[18px]'

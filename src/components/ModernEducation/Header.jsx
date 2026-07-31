@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next'
 import AnimatedSection from '../shared/AnimatedSection'
 import ParticleBackground from '../shared/ParticleBackground'
 import Text from '../shared/Text'
+import useSectionText from "@/hooks/useSectionText.js";
 
 export default function ModernEducationHeader({ headerProps = {}, children }) {
 	const { t } = useTranslation()
 
 	const bgRef = useRef(null)
 	const [bgVisible, setBgVisible] = useState(false)
+	const st = useSectionText('main')
 
 	useEffect(() => {
 		const el = bgRef.current?.parentElement
@@ -25,7 +27,7 @@ export default function ModernEducationHeader({ headerProps = {}, children }) {
 	const {
 		buttonText = 'Bizning platformalar',
 		buttonType,
-		title = 'Barcha imkoniyatlar',
+		title =st('main_title3',  'Barcha imkoniyatlar').split(" ").slice(0, -2).join(" "),
 		highlight = 'bir joyda',
 		highlightColor,
 		subtitle = (

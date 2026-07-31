@@ -1,20 +1,21 @@
-import { useTranslation } from 'react-i18next'
-import { useDataText } from '@/hooks/useDataText'
-import { motion } from 'framer-motion'
-const vp = { once: true, amount: 0.2 }
+import {useTranslation} from 'react-i18next'
+import {useDataText} from '@/hooks/useDataText'
+import {motion} from 'framer-motion'
 
-const BookCard = ({ book, index }) => {
-	const dt = useDataText('books')
+const vp = {once: true, amount: 0.2}
+
+const BookCard = ({book, index}) => {
+    const dt = useDataText('books')
     const {
         t
     } = useTranslation();
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{opacity: 0, y: 32}}
+            whileInView={{opacity: 1, y: 0}}
             viewport={vp}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: (index % 4) * 0.08 }}
+            transition={{duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: (index % 4) * 0.08}}
             style={{
                 backgroundColor: 'rgba(var(--card-rgb),1)',
                 borderRadius: '20px',
@@ -25,7 +26,7 @@ const BookCard = ({ book, index }) => {
                 boxShadow: '0px 1px 5px 0px rgba(29, 36, 45, 0.5)',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
             }}
-            whileHover={{ y: -6, boxShadow: '0 20px 48px rgba(0,0,0,0.4)' }}
+            whileHover={{y: -6, boxShadow: '0 20px 48px rgba(0,0,0,0.4)'}}
         >
             {/* Image area */}
             <div style={{
@@ -44,9 +45,24 @@ const BookCard = ({ book, index }) => {
                     alignItems: 'center',
                     gap: '5px',
                 }}>
-                    <div style={{ width: '18px', height: '3px', borderRadius: '2px', backgroundColor: 'rgba(255,255,255,0.15)' }} />
-                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)' }} />
-                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)' }} />
+                    <div style={{
+                        width: '18px',
+                        height: '3px',
+                        borderRadius: '2px',
+                        backgroundColor: 'rgba(255,255,255,0.15)'
+                    }}/>
+                    <div style={{
+                        width: '5px',
+                        height: '5px',
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(255,255,255,0.15)'
+                    }}/>
+                    <div style={{
+                        width: '5px',
+                        height: '5px',
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(255,255,255,0.15)'
+                    }}/>
                 </div>
 
                 {/* Book cover */}
@@ -68,36 +84,49 @@ const BookCard = ({ book, index }) => {
                 />
             </div>
             {/* Info */}
-            <div style={{ padding: '10px 14px 16px' }}>
+            <div style={{padding: '10px 14px 16px'}}>
                 {/* Reyting/izoh soni API'da yo'q — bo'lsa ko'rsatiladi, bo'lmasa qator chizilmaydi */}
-                {(book.rating != null || book.izoh != null) && (
+                {(book.stars_sum) ? (
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         marginBottom: '6px',
                     }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                            {book.rating != null && (
+                        <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                            {book.stars_sum && (
                                 <>
-                                    <span style={{ fontSize: '13px' }}>⭐</span>
-                                    <span style={{ color: '#fff', fontSize: '13px', fontWeight: 500, fontFamily: 'var(--font-inter)' }}>
-                                        {book.rating}
+                                    <span style={{fontSize: '13px'}}>⭐</span>
+                                    <span style={{
+                                        color: '#fff',
+                                        fontSize: '13px',
+                                        fontWeight: 500,
+                                        fontFamily: 'var(--font-inter)'
+                                    }}>
+                                        {(book.stars_sum / book.comments_count).toFixed(1)}
                                     </span>
                                 </>
                             )}
-                            {book.reviews != null && (
-                                <span style={{ color: 'rgba(144,157,162,1)', fontSize: '12px', fontFamily: 'var(--font-inter)' }}>
-                                    ({book.reviews})
+                            {book.comments_count && (
+                                <span style={{
+                                    color: 'rgba(144,157,162,1)',
+                                    fontSize: '12px',
+                                    fontFamily: 'var(--font-inter)'
+                                }}>
+                                    ({book.comments_count})
                                 </span>
                             )}
                         </div>
-                        {book.izoh != null && (
-                            <span style={{ color: 'rgba(144,157,162,1)', fontSize: '12px', fontFamily: 'var(--font-inter)' }}>
+                        {book.comments_count && (
+                            <span style={{
+                                color: 'rgba(144,157,162,1)',
+                                fontSize: '12px',
+                                fontFamily: 'var(--font-inter)'
+                            }}>
                                 {book.izoh}{t("components.bookCard.ta_izoh")}</span>
                         )}
                     </div>
-                )}
+                ): ''}
 
                 <h3 style={{
                     fontFamily: 'var(--font-display)',
