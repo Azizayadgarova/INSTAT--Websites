@@ -115,6 +115,15 @@
 			"platformamizdagi_barcha_elektron_kitobla": "Platformamizdagi barcha elektron kitoblarni bir joyda kashf eting. Janr, reyting va narx bo'yicha saralab, o'zingizga mos asarni oson tanlang.",
 			"barchasini_korish": "Barchasini ko'rish"
 		},
+		"kutubxonaKatalogi": {
+			"badge": "Kitoblar katalogi",
+			"sarlavha": "Barcha kitoblar",
+			"tavsif": "Platformamizdagi barcha elektron kitoblarni bir joyda ko'ring. Nomi yoki kategoriyasi bo'yicha qidirib, o'zingizga mos kitobni toping.",
+			"qidirish_placeholder": "Kitob nomi bo'yicha qidirish...",
+			"barcha_kategoriyalar": "Barcha kategoriyalar",
+			"topilmadi": "Bu tanlov bo'yicha kitob topilmadi",
+			"sahifa": "Sahifa"
+		},
 		"bookCard": {
 			"ta_izoh": "ta izoh"
 		},

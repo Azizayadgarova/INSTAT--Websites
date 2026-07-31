@@ -10,29 +10,11 @@ import { books } from '../data/books.data'
 import { booksApi } from '@/api/resources.api'
 import { useApiResource } from '@/hooks/useApiResource'
 import { useSectionText } from '@/hooks/useSectionText'
-import { pickField } from '@/utils/siteContent'
+import { toBook } from '@/utils/bookMapper'
 
 const vp = { once: true, amount: 0.2 }
 
 const BOOKS_LIMIT = 8
-
-// /books/ muqova rasmini bermaydi — statik kitoblardagi rasmlar navbat bilan
-// o'rin egallaydi (MikroMalumotlar'dagi PLACEHOLDER_IMAGES bilan bir xil yondashuv).
-const COVER_PLACEHOLDERS = books.map(b => b.image)
-
-/**
- * Book (backend: /books/) -> BookCard shakli.
- * Reyting, sharh va izoh soni endpointda yo'q, shuning uchun `undefined` qoladi
- * — BookCard bunday maydonlarni umuman chizmaydi (soxta raqam ko'rsatilmasin).
- */
-const toBook = (book, i, lang) => ({
-	id: book.id,
-	title: pickField(book, 'name', lang),
-	category: pickField(book.category ?? {}, 'name', lang),
-	image: book.book_thumbnails?.length ? import.meta.env.VITE_API_STORAGE_URL + "/" + book.book_thumbnails[0]?.file : COVER_PLACEHOLDERS[i % COVER_PLACEHOLDERS.length],
-    stars_sum: book.stars_sum,
-    comments_count: book.comments_count,
-})
 
 const ElektronKutubxona = () => {
     const {
@@ -210,7 +192,7 @@ const ElektronKutubxona = () => {
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
                 }}
-                onClick={() => navigate('/platform/raqamli-kutubxona')}
+                onClick={() => navigate('/platform/kutubxona-katalogi')}
                 >{t("components.elektronKutubxona.barchasini_korish")}</button>
             </motion.div>
         </section>

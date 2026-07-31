@@ -46,6 +46,7 @@ export const allRoutes = [
 	]),
 	'/platform/onlayn-talim',
 	'/platform/raqamli-kutubxona',
+	'/platform/kutubxona-katalogi',
 	'/platform/elektron-jurnal',
 	'/platform/mikro-malumotlar',
 	'/platform/bosh-ish-orinlari',

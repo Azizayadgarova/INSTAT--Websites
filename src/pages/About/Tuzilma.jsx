@@ -6,6 +6,7 @@ import sIcon1 from '@/assets/icons/Major Brand Logos [1.1] (2).png'
 import sIcon2 from '@/assets/icons/Major Brand Logos [1.1] (3).png'
 import sIcon3 from '@/assets/icons/Major Brand Logos [1.1] (4).png'
 import sIcon4 from '@/assets/icons/Vector (16).png'
+import useSectionText from "@/hooks/useSectionText.js";
 
 const CARD = {
 	background: 'rgba(31, 37, 51, 1)',
@@ -181,6 +182,7 @@ const Tuzilma = () => {
 
     const contacts = useContacts()
     const structureImg = useSiteData(d => pickPath(d.byModuleKey.structure?.structure)).data
+    const st = useSectionText('all')
 
     return (
         <div
@@ -240,8 +242,8 @@ const Tuzilma = () => {
                                     <PhoneIcon />
                                 </IconSquare>
                                 <p style={{ ...LABEL, marginTop: '8px' }}>{t("pages.tuzilma.telefon")}</p>
-                                <a href={contacts.phoneHref} style={LINK}>
-                                    {contacts.phone}
+                                <a href={st('phone_number', contacts.phoneHref)} style={LINK}>
+                                    {st('phone_number', contacts.phone)}
                                 </a>
                             </div>
 
@@ -253,8 +255,8 @@ const Tuzilma = () => {
                                     <EmailIcon />
                                 </IconSquare>
                                 <p style={{ ...LABEL, marginTop: '8px' }}>{t("pages.tuzilma.e_mail")}</p>
-                                <a href={contacts.emailHref} style={LINK}>
-                                    {contacts.email}
+                                <a href={st('email', contacts.emailHref)} style={LINK}>
+                                    {st('email', contacts.email)}
                                 </a>
                             </div>
 
@@ -280,10 +282,10 @@ const Tuzilma = () => {
                         <p style={SOCIAL_LABEL}>{t("pages.tuzilma.ijtimoiy_tarmoqlar")}</p>
                         <div style={{ display: 'flex', gap: '29px', marginTop: '12px' }}>
                             {[
-                                { src: sIcon1, href: contacts.social.instagram, alt: 'Instagram', size: 40 },
-                                { src: sIcon2, href: contacts.social.twitter, alt: 'X', size: 40 },
-                                { src: sIcon3, href: contacts.social.facebook, alt: 'Facebook', size: 40 },
-                                { src: sIcon4, href: contacts.social.linkedin, alt: 'LinkedIn', size: 32, mt: 4 },
+                                { src: sIcon1, href: st('instagram',  contacts.social.instagram), alt: 'Instagram', size: 40 },
+                                { src: sIcon2, href: st('twitter',  contacts.social.twitter), alt: 'X', size: 40 },
+                                { src: sIcon3, href: st('facebook',  contacts.social.facebook), alt: 'Facebook', size: 40 },
+                                { src: sIcon4, href: st('linkedin',  contacts.social.linkedin), alt: 'LinkedIn', size: 32, mt: 4 },
                             ].map(({ src, href, alt, size, mt = 0 }) => (
                                 <a key={alt} href={href} target='_blank' rel='noopener noreferrer'
                                     style={{
@@ -346,7 +348,7 @@ const Tuzilma = () => {
                     >
                         <iframe
                             title={t("pages.tuzilma.instat_manzili")}
-                            src='https://www.google.com/maps?q=Toshkent+shahri+Shayxontohur+tumani+Navoiy+ko%27chasi+30-uy&output=embed'
+                            src={st('address_link', "")}
                             width='100%'
                             height='100%'
                             style={{ border: 0, display: 'block', borderRadius: '8px' }}
@@ -354,7 +356,6 @@ const Tuzilma = () => {
                             referrerPolicy='no-referrer-when-downgrade'
                         />
                     </div>
-
                     <div
                         style={{
                             display: 'flex',
@@ -394,7 +395,7 @@ const Tuzilma = () => {
                                 color: 'rgba(242, 243, 244, 1)',
                                 margin: 0,
                             }}
-                        >{t("pages.tuzilma.toshkent_shahri_shayxontohur_tumani")}</p>
+                        >{st('address', "")}</p>
                     </div>
 
                     {/* Transport yo'nalishlari */}
