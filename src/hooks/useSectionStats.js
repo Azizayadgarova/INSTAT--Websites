@@ -21,7 +21,7 @@ export const useSectionStats = (module, fallback = []) => {
 		const src = data?.[item.key]
 		if (!src) return item
 		const value = pickLang(src, lang).replace(/\s+/g, ' ').trim()
-		const label = (src.label ?? '').toString().trim()
+		const label = (src[`label_${lang}`] ?? src.label ?? '').toString().trim()
 		return { ...item, value: value || item.value, label: label || item.label }
 	})
 }
