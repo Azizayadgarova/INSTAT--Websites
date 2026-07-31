@@ -3,15 +3,7 @@ import ContentPage from '@/components/shared/ContentPage'
 
 const Page = () => {
 	const { t } = useTranslation()
-	return (
-		<div style={{ paddingTop: '59px' }}>
-			<ContentPage
-				module='hotel'
-				contentKey='hotel'
-				badge={t('menu.about.title')}
-			/>
-		</div>
-	)
+	return <ContentPage module='hotel' contentKey='hotel_text' title={t('menu.about.yotoqhona')} />
 }
 
 export default Page

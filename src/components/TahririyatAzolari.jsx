@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next'
 import bgOnline from '@/assets/bgImg/Background (1).png'
 import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
-import { CONFIGS, mod } from './MentorsSection/mentors.data'
-import { useArticleEditors } from '@/hooks/useArticleEditors'
-import { useSiteText } from '@/hooks/useSiteText'
+import { BASE_H, BASE_W, CONFIGS, mod, toMentor } from './MentorsSection/mentors.data'
+import { siteArticleEditorsApi } from '@/api/siteContent.api'
+import { useSiteList } from '@/hooks/useSiteList'
 
 const PX = '?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop'
 
@@ -58,9 +58,13 @@ export default function TahririyatAzolari() {
         t
     } = useTranslation();
 
-    // Tahririyat a'zolari — /api/site-article-editors (fallback: FALLBACK_MEMBERS)
-    const { items: members } = useArticleEditors(FALLBACK_MEMBERS)
-    const st = useSiteText('article')
+    // site-article-editors bo'sh bo'lsa FALLBACK_MEMBERS ko'rsatiladi
+    const { items: members } = useSiteList(
+        'site-article-editors',
+        siteArticleEditorsApi,
+        toMentor,
+        FALLBACK_MEMBERS,
+    )
 
     const [current, setCurrent]     = useState(0)
     const [bgVisible, setBgVisible] = useState(false)
@@ -155,14 +159,14 @@ export default function TahririyatAzolari() {
 						fontFamily: 'var(--font-display)',
 						fontWeight: 600, lineHeight: 1.1,
 						color: '#fff', margin: '0 0 16px', letterSpacing: '-0.02em',
-					}}>{st('article_title5', t("components.tahririyatAzolari.tahririyat_azolari"))}</h2>
+					}}>{t("components.tahririyatAzolari.tahririyat_azolari")}</h2>
 
 					<p className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[520px] px-4 md:px-0' style={{
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400, lineHeight: 1.65,
 						color: 'rgba(202,202,206,1)',
 						margin: '0 0 0',
-					}}>{st('article_description5', t("components.tahririyatAzolari.platformada_chop_etilayotgan_yetakchi"))}</p>
+					}}>{t("components.tahririyatAzolari.platformada_chop_etilayotgan_yetakchi")}</p>
 				</div>
 
 				{/* Carousel */}

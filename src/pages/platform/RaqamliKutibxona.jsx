@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useSiteData } from '@/hooks/useSiteData'
-import { pickLang } from '@/utils/siteContent'
+import { useSectionText } from '@/hooks/useSectionText'
 import bgImage from '@/assets/bgImg/Ai-boom 2.webp'
 import img1 from '@/assets/image1.webp'
 import img2 from '@/assets/image2.webp'
@@ -128,15 +127,10 @@ const ROW2 = [
 
 const RaqamliKutibxona = () => {
     const {
-        t, i18n
+        t
     } = useTranslation();
-    const lang = i18n.resolvedLanguage ?? 'uz'
 
-    // Hero matni backend'dan — site-data (module: library). Kalit topilmasa i18n fallback.
-    const { data: libKv } = useSiteData(d => d.byModuleKey.library ?? {})
-    const heroTitle = pickLang(libKv?.library_title1, lang) || t("pages.raqamliKutibxona.minglab_elektron_kitoblar")
-    const heroHighlight = pickLang(libKv?.library_title2, lang) || '-bir platformada'
-    const heroSubtitleApi = pickLang(libKv?.library_description1, lang)
+    const st = useSectionText('library')
 
     const [mounted, setMounted] = useState(false)
     const [hoveredIndex, setHovered] = useState(null)
@@ -342,12 +336,11 @@ const RaqamliKutibxona = () => {
 				>
 					<Text
 						buttonText='Platforma haqida'
-						title={heroTitle}
-						highlight={heroHighlight}
-						subtitle={
-							heroSubtitleApi || <>{t("pages.raqamliKutibxona.onlayn_kitoblarni_sotib_oling")}<br />{t("pages.raqamliKutibxona.istalgan_qurilmada_oqing")}</>
-						}
-						subtitleStyle={{ maxWidth: 680 }}
+						title={st('library_title1', t("pages.raqamliKutibxona.minglab_elektron_kitoblar"))}
+						highlight={st('library_title2', '-bir platformada')}
+						subtitle={st('library_description1',
+							<>{t("pages.raqamliKutibxona.onlayn_kitoblarni_sotib_oling")}<br />{t("pages.raqamliKutibxona.istalgan_qurilmada_oqing")}</>
+						)}
 						buttonType='button2'
 					/>
 				</div>
@@ -595,7 +588,7 @@ const RaqamliKutibxona = () => {
             <ElektronKutubxona />
             <Kutubxona />
             <FAQSection hideParticles platformStyle module='library' />
-            <Testimonials hideParticles platformStyle source='library' />
+            <Testimonials hideParticles platformStyle />
         </>
     );
 }

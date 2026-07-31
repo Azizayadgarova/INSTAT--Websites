@@ -5,11 +5,12 @@ import icon04 from '@/assets/icons/Vector (10).png'
 import icon01 from '@/assets/icons/Vector (8).png'
 import icon03 from '@/assets/icons/Vector (9).png'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
 import { siteMicroDataInstructionsApi } from '@/api/siteContent.api'
-import { useSiteInstructions } from '@/hooks/useSiteInstructions'
-import { useSiteText } from '@/hooks/useSiteText'
+import { useSiteList } from '@/hooks/useSiteList'
+import { toFeature } from '@/utils/siteContent'
 
 const vp = { once: true, amount: 0.25 }
 const BG = 'rgba(var(--card-rgb),1)'
@@ -210,10 +211,23 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 )
 
 const PlatformaIshlashi = () => {
-	// Bosqichlar matni — /api/site-micro-data-instructions (fallback: steps).
-	// Geometriya (SNAKE/BADGE_POS/ICON_YS) statik `steps` dan — qat'iy 4 slot.
-	const { items } = useSiteInstructions(siteMicroDataInstructionsApi, steps, { descKey: 'description' })
-	const st = useSiteText('micro_data')
+	// "Ilon" yo'lakcha (SNAKE) va badge koordinatalari 4 ta bosqichga qarab
+	// modul darajasida hisoblanadi — shuning uchun bosqichlar soni o'zgarmaydi,
+	// API faqat sarlavha va tavsifni almashtiradi.
+	const { items: apiSteps } = useSiteList(
+		'site-micro-data-instructions',
+		siteMicroDataInstructionsApi,
+		toFeature,
+		[],
+	)
+	const resolvedSteps = useMemo(
+		() =>
+			steps.map((step, i) => {
+				const f = apiSteps[i]
+				return f ? { ...step, title: f.title, description: f.description } : step
+			}),
+		[apiSteps],
+	)
 
 	return (
 	<section style={{ width: '100%', background: BG, display: 'flex', flexDirection: 'column', alignItems: 'center', overflowX: 'clip' }}>
@@ -229,7 +243,7 @@ const PlatformaIshlashi = () => {
 			</motion.div>
 
 			<BlurWords
-				text={st('micro_data_title4', 'Platforma qanday ishlaydi')}
+				text="Platforma qanday ishlaydi"
 				delay={0.1}
 				className='text-[32px] md:text-[52px]'
 				style={{ fontFamily: 'var(--font-display)', fontWeight: 600, lineHeight: 1.08, color: '#ffffff', display: 'block' }}
@@ -241,13 +255,14 @@ const PlatformaIshlashi = () => {
 				className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[540px]'
 				style={{ fontFamily: 'var(--font-inter)', fontWeight: 400, lineHeight: 1.65, color: 'rgba(140, 140, 158, 1)', margin: '0 auto' }}
 			>
-				{st('micro_data_description4', "Platformadan foydalanish jarayoni oddiy va qulay bo'lib, foydalanuvchilar bir necha qadam orqali kerakli statistik ma'lumotlarga ega bo'lishlari mumkin.")}
+				Platformadan foydalanish jarayoni oddiy va qulay bo&apos;lib, foydalanuvchilar bir
+				necha qadam orqali kerakli statistik ma&apos;lumotlarga ega bo&apos;lishlari mumkin.
 			</motion.p>
 		</div>
 
 		{/* ── Mobile layout ── */}
 		<div className='md:hidden' style={{ alignSelf: 'stretch', padding: '40px 20px', boxSizing: 'border-box' }}>
-			{items.map((step, i) => (
+			{resolvedSteps.map((step, i) => (
 				<motion.div
 					key={step.id}
 					initial={{ opacity: 0, y: 24 }}
@@ -372,8 +387,8 @@ const PlatformaIshlashi = () => {
 					</div>
 				))}
 
-				{items.map((step, index) => (
-					<div key={step.id} style={{ position: 'relative', zIndex: 1, height: ROW_H, marginBottom: index < items.length - 1 ? GAP_H : 0 }}>
+				{resolvedSteps.map((step, index) => (
+					<div key={step.id} style={{ position: 'relative', zIndex: 1, height: ROW_H, marginBottom: index < resolvedSteps.length - 1 ? GAP_H : 0 }}>
 						{step.badgeRight ? (
 							<div style={{ position: 'absolute', left: '40px', right: '370px', top: 'calc(50% + 170px)', transform: 'translateY(-50%)' }}>
 								<TextCard title={step.title} description={step.description} fromLeft delay={0.05} icon={step.icon} />

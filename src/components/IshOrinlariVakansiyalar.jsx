@@ -45,7 +45,7 @@ function JobCard({ job }) {
 					margin: 0,
 				}}
 			>
-				{job.position}
+				{job.title}
 			</h3>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
 				<LocationIcon />
@@ -58,7 +58,7 @@ function JobCard({ job }) {
 						color: 'rgba(90,98,117,1)',
 					}}
 				>
-					{job.direction}
+					{job.place}
 				</span>
 			</div>
             <p
@@ -72,7 +72,7 @@ function JobCard({ job }) {
 					flex: 1,
 				}}
 			>
-				{job.requirements}
+				{job.desc}
 			</p>
             <div
 				style={{
@@ -92,17 +92,21 @@ function JobCard({ job }) {
 						color: 'rgba(225,227,230,1)',
 					}}
 				>
-					{job.salary}
+					{job.pay}
 				</span>
-				<span
-					className='text-[13px] md:text-[16px]'
-					style={{
-						fontFamily: 'var(--font-display)',
-						fontWeight: 400,
-						lineHeight: '24px',
-						color: 'rgba(255,255,255,1)',
-					}}
-				>{t("components.ishOrinlariVakansiyalar.oy")}</span>
+				{/* "/oy" faqat raqamli ish haqi bilan mantiqiy — API matnli qiymat
+				    ham qaytaradi ("Ish haqi shtat jadvali bo'yicha") */}
+				{job.payIsAmount && (
+					<span
+						className='text-[13px] md:text-[16px]'
+						style={{
+							fontFamily: 'var(--font-display)',
+							fontWeight: 400,
+							lineHeight: '24px',
+							color: 'rgba(255,255,255,1)',
+						}}
+					>{t("components.ishOrinlariVakansiyalar.oy")}</span>
+				)}
 			</div>
             <button
 				style={{
@@ -135,8 +139,7 @@ const IshOrinlariVakansiyalar = () => {
         t
     } = useTranslation();
 
-    // Vakansiyalar — /api/site-vacancies/items/all/ (fallback: JOBS -> useVacancies ichida)
-    const { items: jobs } = useVacancies()
+    const { items } = useVacancies()
 
     return (
         <section
@@ -206,7 +209,7 @@ const IshOrinlariVakansiyalar = () => {
 					marginBottom: '48px',
 				}}
 			>
-				{jobs.map(job => (
+				{items.map(job => (
 					<JobCard key={job.id} job={job} />
 				))}
 			</div>

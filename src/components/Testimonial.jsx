@@ -1,10 +1,25 @@
 import gsap from 'gsap'
-import { memo, useEffect, useRef } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import starImg from '@/assets/Star.png'
 import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
-import { useFeedbacks } from '@/hooks/useFeedbacks'
+import { siteLibraryFeedbacksApi } from '@/api/siteContent.api'
+import { useSiteList } from '@/hooks/useSiteList'
+import { toFeedback } from '@/utils/siteContent'
+
+/** FEEDBACK yozuvini shu bo'limdagi Card kutadigan ko'rinishga o'tkazadi. */
+const toCard = item => {
+    const f = toFeedback(item)
+    return {
+        id: f.id,
+        name: f.name,
+        user: f.userName ? `@${f.userName.replace(/^@/, '')}` : '',
+        text: f.comment,
+        img: f.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(f.name)}&background=272B37&color=fff&size=150&bold=true`,
+        stars: f.stars,
+    }
+}
 
 const testimonials = [
     { id: 1, name: 'Dilnoza Rahmonova',  user: '@dilnozrakhmonova13', text: "Online va oflayn ta'lim imkoniyatlari juda qulay. Darslarni istalgan vaqtda ko'rib chiqish va materiallarni yuklab olish imkoniyati mavjud. Platforma orqali bilimlarimni sezilarli darajada oshirdim.", img: 'https://i.pravatar.cc/150?u=1', stars: 5 },
@@ -13,37 +28,66 @@ const testimonials = [
     { id: 4, name: 'Nodira Yusupova',    user: '@nodira_yusupova',      text: "Statistika agentligining bu platformasi juda qulay va zamonaviy. Elektron jurnallar, ilmiy maqolalar va o'quv materiallari bir joyda jamlangani ish samaradorligimni oshirdi.", img: 'https://i.pravatar.cc/150?u=44', stars: 5 },
 ]
 
+const CARD_GAP = 24
+
+/** Karta kengligi CSS'dagi `clamp(280px, 75vw, 486px)` bilan bir xil hisoblanadi. */
+const cardWidth = () => {
+    const vw = typeof window === 'undefined' ? 1440 : window.innerWidth
+    return Math.min(486, Math.max(280, vw * 0.75)) + CARD_GAP
+}
+
+/**
+ * Qator ekranni har doim to'liq qoplashi uchun kerakli nusxalar soni.
+ * Lenta bir "to'plam" kenglikka siljiydi, shuning uchun qolgan (n-1) to'plam
+ * ekran kengligidan kam bo'lmasligi kerak — aks holda o'ngda bo'sh joy qoladi.
+ */
+const copiesNeeded = count => {
+    if (!count) return 3
+    const vw = typeof window === 'undefined' ? 1440 : window.innerWidth
+    return Math.max(3, Math.ceil(vw / (count * cardWidth())) + 1)
+}
+
 const StarIcon = () => (
     <img src={starImg} width='16' height='16' alt='' aria-hidden='true' style={{ display: 'inline-block' }} loading='lazy' decoding='async' />
 )
 
-const Testimonials = ({ hideBackground = false, hideParticles = false, platformStyle = false, source }) => {
+const Testimonials = ({
+    hideBackground = false,
+    hideParticles = false,
+    platformStyle = false,
+    feedbackKey = 'site-library-feedbacks',
+    feedbackApi = siteLibraryFeedbacksApi,
+}) => {
     const row1Ref = useRef(null)
     const row2Ref = useRef(null)
     const sectionRef = useRef(null)
 
-    // source='library' | 'article' | 'micro' -> tegishli feedbacks API; aks holda statik
-    const { items } = useFeedbacks(testimonials, source)
+    // API bo'sh bo'lsa statik `testimonials` ko'rsatiladi
+    const { items } = useSiteList(feedbackKey, feedbackApi, toCard, testimonials)
 
-    // 1 ta fikr bo'lsa ham qator to'lib tursin — bazani ekranga yetguncha takrorlaymiz,
-    // so'ng uzluksiz loop uchun 3 nusxaga ko'paytiramiz.
-    const MIN_CARDS = 6
-    const filled = items.length
-        ? Array.from({ length: Math.ceil(MIN_CARDS / items.length) }, () => items).flat()
-        : items
-    const setLen = filled.length
-    const loopDur = Math.max(20, setLen * 6) // px/sek ~ bir xil qolsin
-
-    const row1 = [...filled, ...filled, ...filled]
-    const reversed = [...filled].reverse()
-    const row2 = [...reversed, ...reversed, ...reversed]
+    // Kam fikr kelganda ham lenta bo'sh qolmasligi uchun nusxalar soni ekranga moslanadi
+    const [copies, setCopies] = useState(() => copiesNeeded(items.length))
 
     useEffect(() => {
-        const createLoop = (el, speed, direction, setLen) => {
+        const update = () => setCopies(copiesNeeded(items.length))
+        update()
+        window.addEventListener('resize', update)
+        return () => window.removeEventListener('resize', update)
+    }, [items.length])
+
+    const repeat = arr => Array.from({ length: copies }, () => arr).flat()
+    const row1 = repeat(items)
+    const row2 = repeat([...items].reverse())
+
+    useEffect(() => {
+        const createLoop = (el, pxPerSecond, direction, setLen) => {
             if (!el) return
             const itemWidth = el.children[setLen]
                 ? el.children[setLen].offsetLeft
-                : el.scrollWidth / 3
+                : el.scrollWidth / copies
+            if (!itemWidth) return
+            // Tezlik fikrlar sonidan qat'i nazar bir xil bo'lishi uchun masofadan hisoblanadi
+            const speed = itemWidth / pxPerSecond
 
             if (direction === 'left') {
                 gsap.to(el, {
@@ -69,8 +113,8 @@ const Testimonials = ({ hideBackground = false, hideParticles = false, platformS
             }
         }
 
-        createLoop(row1Ref.current, loopDur, 'left', setLen)
-        createLoop(row2Ref.current, loopDur, 'right', setLen)
+        createLoop(row1Ref.current, 80, 'left', items.length)
+        createLoop(row2Ref.current, 80, 'right', items.length)
 
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -89,7 +133,8 @@ const Testimonials = ({ hideBackground = false, hideParticles = false, platformS
             gsap.killTweensOf([row1Ref.current, row2Ref.current])
             observer.disconnect()
         }
-    }, [setLen, loopDur])
+        // `items` API'dan kelgach yoki nusxalar soni o'zgarganda karusel qayta qurilishi shart
+    }, [items, copies])
 
     return (
         <>
@@ -107,9 +152,8 @@ const Testimonials = ({ hideBackground = false, hideParticles = false, platformS
                     buttonText={platformStyle ? 'Fikrlar' : 'Talabalar fikri'}
                     buttonType={platformStyle ? 'button2' : 'button1'}
                     title={platformStyle ? 'Foydalanuvchilar fikri' : "Biz bilan o'qigan talabalar"}
-                    titleStyle={platformStyle ? { color: '#fff', letterSpacing: '-0.02em' } : undefined}
-                    titleClassName={platformStyle ? '!text-[28px] md:!text-[44px]' : ''}
-                    subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)', maxWidth: 700 } : undefined}
+                    titleStyle={platformStyle ? { color: '#fff', fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.02em' } : undefined}
+                    subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
                     highlight={platformStyle ? '' : 'nimani deydi?'}
                     subtitle={
                         platformStyle

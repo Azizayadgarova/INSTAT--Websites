@@ -1,11 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
-import { useSiteText } from '@/hooks/useSiteText'
 
 const STATS = [
-	{ key: 'article_numbers', raw: 12000, display: '12 000', label: 'Maqolalar' },
-	{ key: 'article_editions', raw: 150, display: '150', label: 'Jurnal' },
-	{ key: 'article_authors', raw: 4000, display: '4 000', label: 'Mualliflar' },
+	{ raw: 12000, display: '12 000', label: 'Maqolalar' },
+	{ raw: 150, display: '150', label: 'Jurnal' },
+	{ raw: 4000, display: '4 000', label: 'Mualliflar' },
 ]
 
 function formatNum(n, hasSpace) {
@@ -153,16 +152,6 @@ export default function JurnalStatistika() {
     const [animate, setAnimate] = useState(false)
     const sectionRef = useRef(null)
 
-    // Raqamlar backend'dan — site-data (module: article). Qiymatdan raqam ajratiladi.
-    const st = useSiteText('article')
-    const resolvedStats = STATS.map(s => {
-        const v = st(s.key, '')
-        if (!v) return s
-        const raw = parseInt(v.replace(/[^\d]/g, ''), 10) || s.raw
-        const display = v.replace(/\s*\+\s*$/, '').trim() || s.display
-        return { ...s, raw, display }
-    })
-
     useEffect(() => {
 		const obs = new IntersectionObserver(
 			([entry]) => {
@@ -205,7 +194,7 @@ export default function JurnalStatistika() {
 				>{t("components.jurnalStatistika.statistik_blok")}</p>
 
 				<div className='grid grid-cols-1 md:grid-cols-3 md:gap-[42px]'>
-					{resolvedStats.map((s, i) => (
+					{STATS.map((s, i) => (
 						<div
 							key={s.label}
 							style={{ transitionDelay: `${i * 0.12}s` }}

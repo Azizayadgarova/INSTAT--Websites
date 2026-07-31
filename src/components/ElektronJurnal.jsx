@@ -4,7 +4,12 @@ import img3 from '@/assets/4.webp'
 import img4 from '@/assets/5.webp'
 import img5 from '@/assets/6.webp'
 import bgGlow from '@/assets/bgImg/Background (1).png'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { siteArticleFeaturesApi, siteArticleFeedbacksApi } from '@/api/siteContent.api'
+import { authorsApi, editionsApi, journalSectionsApi } from '@/api/resources.api'
+import { useSiteList } from '@/hooks/useSiteList'
+import { toEdition, toName } from '@/utils/siteContent'
+import { toFeature } from '@/utils/siteContent'
 import FAQSection from './FAQSection'
 import JurnalStatistika from './JurnalStatistika'
 import MaqolaTalablari  from './MaqolaTalablari'
@@ -14,11 +19,6 @@ import { Button2 } from './shared/Button2'
 import Text from './shared/Text'
 import Testimonial from './Testimonial'
 import AnimatedSection from './shared/AnimatedSection'
-import { useArticleFeatures } from '@/hooks/useArticleFeatures'
-import { useTranslation } from 'react-i18next'
-import { useSiteData } from '@/hooks/useSiteData'
-import { pickLang } from '@/utils/siteContent'
-import { useSiteText } from '@/hooks/useSiteText'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -64,6 +64,9 @@ const JOURNALS = [
 	{ img: img1, title: "Milliy ta'lim tizimi rivojlanishi",              year: '2023 yil 1-son', author: 'Dilnoza Yusupova', category: "Ta'lim"           },
 	{ img: img2, title: "Qishloq xo'jaligi statistikasi",                 year: '2022 yil 3-son', author: 'Jahongir Toshmatov', category: "Qishloq xo'jaligi" },
 ]
+
+// API `thumbnail` bermaganda ishlatiladigan muqovalar
+const COVERS = [img1, img2, img3, img4, img5]
 
 const AUTHORS = [
 	'Afzal Pulatov',
@@ -295,6 +298,9 @@ function FilterRow({
 	catOpen,
 	setCatOpen,
 	onSearch,
+	// Variantlar backenddan keladi (authors / journal-sections)
+	authors,
+	categories,
 }) {
 	const dropStyle = {
 		position: 'absolute',
@@ -393,7 +399,7 @@ function FilterRow({
 				</div>
 				{authorOpen && (
 					<div style={{ ...dropStyle, minWidth: '190px' }}>
-						{AUTHORS.map(a => (
+						{authors.map(a => (
 							<div
 								key={a}
 								style={itemStyle(a === author)}
@@ -474,7 +480,7 @@ function FilterRow({
 					<div
 						style={{ ...dropStyle, minWidth: '210px' }}
 					>
-						{CATEGORIES.map(c => (
+						{categories.map(c => (
 							<div
 								key={c}
 								style={itemStyle(c === category)}
@@ -622,23 +628,41 @@ function Pagination({ page, setPage, total }) {
 // ─── Jurnallar section ────────────────────────────────────────────────────────
 
 function JurnallarSection() {
-	const st = useSiteText('article')
 	const [page, setPage]           = useState(1)
-	const [author, setAuthor]       = useState(AUTHORS[0])
-	const [category, setCategory]   = useState(CATEGORIES[0])
+	const [author, setAuthor]       = useState(null)
+	const [category, setCategory]   = useState(null)
 	const [authorOpen, setAuthorOpen] = useState(false)
 	const [catOpen, setCatOpen]     = useState(false)
-	const [filtered, setFiltered]   = useState(JOURNALS)
+	const [filtered, setFiltered]   = useState(null)
+
+	// Jurnallar va filtr variantlari backenddan; endpoint bo'sh bo'lsa statik ro'yxat
+	const { items: apiJournals } = useSiteList('editions', editionsApi, toEdition, JOURNALS)
+	const { items: authors }    = useSiteList('authors', authorsApi, toName, AUTHORS)
+	const { items: categories } = useSiteList('journal-sections', journalSectionsApi, toName, CATEGORIES)
+
+	// `thumbnail` majburiy emas — bo'sh bo'lsa maketdagi rasmlar navbatma-navbat
+	const journals = apiJournals.map((j, i) => ({ ...j, img: j.img || COVERS[i % COVERS.length] }))
+
+	// Ro'yxat async keladi — tanlov qilinmaguncha birinchi variant faol
+	const activeAuthor   = author ?? authors[0] ?? ''
+	const activeCategory = category ?? categories[0] ?? ''
 
 	const PER_PAGE = 8
 
 	const handleSearch = () => {
-		const result = JOURNALS.filter(j => j.author === author && j.category === category)
+		// API'dan kelgan editions'da muallif/bo'lim maydoni yo'q (null) — ular
+		// filtrdan o'tib ketadi. Backend bu bog'lanishni qo'shsa filtr o'zi ishlaydi.
+		const result = journals.filter(
+			j =>
+				(j.author == null || j.author === activeAuthor) &&
+				(j.category == null || j.category === activeCategory),
+		)
 		setFiltered(result)
 		setPage(1)
 	}
 
-	const displayed = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE)
+	const visible = filtered ?? journals
+	const displayed = visible.slice((page - 1) * PER_PAGE, page * PER_PAGE)
 
 	return (
 		<section
@@ -686,7 +710,7 @@ function JurnallarSection() {
 							letterSpacing: '-0.02em',
 						}}
 					>
-						{st('article_title3', "Nufuzli jurnallar va so'nggi nashrlar")}
+						Nufuzli jurnallar va so&apos;nggi nashrlar
 					</h2>
 
 					<p
@@ -700,22 +724,25 @@ function JurnallarSection() {
 							margin: 0,
 						}}
 					>
-						{st('article_description3', 'Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.')}
+						Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng
+						yangi sonlari bilan tanishing.
 					</p>
 				</div>
 			</AnimatedSection>
 
 			<div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '800px' }}>
 				<FilterRow
-					author={author}
+					author={activeAuthor}
 					setAuthor={setAuthor}
 					authorOpen={authorOpen}
 					setAuthorOpen={setAuthorOpen}
-					category={category}
+					category={activeCategory}
 					setCategory={setCategory}
 					catOpen={catOpen}
 					setCatOpen={setCatOpen}
 					onSearch={handleSearch}
+					authors={authors}
+					categories={categories}
 				/>
 			</div>
 
@@ -743,7 +770,7 @@ function JurnallarSection() {
 				)}
 			</div>
 
-			<Pagination page={page} setPage={setPage} total={Math.ceil(filtered.length / PER_PAGE)} />
+			<Pagination page={page} setPage={setPage} total={Math.ceil(visible.length / PER_PAGE)} />
 		</section>
 	)
 }
@@ -1075,15 +1102,26 @@ function useIsMobile(bp = 768) {
 
 function HeroSection() {
 	const isMobile = useIsMobile()
-	// Hero karusel kartalari — /api/site-article-features (fallback: CARDS)
-	const { items: cards } = useArticleFeatures(CARDS)
-	// Sarlavha/tavsif backend'dan — site-data (module: article)
-	const { i18n } = useTranslation()
-	const lang = i18n.resolvedLanguage ?? 'uz'
-	const { data: artKv } = useSiteData(d => d.byModuleKey.article ?? {})
-	const heroT1 = pickLang(artKv?.article_title1, lang) || 'Ilmiy jurnallar va maqolalar uchun'
-	const heroT2 = pickLang(artKv?.article_title2, lang) || 'yagona platforma'
-	const heroSub = pickLang(artKv?.article_description1, lang) || "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda."
+
+	// Karusel geometriyasi CARDS.length ga bog'langan — kartochkalar soni
+	// o'zgarmaydi, API faqat matn va rasmni almashtiradi.
+	const { items: apiFeats } = useSiteList(
+		'site-article-features',
+		siteArticleFeaturesApi,
+		toFeature,
+		[],
+	)
+	const cards = useMemo(
+		() =>
+			CARDS.map((card, i) => {
+				const f = apiFeats[i]
+				return f
+					? { ...card, src: f.image || card.src, backTitle: f.title, backDesc: f.description }
+					: card
+			}),
+		[apiFeats],
+	)
+
 	const [visible, setVisible] = useState(false)
 	const [flipped, setFlipped] = useState({})
 	const [hovered, setHovered] = useState(null)
@@ -1317,9 +1355,9 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						{heroT1}
+						Ilmiy jurnallar va maqolalar uchun
 						<br />
-						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{heroT2}</span>
+						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>yagona platforma</span>
 					</h1>
 					<p
 						style={{
@@ -1332,7 +1370,8 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						{heroSub}
+						Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro
+						standartlarga mos nashr imkoniyatlari — barchasi bir joyda.
 					</p>
 				</div>
 
@@ -1447,7 +1486,12 @@ export default function ElektronJurnal() {
 			<TahririyatAzolari />
 			<JurnalStatistika />
 			<FAQSection hideParticles platformStyle module='articles' />
-			<Testimonial hideParticles platformStyle source='article' />
+			<Testimonial
+				hideParticles
+				platformStyle
+				feedbackKey='site-article-feedbacks'
+				feedbackApi={siteArticleFeedbacksApi}
+			/>
 		</>
 	)
 }

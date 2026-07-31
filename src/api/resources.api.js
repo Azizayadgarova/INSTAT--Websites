@@ -51,35 +51,8 @@ export const authorsApi = createResourceApi('authors')
 export const booksApi = createResourceApi('books')
 export const permissionsApi = createResourceApi('permissions')
 export const categoriesApi = createResourceApi('categories')
-export const coursesApi = {
-	...createResourceApi('courses'),
-	/** Faqat faol kurslar — server tomonda filtrlanadi (/courses/items/active/) */
-	getActive: async (params = {}) => {
-		const { data } = await api.get('/courses/items/active/', { params })
-		if (Array.isArray(data)) return { items: data, meta: null, links: null }
-		return {
-			items: Array.isArray(data?.data) ? data.data : [],
-			meta: data?.meta ?? null,
-			links: data?.links ?? null,
-		}
-	},
-}
+export const coursesApi = createResourceApi('courses')
 export const courseGroupsApi = createResourceApi('course-groups')
-/**
- * O'qituvchilar (mentorlar). DIQQAT: bu endpoint boshqalardan farqli — yo'l
- * oxirida slash YO'Q (`/api/teachers/` 404 qaytaradi), shuning uchun
- * createResourceApi ishlatilmaydi. Javob shakli odatdagidek {links, data}.
- */
-export const teachersApi = {
-	getAll: async (params = {}) => {
-		const { data } = await api.get('/site-main-managers/items/all/', { params })
-		return {
-			items: Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : [],
-			meta: data?.meta ?? null,
-			links: data?.links ?? null,
-		}
-	},
-}
 export const bookCasesApi = createResourceApi('book-cases')
 export const udkCodesApi = createResourceApi('udk-codes')
 export const academicDegreesApi = createResourceApi('academic-degrees')

@@ -11,6 +11,11 @@ const API_SAMPLE = [
 	{ id: 23, module: 'corruption', type: 'string', key: 'corruption_chairman', label: 'Komissiya raisi', value: 'Shukurov Sh.Z.', value_uz: null },
 	{ id: 31, module: 'science', type: 'string', key: 'science_programme', value: 'ILMIY-TADQIQOTLAR DASTURI', value_uz: 'ILMIY-TADQIQOTLAR DASTURI' },
 	{ id: 35, module: 'info_resource', type: 'link', key: 'siat_stat', value: 'https://siat.stat.uz/', value_uz: 'Statistika Axborot Tizimi' },
+	{ id: 90, module: 'micro_data', type: 'string', key: 'micro_data_title6', label: 'Sahifa sarlavhasi 6', value: 'Statistik blok', value_uz: 'Statistik blok' },
+	{ id: 91, module: 'micro_data', type: 'string', key: 'micro_data_set', label: "Statistik ma'lumotlar to'plami", value: '500', value_uz: '500' },
+	{ id: 92, module: 'micro_data', type: 'string', key: 'micro_data_period', label: "Ma'lumotlar davri", value: '25 yil', value_uz: null },
+	{ id: 93, module: 'micro_data', type: 'string', key: 'micro_data_indicator', label: "Statistik ko'rsatkichlar", value: '120', value_uz: '120' },
+	{ id: 94, module: 'micro_data', type: 'string', key: 'micro_data_region', label: 'Hududiy qamrov', value: '14', value_uz: '14' },
 ]
 
 vi.mock('../api/axios', () => ({ default: { get: vi.fn(() => Promise.resolve({ data: API_SAMPLE })) } }))
@@ -18,6 +23,7 @@ vi.mock('../api/axios', () => ({ default: { get: vi.fn(() => Promise.resolve({ d
 import { resetSiteDataCache } from '../api/siteData.api'
 import ContentPage from '../components/shared/ContentPage'
 import LinkResourcePage from '../components/shared/LinkResourcePage'
+import StatistikBlok from '../components/StatistikBlok'
 import i18n from '../i18n'
 
 const wrap = ui => render(<HelmetProvider><MemoryRouter>{ui}</MemoryRouter></HelmetProvider>)
@@ -46,6 +52,15 @@ describe('API kontenti sahifada ko‘rinadi', () => {
 	it('Ilmiy tadqiqot — dastur matni + PDF', async () => {
 		wrap(<ContentPage module='science' contentKey='science_programme' title='Ilmiy' />)
 		await waitFor(() => expect(screen.getByText(/ILMIY-TADQIQOTLAR DASTURI/)).toBeInTheDocument())
+	})
+
+	it('Statistik blok — raqam, izoh va sarlavha micro_data modulidan keladi', async () => {
+		wrap(<StatistikBlok />)
+		await waitFor(() => expect(screen.getAllByText('500').length).toBeGreaterThan(0))
+		// value_uz null bo'lsa value ishlatiladi
+		expect(screen.getAllByText('25 yil').length).toBeGreaterThan(0)
+		expect(screen.getAllByText("Statistik ma'lumotlar to'plami").length).toBeGreaterThan(0)
+		expect(screen.getAllByText('Statistik blok').length).toBeGreaterThan(0)
 	})
 
 	it('Axborot resursi — tashqi havola to‘g‘ri', async () => {

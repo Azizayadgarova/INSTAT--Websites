@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { useSiteData } from '@/hooks/useSiteData'
-import { useEducationFeatures } from '@/hooks/useEducationFeatures'
-import { pickLang } from '@/utils/siteContent'
-import heroImg from '@/assets/rasm_tiniq.png'
+import { useSectionText } from '@/hooks/useSectionText'
+import { pickLang, splitHeading } from '@/utils/siteContent'
+import { siteEducationFeaturesApi } from '@/api/siteContent.api'
+import heroImg from '@/assets/rasm_tiniq.jpg'
 import groupImg0 from '@/assets/Group 1000002879.webp'
 import groupImg1 from '@/assets/Group 1000002880.webp'
 import groupImg2 from '@/assets/Group 1000002880 (1).webp'
@@ -240,10 +241,12 @@ function HeroImage() {
 	)
 }
 
-function HeroText({ title, highlight, subtitle }) {
+function HeroText() {
     const {
         t
     } = useTranslation();
+
+    const st = useSectionText('education')
 
     const [visible, setVisible] = useState(false)
     useEffect(() => {
@@ -263,13 +266,12 @@ function HeroText({ title, highlight, subtitle }) {
 		>
             <Text
 				buttonText="Onlayn ta'lim"
-				title={title || t("pages.onlaynTalim.bilim_va_konikmalarni")}
-				highlight={highlight || 'tizimli rivojlantirish'}
-				subtitle={
-					subtitle || <>{t("pages.onlaynTalim.zamonaviy_talim_metodlari_asosida")}<br className='hidden md:block' />
+				title={st('education_title1', t("pages.onlaynTalim.bilim_va_konikmalarni"))}
+				highlight={st('education_title2', 'tizimli rivojlantirish')}
+				subtitle={st('education_description',
+					<>{t("pages.onlaynTalim.zamonaviy_talim_metodlari_asosida")}<br className='hidden md:block' />
 						{' '}{t("pages.onlaynTalim.bilimlaringizni_chuqurlashtiring")}</>
-				}
-				subtitleStyle={{ maxWidth: 620 }}
+				)}
 				buttonType='button2'
 			/>
         </div>
@@ -370,26 +372,14 @@ export default function OnlaynTalim() {
 	const { t, i18n: _i18n } = useTranslation()
 	const _lang = _i18n.resolvedLanguage ?? 'uz'
 	const { data: _eduKv } = useSiteData(d => d.byModuleKey.education ?? {})
-	// "Zamonaviy ta'lim" kartalari — /api/site-education-features (bo'sh bo'lsa ONLAYN_CARDS)
-	const { items: eduCards } = useEducationFeatures(ONLAYN_CARDS)
+	const st = useSectionText('education')
+	const about = splitHeading(st('education_title3'), "Zamonaviy ta'lim,", 'Global imkoniyatlar!')
 	const STATS = STATS_FALLBACK.map(item => {
 		const src = _eduKv?.[item.key]
 		if (!src) return item
 		const raw = pickLang(src, _lang).replace(/\s+/g, ' ').trim()
 		return raw ? { ...item, value: /[+MK]/i.test(raw) ? raw : `${raw}+`, label: src.label?.trim() || item.label } : item
 	})
-
-	// Sarlavha/tavsiflar backend'dan — site-data (module: education)
-	const _eduText = key => pickLang(_eduKv?.[key], _lang)
-	const _heroTitle = _eduText('education_title1')
-	const _heroHighlight = _eduText('education_title2')
-	const _heroSubtitle = _eduText('education_description')
-	const _meTitle = _eduText('education_title3')
-	const _meSubtitle = _eduText('education_description3')
-	// title3 ("Zamonaviy ta'lim, Global imkoniyatlar!") ni vergul bo'yicha 2 qatorga bo'lamiz
-	const _meComma = _meTitle.indexOf(',')
-	const _meT1 = _meTitle ? (_meComma > -1 ? _meTitle.slice(0, _meComma + 1) : _meTitle) : ''
-	const _meT2 = _meTitle && _meComma > -1 ? _meTitle.slice(_meComma + 1).trim() : ''
 
     const [statsRef, statsInView] = useInView(0.3)
 
@@ -415,7 +405,7 @@ export default function OnlaynTalim() {
 				<TextGlow />
 				<Particles />
 
-				<HeroText title={_heroTitle} highlight={_heroHighlight} subtitle={_heroSubtitle} />
+				<HeroText />
 
 				<div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
 					<HeroImage />
@@ -434,16 +424,19 @@ export default function OnlaynTalim() {
             <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 					<ModernEducation
-						customCards={eduCards}
+						customCards={ONLAYN_CARDS}
+						contentKey='site-education-features'
+						contentApi={siteEducationFeaturesApi}
 						cardHeight={100}
 						hideParticles
 						headerProps={{
 							buttonText: "Platforma haqida",
 							buttonType: "button2",
-							title: _meT1 || "Zamonaviy ta'lim,",
-							highlight: _meTitle ? _meT2 : "Global imkoniyatlar!",
+							title: about.title,
+							highlight: about.highlight,
 							highlightColor: "#ffffff",
-							subtitle: _meSubtitle || <>{t("pages.onlaynTalim.bizning_platforma_orqali_siz")}<br />{t("pages.onlaynTalim.mahalliy_va_xorijiy_mutaxassislar")}</>,
+							subtitle: st('education_description3',
+								<>{t("pages.onlaynTalim.bizning_platforma_orqali_siz")}<br />{t("pages.onlaynTalim.mahalliy_va_xorijiy_mutaxassislar")}</>),
 							hideParticles: true,
 							titleStyle: { color: "#fff" },
 							subtitleStyle: { fontSize: "16px" },

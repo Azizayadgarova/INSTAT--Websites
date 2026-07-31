@@ -2,7 +2,10 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Link, NavLink, useOutlet } from 'react-router-dom'
 
-import ShareLinks from '@/components/shared/ShareLinks'
+import sIconInsta from '@/assets/Major Brand Logos [1.1] (1).png'
+import sIconX from '@/assets/Major Brand Logos [1.1].png'
+import sIconFb from '@/assets/Vector (14).png'
+import sIconLn from '@/assets/Vector (15).png'
 
 const INFO_LINKS = [
 	{ label: 'Yangiliklar', path: '/media-servises/yangiliklar' },
@@ -119,7 +122,71 @@ const MediaServise = () => {
 							))}
 						</nav>
 
-						<ShareLinks label={t("pages.mediaServise.share_this_blog")} />
+						<div
+							style={{
+								marginTop: '32px',
+								paddingLeft: '6px',
+							}}
+						>
+							<p
+								style={{
+									fontFamily: 'Inter Display, sans-serif',
+									fontWeight: 400,
+									fontSize: '16px',
+									lineHeight: '28px',
+									letterSpacing: '-0.02em',
+									color: 'rgba(153,160,174,1)',
+									marginBottom: '12px',
+								}}
+							>{t("pages.mediaServise.share_this_blog")}</p>
+
+							<div
+								style={{
+									display: 'flex',
+									gap: '25px',
+									alignItems: 'center',
+								}}
+							>
+								{[
+									{
+										src: sIconInsta,
+										alt: 'Instagram',
+									},
+									{
+										src: sIconX,
+										alt: 'X',
+									},
+									{
+										src: sIconFb,
+										alt: 'Facebook',
+									},
+									{
+										src: sIconLn,
+										alt: 'LinkedIn',
+									},
+								].map(({ src, alt }) => (
+									<div
+										key={alt}
+										style={{
+											width: 24,
+											height: 24,
+											display: 'flex',
+											alignItems: 'center',
+											justifyContent: 'center',
+										}}
+									>
+										<img
+											src={src}
+											alt={alt}
+											style={{
+												width: '100%',
+												height: '100%',
+												objectFit: 'contain',
+											}} loading='lazy' decoding='async' />
+									</div>
+								))}
+							</div>
+						</div>
 					</div>
 				</aside>
 

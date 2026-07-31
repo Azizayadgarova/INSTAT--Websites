@@ -1,4 +1,23 @@
+import { toPerson } from '@/utils/siteContent'
+
 const UP = '&auto=format&q=75&fm=webp'
+
+/**
+ * PERSON shaklidagi yozuvni (site-education-mentors, site-article-editors,
+ * site-main-managers) MentorCard kutadigan ko'rinishga o'tkazadi.
+ * Backend rasm bermasa — ism bosh harflaridan avatar generatsiya qilinadi.
+ */
+export const toMentor = (item, lang) => {
+	const p = toPerson(item, lang)
+	return {
+		name: p.name,
+		role: p.direction,
+		exp: p.experience ? `${p.experience}+ yil tajriba` : '',
+		photo:
+			p.image ||
+			`https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=1F2533&color=fff&size=400&bold=true`,
+	}
+}
 
 export const mentors = [
 	{

@@ -7,7 +7,10 @@
     "comingSoonHint": "The materials are being prepared and will be published here shortly.",
     "language": "Language",
     "download": "Download",
-    "openResource": "Open resource"
+    "openResource": "Open resource",
+    "readMore": "Read more",
+    "collapse": "Collapse",
+    "watch": "Watch"
   },
   "error": {
     "title": "Something went wrong",
@@ -80,8 +83,6 @@
     },
     "ishOrinlariVakansiyalar": {
       "oy": "/mo",
-      "stavka": "Rate",
-      "qoshimcha_haq": "Additional pay",
       "ariza_yuborish": "Apply",
       "karyerangiz_uchun_eng_yaxshi": "The best choice for your career",
       "eng_saralangan_vakansiyalarni_bir": "Find the best vacancies in one place. Identify the right job, apply quickly and take your career to the next level."
@@ -286,7 +287,10 @@
       "institut_ozbekiston_respublikasi_milliy": "The institute is a state educational and research institution within the unified system of the National Statistics Committee of the Republic of Uzbekistan and reports to the Committee in its activities."
     },
     "qarshiKurash": {
-      "qarshikurash": "Anti-corruption"
+      "qarshikurash": "Anti-corruption",
+      "works": "Key areas of anti-corruption work",
+      "docs": "Legal documents",
+      "videos": "Video materials"
     },
     "odobAxloq": {
       "odobaxloq": "Code of ethics"

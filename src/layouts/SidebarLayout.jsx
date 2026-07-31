@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, NavLink, useOutlet } from 'react-router-dom'
 
-import ShareLinks from '@/components/shared/ShareLinks'
+import sIconInsta from '@/assets/Major Brand Logos [1.1] (1).png'
+import sIconX from '@/assets/Major Brand Logos [1.1].png'
+import sIconFb from '@/assets/Vector (14).png'
+import sIconLn from '@/assets/Vector (15).png'
 
 const NavItem = ({ link }) => {
 	const [hovered, setHovered] = useState(false)
@@ -100,7 +103,42 @@ const SidebarLayout = ({ links }) => {
 							))}
 						</nav>
 
-						<ShareLinks label={t('components.sidebarLayout.share_this_blog')} />
+						<div
+							style={{
+								marginTop: 32,
+								paddingLeft: 6,
+							}}
+						>
+							<p
+								style={{
+									color: 'rgba(153,160,174,1)',
+									marginBottom: 12,
+								}}
+							>
+								{t('components.sidebarLayout.share_this_blog')}
+							</p>
+
+							<div
+								style={{
+									display: 'flex',
+									gap: 25,
+								}}
+							>
+								{[sIconInsta, sIconX, sIconFb, sIconLn].map((img, index) => (
+									<img
+										key={index}
+										src={img}
+										alt=''
+										style={{
+											width: 24,
+											height: 24,
+										}}
+										loading='lazy'
+										decoding='async'
+									/>
+								))}
+							</div>
+						</div>
 					</div>
 				</aside>
 

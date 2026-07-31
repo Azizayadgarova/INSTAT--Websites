@@ -2,12 +2,18 @@ import { useTranslation } from 'react-i18next'
 import bgOnline from '@/assets/bgImg/Background (1).png'
 import { useEffect, useRef, useState } from 'react'
 import MentorCard from './MentorsSection/MentorCard'
-import { CONFIGS, mod } from './MentorsSection/mentors.data'
-import { useMentors } from '@/hooks/useMentors'
-import { useSiteText } from '@/hooks/useSiteText'
+import { CONFIGS, mentors, mod, toMentor } from './MentorsSection/mentors.data'
 import ParticleBackground from './shared/ParticleBackground'
 import SectionBackground from './shared/SectionBackground'
 import Text from './shared/Text'
+
+import { siteEducationMentorsApi } from '@/api/siteContent.api'
+import { useSectionText } from '@/hooks/useSectionText'
+import { useSiteList } from '@/hooks/useSiteList'
+import { splitHeading } from '@/utils/siteContent'
+
+
+
 
 const bg = '/bgImg/Background.svg'
 
@@ -16,11 +22,26 @@ const MentorsSection = ({ variant }) => {
         t
     } = useTranslation();
 
+    // API bo'sh bo'lsa statik `mentors` ro'yxati ko'rsatiladi
+    const { items: mentorList } = useSiteList(
+        'site-education-mentors',
+        siteEducationMentorsApi,
+        toMentor,
+        mentors,
+    )
+
     const isOnline = variant === 'online'
-    // Boʻlim sarlavhasi (faqat online variant) — site-data (module: education)
-    const st = useSiteText('education')
-    const _title = isOnline ? st('education_title5') : ''
-    const _subtitle = isOnline ? st('education_description5') : ''
+
+    // Onlayn ta'lim sahifasida sarlavha backend'dan (education moduli) keladi
+    const st = useSectionText('education')
+    const heading = isOnline
+		? splitHeading(st('education_title5'), t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan"), "o'rganing!")
+		: { title: t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan"), highlight: "o'rganing!" }
+    const subtitleFallback = (
+		<>{t("components.mentorsSection.bizning_platforma_orqali_siz")}{' '}
+			<br className='hidden sm:block' />{t("components.mentorsSection.mahalliy_va_xorijiy_mutaxassislar")}</>
+	)
+
     const [current, setCurrent] = useState(0)
     const bgRef = useRef(null)
     const [bgVisible, setBgVisible] = useState(false)
@@ -31,17 +52,7 @@ const MentorsSection = ({ variant }) => {
 		? Math.min(1, trackW / 568)
 		: Math.min(1, Math.max(0.42, trackW / 900))
 
-    const { items: mentors } = useMentors(variant)
-
-    // Avtomatik aylantirish intervali birinchi renderdagi `shift` ni ushlab
-    // qoladi — ro'yxat API'dan kelib uzunligi o'zgarganda ham to'g'ri
-    // hisoblanishi uchun uzunlikni ref orqali o'qiymiz.
-    const countRef = useRef(mentors.length)
-    useEffect(() => {
-		countRef.current = mentors.length
-	}, [mentors.length])
-
-    const shift = dir => setCurrent(prev => mod(prev + dir, countRef.current))
+    const shift = dir => setCurrent(prev => mod(prev + dir, mentorList.length))
 
     useEffect(() => {
 		const update = () => {
@@ -138,21 +149,15 @@ const MentorsSection = ({ variant }) => {
 					<div style={{ marginBottom: 0 }}>
 						<Text
 							buttonText='Mentorlar'
-							title={_title || t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")}
-							highlight={_title ? '' : "o'rganing!"}
-							subtitle={
-								_subtitle || <>{t("components.mentorsSection.bizning_platforma_orqali_siz")}{' '}
-									<br className='hidden sm:block' />{t("components.mentorsSection.mahalliy_va_xorijiy_mutaxassislar")}</>
-							}
+							title={heading.title}
+							highlight={heading.highlight}
+							subtitle={isOnline ? st('education_description5', subtitleFallback) : subtitleFallback}
 							buttonType={isOnline ? 'button2' : 'button1'}
-							titleClassName={
-								isOnline ? 'mx-auto max-w-[720px] md:!text-[48px] md:!leading-[1.15]' : ''
-							}
 							titleStyle={
 								isOnline ? { color: '#fff' } : undefined
 							}
 							highlightColor={isOnline ? '#fff' : undefined}
-							subtitleStyle={isOnline ? { fontSize: '16px', maxWidth: '560px' } : undefined}
+							subtitleStyle={isOnline ? { fontSize: '16px' } : undefined}
 						/>
 					</div>
 
@@ -171,11 +176,11 @@ const MentorsSection = ({ variant }) => {
 								style={{ position: 'relative', width: '100%', height: '100%' }}
 							>
 								{CONFIGS.map(cfg => {
-									const idx = mod(current + cfg.offset, mentors.length)
+									const idx = mod(current + cfg.offset, mentorList.length)
 									return (
 										<MentorCard
 											key={cfg.offset}
-											mentor={mentors[idx]}
+											mentor={mentorList[idx]}
 											cfg={cfg}
 											trackW={trackW}
 											dimScale={dimScale}

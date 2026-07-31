@@ -1,14 +1,68 @@
 import { useTranslation } from 'react-i18next'
+import { useDataText } from '@/hooks/useDataText'
 import bgGlow from '@/assets/bgImg/Background (1).png'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Button2 } from './shared/Button2'
 import AnimatedSection from './shared/AnimatedSection'
+import { dataReportsApi } from '@/api/resources.api'
+import { useApiResource } from '@/hooks/useApiResource'
+import { useSectionText } from '@/hooks/useSectionText'
+import { pickField } from '@/utils/siteContent'
 
 import { ALL_DATA } from '@/data/publications.data'
-import { useDataReports } from '@/hooks/useDataReports'
-import { useSiteText } from '@/hooks/useSiteText'
 
 const ITEMS_PER_PAGE = 8
+
+const UZ_MONTHS = [
+	'yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun',
+	'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr',
+]
+
+/** created_at -> "2025 yil mart" (ru/en uchun tizim formati) */
+const formatPublished = (iso, lang) => {
+	if (!iso) return ''
+	const d = new Date(iso)
+	if (Number.isNaN(d.getTime())) return ''
+	if (lang === 'uz') return `${d.getFullYear()} yil ${UZ_MONTHS[d.getMonth()]}`
+	return d.toLocaleDateString(lang === 'ru' ? 'ru-RU' : 'en-US', {
+		year: 'numeric',
+		month: 'long',
+	})
+}
+
+/** options[].date_from/date_to -> "2015 — 2024" (bir xil yil bo'lsa bitta yil) */
+const yearsRange = report => {
+	const years = (report.options ?? [])
+		.flatMap(o => [o.date_from, o.date_to])
+		.map(d => Number(String(d ?? '').slice(0, 4)))
+		.filter(y => y > 1900)
+	if (!years.length) return ''
+	const from = Math.min(...years)
+	const to = Math.max(...years)
+	return from === to ? String(from) : `${from} — ${to}`
+}
+
+/**
+ * Data report (backend: /data-reports/) -> kartochka shakli.
+ * Endpoint `name`, `category` (nomi tilga qarab) va `options` (sana oralig'i)
+ * beradi — maketdagi `location` uchun mos maydon yo'q, shuning uchun u qatori
+ * bo'sh qoladi va ko'rsatilmaydi.
+ */
+const toPublication = (report, lang) => ({
+	id: report.id,
+	title: pickField(report, 'name', lang),
+	category: pickField(report.category ?? {}, 'name', lang),
+	location: '',
+	years: yearsRange(report),
+	published: formatPublished(report.created_at, lang),
+})
+
+// Bu bo'lim mikro-ma'lumotlar sahifasida turadi: kategoriyasi boshqa turga
+// tegishli hisobotlar chiqmasin. Turi ko'rsatilmagan yozuvlar qoldiriladi.
+const isMicroData = report => {
+	const type = report.category?.type
+	return !type || type === 'micro-data'
+}
 
 function IconPin() {
 	return (
@@ -80,6 +134,7 @@ function IconEdit() {
 }
 
 function DataCard({ item }) {
+	const dt = useDataText('publications')
 	const [hov, setHov] = useState(false)
 
 	return (
@@ -123,7 +178,7 @@ function DataCard({ item }) {
 						overflow: 'hidden',
 					}}
 				>
-					{item.title}
+					{dt(item, 'title')}
 				</h3>
 				<span
 					style={{
@@ -133,47 +188,31 @@ function DataCard({ item }) {
 						color: 'rgba(var(--text-rgb),1)',
 					}}
 				>
-					{item.category}
+					{dt(item, 'category')}
 				</span>
 			</div>
 
 			<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: 'auto' }}>
-				<div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-					<IconPin />
-					<span
-						style={{
-							fontFamily: 'var(--font-display)',
-							fontSize: '14px',
-							color: 'rgba(255,255,255,1)',
-						}}
-					>
-						{item.location}
-					</span>
-				</div>
-				<div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-					<IconClock />
-					<span
-						style={{
-							fontFamily: 'var(--font-display)',
-							fontSize: '14px',
-							color: 'rgba(255,255,255,1)',
-						}}
-					>
-						{item.years}
-					</span>
-				</div>
-				<div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-					<IconEdit />
-					<span
-						style={{
-							fontFamily: 'var(--font-display)',
-							fontSize: '14px',
-							color: 'rgba(255,255,255,1)',
-						}}
-					>
-						{item.published}
-					</span>
-				</div>
+				{[
+					{ icon: <IconPin />, text: dt(item, 'location') },
+					{ icon: <IconClock />, text: item.years },
+					{ icon: <IconEdit />, text: dt(item, 'published') },
+				]
+					.filter(row => row.text)
+					.map((row, i) => (
+						<div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+							{row.icon}
+							<span
+								style={{
+									fontFamily: 'var(--font-display)',
+									fontSize: '14px',
+									color: 'rgba(255,255,255,1)',
+								}}
+							>
+								{row.text}
+							</span>
+						</div>
+					))}
 			</div>
 		</div>
 	)
@@ -309,22 +348,35 @@ function Pagination({ page, setPage, total }) {
 
 export default function NufuzliNashrlar() {
     const {
-        t
+        t, i18n
     } = useTranslation();
+    const lang = i18n.resolvedLanguage ?? 'uz'
+
+    const st = useSectionText('micro_data')
 
     const [page, setPage] = useState(1)
-    const st = useSiteText('micro_data')
 
-    // Nufuzli nashrlar — /api/data-reports/ (fallback: ALL_DATA)
-    const { items: allData } = useDataReports(ALL_DATA)
+    // Backend `per_page`ni e'tiborsiz qoldiradi (javobda doim per_page: 16),
+    // shuning uchun ro'yxat bir marta olinadi va sahifalash frontendda bo'ladi.
+    const { data, loading } = useApiResource(() => dataReportsApi.getAll({ per_page: 100 }), [])
 
-    const totalPages = Math.max(1, Math.ceil(allData.length / ITEMS_PER_PAGE))
-    // Ma'lumot API'dan kelib uzunligi o'zgarsa `page` chegaradan chiqmasin
-    const safePage = Math.min(page, totalPages)
-    const displayed = allData.slice(
-		(safePage - 1) * ITEMS_PER_PAGE,
-		safePage * ITEMS_PER_PAGE,
+    const apiItems = useMemo(
+		() =>
+			(data?.items ?? [])
+				.filter(report => report.is_active !== false && isMicroData(report))
+				.map(report => toPublication(report, lang)),
+		[data, lang],
 	)
+
+    // Backendda hali hisobot yo'q yoki so'rov muvaffaqiyatsiz — statik ro'yxat
+    // ko'rsatiladi (docs/API.md: kontent fallback), bo'lim bo'sh qolmasin.
+    const isFallback = !loading && apiItems.length === 0
+    const source = isFallback ? ALL_DATA : apiItems
+
+    const totalPages = Math.max(1, Math.ceil(source.length / ITEMS_PER_PAGE))
+    // Ma'lumot yangilanib sahifalar soni kamaysa, joriy sahifa oxirgisiga tushadi
+    const current = Math.min(page, totalPages)
+    const displayed = source.slice((current - 1) * ITEMS_PER_PAGE, current * ITEMS_PER_PAGE)
 
     return (
         <section
@@ -403,13 +455,23 @@ export default function NufuzliNashrlar() {
 						marginBottom: '48px',
 					}}
 				>
-					{displayed.map(item => (
-						<DataCard key={item.id} item={item} />
-					))}
+					{loading
+						? Array.from({ length: ITEMS_PER_PAGE }, (_, i) => (
+								<div
+									key={`sk${i}`}
+									style={{
+										minHeight: '198px',
+										borderRadius: '20px',
+										border: '1px solid rgba(31,37,51,1)',
+										background: 'rgba(var(--card-rgb),1)',
+									}}
+								/>
+							))
+						: displayed.map(item => <DataCard key={item.id} item={item} />)}
 				</div>
 
 				{/* Pagination */}
-				<Pagination page={safePage} setPage={setPage} total={totalPages} />
+				<Pagination page={current} setPage={setPage} total={totalPages} />
 			</div>
         </section>
     );

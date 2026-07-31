@@ -19,13 +19,6 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
     const cardRef = useRef(null)
     const [isHovered, setIsHovered] = useState(false)
 
-    const initials = (mentor.name ?? '')
-		.split(' ')
-		.filter(Boolean)
-		.slice(0, 2)
-		.map(part => part[0].toUpperCase())
-		.join('')
-
     const mx = useMotionValue(0.5)
     const my = useMotionValue(0.5)
     const scaleBase = useMotionValue(1)
@@ -130,42 +123,19 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 						transition: 'scale 0.12s ease',
 					}}
 				>
-					{mentor.photo ? (
-						<img
-							src={mentor.photo}
-							alt={mentor.name}
-							loading='lazy'
-							decoding='async'
-							style={{
-								width: '100%',
-								height: '100%',
-								objectFit: 'cover',
-								filter: isActive ? 'none' : 'grayscale(1) brightness(0.5)',
-								transition: 'filter 0.5s ease',
-							}}
-						/>
-					) : (
-						// Avatar yo'q (backendda `avatar: null`) — bosh harflar bilan o'rin egallaymiz
-						<div
-							aria-label={mentor.name}
-							style={{
-								width: '100%',
-								height: '100%',
-								display: 'flex',
-								alignItems: 'center',
-								justifyContent: 'center',
-								background: 'linear-gradient(160deg, #1B2130 0%, #0E121B 100%)',
-								color: 'rgba(255,255,255,0.45)',
-								fontSize: Math.max(20, 64 * cfg.scale * dimScale),
-								fontWeight: 500,
-								letterSpacing: '0.04em',
-								filter: isActive ? 'none' : 'grayscale(1) brightness(0.5)',
-								transition: 'filter 0.5s ease',
-							}}
-						>
-							{initials}
-						</div>
-					)}
+					<img
+						src={mentor.photo}
+						alt={mentor.name}
+						loading='lazy'
+						decoding='async'
+						style={{
+							width: '100%',
+							height: '100%',
+							objectFit: 'cover',
+							filter: isActive ? 'none' : 'grayscale(1) brightness(0.5)',
+							transition: 'filter 0.5s ease',
+						}}
+					/>
 				</motion.div>
 
 				{isActive && (
@@ -243,29 +213,24 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 						>
 							{mentor.name}
 						</motion.h3>
-						{mentor.role && (
+						<motion.p
+							initial={{ opacity: 0, y: 8 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.45, delay: 0.14, ease: EASE_SMOOTH }}
+							style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(11, 15 * dimScale), margin: '0 0 4px 0' }}
+						>
+							{mentor.role}
+						</motion.p>
+						{!hideExtra && (
+							<>
 							<motion.p
 								initial={{ opacity: 0, y: 8 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.45, delay: 0.14, ease: EASE_SMOOTH }}
-								style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(11, 15 * dimScale), margin: '0 0 4px 0' }}
+								transition={{ duration: 0.45, delay: 0.19, ease: EASE_SMOOTH }}
+								style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
 							>
-								{mentor.role}
+								{mentor.exp}
 							</motion.p>
-						)}
-						{!hideExtra && (
-							<>
-							{mentor.exp && (
-								<motion.p
-									initial={{ opacity: 0, y: 8 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.45, delay: 0.19, ease: EASE_SMOOTH }}
-									style={{ color: 'rgba(var(--text-rgb),1)', fontSize: Math.max(10, 13 * dimScale), marginBottom: 15 }}
-								>
-									{mentor.exp}
-								</motion.p>
-							)}
-							{mentor.socials && (
 							<motion.div
 								initial={{ opacity: 0, scale: 0.85 }}
 								animate={{ opacity: 1, scale: 1 }}
@@ -276,7 +241,6 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 								<a href='#' aria-label={t("components.mentorCard.facebook")} onClick={e => e.preventDefault()}><img src={facebook} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
 								<a href='#' aria-label={t("components.mentorCard.twitter")} onClick={e => e.preventDefault()}><img src={twitter} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
 							</motion.div>
-							)}
 							</>
 						)}
 					</motion.div>

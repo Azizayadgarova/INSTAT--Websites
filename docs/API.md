@@ -32,6 +32,7 @@ Har element: `{ id, module, type, key, label, value, value_uz, value_ru, value_e
 | press | Hamkorlik |
 | info_resource | 7 ta Axborot havola sahifasi |
 | education | OnlaynTalim statistika raqamlari |
+| micro_data | MikroMalumotlar sahifasi, StatistikBlok raqamlari (`micro_data_set/period/indicator/region`) |
 
 ## Xususiyatlar
 

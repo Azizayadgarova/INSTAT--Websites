@@ -513,7 +513,7 @@ export default function MikroMalumotlar() {
 			<HeroSection />
 			<DatasetSection />
 			<MikroStatistika />
-			<FAQSection hideParticles platformStyle />
+			<FAQSection hideParticles platformStyle module='micro_data' />
 			<Testimonial hideParticles platformStyle />
 		</>
 	)

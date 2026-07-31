@@ -1,15 +1,17 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
-import { useLibraryInstructions } from '@/hooks/useLibraryInstructions'
-import { useSiteText } from '@/hooks/useSiteText'
+import { siteLibraryInstructionsApi } from '@/api/siteContent.api'
+import { useSiteList } from '@/hooks/useSiteList'
+import { useSectionText } from '@/hooks/useSectionText'
+import { toFeature } from '@/utils/siteContent'
 
 const vp = { once: true, amount: 0.1 }
 const DURATION = 4000
 
-const FALLBACK_STEPS = [
+const STATIC_STEPS = [
 	{
 		id: '01',
 		title: 'Onlayn qidiruv',
@@ -107,23 +109,37 @@ const TiltCard = ({ src, alt = '' }) => {
 }
 
 const Kutubxona = () => {
+	const st = useSectionText('library')
 	const [active, setActive] = useState(0)
 	const [paused, setPaused] = useState(false)
 	const bgRef = useRef(null)
 	const [bgVisible, setBgVisible] = useState(false)
 
-	// "Oflayn kutubxona" bosqichlari — /api/site-library-instructions (fallback: FALLBACK_STEPS)
-	const { items: steps } = useLibraryInstructions(FALLBACK_STEPS)
-	// Boʻlim sarlavhasi — site-data (module: library)
-	const st = useSiteText('library')
-	// steps uzunligi API'dan o'zgarsa `active` chegaradan chiqmasligi uchun klamp
-	const activeIdx = steps.length ? active % steps.length : 0
+	// Bosqich raqami va rasm frontendda qoladi — API faqat matnni beradi
+	const { items: apiSteps } = useSiteList(
+		'site-library-instructions',
+		siteLibraryInstructionsApi,
+		toFeature,
+		[],
+	)
+	const data = useMemo(
+		() =>
+			apiSteps.length
+				? apiSteps.map((f, i) => ({
+						id: String(i + 1).padStart(2, '0'),
+						title: f.title,
+						desc: f.description,
+						img: f.image || STATIC_STEPS[i % STATIC_STEPS.length].img,
+					}))
+				: STATIC_STEPS,
+		[apiSteps],
+	)
 
 	useEffect(() => {
-		if (paused || steps.length === 0) return
-		const t = setTimeout(() => setActive(a => (a + 1) % steps.length), DURATION)
+		if (paused) return
+		const t = setTimeout(() => setActive(a => (a + 1) % data.length), DURATION)
 		return () => clearTimeout(t)
-	}, [active, paused, steps.length])
+	}, [active, paused, data.length])
 
 	useEffect(() => {
 		const el = bgRef.current?.parentElement
@@ -177,7 +193,7 @@ const Kutubxona = () => {
 					className='text-[32px] md:text-[48px]'
 					style={{ fontWeight: 600, color: '#fff' }}
 				/>
-				<p className="text-[#CACACE] text-[14px] md:text-[16px] max-w-[327px] md:max-w-160 mx-auto text-center">
+				<p className="text-[#CACACE] text-[14px] md:text-[16px] max-w-[327px] md:max-w-none text-center">
 					<BlurWords
 						text={st('library_description6', "Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!")}
 						delay={0.08}
@@ -187,8 +203,8 @@ const Kutubxona = () => {
 			</motion.div>
 
 <div className="z-10 w-full max-w-275 px-6">
-				{steps.map((item, i) => {
-					const isActive = i === activeIdx
+				{data.map((item, i) => {
+					const isActive = i === active
 					return (
 						<motion.div
 							key={item.id}

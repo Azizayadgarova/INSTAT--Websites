@@ -3,16 +3,17 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import bgImage from '@/assets/Union.png'
 import bgMobile from '@/assets/Union (2).png'
-import { useSiteData } from '@/hooks/useSiteData'
-import { pickLang } from '@/utils/siteContent'
+import { useSectionStats } from '@/hooks/useSectionStats'
+import { useSectionText } from '@/hooks/useSectionText'
 
 const vp = { once: true, amount: 0.2 }
 
-// `key` — site-data (module: micro_data) kaliti; `value` — API bo'sh bo'lsa fallback
-const stats = [
+// Raqam (`value`) va izoh (`label`) backend'ning micro_data modulidan keladi;
+// doira/matn koordinatalari maketga bog'liq, shuning uchun frontendda qoladi.
+const STATS_FALLBACK = [
 	{
 		key: 'micro_data_set',
-		value: '500',
+		value: '500+',
 		label: "Statistik ma'lumotlar\nto'plami",
 		circle: { top: 300, left: -42 },
 		labelStyle: { top: 180, left: -55, width: 320 ,  },
@@ -26,7 +27,7 @@ const stats = [
 	},
 	{
 		key: 'micro_data_indicator',
-		value: '120',
+		value: '120+',
 		label: "Statistik ko'rsatkichlar",
 		circle: { top: 300, left: 528 },
 		labelStyle: { top: 400, left: 200, width: 300},
@@ -39,6 +40,9 @@ const stats = [
 		labelStyle: { top: 395, left: 820, width: 290 },
 	},
 ]
+
+// Uzun qiymatlar ("25 yil") doiraga sig'ishi uchun shrift kichikroq
+const valueFont = (value, long, short) => ((value ?? '').length > 4 ? long : short)
 
 const mobilePositions = [
 	{
@@ -61,17 +65,12 @@ const mobilePositions = [
 
 const StatistikBlok = () => {
     const {
-        t, i18n
+        t
     } = useTranslation();
-    const lang = i18n.resolvedLanguage ?? 'uz'
 
-    // Qiymatlar backend'dan — site-data (module: micro_data). Kalit topilmasa fallback.
-    const { data: kv } = useSiteData(d => d.byModuleKey.micro_data ?? {})
-    const resolvedStats = stats.map(item => {
-        const src = kv?.[item.key]
-        const val = src ? pickLang(src, lang) : ''
-        return { ...item, value: val || item.value }
-    })
+    const st = useSectionText('micro_data')
+    const stats = useSectionStats('micro_data', STATS_FALLBACK)
+    const title = st('micro_data_title6', t("components.statistikBlok.statistik_blok"))
 
     return (
         <section style={{ width: '100%' }}>
@@ -124,7 +123,7 @@ const StatistikBlok = () => {
 							color: '#fff',
 							margin: 0,
 						}}
-					>{t("components.statistikBlok.statistik_blok")}</motion.h2>
+					>{title}</motion.h2>
 
 					<div
 						style={{
@@ -133,8 +132,8 @@ const StatistikBlok = () => {
 							height: '550px',
 						}}
 					>
-						{resolvedStats.map((item, index) => (
-							<React.Fragment key={item.label}>
+						{stats.map((item, index) => (
+							<React.Fragment key={item.key}>
 								{/* Label */}
 								<motion.div
 									initial={{ opacity: 0 }}
@@ -178,7 +177,7 @@ const StatistikBlok = () => {
 										alignItems: 'center',
 										justifyContent: 'center',
 										color: '#fff',
-										fontSize: String(item.value).length > 4 ? '44px' : '54px',
+										fontSize: valueFont(item.value, '44px', '54px'),
 										fontWeight: 600,
 									}}
 								>
@@ -232,13 +231,13 @@ const StatistikBlok = () => {
 						color: '#fff',
 						margin: 0,
 					}}
-				>{t("components.statistikBlok.statistik_blok")}</motion.h2>
+				>{title}</motion.h2>
 
 				{/* Circles & labels */}
-				{resolvedStats.map((item, index) => {
+				{stats.map((item, index) => {
 					const pos = mobilePositions[index]
 					return (
-						<React.Fragment key={item.label}>
+						<React.Fragment key={item.key}>
 							{/* Circle */}
 							<motion.div
 								initial={{ opacity: 0, scale: 0.8 }}
@@ -258,7 +257,7 @@ const StatistikBlok = () => {
 									alignItems: 'center',
 									justifyContent: 'center',
 									color: '#fff',
-									fontSize: String(item.value).length > 4 ? '24px' : '30px',
+									fontSize: valueFont(item.value, '24px', '30px'),
 									fontWeight: 700,
 									fontFamily: 'var(--font-display)',
 									zIndex: 2,

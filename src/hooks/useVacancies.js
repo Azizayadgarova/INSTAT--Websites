@@ -3,66 +3,71 @@ import { useTranslation } from 'react-i18next'
 
 import { siteVacanciesApi } from '@/api/siteContent.api'
 import { JOBS } from '@/data/jobs.data'
-import { useApiResource } from './useApiResource'
+import { toVacancy } from '@/utils/siteContent'
+import { useDataText } from './useDataText'
+import { useSiteList } from './useSiteList'
 
 /**
- * Vakansiyalar ro'yxatini backenddan yuklaydi (/api/site-vacancies/items/all/).
+ * Bo'sh ish o'rinlari — /api/site-vacancies/items/all/ (public).
  *
- * `/site-vacancies/` token talab qiladi (401), lekin `items/all` ochiq (getAllFlat).
- * Backend har maydonni uch tilda qaytaradi:
- *   direction_(uz|ru|en)   - Vakansiya yo'nalishi
- *   position_(uz|ru|en)    - Lavozimi
- *   salary_(uz|ru|en)      - Ish haqi
- *   shift_(uz|ru|en)       - Stavka / bandlik
- *   extra_salary_(uz|ru|en)- Qo'shimcha haq
- *   requirements_(uz|ru|en)- Malakaviy talablar
+ * Backend maydonlari kartochka maydonlariga quyidagicha moslanadi:
+ *   position     -> title  (lavozim, kartochka sarlavhasi)
+ *   direction    -> place  (bo'lim nomi — kartochkada joylashuv qatorida)
+ *   requirements -> desc   (talablar)
+ *   salary       -> pay    (ish haqi; matn bo'lishi mumkin, masalan
+ *                           "Ish haqi shtat jadvali bo'yicha")
+ *   shift, extraSalary — hozircha kartochkada ko'rsatilmaydi, lekin
+ *                        qaytariladi (kerak bo'lganda ishlatish uchun).
  *
- * Joriy tilga mos maydon tanlanadi, bo'sh bo'lsa uz -> ru -> en tartibida.
- * Javobda `id` yo'q — indeks asosida barqaror kalit yasaladi.
+ * `payIsAmount` — `salary` faqat raqam/valyutadan iborat bo'lsa `true`;
+ * shundagina kartochkada "/oy" qo'shimchasi ko'rsatiladi (matnli ish haqi
+ * bilan "Ish haqi shtat jadvali bo'yicha /oy" degan g'alizlik chiqmaydi).
  *
- * API bo'sh massiv qaytarsa yoki xato bersa, src/data/jobs.data.js dagi statik
- * ro'yxat ko'rsatiladi (bo'lim hech qachon bo'sh qolmaydi).
+ * API bo'sh qaytarsa yoki xato bersa — src/data/jobs.data.js statik ro'yxati.
  */
+const isAmount = text => /\d/.test(text) && !/[a-zA-ZЀ-ӿ]{4,}/.test(text)
+
 export const useVacancies = () => {
 	const { i18n } = useTranslation()
 	const lang = i18n.resolvedLanguage ?? 'uz'
+	const dt = useDataText('jobs')
+	const { items: api, loading, error, retry } = useSiteList('site-vacancies', siteVacanciesApi, toVacancy)
 
-	const { data, loading, error, retry } = useApiResource(() => siteVacanciesApi.getAllFlat(), [])
-
-	const fallbackItems = useMemo(
+	const fallback = useMemo(
 		() =>
 			JOBS.map(job => ({
 				id: job.id,
-				direction: job.city,
-				position: job.title,
-				salary: job.price,
+				title: dt(job, 'title'),
+				place: dt(job, 'city'),
+				desc: dt(job, 'desc'),
+				pay: job.price,
+				payIsAmount: true,
 				shift: '',
 				extraSalary: '',
-				requirements: job.desc,
 			})),
-		[]
+		// `dt` har renderda yangi funksiya — til o'zgarganda qayta hisoblanadi.
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[lang],
 	)
 
 	const items = useMemo(() => {
-		const pick = (item, field) =>
-			item[`${field}_${lang}`] || item[`${field}_uz`] || item[`${field}_ru`] || item[`${field}_en`] || ''
-
-		const mapped = (data ?? [])
-			.map((item, i) => ({
-				id: item.id ?? `vacancy-${i}`,
-				direction: pick(item, 'direction'),
-				position: pick(item, 'position'),
-				salary: pick(item, 'salary'),
-				shift: pick(item, 'shift'),
-				extraSalary: pick(item, 'extra_salary'),
-				requirements: pick(item, 'requirements'),
+		const mapped = api
+			.map(v => ({
+				id: v.id,
+				title: v.position,
+				place: v.direction,
+				desc: v.requirements,
+				pay: v.salary,
+				payIsAmount: isAmount(v.salary),
+				shift: v.shift,
+				extraSalary: v.extraSalary,
 			}))
-			.filter(item => item.position || item.direction)
+			.filter(item => item.title)
 
-		return mapped.length > 0 ? mapped : fallbackItems
-	}, [data, lang, fallbackItems])
+		return mapped.length > 0 ? mapped : fallback
+	}, [api, fallback])
 
-	return { items, loading, error, retry, isFallback: items === fallbackItems }
+	return { items, loading, error, retry, isFallback: items === fallback }
 }
 
 export default useVacancies

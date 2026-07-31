@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { ITEMS } from '@/data/article-requirements.data'
 import { useDataText } from '@/hooks/useDataText'
-import { useArticleInstructions } from '@/hooks/useArticleInstructions'
-import { useSiteText } from '@/hooks/useSiteText'
+import { siteArticleInstructionsApi } from '@/api/siteContent.api'
+import { useSiteList } from '@/hooks/useSiteList'
+import { toFeature } from '@/utils/siteContent'
 
 const KF = `
 @keyframes mt_fadeUp { from { opacity:0; transform:translateY(32px) } to { opacity:1; transform:translateY(0) } }
@@ -39,13 +40,13 @@ function useMobile(bp = 768) {
 }
 
 // Mobile: barcha narsalar doimiy ko'rinadi (scroll animatsiyasiz)
-function MobileItem({ item, idx }) {
+function MobileItem({ item, idx, total }) {
 	const dt = useDataText('articleRequirements')
 	return (
 		<div style={{
 			position: 'relative',
 			paddingLeft: '36px',
-			marginBottom: idx < ITEMS.length - 1 ? '40px' : 0,
+			marginBottom: idx < total - 1 ? '40px' : 0,
 		}}>
 			{/* Dot */}
 			<div style={{
@@ -97,7 +98,7 @@ function MobileItem({ item, idx }) {
 	)
 }
 
-function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
+function AnimatedItem({ item, idx, total, dotRef, pulseRef, numRef, contentRef }) {
 	const dt = useDataText('articleRequirements')
 	const numBlock = (
 		<div
@@ -163,7 +164,7 @@ function AnimatedItem({ item, idx, dotRef, pulseRef, numRef, contentRef }) {
 			alignItems: 'flex-start',
 			position: 'relative',
 			minHeight: '140px',
-			marginBottom: idx < ITEMS.length - 1 ? '60px' : 0,
+			marginBottom: idx < total - 1 ? '60px' : 0,
 		}}>
 			{item.flip ? contentBlock : numBlock}
 
@@ -210,9 +211,28 @@ export default function MaqolaTalablari() {
 
     const [headerRef, headerVisible] = useInView(0.3)
     const isMobile    = useMobile()
-    const st = useSiteText('article')
-    // "Maqola nashri talablari" — /api/site-article-instructions (fallback: ITEMS)
-    const { items } = useArticleInstructions(ITEMS)
+
+    // Tartib raqami va chap/o'ng joylashuv frontendda — API matnni beradi
+    const { items: apiItems } = useSiteList(
+        'site-article-instructions',
+        siteArticleInstructionsApi,
+        toFeature,
+        [],
+    )
+    const items = useMemo(
+        () =>
+            apiItems.length
+                ? apiItems.map((f, i) => ({
+                        id: f.id,
+                        num: String(i + 1).padStart(2, '0'),
+                        title: f.title,
+                        desc: f.description,
+                        flip: i % 2 === 1,
+                    }))
+                : ITEMS,
+        [apiItems],
+    )
+
     const timelineRef = useRef(null)
     const lineElRef   = useRef(null)
     const dotRefs     = useRef([])
@@ -305,6 +325,7 @@ export default function MaqolaTalablari() {
 		window.addEventListener('scroll', onScroll, { passive: true })
 		onScroll()
 		return () => window.removeEventListener('scroll', onScroll)
+		// `items` API'dan kelgach ref'lar qayta bog'lanadi — handler yangilanishi shart
 	}, [isMobile, items])
 
     return (
@@ -357,7 +378,7 @@ export default function MaqolaTalablari() {
 					letterSpacing: '-0.02em',
 					opacity:   headerVisible ? 1 : 0,
 					animation: headerVisible ? 'mt_fadeUp 0.7s cubic-bezier(.22,1,.36,1) 0.1s both' : 'none',
-				}}>{st('article_title4', t("components.maqolaTalablari.maqola_nashri_talablari"))}</h2>
+				}}>{t("components.maqolaTalablari.maqola_nashri_talablari")}</h2>
 
 				<p className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[500px]' style={{
 					fontFamily: 'var(--font-display)',
@@ -368,7 +389,7 @@ export default function MaqolaTalablari() {
 					margin: '0px 0 48px',
 					opacity:   headerVisible ? 1 : 0,
 					animation: headerVisible ? 'mt_fadeUp 0.7s cubic-bezier(.22,1,.36,1) 0.2s both' : 'none',
-				}}>{st('article_description4', t("components.maqolaTalablari.maqolangiz_platformada_elon_qilinishi"))}</p>
+				}}>{t("components.maqolaTalablari.maqolangiz_platformada_elon_qilinishi")}</p>
 			</div>
             {/* Mobile timeline — hamma narsa darhol ko'rinadi */}
             {isMobile && (
@@ -389,7 +410,7 @@ export default function MaqolaTalablari() {
 					}}/>
 
 					{items.map((item, idx) => (
-						<MobileItem key={item.id ?? item.title} item={item} idx={idx} />
+						<MobileItem key={item.title} item={item} idx={idx} total={items.length} />
 					))}
 				</div>
 			)}
@@ -416,9 +437,10 @@ export default function MaqolaTalablari() {
 
 					{items.map((item, idx) => (
 						<AnimatedItem
-							key={item.id ?? item.title}
+							key={item.title}
 							item={item}
 							idx={idx}
+							total={items.length}
 							dotRef={el     => dotRefs.current[idx]     = el}
 							pulseRef={el   => pulseRefs.current[idx]   = el}
 							numRef={el     => numRefs.current[idx]     = el}

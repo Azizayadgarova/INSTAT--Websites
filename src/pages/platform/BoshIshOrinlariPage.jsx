@@ -41,7 +41,8 @@ const BoshIshOrinlariPage = () => (
 			<IshOrinlariVakansiyalar />
 		</LazyOnScroll>
 		<LazyOnScroll rootMargin='200px'>
-			<FAQSection platformStyle hideParticles />
+			{/* `vacancies` moduli backendda hali yo'q — statik fallback ko'rinadi */}
+			<FAQSection platformStyle hideParticles module='vacancies' />
 		</LazyOnScroll>
 	</div>
 )

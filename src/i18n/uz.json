@@ -7,7 +7,10 @@
 		"comingSoonHint": "Materiallar tayyorlanmoqda. Tez orada shu yerda e’lon qilinadi.",
 		"language": "Til",
 		"download": "Yuklab olish",
-		"openResource": "Resursga o‘tish"
+		"openResource": "Resursga o‘tish",
+		"readMore": "To‘liq o‘qish",
+		"collapse": "Yopish",
+		"watch": "Ko‘rish"
 	},
 	"error": {
 		"title": "Xatolik yuz berdi",
@@ -80,8 +83,6 @@
 		},
 		"ishOrinlariVakansiyalar": {
 			"oy": "/oy",
-			"stavka": "Stavka",
-			"qoshimcha_haq": "Qo'shimcha haq",
 			"ariza_yuborish": "Ariza yuborish",
 			"karyerangiz_uchun_eng_yaxshi": "Karyerangiz uchun eng yaxshi tanlov",
 			"eng_saralangan_vakansiyalarni_bir": "Eng saralangan vakansiyalarni bir joyda toping. Platformamiz orqali mos ishni aniqlang, tezkor murojaat yuboring va karyerangizni keyingi bosqichga olib chiqing."
@@ -286,7 +287,10 @@
 			"institut_ozbekiston_respublikasi_milliy": "Institut O'zbekiston Respublikasi Milliy statistika qo'mitasining yagona tizimiga kiruvchi davlat ta'lim va ilmiy tadqiqot muassasasi hisoblanadi va o'z faoliyatida Milliy statistika qo'mitasiga bo'ysunadi."
 		},
 		"qarshiKurash": {
-			"qarshikurash": "QarshiKurash"
+			"qarshikurash": "QarshiKurash",
+			"works": "Korrupsiyaga qarshi kurashishning asosiy yo‘nalishlari",
+			"docs": "Me’yoriy-huquqiy hujjatlar",
+			"videos": "Video materiallar"
 		},
 		"odobAxloq": {
 			"odobaxloq": "OdobAxloq"

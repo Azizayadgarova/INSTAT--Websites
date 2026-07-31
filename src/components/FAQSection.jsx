@@ -58,13 +58,17 @@ const FaqCard = memo(({ item, realIndex, isOpen, onToggle, delay, platformStyle 
 	)
 })
 
+/**
+ * @param {string} [module] - /api/site-faqs `module` maydoni: qaysi sahifaning
+ *   savollari ko'rsatilsin (education | library | articles | micro_data |
+ *   vacancies). Berilmasa — barcha modullar (bosh sahifa uchun).
+ */
 const FAQSection = ({ hideParticles = false, platformStyle = false, module }) => {
     const {
         t
     } = useTranslation();
 
     const [openIndex, setOpenIndex] = useState(null)
-
     const { items } = useFaqs(module)
 
     const toggleFAQ = index => setOpenIndex(prev => (prev === index ? null : index))
@@ -90,8 +94,7 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 									</>
 								)
 							}
-							titleStyle={platformStyle ? { color: '#fff', letterSpacing: '-0.02em' } : undefined}
-							titleClassName={platformStyle ? '!text-[28px] md:!text-[44px]' : ''}
+							titleStyle={platformStyle ? { color: '#fff', fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.02em' } : undefined}
 							subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
 							highlight=''
 							subtitle={

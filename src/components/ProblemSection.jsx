@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useDataText } from '@/hooks/useDataText'
-import { useSiteText } from '@/hooks/useSiteText'
+import { useSectionText } from '@/hooks/useSectionText'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Button2 } from './shared/Button2'
@@ -12,10 +12,10 @@ const vp = VP_LOW
 
 const ProblemSection = () => {
 	const dt = useDataText('problems')
+	const st = useSectionText('library')
     const {
         t
     } = useTranslation();
-    const st = useSiteText('library')
 
     const [active, setActive] = useState(0)
     const [displayIdx, setDisplayIdx] = useState(0)

@@ -1,10 +1,13 @@
 import { useRef, useEffect } from 'react'
 import { useScroll, useSpring } from 'framer-motion'
-import { cards, BUTTON_TEXT } from './cards'
+import { cards, mergeCards } from './cards'
 import FloatingCard from './FloatingCard'
 import GridCard from './GridCard'
 import ModernEducationHeader from './Header'
 import ParticleBackground from '../shared/ParticleBackground'
+import { siteMainFeaturesApi } from '@/api/siteContent.api'
+import { useSiteList } from '@/hooks/useSiteList'
+import { toFeature } from '@/utils/siteContent'
 
 function MobileCard({ card }) {
   return (
@@ -54,7 +57,21 @@ function MobileCard({ card }) {
   )
 }
 
-export default function ModernEducation({ headerProps, variant = 'scroll', customCards, cardHeight = 140, hideParticles = false } = {}) {
+/**
+ * @param {Array} customCards - fallback maket: API bo'sh bo'lsa shu ko'rsatiladi,
+ *   to'lgan bo'lsa animatsiya/havola parametrlari shu yerdan olinadi (mergeCards).
+ * @param {string} contentKey - site-* endpoint nomi (kesh kaliti)
+ * @param {object} contentApi - shu endpoint'ning createResourceApi klienti
+ */
+export default function ModernEducation({
+	headerProps,
+	variant = 'scroll',
+	customCards,
+	cardHeight = 140,
+	hideParticles = false,
+	contentKey = 'site-main-features',
+	contentApi = siteMainFeaturesApi,
+} = {}) {
 	const containerRef = useRef(null)
 
 	const { scrollYProgress } = useScroll({
@@ -124,10 +141,12 @@ export default function ModernEducation({ headerProps, variant = 'scroll', custo
 		}
 	}, [variant, scrollYProgress, smooth])
 
-	const displayCards = customCards || cards
+	const layout = customCards || cards
+	const { items: apiCards } = useSiteList(contentKey, contentApi, toFeature, [])
+	const displayCards = apiCards.length ? mergeCards(apiCards, layout) : layout
 
 	return (
-		<div className='relative isolate bg-[rgba(var(--bg-rgb),1)] w-full' style={{ paddingBottom: 0 }}>
+		<div className='relative bg-[rgba(var(--bg-rgb),1)] w-full' style={{ paddingBottom: 0 }}>
 			<ModernEducationHeader headerProps={headerProps}>
 				{/* MOBILE: oddiy vertikal ro'yxat, animatsiyasiz */}
 				<div className='flex md:hidden flex-col gap-10 w-full px-5 pb-10'>

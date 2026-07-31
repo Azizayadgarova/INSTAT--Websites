@@ -7,11 +7,13 @@ import icon4 from '@/assets/icons/Vector (5).png'
 import illus1 from '@/assets/Illus.webp'
 import illus2 from '@/assets/Illustration (2).webp'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion' // eslint-disable-line no-unused-vars
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import AnimatedSection from './shared/AnimatedSection'
 import { Button2 } from './shared/Button2'
-import { useLibraryFeatures } from '@/hooks/useLibraryFeatures'
-import { useSiteText } from '@/hooks/useSiteText'
+import { siteLibraryFeaturesApi } from '@/api/siteContent.api'
+import { useSiteList } from '@/hooks/useSiteList'
+import { useSectionText } from '@/hooks/useSectionText'
+import { toFeature } from '@/utils/siteContent'
 
 const leftFeatures = [
 	{
@@ -42,10 +44,6 @@ const rightFeatures = [
 			"Sotib olingan va saqlangan kitoblaringizni bitta joyda boshqaring. Kutubxonangizni mavzular bo'yicha tartiblang va istalgan vaqtda tezkor kirish imkoniyatidan foydalaning.",
 	},
 ]
-
-// Vizual tartib (grid): left[0], right[0], left[1], right[1].
-// site-library-features API matni shu tartibda slotlar ustiga qo'yiladi.
-const FEATURE_SLOTS = [leftFeatures[0], rightFeatures[0], leftFeatures[1], rightFeatures[1]]
 
 const vp = { once: true, amount: 0.2 }
 
@@ -205,13 +203,27 @@ const FoydalanishJarayoni = () => {
         t
     } = useTranslation();
 
+    const st = useSectionText('library')
+
+    // Maket 4 ta uyaga qat'iy bog'langan: API'ning dastlabki 2 tasi chapga,
+    // keyingi 2 tasi o'ngga tushadi. Ikonkalar frontendda qoladi.
+    const { items: apiFeats } = useSiteList(
+        'site-library-features',
+        siteLibraryFeaturesApi,
+        toFeature,
+        [],
+    )
+    const [left, right] = useMemo(() => {
+        const fill = (staticArr, offset) =>
+            staticArr.map((base, i) => {
+                const f = apiFeats[offset + i]
+                return f ? { icon: base.icon, title: f.title, description: f.description } : base
+            })
+        return [fill(leftFeatures, 0), fill(rightFeatures, leftFeatures.length)]
+    }, [apiFeats])
+
     const bgRef = useRef(null)
     const [bgVisible, setBgVisible] = useState(false)
-
-    // "Platforma qanday ishlaydi" kartalari — /api/site-library-features (fallback: FEATURE_SLOTS)
-    const { items: features } = useLibraryFeatures(FEATURE_SLOTS)
-    // Boʻlim sarlavhasi — site-data (module: library)
-    const st = useSiteText('library')
 
     useEffect(() => {
 		const el = bgRef.current?.parentElement
@@ -321,7 +333,7 @@ const FoydalanishJarayoni = () => {
 					{/* 1 — left[0]: desktop col-1 row-1 */}
 					<div className='lg:col-start-1 lg:row-start-1'>
 						<MagneticWrap fromLeft delay={0}>
-							<FeatureCard {...features[0]} />
+							<FeatureCard {...left[0]} />
 						</MagneticWrap>
 					</div>
 
@@ -340,14 +352,14 @@ const FoydalanishJarayoni = () => {
 					{/* 3 — right[0]: desktop col-3 row-1 */}
 					<div className='lg:col-start-3 lg:row-start-1'>
 						<MagneticWrap fromLeft={false} delay={0}>
-							<FeatureCard {...features[1]} />
+							<FeatureCard {...right[0]} />
 						</MagneticWrap>
 					</div>
 
 					{/* 4 — left[1]: desktop col-1 row-2 */}
 					<div className='lg:col-start-1 lg:row-start-2'>
 						<MagneticWrap fromLeft delay={0.15}>
-							<FeatureCard {...features[2]} />
+							<FeatureCard {...left[1]} />
 						</MagneticWrap>
 					</div>
 
@@ -366,7 +378,7 @@ const FoydalanishJarayoni = () => {
 					{/* 6 — right[1]: desktop col-3 row-2 */}
 					<div className='lg:col-start-3 lg:row-start-2'>
 						<MagneticWrap fromLeft={false} delay={0.15}>
-							<FeatureCard {...features[3]} />
+							<FeatureCard {...right[1]} />
 						</MagneticWrap>
 					</div>
 				</div>

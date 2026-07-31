@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from './shared/Button'
 import AnimatedSection from './shared/AnimatedSection'
@@ -7,7 +8,8 @@ import icon02 from '@/assets/Vector (11).png'
 import icon03 from '@/assets/send-plane-line.png'
 import icon04 from '@/assets/Vector (12).png'
 import { siteVacancyInstructionsApi } from '@/api/siteContent.api'
-import { useSiteInstructions } from '@/hooks/useSiteInstructions'
+import { useSiteList } from '@/hooks/useSiteList'
+import { toFeature } from '@/utils/siteContent'
 
 const STEPS = [
 	{
@@ -200,8 +202,26 @@ const IshOrinlariJarayon = () => {
         t
     } = useTranslation();
 
-    // Jarayon bosqichlari — /api/site-vacancy-instructions (fallback: STEPS)
-    const { items: steps } = useSiteInstructions(siteVacancyInstructionsApi, STEPS, { descKey: 'desc' })
+    // Ikonka va chap/o'ng joylashuv frontendda qoladi — API matnni beradi
+    const { items: apiSteps } = useSiteList(
+        'site-vacancy-instructions',
+        siteVacancyInstructionsApi,
+        toFeature,
+        [],
+    )
+    const steps = useMemo(
+        () =>
+            apiSteps.length
+                ? apiSteps.map((f, i) => ({
+                        ...STEPS[i % STEPS.length],
+                        id: String(i + 1).padStart(2, '0'),
+                        reverse: i % 2 === 1,
+                        title: f.title,
+                        desc: f.description,
+                    }))
+                : STEPS,
+        [apiSteps],
+    )
 
     return (
         <section style={{ width: '100%', background: 'rgba(var(--card-rgb),1)' }}>

@@ -6,6 +6,27 @@ import Image5 from '@/assets/image5.webp'
 
 export const BUTTON_TEXT = 'Tizimga kirish'
 
+/**
+ * API'dan kelgan FEATURE yozuvlarini statik kartochka maketiga qo'shadi.
+ *
+ * Backend faqat matn va rasm beradi — animatsiya parametrlari (startX/startY/
+ * exitX) va havolalar (`to`) frontendda qoladi, shuning uchun i-indeksdagi
+ * statik kartochka "shablon" sifatida ishlatiladi. API rasmi bo'sh bo'lsa
+ * (image: null) statik rasm saqlanadi.
+ */
+export const mergeCards = (apiItems, layout) =>
+	apiItems.map((item, i) => {
+		const base = layout[i % layout.length]
+		return {
+			...base,
+			id: item.id,
+			title: item.title,
+			highlight: '', // API sarlavhani bo'lmaydi — to'liq `title` da keladi
+			description: item.description,
+			img: item.image || base.img,
+		}
+	})
+
 export const cards = [
 	{
 		id: 1,

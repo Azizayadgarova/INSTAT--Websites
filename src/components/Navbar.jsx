@@ -119,33 +119,22 @@ const Navbar = () => {
 								<ul className='space-y-[12px]'>
 									{Object.entries(menuConfig).map(([key, item]) => (
 										<li key={key}>
-											{item.direct ? (
-												<Link
-													to={item.base}
-													onClick={closeMenu}
-													style={{ textDecoration: 'none' }}
-													className='block text-[28px] md:text-[32px] font-inter font-semibold cursor-pointer transition-colors duration-200 text-[rgba(90,98,117,1)] hover:text-white'
-												>
-													{item.title}
-												</Link>
-											) : (
-												<div
-													onClick={() => {
-														setActiveMenu(key)
-														setActiveLinkIndex(null)
-													}}
-													className={`text-[28px] md:text-[32px] font-inter font-semibold cursor-pointer transition-colors duration-200 ${
-														activeMenu === key
-															? 'text-cyan-300'
-															: 'text-[rgba(90,98,117,1)] hover:text-white'
-													}`}
-												>
-													{item.title}
-												</div>
-											)}
+											<div
+												onClick={() => {
+													setActiveMenu(key)
+													setActiveLinkIndex(null)
+												}}
+												className={`text-[28px] md:text-[32px] font-inter font-semibold cursor-pointer transition-colors duration-200 ${
+													activeMenu === key
+														? 'text-cyan-300'
+														: 'text-[rgba(90,98,117,1)] hover:text-white'
+												}`}
+											>
+												{item.title}
+											</div>
 
 											{/* Mobile: active bo'lganda ichki bo'limlar inline */}
-											{!item.direct && activeMenu === key && (
+											{activeMenu === key && (
 												<ul className='md:hidden mt-[12px] mb-[4px] space-y-[10px] pl-[2px]'>
 													{item.links.map((link, i) => (
 														<li

@@ -1,19 +1,23 @@
 import { memo, useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import img from '@/assets/Illustration.webp'
+import { useSectionStats } from '@/hooks/useSectionStats'
+import { parseStatValue } from '@/utils/siteContent'
 
-const stats = [
-	{ number: 10000, suffix: '+', label: 'Foydalanuvchilar' },
-	{ number: 50, suffix: '+', label: 'Hamkorlar' },
-	{ number: 100, suffix: '+', label: 'Ekspertlar' },
-	{ number: 5, suffix: '+', label: 'Platforma faoliyati' },
+// Raqam (`value`) va izoh (`label`) backend'ning `main` modulidan keladi
+// (site-data: main_users_number va h.k.). API javob bermasa shu qiymatlar qoladi.
+const STATS_FALLBACK = [
+	{ key: 'main_users_number', value: '10 000+', label: 'Foydalanuvchilar' },
+	{ key: 'main_partners_number', value: '50+', label: 'Hamkorlar' },
+	{ key: 'main_experts_number', value: '100+', label: 'Ekspertlar' },
+	{ key: 'main_activity_number', value: '5+', label: 'Platforma faoliyati' },
 ]
 
 function CountUp({ target, suffix, inView }) {
 	const [count, setCount] = useState(0)
 
 	useEffect(() => {
-		if (!inView) return
+		if (!inView || target == null) return
 		const duration = 1800
 		const startTime = performance.now()
 		let raf
@@ -29,6 +33,9 @@ function CountUp({ target, suffix, inView }) {
 		return () => cancelAnimationFrame(raf)
 	}, [inView, target])
 
+	// Raqamsiz qiymat ("Ma'lumot yo'q") — sanashsiz chiqadi
+	if (target == null) return <span>{suffix}</span>
+
 	return (
 		<span>
 			{count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}{suffix}
@@ -39,6 +46,8 @@ function CountUp({ target, suffix, inView }) {
 const StatisticComponent = () => {
 	const ref = useRef(null)
 	const inView = useInView(ref, { once: true, margin: '-80px' })
+	// "10 000+" -> { number: 10000, suffix: '+' }, JSX o'zgarishsiz qoladi
+	const stats = useSectionStats('main', STATS_FALLBACK).map(stat => ({ ...stat, ...parseStatValue(stat.value) }))
 
 	return (
 		<div
@@ -68,7 +77,7 @@ const StatisticComponent = () => {
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap justify-center gap-[38px] z-10 px-4">
 				{stats.map((stat, index) => (
 					<motion.div
-						key={stat.label}
+						key={stat.key}
 						className="flex flex-col items-center"
 						initial={{ opacity: 0, y: 40 }}
 						animate={inView ? { opacity: 1, y: 0 } : {}}
