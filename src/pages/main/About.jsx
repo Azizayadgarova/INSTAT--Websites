@@ -209,7 +209,7 @@ const About = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2, ease: EASE_SMOOTH }}
-          >{t("pages.about.talim_ilm_fan_va")}</motion.p>
+          >{st('main_title2', t("pages.about.talim_ilm_fan_va"))}</motion.p>
         </div>
       </div>
       <motion.div

@@ -13,6 +13,11 @@ const NAV_LINKS = [
 	{ label: "Bo'sh ish o'rinlari", path: '/platform/bosh-ish-orinlari' },
 ]
 
+function handleLogin()
+{
+	window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
+}
+
 const Navbar2 = () => {
     const {
         t
@@ -145,6 +150,7 @@ const Navbar2 = () => {
 							fontWeight: 500,
 							cursor: 'pointer',
 						}}
+						onClick={handleLogin}
 						className='hidden md:flex gap-2 px-4 py-2'
 					>
 						<img src={userIcon} alt='user' width={16} height={16} loading='lazy' decoding='async' />

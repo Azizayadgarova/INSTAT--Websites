@@ -5,6 +5,7 @@ import fotIcon3 from '@/assets/iBEROwOJyQaiqZZ4k8N5Sj51w.svg.png'
 import fotIcon1 from '@/assets/icons/fUwXkleZJbkDUDDvw93zVo3gnls.svg fill.png'
 import icon1 from '@/assets/icons/InstatIcon.png'
 import { memo, useEffect, useRef } from 'react'
+import {Link} from "react-router-dom";
 
 const HEADING = {
 	fontFamily: 'Inter Display, sans-serif',
@@ -27,10 +28,22 @@ const LINK = {
 
 const LETTERS = 'INSTAT'.split('')
 const saytlar = [
-	'Raqamli kutubxona',
-	'Onlayn kurslar',
-	"Mikro ma'lumotlar",
-	'Elektron jurnal',
+	{
+		to: "/platform/onlayn-talim",
+		label: "Onlayn kurslar",
+	},
+	{
+		to: "/platform/raqamli-kutubxona",
+		label: "Raqamli kutubxona",
+	},
+	{
+		to: "/platform/elektron-jurnal",
+		label: "Elektron jurnal",
+	},
+	{
+		to: "/platform/mikro-malumotlar",
+		label: "Mikro ma'lumotlar",
+	},
 ]
 const support = ['FAQ', "Biz bilan bog'lanish"]
 const huquqiy = ['Maxfiylik siyosati', 'Xizmat shartlari', 'Cookie siyosati']
@@ -171,11 +184,11 @@ const Footer = () => {
                         >
                             {saytlar.map(item => (
                                 <li
-                                    key={item}
+                                    key={item.to}
                                     style={LINK}
                                     className='text-center md:text-left hover:text-white transition'
                                 >
-                                    {item}
+									<Link to={item.to}>{item.label}</Link>
                                 </li>
                             ))}
                         </ul>

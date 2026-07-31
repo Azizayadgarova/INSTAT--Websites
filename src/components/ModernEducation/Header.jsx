@@ -28,13 +28,13 @@ export default function ModernEducationHeader({ headerProps = {}, children }) {
 		buttonText = 'Bizning platformalar',
 		buttonType,
 		title =st('main_title3',  'Barcha imkoniyatlar').split(" ").slice(0, -2).join(" "),
-		highlight = 'bir joyda',
+		highlight = st('main_title3',  'Barcha imkoniyatlar').split(" ").slice( -2).join(" "),
 		highlightColor,
 		subtitle = (
 			<>
-				{t('components.header.beshta_platforma_orqali_oqish')}
+				{st('main_description3',  t('components.header.beshta_platforma_orqali_oqish')).split(" ").slice(0, -2).join(" ")}
 				<br className='hidden md:block' />
-				{t('components.header.rivojlanish_imkoniyatlari')}
+				{st('main_description3',  t('components.header.rivojlanish_imkoniyatlari')).split(" ").slice( -2).join(" ")}
 			</>
 		),
 		hideParticles = false,
