@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import logoImg from '@/assets/icons/InstatIcon.png'
 import userIcon from '@/assets/icons/user-line.png'
 import menuIcon from '@/assets/menu-line.png'
+import LanguageSwitcher from "@/components/shared/LanguageSwitcher.jsx";
 
 const NAV_LINKS = [
 	{ label: "Onlayn ta'lim",       path: '/platform/onlayn-talim' },
@@ -46,7 +47,7 @@ const Navbar2 = () => {
 					WebkitBackdropFilter: 'blur(40px)',
 				}}
 			>
-				<div className='max-w-360 mx-auto flex items-center justify-between py-5 px-5 md:px-25'>
+				<div className='max-w-400 mx-auto flex items-center justify-between py-5 px-5 md:px-25'>
 
 					{/* Logo */}
 					<Link to='/'>
@@ -134,6 +135,11 @@ const Navbar2 = () => {
 								)
 							})}
 						</div>
+					</div>
+					<div
+						className='mx-5'>
+					<LanguageSwitcher className='mx-4' compact />
+
 					</div>
 
 					{/* Desktop: Shaxsiy kabinet tugmasi */}
