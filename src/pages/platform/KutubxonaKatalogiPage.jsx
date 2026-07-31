@@ -192,38 +192,13 @@ const KutubxonaKatalogiPage = () => {
 	)
 	const categoryLabel = categories.find(c => c.id === categoryId)?.label ?? categories[0].label
 
-	/**
-	 * /books/ backendda `search` ishlaydi, lekin kategoriya bo'yicha filtr yo'q
-	 * (barcha ko'rilgan parametr nomlari e'tiborga olinmadi). Shu sabab:
-	 *  - kategoriya tanlanmagan bo'lsa — server sahifasi va qidiruvi to'g'ridan-to'g'ri ishlatiladi;
-	 *  - kategoriya tanlansa — qidiruvga mos barcha backend sahifalari yig'ib olinadi va
-	 *    kategoriya bo'yicha filtr + sahifalash shu yerda (klientda) amalga oshiriladi.
-	 */
 	const fetchBooks = async () => {
-		if (categoryId === ALL_CATEGORY) {
-			const res = await booksApi.getAll({ search: debouncedSearch, page })
-			return {
-				items: (res.items ?? []).filter(b => b.is_active !== false),
-				meta: res.meta,
-			}
-		}
-
-		let all = []
-		let current = 1
-		let lastPage = 1
-		do {
-			const res = await booksApi.getAll({ search: debouncedSearch, page: current })
-			all = all.concat(res.items ?? [])
-			lastPage = res.meta?.last_page ?? 1
-			current += 1
-		} while (current <= lastPage)
-
-		const matched = all.filter(b => b.is_active !== false && b.category?.id === categoryId)
-		const lastPageLocal = Math.max(1, Math.ceil(matched.length / PER_PAGE))
-		const safePage = Math.min(page, lastPageLocal)
+		const params = { search: debouncedSearch, page }
+		if (categoryId !== ALL_CATEGORY) params.category = categoryId
+		const res = await booksApi.getAll(params)
 		return {
-			items: matched.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE),
-			meta: { total: matched.length, current_page: safePage, last_page: lastPageLocal },
+			items: (res.items ?? []).filter(b => b.is_active !== false),
+			meta: res.meta,
 		}
 	}
 
