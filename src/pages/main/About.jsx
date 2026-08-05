@@ -47,7 +47,7 @@ const HOME_SECTIONS = [
   { id: 'education',   Component: ModernEducation,    height: '100vh' },
   { id: 'hero-zoom',   Component: HeroZoom,           height: '100vh' },
   { id: 'mentors',     Component: MentorsSection,     height: '850px' },
-  { id: 'testimonials',Component: Testimonials,       height: '700px', suspenseHeight: '600px' },
+  // { id: 'testimonials',Component: Testimonials,       height: '700px', suspenseHeight: '600px' },
   { id: 'integration', Component: IntegrationSection, height: '850px', suspenseHeight: '600px' },
   { id: 'faq',         Component: FAQSection,         height: '600px' },
 ]

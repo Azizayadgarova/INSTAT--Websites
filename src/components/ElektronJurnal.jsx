@@ -1486,12 +1486,12 @@ export default function ElektronJurnal() {
 			<TahririyatAzolari />
 			<JurnalStatistika />
 			<FAQSection hideParticles platformStyle module='articles' />
-			<Testimonial
+			{/*<Testimonial
 				hideParticles
 				platformStyle
 				feedbackKey='site-article-feedbacks'
 				feedbackApi={siteArticleFeedbacksApi}
-			/>
+			/>*/}
 		</>
 	)
 }

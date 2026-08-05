@@ -31,7 +31,13 @@ const Navbar = () => {
 		document.body.style.overflow = isOpen ? 'hidden' : ''
 	}, [isOpen])
 
-    return (
+	function handleLogin()
+	{
+		window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
+	}
+
+
+	return (
         <>
             {/* NAVBAR */}
             <nav className='fixed w-full z-50 bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
@@ -45,8 +51,10 @@ const Navbar = () => {
 						className='w-52 h-7.5 md:h-auto'
 						style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} decoding='async' />
 					<div className='flex items-center gap-4'>
+
 						<LanguageSwitcher compact />
-						<Link to='/about/umumiy-malumot' className='hidden md:block text-[14px] text-white' style={{ textDecoration: 'none' }}>{t("components.navbar.tizimga_kirish")}</Link>
+						<div  						onClick={handleLogin}
+													className='hidden md:block text-[14px] text-white' style={{ textDecoration: 'none' }}>{t("components.navbar.tizimga_kirish")}</div>
 						<div className="hidden lg:block w-[1px] h-[22px] bg-white/40" />
 						<button
 							onClick={toggleMenu}

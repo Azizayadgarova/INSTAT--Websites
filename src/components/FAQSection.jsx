@@ -10,6 +10,7 @@ const FaqCard = memo(({ item, realIndex, isOpen, onToggle, delay, platformStyle 
 	return (
 		<AnimatedSection delay={delay}>
 			<div
+				id="faq"
 				className={`${platformStyle ? '' : 'faq-card'} relative overflow-hidden ${isOpen ? 'shadow-[0_10px_30px_rgba(0,0,0,0.4)]' : ''}`}
 				style={
 					platformStyle

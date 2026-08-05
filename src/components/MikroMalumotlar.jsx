@@ -466,7 +466,7 @@ function HeroSection() {
 					color: '#fff', maxWidth: '1100px', margin: 0,
 				}}>
 					Tadqiqot uchun <br />
-					<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>mikroma'lumotlar</span>
+					<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>mikro ma'lumotlar</span>
 				</h1>
 				<p style={{
 					fontFamily: 'var(--font-display)', fontWeight: 400,
@@ -514,7 +514,7 @@ export default function MikroMalumotlar() {
 			<DatasetSection />
 			<MikroStatistika />
 			<FAQSection hideParticles platformStyle module='micro_data' />
-			<Testimonial hideParticles platformStyle />
+			{/*<Testimonial hideParticles platformStyle />*/}
 		</>
 	)
 }

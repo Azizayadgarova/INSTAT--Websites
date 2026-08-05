@@ -33,7 +33,10 @@ const SAYTLAR_PATHS = [
 	{ to: '/platform/elektron-jurnal',   key: 'elektron_jurnal' },
 	{ to: '/platform/mikro-malumotlar',  key: 'mikro_malumotlar' },
 ]
-const SUPPORT_KEYS = ['faq', 'biz_bilan_boglanish']
+const SUPPORT_KEYS = [
+	{ to: '#faq',  key: 'faq' },
+	{ to: '/about/tuzilma',  key: 'biz_bilan_boglanish' },
+]
 const HUQUQIY_KEYS = ['maxfiylik_siyosati', 'xizmat_shartlari', 'cookie_siyosati']
 const SOCIAL = [fotIcon1, fotIcon3, fotIcon2]
 
@@ -131,7 +134,7 @@ const Footer = () => {
     } = useTranslation();
 
     const saytlar = SAYTLAR_PATHS.map(item => ({ to: item.to, label: t(`components.footer.${item.key}`) }))
-    const support = SUPPORT_KEYS.map(key => t(`components.footer.${key}`))
+    const support = SUPPORT_KEYS.map(key => t(`components.footer.${key.key}`))
     const huquqiy = HUQUQIY_KEYS.map(key => t(`components.footer.${key}`))
 
     return (
@@ -197,13 +200,14 @@ const Footer = () => {
                                 gap: '14px',
                             }}
                         >
-                            {support.map(item => (
+                            {SUPPORT_KEYS.map(item => (
                                 <li
-                                    key={item}
+                                    key={item.to}
                                     style={LINK}
                                     className='text-center md:text-left hover:text-white transition'
                                 >
-                                    {item}
+									<Link to={item.to}>{t(`components.footer.${item.key}`)}</Link>
+
                                 </li>
                             ))}
                         </ul>

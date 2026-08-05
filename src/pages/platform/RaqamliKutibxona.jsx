@@ -588,7 +588,7 @@ const RaqamliKutibxona = () => {
             <ElektronKutubxona />
             <Kutubxona />
             <FAQSection hideParticles platformStyle module='library' />
-            <Testimonials hideParticles platformStyle />
+            {/*<Testimonials hideParticles platformStyle />*/}
         </>
     );
 }
