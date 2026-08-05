@@ -17,7 +17,7 @@ const createResourceApi = path => {
 	 *   plus any endpoint-specific filters (e.g. category, type).
 	 */
 	const getAll = async (params = {}) => {
-		const { data } = await api.get(`/${path}/items/active/`, { params })
+		const { data } = await api.get(`/${path}/`, { params })
 		// Ko'pchilik endpoint {links, data, meta} shaklida javob beradi, lekin
 		// ba'zilari (masalan review-authors) to'g'ridan-to'g'ri array qaytaradi —
 		// ikkalasini ham qo'llab-quvvatlaymiz.
@@ -66,7 +66,7 @@ export const bookCommentsApi = {
 }
 export const permissionsApi = createResourceApi('permissions')
 export const categoriesApi = createResourceApi('categories')
-export const coursesApi = createResourceApi('courses')
+export const coursesApi = createResourceApi('courses/items/active/')
 /** Bitta kursning "Nimalarni o'rganasiz" bandlari — /courses/{id}/course_features/ (flat array). */
 export const courseFeaturesApi = {
 	getByCourse: async courseId => {
