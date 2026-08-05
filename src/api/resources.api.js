@@ -17,7 +17,7 @@ const createResourceApi = path => {
 	 *   plus any endpoint-specific filters (e.g. category, type).
 	 */
 	const getAll = async (params = {}) => {
-		const { data } = await api.get(`/${path}/`, { params })
+		const { data } = await api.get(`/${path}/items/active/`, { params })
 		// Ko'pchilik endpoint {links, data, meta} shaklida javob beradi, lekin
 		// ba'zilari (masalan review-authors) to'g'ridan-to'g'ri array qaytaradi —
 		// ikkalasini ham qo'llab-quvvatlaymiz.
@@ -49,9 +49,44 @@ const createResourceApi = path => {
 export const groupsApi = createResourceApi('groups')
 export const authorsApi = createResourceApi('authors')
 export const booksApi = createResourceApi('books')
+/**
+ * DIQQAT: GET /books/{id}/ backendda anonim foydalanuvchi bilan 500 qaytaradi
+ * (AnonymousUser xatosi) — shu sabab bitta kitobni ro'yxatdan qidiramiz.
+ */
+export const getBookById = async id => {
+	const { items } = await booksApi.getAll({ per_page: 100 })
+	return items.find(b => String(b.id) === String(id)) ?? null
+}
+/** Kitob sharhlari — /books/{id}/comments/ (flat array). */
+export const bookCommentsApi = {
+	getByBook: async bookId => {
+		const { data } = await api.get(`/books/${bookId}/comments/`)
+		return Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
+	},
+}
 export const permissionsApi = createResourceApi('permissions')
 export const categoriesApi = createResourceApi('categories')
 export const coursesApi = createResourceApi('courses')
+/** Bitta kursning "Nimalarni o'rganasiz" bandlari — /courses/{id}/course_features/ (flat array). */
+export const courseFeaturesApi = {
+	getByCourse: async courseId => {
+		const { data } = await api.get(`/courses/${courseId}/course_features/`)
+		return Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
+	},
+}
+/** "O'quv reja" — kurs bloklari va ularning darslari (flat array'lar). */
+export const courseBlocksApi = {
+	getByCourse: async courseId => {
+		const { data } = await api.get(`/courses/${courseId}/course_blocks/items/all-active/`)
+		return Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
+	},
+}
+export const courseBlockLessonsApi = {
+	getByBlock: async (courseId, blockId) => {
+		const { data } = await api.get(`/courses/${courseId}/course_blocks/${blockId}/lessons/items/all-active/`)
+		return Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
+	},
+}
 export const courseGroupsApi = createResourceApi('course-groups')
 export const bookCasesApi = createResourceApi('book-cases')
 export const udkCodesApi = createResourceApi('udk-codes')

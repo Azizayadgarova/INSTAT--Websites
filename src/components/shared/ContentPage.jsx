@@ -33,7 +33,7 @@ const ContentPage = ({ module, contentKey, title, description, showTitle = false
 
 	const stringItems = (data ?? []).filter(it => it.type === 'string')
 	const main = contentKey ? (data ?? []).find(it => it.key === contentKey) : stringItems[0]
-	const attachments = (data ?? []).filter(it => it.type === 'file' && it.path)
+	const attachments = (data ?? []).filter(it => it.type === 'file' && it.path && it.key === contentKey)
 
 	return (
 		<section>

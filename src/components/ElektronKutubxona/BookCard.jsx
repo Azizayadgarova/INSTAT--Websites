@@ -1,11 +1,13 @@
 import {useTranslation} from 'react-i18next'
 import {useDataText} from '@/hooks/useDataText'
 import {motion} from 'framer-motion'
+import {useNavigate} from 'react-router-dom'
 
 const vp = {once: true, amount: 0.2}
 
 const BookCard = ({book, index}) => {
     const dt = useDataText('books')
+    const navigate = useNavigate()
     const {
         t
     } = useTranslation();
@@ -16,6 +18,7 @@ const BookCard = ({book, index}) => {
             whileInView={{opacity: 1, y: 0}}
             viewport={vp}
             transition={{duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: (index % 4) * 0.08}}
+            onClick={() => navigate(`/platform/kitob/${book.id}`)}
             style={{
                 backgroundColor: 'rgba(var(--card-rgb),1)',
                 borderRadius: '20px',

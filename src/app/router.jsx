@@ -12,6 +12,8 @@ const KutubxonaKatalogiPage = lazy(() => import('../pages/platform/KutubxonaKata
 const ElektronJurnalPage   = lazy(() => import('../pages/platform/ElektronJurnalPage'))
 const MikroMalumotlarPage  = lazy(() => import('../pages/platform/MikroMalumotlarPage'))
 const BoshIshOrinlariPage  = lazy(() => import('../pages/platform/BoshIshOrinlariPage'))
+const KursDetail           = lazy(() => import('../pages/platform/KursDetail'))
+const KitobDetail          = lazy(() => import('../pages/platform/KitobDetail'))
 
 
 // About pages
@@ -132,8 +134,10 @@ export const routes = [
 		children: [
 			{ index: true, element: <Navigate to='/platform/onlayn-talim' replace /> },
 			{ path: 'onlayn-talim',        element: s(OnlaynTalim) },
+			{ path: 'kurs/:id',            element: s(KursDetail) },
 			{ path: 'raqamli-kutubxona',   element: s(RaqamliKutibxona) },
 			{ path: 'kutubxona-katalogi',  element: s(KutubxonaKatalogiPage) },
+			{ path: 'kitob/:id',           element: s(KitobDetail) },
 			{ path: 'elektron-jurnal',     element: s(ElektronJurnalPage) },
 			{ path: 'mikro-malumotlar',    element: s(MikroMalumotlarPage) },
 			{ path: 'bosh-ish-orinlari',   element: s(BoshIshOrinlariPage) },

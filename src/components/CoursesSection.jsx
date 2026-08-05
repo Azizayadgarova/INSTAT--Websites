@@ -85,6 +85,8 @@ const CoursesSection = () => {
 						const priceLabel = Number(course.price) > 0
 							? `${Number(course.price).toLocaleString('uz-UZ')} ${t('components.coursesSection.uzs', "so'm")}`
 							: t('components.coursesSection.0_uzs')
+						const rating = course.ratings_count > 0 ? course.rating_sum / course.ratings_count : 0
+						const filledStars = Math.round(rating)
 
 						return (
 							<motion.div
@@ -94,7 +96,8 @@ const CoursesSection = () => {
 								viewport={{ once: true, amount: 0.1 }}
 								transition={{ duration: 0.65, delay: i * 0.08 }}
 								whileHover={{ y: -10, scale: 1.02 }}
-								className='group bg-[#161B26] rounded-[22px] p-4 flex flex-col'
+								onClick={() => navigate(`/platform/kurs/${course.id}`)}
+								className='group bg-[#161B26] rounded-[22px] p-4 flex flex-col cursor-pointer'
 							>
 								<div className='aspect-16/10 mb-4 overflow-hidden rounded-2xl shrink-0'>
 									<motion.img
@@ -111,7 +114,15 @@ const CoursesSection = () => {
 									</h3>
 									<div className='flex items-center gap-0.5 shrink-0'>
 										{STARS.map(starIdx => (
-											<img key={starIdx} src={StarIcon} alt='star' className='w-4 h-4' loading='lazy' decoding='async' />
+											<img
+												key={starIdx}
+												src={StarIcon}
+												alt='star'
+												className='w-4 h-4'
+												loading='lazy'
+												decoding='async'
+												style={{ opacity: starIdx < filledStars ? 1 : 0.25 }}
+											/>
 										))}
 									</div>
 								</div>
