@@ -172,6 +172,7 @@ body {
 
 /* Backend HTML tipografiyasi */
 .instat-rich { color: rgba(var(--text-rgb),1); line-height: 1.75; font-size: 16px; }
+.instat-rich * { background-color: transparent !important; color: #fff !important; }
 .instat-rich p { margin: 0 0 14px; }
 .instat-rich strong { color: #fff; font-weight: 600; }
 .instat-rich ul, .instat-rich ol { margin: 0 0 14px; padding-left: 22px; }
