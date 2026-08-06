@@ -81,7 +81,13 @@ const CoursesSection = () => {
 				<div className='relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 lg:px-24 items-stretch'>
 					{courses.map((course, i) => {
 						const title = pickField(course, 'name', lang)
-						const hours = course.total_duration ? Math.max(1, Math.round(course.total_duration / 60)) : 0
+						const totalSeconds = Math.max(0, Math.round(course.total_duration || 0))
+						const durationValue = totalSeconds >= 3600
+							? Math.round(totalSeconds / 3600)
+							: totalSeconds >= 60
+								? Math.round(totalSeconds / 60)
+								: totalSeconds
+						const durationUnit = totalSeconds >= 3600 ? 'soat' : totalSeconds >= 60 ? 'daqiqa' : 'soniya'
 						const priceLabel = Number(course.price) > 0
 							? `${Number(course.price).toLocaleString('uz-UZ')} ${t('components.coursesSection.uzs', "so'm")}`
 							: t('components.coursesSection.0_uzs')
@@ -130,7 +136,7 @@ const CoursesSection = () => {
 									<div className='flex items-center gap-1.5'>
 										<img src={ClockIcon} alt='clock' className='w-4 h-4' loading='lazy' decoding='async' />
 										<span className='text-[#BCBCBC] text-sm font-light'>
-											{hours}{t("components.coursesSection.soat")}</span>
+											{durationValue}{t(`components.coursesSection.${durationUnit}`)}</span>
 									</div>
 									<div className='text-[#3b82f6] text-[24px] font-semibold leading-[120%] text-right'>{priceLabel}</div>
 								</div>

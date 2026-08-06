@@ -35,12 +35,14 @@ const CheckIcon = () => (
 	</svg>
 )
 
-const formatDuration = mins => {
-	const total = Math.max(0, Math.round(mins || 0))
-	const h = Math.floor(total / 60)
-	const rem = total % 60
-	if (h <= 0) return `${total} min`
-	return rem > 0 ? `${h} hr ${rem} min` : `${h} hr`
+const formatDuration = seconds => {
+	const total = Math.max(0, Math.round(seconds || 0))
+	const h = Math.floor(total / 3600)
+	const m = Math.floor((total % 3600) / 60)
+	const s = total % 60
+	if (h > 0) return m > 0 ? `${h} soat ${m} daqiqa` : `${h} soat`
+	if (m > 0) return s > 0 ? `${m} daqiqa ${s} soniya` : `${m} daqiqa`
+	return `${s} soniya`
 }
 
 const PlayIcon = () => (
@@ -176,7 +178,7 @@ const KursDetail = () => {
 
 	const title = course ? pickField(course, 'name', lang) : ''
 	const description = course ? pickField(course, 'description', lang) : ''
-	const hours = course?.total_duration ? Math.max(1, Math.round(course.total_duration / 60)) : 0
+	const durationLabel = course?.total_duration ? formatDuration(course.total_duration) : ''
 	const priceLabel = course && Number(course.price) > 0
 		? `${Number(course.price).toLocaleString('uz-UZ')} ${t('components.coursesSection.uzs', "so'm")}`
 		: t('components.coursesSection.0_uzs')
@@ -276,7 +278,7 @@ const KursDetail = () => {
 										)}
 									</div>
 									{!!course.lessons_count && <InfoStat icon={DeviceIcon}>{course.lessons_count} ta darslar</InfoStat>}
-									{!!hours && <InfoStat icon={ClockIcon}>Davomiyligi: {hours} soat</InfoStat>}
+									{!!durationLabel && <InfoStat icon={ClockIcon}>Davomiyligi: {durationLabel}</InfoStat>}
 									{!!course.tests_count && <InfoStat icon={DeviceIcon}>{course.tests_count} ta test savollari</InfoStat>}
 								</div>
 							</div>
