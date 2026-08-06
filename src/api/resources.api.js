@@ -33,7 +33,7 @@ const createResourceApi = path => {
 
 	/** Some endpoints expose a non-paginated "all" action: /<path>/items/all/ */
 	const getAllFlat = async (params = {}) => {
-		const { data } = await api.get(`/${path}`, { params })
+		const { data } = await api.get(`/${path}/items/all/`, { params })
 		return Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
 	}
 
