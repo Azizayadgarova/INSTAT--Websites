@@ -124,6 +124,14 @@
 			"topilmadi": "Bu tanlov bo'yicha kitob topilmadi",
 			"sahifa": "Sahifa"
 		},
+		"kurslarKatalogi": {
+			"badge": "Kurslar katalogi",
+			"sarlavha": "Barcha kurslar",
+			"tavsif": "Platformamizdagi barcha onlayn kurslarni bir joyda ko'ring. Nomi bo'yicha qidirib, o'zingizga mos kursni toping.",
+			"qidirish_placeholder": "Kurs nomi bo'yicha qidirish...",
+			"topilmadi": "Bu qidiruv bo'yicha kurs topilmadi",
+			"sahifa": "Sahifa"
+		},
 		"bookCard": {
 			"ta_izoh": "ta izoh"
 		},

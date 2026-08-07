@@ -33,6 +33,8 @@ export const siteEducationMentorsApi = createResourceApi('site-education-mentors
 export const siteLibraryFeaturesApi = createResourceApi('site-library-features')
 /** FEATURE — kutubxonadan foydalanish bosqichlari */
 export const siteLibraryInstructionsApi = createResourceApi('site-library-instructions')
+/** STEP — kutubxonadagi muammolar (ProblemSection) */
+export const siteLibraryStepsApi = createResourceApi('site-library-steps')
 /** FEEDBACK — kutubxona foydalanuvchilari fikri */
 export const siteLibraryFeedbacksApi = createResourceApi('site-library-feedbacks')
 

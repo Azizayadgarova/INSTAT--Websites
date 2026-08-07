@@ -2,6 +2,7 @@ import { lazy, Suspense, useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar2 from '../components/Navbar2'
 import ScrollToTop from '../components/shared/ScrollToTop'
+import AppPromoSection from "@/components/AppPromoSection.jsx";
 
 const CursorRing = lazy(() => import('../components/shared/CursorRing'))
 const Footer     = lazy(() => import('../components/Footer.jsx'))
@@ -26,6 +27,9 @@ const SecondLayout = () => {
 			<main className='pt-20'>
 				<Outlet />
 			</main>
+			<Suspense fallback={null}>
+				<AppPromoSection />
+			</Suspense>
 			<Suspense fallback={null}><Footer /></Suspense>
 		</div>
 	)

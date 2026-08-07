@@ -1,22 +1,20 @@
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import bgGlow from '@/assets/bgImg/Background (1).png'
+import StarIcon from '@/assets/Star.png'
+import ClockIcon from '@/assets/icons/time-line.png'
 import BlurWords from '../../components/shared/BlurWords'
 import { Button2 } from '../../components/shared/Button2'
-import BookCard from '../../components/ElektronKutubxona/BookCard'
 import AsyncBoundary from '../../components/shared/AsyncBoundary'
-import { booksApi, categoriesApi } from '@/api/resources.api'
+import { coursesApi } from '@/api/resources.api'
 import { useApiResource } from '@/hooks/useApiResource'
 import { pickField } from '@/utils/siteContent'
-import { toBook } from '@/utils/bookMapper'
 
 const vp = { once: true, amount: 0.2 }
-const PER_PAGE = 12
+const STARS = [0, 1, 2, 3, 4]
 const SEARCH_DEBOUNCE_MS = 400
-const ALL_CATEGORY = 'all'
-// /categories/ turli modullar uchun umumiy — faqat kutubxona kategoriyalari kerak.
-const LIBRARY_CATEGORY_TYPE = 'library'
 
 function PagBtn({ children, onClick, active, nav }) {
 	return (
@@ -55,7 +53,7 @@ function Pagination({ page, setPage, total, t }) {
 			position: 'relative', zIndex: 1, marginTop: '8px',
 		}}>
 			<span style={{ fontFamily: 'var(--font-display)', fontSize: '14px', color: 'rgba(100,110,130,1)' }}>
-				{t('components.kutubxonaKatalogi.sahifa')}
+				{t('components.kurslarKatalogi.sahifa')}
 			</span>
 			<div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
 				<PagBtn nav onClick={() => setPage(1)}>«</PagBtn>
@@ -74,89 +72,101 @@ function Pagination({ page, setPage, total, t }) {
 	)
 }
 
-function FilterBar({ search, setSearch, categoryId, setCategoryId, categoryLabel, categories, catOpen, setCatOpen, t }) {
+function SearchBar({ search, setSearch, t }) {
 	return (
-		<div
-			className='flex-col md:flex-row w-[327px] md:w-full'
-			style={{
-				display: 'flex', alignItems: 'stretch', gap: '12px',
-				maxWidth: '800px', margin: '0 auto 40px', position: 'relative', zIndex: 10,
-			}}
-		>
-			{/* Search */}
-			<div style={{
-				flex: 1, display: 'flex', alignItems: 'center', gap: '10px',
-				height: '56px', padding: '0 18px', borderRadius: '14px',
-				background: 'rgba(var(--card-rgb),1)', border: '1px solid rgba(31,37,51,1)',
-			}}>
-				<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style={{ flexShrink: 0 }}>
-					<circle cx='11' cy='11' r='7' stroke='rgba(144,157,162,1)' strokeWidth='2' />
-					<path d='M16.5 16.5L21 21' stroke='rgba(144,157,162,1)' strokeWidth='2' strokeLinecap='round' />
-				</svg>
-				<input
-					type='text'
-					value={search}
-					onChange={e => setSearch(e.target.value)}
-					placeholder={t('components.kutubxonaKatalogi.qidirish_placeholder')}
-					style={{
-						flex: 1, background: 'transparent', border: 'none', outline: 'none',
-						color: '#fff', fontSize: '14px', fontFamily: 'var(--font-display)',
-					}}
-				/>
-			</div>
-
-			{/* Category dropdown */}
-			<div
+		<div style={{
+			display: 'flex', alignItems: 'center', gap: '10px',
+			height: '56px', padding: '0 18px', borderRadius: '14px',
+			background: 'rgba(var(--card-rgb),1)', border: '1px solid rgba(31,37,51,1)',
+			width: '100%', maxWidth: '520px', margin: '0 auto 40px',
+			position: 'relative', zIndex: 10,
+		}}>
+			<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style={{ flexShrink: 0 }}>
+				<circle cx='11' cy='11' r='7' stroke='rgba(144,157,162,1)' strokeWidth='2' />
+				<path d='M16.5 16.5L21 21' stroke='rgba(144,157,162,1)' strokeWidth='2' strokeLinecap='round' />
+			</svg>
+			<input
+				type='text'
+				value={search}
+				onChange={e => setSearch(e.target.value)}
+				placeholder={t('components.kurslarKatalogi.qidirish_placeholder')}
 				style={{
-					position: 'relative', minWidth: '220px', height: '56px',
-					padding: '0 18px', borderRadius: '14px', cursor: 'pointer',
-					background: 'rgba(var(--card-rgb),1)', border: '1px solid rgba(31,37,51,1)',
-					display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px',
+					flex: 1, background: 'transparent', border: 'none', outline: 'none',
+					color: '#fff', fontSize: '14px', fontFamily: 'var(--font-display)',
 				}}
-				onClick={() => setCatOpen(p => !p)}
-			>
-				<span style={{
-					fontSize: '14px', color: '#fff', fontWeight: 500, fontFamily: 'var(--font-display)',
-					overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-				}}>
-					{categoryLabel}
-				</span>
-				<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style={{ flexShrink: 0, transform: catOpen ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>
-					<path d='M6 9l6 6 6-6' stroke='white' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round' />
-				</svg>
-				{catOpen && (
-					<div style={{
-						position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0, zIndex: 200,
-						maxHeight: '280px', overflowY: 'auto',
-						background: 'rgba(18,22,32,0.95)', backdropFilter: 'blur(16px)',
-						WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.07)',
-						borderRadius: '14px', boxShadow: '0 16px 40px rgba(0,0,0,0.45)',
-					}}>
-						{categories.map(c => (
-							<div
-								key={c.id}
-								onClick={e => { e.stopPropagation(); setCategoryId(c.id); setCatOpen(false) }}
-								style={{
-									padding: '10px 18px', fontSize: '13px', cursor: 'pointer',
-									fontFamily: 'var(--font-display)',
-									color: c.id === categoryId ? 'rgba(var(--cyan-rgb),0.9)' : 'rgba(200,205,220,0.75)',
-									background: c.id === categoryId ? 'rgba(var(--cyan-rgb),0.06)' : 'transparent',
-									borderBottom: '1px solid rgba(255,255,255,0.04)',
-								}}
-							>
-								{c.label}
-							</div>
-						))}
-					</div>
-				)}
-			</div>
+			/>
 		</div>
 	)
 }
 
-const KutubxonaKatalogiPage = () => {
+const CourseCard = ({ course, i, lang, t, navigate }) => {
+	const title = pickField(course, 'name', lang)
+	const totalSeconds = Math.max(0, Math.round(course.total_duration || 0))
+	const durationValue = totalSeconds >= 3600
+		? Math.round(totalSeconds / 3600)
+		: totalSeconds >= 60
+			? Math.round(totalSeconds / 60)
+			: totalSeconds
+	const durationUnit = totalSeconds >= 3600 ? 'soat' : totalSeconds >= 60 ? 'daqiqa' : 'soniya'
+	const priceLabel = Number(course.price) > 0
+		? `${Number(course.price).toLocaleString('uz-UZ')} ${t('components.coursesSection.uzs', "so'm")}`
+		: t('components.coursesSection.0_uzs')
+	const rating = course.ratings_count > 0 ? course.rating_sum / course.ratings_count : 0
+	const filledStars = Math.round(rating)
+
+	return (
+		<motion.div
+			initial={{ opacity: 0, y: 32, scale: 0.96 }}
+			whileInView={{ opacity: 1, y: 0, scale: 1 }}
+			viewport={{ once: true, amount: 0.1 }}
+			transition={{ duration: 0.5, delay: (i % 6) * 0.06 }}
+			whileHover={{ y: -10, scale: 1.02 }}
+			onClick={() => navigate(`/platform/kurs/${course.id}`)}
+			className='group bg-[#161B26] rounded-[22px] p-4 flex flex-col cursor-pointer'
+		>
+			<div className='aspect-16/10 mb-4 overflow-hidden rounded-2xl shrink-0'>
+				<motion.img
+					src={course.thumbnail}
+					alt={title}
+					loading='lazy'
+					className='w-full h-full object-cover'
+					whileHover={{ scale: 1.08 }}
+				/>
+			</div>
+			<div className='flex items-start justify-between gap-2 mb-4 flex-1'>
+				<h3 className='text-white font-normal text-[16px] leading-[140%] line-clamp-2 overflow-hidden'>
+					{title}
+				</h3>
+				<div className='flex items-center gap-0.5 shrink-0'>
+					{STARS.map(starIdx => (
+						<img
+							key={starIdx}
+							src={StarIcon}
+							alt='star'
+							className='w-4 h-4'
+							loading='lazy'
+							decoding='async'
+							style={{ opacity: starIdx < filledStars ? 1 : 0.25 }}
+						/>
+					))}
+				</div>
+			</div>
+			<div className='flex items-center justify-between mt-auto'>
+				<div className='flex items-center gap-1.5'>
+					<img src={ClockIcon} alt='clock' className='w-4 h-4' loading='lazy' decoding='async' />
+					<span className='text-[#BCBCBC] text-sm font-light'>
+						{durationValue}{t(`components.coursesSection.${durationUnit}`)}</span>
+				</div>
+				<div className='text-[#3b82f6] text-[24px] font-semibold leading-[120%] text-right'>{priceLabel}</div>
+			</div>
+		</motion.div>
+	)
+}
+
+const KurslarKatalogiPage = () => {
 	const { t, i18n } = useTranslation()
 	const lang = i18n.resolvedLanguage ?? 'uz'
+	const navigate = useNavigate()
 
 	// Qidiruv debounce qilinadi — har harfda emas, yozish to'xtagach so'rov ketadi.
 	const [searchInput, setSearchInput] = useState('')
@@ -166,48 +176,22 @@ const KutubxonaKatalogiPage = () => {
 		return () => clearTimeout(id)
 	}, [searchInput])
 
-	const [categoryId, setCategoryId] = useState(ALL_CATEGORY)
-	const [catOpen, setCatOpen] = useState(false)
 	const [page, setPage] = useState(1)
-
 	useEffect(() => {
 		setPage(1)
-	}, [debouncedSearch, categoryId])
+	}, [debouncedSearch])
 
-	// Kategoriyalar ro'yxati — /categories/ dan bir marta olinadi (faqat "library" turi)
-	const { data: categoriesData } = useApiResource(
-		() => categoriesApi.getAll({ per_page: 100 }),
-		[],
-	)
-	const libraryCategories = useMemo(
-		() =>
-			(categoriesData?.items ?? [])
-				.filter(c => c.type === LIBRARY_CATEGORY_TYPE)
-				.map(c => ({ id: c.id, label: pickField(c, 'name', lang) })),
-		[categoriesData, lang],
-	)
-	const categories = useMemo(
-		() => [{ id: ALL_CATEGORY, label: t('components.kutubxonaKatalogi.barcha_kategoriyalar') }, ...libraryCategories],
-		[libraryCategories, t],
-	)
-	const categoryLabel = categories.find(c => c.id === categoryId)?.label ?? categories[0].label
-
-	const fetchBooks = async () => {
-		const params = { search: debouncedSearch, page }
-		if (categoryId !== ALL_CATEGORY) params.category = categoryId
-		const res = await booksApi.getAll(params)
+	const fetchCourses = async () => {
+		const res = await coursesApi.getAll({ search: debouncedSearch, page })
 		return {
 			items: res.items ?? [],
 			meta: res.meta,
 		}
 	}
 
-	const { data, loading, error, retry } = useApiResource(fetchBooks, [debouncedSearch, categoryId, page])
+	const { data, loading, error, retry } = useApiResource(fetchCourses, [debouncedSearch, page])
 
-	const displayed = useMemo(
-		() => (data?.items ?? []).map((b, i) => toBook(b, i, lang)),
-		[data, lang],
-	)
+	const courses = data?.items ?? []
 	const totalPages = Math.max(1, data?.meta?.last_page ?? 1)
 	const totalCount = data?.meta?.total ?? 0
 
@@ -266,11 +250,11 @@ const KutubxonaKatalogiPage = () => {
 					viewport={vp}
 					transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
 				>
-					<Button2 text={t('components.kutubxonaKatalogi.badge')} />
+					<Button2 text={t('components.kurslarKatalogi.badge')} />
 				</motion.div>
 
 				<BlurWords
-					text={t('components.kutubxonaKatalogi.sarlavha')}
+					text={t('components.kurslarKatalogi.sarlavha')}
 					delay={0.1}
 					step={0.08}
 					className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px]'
@@ -297,21 +281,11 @@ const KutubxonaKatalogiPage = () => {
 						margin: 0,
 					}}
 				>
-					{t('components.kutubxonaKatalogi.tavsif')}
+					{t('components.kurslarKatalogi.tavsif')}
 				</motion.p>
 			</div>
 
-			<FilterBar
-				search={searchInput}
-				setSearch={setSearchInput}
-				categoryId={categoryId}
-				setCategoryId={setCategoryId}
-				categoryLabel={categoryLabel}
-				categories={categories}
-				catOpen={catOpen}
-				setCatOpen={setCatOpen}
-				t={t}
-			/>
+			<SearchBar search={searchInput} setSearch={setSearchInput} t={t} />
 
 			<AsyncBoundary
 				loading={loading}
@@ -319,17 +293,17 @@ const KutubxonaKatalogiPage = () => {
 				onRetry={retry}
 				skeleton={
 					<div
-						className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+						className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
 						style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1200px', padding: '0 24px', gap: '20px', marginBottom: '48px' }}
 					>
-						{Array.from({ length: PER_PAGE }, (_, i) => (
-							<div key={`sk${i}`} style={{ height: '360px', borderRadius: '20px', backgroundColor: 'rgba(var(--card-rgb),1)', boxShadow: '0px 1px 5px 0px rgba(29, 36, 45, 0.5)' }} />
+						{Array.from({ length: 6 }, (_, i) => (
+							<div key={`sk${i}`} style={{ height: '320px', borderRadius: '22px', backgroundColor: 'rgba(var(--card-rgb),1)', boxShadow: '0px 1px 5px 0px rgba(29, 36, 45, 0.5)' }} />
 						))}
 					</div>
 				}
 			>
 				<div
-					className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+					className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
 					style={{
 						position: 'relative',
 						zIndex: 1,
@@ -340,8 +314,10 @@ const KutubxonaKatalogiPage = () => {
 						marginBottom: '48px',
 					}}
 				>
-					{displayed.length > 0 ? (
-						displayed.map((book, i) => <BookCard key={book.id} book={book} index={i} />)
+					{courses.length > 0 ? (
+						courses.map((course, i) => (
+							<CourseCard key={course.id} course={course} i={i} lang={lang} t={t} navigate={navigate} />
+						))
 					) : (
 						<div
 							style={{
@@ -353,7 +329,7 @@ const KutubxonaKatalogiPage = () => {
 								color: 'rgba(150,160,180,1)',
 							}}
 						>
-							{t('components.kutubxonaKatalogi.topilmadi')}
+							{t('components.kurslarKatalogi.topilmadi')}
 						</div>
 					)}
 				</div>
@@ -364,4 +340,4 @@ const KutubxonaKatalogiPage = () => {
 	)
 }
 
-export default KutubxonaKatalogiPage
+export default KurslarKatalogiPage

@@ -98,6 +98,20 @@ export const toFeature = (item, lang) => ({
 })
 
 /**
+ * STEP: title_*, description_*, icon, image — `order` maydoni yo'q,
+ * shuning uchun `id` bo'yicha saralanadi (useSiteList buni avtomatik qiladi).
+ * site-library-steps
+ */
+export const toStep = (item, lang) => ({
+	id: item.id,
+	title: pickI18n(item, 'title', lang),
+	description: pickI18n(item, 'description', lang),
+	icon: item.icon || null,
+	image: item.image || null,
+	order: item.id,
+})
+
+/**
  * PERSON: name_*, direction_*, image, experience
  * site-education-mentors, site-article-editors, site-main-managers
  */

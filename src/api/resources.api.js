@@ -48,7 +48,21 @@ const createResourceApi = path => {
 // --- Ta'lim / kitob tizimi ---------------------------------------------
 export const groupsApi = createResourceApi('groups')
 export const authorsApi = createResourceApi('authors')
-export const booksApi = createResourceApi('books')
+/**
+ * DIQQAT: ro'yxat uchun GET /books/ emas — /books/items/active/ ishlatiladi
+ * (faqat faol kitoblarni qaytaradi, xuddi shu {links,data,meta} shaklda).
+ */
+export const booksApi = {
+	...createResourceApi('books'),
+	getAll: async (params = {}) => {
+		const { data } = await api.get('/books/items/active/', { params })
+		return {
+			items: Array.isArray(data?.data) ? data.data : [],
+			meta: data?.meta ?? null,
+			links: data?.links ?? null,
+		}
+	},
+}
 /**
  * DIQQAT: GET /books/{id}/ backendda anonim foydalanuvchi bilan 500 qaytaradi
  * (AnonymousUser xatosi) — shu sabab bitta kitobni ro'yxatdan qidiramiz.
@@ -66,7 +80,22 @@ export const bookCommentsApi = {
 }
 export const permissionsApi = createResourceApi('permissions')
 export const categoriesApi = createResourceApi('categories')
-export const coursesApi = createResourceApi('courses')
+/**
+ * DIQQAT: ro'yxat uchun GET /courses/ emas — /courses/items/active/ ishlatiladi
+ * (faqat faol kurslarni qaytaradi, xuddi shu {links,data,meta} shaklda).
+ * getById va boshqa metodlar standart /courses/{id}/ orqali ishlayveradi.
+ */
+export const coursesApi = {
+	...createResourceApi('courses'),
+	getAll: async (params = {}) => {
+		const { data } = await api.get('/courses/items/active/', { params })
+		return {
+			items: Array.isArray(data?.data) ? data.data : [],
+			meta: data?.meta ?? null,
+			links: data?.links ?? null,
+		}
+	},
+}
 /** Bitta kursning "Nimalarni o'rganasiz" bandlari — /courses/{id}/course_features/ (flat array). */
 export const courseFeaturesApi = {
 	getByCourse: async courseId => {
@@ -97,7 +126,29 @@ export const articleTypesApi = createResourceApi('article-types')
 export const journalSectionsApi = createResourceApi('journal-sections')
 export const reviewsApi = createResourceApi('reviews')
 export const reviewAuthorsApi = createResourceApi('review-authors')
-export const editionsApi = createResourceApi('editions')
+/**
+ * DIQQAT: ro'yxat uchun GET /editions/ emas — /editions/items/active/ ishlatiladi
+ * (faqat faol nashrlarni qaytaradi, xuddi shu {links,data,meta} shaklda).
+ * getById va boshqa metodlar standart /editions/{id}/ orqali ishlayveradi.
+ */
+export const editionsApi = {
+	...createResourceApi('editions'),
+	getAll: async (params = {}) => {
+		const { data } = await api.get('/editions/items/active/', { params })
+		return {
+			items: Array.isArray(data?.data) ? data.data : [],
+			meta: data?.meta ?? null,
+			links: data?.links ?? null,
+		}
+	},
+}
+/** Bitta nashrdagi maqolalar — /editions/{id}/articles/ (flat array). */
+export const editionArticlesApi = {
+	getByEdition: async editionId => {
+		const { data } = await api.get(`/editions/${editionId}/articles/`)
+		return Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
+	},
+}
 
 // --- Umumiy sayt ma'lumotlari ---------------------------------------------
 export const bannersApi = createResourceApi('banners')

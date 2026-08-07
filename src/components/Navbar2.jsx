@@ -17,7 +17,6 @@ const NAV_LINK_PATHS = [
 	{ key: 'raqamli_kutubxona',  path: '/platform/raqamli-kutubxona' },
 	{ key: 'elektron_jurnal',    path: '/platform/elektron-jurnal' },
 	{ key: 'mikro_malumotlar',   path: '/platform/mikro-malumotlar' },
-	{ key: 'bosh_ish_orinlari',  path: '/platform/bosh-ish-orinlari' },
 ]
 
 function handleLogin()
@@ -188,18 +187,18 @@ const Navbar2 = () => {
 						<span className='hidden md:inline'>{t("components.navbar.menyu")}</span>
 					</button>
 					{/* Mobile: hamburger tugmasi */}
-					<button
-						onClick={toggleMenu}
-						className='flex md:hidden items-center justify-center w-14 h-14 rounded-[10px]'
-						style={{
-							background: 'linear-gradient(180deg, #3E8BE6 0%, #2B6FC4 100%)',
-							border: '1px solid #5FA2F0',
-							cursor: 'pointer',
-							flexShrink: 0,
-						}}
-					>
-						<img src={menuIcon} alt='Menu' width={22} loading='lazy' decoding='async' />
-					</button>
+					{/*<button*/}
+					{/*	onClick={toggleMenu}*/}
+					{/*	className='flex md:hidden items-center justify-center w-14 h-14 rounded-[10px]'*/}
+					{/*	style={{*/}
+					{/*		background: 'linear-gradient(180deg, #3E8BE6 0%, #2B6FC4 100%)',*/}
+					{/*		border: '1px solid #5FA2F0',*/}
+					{/*		cursor: 'pointer',*/}
+					{/*		flexShrink: 0,*/}
+					{/*	}}*/}
+					{/*>*/}
+					{/*	<img src={menuIcon} alt='Menu' width={22} loading='lazy' decoding='async' />*/}
+					{/*</button>*/}
 				</div>
 			</nav>
 			{/* MENU OVERLAY */}

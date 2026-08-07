@@ -1,32 +1,27 @@
 import { useTranslation } from 'react-i18next'
-import { useDataText } from '@/hooks/useDataText'
 import { useSectionText } from '@/hooks/useSectionText'
+import { useSiteList } from '@/hooks/useSiteList'
+import { siteLibraryStepsApi } from '@/api/siteContent.api'
+import { toStep } from '@/utils/siteContent'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button2 } from './shared/Button2'
-import Diagram from './ProblemSection/Diagram'
 import { problems } from '../data/problems.data'
 import { fadeUp, fadeLeft, VP_LOW } from '../constants/animations'
 
 const vp = VP_LOW
 
+// Backend rasm bermagan qadamlar uchun zaxira (o'zbekcha fallback bilan bir xil rasmlar)
+const FALLBACK_IMAGES = problems.map(p => p.image)
+
 const ProblemSection = () => {
-	const dt = useDataText('problems')
 	const st = useSectionText('library')
+	const { items: problemItems } = useSiteList('site-library-steps', siteLibraryStepsApi, toStep, problems)
     const {
         t
     } = useTranslation();
 
     const [active, setActive] = useState(0)
-    const [displayIdx, setDisplayIdx] = useState(0)
-
-    useEffect(() => {
-		if (displayIdx === active) return
-		const dir = active > displayIdx ? 1 : -1
-		const isLast = displayIdx + dir === active
-		const t = setTimeout(() => setDisplayIdx(p => p + dir), isLast ? 220 : 130)
-		return () => clearTimeout(t)
-	}, [displayIdx, active])
 
     const handleSelect = (i) => setActive(i)
 
@@ -106,16 +101,40 @@ const ProblemSection = () => {
 					boxSizing: 'border-box',
 				}}
 			>
-				{/* Diagram — mobile da birinchi (DOM da birinchi), desktop da o'ngga */}
-				<div className='md:order-last' style={{ minHeight: '340px' }}>
-					<Diagram active={displayIdx} direction={active >= displayIdx ? 1 : -1} />
+				{/* Rasm — mobile da birinchi (DOM da birinchi), desktop da o'ngga. Chapdagi muammo tanlanganda almashadi */}
+				<div
+					className='md:order-last'
+					style={{
+						position: 'relative',
+						minHeight: '340px',
+						borderRadius: '20px',
+						overflow: 'hidden',
+						border: '1px solid rgba(255,255,255,0.08)',
+					}}
+				>
+					<img
+						key={problemItems[active]?.id ?? active}
+						src={problemItems[active]?.image || FALLBACK_IMAGES[active % FALLBACK_IMAGES.length]}
+						alt=''
+						style={{
+							position: 'absolute',
+							inset: 0,
+							width: '100%',
+							height: '100%',
+							objectFit: 'cover',
+							animation: 'problemImgFade 0.45s cubic-bezier(0.22,1,0.36,1) both',
+						}}
+						loading='lazy'
+						decoding='async'
+					/>
+					<style>{'@keyframes problemImgFade { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }'}</style>
 				</div>
 
 				{/* Muammo ro'yxati — mobile da ikkinchi, desktop da chapga */}
 				<div className='md:order-first' style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
-					{problems.map((p, i) => (
+					{problemItems.map((p, i) => (
 						<motion.div
-							key={dt(p, 'title')}
+							key={p.id}
 							variants={fadeLeft}
 							initial='hidden'
 							whileInView='visible'
@@ -158,14 +177,14 @@ const ProblemSection = () => {
 								fontWeight: 600, fontSize: '24px', lineHeight: '28px',
 								color: '#ffffff', margin: '0 0 10px 0',
 							}}>
-								{dt(p, 'title')}
+								{p.title}
 							</h3>
 							<p style={{
 								fontFamily: 'var(--font-inter)',
 								fontWeight: 400, fontSize: '16px', lineHeight: '160%',
 								color: 'rgba(var(--muted-rgb),1)', margin: 0,
 							}}>
-								{dt(p, 'description')}
+								{p.description}
 							</p>
 						</motion.div>
 					))}

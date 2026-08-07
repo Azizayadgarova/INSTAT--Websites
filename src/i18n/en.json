@@ -124,6 +124,14 @@
       "topilmadi": "No books found for this selection",
       "sahifa": "Page"
     },
+    "kurslarKatalogi": {
+      "badge": "Course catalog",
+      "sarlavha": "All courses",
+      "tavsif": "Browse every online course on our platform in one place. Search by title to find the right course.",
+      "qidirish_placeholder": "Search by course title...",
+      "topilmadi": "No courses found for this search",
+      "sahifa": "Page"
+    },
     "bookCard": {
       "ta_izoh": "reviews"
     },

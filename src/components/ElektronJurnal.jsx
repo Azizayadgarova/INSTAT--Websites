@@ -5,11 +5,12 @@ import img4 from '@/assets/5.webp'
 import img5 from '@/assets/6.webp'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { siteArticleFeaturesApi, siteArticleFeedbacksApi } from '@/api/siteContent.api'
-import { authorsApi, editionsApi, journalSectionsApi } from '@/api/resources.api'
+import { editionsApi, journalSectionsApi } from '@/api/resources.api'
 import { useSiteList } from '@/hooks/useSiteList'
-import { toEdition, toName } from '@/utils/siteContent'
-import { toFeature } from '@/utils/siteContent'
+import { useApiResource } from '@/hooks/useApiResource'
+import { toEdition, toFeature } from '@/utils/siteContent'
 import FAQSection from './FAQSection'
 import JurnalStatistika from './JurnalStatistika'
 import MaqolaTalablari  from './MaqolaTalablari'
@@ -19,6 +20,7 @@ import { Button2 } from './shared/Button2'
 import Text from './shared/Text'
 import Testimonial from './Testimonial'
 import AnimatedSection from './shared/AnimatedSection'
+import AsyncBoundary from './shared/AsyncBoundary'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -50,37 +52,20 @@ const CARDS = [
 	},
 ]
 
-const JOURNALS = [
-	{ img: img1, title: "O'zbekistonda qurilish",                          year: '2020 yil 1-son', author: 'Afzal Pulatov',    category: 'Sanoat'           },
-	{ img: img2, title: "O'zbekistonda kichik tadbirkorlik",               year: '2020 yil 1-son', author: 'Dilnoza Yusupova', category: 'Makroiqtisodiyot' },
-	{ img: img3, title: 'Ayollar va erkaklar',                             year: '2022 yil 1-son', author: 'Malika Xasanova',  category: 'Demografiya'      },
-	{ img: img4, title: "O'zbekiston raqamlarda",                          year: '2022 yil 1-son', author: 'Jahongir Toshmatov', category: 'Makroiqtisodiyot' },
-	{ img: img5, title: "O'zbekistonda axborotlashgan jamiyat rivojlanishi", year: '2022 yil 1-son', author: 'Afzal Pulatov',   category: "Ta'lim"           },
-	{ img: img1, title: "O'zbekistonda ilm-fan va innovatsion faoliyat",   year: '2022 yil 1-son', author: 'Dilnoza Yusupova', category: "Ta'lim"           },
-	{ img: img2, title: "O'zbekistonda transport va aloqa",                year: '2018 yil 1-son', author: 'Jahongir Toshmatov', category: 'Sanoat'         },
-	{ img: img3, title: "O'zbekiston sanoati",                             year: '2020 yil 1-son', author: 'Malika Xasanova',  category: 'Sanoat'           },
-	{ img: img4, title: "O'zbekistonda qishloq xo'jaligi",                year: '2021 yil 1-son', author: 'Afzal Pulatov',    category: "Qishloq xo'jaligi" },
-	{ img: img5, title: "Demografik o'zgarishlar tahlili",                year: '2021 yil 2-son', author: 'Malika Xasanova',  category: 'Demografiya'      },
-	{ img: img1, title: "Milliy ta'lim tizimi rivojlanishi",              year: '2023 yil 1-son', author: 'Dilnoza Yusupova', category: "Ta'lim"           },
-	{ img: img2, title: "Qishloq xo'jaligi statistikasi",                 year: '2022 yil 3-son', author: 'Jahongir Toshmatov', category: "Qishloq xo'jaligi" },
-]
-
 // API `thumbnail` bermaganda ishlatiladigan muqovalar
 const COVERS = [img1, img2, img3, img4, img5]
 
-const AUTHORS = [
-	'Afzal Pulatov',
-	'Dilnoza Yusupova',
-	'Jahongir Toshmatov',
-	'Malika Xasanova',
+// /journal-sections/items/all/ bo'sh bo'lganda ishlatiladigan zaxira ro'yxat
+const SECTIONS_FALLBACK = [
+	{ id: 'fallback-1', name: 'Makroiqtisodiyot' },
+	{ id: 'fallback-2', name: "Qishloq xo'jaligi" },
+	{ id: 'fallback-3', name: "Ta'lim" },
+	{ id: 'fallback-4', name: 'Demografiya' },
+	{ id: 'fallback-5', name: 'Sanoat' },
 ]
-const CATEGORIES = [
-	'Makroiqtisodiyot',
-	"Qishloq xo'jaligi",
-	"Ta'lim",
-	'Demografiya',
-	'Sanoat',
-]
+const ALL_SECTION = 'all'
+const toSection = item => ({ id: item.id, name: (item.name ?? '').toString().trim() })
+const SEARCH_DEBOUNCE_MS = 400
 
 // ─── Carousel constants ───────────────────────────────────────────────────────
 
@@ -179,7 +164,7 @@ function PagBtn({ children, onClick, active, nav }) {
 
 // ─── Journal card ─────────────────────────────────────────────────────────────
 
-const JournalCard = memo(function JournalCard({ j }) {
+const JournalCard = memo(function JournalCard({ j, onClick }) {
 	return (
 		<div
 			className='w-[282px] md:w-full mx-auto md:mx-0'
@@ -194,6 +179,7 @@ const JournalCard = memo(function JournalCard({ j }) {
 				flexDirection: 'column',
 				transition: 'transform .2s, box-shadow .2s',
 			}}
+			onClick={onClick}
 			onMouseEnter={e => {
 				e.currentTarget.style.transform = 'translateY(-4px)'
 				e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,.5)'
@@ -288,245 +274,138 @@ const JournalCard = memo(function JournalCard({ j }) {
 
 // ─── Filter / search bar ──────────────────────────────────────────────────────
 
-function FilterRow({
-	author,
-	setAuthor,
-	authorOpen,
-	setAuthorOpen,
-	category,
-	setCategory,
-	catOpen,
-	setCatOpen,
-	onSearch,
-	// Variantlar backenddan keladi (authors / journal-sections)
-	authors,
-	categories,
+function FilterBar({
+	search,
+	setSearch,
+	sectionId,
+	setSectionId,
+	sectionLabel,
+	sections,
+	sectionOpen,
+	setSectionOpen,
 }) {
-	const dropStyle = {
-		position: 'absolute',
-		top: 'calc(100% + 8px)',
-		left: 0,
-		zIndex: 200,
-		background: 'rgba(18,22,32,0.85)',
-		backdropFilter: 'blur(16px)',
-		WebkitBackdropFilter: 'blur(16px)',
-		border: '1px solid rgba(255,255,255,0.07)',
-		borderRadius: '14px',
-		overflow: 'hidden',
-		boxShadow:
-			'0 16px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04) inset',
-	}
-	const itemStyle = active => ({
-		padding: '10px 18px',
-		fontSize: '13px',
-		cursor: 'pointer',
-		fontFamily: 'var(--font-display)',
-		color: active ? 'rgba(var(--cyan-rgb),0.9)' : 'rgba(200,205,220,0.75)',
-		background: active ? 'rgba(var(--cyan-rgb),0.06)' : 'transparent',
-		borderBottom: '1px solid rgba(255,255,255,0.04)',
-		transition: 'background 0.15s, color 0.15s',
-	})
-
 	return (
 		<div
-			className='w-[327px] md:w-full mx-auto md:mx-0'
+			className='flex-col md:flex-row w-[327px] md:w-full mx-auto md:mx-0'
 			style={{
-				height: '72px',
-				borderRadius: '16px',
-				padding: '12px',
-				boxSizing: 'border-box',
-				gap: '10px',
-				background: 'rgba(22,27,38,1)',
-				border: '1px solid rgba(31,37,51,1)',
 				display: 'flex',
-				alignItems: 'center',
+				alignItems: 'stretch',
+				gap: '12px',
 				marginBottom: '40px',
 				position: 'relative',
-				zIndex: 1,
+				zIndex: 10,
 			}}
 		>
-			{/* Authors */}
-			<div
-				style={{
-					position: 'relative',
-					
-					padding: '0 16px',
-					cursor: 'pointer',
-					height: '100%',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
-				}}
-				onClick={() => {
-					setAuthorOpen(p => !p)
-					setCatOpen(false)
-				}}
-			>
-				<div
-					style={{
-						fontSize: '16px',
-						color: 'rgba(255, 255, 255, 1)',
-						marginBottom: '4px',
-						display: 'flex',
-						gap: '75px',
-						alignItems: 'center',
-						fontFamily: 'var(--font-display)',
-					}}
-				>
-					Mualliflar{' '}
-					<svg width='20' height='20' viewBox='0 0 24 24' fill='none'>
-						<path
-							d='M6 9l6 6 6-6'
-							stroke='white'
-							strokeWidth='2.5'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						/>
-					</svg>
-				</div>
-				<div
-					style={{
-						fontSize: '14px',
-						color: 'rgba(202,202,206,1)',
-						fontWeight: 500,
-						display: 'flex',
-						alignItems: 'center',
-						gap: '8px',
-						fontFamily: 'var(--font-display)',
-					}}
-				>
-					{author}
-				</div>
-				{authorOpen && (
-					<div style={{ ...dropStyle, minWidth: '190px' }}>
-						{authors.map(a => (
-							<div
-								key={a}
-								style={itemStyle(a === author)}
-								onClick={e => {
-									e.stopPropagation()
-									setAuthor(a)
-									setAuthorOpen(false)
-								}}
-							>
-								{a}
-							</div>
-						))}
-					</div>
-				)}
-			</div>
-
-			<div
-				className='hidden md:block'
-				style={{
-					width: '1px',
-					height: '30px',
-					background: 'white',
-					flexShrink: 0,
-				}}
-			/>
-
-			{/* Categories */}
-			<div
-				className='hidden md:flex flex-col justify-center'
-				style={{
-					position: 'relative',
-					flex: 1,
-					padding: '0 16px',
-					cursor: 'pointer',
-					height: '100%',
-				}}
-				onClick={() => {
-					setCatOpen(p => !p)
-					setAuthorOpen(false)
-				}}
-			>
-				<div
-					style={{
-						fontSize: '16px',
-						color: 'white',
-						marginBottom: '3px',
-						fontFamily: 'var(--font-display)',
-						display: 'flex',
-						alignItems: 'center',
-						gap: '46px',
-					}}
-				>
-					Kategoriyalar
-					<svg width='20' height='20' viewBox='0 0 24 24' fill='none'>
-						<path
-							d='M6 9l6 6 6-6'
-							stroke='white'
-							strokeWidth='2.5'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						/>
-					</svg>
-				</div>
-				<div
-					style={{
-						fontSize: '14px',
-						color: '#fff',
-						fontWeight: 500,
-						display: 'flex',
-						alignItems: 'center',
-						gap: '8px',
-						fontFamily: 'var(--font-display)',
-					}}
-				>
-					{category}
-				</div>
-				{catOpen && (
-					<div
-						style={{ ...dropStyle, minWidth: '210px' }}
-					>
-						{categories.map(c => (
-							<div
-								key={c}
-								style={itemStyle(c === category)}
-								onClick={e => {
-									e.stopPropagation()
-									setCategory(c)
-									setCatOpen(false)
-								}}
-							>
-								{c}
-							</div>
-						))}
-					</div>
-				)}
-			</div>
-
 			{/* Search */}
-			<div style={{ flexShrink: 0 }}>
-				<button
-					onClick={onSearch}
-					className='h-[48px] rounded-[12px] md:rounded-[10px] px-[14px] md:px-[24px]'
+			<div
+				style={{
+					flex: 1,
+					display: 'flex',
+					alignItems: 'center',
+					gap: '10px',
+					height: '56px',
+					padding: '0 18px',
+					borderRadius: '14px',
+					background: 'rgba(22,27,38,1)',
+					border: '1px solid rgba(31,37,51,1)',
+				}}
+			>
+				<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style={{ flexShrink: 0 }}>
+					<circle cx='11' cy='11' r='7' stroke='rgba(144,157,162,1)' strokeWidth='2' />
+					<path d='M16.5 16.5L21 21' stroke='rgba(144,157,162,1)' strokeWidth='2' strokeLinecap='round' />
+				</svg>
+				<input
+					type='text'
+					value={search}
+					onChange={e => setSearch(e.target.value)}
+					placeholder='Jurnal nomi bo&apos;yicha qidirish...'
 					style={{
-						display: 'flex',
-						alignItems: 'center',
-						gap: '4px',
-						background: 'rgba(43,117,204,1)',
+						flex: 1,
+						background: 'transparent',
+						border: 'none',
+						outline: 'none',
 						color: '#fff',
-						border: '1px solid rgba(255,255,255,0.15)',
 						fontSize: '14px',
-						fontWeight: 500,
-						cursor: 'pointer',
 						fontFamily: 'var(--font-display)',
-						flexShrink: 0,
+					}}
+				/>
+			</div>
+
+			{/* Journal sections select */}
+			<div
+				style={{
+					position: 'relative',
+					minWidth: '220px',
+					height: '56px',
+					padding: '0 18px',
+					borderRadius: '14px',
+					cursor: 'pointer',
+					background: 'rgba(22,27,38,1)',
+					border: '1px solid rgba(31,37,51,1)',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'space-between',
+					gap: '8px',
+				}}
+				onClick={() => setSectionOpen(p => !p)}
+			>
+				<span
+					style={{
+						fontSize: '14px',
+						color: '#fff',
+						fontWeight: 500,
+						fontFamily: 'var(--font-display)',
+						overflow: 'hidden',
+						textOverflow: 'ellipsis',
+						whiteSpace: 'nowrap',
 					}}
 				>
-					<svg width='16' height='16' viewBox='0 0 24 24' fill='none'>
-						<circle cx='11' cy='11' r='7' stroke='white' strokeWidth='2' />
-						<path
-							d='M16.5 16.5L21 21'
-							stroke='white'
-							strokeWidth='2'
-							strokeLinecap='round'
-						/>
-					</svg>
-					Izlash
-				</button>
+					{sectionLabel}
+				</span>
+				<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style={{ flexShrink: 0, transform: sectionOpen ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>
+					<path d='M6 9l6 6 6-6' stroke='white' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round' />
+				</svg>
+				{sectionOpen && (
+					<div
+						style={{
+							position: 'absolute',
+							top: 'calc(100% + 8px)',
+							left: 0,
+							right: 0,
+							zIndex: 200,
+							maxHeight: '280px',
+							overflowY: 'auto',
+							background: 'rgba(18,22,32,0.95)',
+							backdropFilter: 'blur(16px)',
+							WebkitBackdropFilter: 'blur(16px)',
+							border: '1px solid rgba(255,255,255,0.07)',
+							borderRadius: '14px',
+							boxShadow: '0 16px 40px rgba(0,0,0,0.45)',
+						}}
+					>
+						{sections.map(s => (
+							<div
+								key={s.id}
+								onClick={e => {
+									e.stopPropagation()
+									setSectionId(s.id)
+									setSectionOpen(false)
+								}}
+								style={{
+									padding: '10px 18px',
+									fontSize: '13px',
+									cursor: 'pointer',
+									fontFamily: 'var(--font-display)',
+									color: s.id === sectionId ? 'rgba(var(--cyan-rgb),0.9)' : 'rgba(200,205,220,0.75)',
+									background: s.id === sectionId ? 'rgba(var(--cyan-rgb),0.06)' : 'transparent',
+									borderBottom: '1px solid rgba(255,255,255,0.04)',
+								}}
+							>
+								{s.name}
+							</div>
+						))}
+					</div>
+				)}
 			</div>
 		</div>
 	)
@@ -628,41 +507,51 @@ function Pagination({ page, setPage, total }) {
 // ─── Jurnallar section ────────────────────────────────────────────────────────
 
 function JurnallarSection() {
-	const [page, setPage]           = useState(1)
-	const [author, setAuthor]       = useState(null)
-	const [category, setCategory]   = useState(null)
-	const [authorOpen, setAuthorOpen] = useState(false)
-	const [catOpen, setCatOpen]     = useState(false)
-	const [filtered, setFiltered]   = useState(null)
+	const navigate = useNavigate()
 
-	// Jurnallar va filtr variantlari backenddan; endpoint bo'sh bo'lsa statik ro'yxat
-	const { items: apiJournals } = useSiteList('editions', editionsApi, toEdition, JOURNALS)
-	const { items: authors }    = useSiteList('authors', authorsApi, toName, AUTHORS)
-	const { items: categories } = useSiteList('journal-sections', journalSectionsApi, toName, CATEGORIES)
+	// Qidiruv debounce qilinadi — har harfda emas, yozish to'xtagach so'rov ketadi.
+	const [searchInput, setSearchInput] = useState('')
+	const [debouncedSearch, setDebouncedSearch] = useState('')
+	useEffect(() => {
+		const id = setTimeout(() => setDebouncedSearch(searchInput.trim()), SEARCH_DEBOUNCE_MS)
+		return () => clearTimeout(id)
+	}, [searchInput])
+
+	const [sectionId, setSectionId] = useState(ALL_SECTION)
+	const [sectionOpen, setSectionOpen] = useState(false)
+	const [page, setPage] = useState(1)
+
+	useEffect(() => {
+		setPage(1)
+	}, [debouncedSearch, sectionId])
+
+	// Bo'limlar ro'yxati — /journal-sections/items/all/ dan bir marta olinadi
+	const { items: sectionItems } = useSiteList('journal-sections', journalSectionsApi, toSection, SECTIONS_FALLBACK)
+	const sections = useMemo(
+		() => [{ id: ALL_SECTION, name: "Barcha bo'limlar" }, ...sectionItems],
+		[sectionItems],
+	)
+	const sectionLabel = sections.find(s => s.id === sectionId)?.name ?? sections[0].name
+
+	// Nashrlar — /editions/items/active/ (sahifalangan), qidiruv backendga uzatiladi
+	const fetchEditions = async () => {
+		const params = { search: debouncedSearch, page }
+		if (sectionId !== ALL_SECTION) params.journal_section = sectionId
+		const res = await editionsApi.getAll(params)
+		return {
+			items: res.items ?? [],
+			meta: res.meta,
+		}
+	}
+	const { data, loading, error, retry } = useApiResource(fetchEditions, [debouncedSearch, sectionId, page])
 
 	// `thumbnail` majburiy emas — bo'sh bo'lsa maketdagi rasmlar navbatma-navbat
-	const journals = apiJournals.map((j, i) => ({ ...j, img: j.img || COVERS[i % COVERS.length] }))
-
-	// Ro'yxat async keladi — tanlov qilinmaguncha birinchi variant faol
-	const activeAuthor   = author ?? authors[0] ?? ''
-	const activeCategory = category ?? categories[0] ?? ''
-
-	const PER_PAGE = 8
-
-	const handleSearch = () => {
-		// API'dan kelgan editions'da muallif/bo'lim maydoni yo'q (null) — ular
-		// filtrdan o'tib ketadi. Backend bu bog'lanishni qo'shsa filtr o'zi ishlaydi.
-		const result = journals.filter(
-			j =>
-				(j.author == null || j.author === activeAuthor) &&
-				(j.category == null || j.category === activeCategory),
-		)
-		setFiltered(result)
-		setPage(1)
-	}
-
-	const visible = filtered ?? journals
-	const displayed = visible.slice((page - 1) * PER_PAGE, page * PER_PAGE)
+	const displayed = (data?.items ?? []).map((e, i) => {
+		const j = toEdition(e)
+		return { ...j, img: j.img || COVERS[i % COVERS.length] }
+	})
+	const totalPages = Math.max(1, data?.meta?.last_page ?? 1)
+	const totalCount = data?.meta?.total ?? 0
 
 	return (
 		<section
@@ -731,46 +620,59 @@ function JurnallarSection() {
 			</AnimatedSection>
 
 			<div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '800px' }}>
-				<FilterRow
-					author={activeAuthor}
-					setAuthor={setAuthor}
-					authorOpen={authorOpen}
-					setAuthorOpen={setAuthorOpen}
-					category={activeCategory}
-					setCategory={setCategory}
-					catOpen={catOpen}
-					setCatOpen={setCatOpen}
-					onSearch={handleSearch}
-					authors={authors}
-					categories={categories}
+				<FilterBar
+					search={searchInput}
+					setSearch={setSearchInput}
+					sectionId={sectionId}
+					setSectionId={setSectionId}
+					sectionLabel={sectionLabel}
+					sections={sections}
+					sectionOpen={sectionOpen}
+					setSectionOpen={setSectionOpen}
 				/>
 			</div>
 
-			<div
-				className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center md:justify-items-stretch'
-				style={{
-					gap: '20px',
-					marginBottom: '48px',
-					position: 'relative',
-					zIndex: 1,
-					width: '100%',
-					maxWidth: '1200px',
-				}}
-			>
-				{displayed.length > 0 ? displayed.map((j, i) => (
-					<JournalCard key={i} j={j} />
-				)) : (
-					<div style={{
-						gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0',
-						fontFamily: 'var(--font-display)',
-						fontSize: '16px', color: 'rgba(150,160,180,1)',
-					}}>
-						Bu tanlov bo'yicha jurnal topilmadi
+			<AsyncBoundary
+				loading={loading}
+				error={error}
+				onRetry={retry}
+				skeleton={
+					<div
+						className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center md:justify-items-stretch'
+						style={{ gap: '20px', marginBottom: '48px', position: 'relative', zIndex: 1, width: '100%', maxWidth: '1200px' }}
+					>
+						{Array.from({ length: 8 }, (_, i) => (
+							<div key={`sk${i}`} style={{ width: '100%', maxWidth: '282px', height: '342px', borderRadius: '20px', backgroundColor: 'rgba(22,27,38,1)' }} />
+						))}
 					</div>
-				)}
-			</div>
+				}
+			>
+				<div
+					className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center md:justify-items-stretch'
+					style={{
+						gap: '20px',
+						marginBottom: '48px',
+						position: 'relative',
+						zIndex: 1,
+						width: '100%',
+						maxWidth: '1200px',
+					}}
+				>
+					{displayed.length > 0 ? displayed.map(j => (
+						<JournalCard key={j.id} j={j} onClick={() => navigate(`/platform/jurnal/${j.id}`)} />
+					)) : (
+						<div style={{
+							gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0',
+							fontFamily: 'var(--font-display)',
+							fontSize: '16px', color: 'rgba(150,160,180,1)',
+						}}>
+							Bu qidiruv bo'yicha jurnal topilmadi
+						</div>
+					)}
+				</div>
 
-			<Pagination page={page} setPage={setPage} total={Math.ceil(visible.length / PER_PAGE)} />
+				{totalCount > 0 && <Pagination page={page} setPage={setPage} total={totalPages} />}
+			</AsyncBoundary>
 		</section>
 	)
 }

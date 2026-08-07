@@ -34,12 +34,12 @@ const CoursesSection = () => {
 	const navigate = useNavigate()
 	const st = useSectionText('education')
 
-	// Faqat faol (is_active) kurslarni ko'rsatamiz, birinchi 6 tasi
+	// /courses/items/active/ faqat faol kurslarni qaytaradi — birinchi 6 tasi
 	const { data, loading, error, retry } = useApiResource(
 		() => coursesApi.getAll({ per_page: 6 }),
 		[],
 	)
-	const courses = (data?.items ?? []).filter(c => c.is_active)
+	const courses = data?.items ?? []
 
     return (
         <section ref={sectionRef} className='relative w-full bg-[#0E121B] flex flex-col items-center justify-start overflow-hidden pt-10 pb-10'>
@@ -147,7 +147,7 @@ const CoursesSection = () => {
 			</AsyncBoundary>
             <div className='relative z-10 flex justify-center mt-10 mb-0'>
 				<button
-					onClick={() => navigate('/platform/onlayn-talim')}
+					onClick={() => navigate('/platform/kurslar-katalogi')}
 					style={{
 						width: '124px',
 						height: '48px',
