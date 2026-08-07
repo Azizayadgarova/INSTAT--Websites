@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { useDataText } from '@/hooks/useDataText'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { useMemo, useState } from 'react'
@@ -135,10 +136,12 @@ function IconEdit() {
 
 function DataCard({ item }) {
 	const dt = useDataText('publications')
+	const navigate = useNavigate()
 	const [hov, setHov] = useState(false)
 
 	return (
 		<div
+			onClick={() => navigate(`/platform/nashr/${item.id}`)}
 			onMouseEnter={() => setHov(true)}
 			onMouseLeave={() => setHov(false)}
 			style={{

@@ -153,6 +153,15 @@ export const editionArticlesApi = {
 // --- Umumiy sayt ma'lumotlari ---------------------------------------------
 export const bannersApi = createResourceApi('banners')
 export const dataReportsApi = createResourceApi('data-reports')
+/**
+ * DIQQAT: GET /data-reports/{id}/ ro'yxatdagidan KAMROQ maydon qaytaradi
+ * (category nested obyekt emas — faqat id, `options` va `file_size` umuman yo'q).
+ * Shu sabab ro'yxatdan qidiramiz — xuddi getBookById kabi.
+ */
+export const getDataReportById = async id => {
+	const { items } = await dataReportsApi.getAll({ per_page: 100 })
+	return items.find(r => String(r.id) === String(id)) ?? null
+}
 export const dataRequestsApi = createResourceApi('data-requests')
 export const microDataDepartmentsApi = createResourceApi('micro-data-departments')
 

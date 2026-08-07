@@ -15,6 +15,7 @@ const BoshIshOrinlariPage  = lazy(() => import('../pages/platform/BoshIshOrinlar
 const KursDetail           = lazy(() => import('../pages/platform/KursDetail'))
 const KurslarKatalogiPage  = lazy(() => import('../pages/platform/KurslarKatalogiPage'))
 const JurnalDetail         = lazy(() => import('../pages/platform/JurnalDetail'))
+const NashrDetail          = lazy(() => import('../pages/platform/NashrDetail'))
 const KitobDetail          = lazy(() => import('../pages/platform/KitobDetail'))
 
 
@@ -144,6 +145,7 @@ export const routes = [
 			{ path: 'elektron-jurnal',     element: s(ElektronJurnalPage) },
 			{ path: 'jurnal/:id',          element: s(JurnalDetail) },
 			{ path: 'mikro-malumotlar',    element: s(MikroMalumotlarPage) },
+			{ path: 'nashr/:id',           element: s(NashrDetail) },
 			{ path: 'bosh-ish-orinlari',   element: s(BoshIshOrinlariPage) },
 		],
 	},
