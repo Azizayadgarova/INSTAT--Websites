@@ -12,7 +12,7 @@ import { pickField } from '@/utils/siteContent'
 
 import { ALL_DATA } from '@/data/publications.data'
 
-const ITEMS_PER_PAGE = 8
+export const ITEMS_PER_PAGE = 8
 
 const UZ_MONTHS = [
 	'yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun',
@@ -49,7 +49,7 @@ const yearsRange = report => {
  * beradi — maketdagi `location` uchun mos maydon yo'q, shuning uchun u qatori
  * bo'sh qoladi va ko'rsatilmaydi.
  */
-const toPublication = (report, lang) => ({
+export const toPublication = (report, lang) => ({
 	id: report.id,
 	title: pickField(report, 'name', lang),
 	category: pickField(report.category ?? {}, 'name', lang),
@@ -60,12 +60,12 @@ const toPublication = (report, lang) => ({
 
 // Bu bo'lim mikro-ma'lumotlar sahifasida turadi: kategoriyasi boshqa turga
 // tegishli hisobotlar chiqmasin. Turi ko'rsatilmagan yozuvlar qoldiriladi.
-const isMicroData = report => {
+export const isMicroData = report => {
 	const type = report.category?.type
 	return !type || type === 'micro-data'
 }
 
-function IconPin() {
+export function IconPin() {
 	return (
 		<svg
 			width='20'
@@ -134,7 +134,7 @@ function IconEdit() {
 	)
 }
 
-function DataCard({ item }) {
+export function DataCard({ item }) {
 	const dt = useDataText('publications')
 	const navigate = useNavigate()
 	const [hov, setHov] = useState(false)
@@ -221,7 +221,7 @@ function DataCard({ item }) {
 	)
 }
 
-function PagBtn({ children, onClick, active, nav }) {
+export function PagBtn({ children, onClick, active, nav }) {
 	return (
 		<button
 			onClick={onClick}
@@ -259,7 +259,7 @@ function PagBtn({ children, onClick, active, nav }) {
 	)
 }
 
-function Pagination({ page, setPage, total }) {
+export function Pagination({ page, setPage, total }) {
     const {
         t
     } = useTranslation();
@@ -356,11 +356,10 @@ export default function NufuzliNashrlar() {
     const lang = i18n.resolvedLanguage ?? 'uz'
 
     const st = useSectionText('micro_data')
-
-    const [page, setPage] = useState(1)
+    const navigate = useNavigate()
 
     // Backend `per_page`ni e'tiborsiz qoldiradi (javobda doim per_page: 16),
-    // shuning uchun ro'yxat bir marta olinadi va sahifalash frontendda bo'ladi.
+    // shuning uchun ro'yxat bir marta olinadi.
     const { data, loading } = useApiResource(() => dataReportsApi.getAll({ per_page: 100 }), [])
 
     const apiItems = useMemo(
@@ -376,10 +375,9 @@ export default function NufuzliNashrlar() {
     const isFallback = !loading && apiItems.length === 0
     const source = isFallback ? ALL_DATA : apiItems
 
-    const totalPages = Math.max(1, Math.ceil(source.length / ITEMS_PER_PAGE))
-    // Ma'lumot yangilanib sahifalar soni kamaysa, joriy sahifa oxirgisiga tushadi
-    const current = Math.min(page, totalPages)
-    const displayed = source.slice((current - 1) * ITEMS_PER_PAGE, current * ITEMS_PER_PAGE)
+    // Bosh sahifada filtr/pagination yo'q — faqat birinchi hisobotlar ko'rsatiladi,
+    // to'liq ro'yxat filtr va pagination bilan /platform/mikro-malumotlar-katalogi'da.
+    const displayed = source.slice(0, ITEMS_PER_PAGE)
 
     return (
         <section
@@ -473,8 +471,27 @@ export default function NufuzliNashrlar() {
 						: displayed.map(item => <DataCard key={item.id} item={item} />)}
 				</div>
 
-				{/* Pagination */}
-				<Pagination page={current} setPage={setPage} total={totalPages} />
+				{/* Barchasi */}
+				<button
+					onClick={() => navigate('/platform/mikro-malumotlar-katalogi')}
+					style={{
+						height: '48px',
+						padding: '0 28px',
+						borderRadius: '12px',
+						background: 'rgba(var(--blue-rgb),1)',
+						border: '1px solid transparent',
+						outline: '1px solid rgba(28, 84, 148, 1)',
+						boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(var(--bg-rgb),0.3) inset, 0px 16px 24px -8px rgba(var(--bg-rgb),0.1)',
+						fontFamily: 'var(--font-display)',
+						fontWeight: 600,
+						fontSize: '16px',
+						color: '#fff',
+						cursor: 'pointer',
+						whiteSpace: 'nowrap',
+					}}
+				>
+					Barchasi
+				</button>
 			</div>
         </section>
     );

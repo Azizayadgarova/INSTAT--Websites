@@ -10,7 +10,9 @@ const OnlaynTalim = lazy(() => import('../pages/platform/OnlaynTalim'))
 const RaqamliKutibxona = lazy(() => import('../pages/platform/RaqamliKutibxona'))
 const KutubxonaKatalogiPage = lazy(() => import('../pages/platform/KutubxonaKatalogiPage'))
 const ElektronJurnalPage   = lazy(() => import('../pages/platform/ElektronJurnalPage'))
+const JurnalKatalogiPage   = lazy(() => import('../pages/platform/JurnalKatalogiPage'))
 const MikroMalumotlarPage  = lazy(() => import('../pages/platform/MikroMalumotlarPage'))
+const MikroMalumotlarKatalogiPage = lazy(() => import('../pages/platform/MikroMalumotlarKatalogiPage'))
 const BoshIshOrinlariPage  = lazy(() => import('../pages/platform/BoshIshOrinlariPage'))
 const KursDetail           = lazy(() => import('../pages/platform/KursDetail'))
 const KurslarKatalogiPage  = lazy(() => import('../pages/platform/KurslarKatalogiPage'))
@@ -143,8 +145,10 @@ export const routes = [
 			{ path: 'kutubxona-katalogi',  element: s(KutubxonaKatalogiPage) },
 			{ path: 'kitob/:id',           element: s(KitobDetail) },
 			{ path: 'elektron-jurnal',     element: s(ElektronJurnalPage) },
+			{ path: 'jurnal-katalogi',     element: s(JurnalKatalogiPage) },
 			{ path: 'jurnal/:id',          element: s(JurnalDetail) },
 			{ path: 'mikro-malumotlar',    element: s(MikroMalumotlarPage) },
+			{ path: 'mikro-malumotlar-katalogi', element: s(MikroMalumotlarKatalogiPage) },
 			{ path: 'nashr/:id',           element: s(NashrDetail) },
 			{ path: 'bosh-ish-orinlari',   element: s(BoshIshOrinlariPage) },
 		],

@@ -7,7 +7,7 @@ import bgGlow from '@/assets/bgImg/Background (1).png'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { siteArticleFeaturesApi, siteArticleFeedbacksApi } from '@/api/siteContent.api'
-import { editionsApi, journalSectionsApi } from '@/api/resources.api'
+import { editionsApi } from '@/api/resources.api'
 import { useSiteList } from '@/hooks/useSiteList'
 import { useApiResource } from '@/hooks/useApiResource'
 import { toEdition, toFeature } from '@/utils/siteContent'
@@ -53,19 +53,19 @@ const CARDS = [
 ]
 
 // API `thumbnail` bermaganda ishlatiladigan muqovalar
-const COVERS = [img1, img2, img3, img4, img5]
+export const COVERS = [img1, img2, img3, img4, img5]
 
 // /journal-sections/items/all/ bo'sh bo'lganda ishlatiladigan zaxira ro'yxat
-const SECTIONS_FALLBACK = [
+export const SECTIONS_FALLBACK = [
 	{ id: 'fallback-1', name: 'Makroiqtisodiyot' },
 	{ id: 'fallback-2', name: "Qishloq xo'jaligi" },
 	{ id: 'fallback-3', name: "Ta'lim" },
 	{ id: 'fallback-4', name: 'Demografiya' },
 	{ id: 'fallback-5', name: 'Sanoat' },
 ]
-const ALL_SECTION = 'all'
-const toSection = item => ({ id: item.id, name: (item.name ?? '').toString().trim() })
-const SEARCH_DEBOUNCE_MS = 400
+export const ALL_SECTION = 'all'
+export const toSection = item => ({ id: item.id, name: (item.name ?? '').toString().trim() })
+export const SEARCH_DEBOUNCE_MS = 400
 
 // ─── Carousel constants ───────────────────────────────────────────────────────
 
@@ -123,7 +123,7 @@ function Particle({ x, y, dx, dy, color, onDone }) {
 	)
 }
 
-function PagBtn({ children, onClick, active, nav }) {
+export function PagBtn({ children, onClick, active, nav }) {
 	const base = nav
 		? 'transparent'
 		: active
@@ -164,12 +164,11 @@ function PagBtn({ children, onClick, active, nav }) {
 
 // ─── Journal card ─────────────────────────────────────────────────────────────
 
-const JournalCard = memo(function JournalCard({ j, onClick }) {
+export const JournalCard = memo(function JournalCard({ j, onClick }) {
 	return (
 		<div
 			className='w-[282px] md:w-full mx-auto md:mx-0'
 			style={{
-				height: '342px',
 				borderRadius: '20px',
 				backgroundColor: 'rgba(22,27,38,1)',
 				boxShadow: '0px 1px 5px 0px rgba(29,36,45,0.2)',
@@ -191,7 +190,6 @@ const JournalCard = memo(function JournalCard({ j, onClick }) {
 		>
 			<div
 				style={{
-					height: '216px',
 					flexShrink: 0,
 					padding: '24px 24px 0',
 					background: 'rgba(31,37,51,1)',
@@ -202,7 +200,7 @@ const JournalCard = memo(function JournalCard({ j, onClick }) {
 				<div
 					style={{
 						width: '100%',
-						height: '100%',
+						aspectRatio: '21 / 29',
 						borderRadius: '14px 14px 0 0',
 						overflow: 'hidden',
 					}}
@@ -274,7 +272,7 @@ const JournalCard = memo(function JournalCard({ j, onClick }) {
 
 // ─── Filter / search bar ──────────────────────────────────────────────────────
 
-function FilterBar({
+export function FilterBar({
 	search,
 	setSearch,
 	sectionId,
@@ -413,7 +411,7 @@ function FilterBar({
 
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
-function Pagination({ page, setPage, total }) {
+export function Pagination({ page, setPage, total }) {
 	const getPages = () => {
 		if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
 		if (page <= 5) return [1, 2, 3, 4, 5, '...', total]
@@ -506,52 +504,23 @@ function Pagination({ page, setPage, total }) {
 
 // ─── Jurnallar section ────────────────────────────────────────────────────────
 
+const JURNALLAR_PREVIEW_COUNT = 8
+
 function JurnallarSection() {
 	const navigate = useNavigate()
 
-	// Qidiruv debounce qilinadi — har harfda emas, yozish to'xtagach so'rov ketadi.
-	const [searchInput, setSearchInput] = useState('')
-	const [debouncedSearch, setDebouncedSearch] = useState('')
-	useEffect(() => {
-		const id = setTimeout(() => setDebouncedSearch(searchInput.trim()), SEARCH_DEBOUNCE_MS)
-		return () => clearTimeout(id)
-	}, [searchInput])
-
-	const [sectionId, setSectionId] = useState(ALL_SECTION)
-	const [sectionOpen, setSectionOpen] = useState(false)
-	const [page, setPage] = useState(1)
-
-	useEffect(() => {
-		setPage(1)
-	}, [debouncedSearch, sectionId])
-
-	// Bo'limlar ro'yxati — /journal-sections/items/all/ dan bir marta olinadi
-	const { items: sectionItems } = useSiteList('journal-sections', journalSectionsApi, toSection, SECTIONS_FALLBACK)
-	const sections = useMemo(
-		() => [{ id: ALL_SECTION, name: "Barcha bo'limlar" }, ...sectionItems],
-		[sectionItems],
+	// Bosh sahifada filtr/pagination yo'q — faqat birinchi nashrlar ko'rsatiladi,
+	// to'liq ro'yxat filtr va pagination bilan /platform/jurnal-katalogi'da.
+	const { data, loading, error, retry } = useApiResource(
+		() => editionsApi.getAll({ per_page: JURNALLAR_PREVIEW_COUNT }),
+		[],
 	)
-	const sectionLabel = sections.find(s => s.id === sectionId)?.name ?? sections[0].name
-
-	// Nashrlar — /editions/items/active/ (sahifalangan), qidiruv backendga uzatiladi
-	const fetchEditions = async () => {
-		const params = { search: debouncedSearch, page }
-		if (sectionId !== ALL_SECTION) params.journal_section = sectionId
-		const res = await editionsApi.getAll(params)
-		return {
-			items: res.items ?? [],
-			meta: res.meta,
-		}
-	}
-	const { data, loading, error, retry } = useApiResource(fetchEditions, [debouncedSearch, sectionId, page])
 
 	// `thumbnail` majburiy emas — bo'sh bo'lsa maketdagi rasmlar navbatma-navbat
 	const displayed = (data?.items ?? []).map((e, i) => {
 		const j = toEdition(e)
 		return { ...j, img: j.img || COVERS[i % COVERS.length] }
 	})
-	const totalPages = Math.max(1, data?.meta?.last_page ?? 1)
-	const totalCount = data?.meta?.total ?? 0
 
 	return (
 		<section
@@ -619,19 +588,6 @@ function JurnallarSection() {
 				</div>
 			</AnimatedSection>
 
-			<div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '800px' }}>
-				<FilterBar
-					search={searchInput}
-					setSearch={setSearchInput}
-					sectionId={sectionId}
-					setSectionId={setSectionId}
-					sectionLabel={sectionLabel}
-					sections={sections}
-					sectionOpen={sectionOpen}
-					setSectionOpen={setSectionOpen}
-				/>
-			</div>
-
 			<AsyncBoundary
 				loading={loading}
 				error={error}
@@ -642,7 +598,7 @@ function JurnallarSection() {
 						style={{ gap: '20px', marginBottom: '48px', position: 'relative', zIndex: 1, width: '100%', maxWidth: '1200px' }}
 					>
 						{Array.from({ length: 8 }, (_, i) => (
-							<div key={`sk${i}`} style={{ width: '100%', maxWidth: '282px', height: '342px', borderRadius: '20px', backgroundColor: 'rgba(22,27,38,1)' }} />
+							<div key={`sk${i}`} style={{ width: '100%', maxWidth: '282px', height: '454px', borderRadius: '20px', backgroundColor: 'rgba(22,27,38,1)' }} />
 						))}
 					</div>
 				}
@@ -666,13 +622,34 @@ function JurnallarSection() {
 							fontFamily: 'var(--font-display)',
 							fontSize: '16px', color: 'rgba(150,160,180,1)',
 						}}>
-							Bu qidiruv bo'yicha jurnal topilmadi
+							Hozircha jurnal nashrlari yo'q
 						</div>
 					)}
 				</div>
-
-				{totalCount > 0 && <Pagination page={page} setPage={setPage} total={totalPages} />}
 			</AsyncBoundary>
+
+			<button
+				onClick={() => navigate('/platform/jurnal-katalogi')}
+				style={{
+					position: 'relative',
+					zIndex: 1,
+					height: '48px',
+					padding: '0 28px',
+					borderRadius: '12px',
+					background: 'rgba(var(--blue-rgb),1)',
+					border: '1px solid transparent',
+					outline: '1px solid rgba(28, 84, 148, 1)',
+					boxShadow: '0px 2px 6px 0px rgba(255,255,255,0.25) inset, 0px -2px 4px 0px rgba(var(--bg-rgb),0.3) inset, 0px 16px 24px -8px rgba(var(--bg-rgb),0.1)',
+					fontFamily: 'var(--font-display)',
+					fontWeight: 600,
+					fontSize: '16px',
+					color: '#fff',
+					cursor: 'pointer',
+					whiteSpace: 'nowrap',
+				}}
+			>
+				Barchasi
+			</button>
 		</section>
 	)
 }
