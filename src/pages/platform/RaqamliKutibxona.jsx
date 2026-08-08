@@ -505,8 +505,8 @@ const RaqamliKutibxona = () => {
 				>
 
 					{[
-						{ items: ROW1, anim: 'ribbonScroll 40s linear infinite' },
-						{ items: ROW2, anim: 'ribbonScrollReverse 48s linear infinite' },
+						// { items: ROW1, anim: 'ribbonScroll 40s linear infinite' },
+						// { items: ROW2, anim: 'ribbonScrollReverse 48s linear infinite' },
 					].map((row, rowIdx) => (
 						<div
 							key={rowIdx}
