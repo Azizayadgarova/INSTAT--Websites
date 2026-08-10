@@ -193,7 +193,7 @@ const Kutubxona = () => {
 			>
 				<Button2 text={t('components.kutubxona.kutubxona', 'Kutubxona')} />
 				<BlurWords
-					text={st('library_title6', "Oflayn kutubxona – to'liq nazorat")}
+					text={st('library_title6', t('components.kutubxona.oflayn_kutubxona_toliq_nazorat', "Oflayn kutubxona – to'liq nazorat"))}
 					delay={0.08}
 					step={0.06}
 					className='text-[32px] md:text-[48px]'
@@ -201,7 +201,7 @@ const Kutubxona = () => {
 				/>
 				<p className="text-[#CACACE] text-[14px] md:text-[16px] max-w-[327px] md:max-w-none text-center">
 					<BlurWords
-						text={st('library_description6', "Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!")}
+						text={st('library_description6', t('components.kutubxona.oldindan_rejalashtiring', "Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!"))}
 						delay={0.08}
 						step={0.04}
 					/>

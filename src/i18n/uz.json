@@ -162,7 +162,9 @@
 			"step_03_title": "Oson navigatsiya",
 			"step_03_desc": "Kutubxonada yo'qolib qolmaysiz. Har bir bo'lim, shkaf va javon aniq belgilangan. Siz qidirayotgan kitob qayerda turganini ko'rishingiz va to'g'ridan-to'g'ri unga yo'nalish olishingiz mumkin. Navigatsiya tizimi sizga eng qisqa yo'lni ko'rsatadi.",
 			"step_04_title": "Kitobni oling",
-			"step_04_desc": "Kerakli kitobni oldindan bron qiling va kutmasdan olib keting. Tizim sizga qachon kitob qaytarilishini va qachon tayyorligini avtomatik ravishda xabar beradi. Bir necha daqiqa ichida kitob sizning qo'lingizda bo'ladi."
+			"step_04_desc": "Kerakli kitobni oldindan bron qiling va kutmasdan olib keting. Tizim sizga qachon kitob qaytarilishini va qachon tayyorligini avtomatik ravishda xabar beradi. Bir necha daqiqa ichida kitob sizning qo'lingizda bo'ladi.",
+			"oflayn_kutubxona_toliq_nazorat": "Oflayn kutubxona – to'liq nazorat",
+			"oldindan_rejalashtiring": "Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!"
 		},
 		"elektronJurnal": {
 			"jurnal_qidirish_placeholder": "Jurnal nomi bo'yicha qidirish...",
@@ -447,7 +449,8 @@
 		"header": {
 			"beshta_platforma_orqali_oqish": "Beshta platforma orqali o'qish, tadqiqot qilish, bilim olish va professional",
 			"rivojlanish_imkoniyatlari": "rivojlanish imkoniyatlari.",
-			"bizning_platformalar": "Bizning platformalar"
+			"bizning_platformalar": "Bizning platformalar",
+			"barcha_imkoniyatlar": "Barcha imkoniyatlar"
 		},
 		"ishOrinlariJarayon": {
 			"platformadan_qanday_foydalaniladi": "Platformadan qanday foydalaniladi",
@@ -493,7 +496,8 @@
 			"minglab_elektron_kitoblar": "Minglab elektron kitoblar",
 			"onlayn_kitoblarni_sotib_oling": "Onlayn kitoblarni sotib oling, bepul asarlarni kashf eting va ularni qulay o'qish rejimida",
 			"istalgan_qurilmada_oqing": "istalgan qurilmada o'qing.",
-			"platforma_haqida": "Platforma haqida"
+			"platforma_haqida": "Platforma haqida",
+			"bir_platformada": "-bir platformada"
 		},
 		"onlaynTalim": {
 			"bilim_va_konikmalarni": "Bilim va ko'nikmalarni",
@@ -503,6 +507,9 @@
 			"mahalliy_va_xorijiy_mutaxassislar": "mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz.",
 			"onlayn_talim": "Onlayn ta'lim",
 			"platforma_haqida": "Platforma haqida",
+			"tizimli_rivojlantirish": "tizimli rivojlantirish",
+			"zamonaviy_talim_comma": "Zamonaviy ta'lim,",
+			"global_imkoniyatlar": "Global imkoniyatlar!",
 			"card1_title": "Global tajribaga ega ",
 			"card1_highlight": "mentorlar",
 			"card1_tags": "Global mentorlik",

@@ -268,7 +268,7 @@ function HeroText() {
             <Text
 				buttonText={t("pages.onlaynTalim.onlayn_talim")}
 				title={st('education_title1', t("pages.onlaynTalim.bilim_va_konikmalarni"))}
-				highlight={st('education_title2', 'tizimli rivojlantirish')}
+				highlight={st('education_title2', t('pages.onlaynTalim.tizimli_rivojlantirish', 'tizimli rivojlantirish'))}
 				subtitle={st('education_description',
 					<>{t("pages.onlaynTalim.zamonaviy_talim_metodlari_asosida")}<br className='hidden md:block' />
 						{' '}{t("pages.onlaynTalim.bilimlaringizni_chuqurlashtiring")}</>
@@ -374,7 +374,7 @@ export default function OnlaynTalim() {
 	const _lang = _i18n.resolvedLanguage ?? 'uz'
 	const { data: _eduKv } = useSiteData(d => d.byModuleKey.education ?? {})
 	const st = useSectionText('education')
-	const about = splitHeading(st('education_title3'), "Zamonaviy ta'lim,", 'Global imkoniyatlar!')
+	const about = splitHeading(st('education_title3'), t('pages.onlaynTalim.zamonaviy_talim_comma', "Zamonaviy ta'lim,"), t('pages.onlaynTalim.global_imkoniyatlar', 'Global imkoniyatlar!'))
 	const STATS = getStatsFallback(t).map(item => {
 		const src = _eduKv?.[item.key]
 		if (!src) return item

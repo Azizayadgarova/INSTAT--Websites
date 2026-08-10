@@ -162,7 +162,9 @@
       "step_03_title": "Easy Navigation",
       "step_03_desc": "You'll never lose your way in the library. Every section, cabinet, and shelf is clearly marked. You can see exactly where the book you're looking for is and get directions straight to it. The navigation system shows you the shortest route.",
       "step_04_title": "Get the Book",
-      "step_04_desc": "Reserve the book you need in advance and pick it up without waiting. The system automatically notifies you when the book is due back and when it's ready for pickup. Within minutes, the book will be in your hands."
+      "step_04_desc": "Reserve the book you need in advance and pick it up without waiting. The system automatically notifies you when the book is due back and when it's ready for pickup. Within minutes, the book will be in your hands.",
+      "oflayn_kutubxona_toliq_nazorat": "Offline library – complete control",
+      "oldindan_rejalashtiring": "Plan ahead: check a book's availability, find its exact location, and pick it up at the library without unnecessary waiting!"
     },
     "elektronJurnal": {
       "jurnal_qidirish_placeholder": "Search by journal name...",
@@ -447,7 +449,8 @@
     "header": {
       "beshta_platforma_orqali_oqish": "Five platforms for studying, research, learning and professional",
       "rivojlanish_imkoniyatlari": "development.",
-      "bizning_platformalar": "Our platforms"
+      "bizning_platformalar": "Our platforms",
+      "barcha_imkoniyatlar": "All capabilities"
     },
     "ishOrinlariJarayon": {
       "platformadan_qanday_foydalaniladi": "How to use the platform",
@@ -493,7 +496,8 @@
       "minglab_elektron_kitoblar": "Thousands of e-books",
       "onlayn_kitoblarni_sotib_oling": "Buy books online, discover free titles and read them comfortably",
       "istalgan_qurilmada_oqing": "on any device.",
-      "platforma_haqida": "About the platform"
+      "platforma_haqida": "About the platform",
+      "bir_platformada": "on one platform"
     },
     "onlaynTalim": {
       "bilim_va_konikmalarni": "Deepen your knowledge",
@@ -503,6 +507,9 @@
       "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts.",
       "onlayn_talim": "Online education",
       "platforma_haqida": "About the platform",
+      "tizimli_rivojlantirish": "of knowledge and skills",
+      "zamonaviy_talim_comma": "Modern education,",
+      "global_imkoniyatlar": "global opportunities!",
       "card1_title": "Mentors with global ",
       "card1_highlight": "experience",
       "card1_tags": "Global mentorship",
