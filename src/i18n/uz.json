@@ -188,7 +188,12 @@
 			"hero_sarlavha_1": "Ilmiy jurnallar va maqolalar uchun",
 			"hero_sarlavha_2": "yagona platforma",
 			"hero_tavsif": "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda.",
-			"maqola_yuborish": "Maqola yuborish"
+			"maqola_yuborish": "Maqola yuborish",
+			"section_makroiqtisodiyot": "Makroiqtisodiyot",
+			"section_qishloq_xojaligi": "Qishloq xo'jaligi",
+			"section_talim": "Ta'lim",
+			"section_demografiya": "Demografiya",
+			"section_sanoat": "Sanoat"
 		},
 		"kutubxonaKatalogi": {
 			"badge": "Kitoblar katalogi",
@@ -313,7 +318,17 @@
 			"mobil_ilova_bilan_yanada": "Mobil ilova bilan yanada qulayroq!"
 		},
 		"statistikBlok": {
-			"statistik_blok": "Statistik blok"
+			"statistik_blok": "Statistik blok",
+			"statistik_malumotlar_toplami": "Statistik ma'lumotlar\nto'plami",
+			"malumotlar_davri": "Ma'lumotlar davri",
+			"statistik_korsatkichlar": "Statistik ko'rsatkichlar",
+			"hududiy_qamrov": "Hududiy qamrov"
+		},
+		"statisticComponent": {
+			"foydalanuvchilar": "Foydalanuvchilar",
+			"hamkorlar": "Hamkorlar",
+			"ekspertlar": "Ekspertlar",
+			"platforma_faoliyati": "Platforma faoliyati"
 		},
 		"navbar": {
 			"tizimga_kirish": "Tizimga kirish",
@@ -461,6 +476,16 @@
 		"sidebarLayout": {
 			"ortga": "Ortga",
 			"share_this_blog": ""
+		},
+		"informationStatistika": {
+			"kitoblar": "KITOBLAR",
+			"bizda_klassikadan_tortib": "Bizda klassikadan tortib zamonaviy bestsellerlargacha bo'lgan barcha mavzular mavjud.",
+			"mamlakatlar": "MAMLAKATLAR",
+			"foydalanuvchilar_butun_dunyodan": "Foydalanuvchilar butun dunyodan bilim o'rganmoqda va baham ko'rmoqda.",
+			"mualliflar": "MUALLIFLAR",
+			"nashriyotlar_va_mustaqil": "Nashriyotlar va mustaqil mualliflar bilan bevosita hamkorlik qilamiz.",
+			"yuklab_olishlar": "YUKLAB OLISHLAR",
+			"bizning_kitoblarimiz_millionlab": "Bizning kitoblarimiz millionlab odamlarning bilim olishiga yordam berdi."
 		}
 	},
 	"pages": {
@@ -477,7 +502,23 @@
 			"bizning_platforma_orqali_siz": "Bizning platforma orqali siz IT va zamonaviy kasblarni",
 			"mahalliy_va_xorijiy_mutaxassislar": "mahalliy va xorijiy mutaxassislar bilan onlayn o'rganasiz.",
 			"onlayn_talim": "Onlayn ta'lim",
-			"platforma_haqida": "Platforma haqida"
+			"platforma_haqida": "Platforma haqida",
+			"card1_title": "Global tajribaga ega ",
+			"card1_highlight": "mentorlar",
+			"card1_tags": "Global mentorlik",
+			"card1_description": "Dunyoning turli davlatlaridan tajribali mutaxassislar bilan zamonaviy kasblarni real tajriba asosida o'rganing. Barcha darslar amaliy misollar bilan tushuntiriladi.",
+			"card2_title": "Amaliy va natijaga yo'naltirilgan ",
+			"card2_highlight": "ta'lim",
+			"card2_tags": "Amaliy ta'lim",
+			"card2_description": "Har bir kurs real loyihalar va amaliy topshiriqlar asosida tuzilgan. Siz faqat nazariya emas, balki ish jarayonida kerak bo'ladigan ko'nikmalarni egalaysiz.",
+			"card3_title": "Moslashuvchan va qulay ",
+			"card3_highlight": "o'rganish",
+			"card3_tags": "Moslashuvchan ta'lim",
+			"card3_description": "Platformadan istalgan vaqtda va istalgan qurilmadan foydalanib o'qish mumkin. Darslar sizning vaqtingiz va sur'atiningizga moslashtirilgan.",
+			"card4_title": "Sertifikat va karyera ",
+			"card4_highlight": "imkoniyati",
+			"card4_tags": "Karyera rivojlanishi",
+			"card4_description": "Kurslarni muvaffaqiyatli yakunlagan talabalar sertifikatga ega bo'lishadi. Bu esa ishga kirish va professional rivojlanishda katta imkoniyat yaratadi."
 		},
 		"jurnalKatalogiPage": {
 			"barcha_bolimlar": "Barcha bo'limlar",

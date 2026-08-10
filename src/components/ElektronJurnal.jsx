@@ -57,12 +57,12 @@ const CARDS = [
 export const COVERS = [img1, img2, img3, img4, img5]
 
 // /journal-sections/items/all/ bo'sh bo'lganda ishlatiladigan zaxira ro'yxat
-export const SECTIONS_FALLBACK = [
-	{ id: 'fallback-1', name: 'Makroiqtisodiyot' },
-	{ id: 'fallback-2', name: "Qishloq xo'jaligi" },
-	{ id: 'fallback-3', name: "Ta'lim" },
-	{ id: 'fallback-4', name: 'Demografiya' },
-	{ id: 'fallback-5', name: 'Sanoat' },
+export const getSectionsFallback = t => [
+	{ id: 'fallback-1', name: t('components.elektronJurnal.section_makroiqtisodiyot', 'Makroiqtisodiyot') },
+	{ id: 'fallback-2', name: t('components.elektronJurnal.section_qishloq_xojaligi', "Qishloq xo'jaligi") },
+	{ id: 'fallback-3', name: t('components.elektronJurnal.section_talim', "Ta'lim") },
+	{ id: 'fallback-4', name: t('components.elektronJurnal.section_demografiya', 'Demografiya') },
+	{ id: 'fallback-5', name: t('components.elektronJurnal.section_sanoat', 'Sanoat') },
 ]
 export const ALL_SECTION = 'all'
 export const toSection = item => ({ id: item.id, name: (item.name ?? '').toString().trim() })

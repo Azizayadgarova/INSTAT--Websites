@@ -13,7 +13,7 @@ import {
 	Pagination,
 	JournalCard,
 	COVERS,
-	SECTIONS_FALLBACK,
+	getSectionsFallback,
 	ALL_SECTION,
 	toSection,
 	SEARCH_DEBOUNCE_MS,
@@ -40,7 +40,8 @@ const JurnalKatalogiPage = () => {
 	}, [debouncedSearch, sectionId])
 
 	// Bo'limlar ro'yxati — /journal-sections/items/all/ dan bir marta olinadi
-	const { items: sectionItems } = useSiteList('journal-sections', journalSectionsApi, toSection, SECTIONS_FALLBACK)
+	const sectionsFallback = useMemo(() => getSectionsFallback(t), [t])
+	const { items: sectionItems } = useSiteList('journal-sections', journalSectionsApi, toSection, sectionsFallback)
 	const sections = useMemo(
 		() => [{ id: ALL_SECTION, name: t('pages.jurnalKatalogiPage.barcha_bolimlar', "Barcha bo'limlar") }, ...sectionItems],
 		[sectionItems, t],

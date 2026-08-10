@@ -188,7 +188,12 @@
       "hero_sarlavha_1": "For scientific journals and articles",
       "hero_sarlavha_2": "a single platform",
       "hero_tavsif": "Peer-reviewed scientific articles, respected journals, and publishing opportunities that meet international standards — all in one place.",
-      "maqola_yuborish": "Submit an Article"
+      "maqola_yuborish": "Submit an Article",
+      "section_makroiqtisodiyot": "Macroeconomics",
+      "section_qishloq_xojaligi": "Agriculture",
+      "section_talim": "Education",
+      "section_demografiya": "Demography",
+      "section_sanoat": "Industry"
     },
     "kutubxonaKatalogi": {
       "badge": "Book catalog",
@@ -313,7 +318,17 @@
       "mobil_ilova_bilan_yanada": "Even better with the mobile app!"
     },
     "statistikBlok": {
-      "statistik_blok": "Statistics"
+      "statistik_blok": "Statistics",
+      "statistik_malumotlar_toplami": "Statistical\ndataset",
+      "malumotlar_davri": "Data period",
+      "statistik_korsatkichlar": "Statistical indicators",
+      "hududiy_qamrov": "Regional coverage"
+    },
+    "statisticComponent": {
+      "foydalanuvchilar": "Users",
+      "hamkorlar": "Partners",
+      "ekspertlar": "Experts",
+      "platforma_faoliyati": "Platform activity"
     },
     "navbar": {
       "tizimga_kirish": "Sign in",
@@ -461,6 +476,16 @@
     "sidebarLayout": {
       "ortga": "Back",
       "share_this_blog": "Share this page"
+    },
+    "informationStatistika": {
+      "kitoblar": "BOOKS",
+      "bizda_klassikadan_tortib": "We have every subject, from the classics to modern bestsellers.",
+      "mamlakatlar": "COUNTRIES",
+      "foydalanuvchilar_butun_dunyodan": "Users from around the world are learning and sharing knowledge.",
+      "mualliflar": "AUTHORS",
+      "nashriyotlar_va_mustaqil": "We work directly with publishers and independent authors.",
+      "yuklab_olishlar": "DOWNLOADS",
+      "bizning_kitoblarimiz_millionlab": "Our books have helped millions of people gain knowledge."
     }
   },
   "pages": {
@@ -477,7 +502,23 @@
       "bizning_platforma_orqali_siz": "Through our platform you can study IT and modern professions",
       "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts.",
       "onlayn_talim": "Online education",
-      "platforma_haqida": "About the platform"
+      "platforma_haqida": "About the platform",
+      "card1_title": "Mentors with global ",
+      "card1_highlight": "experience",
+      "card1_tags": "Global mentorship",
+      "card1_description": "Learn modern professions through real-world experience with seasoned experts from around the world. Every lesson is explained with practical examples.",
+      "card2_title": "Practical, results-driven ",
+      "card2_highlight": "education",
+      "card2_tags": "Practical education",
+      "card2_description": "Every course is built around real projects and hands-on assignments. You'll gain not just theory, but the skills you actually need on the job.",
+      "card3_title": "Flexible and convenient ",
+      "card3_highlight": "learning",
+      "card3_tags": "Flexible learning",
+      "card3_description": "Study from the platform anytime, on any device. Lessons adapt to your own pace and schedule.",
+      "card4_title": "Certification and career ",
+      "card4_highlight": "opportunities",
+      "card4_tags": "Career growth",
+      "card4_description": "Students who successfully complete their courses receive a certificate — opening up great opportunities for employment and professional growth."
     },
     "jurnalKatalogiPage": {
       "barcha_bolimlar": "All sections",

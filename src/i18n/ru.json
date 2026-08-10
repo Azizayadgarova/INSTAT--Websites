@@ -188,7 +188,12 @@
       "hero_sarlavha_1": "Для научных журналов и статей",
       "hero_sarlavha_2": "единая платформа",
       "hero_tavsif": "Рецензируемые научные статьи, авторитетные журналы и возможности публикации по международным стандартам — всё в одном месте.",
-      "maqola_yuborish": "Отправить статью"
+      "maqola_yuborish": "Отправить статью",
+      "section_makroiqtisodiyot": "Макроэкономика",
+      "section_qishloq_xojaligi": "Сельское хозяйство",
+      "section_talim": "Образование",
+      "section_demografiya": "Демография",
+      "section_sanoat": "Промышленность"
     },
     "kutubxonaKatalogi": {
       "badge": "Каталог книг",
@@ -313,7 +318,17 @@
       "mobil_ilova_bilan_yanada": "С мобильным приложением ещё удобнее!"
     },
     "statistikBlok": {
-      "statistik_blok": "Статистика"
+      "statistik_blok": "Статистика",
+      "statistik_malumotlar_toplami": "Набор\nстатистических данных",
+      "malumotlar_davri": "Период данных",
+      "statistik_korsatkichlar": "Статистические показатели",
+      "hududiy_qamrov": "Территориальный охват"
+    },
+    "statisticComponent": {
+      "foydalanuvchilar": "Пользователи",
+      "hamkorlar": "Партнёры",
+      "ekspertlar": "Эксперты",
+      "platforma_faoliyati": "Активность платформы"
     },
     "navbar": {
       "tizimga_kirish": "Войти",
@@ -461,6 +476,16 @@
     "sidebarLayout": {
       "ortga": "Назад",
       "share_this_blog": "Поделиться"
+    },
+    "informationStatistika": {
+      "kitoblar": "КНИГИ",
+      "bizda_klassikadan_tortib": "У нас есть все темы — от классики до современных бестселлеров.",
+      "mamlakatlar": "СТРАНЫ",
+      "foydalanuvchilar_butun_dunyodan": "Пользователи со всего мира учатся и делятся знаниями.",
+      "mualliflar": "АВТОРЫ",
+      "nashriyotlar_va_mustaqil": "Мы напрямую сотрудничаем с издательствами и независимыми авторами.",
+      "yuklab_olishlar": "СКАЧИВАНИЯ",
+      "bizning_kitoblarimiz_millionlab": "Наши книги помогли миллионам людей получить знания."
     }
   },
   "pages": {
@@ -477,7 +502,23 @@
       "bizning_platforma_orqali_siz": "На нашей платформе вы освоите IT и современные профессии",
       "mahalliy_va_xorijiy_mutaxassislar": "онлайн, вместе с местными и зарубежными экспертами.",
       "onlayn_talim": "Онлайн-образование",
-      "platforma_haqida": "О платформе"
+      "platforma_haqida": "О платформе",
+      "card1_title": "Менторы с мировым",
+      "card1_highlight": "опытом",
+      "card1_tags": "Глобальное менторство",
+      "card1_description": "Изучайте современные профессии на реальных примерах вместе с опытными специалистами со всего мира. Все уроки объясняются на практических примерах.",
+      "card2_title": "Практическое обучение,",
+      "card2_highlight": "ориентированное на результат",
+      "card2_tags": "Практическое обучение",
+      "card2_description": "Каждый курс построен на реальных проектах и практических заданиях. Вы освоите не только теорию, но и навыки, необходимые в реальной работе.",
+      "card3_title": "Гибкое и удобное",
+      "card3_highlight": "обучение",
+      "card3_tags": "Гибкое обучение",
+      "card3_description": "Учитесь с платформы в любое время и с любого устройства. Уроки адаптированы под ваш темп и график.",
+      "card4_title": "Сертификат и карьерные",
+      "card4_highlight": "возможности",
+      "card4_tags": "Карьерное развитие",
+      "card4_description": "Студенты, успешно завершившие курсы, получают сертификат. Это открывает большие возможности для трудоустройства и профессионального роста."
     },
     "jurnalKatalogiPage": {
       "barcha_bolimlar": "Все разделы",

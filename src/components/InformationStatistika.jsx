@@ -1,30 +1,31 @@
+import { useTranslation } from 'react-i18next'
 import { useSectionStats } from '@/hooks/useSectionStats'
 
 // Raqam va izoh backend'dan (library moduli) keladi; tavsif frontendda qoladi
-const STATS_FALLBACK = [
+const STATS_FALLBACK = t => [
   {
     key: 'library_books_number',
     value: "50 000+",
-    label: "KITOBLAR",
-    description: "Bizda klassikadan tortib zamonaviy bestsellerlargacha bo'lgan barcha mavzular mavjud."
+    label: t('components.informationStatistika.kitoblar', "KITOBLAR"),
+    description: t('components.informationStatistika.bizda_klassikadan_tortib', "Bizda klassikadan tortib zamonaviy bestsellerlargacha bo'lgan barcha mavzular mavjud.")
   },
   {
     key: 'library_countries_number',
     value: "120+",
-    label: "MAMLAKATLAR",
-    description: "Foydalanuvchilar butun dunyodan bilim o'rganmoqda va baham ko'rmoqda."
+    label: t('components.informationStatistika.mamlakatlar', "MAMLAKATLAR"),
+    description: t('components.informationStatistika.foydalanuvchilar_butun_dunyodan', "Foydalanuvchilar butun dunyodan bilim o'rganmoqda va baham ko'rmoqda.")
   },
   {
     key: 'library_authors_number',
     value: "1 500+",
-    label: "MUALLIFLAR",
-    description: "Nashriyotlar va mustaqil mualliflar bilan bevosita hamkorlik qilamiz."
+    label: t('components.informationStatistika.mualliflar', "MUALLIFLAR"),
+    description: t('components.informationStatistika.nashriyotlar_va_mustaqil', "Nashriyotlar va mustaqil mualliflar bilan bevosita hamkorlik qilamiz.")
   },
   {
     key: 'library_downloads_number',
     value: "2 mln+",
-    label: "YUKLAB OLISHLAR",
-    description: "Bizning kitoblarimiz millionlab odamlarning bilim olishiga yordam berdi."
+    label: t('components.informationStatistika.yuklab_olishlar', "YUKLAB OLISHLAR"),
+    description: t('components.informationStatistika.bizning_kitoblarimiz_millionlab', "Bizning kitoblarimiz millionlab odamlarning bilim olishiga yordam berdi.")
   }
 ]
 
@@ -32,7 +33,8 @@ const BORDER = 'linear-gradient(180deg, rgba(22,50,183,0.15) 0%, #2B75CC 50%, rg
 const BORDER_H = 'linear-gradient(90deg, rgba(22,50,183,0.15) 0%, #2B75CC 50%, rgba(22,50,183,0.15) 100%)'
 
 const InformationStatistika = () => {
-  const stats = useSectionStats('library', STATS_FALLBACK)
+  const { t } = useTranslation()
+  const stats = useSectionStats('library', STATS_FALLBACK(t))
 
   return (
     <section

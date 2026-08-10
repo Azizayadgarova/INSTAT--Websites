@@ -10,32 +10,32 @@ const vp = { once: true, amount: 0.2 }
 
 // Raqam (`value`) va izoh (`label`) backend'ning micro_data modulidan keladi;
 // doira/matn koordinatalari maketga bog'liq, shuning uchun frontendda qoladi.
-const STATS_FALLBACK = [
+const STATS_FALLBACK = t => [
 	{
 		key: 'micro_data_set',
 		value: '500+',
-		label: "Statistik ma'lumotlar\nto'plami",
+		label: t('components.statistikBlok.statistik_malumotlar_toplami', "Statistik ma'lumotlar\nto'plami"),
 		circle: { top: 300, left: -42 },
 		labelStyle: { top: 180, left: -55, width: 320 ,  },
 	},
 	{
 		key: 'micro_data_period',
 		value: '25 yil',
-		label: "Ma'lumotlar davri",
+		label: t('components.statistikBlok.malumotlar_davri', "Ma'lumotlar davri"),
 		circle: { top: 95, left: 242 },
 		labelStyle: { top: 172, left: 510, width: 280 },
 	},
 	{
 		key: 'micro_data_indicator',
 		value: '120+',
-		label: "Statistik ko'rsatkichlar",
+		label: t('components.statistikBlok.statistik_korsatkichlar', "Statistik ko'rsatkichlar"),
 		circle: { top: 300, left: 528 },
 		labelStyle: { top: 400, left: 200, width: 300},
 	},
 	{
 		key: 'micro_data_region',
 		value: '14',
-		label: 'Hududiy qamrov',
+		label: t('components.statistikBlok.hududiy_qamrov', 'Hududiy qamrov'),
 		circle: { top: 95, left: 810 },
 		labelStyle: { top: 395, left: 820, width: 290 },
 	},
@@ -69,7 +69,7 @@ const StatistikBlok = () => {
     } = useTranslation();
 
     const st = useSectionText('micro_data')
-    const stats = useSectionStats('micro_data', STATS_FALLBACK)
+    const stats = useSectionStats('micro_data', STATS_FALLBACK(t))
     const title = st('micro_data_title6', t("components.statistikBlok.statistik_blok"))
 
     return (
