@@ -8,12 +8,13 @@ import sIconFb from '@/assets/Vector (14).png'
 import sIconLn from '@/assets/Vector (15).png'
 
 const INFO_LINKS = [
-	{ label: 'Yangiliklar', path: '/media-servises/yangiliklar' },
-	{ label: 'Tadbirlar', path: '/media-servises/tadbirlar' },
-	{ label: 'Hamkorlik', path: '/media-servises/hamkorlik' },
+	{ label: 'pages.mediaServise.yangiliklar', fallback: 'Yangiliklar', path: '/media-servises/yangiliklar' },
+	{ label: 'pages.mediaServise.tadbirlar', fallback: 'Tadbirlar', path: '/media-servises/tadbirlar' },
+	{ label: 'pages.mediaServise.hamkorlik', fallback: 'Hamkorlik', path: '/media-servises/hamkorlik' },
 ]
 
 const NavItem = ({ link }) => {
+	const { t } = useTranslation()
 	const [hovered, setHovered] = useState(false)
 
 	return (
@@ -52,7 +53,7 @@ const NavItem = ({ link }) => {
 							transition: '0.2s',
 						}}
 					>
-						{link.label}
+						{t(link.label, link.fallback)}
 					</div>
 				</div>
 			)}

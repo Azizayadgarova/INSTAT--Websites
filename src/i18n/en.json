@@ -85,7 +85,8 @@
       "oy": "/mo",
       "ariza_yuborish": "Apply",
       "karyerangiz_uchun_eng_yaxshi": "The best choice for your career",
-      "eng_saralangan_vakansiyalarni_bir": "Find the best vacancies in one place. Identify the right job, apply quickly and take your career to the next level."
+      "eng_saralangan_vakansiyalarni_bir": "Find the best vacancies in one place. Identify the right job, apply quickly and take your career to the next level.",
+      "vakansiyalar": "Vacancies"
     },
     "jurnalStatistika": {
       "statistik_blok": "Statistics"
@@ -93,9 +94,36 @@
     "mentorsSection": {
       "sohasida_tajribali_mutaxassislar_bilan": "Learn from experienced professionals",
       "bizning_platforma_orqali_siz": "Through our platform you can study IT and modern professions",
-      "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts."
+      "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts.",
+      "mentorlar": "Mentors",
+      "organing": "learn!"
+    },
+    "topFooter": {
+      "biz_bilan_boglaning": "Contact us",
+      "savollaringiz_bormi": "Have questions?",
+      "kurslar_royxatdan_otish_yoki": "Courses, registration or partnership —",
+      "boyicha_savollaringiz_bolsa_biz": "if you have any questions, get in touch with us",
+      "email_muvaffaqiyatli_yuborildi": "✓ Email sent successfully!",
+      "pochtangizni_qoldiring": "Leave your email",
+      "yuborish": "Send"
+    },
+    "testimonial": {
+      "testimonial_1": "The online and offline learning options are incredibly convenient. I can review lessons anytime and download materials whenever I need them. Thanks to this platform, I've significantly improved my knowledge.",
+      "testimonial_2": "The quality of education at the university is excellent. Courses developed by experts and the digital library have been a huge help to us. This platform has contributed to my growth as a statistics professional.",
+      "testimonial_3": "This platform gave me not just knowledge, but practical skills as well. The database of scientific articles and research materials is extremely useful. Every lesson is structured clearly and is easy to understand.",
+      "testimonial_4": "This platform from the statistics agency is very convenient and modern. Having electronic journals, scientific articles, and study materials all in one place has boosted my work efficiency.",
+      "fikrlar": "Reviews",
+      "talabalar_fikri": "Student Feedback",
+      "foydalanuvchilar_fikri": "User Feedback",
+      "biz_bilan_oqigan_talabalar": "Students Who Studied With Us",
+      "nimani_deydi": "what do they say?",
+      "platformamiz_allaqachon_yuzlab": "Our platform has already helped hundreds of readers save time and quickly find the book they need.",
+      "platformamiz_orqali_bilim_olgan": "Students who gained knowledge through our platform",
+      "real_natijalari_va_tajribasi": "share their real results and experience",
+      "yulduz": "star"
     },
     "mikroImkoniyatlar": {
+      "afzalliklar": "Advantages",
       "platformaning_asosiy_imkoniyatlari": "Key platform capabilities",
       "mikro_malumotlar_laboratoriyasi_foydalan": "The microdata laboratory offers modern, convenient tools for working effectively with statistical data.",
       "har_bir_detalni_aniqlik": "See every detail clearly",
@@ -113,7 +141,54 @@
     },
     "elektronKutubxona": {
       "platformamizdagi_barcha_elektron_kitobla": "Discover every e-book on our platform in one place. Filter by genre, rating and price, and pick the right title with ease.",
-      "barchasini_korish": "View all"
+      "barchasini_korish": "View all",
+      "elektron_kutubxona": "Digital Library",
+      "kitoblar_katalogi": "Book Catalog"
+    },
+    "mikroMalumotlarHero": {
+      "platforma_haqida": "About the Platform",
+      "rasmiy_statistika_uchun": "A digital platform for",
+      "raqamli_platforma": "official statistics",
+      "mikro_malumotlar_laboratoriyasi_foydalan": "The microdata laboratory gives users secure and convenient access to the official statistical data of the Republic of Uzbekistan.",
+      "ariza_yuborish": "Submit a request",
+      "statistik_shablonlar": "Statistical templates"
+    },
+    "kutubxona": {
+      "kutubxona": "Library",
+      "step_01_title": "Online Search",
+      "step_01_desc": "Every book's page shows its real-time availability. The system tells you exactly how many copies the library holds and which section or shelf they're on. If an electronic version of the book exists, that is flagged separately as well.",
+      "step_02_title": "Find the Book",
+      "step_02_desc": "Every book's page shows its real-time availability. The system tells you exactly how many copies the library holds and which section or shelf they're on. If an electronic version of the book exists, that is flagged separately as well.",
+      "step_03_title": "Easy Navigation",
+      "step_03_desc": "You'll never lose your way in the library. Every section, cabinet, and shelf is clearly marked. You can see exactly where the book you're looking for is and get directions straight to it. The navigation system shows you the shortest route.",
+      "step_04_title": "Get the Book",
+      "step_04_desc": "Reserve the book you need in advance and pick it up without waiting. The system automatically notifies you when the book is due back and when it's ready for pickup. Within minutes, the book will be in your hands."
+    },
+    "elektronJurnal": {
+      "jurnal_qidirish_placeholder": "Search by journal name...",
+      "sahifa": "Page",
+      "barchasini_korish": "View All",
+      "batafsil": "Learn more →",
+      "jurnallar": "Journals",
+      "nufuzli_jurnallar_sarlavha": "Leading Journals and Latest Issues",
+      "nufuzli_jurnallar_tavsif": "Explore the leading scientific journals published on the platform and their newest issues.",
+      "jurnal_nashrlari_yoq": "No journal issues yet",
+      "barchasi": "View All",
+      "card_1_title": "Scientific Articles",
+      "card_1_desc": "A database of quality, peer-reviewed research papers.",
+      "card_2_title": "International Journals",
+      "card_2_desc": "Journals indexed in Scopus and Web of Science.",
+      "card_3_title": "A Single Platform",
+      "card_3_desc": "Publishing, reading, and collaboration — all in one place.",
+      "card_4_title": "Fast Publishing",
+      "card_4_desc": "Publish your article quickly and easily.",
+      "card_5_title": "Career Opportunities",
+      "card_5_desc": "Grow your academic career and gain recognition.",
+      "platforma_haqida": "About the Platform",
+      "hero_sarlavha_1": "For scientific journals and articles",
+      "hero_sarlavha_2": "a single platform",
+      "hero_tavsif": "Peer-reviewed scientific articles, respected journals, and publishing opportunities that meet international standards — all in one place.",
+      "maqola_yuborish": "Submit an Article"
     },
     "kutubxonaKatalogi": {
       "badge": "Book catalog",
@@ -139,7 +214,9 @@
       "sahifa": "Page",
       "barchasini_korish": "View all",
       "nufuzli_jurnallar_va_songgi": "Leading journals and latest publications",
-      "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues."
+      "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues.",
+      "jurnallar": "Journals",
+      "barchasi": "View All"
     },
     "coursesSection": {
       "maqsadingizga_mos": "Choose the online course",
@@ -149,12 +226,15 @@
       "soat": "h",
       "daqiqa": "min",
       "soniya": "sec",
+      "uzs": "UZS",
       "0_uzs": "Free",
-      "barcha_kurslar": "All courses"
+      "barcha_kurslar": "All courses",
+      "kurslar_katalogi": "Course Catalog"
     },
     "ishOrinlariAfzalliklar": {
       "platforma_orqali_ish_topish": "Finding a job through the platform is now easy and effective",
-      "platforma_sizning_qiziqishlaringiz_va": "The platform helps you quickly find company vacancies that match your interests and skills. Apply in a few clicks,"
+      "platforma_sizning_qiziqishlaringiz_va": "The platform helps you quickly find company vacancies that match your interests and skills. Apply in a few clicks,",
+      "bizning_afzalliklarimiz": "Our advantages"
     },
     "footer": {
       "kadrlar_malakasini_oshirish_va": "Institute for Professional Development and",
@@ -178,7 +258,31 @@
       "barchasini_korish": "View all",
       "kategoriyalar": "Categories",
       "siz_uchun_mos_kategoriyani": "Pick the category that suits you",
-      "eng_talab_yuqori_bolgan": "Find a job among the most in-demand categories and grow your career"
+      "eng_talab_yuqori_bolgan": "Find a job among the most in-demand categories and grow your career",
+      "frontend_dasturchi": "Frontend Developer",
+      "ofis_menejeri": "Office Manager",
+      "sotuv_menejeri": "Sales Manager",
+      "haydovchi": "Driver",
+      "qurilish_muhandisi": "Construction Engineer",
+      "hamshira": "Nurse",
+      "ingliz_tili_oqituvchisi": "English Teacher",
+      "ofitsiant": "Waiter",
+      "tozalovchi": "Cleaner",
+      "operator": "Operator",
+      "smm_menejer": "SMM Manager",
+      "ux_ui_dizayner": "UX/UI Designer",
+      "count_320": "320 job openings",
+      "count_190": "190 job openings",
+      "count_340": "340 job openings",
+      "count_410": "410 jobs",
+      "count_150": "150 job openings",
+      "count_130": "130 job openings",
+      "count_170": "170 job openings",
+      "count_260": "260 job openings",
+      "count_120": "120 job openings",
+      "count_200": "200 job openings",
+      "count_275": "275 job openings",
+      "count_210": "210 job openings"
     },
     "navbar2": {
       "shaxsiy_kabinet": "My account",
@@ -194,7 +298,8 @@
       "bitta_platformada": "all on one platform",
       "ish_beruvchilar_va_nomzodlarni": "A modern platform connecting employers and candidates. Find the right job quickly and grow your career.",
       "pochtangizni_qoldiring": "Leave your email",
-      "vakansiya_izlash": "Search vacancies"
+      "vakansiya_izlash": "Search vacancies",
+      "ish_va_imkoniyatlar_platformasi": "Jobs and opportunities platform"
     },
     "mentorCard": {
       "instagram": "Instagram",
@@ -222,16 +327,35 @@
     },
     "foydalanishJarayoni": {
       "platforma_qanday_ishlaydi": "How does the platform work?",
-      "raqamli_kutubxonadan_foydalanish_jarayon": "How to use the digital library — a short overview of selecting, purchasing and reading a book within the platform."
+      "raqamli_kutubxonadan_foydalanish_jarayon": "How to use the digital library — a short overview of selecting, purchasing and reading a book within the platform.",
+      "foydalanish_jarayoni": "Usage Process",
+      "keng_qamrovli_qidiruv": "Comprehensive Search",
+      "janr_muallif_yoki_kalit_sozlar": "Find books quickly and precisely by genre, author, or keywords. You can also discover rare and unique works along the way.",
+      "moslashuvchan_oqish_tajribasi": "Flexible Reading Experience",
+      "kitoblarni_istalgan_qurilmada_oqing": "Read books on any device and customize your reading settings to your personal needs. Adjust brightness, font, and page-turning for maximum comfort.",
+      "xavfsiz_va_qulay_xarid": "Safe and Convenient Purchase",
+      "tanlangan_kitobni_bir_necha_soniyada": "Purchase your selected book in just a few seconds, or enjoy free titles. The payment process is secure and fast, giving you a reliable purchasing experience.",
+      "shaxsiy_kutubxona_boshqaruvi": "Personal Library Management",
+      "sotib_olingan_va_saqlangan_kitoblaringizni": "Manage your purchased and saved books in one place. Organize your library by topic and enjoy quick access whenever you need it."
     },
     "ishOrinlariRasmlar": {
       "mos_vakansiyalarni_tez_toping": "Find matching vacancies fast",
       "sizning_qiziqishlaringiz_konikmalaringiz": "Find company vacancies matching your interests, skills and experience in a matter of seconds.",
-      "sizning_qiziqishlaringiz_konikmalaringiz_2": "Find company vacancies matching your interests, skills and experience in a matter of seconds. The platform surfaces precise, up-to-date openings without endless searching."
+      "sizning_qiziqishlaringiz_konikmalaringiz_2": "Find company vacancies matching your interests, skills and experience in a matter of seconds. The platform surfaces precise, up-to-date openings without endless searching.",
+      "arizani_tez_yuboring": "Apply quickly",
+      "tanlagan_ishga_bir_necha_klik": "Apply to your chosen job in just a few clicks and save valuable time.",
+      "profilingizni_kuchli_qiling": "Strengthen your profile",
+      "profilingizni_tolik_toldiring": "Complete your profile in full to present yourself to employers in the best possible light.",
+      "tezkor_bildirishnomalar": "Instant notifications",
+      "yangi_vakansiyalar_va_ariza_holati": "Get notified instantly about new vacancies and the status of your application.",
+      "karyerangizni_tez_rivojlantiring": "Advance your career faster",
+      "firma_vakansiyalari_bilan_tanishing": "Explore company vacancies and grow your career effectively."
     },
     "integrationSection": {
       "integratsiyalashgan": "Integrated",
-      "talim_jarayonini_qulay_va": "Integrations that make learning convenient and effective"
+      "talim_jarayonini_qulay_va": "Integrations that make learning convenient and effective",
+      "platforma_haqida": "About the Platform",
+      "platformalar": "platforms"
     },
     "carouselCard": {
       "batafsil": "Learn more →"
@@ -254,17 +378,44 @@
     "jurnallarSection": {
       "nufuzli_jurnallar_va_songgi": "Leading journals and latest publications",
       "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues.",
-      "bu_tanlov_boyicha_jurnal": "No journals found for this selection"
+      "bu_tanlov_boyicha_jurnal": "No journals found for this selection",
+      "jurnallar": "Journals"
     },
     "problemSection": {
       "kitob_izlashdan_charchadingizmi": "Tired of hunting for books?",
-      "biz_har_bir_foydalanuvchi": "We understand the problems every user runs into — both offline and online."
+      "biz_har_bir_foydalanuvchi": "We understand the problems every user runs into — both offline and online.",
+      "foydalanish_jarayoni": "How it works"
+    },
+    "onlaynTalimHero": {
+      "onlayn_talim": "Online education",
+      "title_line1": "Systematic development",
+      "title_highlight": "of knowledge and skills",
+      "subtitle": "Deepen your knowledge through courses developed using modern educational methods.",
+      "platformadagi_faollik": "Platform activity",
+      "oquvchilar_soni": "Number of students",
+      "mavjud_kurslar": "Available courses",
+      "muvaffaqiyatli_bitiruvchilar": "Successful graduates"
+    },
+    "platformaIshlashi": {
+      "qadam": "STEP",
+      "qanday_ishlaydi": "How does it work?",
+      "platforma_qanday_ishlaydi": "How the platform works",
+      "jarayon_tavsifi": "Using the platform is simple and convenient — in just a few steps, users can access the statistical data they need.",
+      "step1_title": "Registration and sign-in",
+      "step1_description": "The user registers on the platform and logs into their personal account, gaining access to all of the system's statistical data and analytical tools.",
+      "step2_title": "Finding the required data",
+      "step2_description": "Using the platform's catalog of statistical data, the user finds the dataset they need. Data is organized by type and category, making the search process easy.",
+      "step3_title": "Analyzing the data",
+      "step3_description": "The selected data is reviewed using the platform's analytical tools. Charts and graphs allow the data to be analyzed visually, enabling a deeper understanding.",
+      "step4_title": "Preparing and exporting results",
+      "step4_description": "Based on the analysis results, the user prepares a report and can export it in various formats for use wherever needed."
     },
     "fAQSection": {
       "kop_beriladigan": "Frequently asked",
       "savollar": "questions",
       "platforma_va_onlayn_kurslar": "Answers to the most common questions",
-      "eng_kop_beriladigan_savollarga": "about the platform and online courses"
+      "eng_kop_beriladigan_savollarga": "about the platform and online courses",
+      "foydalanuvchilardan_izohlar": "Comments from users"
     },
     "heroZoom": {
       "zamonaviy_platforma_asosida_ishlab": "Built on a modern platform,",
@@ -280,11 +431,27 @@
     },
     "header": {
       "beshta_platforma_orqali_oqish": "Five platforms for studying, research, learning and professional",
-      "rivojlanish_imkoniyatlari": "development."
+      "rivojlanish_imkoniyatlari": "development.",
+      "bizning_platformalar": "Our platforms"
     },
     "ishOrinlariJarayon": {
       "platformadan_qanday_foydalaniladi": "How to use the platform",
-      "bir_necha_oddiy_qadam": "Find a job or hire the right person in a few simple steps"
+      "bir_necha_oddiy_qadam": "Find a job or hire the right person in a few simple steps",
+      "profil_yarating": "Create a profile",
+      "ozingiz_haqingizdagi_muhim_malumotlarni": "Enter key information about yourself to build a professional profile. A complete profile presents you more accurately to employers and helps you find suitable vacancies faster.",
+      "mos_vakansiyani_toping": "Find a suitable vacancy",
+      "qiziqishlaringiz_tajribangiz_va_konikmalaringizga": "Easily and quickly find jobs that match your interests, experience, and skills through our modern search system. The platform recommends the most relevant and suitable vacancies for you, letting you make the right choice without wasting time.",
+      "ariza_yuboring": "Submit your application",
+      "sizga_mos_keladigan_vakansiyani": "Choose the vacancy that suits you and submit your application in just a few clicks. The platform delivers your profile directly to the employer, simplifying the entire process.",
+      "javobni_kuting": "Wait for a response",
+      "yuborgan_arizangiz_ish_beruvchi": "Your application will be reviewed by the employer, and you'll be notified of the outcome. The platform lets you track the process and receive a timely response.",
+      "jarayon": "Process"
+    },
+    "ishOrinlariCTA": {
+      "mos_lavozim_topa_olmadingizmi": "Couldn't find a suitable position?",
+      "rezyumeyingizni_yuboring_biz_yangi": "Send us your resume — we'll get in touch with you as soon as new positions open up.",
+      "rezyume_yuborish": "Submit resume",
+      "boglanish": "Contact us"
     },
     "maqolaTalablari": {
       "talablar": "Requirements",
@@ -300,14 +467,82 @@
     "raqamliKutibxona": {
       "minglab_elektron_kitoblar": "Thousands of e-books",
       "onlayn_kitoblarni_sotib_oling": "Buy books online, discover free titles and read them comfortably",
-      "istalgan_qurilmada_oqing": "on any device."
+      "istalgan_qurilmada_oqing": "on any device.",
+      "platforma_haqida": "About the platform"
     },
     "onlaynTalim": {
       "bilim_va_konikmalarni": "Deepen your knowledge",
       "zamonaviy_talim_metodlari_asosida": "and skills through courses built on",
       "bilimlaringizni_chuqurlashtiring": "modern teaching methods",
       "bizning_platforma_orqali_siz": "Through our platform you can study IT and modern professions",
-      "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts."
+      "mahalliy_va_xorijiy_mutaxassislar": "online, with local and international experts.",
+      "onlayn_talim": "Online education",
+      "platforma_haqida": "About the platform"
+    },
+    "jurnalKatalogiPage": {
+      "barcha_bolimlar": "All sections",
+      "jurnallar": "Journals",
+      "nufuzli_jurnallar_va_songgi_nashrlar": "Renowned journals and the latest issues",
+      "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues.",
+      "bu_qidiruv_boyicha_jurnal_topilmadi": "No journals found for this search"
+    },
+    "jurnalDetail": {
+      "yuklab_olish": "Download",
+      "muallif": "Author",
+      "nomsiz_maqola": "Untitled article",
+      "bolimsiz": "Uncategorized",
+      "jurnallar": "Journals",
+      "yil": "year",
+      "son_suffix": " issue",
+      "nashr_sanasi": "Publication date",
+      "maqolalar": "Articles",
+      "bu_nashrda_hozircha_maqolalar_yoq": "This issue has no articles yet"
+    },
+    "kursDetail": {
+      "tugatish_sertifikati": "Certificate of completion",
+      "barcha_materiallarga_umrbod_kirish": "Lifetime access to all materials",
+      "oz_fikringizni_shaffof_qoldirish": "Ability to leave transparent feedback",
+      "qollab_quvvatlash_xizmati": "Support service",
+      "kurs_haqida": "About the course",
+      "oquv_reja": "Curriculum",
+      "kurslar_katalogi": "Course catalog",
+      "nima_olasiz": "What you'll get",
+      "kursni_boshlash": "Start the course",
+      "kurs_malumotlari": "Course information",
+      "ta_darslar": "lessons",
+      "davomiyligi": "Duration",
+      "ta_test_savollari": "test questions",
+      "qisqartirish": "Show less",
+      "batafsil_korish": "Show more",
+      "nimalarni_organasiz": "What you will learn!"
+    },
+    "kitobDetail": {
+      "mahsulot_tarifi": "Product description",
+      "sharhlar": "Reviews",
+      "kutubxona_katalogi": "Library catalog",
+      "kotegoriya": "Category",
+      "tizimga_yuklangan_sana": "Date added to the system:",
+      "oqishni_boshlash": "Start reading",
+      "kitob_malumotlari": "Book information",
+      "ta_sotuv": "sales",
+      "ta_izoh": "reviews",
+      "foydalanuvchi": "User"
+    },
+    "nashrDetail": {
+      "nashrlar": "Publications",
+      "kategoriya": "Category",
+      "nashr_etilgan_sana": "Publication date",
+      "tavsif": "Description",
+      "kategoriya_haqida": "About the category",
+      "mavjud_davrlar": "Available periods"
+    },
+    "mikroMalumotlarKatalogiPage": {
+      "barcha_sohalar": "All fields",
+      "malumotlar": "Data",
+      "mikromalumotlar_katalogi": "Microdata catalog",
+      "statistika_agentligi_tomonidan": "Work with individual-level datasets collected by the Statistics Agency and enrich your research.",
+      "malumot_nomi_boyicha_qidirish": "Search by data name...",
+      "bu_qidiruv_boyicha_malumot_topilmadi": "No data found for this search"
     },
     "ishOrinlari": {
       "ishorinlari": "Vacancies",
@@ -352,7 +587,12 @@
     },
     "umumiyMalumot": {
       "upcoming_events": "UPCOMING EVENTS",
-      "yangiliklar": "News"
+      "yangiliklar": "News",
+      "huquqiy_asos": "Legal Basis",
+      "huquqiy_asos_1": "The Institute for Professional Development and Statistical Research under the State Statistics Committee is the legal successor of the former Center for Personnel Retraining and Statistical Research.",
+      "huquqiy_asos_2": "The Institute carries out its activities in accordance with its Charter, approved by Order No. 94 of the State Statistics Committee dated 10 September 2019 (registered with the Public Services Center of the Mirzo-Ulugbek district of Tashkent city on 11 September 2019), as well as the annual advanced-training and retraining program for state statistics staff and the statistical research program, both approved by the State Statistics Committee.",
+      "huquqiy_asos_3": "The Institute's core mission is to organize the advanced training of state statistics staff efficiently and systematically, to widely introduce information and communication technologies and innovative methods into the training process, and to conduct statistical research in the economic and social spheres, including sectoral and regional issues. For staff retraining and upskilling, the Institute has established 2 departments (chairs), and for statistical research in the economic and social spheres, as well as sectoral and regional issues, 3 divisions.",
+      "huquqiy_asos_4": "The Institute publishes the quarterly electronic scientific journal 'Statistical Bulletin of Uzbekistan' (www.statmirror.uz, certificate No. 1309 of the Information and Mass Communications Agency dated 27 August 2019). Under Resolution No. 269/2 of the Presidium of the Higher Attestation Commission dated 30 September 2019, a scientific council (No. DSc.30.09.2019.I.92.01) operates at the Institute, awarding the degree of Doctor of Economic Sciences in the specialties 'Econometrics and Statistics' and 'Information Systems and Technologies in Economics'. Accordingly, based on annually allocated admission quotas, basic doctoral and doctoral studies in these specialties are organized for researchers."
     },
     "yotoqxona": {
       "yotoqhona": "Dormitory"
@@ -360,19 +600,30 @@
     "about": {
       "ortga": "Back",
       "head_line": "Training and Statistical Research Institute",
-
       "share_this_blog": "Share this page",
       "malumotlar_va_tahlil_ilmi": "“Data and analytics science”",
       "raqamli_talim_platformasi": "Digital education platform",
-      "talim_ilm_fan_va": "A single digital platform for education, science and careers"
+      "talim_ilm_fan_va": "A single digital platform for education, science and careers",
+      "umumiy_malumotlar": "General Information",
+      "tuzilma": "Structure",
+      "rahbariyat": "Management",
+      "korrupsiyaga_qarshi_kurashish": "Anti-Corruption",
+      "bosh_ish_orinlari": "Vacancies",
+      "mehmonhona_turidagi_yotoqhona": "Hotel-Type Dormitory",
+      "odob_axloq_qoidalari": "Code of Ethics"
     },
     "mediaServise": {
       "ortga": "Back",
-      "share_this_blog": "Share this page"
+      "share_this_blog": "Share this page",
+      "yangiliklar": "News",
+      "tadbirlar": "Events",
+      "hamkorlik": "Cooperation"
     },
     "science": {
       "ortga": "Back",
-      "share_this_blog": "Share this page"
+      "share_this_blog": "Share this page",
+      "ilmiy_tadqiqot": "Scientific Research",
+      "oliy_talim": "Higher Education"
     }
   },
   "data": {

@@ -11,14 +11,28 @@ import { useTranslation } from 'react-i18next'
 const HERO_GRADIENT =
 	'linear-gradient(135deg, rgba(45,212,191,1) 0%, rgba(20,184,166,1) 100%)'
 
-const HUQUQIY_ASOS = [
-	"Davlat statistika qo'mitasi huzuridagi Kadrlar malakasini oshirish va statistik tadqiqotlar instituti sobiq Kadrlarni qayta tayyorlash va statistika tadqiqotlari markazining huquqiy vorisi hisoblanadi.",
-	"Institut o'z faoliyatini Davlat statistika qo'mitasining 2019-yil 10-sentabrdagi 94-sonli buyrug'i bilan tasdiqlangan Ustavga (Toshkent shahar, Mirzo Ulug'bek tumani Davlat xizmatlari markazida 2019-yil 11-sentabrda ro'yxatga olingan), har yili Davlat statistika qo'mitasi tomonidan tasdiqlanadigan davlat statistika organlari xodimlarining malakasini oshirish va qayta tayyorlash dasturi hamda statistika tadqiqotlarini amalga oshirish dasturiga muvofiq amalga oshiradi.",
-	"Institut faoliyatining asosiy maqsadi - davlat statistika organlari xodimlarining malakasini oshirishni tizimli asosda samarali tashkil qilish, o'qitish jarayoniga axborot-kommunikatsiya texnologiyalarini va innovatsion usullarni keng joriy etish, iqtisodiy va ijtimoiy sohalarda, shuningdek tarmoqlar va mintaqaviy muammolar bo'yicha statistik tadqiqotlarni olib borishdan iborat. Tizim xodimlarini qayta tayyorlash va malakasini oshirish bo'yicha institutda 2 ta kafedra, iqtisodiy va ijtimoiy sohalarda, hamda tarmoqlar va mintaqaviy muammolar bo'yicha statistik tadqiqotlarni olib borish bo'yicha 3 ta bo'lim tashkil etilgan.",
-	"Institutda “O'zbekiston statistika axborotnomasi” choraklik elektron ilmiy jurnali (www.statmirror.uz, Axborot va ommaviy kommunikatsiyalar agentligining 2019-yil 27-avgustdagi 1309-son guvohnomasi) nashr etiladi. Oliy attestatsiya komissiyasi Rayosatining 2019-yil 30-sentabrdagi 269/2-son qaroriga asosan, “Ekonometrika va statistika” hamda “Iqtisodiyotda axborot tizimlari va texnologiyalari” ixtisosliklari bo'yicha iqtisodiyot fanlari doktori ilmiy darajasini beruvchi ilmiy kengash (DSc.30.09.2019.I.92.01 raqamli) faoliyat yuritadi. Mos ravishda, har yili ajratiladigan qabul kvotalariga asosan, ilmiy izlanuvchilar uchun mazkur ixtisosliklar bo'yicha tayanch doktorantura va doktorantura tashkil etiladi.",
+const HUQUQIY_ASOS_KEYS = [
+	{
+		key: 'pages.umumiyMalumot.huquqiy_asos_1',
+		fallback: "Davlat statistika qo'mitasi huzuridagi Kadrlar malakasini oshirish va statistik tadqiqotlar instituti sobiq Kadrlarni qayta tayyorlash va statistika tadqiqotlari markazining huquqiy vorisi hisoblanadi.",
+	},
+	{
+		key: 'pages.umumiyMalumot.huquqiy_asos_2',
+		fallback: "Institut o'z faoliyatini Davlat statistika qo'mitasining 2019-yil 10-sentabrdagi 94-sonli buyrug'i bilan tasdiqlangan Ustavga (Toshkent shahar, Mirzo Ulug'bek tumani Davlat xizmatlari markazida 2019-yil 11-sentabrda ro'yxatga olingan), har yili Davlat statistika qo'mitasi tomonidan tasdiqlanadigan davlat statistika organlari xodimlarining malakasini oshirish va qayta tayyorlash dasturi hamda statistika tadqiqotlarini amalga oshirish dasturiga muvofiq amalga oshiradi.",
+	},
+	{
+		key: 'pages.umumiyMalumot.huquqiy_asos_3',
+		fallback: "Institut faoliyatining asosiy maqsadi - davlat statistika organlari xodimlarining malakasini oshirishni tizimli asosda samarali tashkil qilish, o'qitish jarayoniga axborot-kommunikatsiya texnologiyalarini va innovatsion usullarni keng joriy etish, iqtisodiy va ijtimoiy sohalarda, shuningdek tarmoqlar va mintaqaviy muammolar bo'yicha statistik tadqiqotlarni olib borishdan iborat. Tizim xodimlarini qayta tayyorlash va malakasini oshirish bo'yicha institutda 2 ta kafedra, iqtisodiy va ijtimoiy sohalarda, hamda tarmoqlar va mintaqaviy muammolar bo'yicha statistik tadqiqotlarni olib borish bo'yicha 3 ta bo'lim tashkil etilgan.",
+	},
+	{
+		key: 'pages.umumiyMalumot.huquqiy_asos_4',
+		fallback: "Institutda “O'zbekiston statistika axborotnomasi” choraklik elektron ilmiy jurnali (www.statmirror.uz, Axborot va ommaviy kommunikatsiyalar agentligining 2019-yil 27-avgustdagi 1309-son guvohnomasi) nashr etiladi. Oliy attestatsiya komissiyasi Rayosatining 2019-yil 30-sentabrdagi 269/2-son qaroriga asosan, “Ekonometrika va statistika” hamda “Iqtisodiyotda axborot tizimlari va texnologiyalari” ixtisosliklari bo'yicha iqtisodiyot fanlari doktori ilmiy darajasini beruvchi ilmiy kengash (DSc.30.09.2019.I.92.01 raqamli) faoliyat yuritadi. Mos ravishda, har yili ajratiladigan qabul kvotalariga asosan, ilmiy izlanuvchilar uchun mazkur ixtisosliklar bo'yicha tayanch doktorantura va doktorantura tashkil etiladi.",
+	},
 ]
 
-const HuquqiyAsos = () => (
+const HuquqiyAsos = () => {
+	const { t } = useTranslation()
+	return (
 	<section style={{ maxWidth: '980px', marginTop: '40px' }}>
 		<h2
 			style={{
@@ -29,10 +43,10 @@ const HuquqiyAsos = () => (
 				marginBottom: '16px',
 			}}
 		>
-			Huquqiy asos
+			{t('pages.umumiyMalumot.huquqiy_asos', 'Huquqiy asos')}
 		</h2>
 		<ul style={{ listStyle: 'disc', paddingLeft: '20px', margin: 0 }}>
-			{HUQUQIY_ASOS.map((text, i) => (
+			{HUQUQIY_ASOS_KEYS.map(({ key, fallback }, i) => (
 				<li
 					key={i}
 					style={{
@@ -45,12 +59,13 @@ const HuquqiyAsos = () => (
 						color: 'rgba(188, 188, 188, 1)',
 					}}
 				>
-					{text}
+					{t(key, fallback)}
 				</li>
 			))}
 		</ul>
 	</section>
-)
+	)
+}
 
 const Badge = ({ text }) => (
 	<span

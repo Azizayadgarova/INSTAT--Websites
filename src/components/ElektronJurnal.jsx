@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import img1 from '@/assets/2.webp'
 import img2 from '@/assets/3.webp'
 import img3 from '@/assets/4.webp'
@@ -282,6 +283,7 @@ export function FilterBar({
 	sectionOpen,
 	setSectionOpen,
 }) {
+	const { t } = useTranslation()
 	return (
 		<div
 			className='flex-col md:flex-row w-[327px] md:w-full mx-auto md:mx-0'
@@ -316,7 +318,7 @@ export function FilterBar({
 					type='text'
 					value={search}
 					onChange={e => setSearch(e.target.value)}
-					placeholder='Jurnal nomi bo&apos;yicha qidirish...'
+					placeholder={t('components.elektronJurnal.jurnal_qidirish_placeholder', "Jurnal nomi bo'yicha qidirish...")}
 					style={{
 						flex: 1,
 						background: 'transparent',
@@ -412,6 +414,7 @@ export function FilterBar({
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
 export function Pagination({ page, setPage, total }) {
+	const { t } = useTranslation()
 	const getPages = () => {
 		if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
 		if (page <= 5) return [1, 2, 3, 4, 5, '...', total]
@@ -440,7 +443,7 @@ export function Pagination({ page, setPage, total }) {
 					minWidth: '60px',
 				}}
 			>
-				Sahifa
+				{t('components.elektronJurnal.sahifa', 'Sahifa')}
 			</span>
 			<div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
 				<span className='hidden md:contents'>
@@ -496,7 +499,7 @@ export function Pagination({ page, setPage, total }) {
 					padding: 0,
 				}}
 			>
-				Barchasini ko'rish <span>›</span>
+				{t('components.elektronJurnal.barchasini_korish', "Barchasini ko'rish")} <span>›</span>
 			</button>
 		</div>
 	)
@@ -507,6 +510,7 @@ export function Pagination({ page, setPage, total }) {
 const JURNALLAR_PREVIEW_COUNT = 8
 
 function JurnallarSection() {
+	const { t } = useTranslation()
 	const navigate = useNavigate()
 
 	// Bosh sahifada filtr/pagination yo'q — faqat birinchi nashrlar ko'rsatiladi,
@@ -555,7 +559,7 @@ function JurnallarSection() {
 
 			<AnimatedSection style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
 				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
-					<Button2 text='Jurnallar' />
+					<Button2 text={t('components.elektronJurnal.jurnallar', 'Jurnallar')} />
 
 					<h2
 						style={{
@@ -568,7 +572,7 @@ function JurnallarSection() {
 							letterSpacing: '-0.02em',
 						}}
 					>
-						Nufuzli jurnallar va so&apos;nggi nashrlar
+						{t('components.elektronJurnal.nufuzli_jurnallar_sarlavha', "Nufuzli jurnallar va so'nggi nashrlar")}
 					</h2>
 
 					<p
@@ -582,8 +586,7 @@ function JurnallarSection() {
 							margin: 0,
 						}}
 					>
-						Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng
-						yangi sonlari bilan tanishing.
+						{t('components.elektronJurnal.nufuzli_jurnallar_tavsif', 'Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.')}
 					</p>
 				</div>
 			</AnimatedSection>
@@ -622,7 +625,7 @@ function JurnallarSection() {
 							fontFamily: 'var(--font-display)',
 							fontSize: '16px', color: 'rgba(150,160,180,1)',
 						}}>
-							Hozircha jurnal nashrlari yo'q
+							{t('components.elektronJurnal.jurnal_nashrlari_yoq', "Hozircha jurnal nashrlari yo'q")}
 						</div>
 					)}
 				</div>
@@ -648,7 +651,7 @@ function JurnallarSection() {
 					whiteSpace: 'nowrap',
 				}}
 			>
-				Barchasi
+				{t('components.elektronJurnal.barchasi', 'Barchasi')}
 			</button>
 		</section>
 	)
@@ -673,6 +676,7 @@ const CarouselCard = memo(function CarouselCard({
 	onClick,
 	removePart,
 }) {
+	const { t } = useTranslation()
 	const cardTransform = isH
 		? `translateX(calc(-50% + ${tf.transX}px)) translateY(${tf.transY * 0.3}px) translateZ(${tf.transZ + 60}px) rotateY(0deg) scale(${tf.scale * 1.1})`
 		: `translateX(calc(-50% + ${tf.transX}px)) translateY(${tf.transY}px) translateZ(${tf.transZ}px) rotateY(${tf.rotY}deg) scale(${tf.scale})`
@@ -957,7 +961,7 @@ const CarouselCard = memo(function CarouselCard({
 								fontFamily: 'var(--font-display)',
 							}}
 						>
-							Batafsil →
+							{t('components.elektronJurnal.batafsil', 'Batafsil →')}
 						</div>
 					</div>
 				</div>
@@ -980,6 +984,7 @@ function useIsMobile(bp = 768) {
 }
 
 function HeroSection() {
+	const { t } = useTranslation()
 	const isMobile = useIsMobile()
 
 	// Karusel geometriyasi CARDS.length ga bog'langan — kartochkalar soni
@@ -996,9 +1001,13 @@ function HeroSection() {
 				const f = apiFeats[i]
 				return f
 					? { ...card, src: f.image || card.src, backTitle: f.title, backDesc: f.description }
-					: card
+					: {
+							...card,
+							backTitle: t(`components.elektronJurnal.card_${i + 1}_title`, card.backTitle),
+							backDesc: t(`components.elektronJurnal.card_${i + 1}_desc`, card.backDesc),
+						}
 			}),
-		[apiFeats],
+		[apiFeats, t],
 	)
 
 	const [visible, setVisible] = useState(false)
@@ -1221,7 +1230,7 @@ function HeroSection() {
 							: 'none',
 					}}
 				>
-					<Button text='Platforma haqida' variant='dark' />
+					<Button text={t('components.elektronJurnal.platforma_haqida', 'Platforma haqida')} variant='dark' />
 					<h1
 						style={{
 							fontFamily: 'var(--font-display)',
@@ -1234,9 +1243,9 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						Ilmiy jurnallar va maqolalar uchun
+						{t('components.elektronJurnal.hero_sarlavha_1', 'Ilmiy jurnallar va maqolalar uchun')}
 						<br />
-						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>yagona platforma</span>
+						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{t('components.elektronJurnal.hero_sarlavha_2', 'yagona platforma')}</span>
 					</h1>
 					<p
 						style={{
@@ -1249,8 +1258,7 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro
-						standartlarga mos nashr imkoniyatlari — barchasi bir joyda.
+						{t('components.elektronJurnal.hero_tavsif', "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda.")}
 					</p>
 				</div>
 
@@ -1338,7 +1346,7 @@ function HeroSection() {
 							e.currentTarget.style.transform = 'scale(1)'
 						}}
 					>
-						Maqola yuborish
+						{t('components.elektronJurnal.maqola_yuborish', 'Maqola yuborish')}
 						<svg width='18' height='18' viewBox='0 0 24 24' fill='none'>
 							<path
 								d='M5 12h14M13 6l6 6-6 6'

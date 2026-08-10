@@ -25,7 +25,7 @@ export default function ModernEducationHeader({ headerProps = {}, children }) {
 	}, [])
 
 	const {
-		buttonText = 'Bizning platformalar',
+		buttonText = t('components.header.bizning_platformalar', 'Bizning platformalar'),
 		buttonType,
 		title =st('main_title3',  'Barcha imkoniyatlar').split(" ").slice(0, -2).join(" "),
 		highlight = st('main_title3',  'Barcha imkoniyatlar').split(" ").slice( -2).join(" "),

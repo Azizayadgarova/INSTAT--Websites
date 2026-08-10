@@ -41,7 +41,7 @@ export default function MikroMalumotlarHero() {
 				maxWidth: '820px', width: '100%',
 			}}>
 				<div style={show(1)}>
-					<Button text='Platforma haqida' variant='dark' />
+					<Button text={t('components.mikroMalumotlarHero.platforma_haqida', 'Platforma haqida')} variant='dark' />
 				</div>
 
 				<div style={show(2)}>

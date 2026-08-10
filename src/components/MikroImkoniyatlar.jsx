@@ -68,7 +68,7 @@ export default function MikroImkoniyatlar() {
 				{/* ── Header ── */}
 				<AnimatedSection style={{ marginBottom: '32px' }}>
 					<div className='flex flex-col items-center gap-4 text-center'>
-						<Button2 text='Afzalliklar' />
+						<Button2 text={t('components.mikroImkoniyatlar.afzalliklar', 'Afzalliklar')} />
 						<h2
 							className='text-[32px] md:text-[48px]'
 							style={{

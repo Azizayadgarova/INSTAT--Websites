@@ -9,16 +9,19 @@ import sIconLn from '@/assets/Vector (15).png'
 
 const INFO_LINKS = [
 	{
-		label: 'Ilmiy tadqiqot',
+		label: 'pages.science.ilmiy_tadqiqot',
+		fallback: 'Ilmiy tadqiqot',
 		path: '/science/ilmiy-tadqiqot',
 	},
 	{
-		label: "Oliy ta'lim",
+		label: 'pages.science.oliy_talim',
+		fallback: "Oliy ta'lim",
 		path: '/science/oliy-talim',
 	},
 ]
 
 const NavItem = ({ link }) => {
+	const { t } = useTranslation()
 	const [hovered, setHovered] = useState(false)
 
 	return (
@@ -59,7 +62,7 @@ const NavItem = ({ link }) => {
 							transition: '0.2s',
 						}}
 					>
-						{link.label}
+						{t(link.label, link.fallback)}
 					</div>
 				</div>
 			)}

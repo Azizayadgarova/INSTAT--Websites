@@ -62,7 +62,7 @@ const CoursesSection = () => {
 				}} loading='lazy' decoding='async' />
             <div className='relative z-10 text-center px-6 mx-auto max-w-4xl mb-16'>
 				<div className='mb-6'>
-					<Button2 text='Kurslar katalogi' />
+					<Button2 text={t('components.coursesSection.kurslar_katalogi', 'Kurslar katalogi')} />
 				</div>
 
 				<h2

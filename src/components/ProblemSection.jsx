@@ -53,7 +53,7 @@ const ProblemSection = () => {
 				}}
 			>
 				<motion.div variants={fadeUp} initial='hidden' whileInView='visible' viewport={vp} custom={0}>
-					<Button2 text='Foydalanish jarayoni' />
+					<Button2 text={t('components.problemSection.foydalanish_jarayoni', 'Foydalanish jarayoni')} />
 				</motion.div>
 
 				<motion.h2

@@ -6,19 +6,27 @@ import imgMobileBg from '@/assets/Union (3).png'
 
 const CARDS = [
 	{
+		key: 'arizani_tez_yuboring',
 		title: 'Arizani tez yuboring',
+		descKey: 'tanlagan_ishga_bir_necha_klik',
 		desc: 'Tanlagan ishga bir necha klik bilan ariza yuboring va vaqtni tejang.',
 	},
 	{
+		key: 'profilingizni_kuchli_qiling',
 		title: 'Profilingizni kuchli qiling',
+		descKey: 'profilingizni_tolik_toldiring',
 		desc: "Profilingizni to'liq to'ldiring va ish beruvchiga o'zingizni eng yaxshi tarzda ko'rsating.",
 	},
 	{
+		key: 'tezkor_bildirishnomalar',
 		title: 'Tezkor bildirishnomalar',
+		descKey: 'yangi_vakansiyalar_va_ariza_holati',
 		desc: "Yangi vakansiyalar va ariza holati haqida darhol xabardor bo'ling.",
 	},
 	{
+		key: 'karyerangizni_tez_rivojlantiring',
 		title: 'Karyerangizni tez rivojlantiring',
+		descKey: 'firma_vakansiyalari_bilan_tanishing',
 		desc: "Firma vakansiyalari bilan tanishing va karyerangizni samarali rivojlantiring.",
 	},
 ]
@@ -30,6 +38,11 @@ const IshOrinlariRasmlar = () => {
 
     const sectionRef = useRef(null)
     const [visible, setVisible] = useState(false)
+
+    const cards = CARDS.map(c => ({
+        title: t(`components.ishOrinlariRasmlar.${c.key}`, c.title),
+        desc: t(`components.ishOrinlariRasmlar.${c.descKey}`, c.desc),
+    }))
 
     useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -148,7 +161,7 @@ const IshOrinlariRasmlar = () => {
 							gap: '24px',
 						}}
 					>
-						{CARDS.map((c, i) => (
+						{cards.map((c, i) => (
 							<div
 								key={c.title}
 								style={{
@@ -235,7 +248,7 @@ const IshOrinlariRasmlar = () => {
 
 				{/* 4 ta yozuv — Union ustida */}
 				<div style={{ position: 'relative', zIndex: 1, padding: '24px 16px 32px 36px', marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '28px', alignItems: 'center' }}>
-					{CARDS.map((c, i) => (
+					{cards.map((c, i) => (
 						<div
 							key={c.title}
 							style={{

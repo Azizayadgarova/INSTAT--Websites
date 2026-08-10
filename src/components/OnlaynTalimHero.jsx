@@ -1,13 +1,16 @@
 import heroImg from '@/assets/Image (2).webp'
+import { useTranslation } from 'react-i18next'
 
 const stats = [
-	{ value: '200 M+', label: 'Platformadagi faollik' },
-	{ value: '45 000+', label: "O'quvchilar soni" },
-	{ value: '120+', label: 'Mavjud kurslar' },
-	{ value: '8 500+', label: 'Muvaffaqiyatli bitiruvchilar' },
+	{ value: '200 M+', key: 'platformadagi_faollik', label: 'Platformadagi faollik' },
+	{ value: '45 000+', key: 'oquvchilar_soni', label: "O'quvchilar soni" },
+	{ value: '120+', key: 'mavjud_kurslar', label: 'Mavjud kurslar' },
+	{ value: '8 500+', key: 'muvaffaqiyatli_bitiruvchilar', label: 'Muvaffaqiyatli bitiruvchilar' },
 ]
 
 export default function OnlaynTalimHero() {
+	const { t } = useTranslation()
+
 	return (
 		<section
 			style={{
@@ -37,7 +40,7 @@ export default function OnlaynTalimHero() {
 					letterSpacing: '-0.01em',
 				}}
 			>
-				Onlayn ta'lim
+				{t('components.onlaynTalimHero.onlayn_talim', "Onlayn ta'lim")}
 			</span>
 
 			{/* Title */}
@@ -54,9 +57,9 @@ export default function OnlaynTalimHero() {
 					marginBottom: '20px',
 				}}
 			>
-				Bilim va ko'nikmalarni
+				{t('components.onlaynTalimHero.title_line1', "Bilim va ko'nikmalarni")}
 				<br />
-				<span style={{ color: 'rgba(0,230,252,1)' }}>tizimli rivojlantirish</span>
+				<span style={{ color: 'rgba(0,230,252,1)' }}>{t('components.onlaynTalimHero.title_highlight', 'tizimli rivojlantirish')}</span>
 			</h1>
 
 			{/* Subtitle */}
@@ -73,8 +76,7 @@ export default function OnlaynTalimHero() {
 					marginBottom: '48px',
 				}}
 			>
-				Zamonaviy ta'lim metodlari asosida ishlab chiqilgan kurslar orqali
-				bilimlaringizni chuqurlashtiring.
+				{t('components.onlaynTalimHero.subtitle', "Zamonaviy ta'lim metodlari asosida ishlab chiqilgan kurslar orqali bilimlaringizni chuqurlashtiring.")}
 			</p>
 
 			{/* Hero image */}
@@ -89,7 +91,7 @@ export default function OnlaynTalimHero() {
 			>
 				<img
 					src={heroImg}
-					alt="Onlayn ta'lim"
+					alt={t('components.onlaynTalimHero.onlayn_talim', "Onlayn ta'lim")}
 					style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
 					loading='eager'
 					decoding='async'
@@ -120,8 +122,8 @@ export default function OnlaynTalimHero() {
 					background: 'rgba(14,18,27,1)',
 				}}
 			>
-				{stats.map(({ value, label }) => (
-					<div key={label} style={{ textAlign: 'center' }}>
+				{stats.map(({ value, label, key }) => (
+					<div key={key} style={{ textAlign: 'center' }}>
 						<p
 							style={{
 								fontFamily: 'var(--font-display)',
@@ -143,7 +145,7 @@ export default function OnlaynTalimHero() {
 								margin: '6px 0 0',
 							}}
 						>
-							{label}
+							{t(`components.onlaynTalimHero.${key}`, label)}
 						</p>
 					</div>
 				))}

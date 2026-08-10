@@ -109,11 +109,11 @@ const ElektronKutubxona = () => {
                     viewport={vp}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
-                    <Button2 text='Elektron kutubxona' />
+                    <Button2 text={t('components.elektronKutubxona.elektron_kutubxona', 'Elektron kutubxona')} />
                 </motion.div>
 
                 <BlurWords
-                    text={st('library_title5', 'Kitoblar katalogi')}
+                    text={st('library_title5', t('components.elektronKutubxona.kitoblar_katalogi', 'Kitoblar katalogi'))}
                     delay={0.1}
                     step={0.08}
                     className='text-[32px] leading-[40px] md:text-[48px] md:leading-[58px]'

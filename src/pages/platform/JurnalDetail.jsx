@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { editionsApi, editionArticlesApi } from '@/api/resources.api'
 import { useApiResource } from '@/hooks/useApiResource'
 import { Button2 } from '@/components/shared/Button2'
@@ -20,43 +21,47 @@ const DownloadIcon = () => (
 	</svg>
 )
 
-const DownloadButton = ({ reviewId }) => (
-	<a
-		href={`${import.meta.env.VITE_API_URL}/reviews/${reviewId}/download-main-file/`}
-		target='_blank'
-		rel='noopener noreferrer'
-		style={{
-			display: 'inline-flex',
-			alignItems: 'center',
-			gap: '6px',
-			padding: '6px 12px',
-			borderRadius: '100px',
-			background: 'rgba(var(--blue-rgb),0.12)',
-			color: 'rgba(var(--blue-rgb),1)',
-			fontSize: '12px',
-			fontWeight: 500,
-			fontFamily: 'var(--font-display)',
-			textDecoration: 'none',
-			whiteSpace: 'nowrap',
-			flexShrink: 0,
-		}}
-	>
-		<DownloadIcon />
-		Yuklab olish
-	</a>
-)
+const DownloadButton = ({ reviewId }) => {
+	const { t } = useTranslation()
+	return (
+		<a
+			href={`${import.meta.env.VITE_API_URL}/reviews/${reviewId}/download-main-file/`}
+			target='_blank'
+			rel='noopener noreferrer'
+			style={{
+				display: 'inline-flex',
+				alignItems: 'center',
+				gap: '6px',
+				padding: '6px 12px',
+				borderRadius: '100px',
+				background: 'rgba(var(--blue-rgb),0.12)',
+				color: 'rgba(var(--blue-rgb),1)',
+				fontSize: '12px',
+				fontWeight: 500,
+				fontFamily: 'var(--font-display)',
+				textDecoration: 'none',
+				whiteSpace: 'nowrap',
+				flexShrink: 0,
+			}}
+		>
+			<DownloadIcon />
+			{t('pages.jurnalDetail.yuklab_olish', 'Yuklab olish')}
+		</a>
+	)
+}
 
 const ArticleRow = ({ article }) => {
+	const { t } = useTranslation()
 	const review = article.review ?? {}
 	const expert = review.expert ?? {}
-	const fullName = [expert.first_name, expert.last_name].filter(Boolean).join(' ') || 'Muallif'
+	const fullName = [expert.first_name, expert.last_name].filter(Boolean).join(' ') || t('pages.jurnalDetail.muallif', 'Muallif')
 
 	return (
 		<div style={{ display: 'flex', gap: '12px', padding: '16px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
 			<div style={{ flex: 1, minWidth: 0 }}>
 				<div className='flex flex-wrap' style={{ alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
 					<p style={{ color: '#fff', fontSize: '14px', fontWeight: 500, fontFamily: 'var(--font-display)', margin: 0 }}>
-						{review.title || 'Nomsiz maqola'}
+						{review.title || t('pages.jurnalDetail.nomsiz_maqola', 'Nomsiz maqola')}
 					</p>
 				</div>
 				<div className='flex flex-wrap' style={{ alignItems: 'center', gap: '8px', color: 'rgba(150,160,180,1)', fontSize: '13px', fontFamily: 'var(--font-display)' }}>
@@ -83,13 +88,13 @@ const ArticleRow = ({ article }) => {
 const NO_SECTION_KEY = 'no-section'
 
 /** Maqolalarni `review.journal_section` bo'yicha guruhlaydi; bo'limi yo'qlar oxirida chiqadi. */
-const groupBySection = articleList => {
+const groupBySection = (articleList, t) => {
 	const groups = new Map()
 	for (const article of articleList) {
 		const section = article.review?.journal_section
 		const key = section?.id ?? NO_SECTION_KEY
 		if (!groups.has(key)) {
-			groups.set(key, { id: key, name: section?.name ?? "Bo'limsiz", items: [] })
+			groups.set(key, { id: key, name: section?.name ?? t('pages.jurnalDetail.bolimsiz', "Bo'limsiz"), items: [] })
 		}
 		groups.get(key).items.push(article)
 	}
@@ -125,16 +130,17 @@ const DetailSkeleton = () => (
 )
 
 const JurnalDetail = () => {
+	const { t } = useTranslation()
 	const { id } = useParams()
 	const navigate = useNavigate()
 
 	const { data: edition, loading, error, retry } = useApiResource(() => editionsApi.getById(id), [id])
 	const { data: articles } = useApiResource(() => editionArticlesApi.getByEdition(id), [id])
 	const articleList = articles ?? []
-	const sections = groupBySection(articleList)
+	const sections = groupBySection(articleList, t)
 
 	const yearLabel = edition
-		? [edition.year && `${edition.year} yil`, edition.number && `${edition.number}-son`].filter(Boolean).join(' ')
+		? [edition.year && `${edition.year} ${t('pages.jurnalDetail.yil', 'yil')}`, edition.number && `${edition.number}${t('pages.jurnalDetail.son_suffix', '-son')}`].filter(Boolean).join(' ')
 		: ''
 
 	return (
@@ -144,7 +150,7 @@ const JurnalDetail = () => {
 					onClick={() => navigate('/platform/elektron-jurnal')}
 					style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', marginBottom: '24px', display: 'inline-block' }}
 				>
-					<Button2 text='Jurnallar' />
+					<Button2 text={t('pages.jurnalDetail.jurnallar', 'Jurnallar')} />
 				</button>
 
 				<AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={!loading && !error && !edition} skeleton={<DetailSkeleton />}>
@@ -177,7 +183,7 @@ const JurnalDetail = () => {
 									<div className='flex flex-wrap' style={{ alignItems: 'center', gap: '10px' }}>
 										{edition.published_at && (
 											<span style={{ color: '#BCBCBC', fontSize: '13px', fontFamily: 'var(--font-display)' }}>
-												Nashr sanasi: {formatDate(edition.published_at)}
+												{t('pages.jurnalDetail.nashr_sanasi', 'Nashr sanasi')}: {formatDate(edition.published_at)}
 											</span>
 										)}
 									</div>
@@ -187,7 +193,7 @@ const JurnalDetail = () => {
 							{/* Maqolalar */}
 							<div style={{ background: 'rgba(var(--card-rgb),1)', borderRadius: '22px', padding: '24px' }}>
 								<h3 style={{ color: '#fff', fontSize: '16px', fontWeight: 600, fontFamily: 'var(--font-display)', marginBottom: '8px' }}>
-									Maqolalar
+									{t('pages.jurnalDetail.maqolalar', 'Maqolalar')}
 								</h3>
 								{sections.length > 0 ? (
 									<div>
@@ -195,7 +201,7 @@ const JurnalDetail = () => {
 									</div>
 								) : (
 									<p style={{ color: 'rgba(150,160,180,1)', fontSize: '14px', fontFamily: 'var(--font-display)' }}>
-										Bu nashrda hozircha maqolalar yo'q
+										{t('pages.jurnalDetail.bu_nashrda_hozircha_maqolalar_yoq', "Bu nashrda hozircha maqolalar yo'q")}
 									</p>
 								)}
 							</div>

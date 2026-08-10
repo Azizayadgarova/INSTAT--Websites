@@ -4,18 +4,18 @@ import { useState } from 'react'
 import briefcaseIcon from '../assets/icons/briefcase-2-line.png'
 import AnimatedSection from './shared/AnimatedSection'
 const CATEGORIES = [
-	{ name: 'Frontend Dasturchi', count: "320 ta ish o'rinlari" },
-	{ name: 'Ofis Menejeri', count: "190 ta ish o'rinlari" },
-	{ name: 'Sotuv Menejeri', count: "340 ta ish o'rinlari" },
-	{ name: 'Haydovchi', count: '410 ta ish' },
-	{ name: 'Qurilish Muhandisi', count: "150 ta ish o'rinlari" },
-	{ name: 'Hamshira', count: "130 ta ish o'rinlari" },
-	{ name: "Ingliz tili o'qituvchisi", count: "170 ta ish o'rinlari" },
-	{ name: 'Ofitsiant', count: "260 ta ish o'rinlari" },
-	{ name: 'Tozalovchi', count: "120 ta ish o'rinlari" },
-	{ name: 'Operator', count: "200 ta ish o'rinlari" },
-	{ name: 'SMM Menejer', count: "275 ta ish o'rinlari" },
-	{ name: 'UX/UI Dizayner', count: "210 ta ish o'rinlari" },
+	{ nameKey: 'frontend_dasturchi', name: 'Frontend Dasturchi', countKey: 'count_320', count: "320 ta ish o'rinlari" },
+	{ nameKey: 'ofis_menejeri', name: 'Ofis Menejeri', countKey: 'count_190', count: "190 ta ish o'rinlari" },
+	{ nameKey: 'sotuv_menejeri', name: 'Sotuv Menejeri', countKey: 'count_340', count: "340 ta ish o'rinlari" },
+	{ nameKey: 'haydovchi', name: 'Haydovchi', countKey: 'count_410', count: '410 ta ish' },
+	{ nameKey: 'qurilish_muhandisi', name: 'Qurilish Muhandisi', countKey: 'count_150', count: "150 ta ish o'rinlari" },
+	{ nameKey: 'hamshira', name: 'Hamshira', countKey: 'count_130', count: "130 ta ish o'rinlari" },
+	{ nameKey: 'ingliz_tili_oqituvchisi', name: "Ingliz tili o'qituvchisi", countKey: 'count_170', count: "170 ta ish o'rinlari" },
+	{ nameKey: 'ofitsiant', name: 'Ofitsiant', countKey: 'count_260', count: "260 ta ish o'rinlari" },
+	{ nameKey: 'tozalovchi', name: 'Tozalovchi', countKey: 'count_120', count: "120 ta ish o'rinlari" },
+	{ nameKey: 'operator', name: 'Operator', countKey: 'count_200', count: "200 ta ish o'rinlari" },
+	{ nameKey: 'smm_menejer', name: 'SMM Menejer', countKey: 'count_275', count: "275 ta ish o'rinlari" },
+	{ nameKey: 'ux_ui_dizayner', name: 'UX/UI Dizayner', countKey: 'count_210', count: "210 ta ish o'rinlari" },
 ]
 
 const TOTAL_PAGES = 16
@@ -146,6 +146,11 @@ export default function IshOrinlariKategoriyalar() {
 
     const [page, setPage] = useState(2)
 
+    const categories = CATEGORIES.map(cat => ({
+        name: t(`components.ishOrinlariKategoriyalar.${cat.nameKey}`, cat.name),
+        count: t(`components.ishOrinlariKategoriyalar.${cat.countKey}`, cat.count),
+    }))
+
     return (
         <section
 			style={{
@@ -226,7 +231,7 @@ export default function IshOrinlariKategoriyalar() {
 					maxWidth: '1200px',
 				}}
 			>
-				{CATEGORIES.map(cat => (
+				{categories.map(cat => (
 					<div
 						key={cat.name}
 						style={{

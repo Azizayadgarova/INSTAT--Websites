@@ -35,8 +35,8 @@ const MentorsSection = ({ variant }) => {
     // Onlayn ta'lim sahifasida sarlavha backend'dan (education moduli) keladi
     const st = useSectionText('education')
     const heading = isOnline
-		? splitHeading(st('education_title5'), t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan"), "o'rganing!")
-		: { title: t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan"), highlight: "o'rganing!" }
+		? splitHeading(st('education_title5'), t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan"), t('components.mentorsSection.organing', "o'rganing!"))
+		: { title: t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan"), highlight: t('components.mentorsSection.organing', "o'rganing!") }
     const subtitleFallback = (
 		<>{t("components.mentorsSection.bizning_platforma_orqali_siz")}{' '}
 			<br className='hidden sm:block' />{t("components.mentorsSection.mahalliy_va_xorijiy_mutaxassislar")}</>
@@ -148,7 +148,7 @@ const MentorsSection = ({ variant }) => {
 				<div>
 					<div style={{ marginBottom: 0 }}>
 						<Text
-							buttonText='Mentorlar'
+							buttonText={t('components.mentorsSection.mentorlar', 'Mentorlar')}
 							title={heading.title}
 							highlight={heading.highlight}
 							subtitle={isOnline ? st('education_description5', subtitleFallback) : subtitleFallback}

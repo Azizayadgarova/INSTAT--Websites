@@ -27,13 +27,13 @@ const IntegrationSection = lazy(() => import('../../components/IntegrationSectio
 const FAQSection = lazy(() => import('../../components/FAQSection'))
 
 const INFO_LINKS = [
-  { label: "Umumiy ma'lumotlar", path: '/about/umumiy-malumot' },
-  { label: 'Tuzilma', path: '/about/tuzilma' },
-  { label: 'Rahbariyat', path: '/about/rahbariyat' },
-  { label: 'Korrupsiyaga qarshi kurashish', path: '/about/qarshi-kurash' },
-  { label: "Bo'sh ish o'rinlari", path: '/about/ish-orinlar' },
-  { label: 'Mehmonhona turidagi yotoqhona', path: '/about/yotoqhona' },
-  { label: 'Odob axloq qoidalari', path: '/about/odob-axloq' },
+  { label: 'pages.about.umumiy_malumotlar', fallback: "Umumiy ma'lumotlar", path: '/about/umumiy-malumot' },
+  { label: 'pages.about.tuzilma', fallback: 'Tuzilma', path: '/about/tuzilma' },
+  { label: 'pages.about.rahbariyat', fallback: 'Rahbariyat', path: '/about/rahbariyat' },
+  { label: 'pages.about.korrupsiyaga_qarshi_kurashish', fallback: 'Korrupsiyaga qarshi kurashish', path: '/about/qarshi-kurash' },
+  { label: 'pages.about.bosh_ish_orinlari', fallback: "Bo'sh ish o'rinlari", path: '/about/ish-orinlar' },
+  { label: 'pages.about.mehmonhona_turidagi_yotoqhona', fallback: 'Mehmonhona turidagi yotoqhona', path: '/about/yotoqhona' },
+  { label: 'pages.about.odob_axloq_qoidalari', fallback: 'Odob axloq qoidalari', path: '/about/odob-axloq' },
 ]
 
 const LINE_COLOR = 'rgba(var(--blue-rgb),0.4)'
@@ -53,6 +53,7 @@ const HOME_SECTIONS = [
 ]
 
 const NavItem = ({ link }) => {
+  const { t } = useTranslation()
   const [hovered, setHovered] = useState(false)
   return (
     <NavLink
@@ -86,7 +87,7 @@ const NavItem = ({ link }) => {
             transition: 'background 0.2s, color 0.2s',
             width: '100%',
           }}>
-            {link.label}
+            {t(link.label, link.fallback)}
           </div>
         </div>
       )}

@@ -41,7 +41,7 @@ const IshOrinlariAfzalliklar = () => {
                 }} loading='lazy' decoding='async' />
             <AnimatedSection style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
-                    <Button2 text='Bizning afzalliklarimiz' />
+                    <Button2 text={t("components.ishOrinlariAfzalliklar.bizning_afzalliklarimiz", "Bizning afzalliklarimiz")} />
 
                     <h2
                         style={{

@@ -208,6 +208,7 @@ function Particles() {
 }
 
 function HeroImage() {
+	const { t } = useTranslation()
 	const [hovered, setHovered] = useState(false)
 	const [ref, inView] = useInView(0.1)
 
@@ -227,7 +228,7 @@ function HeroImage() {
 		>
 			<img
 				src={heroImg}
-				alt="Onlayn ta'lim"
+				alt={t("pages.onlaynTalim.onlayn_talim")}
 				onMouseEnter={() => setHovered(true)}
 				onMouseLeave={() => setHovered(false)}
 				className='w-full h-55 md:h-149 object-cover'
@@ -265,7 +266,7 @@ function HeroText() {
 			}}
 		>
             <Text
-				buttonText="Onlayn ta'lim"
+				buttonText={t("pages.onlaynTalim.onlayn_talim")}
 				title={st('education_title1', t("pages.onlaynTalim.bilim_va_konikmalarni"))}
 				highlight={st('education_title2', 'tizimli rivojlantirish')}
 				subtitle={st('education_description',
@@ -430,7 +431,7 @@ export default function OnlaynTalim() {
 						cardHeight={100}
 						hideParticles
 						headerProps={{
-							buttonText: "Platforma haqida",
+							buttonText: t("pages.onlaynTalim.platforma_haqida"),
 							buttonType: "button2",
 							title: about.title,
 							highlight: about.highlight,

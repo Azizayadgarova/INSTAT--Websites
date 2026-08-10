@@ -18,7 +18,7 @@ const ALL_CATEGORY = 'all'
 const SEARCH_DEBOUNCE_MS = 400
 
 const MikroMalumotlarKatalogiPage = () => {
-	const { i18n } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const lang = i18n.resolvedLanguage ?? 'uz'
 
 	const [searchInput, setSearchInput] = useState('')
@@ -51,8 +51,8 @@ const MikroMalumotlarKatalogiPage = () => {
 
 	const categories = useMemo(() => {
 		const unique = Array.from(new Set(items.map(i => i.category))).filter(Boolean)
-		return [{ id: ALL_CATEGORY, label: "Barcha sohalar" }, ...unique.map(c => ({ id: c, label: c }))]
-	}, [items])
+		return [{ id: ALL_CATEGORY, label: t('pages.mikroMalumotlarKatalogiPage.barcha_sohalar', "Barcha sohalar") }, ...unique.map(c => ({ id: c, label: c }))]
+	}, [items, t])
 	const categoryLabel = categories.find(c => c.id === categoryId)?.label ?? categories[0].label
 
 	const filtered = useMemo(() => {
@@ -96,10 +96,10 @@ const MikroMalumotlarKatalogiPage = () => {
 			<div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				{/* Header */}
 				<div style={{ marginBottom: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
-					<Button2 text="Ma'lumotlar" />
+					<Button2 text={t('pages.mikroMalumotlarKatalogiPage.malumotlar', "Ma'lumotlar")} />
 
 					<BlurWords
-						text="Mikroma'lumotlar katalogi"
+						text={t('pages.mikroMalumotlarKatalogiPage.mikromalumotlar_katalogi', "Mikroma'lumotlar katalogi")}
 						delay={0.1}
 						style={{
 							fontFamily: 'var(--font-display)', fontWeight: 600,
@@ -112,8 +112,7 @@ const MikroMalumotlarKatalogiPage = () => {
 						fontFamily: 'Inter,sans-serif', fontSize: '15px', lineHeight: 1.65,
 						color: 'rgba(155,163,185,1)', maxWidth: '480px', margin: 0,
 					}}>
-						Statistika agentligi tomonidan yig'ilgan individual darajadagi ma'lumotlar to'plamlari
-						bilan ishlang va tadqiqotlaringizni boyiting.
+						{t('pages.mikroMalumotlarKatalogiPage.statistika_agentligi_tomonidan', "Statistika agentligi tomonidan yig'ilgan individual darajadagi ma'lumotlar to'plamlari bilan ishlang va tadqiqotlaringizni boyiting.")}
 					</p>
 				</div>
 
@@ -138,7 +137,7 @@ const MikroMalumotlarKatalogiPage = () => {
 							type='text'
 							value={searchInput}
 							onChange={e => setSearchInput(e.target.value)}
-							placeholder="Ma'lumot nomi bo'yicha qidirish..."
+							placeholder={t('pages.mikroMalumotlarKatalogiPage.malumot_nomi_boyicha_qidirish', "Ma'lumot nomi bo'yicha qidirish...")}
 							style={{
 								flex: 1, background: 'transparent', border: 'none', outline: 'none',
 								color: '#fff', fontSize: '14px', fontFamily: 'var(--font-display)',
@@ -210,7 +209,7 @@ const MikroMalumotlarKatalogiPage = () => {
 							<DataCard key={item.id} item={item} />
 						)) : (
 							<div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0', fontFamily: 'var(--font-display)', fontSize: '16px', color: 'rgba(150,160,180,1)' }}>
-								Bu qidiruv bo'yicha ma'lumot topilmadi
+								{t('pages.mikroMalumotlarKatalogiPage.bu_qidiruv_boyicha_malumot_topilmadi', "Bu qidiruv bo'yicha ma'lumot topilmadi")}
 							</div>
 						)}
 					</div>
