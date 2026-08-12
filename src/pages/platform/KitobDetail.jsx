@@ -13,9 +13,9 @@ import { API_ORIGIN, API_CABINET_URL, storageUrl } from '@/config/api'
 
 const STARS = [0, 1, 2, 3, 4]
 
-const TABS = [
-	{ key: 'tarif', label: "Mahsulot ta'rifi" },
-	{ key: 'sharhlar', label: 'Sharhlar' },
+const getTabs = t => [
+	{ key: 'tarif', label: t('pages.kitobDetail.mahsulot_tarifi', "Mahsulot ta'rifi") },
+	{ key: 'sharhlar', label: t('pages.kitobDetail.sharhlar', 'Sharhlar') },
 ]
 
 const formatDate = iso => {
@@ -78,6 +78,7 @@ const KitobDetail = () => {
 	const { t, i18n } = useTranslation()
 	const lang = i18n.resolvedLanguage ?? 'uz'
 	const [tab, setTab] = useState('tarif')
+	const TABS = getTabs(t)
 
 	const { data: book, loading, error, retry } = useApiResource(() => getBookById(id), [id])
 	const { data: comments } = useApiResource(() => bookCommentsApi.getByBook(id), [id])
@@ -105,7 +106,7 @@ const KitobDetail = () => {
 					onClick={() => navigate('/platform/kutubxona-katalogi')}
 					style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', marginBottom: '24px', display: 'inline-block' }}
 				>
-					<Button2 text='Kutubxona katalogi' />
+					<Button2 text={t('pages.kitobDetail.kutubxona_katalogi', 'Kutubxona katalogi')} />
 				</button>
 
 				<AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={!loading && !error && !book} skeleton={<DetailSkeleton />}>
@@ -133,8 +134,8 @@ const KitobDetail = () => {
 									)}
 
 									<div style={{ maxWidth: '420px' }}>
-										{categoryName && <InfoRow label='Kotegoriya' value={categoryName} />}
-										{book.created_at && <InfoRow label='Tizimga yuklangan sana:' value={formatDate(book.created_at)} />}
+										{categoryName && <InfoRow label={t('pages.kitobDetail.kotegoriya', 'Kotegoriya')} value={categoryName} />}
+										{book.created_at && <InfoRow label={t('pages.kitobDetail.tizimga_yuklangan_sana', 'Tizimga yuklangan sana:')} value={formatDate(book.created_at)} />}
 									</div>
 								</div>
 
@@ -157,7 +158,7 @@ const KitobDetail = () => {
 											fontFamily: 'var(--font-display)',
 										}}
 									>
-										O'qishni boshlash
+										{t('pages.kitobDetail.oqishni_boshlash', "O'qishni boshlash")}
 									</button>
 								</div>
 							</div>
@@ -165,7 +166,7 @@ const KitobDetail = () => {
 							{/* Kitob ma'lumotlari */}
 							<div style={{ marginBottom: '24px' }}>
 								<p style={{ color: 'rgba(150,160,180,1)', fontSize: '13px', fontFamily: 'var(--font-display)', marginBottom: '10px' }}>
-									Kitob ma'lumotlari
+									{t('pages.kitobDetail.kitob_malumotlari', "Kitob ma'lumotlari")}
 								</p>
 								<div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px' }}>
 									<StarsRow filled={filledStars} />
@@ -173,9 +174,9 @@ const KitobDetail = () => {
 										<span style={{ color: '#fff', fontSize: '14px', fontWeight: 500, fontFamily: 'var(--font-display)' }}>{rating.toFixed(1)}</span>
 									)}
 									<span style={{ color: '#8a94a6' }}>•</span>
-									<span style={{ color: '#BCBCBC', fontSize: '14px', fontFamily: 'var(--font-display)' }}>{book.orders_count ?? 0} ta sotuv</span>
+									<span style={{ color: '#BCBCBC', fontSize: '14px', fontFamily: 'var(--font-display)' }}>{book.orders_count ?? 0} {t('pages.kitobDetail.ta_sotuv', 'ta sotuv')}</span>
 									<span style={{ color: '#8a94a6' }}>•</span>
-									<span style={{ color: '#BCBCBC', fontSize: '14px', fontFamily: 'var(--font-display)' }}>{book.comments_count ?? 0} ta izoh</span>
+									<span style={{ color: '#BCBCBC', fontSize: '14px', fontFamily: 'var(--font-display)' }}>{book.comments_count ?? 0} {t('pages.kitobDetail.ta_izoh', 'ta izoh')}</span>
 								</div>
 							</div>
 
@@ -224,7 +225,7 @@ const KitobDetail = () => {
 								) : commentList.length > 0 ? (
 									<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 										{commentList.map(c => {
-											const fullName = [c.user?.first_name, c.user?.last_name].filter(Boolean).join(' ') || 'Foydalanuvchi'
+											const fullName = [c.user?.first_name, c.user?.last_name].filter(Boolean).join(' ') || t('pages.kitobDetail.foydalanuvchi', 'Foydalanuvchi')
 											const avatarSrc = c.user?.avatar ? `${API_ORIGIN}${c.user.avatar}` : null
 											return (
 												<div key={c.id} style={{ display: 'flex', gap: '12px', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>

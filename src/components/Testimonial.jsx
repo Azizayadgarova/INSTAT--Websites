@@ -1,5 +1,6 @@
 import gsap from 'gsap'
 import { memo, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import starImg from '@/assets/Star.png'
 import AnimatedSection from './shared/AnimatedSection'
 import SectionBackground from './shared/SectionBackground'
@@ -20,13 +21,6 @@ const toCard = item => {
         stars: f.stars,
     }
 }
-
-const testimonials = [
-    { id: 1, name: 'Dilnoza Rahmonova',  user: '@dilnozrakhmonova13', text: "Online va oflayn ta'lim imkoniyatlari juda qulay. Darslarni istalgan vaqtda ko'rib chiqish va materiallarni yuklab olish imkoniyati mavjud. Platforma orqali bilimlarimni sezilarli darajada oshirdim.", img: 'https://i.pravatar.cc/150?u=1', stars: 5 },
-    { id: 2, name: 'Jasmin Xolmatova',   user: '@jasminxolmatova234',  text: "Universitetda ta'lim sifati juda yuqori. Mutaxassislar tomonidan tayyorlangan kurslar va elektron kutubxona bizga katta yordam bermoqda. Bu platforma statistika sohasida professional bo'lishimga hissa qo'shdi.", img: 'https://i.pravatar.cc/150?u=2', stars: 5 },
-    { id: 3, name: 'Bekzod Ismoilov',    user: '@bekzodismoilov',       text: "Bu platforma menga nafaqat bilim, balki amaliy ko'nikmalar ham berdi. Ilmiy maqolalar bazasi va tadqiqot materiallari juda foydali. Har bir dars aniq va tushunarli tarzda tuzilgan.", img: 'https://i.pravatar.cc/150?u=3', stars: 5 },
-    { id: 4, name: 'Nodira Yusupova',    user: '@nodira_yusupova',      text: "Statistika agentligining bu platformasi juda qulay va zamonaviy. Elektron jurnallar, ilmiy maqolalar va o'quv materiallari bir joyda jamlangani ish samaradorligimni oshirdi.", img: 'https://i.pravatar.cc/150?u=44', stars: 5 },
-]
 
 const CARD_GAP = 24
 
@@ -58,9 +52,18 @@ const Testimonials = ({
     feedbackKey = 'site-library-feedbacks',
     feedbackApi = siteLibraryFeedbacksApi,
 }) => {
+    const { t } = useTranslation()
+
     const row1Ref = useRef(null)
     const row2Ref = useRef(null)
     const sectionRef = useRef(null)
+
+    const testimonials = [
+        { id: 1, name: 'Dilnoza Rahmonova',  user: '@dilnozrakhmonova13', text: t('components.testimonial.testimonial_1', "Online va oflayn ta'lim imkoniyatlari juda qulay. Darslarni istalgan vaqtda ko'rib chiqish va materiallarni yuklab olish imkoniyati mavjud. Platforma orqali bilimlarimni sezilarli darajada oshirdim."), img: 'https://i.pravatar.cc/150?u=1', stars: 5 },
+        { id: 2, name: 'Jasmin Xolmatova',   user: '@jasminxolmatova234',  text: t('components.testimonial.testimonial_2', "Universitetda ta'lim sifati juda yuqori. Mutaxassislar tomonidan tayyorlangan kurslar va elektron kutubxona bizga katta yordam bermoqda. Bu platforma statistika sohasida professional bo'lishimga hissa qo'shdi."), img: 'https://i.pravatar.cc/150?u=2', stars: 5 },
+        { id: 3, name: 'Bekzod Ismoilov',    user: '@bekzodismoilov',       text: t('components.testimonial.testimonial_3', "Bu platforma menga nafaqat bilim, balki amaliy ko'nikmalar ham berdi. Ilmiy maqolalar bazasi va tadqiqot materiallari juda foydali. Har bir dars aniq va tushunarli tarzda tuzilgan."), img: 'https://i.pravatar.cc/150?u=3', stars: 5 },
+        { id: 4, name: 'Nodira Yusupova',    user: '@nodira_yusupova',      text: t('components.testimonial.testimonial_4', "Statistika agentligining bu platformasi juda qulay va zamonaviy. Elektron jurnallar, ilmiy maqolalar va o'quv materiallari bir joyda jamlangani ish samaradorligimni oshirdi."), img: 'https://i.pravatar.cc/150?u=44', stars: 5 },
+    ]
 
     // API bo'sh bo'lsa statik `testimonials` ko'rsatiladi
     const { items } = useSiteList(feedbackKey, feedbackApi, toCard, testimonials)
@@ -149,16 +152,16 @@ const Testimonials = ({
 
             <AnimatedSection className='relative z-10 mb-20 px-4'>
                 <Text
-                    buttonText={platformStyle ? 'Fikrlar' : 'Talabalar fikri'}
+                    buttonText={platformStyle ? t('components.testimonial.fikrlar', 'Fikrlar') : t('components.testimonial.talabalar_fikri', 'Talabalar fikri')}
                     buttonType={platformStyle ? 'button2' : 'button1'}
-                    title={platformStyle ? 'Foydalanuvchilar fikri' : "Biz bilan o'qigan talabalar"}
+                    title={platformStyle ? t('components.testimonial.foydalanuvchilar_fikri', 'Foydalanuvchilar fikri') : t('components.testimonial.biz_bilan_oqigan_talabalar', "Biz bilan o'qigan talabalar")}
                     titleStyle={platformStyle ? { color: '#fff', fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.02em' } : undefined}
                     subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
-                    highlight={platformStyle ? '' : 'nimani deydi?'}
+                    highlight={platformStyle ? '' : t('components.testimonial.nimani_deydi', 'nimani deydi?')}
                     subtitle={
                         platformStyle
-                            ? 'Platformamiz allaqachon yuzlab kitobxonlarga vaqt tejash va kerakli kitobni tez topishga yordam berdi.'
-                            : <>{`Platformamiz orqali bilim olgan talabalar`} <br /> {`real natijalari va tajribasi bilan o'rtoqlashadi`}</>
+                            ? t('components.testimonial.platformamiz_allaqachon_yuzlab', 'Platformamiz allaqachon yuzlab kitobxonlarga vaqt tejash va kerakli kitobni tez topishga yordam berdi.')
+                            : <>{t('components.testimonial.platformamiz_orqali_bilim_olgan', 'Platformamiz orqali bilim olgan talabalar')} <br /> {t('components.testimonial.real_natijalari_va_tajribasi', "real natijalari va tajribasi bilan o'rtoqlashadi")}</>
                     }
                 />
             </AnimatedSection>
@@ -192,7 +195,9 @@ const Testimonials = ({
 
 }
 
-const Card = memo(({ item }) => (
+const Card = memo(({ item }) => {
+    const { t } = useTranslation()
+    return (
     <div
         className='inline-block testimonial-card'
         style={{
@@ -238,12 +243,13 @@ const Card = memo(({ item }) => (
             "{item.text}"
         </p>
 
-        <div className='flex gap-1' aria-label={`${item.stars} yulduz`}>
+        <div className='flex gap-1' aria-label={`${item.stars} ${t('components.testimonial.yulduz', 'yulduz')}`}>
             {Array.from({ length: item.stars }, (_, i) => (
                 <StarIcon key={i} />
             ))}
         </div>
     </div>
-))
+    )
+})
 
 export default Testimonials

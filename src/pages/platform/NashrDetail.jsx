@@ -46,7 +46,7 @@ const DetailSkeleton = () => (
 const NashrDetail = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const { i18n } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const lang = i18n.resolvedLanguage ?? 'uz'
 
 	const { data: report, loading, error, retry } = useApiResource(() => getDataReportById(id), [id])
@@ -64,7 +64,7 @@ const NashrDetail = () => {
 					onClick={() => navigate('/platform/mikro-malumotlar')}
 					style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', marginBottom: '24px', display: 'inline-block' }}
 				>
-					<Button2 text='Nashrlar' />
+					<Button2 text={t('pages.nashrDetail.nashrlar', 'Nashrlar')} />
 				</button>
 
 				<AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={!loading && !error && !report} skeleton={<DetailSkeleton />}>
@@ -80,14 +80,14 @@ const NashrDetail = () => {
 							)}
 
 							<div style={{ maxWidth: '420px', marginBottom: '20px' }}>
-								{categoryName && <InfoRow label='Kategoriya' value={categoryName} />}
-								{report.created_at && <InfoRow label='Nashr etilgan sana' value={formatMonthYear(report.created_at, lang)} />}
+								{categoryName && <InfoRow label={t('pages.nashrDetail.kategoriya', 'Kategoriya')} value={categoryName} />}
+								{report.created_at && <InfoRow label={t('pages.nashrDetail.nashr_etilgan_sana', 'Nashr etilgan sana')} value={formatMonthYear(report.created_at, lang)} />}
 							</div>
 
 							{description && (
 								<div style={{ marginBottom: '20px' }}>
 									<h3 style={{ color: '#fff', fontSize: '14px', fontWeight: 600, fontFamily: 'var(--font-display)', marginBottom: '10px' }}>
-										Tavsif
+										{t('pages.nashrDetail.tavsif', 'Tavsif')}
 									</h3>
 									<RichContent html={description} />
 								</div>
@@ -96,7 +96,7 @@ const NashrDetail = () => {
 							{categoryDescription && (
 								<div style={{ marginBottom: '20px' }}>
 									<h3 style={{ color: '#fff', fontSize: '14px', fontWeight: 600, fontFamily: 'var(--font-display)', marginBottom: '10px' }}>
-										Kategoriya haqida
+										{t('pages.nashrDetail.kategoriya_haqida', 'Kategoriya haqida')}
 									</h3>
 									<RichContent html={categoryDescription} />
 								</div>
@@ -105,7 +105,7 @@ const NashrDetail = () => {
 							{options.length > 0 && (
 								<div>
 									<h3 style={{ color: '#fff', fontSize: '14px', fontWeight: 600, fontFamily: 'var(--font-display)', marginBottom: '10px' }}>
-										Mavjud davrlar
+										{t('pages.nashrDetail.mavjud_davrlar', 'Mavjud davrlar')}
 									</h3>
 									<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
 										{options.map(o => (

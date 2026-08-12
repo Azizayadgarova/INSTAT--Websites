@@ -14,22 +14,30 @@ import { toFeature } from '@/utils/siteContent'
 const STEPS = [
 	{
 		id: '01', icon: icon01, reverse: false,
+		titleKey: 'profil_yarating',
 		title: 'Profil yarating',
+		descKey: 'ozingiz_haqingizdagi_muhim_malumotlarni',
 		desc: "O'zingiz haqingizdagi muhim ma'lumotlarni kiritib, professional profilingizni shakillantiring. To'ldirilgan profil sizni ish beruvchilarga aniqroq ko'rsatadi va mos vakansiyalarni tezroq topishga yordam beradi.",
 	},
 	{
 		id: '02', icon: icon02, reverse: true,
+		titleKey: 'mos_vakansiyani_toping',
 		title: 'Mos vakansiyani toping',
+		descKey: 'qiziqishlaringiz_tajribangiz_va_konikmalaringizga',
 		desc: "Qiziqishlaringiz, tajribangiz va ko'nikmalaringizga mos keladigan ish o'rinlarini zamonaviy qidiruv tizimi orqali oson va tez toping. Platforma siz uchun eng dolzarb va mos vakansiyalarni tavsiya qiladi, bu esa ortiqcha vaqt sarflashsiz to'g'ri tanlov qilish imkonini beradi.",
 	},
 	{
 		id: '03', icon: icon03, reverse: false,
+		titleKey: 'ariza_yuboring',
 		title: 'Ariza yuboring',
+		descKey: 'sizga_mos_keladigan_vakansiyani',
 		desc: "Sizga mos keladigan vakansiyani tanlab, bir necha bosishda ariza yuboring. Platforma orqali profilingiz ish beruvchiga to'g'ridan-to'g'ri yetkaziladi va jarayonni soddalashtiradi.",
 	},
 	{
 		id: '04', icon: icon04, reverse: true,
+		titleKey: 'javobni_kuting',
 		title: 'Javobni kuting',
+		descKey: 'yuborgan_arizangiz_ish_beruvchi',
 		desc: "Yuborgan arizangiz ish beruvchi tomonidan ko'rib chiqiladi va natijalar haqida xabardor bo'lasiz. Platforma sizga jarayonni kuzatish va o'z vaqtida javob olish imkonini beradi.",
 	},
 ]
@@ -209,18 +217,28 @@ const IshOrinlariJarayon = () => {
         toFeature,
         [],
     )
+    const translatedSteps = useMemo(
+        () =>
+            STEPS.map(s => ({
+                ...s,
+                title: t(`components.ishOrinlariJarayon.${s.titleKey}`, s.title),
+                desc: t(`components.ishOrinlariJarayon.${s.descKey}`, s.desc),
+            })),
+        [t],
+    )
+
     const steps = useMemo(
         () =>
             apiSteps.length
                 ? apiSteps.map((f, i) => ({
-                        ...STEPS[i % STEPS.length],
+                        ...translatedSteps[i % translatedSteps.length],
                         id: String(i + 1).padStart(2, '0'),
                         reverse: i % 2 === 1,
                         title: f.title,
                         desc: f.description,
                     }))
-                : STEPS,
-        [apiSteps],
+                : translatedSteps,
+        [apiSteps, translatedSteps],
     )
 
     return (
@@ -234,7 +252,7 @@ const IshOrinlariJarayon = () => {
                 {/* Header */}
                 <AnimatedSection style={{ width: '100%', marginBottom: 32 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 20 }}>
-                        <Button text="Jarayon" variant="light" />
+                        <Button text={t("components.ishOrinlariJarayon.jarayon", "Jarayon")} variant="light" />
 
                         <h2
                             className='text-[32px] md:text-[52px]'

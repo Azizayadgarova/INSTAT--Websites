@@ -4,13 +4,22 @@ import WaterCanvas from './shared/WaterCanvas'
 import RippleButton from './shared/RippleButton'
 import { Button } from './shared/Button'
 import { useHeroPhase } from '../hooks/useHeroPhase'
+import {pickLang} from "@/utils/siteContent.js";
+import useSiteData from "@/hooks/useSiteData.js";
+import i18n from "i18next";
 
 export default function MikroMalumotlarHero() {
     const {
         t
     } = useTranslation();
+	const lang = i18n.resolvedLanguage ?? 'uz'
+
+	const { data: kv } = useSiteData(d => d.byModuleKey.micro_data ?? {})
 
     const { show } = useHeroPhase()
+	const title1 = pickLang(kv?.micro_data_title1, lang) || t("components.mikroMalumotlarHero.rasmiy_statistika_uchun")
+	const title2 = pickLang(kv?.micro_data_title2, lang) || t("components.mikroMalumotlarHero.raqamli_platforma")
+	const subtitle = pickLang(kv?.micro_data_description1, lang) || t("components.mikroMalumotlarHero.mikro_malumotlar_laboratoriyasi_foydalan")
 
     return (
         <section style={{
@@ -41,7 +50,7 @@ export default function MikroMalumotlarHero() {
 				maxWidth: '820px', width: '100%',
 			}}>
 				<div style={show(1)}>
-					<Button text='Platforma haqida' variant='dark' />
+					<Button text={t('components.mikroMalumotlarHero.platforma_haqida', 'Platforma haqida')} variant='dark' />
 				</div>
 
 				<div style={show(2)}>
@@ -51,8 +60,8 @@ export default function MikroMalumotlarHero() {
 						fontSize: 'clamp(32px, 8.33vw, 64px)',
 						lineHeight: 1.1, letterSpacing: '-.03em',
 						color: '#fff', margin: 0,
-					}}>{t("components.mikroMalumotlarHero.rasmiy_statistika_uchun")}<br />
-						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{t("components.mikroMalumotlarHero.raqamli_platforma")}</span>
+					}}>{title1}<br />
+						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{title2}</span>
 					</h1>
 				</div>
 
@@ -61,7 +70,7 @@ export default function MikroMalumotlarHero() {
 						fontFamily: 'var(--font-display)',
 						fontWeight: 400, fontSize: '16px', lineHeight: 1.75,
 						color: 'rgba(var(--text-rgb),1)', maxWidth: '500px', margin: 0,
-					}}>{t("components.mikroMalumotlarHero.mikro_malumotlar_laboratoriyasi_foydalan")}</p>
+					}}>{subtitle}</p>
 				</div>
 
 				<div style={{ display: 'flex', gap: '12px', ...show(4) }}>

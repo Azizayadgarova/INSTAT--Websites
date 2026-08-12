@@ -63,7 +63,7 @@ function JurnallarSection() {
 				}} loading='lazy' decoding='async' />
             <AnimatedSection style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
 				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
-					<Button2 text='Jurnallar' />
+					<Button2 text={t('components.jurnallarSection.jurnallar', 'Jurnallar')} />
 
 					<h2
 						style={{

@@ -335,9 +335,9 @@ const RaqamliKutibxona = () => {
 					}}
 				>
 					<Text
-						buttonText='Platforma haqida'
+						buttonText={t("pages.raqamliKutibxona.platforma_haqida")}
 						title={st('library_title1', t("pages.raqamliKutibxona.minglab_elektron_kitoblar"))}
-						highlight={st('library_title2', '-bir platformada')}
+						highlight={st('library_title2', t('pages.raqamliKutibxona.bir_platformada', '-bir platformada'))}
 						subtitle={st('library_description1',
 							<>{t("pages.raqamliKutibxona.onlayn_kitoblarni_sotib_oling")}<br />{t("pages.raqamliKutibxona.istalgan_qurilmada_oqing")}</>
 						)}

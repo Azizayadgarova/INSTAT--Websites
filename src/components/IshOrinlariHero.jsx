@@ -113,7 +113,7 @@ export default function IshOrinlariHero() {
         maxWidth: '820px', width: '100%',
       }}>
         <div style={show(1)}>
-          <Button text='Ish va imkoniyatlar platformasi' variant='dark' />
+          <Button text={t("components.ishOrinlariHero.ish_va_imkoniyatlar_platformasi", "Ish va imkoniyatlar platformasi")} variant='dark' />
         </div>
 
         <div style={show(2)}>

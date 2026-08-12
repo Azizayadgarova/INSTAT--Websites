@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import BlurWords from './shared/BlurWords'
@@ -109,6 +110,7 @@ const TiltCard = ({ src, alt = '' }) => {
 }
 
 const Kutubxona = () => {
+	const { t } = useTranslation()
 	const st = useSectionText('library')
 	const [active, setActive] = useState(0)
 	const [paused, setPaused] = useState(false)
@@ -131,8 +133,12 @@ const Kutubxona = () => {
 						desc: f.description,
 						img: f.image || STATIC_STEPS[i % STATIC_STEPS.length].img,
 					}))
-				: STATIC_STEPS,
-		[apiSteps],
+				: STATIC_STEPS.map(s => ({
+						...s,
+						title: t(`components.kutubxona.step_${s.id}_title`, s.title),
+						desc: t(`components.kutubxona.step_${s.id}_desc`, s.desc),
+					})),
+		[apiSteps, t],
 	)
 
 	useEffect(() => {
@@ -185,9 +191,9 @@ const Kutubxona = () => {
 				transition={{ duration: 0.6 }}
 				className="z-10 flex flex-col items-center text-center gap-5 max-w-[890px] px-6 mb-15"
 			>
-				<Button2 text="Kutubxona" />
+				<Button2 text={t('components.kutubxona.kutubxona', 'Kutubxona')} />
 				<BlurWords
-					text={st('library_title6', "Oflayn kutubxona – to'liq nazorat")}
+					text={st('library_title6', t('components.kutubxona.oflayn_kutubxona_toliq_nazorat', "Oflayn kutubxona – to'liq nazorat"))}
 					delay={0.08}
 					step={0.06}
 					className='text-[32px] md:text-[48px]'
@@ -195,7 +201,7 @@ const Kutubxona = () => {
 				/>
 				<p className="text-[#CACACE] text-[14px] md:text-[16px] max-w-[327px] md:max-w-none text-center">
 					<BlurWords
-						text={st('library_description6', "Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!")}
+						text={st('library_description6', t('components.kutubxona.oldindan_rejalashtiring', "Oldindan rejalashtiring: kitobning mavjudligini bilib oling, uning aniq joylashuvini toping va kutubxonada ortiqcha kutmasdan oling!"))}
 						delay={0.08}
 						step={0.04}
 					/>

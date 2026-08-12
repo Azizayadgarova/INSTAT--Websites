@@ -6,6 +6,7 @@ import icon01 from '@/assets/icons/Vector (8).png'
 import icon03 from '@/assets/icons/Vector (9).png'
 import { motion } from 'framer-motion'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import BlurWords from './shared/BlurWords'
 import { Button2 } from './shared/Button2'
 import { siteMicroDataInstructionsApi } from '@/api/siteContent.api'
@@ -25,21 +26,25 @@ const L_PEAK = 120
 const steps = [
 	{
 		id: '01', badgeRight: true, icon: icon01,
+		titleKey: 'step1_title', descKey: 'step1_description',
 		title: "Ro'yxatdan o'tish va tizimga kirish",
 		description: "Foydalanuvchi platformada ro'yxatdan o'tadi va shaxsiy kabinetiga kiradi. Bu orqali tizimning barcha statistik ma'lumotlari va tahlil vositalaridan foydalanish imkoniyati ochiladi.",
 	},
 	{
 		id: '02', badgeRight: false, icon: icon02,
+		titleKey: 'step2_title', descKey: 'step2_description',
 		title: "Kerakli ma'lumotlarni topish",
 		description: "Platformadagi statistik ma'lumotlar katalogi orqali foydalanuvchi o'ziga kerakli ma'lumotlar to'plamini topadi. Ma'lumotlar turi va kategoriyalar bo'yicha tasniflanib, qidirish jarayoni oson amalga oshiriladi.",
 	},
 	{
 		id: '03', badgeRight: true, icon: icon03,
+		titleKey: 'step3_title', descKey: 'step3_description',
 		title: "Ma'lumotlarni tahlil qilish",
 		description: "Tanlangan ma'lumotlar platformaning tahlil vositalari yordamida ko'rib chiqiladi. Grafiklar va diagrammalar orqali ma'lumotlar vizual tarzda tahlil qilinadi va chuqurroq tushunish imkoniyati yaratiladi.",
 	},
 	{
 		id: '04', badgeRight: false, icon: icon04,
+		titleKey: 'step4_title', descKey: 'step4_description',
 		title: "Natijalarni tayyorlash va eksport qilish",
 		description: "Foydalanuvchi o'z tahlil natijalari asosida hisobot tayyirlaydi va ularni turli formatlarda eksport qilib, kerakli joyda foydalanishi mumkin.",
 	},
@@ -128,7 +133,9 @@ const IconCircle = ({ icon, floatDelay = 0, noFloat = false }) => (
 	</motion.div>
 )
 
-const QadamBadge = ({ id, alignRight, delay = 0 }) => (
+const QadamBadge = ({ id, alignRight, delay = 0 }) => {
+	const { t } = useTranslation()
+	return (
 	<motion.div
 		initial={{ opacity: 0, x: alignRight ? 50 : -50 }}
 		whileInView={{ opacity: 1, x: 0 }}
@@ -166,10 +173,11 @@ const QadamBadge = ({ id, alignRight, delay = 0 }) => (
 			marginTop: 4,
 			display: 'block',
 		}}>
-			QADAM
+			{t('components.platformaIshlashi.qadam', 'QADAM')}
 		</span>
 	</motion.div>
-)
+	)
+}
 
 const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 	<motion.div
@@ -211,6 +219,8 @@ const TextCard = ({ title, description, fromLeft, delay = 0, icon }) => (
 )
 
 const PlatformaIshlashi = () => {
+	const { t } = useTranslation()
+
 	// "Ilon" yo'lakcha (SNAKE) va badge koordinatalari 4 ta bosqichga qarab
 	// modul darajasida hisoblanadi — shuning uchun bosqichlar soni o'zgarmaydi,
 	// API faqat sarlavha va tavsifni almashtiradi.
@@ -224,9 +234,14 @@ const PlatformaIshlashi = () => {
 		() =>
 			steps.map((step, i) => {
 				const f = apiSteps[i]
-				return f ? { ...step, title: f.title, description: f.description } : step
+				if (f) return { ...step, title: f.title, description: f.description }
+				return {
+					...step,
+					title: t(`components.platformaIshlashi.${step.titleKey}`, step.title),
+					description: t(`components.platformaIshlashi.${step.descKey}`, step.description),
+				}
 			}),
-		[apiSteps],
+		[apiSteps, t],
 	)
 
 	return (
@@ -239,11 +254,11 @@ const PlatformaIshlashi = () => {
 			gap: 20, maxWidth: 700, margin: '0 auto',
 		}}>
 			<motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={vp} transition={{ duration: 0.5 }}>
-				<Button2 text="Qanday ishlaydi?" />
+				<Button2 text={t('components.platformaIshlashi.qanday_ishlaydi', 'Qanday ishlaydi?')} />
 			</motion.div>
 
 			<BlurWords
-				text="Platforma qanday ishlaydi"
+				text={t('components.platformaIshlashi.platforma_qanday_ishlaydi', 'Platforma qanday ishlaydi')}
 				delay={0.1}
 				className='text-[32px] md:text-[52px]'
 				style={{ fontFamily: 'var(--font-display)', fontWeight: 600, lineHeight: 1.08, color: '#ffffff', display: 'block' }}
@@ -255,8 +270,7 @@ const PlatformaIshlashi = () => {
 				className='text-[14px] md:text-[16px] max-w-[327px] md:max-w-[540px]'
 				style={{ fontFamily: 'var(--font-inter)', fontWeight: 400, lineHeight: 1.65, color: 'rgba(140, 140, 158, 1)', margin: '0 auto' }}
 			>
-				Platformadan foydalanish jarayoni oddiy va qulay bo&apos;lib, foydalanuvchilar bir
-				necha qadam orqali kerakli statistik ma&apos;lumotlarga ega bo&apos;lishlari mumkin.
+				{t('components.platformaIshlashi.jarayon_tavsifi', "Platformadan foydalanish jarayoni oddiy va qulay bo'lib, foydalanuvchilar bir necha qadam orqali kerakli statistik ma'lumotlarga ega bo'lishlari mumkin.")}
 			</motion.p>
 		</div>
 
@@ -323,7 +337,7 @@ const PlatformaIshlashi = () => {
 								textTransform: 'uppercase',
 								display: 'block',
 							}}>
-								QADAM
+								{t('components.platformaIshlashi.qadam', 'QADAM')}
 							</span>
 						</div>
 					</div>

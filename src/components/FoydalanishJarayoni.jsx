@@ -15,36 +15,6 @@ import { useSiteList } from '@/hooks/useSiteList'
 import { useSectionText } from '@/hooks/useSectionText'
 import { toFeature } from '@/utils/siteContent'
 
-const leftFeatures = [
-	{
-		icon: icon1,
-		title: 'Keng qamrovli Qidiruv',
-		description:
-			"Janr, muallif yoki kalit so'zlar orqali kitoblarni tez va aniq toping. Shu bilan birga, kam uchraydigan va noyob asarlarni ham kashf etishingiz mumkin.",
-	},
-	{
-		icon: icon2,
-		title: "Moslashuvchan O'qish Tajribasi",
-		description:
-			"Kitoblarni istalgan qurilmada o'qing va o'qish parametrlarini shaxsiy ehtiyojlaringizga moslang. Yorqinlik, shrift va sahifa aylantirishni sozlash orqali maksimal qulaylikka erishing.",
-	},
-]
-
-const rightFeatures = [
-	{
-		icon: icon3,
-		title: 'Xavfsiz va Qulay Xarid',
-		description:
-			"Tanlangan kitobni bir necha soniyada sotib oling yoki bepul asarlardan foydalaning. To'lov jarayoni xavfsiz va tezkor bo'lib, sizga ishonchli xarid imkonini beradi.",
-	},
-	{
-		icon: icon4,
-		title: 'Shaxsiy Kutubxona Boshqaruvi',
-		description:
-			"Sotib olingan va saqlangan kitoblaringizni bitta joyda boshqaring. Kutubxonangizni mavzular bo'yicha tartiblang va istalgan vaqtda tezkor kirish imkoniyatidan foydalaning.",
-	},
-]
-
 const vp = { once: true, amount: 0.2 }
 
 /* ── Magnetic hover wrapper ── */
@@ -205,6 +175,44 @@ const FoydalanishJarayoni = () => {
 
     const st = useSectionText('library')
 
+    const leftFeatures = [
+        {
+            icon: icon1,
+            title: t('components.foydalanishJarayoni.keng_qamrovli_qidiruv', 'Keng qamrovli Qidiruv'),
+            description: t(
+                'components.foydalanishJarayoni.janr_muallif_yoki_kalit_sozlar',
+                "Janr, muallif yoki kalit so'zlar orqali kitoblarni tez va aniq toping. Shu bilan birga, kam uchraydigan va noyob asarlarni ham kashf etishingiz mumkin.",
+            ),
+        },
+        {
+            icon: icon2,
+            title: t('components.foydalanishJarayoni.moslashuvchan_oqish_tajribasi', "Moslashuvchan O'qish Tajribasi"),
+            description: t(
+                'components.foydalanishJarayoni.kitoblarni_istalgan_qurilmada_oqing',
+                "Kitoblarni istalgan qurilmada o'qing va o'qish parametrlarini shaxsiy ehtiyojlaringizga moslang. Yorqinlik, shrift va sahifa aylantirishni sozlash orqali maksimal qulaylikka erishing.",
+            ),
+        },
+    ]
+
+    const rightFeatures = [
+        {
+            icon: icon3,
+            title: t('components.foydalanishJarayoni.xavfsiz_va_qulay_xarid', 'Xavfsiz va Qulay Xarid'),
+            description: t(
+                'components.foydalanishJarayoni.tanlangan_kitobni_bir_necha_soniyada',
+                "Tanlangan kitobni bir necha soniyada sotib oling yoki bepul asarlardan foydalaning. To'lov jarayoni xavfsiz va tezkor bo'lib, sizga ishonchli xarid imkonini beradi.",
+            ),
+        },
+        {
+            icon: icon4,
+            title: t('components.foydalanishJarayoni.shaxsiy_kutubxona_boshqaruvi', 'Shaxsiy Kutubxona Boshqaruvi'),
+            description: t(
+                'components.foydalanishJarayoni.sotib_olingan_va_saqlangan_kitoblaringizni',
+                "Sotib olingan va saqlangan kitoblaringizni bitta joyda boshqaring. Kutubxonangizni mavzular bo'yicha tartiblang va istalgan vaqtda tezkor kirish imkoniyatidan foydalaning.",
+            ),
+        },
+    ]
+
     // Maket 4 ta uyaga qat'iy bog'langan: API'ning dastlabki 2 tasi chapga,
     // keyingi 2 tasi o'ngga tushadi. Ikonkalar frontendda qoladi.
     const { items: apiFeats } = useSiteList(
@@ -220,7 +228,7 @@ const FoydalanishJarayoni = () => {
                 return f ? { icon: base.icon, title: f.title, description: f.description } : base
             })
         return [fill(leftFeatures, 0), fill(rightFeatures, leftFeatures.length)]
-    }, [apiFeats])
+    }, [apiFeats, leftFeatures, rightFeatures])
 
     const bgRef = useRef(null)
     const [bgVisible, setBgVisible] = useState(false)
@@ -291,7 +299,7 @@ const FoydalanishJarayoni = () => {
 							gap: '20px',
 						}}
 					>
-						<Button2 text='Foydalanish jarayoni' />
+						<Button2 text={t('components.foydalanishJarayoni.foydalanish_jarayoni', 'Foydalanish jarayoni')} />
 
 						<h2
 							className='text-[36px] leading-[44px] md:text-[48px] md:leading-[54px]'

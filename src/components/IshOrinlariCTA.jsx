@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 const BG = 'rgba(var(--bg-rgb),1)'
 const vp = { once: true, amount: 0.18 }
 
 export default function IshOrinlariCTA() {
+	const { t } = useTranslation()
+
 	return (
 		<section style={{ width: '100%', background: BG, padding: '80px 0 100px' }}>
 			<div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px' }}>
@@ -39,7 +42,7 @@ export default function IshOrinlariCTA() {
 							color: '#fff', margin: '0 0 16px',
 							letterSpacing: '-0.02em',
 						}}>
-							Mos lavozim topa olmadingizmi?
+							{t("components.ishOrinlariCTA.mos_lavozim_topa_olmadingizmi", "Mos lavozim topa olmadingizmi?")}
 						</h2>
 						<p style={{
 							fontFamily: 'Inter,sans-serif',
@@ -47,7 +50,7 @@ export default function IshOrinlariCTA() {
 							maxWidth: '480px', margin: '0 auto 36px',
 							lineHeight: 1.75,
 						}}>
-							Rezyumeyingizni yuboring — biz yangi lavozimlar ochilganda siz bilan bog'lanamiz.
+							{t("components.ishOrinlariCTA.rezyumeyingizni_yuboring_biz_yangi", "Rezyumeyingizni yuboring — biz yangi lavozimlar ochilganda siz bilan bog'lanamiz.")}
 						</p>
 						<div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
 							<button
@@ -65,7 +68,7 @@ export default function IshOrinlariCTA() {
 								onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; e.currentTarget.style.filter = 'brightness(1.15)' }}
 								onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.filter = 'brightness(1)' }}
 							>
-								Rezyume yuborish
+								{t("components.ishOrinlariCTA.rezyume_yuborish", "Rezyume yuborish")}
 							</button>
 							<button
 								style={{
@@ -81,7 +84,7 @@ export default function IshOrinlariCTA() {
 								onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.background = 'rgba(43,55,80,1)' }}
 								onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.background = 'rgba(31,37,51,1)' }}
 							>
-								Bog'lanish
+								{t("components.ishOrinlariCTA.boglanish", "Bog'lanish")}
 							</button>
 						</div>
 					</div>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import bgGlow from '@/assets/bgImg/Background (1).png'
 import { Button2 } from '../../components/shared/Button2'
 import AsyncBoundary from '../../components/shared/AsyncBoundary'
@@ -12,13 +13,14 @@ import {
 	Pagination,
 	JournalCard,
 	COVERS,
-	SECTIONS_FALLBACK,
+	getSectionsFallback,
 	ALL_SECTION,
 	toSection,
 	SEARCH_DEBOUNCE_MS,
 } from '../../components/ElektronJurnal'
 
 const JurnalKatalogiPage = () => {
+	const { t } = useTranslation()
 	const navigate = useNavigate()
 
 	// Qidiruv debounce qilinadi — har harfda emas, yozish to'xtagach so'rov ketadi.
@@ -38,10 +40,11 @@ const JurnalKatalogiPage = () => {
 	}, [debouncedSearch, sectionId])
 
 	// Bo'limlar ro'yxati — /journal-sections/items/all/ dan bir marta olinadi
-	const { items: sectionItems } = useSiteList('journal-sections', journalSectionsApi, toSection, SECTIONS_FALLBACK)
+	const sectionsFallback = useMemo(() => getSectionsFallback(t), [t])
+	const { items: sectionItems } = useSiteList('journal-sections', journalSectionsApi, toSection, sectionsFallback)
 	const sections = useMemo(
-		() => [{ id: ALL_SECTION, name: "Barcha bo'limlar" }, ...sectionItems],
-		[sectionItems],
+		() => [{ id: ALL_SECTION, name: t('pages.jurnalKatalogiPage.barcha_bolimlar', "Barcha bo'limlar") }, ...sectionItems],
+		[sectionItems, t],
 	)
 	const sectionLabel = sections.find(s => s.id === sectionId)?.name ?? sections[0].name
 
@@ -114,7 +117,7 @@ const JurnalKatalogiPage = () => {
 					marginBottom: '40px',
 				}}
 			>
-				<Button2 text='Jurnallar' />
+				<Button2 text={t('pages.jurnalKatalogiPage.jurnallar', 'Jurnallar')} />
 
 				<h1
 					style={{
@@ -127,7 +130,7 @@ const JurnalKatalogiPage = () => {
 						letterSpacing: '-0.02em',
 					}}
 				>
-					Nufuzli jurnallar va so'nggi nashrlar
+					{t('pages.jurnalKatalogiPage.nufuzli_jurnallar_va_songgi_nashrlar', "Nufuzli jurnallar va so'nggi nashrlar")}
 				</h1>
 
 				<p
@@ -141,7 +144,7 @@ const JurnalKatalogiPage = () => {
 						margin: 0,
 					}}
 				>
-					Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.
+					{t('pages.jurnalKatalogiPage.platformada_chop_etilayotgan_yetakchi', 'Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.')}
 				</p>
 			</div>
 
@@ -192,7 +195,7 @@ const JurnalKatalogiPage = () => {
 							fontFamily: 'var(--font-display)',
 							fontSize: '16px', color: 'rgba(150,160,180,1)',
 						}}>
-							Bu qidiruv bo'yicha jurnal topilmadi
+							{t('pages.jurnalKatalogiPage.bu_qidiruv_boyicha_jurnal_topilmadi', "Bu qidiruv bo'yicha jurnal topilmadi")}
 						</div>
 					)}
 				</div>

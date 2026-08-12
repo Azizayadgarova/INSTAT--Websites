@@ -174,7 +174,7 @@ const IshOrinlariVakansiyalar = () => {
 				}} loading='lazy' decoding='async' />
             <AnimatedSection style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '48px' }}>
 				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
-					<Button2 text='Vakansiyalar' />
+					<Button2 text={t("components.ishOrinlariVakansiyalar.vakansiyalar", "Vakansiyalar")} />
 
 					<h2
 						className='text-[28px] md:text-[48px]'

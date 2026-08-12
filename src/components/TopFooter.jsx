@@ -167,7 +167,7 @@ const TopFooter = () => {
 
 							<Text
 								title={t("components.topFooter.savollaringiz_bormi")}
-								highlight="Biz bilan bog'laning"
+								highlight={t('components.topFooter.biz_bilan_boglaning', "Biz bilan bog'laning")}
 								subtitle={
 									<>{t("components.topFooter.kurslar_royxatdan_otish_yoki")}<br />{t("components.topFooter.boyicha_savollaringiz_bolsa_biz")}</>
 								}

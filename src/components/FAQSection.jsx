@@ -88,7 +88,7 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 							buttonType={platformStyle ? 'button2' : 'button1'}
 							title={
 								platformStyle ? (
-									'Foydalanuvchilardan izohlar'
+									t('components.fAQSection.foydalanuvchilardan_izohlar', 'Foydalanuvchilardan izohlar')
 								) : (
 									<>{t("components.fAQSection.kop_beriladigan")}{' '}
 										<span className='text-[rgba(var(--cyan-rgb),1)]'>{t("components.fAQSection.savollar")}</span>

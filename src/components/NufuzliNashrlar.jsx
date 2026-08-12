@@ -421,7 +421,7 @@ export default function NufuzliNashrlar() {
 				{/* Header */}
 				<AnimatedSection style={{ marginBottom: '52px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 					<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
-						<Button2 text='Jurnallar' />
+						<Button2 text={t('components.nufuzliNashrlar.jurnallar', 'Jurnallar')} />
 
 						<h2
 							style={{
@@ -490,7 +490,7 @@ export default function NufuzliNashrlar() {
 						whiteSpace: 'nowrap',
 					}}
 				>
-					Barchasi
+					{t('components.nufuzliNashrlar.barchasi', 'Barchasi')}
 				</button>
 			</div>
         </section>

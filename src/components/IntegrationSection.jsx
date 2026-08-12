@@ -125,9 +125,9 @@ const IntegrationSection = () => {
             <AnimatedSection style={{ position: 'relative', zIndex: 50, width: '100%' }}>
 				<div className='text-center mb-14'>
 					<Text
-						buttonText='Platforma haqida'
+						buttonText={t('components.integrationSection.platforma_haqida', 'Platforma haqida')}
 						title={t("components.integrationSection.integratsiyalashgan")}
-						highlight='platformalar'
+						highlight={t('components.integrationSection.platformalar', 'platformalar')}
 						subtitle={
 							<>{t("components.integrationSection.talim_jarayonini_qulay_va")}</>
 						}

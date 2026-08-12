@@ -14,16 +14,16 @@ import DeviceIcon from '@/assets/icons/device-line.png'
 
 const STARS = [0, 1, 2, 3, 4]
 
-const PERKS = [
-	'Tugatish sertifikati',
-	'Barcha materiallarga umrbod kirish',
-	"O'z fikringizni shaffof qoldirish",
-	"Qo'llab-quvvatlash xizmati",
+const getPerks = t => [
+	t('pages.kursDetail.tugatish_sertifikati', 'Tugatish sertifikati'),
+	t('pages.kursDetail.barcha_materiallarga_umrbod_kirish', 'Barcha materiallarga umrbod kirish'),
+	t('pages.kursDetail.oz_fikringizni_shaffof_qoldirish', "O'z fikringizni shaffof qoldirish"),
+	t('pages.kursDetail.qollab_quvvatlash_xizmati', "Qo'llab-quvvatlash xizmati"),
 ]
 
-const TABS = [
-	{ key: 'haqida', label: 'Kurs haqida' },
-	{ key: 'reja', label: "O'quv reja" },
+const getTabs = t => [
+	{ key: 'haqida', label: t('pages.kursDetail.kurs_haqida', 'Kurs haqida') },
+	{ key: 'reja', label: t('pages.kursDetail.oquv_reja', "O'quv reja") },
 	// { key: 'izohlar', label: 'Izohlar' },
 	// { key: 'bitiruvchilar', label: 'Bitiruvchilar' },
 ]
@@ -35,14 +35,17 @@ const CheckIcon = () => (
 	</svg>
 )
 
-const formatDuration = seconds => {
+const formatDuration = (seconds, t) => {
 	const total = Math.max(0, Math.round(seconds || 0))
 	const h = Math.floor(total / 3600)
 	const m = Math.floor((total % 3600) / 60)
 	const s = total % 60
-	if (h > 0) return m > 0 ? `${h} soat ${m} daqiqa` : `${h} soat`
-	if (m > 0) return s > 0 ? `${m} daqiqa ${s} soniya` : `${m} daqiqa`
-	return `${s} soniya`
+	const soat = t('components.coursesSection.soat')
+	const daqiqa = t('components.coursesSection.daqiqa')
+	const soniya = t('components.coursesSection.soniya')
+	if (h > 0) return m > 0 ? `${h} ${soat} ${m} ${daqiqa}` : `${h} ${soat}`
+	if (m > 0) return s > 0 ? `${m} ${daqiqa} ${s} ${soniya}` : `${m} ${daqiqa}`
+	return `${s} ${soniya}`
 }
 
 const PlayIcon = () => (
@@ -101,7 +104,7 @@ const CourseSyllabus = ({ courseId, lang, t }) => {
 									<span style={{ color: '#fff', fontSize: '14px', fontWeight: 500, fontFamily: 'var(--font-display)' }}>{blockTitle}</span>
 								</div>
 								<span style={{ color: '#BCBCBC', fontSize: '13px', fontFamily: 'var(--font-display)', whiteSpace: 'nowrap' }}>
-									{formatDuration(block.total_duration)}
+									{formatDuration(block.total_duration, t)}
 								</span>
 							</button>
 
@@ -126,7 +129,7 @@ const CourseSyllabus = ({ courseId, lang, t }) => {
 													</span>
 												</div>
 												<span style={{ color: '#8a94a6', fontSize: '13px', fontFamily: 'var(--font-display)', whiteSpace: 'nowrap' }}>
-													{formatDuration(lesson.duration)}
+													{formatDuration(lesson.duration, t)}
 												</span>
 											</div>
 										))
@@ -175,10 +178,12 @@ const KursDetail = () => {
 		[id],
 	)
 	const learnPoints = (features ?? []).map(f => ({ id: f.id, text: pickField(f, 'text', lang) })).filter(f => f.text)
+	const PERKS = getPerks(t)
+	const TABS = getTabs(t)
 
 	const title = course ? pickField(course, 'name', lang) : ''
 	const description = course ? pickField(course, 'description', lang) : ''
-	const durationLabel = course?.total_duration ? formatDuration(course.total_duration) : ''
+	const durationLabel = course?.total_duration ? formatDuration(course.total_duration, t) : ''
 	const priceLabel = course && Number(course.price) > 0
 		? `${Number(course.price).toLocaleString('uz-UZ')} ${t('components.coursesSection.uzs', "so'm")}`
 		: t('components.coursesSection.0_uzs')
@@ -197,7 +202,7 @@ const KursDetail = () => {
 					onClick={() => navigate('/platform/onlayn-talim')}
 					style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', marginBottom: '24px', display: 'inline-block' }}
 				>
-					<Button2 text='Kurslar katalogi' />
+					<Button2 text={t('pages.kursDetail.kurslar_katalogi', 'Kurslar katalogi')} />
 				</button>
 
 				<AsyncBoundary loading={loading} error={error} onRetry={retry} skeleton={<DetailSkeleton />}>
@@ -214,7 +219,7 @@ const KursDetail = () => {
 
 								<div className='flex-1'>
 									<h2 style={{ color: '#fff', fontSize: '16px', fontWeight: 500, fontFamily: 'var(--font-display)', marginBottom: '14px' }}>
-										Nima olasiz
+										{t('pages.kursDetail.nima_olasiz', 'Nima olasiz')}
 									</h2>
 									<ul style={{ display: 'flex', flexDirection: 'column', gap: '10px', listStyle: 'none', padding: 0, margin: 0 }}>
 										{PERKS.map(perk => (
@@ -245,7 +250,7 @@ const KursDetail = () => {
 											fontFamily: 'var(--font-display)',
 										}}
 									>
-										Kursni boshlash
+										{t('pages.kursDetail.kursni_boshlash', 'Kursni boshlash')}
 									</button>
 								</div>
 							</div>
@@ -253,7 +258,7 @@ const KursDetail = () => {
 							{/* Kurs ma'lumotlari */}
 							<div style={{ marginBottom: '24px' }}>
 								<p style={{ color: 'rgba(150,160,180,1)', fontSize: '13px', fontFamily: 'var(--font-display)', marginBottom: '10px' }}>
-									Kurs ma'lumotlari
+									{t('pages.kursDetail.kurs_malumotlari', "Kurs ma'lumotlari")}
 								</p>
 								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
 									<div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -277,9 +282,9 @@ const KursDetail = () => {
 											</>
 										)}
 									</div>
-									{!!course.lessons_count && <InfoStat icon={DeviceIcon}>{course.lessons_count} ta darslar</InfoStat>}
-									{!!durationLabel && <InfoStat icon={ClockIcon}>Davomiyligi: {durationLabel}</InfoStat>}
-									{!!course.tests_count && <InfoStat icon={DeviceIcon}>{course.tests_count} ta test savollari</InfoStat>}
+									{!!course.lessons_count && <InfoStat icon={DeviceIcon}>{course.lessons_count} {t('pages.kursDetail.ta_darslar', 'ta darslar')}</InfoStat>}
+									{!!durationLabel && <InfoStat icon={ClockIcon}>{t('pages.kursDetail.davomiyligi', 'Davomiyligi')}: {durationLabel}</InfoStat>}
+									{!!course.tests_count && <InfoStat icon={DeviceIcon}>{course.tests_count} {t('pages.kursDetail.ta_test_savollari', 'ta test savollari')}</InfoStat>}
 								</div>
 							</div>
 
@@ -330,7 +335,7 @@ const KursDetail = () => {
 													color: 'rgba(var(--cyan-rgb),1)', fontSize: '14px', fontFamily: 'var(--font-display)',
 												}}
 											>
-												{expanded ? 'Qisqartirish' : "Batafsil ko'rish"}
+												{expanded ? t('pages.kursDetail.qisqartirish', 'Qisqartirish') : t('pages.kursDetail.batafsil_korish', "Batafsil ko'rish")}
 												<span style={{ transform: expanded ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>▾</span>
 											</button>
 										</>
@@ -352,7 +357,7 @@ const KursDetail = () => {
 							{learnPoints.length > 0 && (
 								<div style={{ background: 'rgba(var(--card-rgb),1)', borderRadius: '22px', padding: '24px' }}>
 									<h2 style={{ color: '#fff', fontSize: '18px', fontWeight: 600, fontFamily: 'var(--font-display)', marginBottom: '18px' }}>
-										Nimalarni o'rganasiz!
+										{t('pages.kursDetail.nimalarni_organasiz', "Nimalarni o'rganasiz!")}
 									</h2>
 									<div className='grid grid-cols-1 md:grid-cols-2' style={{ gap: '14px' }}>
 										{learnPoints.map(point => (

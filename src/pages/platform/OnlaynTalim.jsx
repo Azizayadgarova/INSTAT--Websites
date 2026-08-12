@@ -16,50 +16,50 @@ import ModernEducation from '../../components/ModernEducation'
 import CoursesSection from '../../components/CoursesSection'
 const MentorsSection = lazy(() => import('../../components/MentorsSection'))
 
-const ONLAYN_CARDS = [
+const getOnlaynCards = t => [
 	{
 		id: 1,
-		title: 'Global tajribaga ega ',
-		highlight: 'mentorlar',
-		tags: "Global mentorlik",
-		description: "Dunyoning turli davlatlaridan tajribali mutaxassislar bilan zamonaviy kasblarni real tajriba asosida o'rganing. Barcha darslar amaliy misollar bilan tushuntiriladi.",
+		title: t('pages.onlaynTalim.card1_title', 'Global tajribaga ega '),
+		highlight: t('pages.onlaynTalim.card1_highlight', 'mentorlar'),
+		tags: t('pages.onlaynTalim.card1_tags', "Global mentorlik"),
+		description: t('pages.onlaynTalim.card1_description', "Dunyoning turli davlatlaridan tajribali mutaxassislar bilan zamonaviy kasblarni real tajriba asosida o'rganing. Barcha darslar amaliy misollar bilan tushuntiriladi."),
 		img: groupImg0,
 		startX: '-10%', startY: -10, exitX: '-100%', plainText: true,
 	},
 	{
 		id: 2,
-		title: "Amaliy va natijaga yo'naltirilgan ",
-		highlight: "ta'lim",
-		tags: "Amaliy ta'lim",
-		description: "Har bir kurs real loyihalar va amaliy topshiriqlar asosida tuzilgan. Siz faqat nazariya emas, balki ish jarayonida kerak bo'ladigan ko'nikmalarni egalaysiz.",
+		title: t('pages.onlaynTalim.card2_title', "Amaliy va natijaga yo'naltirilgan "),
+		highlight: t('pages.onlaynTalim.card2_highlight', "ta'lim"),
+		tags: t('pages.onlaynTalim.card2_tags', "Amaliy ta'lim"),
+		description: t('pages.onlaynTalim.card2_description', "Har bir kurs real loyihalar va amaliy topshiriqlar asosida tuzilgan. Siz faqat nazariya emas, balki ish jarayonida kerak bo'ladigan ko'nikmalarni egalaysiz."),
 		img: groupImg1,
 		startX: '50%', startY: 30, exitX: '150%', plainText: true,
 	},
 	{
 		id: 3,
-		title: "Moslashuvchan va qulay ",
-		highlight: "o'rganish",
-		tags: "Moslashuvchan ta'lim",
-		description: "Platformadan istalgan vaqtda va istalgan qurilmadan foydalanib o'qish mumkin. Darslar sizning vaqtingiz va sur'atiningizga moslashtirilgan.",
+		title: t('pages.onlaynTalim.card3_title', "Moslashuvchan va qulay "),
+		highlight: t('pages.onlaynTalim.card3_highlight', "o'rganish"),
+		tags: t('pages.onlaynTalim.card3_tags', "Moslashuvchan ta'lim"),
+		description: t('pages.onlaynTalim.card3_description', "Platformadan istalgan vaqtda va istalgan qurilmadan foydalanib o'qish mumkin. Darslar sizning vaqtingiz va sur'atiningizga moslashtirilgan."),
 		img: groupImg2,
 		startX: '-55%', startY: 60, exitX: '-180%', plainText: true,
 	},
 	{
 		id: 4,
-		title: "Sertifikat va karyera ",
-		highlight: "imkoniyati",
-		tags: "Karyera rivojlanishi",
-		description: "Kurslarni muvaffaqiyatli yakunlagan talabalar sertifikatga ega bo'lishadi. Bu esa ishga kirish va professional rivojlanishda katta imkoniyat yaratadi.",
+		title: t('pages.onlaynTalim.card4_title', "Sertifikat va karyera "),
+		highlight: t('pages.onlaynTalim.card4_highlight', "imkoniyati"),
+		tags: t('pages.onlaynTalim.card4_tags', "Karyera rivojlanishi"),
+		description: t('pages.onlaynTalim.card4_description', "Kurslarni muvaffaqiyatli yakunlagan talabalar sertifikatga ega bo'lishadi. Bu esa ishga kirish va professional rivojlanishda katta imkoniyat yaratadi."),
 		img: groupImg3,
 		startX: '40%', startY: -100, exitX: '120%', plainText: true, stayOnExit: true,
 	},
 ]
 
-const STATS_FALLBACK = [
-	{ key: 'education_activness_number', value: '200 M+', label: 'Platformadagi faollik' },
-	{ key: 'education_students_number', value: '45 000+', label: "O'quvchilar soni" },
-	{ key: 'education_courses_number', value: '120+', label: 'Mavjud kurslar' },
-	{ key: 'education_graduates_number', value: '8 500+', label: 'Muvaffaqiyatli bitiruvchilar' },
+const getStatsFallback = t => [
+	{ key: 'education_activness_number', value: '200 M+', label: t('components.onlaynTalimHero.platformadagi_faollik', 'Platformadagi faollik') },
+	{ key: 'education_students_number', value: '45 000+', label: t('components.onlaynTalimHero.oquvchilar_soni', "O'quvchilar soni") },
+	{ key: 'education_courses_number', value: '120+', label: t('components.onlaynTalimHero.mavjud_kurslar', 'Mavjud kurslar') },
+	{ key: 'education_graduates_number', value: '8 500+', label: t('components.onlaynTalimHero.muvaffaqiyatli_bitiruvchilar', 'Muvaffaqiyatli bitiruvchilar') },
 ]
 
 const CIRCLE_SIZES = [1130, 850, 570, 300]
@@ -208,6 +208,7 @@ function Particles() {
 }
 
 function HeroImage() {
+	const { t } = useTranslation()
 	const [hovered, setHovered] = useState(false)
 	const [ref, inView] = useInView(0.1)
 
@@ -227,7 +228,7 @@ function HeroImage() {
 		>
 			<img
 				src={heroImg}
-				alt="Onlayn ta'lim"
+				alt={t("pages.onlaynTalim.onlayn_talim")}
 				onMouseEnter={() => setHovered(true)}
 				onMouseLeave={() => setHovered(false)}
 				className='w-full h-55 md:h-149 object-cover'
@@ -265,9 +266,9 @@ function HeroText() {
 			}}
 		>
             <Text
-				buttonText="Onlayn ta'lim"
+				buttonText={t("pages.onlaynTalim.onlayn_talim")}
 				title={st('education_title1', t("pages.onlaynTalim.bilim_va_konikmalarni"))}
-				highlight={st('education_title2', 'tizimli rivojlantirish')}
+				highlight={st('education_title2', t('pages.onlaynTalim.tizimli_rivojlantirish', 'tizimli rivojlantirish'))}
 				subtitle={st('education_description',
 					<>{t("pages.onlaynTalim.zamonaviy_talim_metodlari_asosida")}<br className='hidden md:block' />
 						{' '}{t("pages.onlaynTalim.bilimlaringizni_chuqurlashtiring")}</>
@@ -373,8 +374,8 @@ export default function OnlaynTalim() {
 	const _lang = _i18n.resolvedLanguage ?? 'uz'
 	const { data: _eduKv } = useSiteData(d => d.byModuleKey.education ?? {})
 	const st = useSectionText('education')
-	const about = splitHeading(st('education_title3'), "Zamonaviy ta'lim,", 'Global imkoniyatlar!')
-	const STATS = STATS_FALLBACK.map(item => {
+	const about = splitHeading(st('education_title3'), t('pages.onlaynTalim.zamonaviy_talim_comma', "Zamonaviy ta'lim,"), t('pages.onlaynTalim.global_imkoniyatlar', 'Global imkoniyatlar!'))
+	const STATS = getStatsFallback(t).map(item => {
 		const src = _eduKv?.[item.key]
 		if (!src) return item
 		const raw = pickLang(src, _lang).replace(/\s+/g, ' ').trim()
@@ -424,13 +425,13 @@ export default function OnlaynTalim() {
             <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 					<ModernEducation
-						customCards={ONLAYN_CARDS}
+						customCards={getOnlaynCards(t)}
 						contentKey='site-education-features'
 						contentApi={siteEducationFeaturesApi}
 						cardHeight={100}
 						hideParticles
 						headerProps={{
-							buttonText: "Platforma haqida",
+							buttonText: t("pages.onlaynTalim.platforma_haqida"),
 							buttonType: "button2",
 							title: about.title,
 							highlight: about.highlight,

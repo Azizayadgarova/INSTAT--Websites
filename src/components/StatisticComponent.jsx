@@ -1,16 +1,17 @@
 import { memo, useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import img from '@/assets/Illustration.webp'
 import { useSectionStats } from '@/hooks/useSectionStats'
 import { parseStatValue } from '@/utils/siteContent'
 
 // Raqam (`value`) va izoh (`label`) backend'ning `main` modulidan keladi
 // (site-data: main_users_number va h.k.). API javob bermasa shu qiymatlar qoladi.
-const STATS_FALLBACK = [
-	{ key: 'main_users_number', value: '10 000+', label: 'Foydalanuvchilar' },
-	{ key: 'main_partners_number', value: '50+', label: 'Hamkorlar' },
-	{ key: 'main_experts_number', value: '100+', label: 'Ekspertlar' },
-	{ key: 'main_activity_number', value: '5+', label: 'Platforma faoliyati' },
+const STATS_FALLBACK = t => [
+	{ key: 'main_users_number', value: '10 000+', label: t('components.statisticComponent.foydalanuvchilar', 'Foydalanuvchilar') },
+	{ key: 'main_partners_number', value: '50+', label: t('components.statisticComponent.hamkorlar', 'Hamkorlar') },
+	{ key: 'main_experts_number', value: '100+', label: t('components.statisticComponent.ekspertlar', 'Ekspertlar') },
+	{ key: 'main_activity_number', value: '5+', label: t('components.statisticComponent.platforma_faoliyati', 'Platforma faoliyati') },
 ]
 
 function CountUp({ target, suffix, inView }) {
@@ -44,10 +45,11 @@ function CountUp({ target, suffix, inView }) {
 }
 
 const StatisticComponent = () => {
+	const { t } = useTranslation()
 	const ref = useRef(null)
 	const inView = useInView(ref, { once: true, margin: '-80px' })
 	// "10 000+" -> { number: 10000, suffix: '+' }, JSX o'zgarishsiz qoladi
-	const stats = useSectionStats('main', STATS_FALLBACK).map(stat => ({ ...stat, ...parseStatValue(stat.value) }))
+	const stats = useSectionStats('main', STATS_FALLBACK(t)).map(stat => ({ ...stat, ...parseStatValue(stat.value) }))
 
 	return (
 		<div
