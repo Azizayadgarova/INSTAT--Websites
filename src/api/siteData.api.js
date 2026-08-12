@@ -62,6 +62,13 @@ export const getSiteData = async () => {
 	return inflight
 }
 
+/** Bitta modulning barcha yozuvlari (topilmasa — bo'sh ro'yxat). */
+export const getModule = async module => (await getSiteData()).byModule[module] ?? []
+
+/** module + key bo'yicha bitta yozuv (topilmasa — null). */
+export const getItem = async (module, key) =>
+	(await getSiteData()).byModuleKey[module]?.[key] ?? null
+
 export const resetSiteDataCache = () => {
 	cache = null
 	inflight = null

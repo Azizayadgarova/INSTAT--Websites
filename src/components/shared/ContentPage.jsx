@@ -33,7 +33,15 @@ const ContentPage = ({ module, contentKey, title, description, showTitle = false
 
 	const stringItems = (data ?? []).filter(it => it.type === 'string')
 	const main = contentKey ? (data ?? []).find(it => it.key === contentKey) : stringItems[0]
-	const attachments = (data ?? []).filter(it => it.type === 'file' && it.path && it.key === contentKey)
+	// Fayl kalitlari matn kalitidan farq qiladi (`odob` -> `odob_file`), shuning
+	// uchun aniq moslik ham, `<contentKey>_` prefiksi ham hisobga olinadi.
+	// `contentKey` berilmasa — modulning barcha fayllari ko'rsatiladi.
+	const attachments = (data ?? []).filter(
+		it =>
+			it.type === 'file' &&
+			it.path &&
+			(!contentKey || it.key === contentKey || it.key?.startsWith(`${contentKey}_`)),
+	)
 
 	return (
 		<section>

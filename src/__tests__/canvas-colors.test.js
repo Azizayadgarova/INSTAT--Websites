@@ -1,5 +1,5 @@
-import { readFileSync } from 'node:fs'
-import { execSync } from 'node:child_process'
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 /**
@@ -8,11 +8,12 @@ import { describe, expect, it } from 'vitest'
  * yiqitgan edi. Bu test canvas ishlatadigan fayllarda var(--...) rang
  * qiymati paydo bo'lsa ogohlantiradi.
  */
-const canvasFiles = execSync("grep -rl getContext src --include=*.jsx --include=*.js")
-	.toString()
-	.trim()
-	.split('\n')
-	.filter(Boolean)
+// Fayllarni Node bilan qidiramiz — `grep` Windows'da yo'q va shell'ga
+// bog'lanish testni muhitga qarab yiqitardi.
+const canvasFiles = readdirSync('src', { recursive: true, withFileTypes: true })
+	.filter(entry => entry.isFile() && /\.jsx?$/.test(entry.name))
+	.map(entry => join(entry.parentPath ?? entry.path, entry.name))
+	.filter(file => readFileSync(file, 'utf8').includes('getContext'))
 
 describe('canvas ranglari', () => {
 	it.each(canvasFiles)('%s da CSS var() rang ishlatilmagan', file => {

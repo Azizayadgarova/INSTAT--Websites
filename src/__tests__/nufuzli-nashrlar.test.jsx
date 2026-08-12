@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Haqiqiy javoblarga o'xshash namunalar (test.avacoder.uz)
@@ -44,6 +45,9 @@ import { resetSiteDataCache } from '../api/siteData.api'
 import NufuzliNashrlar from '../components/NufuzliNashrlar'
 import i18n from '../i18n'
 
+// Komponent kartochka bosilganda useNavigate() ishlatadi — Router konteksti shart
+const renderSection = () => render(<MemoryRouter><NufuzliNashrlar /></MemoryRouter>)
+
 beforeEach(async () => {
 	resetSiteDataCache()
 	get.mockClear()
@@ -53,7 +57,7 @@ beforeEach(async () => {
 
 describe('NufuzliNashrlar — data-reports API', () => {
 	it('kartochka backend hisobotidan quriladi', async () => {
-		render(<NufuzliNashrlar />)
+		renderSection()
 
 		await waitFor(() => expect(screen.getByText('Erkaklar statistikasi')).toBeInTheDocument())
 		expect(screen.getByText('Aholi')).toBeInTheDocument()
@@ -64,7 +68,7 @@ describe('NufuzliNashrlar — data-reports API', () => {
 	})
 
 	it('boshqa turdagi va nofaol hisobotlar chiqmaydi', async () => {
-		render(<NufuzliNashrlar />)
+		renderSection()
 
 		await waitFor(() => expect(screen.getByText('Erkaklar statistikasi')).toBeInTheDocument())
 		expect(screen.queryByText('Kutubxona hisoboti')).not.toBeInTheDocument()
@@ -74,7 +78,7 @@ describe('NufuzliNashrlar — data-reports API', () => {
 	})
 
 	it('sarlavha va tavsif micro_data modulidan keladi', async () => {
-		render(<NufuzliNashrlar />)
+		renderSection()
 
 		await waitFor(() => expect(screen.getByText('Backend sarlavhasi')).toBeInTheDocument())
 		// value_uz null -> value ishlatiladi
@@ -83,7 +87,7 @@ describe('NufuzliNashrlar — data-reports API', () => {
 
 	it('API bo‘sh bo‘lsa statik ro‘yxat ko‘rsatiladi', async () => {
 		reports = []
-		render(<NufuzliNashrlar />)
+		renderSection()
 
 		await waitFor(() =>
 			expect(screen.getByText("Aholi soni va demografik o'sish")).toBeInTheDocument(),

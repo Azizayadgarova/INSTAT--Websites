@@ -31,12 +31,17 @@ describe('marshrutlar', () => {
 
 	it('/information-resurses bo‘limi sidebar va Outlet bilan render bo‘ladi', async () => {
 		renderAt('/information-resurses/gender-statistika')
+		// Sahifa lazy() bilan yuklanadi — parallel ishlayotgan suite'larda bu
+		// standart 1s kutishdan (va 5s test limitidan) uzoqroq cho'zilishi mumkin.
+		const sidebar = await screen.findByRole(
+			'navigation',
+			{ name: i18n.t('menu.axborot.title') },
+			{ timeout: 15000 },
+		)
+		expect(sidebar).toBeInTheDocument()
 		// Sidebar'da bo'lim nomi + tanlangan sahifa sarlavhasi ko'rinadi
-		const hits = await screen.findAllByText(i18n.t('menu.axborot.gender-statistika'))
-		// sidebar link + sahifa sarlavhasi
-		expect(hits.length).toBeGreaterThan(0)
-		expect(await screen.findByRole('navigation', { name: i18n.t('menu.axborot.title') })).toBeInTheDocument()
-	})
+		expect(screen.getAllByText(i18n.t('menu.axborot.gender-statistika')).length).toBeGreaterThan(0)
+	}, 20000)
 })
 
 describe('i18n', () => {
