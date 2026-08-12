@@ -5,6 +5,7 @@ import { Button2 } from '@/components/shared/Button2'
 import AsyncBoundary from '@/components/shared/AsyncBoundary'
 import Skeleton from '@/components/shared/Skeleton'
 import img1 from '@/assets/2.webp'
+import { API_URL } from '@/config/api'
 
 const formatDate = iso => {
 	const d = new Date(iso)
@@ -22,7 +23,7 @@ const DownloadIcon = () => (
 
 const DownloadButton = ({ reviewId }) => (
 	<a
-		href={`${import.meta.env.VITE_API_URL}/reviews/${reviewId}/download-main-file/`}
+		href={`${API_URL}/reviews/${reviewId}/download-main-file/`}
 		target='_blank'
 		rel='noopener noreferrer'
 		style={{

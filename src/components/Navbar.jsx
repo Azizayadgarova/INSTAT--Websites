@@ -1,15 +1,17 @@
 import { useTranslation } from 'react-i18next'
 import { memo, useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import logoImg from '@/assets/icons/InstatIcon.png'
 import menuIcon from '@/assets/menu-line.png'
 import { useContacts } from '../hooks/useContacts'
 import { useMenu } from '../hooks/useMenu'
+import { useExternalMenuLink } from '../hooks/useExternalMenuLink'
 import LanguageSwitcher from './shared/LanguageSwitcher'
+import MenuLink from './shared/MenuLink'
 import facebook from '../assets/icons/facebook.png'
 import instagram from '../assets/icons/instaIcon.png'
 import twitter from '../assets/icons/social3.png'
 import useSectionText from "@/hooks/useSectionText.js";
+import { API_CABINET_URL } from '@/config/api'
 
 const Navbar = () => {
 	const contacts = useContacts()
@@ -18,6 +20,7 @@ const Navbar = () => {
     } = useTranslation();
 
     const menuConfig = useMenu()
+    const externalHref = useExternalMenuLink()
 
     const [isOpen, setIsOpen] = useState(false)
     const [activeMenu, setActiveMenu] = useState('axborot')
@@ -33,14 +36,18 @@ const Navbar = () => {
 
 	function handleLogin()
 	{
-		window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
+		window.open(API_CABINET_URL, '_blank')
 	}
 
 
 	return (
         <>
             {/* NAVBAR */}
-            <nav className='fixed w-full z-50 bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
+            {/* z-1000: sahifa kontentida zIndex 999 gacha qatlamlar bor (jurnal
+                kartochkalari, filtr dropdown'lari) — navbar ularning hammasidan
+                tepada turishi kerak. 9990+ esa global overlay'lar (intro,
+                scroll progress, kursor) uchun bo'sh qoladi. */}
+            <nav className='fixed w-full z-[1000] bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
 				<div className='max-w-[1440px] mx-auto flex items-center justify-between py-[20px] px-5 md:px-[100px]'>
 					<img
 						src={logoImg}
@@ -71,7 +78,7 @@ const Navbar = () => {
 			</nav>
             {/* MENU OVERLAY */}
             <div
-				className={`fixed inset-0 z-[999] transition-all duration-500 ${
+				className={`fixed inset-0 z-[1001] transition-all duration-500 ${
 					isOpen ? 'visible opacity-100' : 'invisible opacity-0'
 				}`}
 			>
@@ -155,12 +162,13 @@ const Navbar = () => {
 															}}
 															className='cursor-pointer text-[14px] font-inter hover:text-white transition-colors duration-200'
 														>
-															<Link
+															<MenuLink
+																href={externalHref(key, link.path)}
 																to={`${menuConfig[activeMenu].base}/${link.path}`}
 																onClick={closeMenu}
 															>
 																{link.name}
-															</Link>
+															</MenuLink>
 														</li>
 													))}
 												</ul>
@@ -186,12 +194,13 @@ const Navbar = () => {
 											}}
 											className='cursor-pointer text-[15px] font-inter hover:text-white transition-colors duration-200'
 										>
-											<Link
+											<MenuLink
+												href={externalHref(activeMenu, link.path)}
 												to={`${menuConfig[activeMenu].base}/${link.path}`}
 												onClick={closeMenu}
 											>
 												{link.name}
-											</Link>
+											</MenuLink>
 										</li>
 									))}
 								</ul>

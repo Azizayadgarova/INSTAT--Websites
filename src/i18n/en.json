@@ -8,6 +8,7 @@
     "language": "Language",
     "download": "Download",
     "openResource": "Open resource",
+    "redirecting": "Redirecting to the external resource...",
     "readMore": "Read more",
     "collapse": "Collapse",
     "watch": "Watch"
@@ -369,6 +370,10 @@
     "mediaServise": {
       "ortga": "Back",
       "share_this_blog": "Share this page"
+    },
+    "yangiliklar": {
+      "badge": "News",
+      "other": "Other news"
     },
     "science": {
       "ortga": "Back",

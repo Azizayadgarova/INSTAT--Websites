@@ -11,13 +11,18 @@ import api from './axios'
  * createResourceApi() wraps that convention once so each resource file
  * doesn't have to re-implement pagination/param handling.
  */
-const createResourceApi = path => {
+/**
+ * @param {string} path - resurs yo'li, masalan 'books'
+ * @param {object} [client] - axios nusxasi. Standart — asosiy backend (API_URL);
+ *   boshqa serverdagi bo'lim uchun @/api/axios dan mos nusxa beriladi.
+ */
+const createResourceApi = (path, client = api) => {
 	/**
 	 * @param {object} params - query params: page, per_page, search, ordering,
 	 *   plus any endpoint-specific filters (e.g. category, type).
 	 */
 	const getAll = async (params = {}) => {
-		const { data } = await api.get(`/${path}/`, { params })
+		const { data } = await client.get(`/${path}/`, { params })
 		// Ko'pchilik endpoint {links, data, meta} shaklida javob beradi, lekin
 		// ba'zilari (masalan review-authors) to'g'ridan-to'g'ri array qaytaradi —
 		// ikkalasini ham qo'llab-quvvatlaymiz.
@@ -33,12 +38,12 @@ const createResourceApi = path => {
 
 	/** Some endpoints expose a non-paginated "all" action: /<path>/items/all/ */
 	const getAllFlat = async (params = {}) => {
-		const { data } = await api.get(`/${path}/items/all/`, { params })
+		const { data } = await client.get(`/${path}/items/all/`, { params })
 		return Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
 	}
 
 	const getById = async id => {
-		const { data } = await api.get(`/${path}/${id}/`)
+		const { data } = await client.get(`/${path}/${id}/`)
 		return data
 	}
 

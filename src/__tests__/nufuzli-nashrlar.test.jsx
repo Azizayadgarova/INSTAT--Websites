@@ -34,7 +34,11 @@ let reports = REPORTS
 const get = vi.fn(url =>
 	Promise.resolve({ data: url.includes('site-data') ? SITE_DATA : reports }),
 )
-vi.mock('../api/axios', () => ({ default: { get: (...args) => get(...args) } }))
+vi.mock('../api/axios', () => ({
+	default: { get: (...args) => get(...args) },
+	// Alohida instance — `get` spy'iga qo'shimcha chaqiruv qo'shmaydi
+	infoResourceApi: { get: () => Promise.resolve({ data: [] }) },
+}))
 
 import { resetSiteDataCache } from '../api/siteData.api'
 import NufuzliNashrlar from '../components/NufuzliNashrlar'

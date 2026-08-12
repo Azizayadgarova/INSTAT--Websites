@@ -1,3 +1,4 @@
+import { newsApi } from './axios'
 import { createResourceApi } from './resources.api'
 
 /**
@@ -60,7 +61,11 @@ export const siteVacancyInstructionsApi = createResourceApi('site-vacancy-instru
 /** full_name, phone_number, email, acceptance, description_*, path */
 export const siteManagersApi = createResourceApi('site-managers')
 export const siteVacanciesApi = createResourceApi('site-vacancies')
-export const sitePostsApi = createResourceApi('site-posts')
+/**
+ * Yangiliklar — YAGONA istisno: asosiy backend (api1.instat.uz) da bu jadval
+ * bo'sh, kontent alohida serverda yuritiladi (@/config/api dagi API_NEWS_URL).
+ */
+export const sitePostsApi = createResourceApi('site-posts', newsApi)
 export const siteEventsApi = createResourceApi('site-events')
 export const siteFaqsApi = createResourceApi('site-faqs')
 export const siteCorruptionVideosApi = createResourceApi('site-corruption-videos')

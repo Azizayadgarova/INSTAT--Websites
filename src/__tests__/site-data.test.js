@@ -1,11 +1,13 @@
 import { describe, expect, it, beforeEach, vi } from 'vitest'
 
-// axios ni mock qilamiz — tarmoqqa chiqmaymiz
+// axios ni mock qilamiz — tarmoqqa chiqmaymiz. `infoResourceApi` alohida
+// instance: site-data'ning `info_resource` moduli boshqa backend'dan keladi.
 vi.mock('../api/axios', () => ({
 	default: { get: vi.fn() },
+	infoResourceApi: { get: vi.fn() },
 }))
 
-import api from '../api/axios'
+import api, { infoResourceApi } from '../api/axios'
 import { getSiteData, getModule, getItem, resetSiteDataCache } from '../api/siteData.api'
 import { pickLang, pickLink } from '../utils/siteContent'
 
@@ -15,10 +17,16 @@ const SAMPLE = [
 	{ id: 3, module: 'info_resource', type: 'link', key: 'siat_stat', value: 'https://siat.stat.uz/', value_uz: 'Matn', value_ru: 'Текст', value_en: 'Text' },
 ]
 
+const INFO_RESOURCE_SAMPLE = [
+	{ id: 9, module: 'info_resource', type: 'link', key: 'lib_stat', value: 'https://lib.stat.uz/uz' },
+]
+
 beforeEach(() => {
 	resetSiteDataCache()
 	api.get.mockReset()
 	api.get.mockResolvedValue({ data: SAMPLE })
+	infoResourceApi.get.mockReset()
+	infoResourceApi.get.mockResolvedValue({ data: [] })
 })
 
 describe('siteData API', () => {
@@ -37,6 +45,23 @@ describe('siteData API', () => {
 	it('parallel chaqiruvlarni bitta so‘rovga birlashtiradi', async () => {
 		await Promise.all([getSiteData(), getSiteData(), getSiteData()])
 		expect(api.get).toHaveBeenCalledTimes(1)
+	})
+
+	it('info_resource moduli alohida manbadan almashtiriladi', async () => {
+		infoResourceApi.get.mockResolvedValue({ data: INFO_RESOURCE_SAMPLE })
+		const { byModuleKey } = await getSiteData()
+		// Ikkilamchi manbadagi kalit keldi, asosiy manbadagi eski kalit chiqib ketdi
+		expect(byModuleKey.info_resource.lib_stat.value).toBe('https://lib.stat.uz/uz')
+		expect(byModuleKey.info_resource.siat_stat).toBeUndefined()
+		// Boshqa modullar asosiy manbada qoladi
+		expect(byModuleKey.all.email.value).toBe('info@instat.uz')
+	})
+
+	it('ikkilamchi manba yiqilsa asosiy javob buzilmaydi', async () => {
+		infoResourceApi.get.mockRejectedValue(new Error('tarmoq'))
+		const { byModuleKey } = await getSiteData()
+		expect(byModuleKey.info_resource.siat_stat.value).toBe('https://siat.stat.uz/')
+		expect(byModuleKey.about.about.value_ru).toBe('<p>Ru</p>')
 	})
 
 	it('getModule / getItem to‘g‘ri ishlaydi', async () => {

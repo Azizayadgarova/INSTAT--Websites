@@ -11,6 +11,9 @@ import facebook from "@/assets/icons/facebook.png";
 import instagram from "@/assets/icons/instaIcon.png";
 import useSectionText from "@/hooks/useSectionText.js";
 import useContacts from "@/hooks/useContacts.js";
+import useExternalMenuLink from "@/hooks/useExternalMenuLink.js";
+import MenuLink from "@/components/shared/MenuLink.jsx";
+import { API_CABINET_URL } from '@/config/api'
 
 const NAV_LINK_PATHS = [
 	{ key: 'onlayn_talim',       path: '/platform/onlayn-talim' },
@@ -38,6 +41,7 @@ const Navbar2 = () => {
 		label: t(`components.navbar2.${link.key}`),
 	}))
 	const contacts = useContacts()
+	const externalHref = useExternalMenuLink()
 
 	const st = useSectionText('all')
 
@@ -55,7 +59,11 @@ const Navbar2 = () => {
 				style={{
 					position: 'fixed',
 					width: '100%',
-					zIndex: 50,
+					// Sahifa kontentida zIndex 999 gacha qatlamlar bor (jurnal
+					// kartochkalari, filtr dropdown'lari) — navbar ularning
+					// hammasidan tepada turishi kerak. 9990+ global overlay'lar
+					// (intro, scroll progress, kursor) uchun bo'sh qoladi.
+					zIndex: 1000,
 					backgroundColor: 'rgba(18,14,27,0.2)',
 					backdropFilter: 'blur(40px)',
 					WebkitBackdropFilter: 'blur(40px)',
@@ -203,7 +211,7 @@ const Navbar2 = () => {
 			</nav>
 			{/* MENU OVERLAY */}
 			<div
-				className={`fixed inset-0 z-[999] transition-all duration-500 ${
+				className={`fixed inset-0 z-[1001] transition-all duration-500 ${
 					isOpen ? 'visible opacity-100' : 'invisible opacity-0'
 				}`}
 			>
@@ -287,12 +295,13 @@ const Navbar2 = () => {
 															}}
 															className='cursor-pointer text-[14px] font-inter hover:text-white transition-colors duration-200'
 														>
-															<Link
+															<MenuLink
+																href={externalHref(key, link.path)}
 																to={`${menuConfig[activeMenu].base}/${link.path}`}
 																onClick={closeMenu}
 															>
 																{link.name}
-															</Link>
+															</MenuLink>
 														</li>
 													))}
 												</ul>
@@ -318,12 +327,13 @@ const Navbar2 = () => {
 											}}
 											className='cursor-pointer text-[15px] font-inter hover:text-white transition-colors duration-200'
 										>
-											<Link
+											<MenuLink
+												href={externalHref(activeMenu, link.path)}
 												to={`${menuConfig[activeMenu].base}/${link.path}`}
 												onClick={closeMenu}
 											>
 												{link.name}
-											</Link>
+											</MenuLink>
 										</li>
 									))}
 								</ul>

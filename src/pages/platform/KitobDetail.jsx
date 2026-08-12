@@ -9,6 +9,7 @@ import AsyncBoundary from '@/components/shared/AsyncBoundary'
 import RichContent from '@/components/shared/RichContent'
 import Skeleton from '@/components/shared/Skeleton'
 import StarIcon from '@/assets/Star.png'
+import { API_ORIGIN, API_CABINET_URL, storageUrl } from '@/config/api'
 
 const STARS = [0, 1, 2, 3, 4]
 
@@ -16,14 +17,6 @@ const TABS = [
 	{ key: 'tarif', label: "Mahsulot ta'rifi" },
 	{ key: 'sharhlar', label: 'Sharhlar' },
 ]
-
-const API_ORIGIN = (() => {
-	try {
-		return new URL(import.meta.env.VITE_API_URL ?? 'https://api1.instat.uz/api').origin
-	} catch {
-		return ''
-	}
-})()
 
 const formatDate = iso => {
 	const d = new Date(iso)
@@ -95,7 +88,7 @@ const KitobDetail = () => {
 	const categoryName = book?.category ? pickField(book.category, 'name', lang) : ''
 	const authorName = book?.author?.name ?? ''
 	const image = book?.book_thumbnails?.length
-		? `${import.meta.env.VITE_API_STORAGE_URL}/${book.book_thumbnails[0].file}`
+		? storageUrl(book.book_thumbnails[0].file)
 		: null
 	const priceLabel = book && Number(book.price) > 0
 		? `${Number(book.price).toLocaleString('uz-UZ')} ${t('components.coursesSection.uzs', "so'm")}`
@@ -103,7 +96,7 @@ const KitobDetail = () => {
 	const rating = book?.comments_count > 0 ? book.stars_sum / book.comments_count : 0
 	const filledStars = Math.round(rating)
 
-	const handleStart = () => window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
+	const handleStart = () => window.open(API_CABINET_URL, '_blank')
 
 	return (
 		<section style={{ width: '100%', background: 'rgba(var(--bg-rgb),1)', minHeight: '100vh', padding: '24px 16px 100px' }}>

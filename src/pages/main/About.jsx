@@ -11,10 +11,7 @@ import bg from '@/assets/bgImg/Vektor.svg'
 import glowImg from '@/assets/Glow (6).png'
 import instanIcon from '@/assets/logoInstat.png'
 import { Button } from '../../components/shared/Button'
-import sIconInsta from '@/assets/Major Brand Logos [1.1] (1).png'
-import sIconX from '@/assets/Major Brand Logos [1.1].png'
-import sIconFb from '@/assets/Vector (14).png'
-import sIconLn from '@/assets/Vector (15).png'
+import SocialLinks from '@/components/shared/SocialLinks'
 import { EASE_SMOOTH } from '../../constants/animations'
 import useSectionText from "@/hooks/useSectionText.js";
 
@@ -155,18 +152,7 @@ const About = () => {
                   color: 'rgba(153, 160, 174, 1)',
                   marginBottom: '12px',
                 }}>{t("pages.about.share_this_blog")}</p>
-                <div style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
-                  {[
-                    { src: sIconInsta, alt: 'Instagram' },
-                    { src: sIconX,     alt: 'X' },
-                    { src: sIconFb,    alt: 'Facebook' },
-                    { src: sIconLn,    alt: 'LinkedIn' },
-                  ].map(({ src, alt }) => (
-                    <div key={alt} style={{ width: 24, height: 24, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} loading='lazy' decoding='async' />
-                    </div>
-                  ))}
-                </div>
+                <SocialLinks />
               </div>
             </div>
           </aside>

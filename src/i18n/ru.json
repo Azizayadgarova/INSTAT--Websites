@@ -8,6 +8,7 @@
     "language": "Язык",
     "download": "Скачать",
     "openResource": "Перейти к ресурсу",
+    "redirecting": "Перенаправление на внешний ресурс...",
     "readMore": "Читать полностью",
     "collapse": "Свернуть",
     "watch": "Смотреть"
@@ -368,6 +369,10 @@
     "mediaServise": {
       "ortga": "Назад",
       "share_this_blog": "Поделиться"
+    },
+    "yangiliklar": {
+      "badge": "Новости",
+      "other": "Другие новости"
     },
     "science": {
       "ortga": "Назад",

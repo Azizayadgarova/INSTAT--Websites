@@ -8,6 +8,7 @@
 		"language": "Til",
 		"download": "Yuklab olish",
 		"openResource": "Resursga o‘tish",
+		"redirecting": "Tashqi resursga yo‘naltirilmoqda...",
 		"readMore": "To‘liq o‘qish",
 		"collapse": "Yopish",
 		"watch": "Ko‘rish"
@@ -293,7 +294,7 @@
 		},
 		"sidebarLayout": {
 			"ortga": "Ortga",
-			"share_this_blog": ""
+			"share_this_blog": "Ulashish"
 		}
 	},
 	"pages": {
@@ -360,18 +361,22 @@
 		"about": {
 			"ortga": "Ortga",
 			"head_line": "Каdrlаr malakasini oshirish va statistik tadqiqotlar instituti",
-			"share_this_blog": "",
+			"share_this_blog": "Ulashish",
 			"malumotlar_va_tahlil_ilmi": "\"Ma'lumotlar va tahlil ilmi\"",
 			"raqamli_talim_platformasi": "Raqamli ta'lim platformasi",
 			"talim_ilm_fan_va": "Ta'lim, ilm-fan va karyera uchun yagona raqamli platforma"
 		},
 		"mediaServise": {
 			"ortga": "Ortga",
-			"share_this_blog": ""
+			"share_this_blog": "Ulashish"
+		},
+		"yangiliklar": {
+			"badge": "Yangiliklar",
+			"other": "Boshqa yangiliklar"
 		},
 		"science": {
 			"ortga": "Ortga",
-			"share_this_blog": ""
+			"share_this_blog": "Ulashish"
 		}
 	},
 	"data": {

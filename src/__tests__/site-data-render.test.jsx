@@ -18,7 +18,12 @@ const API_SAMPLE = [
 	{ id: 94, module: 'micro_data', type: 'string', key: 'micro_data_region', label: 'Hududiy qamrov', value: '14', value_uz: '14' },
 ]
 
-vi.mock('../api/axios', () => ({ default: { get: vi.fn(() => Promise.resolve({ data: API_SAMPLE })) } }))
+vi.mock('../api/axios', () => ({
+	default: { get: vi.fn(() => Promise.resolve({ data: API_SAMPLE })) },
+	// info_resource alohida backend'dan keladi; bu testda asosiy namuna yetarli,
+	// bo'sh javob almashtirishni o'tkazib yuboradi (@/api/siteData.api).
+	infoResourceApi: { get: vi.fn(() => Promise.resolve({ data: [] })) },
+}))
 
 import { resetSiteDataCache } from '../api/siteData.api'
 import ContentPage from '../components/shared/ContentPage'

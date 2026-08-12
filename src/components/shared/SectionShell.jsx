@@ -1,12 +1,46 @@
 import { Link, NavLink, useOutlet } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Seo from './Seo'
+import SocialLinks from './SocialLinks'
+
+/** Sidebar qatori — ichki (NavLink) va tashqi (<a>) havolada bir xil ko'rinadi. */
+const renderRow = (link, isActive) => (
+	<div className='flex items-stretch'>
+		<span
+			aria-hidden='true'
+			style={{
+				width: 4,
+				minHeight: 40,
+				flexShrink: 0,
+				alignSelf: 'stretch',
+				borderRadius: isActive ? 999 : 0,
+				background: isActive ? 'rgba(74,144,226,1)' : 'rgba(34,37,48,1)',
+			}}
+		/>
+		<span
+			className='ml-2 w-full rounded px-3 py-2 text-[16px] leading-6 transition-colors duration-200'
+			style={{
+				color: isActive ? 'rgba(var(--cyan-rgb),1)' : '#fff',
+				fontWeight: isActive ? 600 : 500,
+				letterSpacing: '-0.02em',
+			}}
+		>
+			{link.name}
+		</span>
+	</div>
+)
 
 /**
  * Bo'lim sahifalari uchun umumiy qobiq: chapda sidebar, o'ngda <Outlet />.
  * Science / MediaServise / InfoResurses'da takrorlangan markup shu yerda birlashtirilgan.
+ *
+ * `links`: [{ path, name, href? }] — `href` berilsa qator tashqi saytga
+ * yangi oynada ochiladi (@/hooks/useExternalMenuLink).
+ *
+ * `showOutlet={false}` — bola marshrut o'rniga `children` ko'rsatiladi (tashqi
+ * resursga yo'naltirilayotgan sahifada kerak bo'ladi).
  */
-const SectionShell = ({ title, description, links = [], children }) => {
+const SectionShell = ({ title, description, links = [], showOutlet = true, children }) => {
 	const outlet = useOutlet()
 	const { t } = useTranslation()
 
@@ -35,41 +69,44 @@ const SectionShell = ({ title, description, links = [], children }) => {
 						<h1 className='mb-4 px-1 text-[22px] font-semibold text-white'>{title}</h1>
 
 						<nav aria-label={title} className='flex w-full flex-col self-start'>
-							{links.map(link => (
-								<NavLink key={link.path} to={link.path} style={{ textDecoration: 'none', display: 'block' }}>
-									{({ isActive }) => (
-										<div className='flex items-stretch'>
-											<span
-												aria-hidden='true'
-												style={{
-													width: 4,
-													minHeight: 40,
-													flexShrink: 0,
-													alignSelf: 'stretch',
-													borderRadius: isActive ? 999 : 0,
-													background: isActive ? 'rgba(74,144,226,1)' : 'rgba(34,37,48,1)',
-												}}
-											/>
-											<span
-												className='ml-2 w-full rounded px-3 py-2 text-[16px] leading-6 transition-colors duration-200'
-												style={{
-													color: isActive ? 'rgba(var(--cyan-rgb),1)' : '#fff',
-													fontWeight: isActive ? 600 : 500,
-													letterSpacing: '-0.02em',
-												}}
-											>
-												{link.name}
-											</span>
-										</div>
-									)}
-								</NavLink>
-							))}
+							{links.map(link =>
+								/* `href` — tashqi portal (admin panelda sozlanadi), o'z sahifasi yo'q,
+								   shuning uchun hech qachon "active" bo'lmaydi va yangi oynada ochiladi. */
+								link.href ? (
+									<a
+										key={link.path}
+										href={link.href}
+										target='_blank'
+										rel='noopener noreferrer'
+										style={{ textDecoration: 'none', display: 'block' }}
+										onClick={e => {
+											e.preventDefault()
+											window.open(link.href, '_blank', 'noopener,noreferrer')
+										}}
+									>
+										{renderRow(link, false)}
+									</a>
+								) : (
+									<NavLink key={link.path} to={link.path} style={{ textDecoration: 'none', display: 'block' }}>
+										{({ isActive }) => renderRow(link, isActive)}
+									</NavLink>
+								),
+							)}
 						</nav>
+
+						{/* Boshqa bo'lim sidebar'laridagi (About, Science, MediaServise) bilan
+						    bir xil "ulashish" bloki */}
+						<div className='mt-8 pl-1.5'>
+							<p className='mb-3 text-[16px] leading-7' style={{ color: 'rgba(153,160,174,1)' }}>
+								{t('components.sidebarLayout.share_this_blog')}
+							</p>
+							<SocialLinks />
+						</div>
 					</div>
 				</aside>
 
 				<main className='min-w-0 flex-1 pb-[60px] md:pl-[30px] md:pr-[60px]'>
-					{outlet ?? children}
+					{(showOutlet ? outlet : null) ?? children}
 				</main>
 			</div>
 		</div>

@@ -178,6 +178,9 @@ body {
 .instat-rich ul, .instat-rich ol { margin: 0 0 14px; padding-left: 22px; }
 .instat-rich li { margin-bottom: 8px; }
 .instat-rich a { color: rgba(var(--cyan-rgb),1); text-decoration: underline; }
+/* Quill matnining ichidagi rasmlar (backend ularni qat'iy width/height bilan
+   saqlaydi) kontentdan kengroq bo'lib ketmasin */
+.instat-rich img { max-width: 100%; height: auto; display: block; margin: 8px 0 16px; border-radius: 8px; }
 .instat-rich .ql-align-center { text-align: center; }
 .instat-rich .ql-align-justify { text-align: justify; }
 .instat-rich .ql-align-right { text-align: right; }
