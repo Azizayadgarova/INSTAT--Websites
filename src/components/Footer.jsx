@@ -6,6 +6,7 @@ import fotIcon1 from '@/assets/icons/fUwXkleZJbkDUDDvw93zVo3gnls.svg fill.png'
 import icon1 from '@/assets/icons/InstatIcon.png'
 import { memo, useEffect, useRef } from 'react'
 import {Link} from "react-router-dom";
+import useSectionText from "@/hooks/useSectionText.js";
 
 const HEADING = {
 	fontFamily: 'Inter Display, sans-serif',
@@ -38,7 +39,7 @@ const SUPPORT_KEYS = [
 	{ to: '/about/tuzilma',  key: 'biz_bilan_boglanish' },
 ]
 const HUQUQIY_KEYS = ['maxfiylik_siyosati', 'xizmat_shartlari', 'cookie_siyosati']
-const SOCIAL = [fotIcon1, fotIcon3, fotIcon2]
+
 
 const GlowText = memo(() => {
 	const containerRef = useRef(null)
@@ -132,6 +133,19 @@ const Footer = () => {
     const {
         t
     } = useTranslation();
+
+	const st = useSectionText('main')
+
+	const SOCIAL = [{
+		link: st('twitter'),
+		icon: fotIcon1
+	},{
+		link: st('linkedin'),
+		icon: fotIcon2
+	},{
+		link: st('instagram'),
+		icon: fotIcon3
+	},]
 
     const saytlar = SAYTLAR_PATHS.map(item => ({ to: item.to, label: t(`components.footer.${item.key}`) }))
     const support = SUPPORT_KEYS.map(key => t(`components.footer.${key.key}`))
@@ -250,16 +264,17 @@ const Footer = () => {
                         <p className='text-center md:text-left' style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>{t("components.footer.instat_inc_barcha_huquqlar")}</p>
                         <div className='flex gap-3'>
                             {SOCIAL.map((icon, i) => (
-                                <div
-                                    key={i}
-                                    className='w-10 h-10 rounded-xl flex items-center justify-center hover:opacity-80 transition'
+                                <a
+									href={icon.link}
+                                    key={i.icon}
+                                    className='w-10 h-10 rounded-xl flex items-center justify-center hover:opacity-80 transition cursor-pointer'
                                     style={{
                                         background:
                                             'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)',
                                     }}
                                 >
-                                    <img src={icon} alt='' className='w-5 h-5' loading='lazy' decoding='async' />
-                                </div>
+                                    <img src={icon.icon} alt='' className='w-5 h-5' loading='lazy' decoding='async' />
+                                </a>
                             ))}
                         </div>
                     </div>

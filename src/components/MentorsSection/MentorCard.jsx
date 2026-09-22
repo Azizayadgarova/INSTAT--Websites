@@ -237,9 +237,9 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 								transition={{ duration: 0.4, delay: 0.25, ease: EASE_SMOOTH }}
 								style={{ display: 'flex', justifyContent: 'center', gap: 15 }}
 							>
-								<a href='#' aria-label={t("components.mentorCard.instagram")} onClick={e => e.preventDefault()}><img src={insta} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
-								<a href='#' aria-label={t("components.mentorCard.facebook")} onClick={e => e.preventDefault()}><img src={facebook} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
-								<a href='#' aria-label={t("components.mentorCard.twitter")} onClick={e => e.preventDefault()}><img src={twitter} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>
+								{/*<a href='#' aria-label={t("components.mentorCard.instagram")} onClick={e => e.preventDefault()}><img src={insta} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>*/}
+								{/*<a href='#' aria-label={t("components.mentorCard.facebook")} onClick={e => e.preventDefault()}><img src={facebook} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>*/}
+								{/*<a href='#' aria-label={t("components.mentorCard.twitter")} onClick={e => e.preventDefault()}><img src={twitter} alt='' aria-hidden='true' width={24} height={24} loading='lazy' decoding='async' /></a>*/}
 							</motion.div>
 							</>
 						)}
