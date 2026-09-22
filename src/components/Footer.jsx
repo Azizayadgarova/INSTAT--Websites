@@ -134,7 +134,7 @@ const Footer = () => {
         t
     } = useTranslation();
 
-	const st = useSectionText('main')
+	const st = useSectionText('all')
 
 	const SOCIAL = [{
 		link: st('twitter'),
