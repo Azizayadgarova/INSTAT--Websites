@@ -22,6 +22,7 @@ import Text from './shared/Text'
 import Testimonial from './Testimonial'
 import AnimatedSection from './shared/AnimatedSection'
 import AsyncBoundary from './shared/AsyncBoundary'
+import useSectionText from "@/hooks/useSectionText.js";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -986,6 +987,7 @@ function useIsMobile(bp = 768) {
 function HeroSection() {
 	const { t } = useTranslation()
 	const isMobile = useIsMobile()
+	const st = useSectionText('article')
 
 	// Karusel geometriyasi CARDS.length ga bog'langan — kartochkalar soni
 	// o'zgarmaydi, API faqat matn va rasmni almashtiradi.
@@ -1243,9 +1245,9 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						{t('components.elektronJurnal.hero_sarlavha_1', 'Ilmiy jurnallar va maqolalar uchun')}
+						{ st('article_title1', t('components.elektronJurnal.hero_sarlavha_1', 'Ilmiy jurnallar va maqolalar uchun'))}
 						<br />
-						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{t('components.elektronJurnal.hero_sarlavha_2', 'yagona platforma')}</span>
+						<span style={{ color: 'rgba(var(--cyan-rgb),1)' }}>{st('article_title2',t('components.elektronJurnal.hero_sarlavha_2', 'yagona platforma'))}</span>
 					</h1>
 					<p
 						style={{
@@ -1258,7 +1260,7 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						{t('components.elektronJurnal.hero_tavsif', "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda.")}
+						{st('article_description',t('components.elektronJurnal.hero_tavsif', "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda."))}
 					</p>
 				</div>
 
