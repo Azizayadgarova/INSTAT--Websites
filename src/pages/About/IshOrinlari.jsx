@@ -114,46 +114,48 @@ const IshOrinlari = () => {
 						</div>
 
 						{/* Mobil: kartochkalar — tor ekranda jadval o'qib bo'lmaydi */}
-						<div className='md:hidden' style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-							{items.map(job => (
-								<div
-									key={job.id}
-									style={{
-										background: 'rgba(var(--card-rgb),1)',
-										border: '1px solid rgba(255,255,255,0.05)',
-										borderRadius: 14,
-										padding: '18px 20px',
-									}}
-								>
-									<p style={{ color: '#fff', fontSize: 16, fontWeight: 600, margin: '0 0 12px' }}>{job.title}</p>
-									<dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', rowGap: 8, columnGap: 12, margin: 0 }}>
-										{job.place && (
-											<>
-												<dt style={DT}>{t('pages.ishOrinlari.bolim')}</dt>
-												<dd style={DD}>{job.place}</dd>
-											</>
-										)}
-										{job.pay && (
-											<>
-												<dt style={DT}>{t('pages.ishOrinlari.ish_haqi')}</dt>
-												<dd style={DD}>{job.pay}{job.payIsAmount ? ` / ${t('components.ishOrinlariVakansiyalar.oy')}` : ''}</dd>
-											</>
-										)}
-										{job.shift && (
-											<>
-												<dt style={DT}>{t('pages.ishOrinlari.ish_tartibi')}</dt>
-												<dd style={DD}>{job.shift}</dd>
-											</>
-										)}
-										{job.desc && (
-											<>
-												<dt style={DT}>{t('pages.ishOrinlari.talablar')}</dt>
-												<dd style={DD}>{job.desc}</dd>
-											</>
-										)}
-									</dl>
-								</div>
-							))}
+						<div className='md:hidd lg:hidden xl:hidden'>
+							<div  style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+								{items.map(job => (
+									<div
+										key={job.id}
+										style={{
+											background: 'rgba(var(--card-rgb),1)',
+											border: '1px solid rgba(255,255,255,0.05)',
+											borderRadius: 14,
+											padding: '18px 20px',
+										}}
+									>
+										<p style={{ color: '#fff', fontSize: 16, fontWeight: 600, margin: '0 0 12px' }}>{job.title}</p>
+										<dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', rowGap: 8, columnGap: 12, margin: 0 }}>
+											{job.place && (
+												<>
+													<dt style={DT}>{t('pages.ishOrinlari.bolim')}</dt>
+													<dd style={DD}>{job.place}</dd>
+												</>
+											)}
+											{job.pay && (
+												<>
+													<dt style={DT}>{t('pages.ishOrinlari.ish_haqi')}</dt>
+													<dd style={DD}>{job.pay}{job.payIsAmount ? ` / ${t('components.ishOrinlariVakansiyalar.oy')}` : ''}</dd>
+												</>
+											)}
+											{job.shift && (
+												<>
+													<dt style={DT}>{t('pages.ishOrinlari.ish_tartibi')}</dt>
+													<dd style={DD}>{job.shift}</dd>
+												</>
+											)}
+											{job.desc && (
+												<>
+													<dt style={DT}>{t('pages.ishOrinlari.talablar')}</dt>
+													<dd style={DD}>{job.desc}</dd>
+												</>
+											)}
+										</dl>
+									</div>
+								))}
+							</div>
 						</div>
 					</>
 				)}
