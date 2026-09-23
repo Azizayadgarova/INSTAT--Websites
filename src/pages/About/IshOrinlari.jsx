@@ -14,6 +14,8 @@ const TH = {
 	textTransform: 'uppercase',
 	letterSpacing: '0.04em',
 	whiteSpace: 'nowrap',
+	border: '1px solid  rgba(255,255,255,0.05)',
+
 }
 
 const TD = {
@@ -23,6 +25,7 @@ const TD = {
 	color: '#fff',
 	lineHeight: 1.5,
 	verticalAlign: 'top',
+	border: '1px solid  rgba(255,255,255,0.05)',
 }
 
 const DT = {
@@ -89,7 +92,7 @@ const IshOrinlari = () => {
 										<tr
 											key={job.id}
 											style={{
-												borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+												border: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
 												transition: 'background .15s',
 											}}
 											onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)' }}
@@ -97,7 +100,7 @@ const IshOrinlari = () => {
 										>
 											<td style={{ ...TD, fontWeight: 600 }}>{job.title}</td>
 											<td style={{ ...TD, color: 'rgba(var(--muted-rgb),1)' }}>{job.place || '—'}</td>
-											<td style={{ ...TD, color: 'rgba(var(--cyan-rgb),1)', fontWeight: 500, whiteSpace: 'nowrap' }}>
+											<td style={{ ...TD, color: 'rgba(var(--cyan-rgb),1)', fontWeight: 500,}}>
 												{job.pay || '—'}
 												{job.payIsAmount && (
 													<span style={{ color: 'rgba(var(--muted-rgb),1)', fontWeight: 400 }}>
@@ -106,7 +109,7 @@ const IshOrinlari = () => {
 												)}
 											</td>
 											<td style={{ ...TD, color: 'rgba(var(--muted-rgb),1)' }}>{job.shift || '—'}</td>
-											<td style={{ ...TD, color: 'rgba(var(--muted-rgb),1)', maxWidth: 320 }}>{job.desc || '—'}</td>
+											<td style={{ ...TD, color: 'rgba(var(--muted-rgb),1)', maxWidth: 400 }}>{job.desc || '—'}</td>
 										</tr>
 									))}
 								</tbody>
