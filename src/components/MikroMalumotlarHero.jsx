@@ -20,6 +20,7 @@ export default function MikroMalumotlarHero() {
 	const title1 = pickLang(kv?.micro_data_title1, lang) || t("components.mikroMalumotlarHero.rasmiy_statistika_uchun")
 	const title2 = pickLang(kv?.micro_data_title2, lang) || t("components.mikroMalumotlarHero.raqamli_platforma")
 	const subtitle = pickLang(kv?.micro_data_description1, lang) || t("components.mikroMalumotlarHero.mikro_malumotlar_laboratoriyasi_foydalan")
+	const handleStart = () => window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
 
     return (
         <section style={{
@@ -91,6 +92,7 @@ export default function MikroMalumotlarHero() {
 							cursor: 'pointer', transition: 'transform .2s, filter .2s',
 							display: 'flex', alignItems: 'center', justifyContent: 'center',
 						}}
+						onClick={handleStart}
 						onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.07)'; e.currentTarget.style.filter = 'brightness(1.18)' }}
 						onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.filter = 'brightness(1)' }}
 					>{t("components.mikroMalumotlarHero.ariza_yuborish")}</RippleButton>
