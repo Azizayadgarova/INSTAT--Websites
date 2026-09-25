@@ -1,11 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
+import useSectionText from "@/hooks/useSectionText.js";
 
-const STATS = [
-	{ raw: 12000, display: '12 000', label: 'Maqolalar' },
-	{ raw: 150, display: '150', label: 'Jurnal' },
-	{ raw: 4000, display: '4 000', label: 'Mualliflar' },
-]
+
 
 function formatNum(n, hasSpace) {
 	if (!hasSpace) return String(n)
@@ -18,6 +15,7 @@ function StatItem({ stat, animate }) {
 	const [count, setCount] = useState(0)
 	const rafRef = useRef(null)
 	const hasSpace = stat.display.includes(' ')
+
 
 	useEffect(() => {
 		if (!animate) return
@@ -145,6 +143,13 @@ function StatItem({ stat, animate }) {
 }
 
 export default function JurnalStatistika() {
+	const st = useSectionText('article')
+
+	const STATS = [
+		{ raw: st('article_numbers'), display: st('article_numbers'), label: 'Maqolalar' },
+		{ raw: st('article_editions'), display: st('article_editions'), label: 'Jurnal' },
+		{ raw: st('article_authors'), display: st('article_authors'), label: 'Mualliflar' },
+	]
     const {
         t
     } = useTranslation();
