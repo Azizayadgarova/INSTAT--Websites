@@ -69,7 +69,7 @@ const IshOrinlari = () => {
 					<>
 						{/* Desktop: jadval */}
 						<div
-							className='hidden md:block'
+							className='hidden lg:hidden md:block'
 							style={{
 								background: 'rgba(var(--card-rgb),1)',
 								border: '1px solid rgba(255,255,255,0.05)',
@@ -117,7 +117,7 @@ const IshOrinlari = () => {
 						</div>
 
 						{/* Mobil: kartochkalar — tor ekranda jadval o'qib bo'lmaydi */}
-						<div className='md:hidd lg:hidden xl:hidden'>
+						<div className='md:hidden xl:hidden'>
 							<div  style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
 								{items.map(job => (
 									<div
