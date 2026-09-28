@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { editionsApi, editionArticlesApi } from '@/api/resources.api'
+import { editionsApi, editionArticlesApi, reviewsApi } from '@/api/resources.api'
 import { useApiResource } from '@/hooks/useApiResource'
 import { Button2 } from '@/components/shared/Button2'
 import AsyncBoundary from '@/components/shared/AsyncBoundary'
@@ -19,6 +20,13 @@ const formatDate = iso => {
 const DownloadIcon = () => (
 	<svg width='14' height='14' viewBox='0 0 24 24' fill='none'>
 		<path d='M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19h16' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+	</svg>
+)
+
+const PreviewIcon = () => (
+	<svg width='14' height='14' viewBox='0 0 24 24' fill='none'>
+		<path d='M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+		<circle cx='12' cy='12' r='3' stroke='currentColor' strokeWidth='2' />
 	</svg>
 )
 
@@ -48,6 +56,50 @@ const DownloadButton = ({ reviewId }) => {
 			<DownloadIcon />
 			{t('pages.jurnalDetail.yuklab_olish', 'Yuklab olish')}
 		</a>
+	)
+}
+
+const PreviewButton = ({ reviewId }) => {
+	const { t } = useTranslation()
+	const [loading, setLoading] = useState(false)
+
+	const handleClick = async () => {
+		if (loading) return
+		setLoading(true)
+		try {
+			const review = await reviewsApi.getById(reviewId)
+			if (review?.main_file) window.open(review.main_file, '_blank', 'noopener,noreferrer')
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	return (
+		<button
+			type='button'
+			onClick={handleClick}
+			disabled={loading}
+			style={{
+				display: 'inline-flex',
+				alignItems: 'center',
+				gap: '6px',
+				padding: '6px 12px',
+				borderRadius: '100px',
+				background: 'rgba(255,255,255,0.06)',
+				color: '#fff',
+				fontSize: '12px',
+				fontWeight: 500,
+				fontFamily: 'var(--font-display)',
+				border: 'none',
+				cursor: loading ? 'default' : 'pointer',
+				opacity: loading ? 0.6 : 1,
+				whiteSpace: 'nowrap',
+				flexShrink: 0,
+			}}
+		>
+			<PreviewIcon />
+			{t('pages.jurnalDetail.korish', 'Ko\'rish')}
+		</button>
 	)
 }
 
@@ -84,7 +136,12 @@ const ArticleRow = ({ article }) => {
 					)}
 				</div>
 			</div>
-			{review.id != null && <DownloadButton reviewId={review.id} />}
+			{review.id != null && (
+				<div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+					<PreviewButton reviewId={review.id} />
+					<DownloadButton reviewId={review.id} />
+				</div>
+			)}
 		</div>
 	)
 }
