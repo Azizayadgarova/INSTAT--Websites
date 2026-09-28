@@ -72,12 +72,11 @@ const IshOrinlari = () => {
 							className='hidden md:hidden sm:hidden lg:block xl:block'
 							style={{
 								background: 'rgba(var(--card-rgb),1)',
-								border: '1px solid rgba(255,255,255,0.05)',
-								borderRadius: 16,
-								overflow: 'hidden',
+								// border: '1px solid rgba(255,255,255,0.05)',
+								// borderRadius: 16,
 							}}
 						>
-							<table style={{ width: '100%', borderCollapse: 'collapse' }}>
+							<table style={{ width: '100%', borderCollapse: 'collapse',borderRadius: 16, }}>
 								<thead>
 									<tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
 										<th style={TH}>{t('pages.ishOrinlari.lavozim')}</th>
