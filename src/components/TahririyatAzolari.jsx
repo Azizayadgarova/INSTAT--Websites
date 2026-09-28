@@ -174,7 +174,7 @@ export default function TahririyatAzolari() {
 					<div style={{
 						position: 'relative',
 						width: '100%',
-						height: Math.round(Math.max(300, 500 * dimScale)),
+						height: Math.round(Math.max(400, 500 * dimScale * 1.1)),
 					}}>
 						<div
 							ref={trackRef}
