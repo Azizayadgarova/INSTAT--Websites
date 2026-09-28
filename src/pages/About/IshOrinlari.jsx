@@ -19,7 +19,7 @@ const TH = {
 }
 
 const TD = {
-	padding: '18px 20px',
+	padding: '12px 14px',
 	fontFamily: 'var(--font-display)',
 	fontSize: 14,
 	color: '#fff',
@@ -69,7 +69,7 @@ const IshOrinlari = () => {
 					<>
 						{/* Desktop: jadval */}
 						<div
-							className='hidden md:block'
+							className='hidden md:block sm:hidden'
 							style={{
 								background: 'rgba(var(--card-rgb),1)',
 								border: '1px solid rgba(255,255,255,0.05)',
