@@ -166,7 +166,7 @@ export default function TahririyatAzolari() {
 						fontWeight: 400, lineHeight: 1.65,
 						color: 'rgba(202,202,206,1)',
 						margin: '0 0 0',
-					}}>{t("components.tahririyatAzolari.platformada_chop_etilayotgan_yetakchi")}</p>
+					}}></p>
 				</div>
 
 				{/* Carousel */}
