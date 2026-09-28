@@ -206,7 +206,7 @@ const Tuzilma = () => {
                     }}
                 >{t("pages.tuzilma.kontakt")}</span>
             </div>
-            <div className='grid grid-cols-1 gap-6 md:grid-cols-1  xl:grid-cols-2'>
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-1  xl:grid-cols-1'>
                 {/* Card 1 */}
                 <div
                     style={{
