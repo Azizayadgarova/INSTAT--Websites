@@ -69,7 +69,7 @@ const IshOrinlari = () => {
 					<>
 						{/* Desktop: jadval */}
 						<div
-							className='hidden md:hidden sm:hidden'
+							className='hidden md:hidden sm:hidden lg:block xl:block'
 							style={{
 								background: 'rgba(var(--card-rgb),1)',
 								border: '1px solid rgba(255,255,255,0.05)',
