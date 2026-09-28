@@ -36,7 +36,7 @@ const MentorsSection = ({ variant }) => {
     const st = useSectionText('education')
     const st1 = useSectionText('main')
     const heading = isOnline
-		? splitHeading(st('education_title5'), t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan"), t('components.mentorsSection.organing', "o'rganing!"))
+		? { title: st('education_title5', t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")).split("/n")[0], highlight:  st('education_title5', t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")).split("/n")[1] }
 		: { title: st1('main_title5', t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")).split("/n")[0], highlight:  st1('main_title5', t("components.mentorsSection.sohasida_tajribali_mutaxassislar_bilan")).split("/n")[1] }
     const subtitleFallback = (
 		<>{t("components.mentorsSection.bizning_platforma_orqali_siz")}{' '}
