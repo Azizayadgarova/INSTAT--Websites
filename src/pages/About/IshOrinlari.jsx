@@ -117,7 +117,7 @@ const IshOrinlari = () => {
 						</div>
 
 						{/* Mobil: kartochkalar — tor ekranda jadval o'qib bo'lmaydi */}
-						<div className='md:hidden lg:hidden xl:hidden'>
+						<div className='md:hidd lg:hidden xl:hidden'>
 							<div  style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
 								{items.map(job => (
 									<div
