@@ -1232,7 +1232,7 @@ function HeroSection() {
 							: 'none',
 					}}
 				>
-					<Button text={t('components.elektronJurnal.platforma_haqida', 'Platforma haqida')} variant='dark' />
+					{/*<Button text={t('components.elektronJurnal.platforma_haqida', 'Platforma haqida')} variant='dark' />*/}
 					<h1
 						style={{
 							fontFamily: 'var(--font-display)',

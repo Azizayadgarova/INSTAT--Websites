@@ -50,9 +50,9 @@ export default function MikroMalumotlarHero() {
 				gap: '28px', zIndex: 10, position: 'relative',
 				maxWidth: '820px', width: '100%',
 			}}>
-				<div style={show(1)}>
-					<Button text={t('components.mikroMalumotlarHero.platforma_haqida', 'Platforma haqida')} variant='dark' />
-				</div>
+				{/*<div style={show(1)}>*/}
+				{/*	<Button text={t('components.mikroMalumotlarHero.platforma_haqida', 'Platforma haqida')} variant='dark' />*/}
+				{/*</div>*/}
 
 				<div style={show(2)}>
 					<h1 style={{

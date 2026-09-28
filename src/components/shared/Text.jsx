@@ -16,7 +16,7 @@ const Text = ({
 
 	return (
 		<div className='z-30 flex flex-col items-center px-4 sm:px-6 lg:px-0'>
-			<Button text={buttonText} variant={variant} />
+			{/*<Button text={buttonText} variant={variant} />*/}
 
 			<div className='text-center'>
 				<h1 className={`text_font pt-[15px] text-white md:text-[rgba(var(--text-rgb),1)] ${titleClassName}`} style={restTitleStyle}>
