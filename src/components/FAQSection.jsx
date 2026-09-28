@@ -76,6 +76,25 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 
     const leftItems = items.filter((_, i) => i % 2 === 0)
     const rightItems = items.filter((_, i) => i % 2 !== 0)
+	const module_faqs = [
+		{
+			key: "articles",
+			value: "elektron_jurnal",
+		},
+		{
+			key: "library",
+			value: "raqamli_kutubxona",
+		},
+		{
+			key: "micro_data",
+			value: "mikromalutmotlar",
+		},
+		{
+			key: "education",
+			value: "onlayn_kurslar",
+		},
+	]
+	const module_faq = module_faqs.find(item => item.key === module)?.value
 
     return (
         <div className='relative overflow-hidden bg-[rgba(var(--bg-rgb),1)]' style={{ contentVisibility: 'auto', containIntrinsicSize: '0 900px' }}>
@@ -99,7 +118,7 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 							subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
 							highlight=''
 							subtitle={
-								<>{t("components.fAQSection.platforma_va_onlayn_kurslar")}<br />{t("components.fAQSection.eng_kop_beriladigan_savollarga")}</>
+								<>{t(`components.fAQSection.platforma_va_${module_faq}`)}<br />{t("components.fAQSection.eng_kop_beriladigan_savollarga")}</>
 							}
 						/>
 					</AnimatedSection>

@@ -1374,7 +1374,7 @@ export default function ElektronJurnal() {
 			<MaqolaTalablari />
 			<TahririyatAzolari />
 			<JurnalStatistika />
-			<FAQSection hideParticles platformStyle module='articles' />
+			<FAQSection hideParticles module='articles' />
 			{/*<Testimonial
 				hideParticles
 				platformStyle

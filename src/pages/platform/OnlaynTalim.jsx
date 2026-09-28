@@ -453,7 +453,7 @@ export default function OnlaynTalim() {
 			</LazyLoad>
             <LazyLoad fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
 				<Suspense fallback={<div style={{ minHeight: '850px', background: 'rgba(var(--bg-rgb),1)' }} />}>
-					<FAQSection hideParticles platformStyle module='education' />
+					<FAQSection hideParticles module='education' />
 				</Suspense>
 			</LazyLoad>
         </div>
