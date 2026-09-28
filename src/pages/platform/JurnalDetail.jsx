@@ -54,8 +54,11 @@ const DownloadButton = ({ reviewId }) => {
 const ArticleRow = ({ article }) => {
 	const { t } = useTranslation()
 	const review = article.review ?? {}
-	const expert = review.expert ?? {}
-	const fullName = [expert.first_name, expert.last_name].filter(Boolean).join(' ') || t('pages.jurnalDetail.muallif', 'Muallif')
+	const authors = review.review_authors ?? []
+	const fullName = authors
+		.map(a => [a.first_name, a.last_name].filter(Boolean).join(' '))
+		.filter(Boolean)
+		.join(', ') || t('pages.jurnalDetail.muallif', 'Muallif')
 
 	return (
 		<div style={{ display: 'flex', gap: '12px', padding: '16px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
