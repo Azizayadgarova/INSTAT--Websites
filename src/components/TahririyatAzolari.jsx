@@ -142,18 +142,18 @@ export default function TahririyatAzolari() {
             <div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
 				{/* Header */}
 				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: 0 }}>
-					<div style={{
-						display: 'inline-flex', alignItems: 'center',
-						background: 'rgba(255,255,255,0.06)',
-						border: '1px solid rgba(255,255,255,0.1)',
-						borderRadius: '100px', padding: '5px 16px', marginBottom: '20px',
-					}}>
-						<span style={{
-							fontFamily: 'var(--font-display)',
-							fontSize: '13px', fontWeight: 500,
-							color: 'rgba(180,185,200,1)', letterSpacing: '0.02em',
-						}}>{t("components.tahririyatAzolari.hodimlar")}</span>
-					</div>
+					{/*<div style={{*/}
+					{/*	display: 'inline-flex', alignItems: 'center',*/}
+					{/*	background: 'rgba(255,255,255,0.06)',*/}
+					{/*	border: '1px solid rgba(255,255,255,0.1)',*/}
+					{/*	borderRadius: '100px', padding: '5px 16px', marginBottom: '20px',*/}
+					{/*}}>*/}
+					{/*	<span style={{*/}
+					{/*		fontFamily: 'var(--font-display)',*/}
+					{/*		fontSize: '13px', fontWeight: 500,*/}
+					{/*		color: 'rgba(180,185,200,1)', letterSpacing: '0.02em',*/}
+					{/*	}}>{t("components.tahririyatAzolari.hodimlar")}</span>*/}
+					{/*</div>*/}
 
 					<h2 className='text-[32px] md:text-[48px] px-4 md:px-0' style={{
 						fontFamily: 'var(--font-display)',
