@@ -23,6 +23,7 @@ import Testimonial from './Testimonial'
 import AnimatedSection from './shared/AnimatedSection'
 import AsyncBoundary from './shared/AsyncBoundary'
 import useSectionText from "@/hooks/useSectionText.js";
+import {API_CABINET_URL} from "@/config/api.js";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -1199,6 +1200,10 @@ function HeroSection() {
 		e.currentTarget?.releasePointerCapture?.(e.pointerId)
 	}, [])
 
+	function handleLogin()
+	{
+		window.open(API_CABINET_URL, '_blank')
+	}
 	return (
 		<section
 			ref={sectionRef}
@@ -1347,6 +1352,7 @@ function HeroSection() {
 							e.currentTarget.style.opacity = '1'
 							e.currentTarget.style.transform = 'scale(1)'
 						}}
+						onClick={handleLogin}
 					>
 						{t('components.elektronJurnal.maqola_yuborish', 'Maqola yuborish')}
 						<svg width='18' height='18' viewBox='0 0 24 24' fill='none'>
