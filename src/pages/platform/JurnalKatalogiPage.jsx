@@ -18,6 +18,7 @@ import {
 	toSection,
 	SEARCH_DEBOUNCE_MS,
 } from '../../components/ElektronJurnal'
+import useSectionText from "@/hooks/useSectionText.js";
 
 const JurnalKatalogiPage = () => {
 	const { t } = useTranslation()
@@ -67,6 +68,7 @@ const JurnalKatalogiPage = () => {
 	})
 	const totalPages = Math.max(1, data?.meta?.last_page ?? 1)
 	const totalCount = data?.meta?.total ?? 0
+	const st = useSectionText('article')
 
 	return (
 		<section
@@ -130,7 +132,7 @@ const JurnalKatalogiPage = () => {
 						letterSpacing: '-0.02em',
 					}}
 				>
-					{t('pages.jurnalKatalogiPage.nufuzli_jurnallar_va_songgi_nashrlar', "Nufuzli jurnallar va so'nggi nashrlar")}
+					{st('article_title3', t('pages.jurnalKatalogiPage.nufuzli_jurnallar_va_songgi_nashrlar', "Nufuzli jurnallar va so'nggi nashrlar"))}
 				</h1>
 
 				<p
@@ -144,7 +146,7 @@ const JurnalKatalogiPage = () => {
 						margin: 0,
 					}}
 				>
-					{t('pages.jurnalKatalogiPage.platformada_chop_etilayotgan_yetakchi', 'Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.')}
+					{st('article_description3', t('pages.jurnalKatalogiPage.nufuzli_jurnallar_va_songgi_nashrlar', "Nufuzli jurnallar va so'nggi nashrlar"))}
 				</p>
 			</div>
 

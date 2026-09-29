@@ -527,6 +527,7 @@ function JurnallarSection() {
 		const j = toEdition(e)
 		return { ...j, img: j.img || COVERS[i % COVERS.length] }
 	})
+	const st = useSectionText('article')
 
 	return (
 		<section
@@ -574,7 +575,7 @@ function JurnallarSection() {
 							letterSpacing: '-0.02em',
 						}}
 					>
-						{t('components.elektronJurnal.nufuzli_jurnallar_sarlavha', "Nufuzli jurnallar va so'nggi nashrlar")}
+						{st('article_title3', t('pages.jurnalKatalogiPage.nufuzli_jurnallar_va_songgi_nashrlar', "Nufuzli jurnallar va so'nggi nashrlar"))}
 					</h2>
 
 					<p
@@ -588,7 +589,7 @@ function JurnallarSection() {
 							margin: 0,
 						}}
 					>
-						{t('components.elektronJurnal.nufuzli_jurnallar_tavsif', 'Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.')}
+						{st('article_description3', t('pages.jurnalKatalogiPage.nufuzli_jurnallar_va_songgi_nashrlar', "Nufuzli jurnallar va so'nggi nashrlar"))}
 					</p>
 				</div>
 			</AnimatedSection>
@@ -1265,7 +1266,7 @@ function HeroSection() {
 							margin: 0,
 						}}
 					>
-						{st('article_description',t('components.elektronJurnal.hero_tavsif', "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda."))}
+						{st('article_description1',t('components.elektronJurnal.hero_tavsif', "Recenzentdan o'tgan ilmiy maqolalar, nufuzli jurnallar va xalqaro standartlarga mos nashr imkoniyatlari — barchasi bir joyda."))}
 					</p>
 				</div>
 

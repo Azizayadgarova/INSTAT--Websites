@@ -1,6 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import useSectionText from "@/hooks/useSectionText.js";
+import i18n from "i18next";
+import useSectionStats from "@/hooks/useSectionStats.js";
+import useSectionLabel from "@/hooks/useSectionLabel.js";
 
 
 
@@ -144,13 +147,14 @@ function StatItem({ stat, animate }) {
 
 export default function JurnalStatistika() {
 	const st = useSectionText('article')
+	const st2 = useSectionLabel('article')
 
 	const STATS = [
-		{ raw: st('article_numbers'), display: st('article_numbers'), label: 'Maqolalar' },
-		{ raw: st('article_editions'), display: st('article_editions'), label: 'Jurnal' },
-		{ raw: st('article_authors'), display: st('article_authors'), label: 'Mualliflar' },
+		{ raw: st('article_numbers'), display: st('article_numbers'), label: st2('article_numbers') },
+		{ raw: st('article_editions'), display: st('article_editions'), label: st2('article_editions') },
+		{ raw: st('article_authors'), display: st('article_authors'), label: st2('article_authors') },
 	]
-    const {
+	const {
         t
     } = useTranslation();
 
@@ -197,7 +201,7 @@ export default function JurnalStatistika() {
 						transition: 'opacity 0.5s ease, transform 0.5s ease',
 					}}
 				>{t("components.jurnalStatistika.statistik_blok")}</p>
-
+				<div></div>
 				<div className='grid grid-cols-1 md:grid-cols-3 md:gap-[42px]'>
 					{STATS.map((s, i) => (
 						<div

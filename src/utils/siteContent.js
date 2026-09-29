@@ -8,6 +8,13 @@ export const pickLang = (item, lang) => {
 	const v = byLang != null && String(byLang).trim() ? byLang : item.value
 	return (v ?? '').toString().trim()
 }
+export const pickLangLabel = (item, lang) => {
+	if (!item) return ''
+	const byLang = item[`label_${lang}`]
+	const v = byLang != null && String(byLang).trim() ? byLang : item.label
+	return (v ?? '').toString().trim()
+}
+
 
 /** link: value=URL, value_<lang>=matn */
 export const pickLink = (item, lang) => ({
