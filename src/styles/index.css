@@ -184,6 +184,9 @@ body {
 .instat-rich .ql-align-center { text-align: center; }
 .instat-rich .ql-align-justify { text-align: justify; }
 .instat-rich .ql-align-right { text-align: right; }
+.instat-rich table { width: 100%; border-collapse: collapse; margin: 0 0 16px; }
+.instat-rich th, .instat-rich td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; }
+.instat-rich th { font-weight: 600; background-color: rgba(255,255,255,0.06) !important; }
 
 /* --- Gradient sarlavha (Figma: Gradient/Text/Heading) --- */
 /* --- Gradient sarlavha (Figma: Gradient/Text/Heading) --- */

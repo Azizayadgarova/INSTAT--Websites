@@ -27,6 +27,17 @@ export const menuConfig = {
 			'statistika-agentligi',
 		],
 	},
+	oquvFaoliyati: {
+		base: '/oquv-faoliyati',
+		paths: [
+			'qayta-tayyorlash-dasturi',
+			'oquv-kurslari-jadvali',
+			'qayta-tayyorlash-rejasi',
+			'oquv-uslubiy-materiallar',
+			'dastur-bajarilishi',
+			'dars-jadvallari',
+		],
+	},
 	science: {
 		base: '/science',
 		paths: ['ilmiy-tadqiqot', 'oliy-talim'],

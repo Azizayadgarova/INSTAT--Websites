@@ -40,6 +40,15 @@
       "ochiq-malumotlar": "Open data portal",
       "statistika-agentligi": "Methodological materials of the Statistics Agency"
     },
+    "oquvFaoliyati": {
+      "title": "Educational Activities",
+      "qayta-tayyorlash-dasturi": "Retraining and Advanced Training Program",
+      "oquv-kurslari-jadvali": "Course Schedule",
+      "qayta-tayyorlash-rejasi": "Retraining and Advanced Training Plan",
+      "oquv-uslubiy-materiallar": "Study and Methodological Materials",
+      "dastur-bajarilishi": "Implementation of the Retraining and Advanced Training Program",
+      "dars-jadvallari": "Class Schedule"
+    },
     "science": {
       "title": "Science",
       "ilmiy-tadqiqot": "Research programme",

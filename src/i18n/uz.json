@@ -40,6 +40,15 @@
 			"ochiq-malumotlar": "Ochiq ma’lumotlar portali",
 			"statistika-agentligi": "Statistika agentligining uslubiy materiallari"
 		},
+		"oquvFaoliyati": {
+			"title": "O'quv faoliyati",
+			"qayta-tayyorlash-dasturi": "Qayta tayyorlash va malaka oshirish dasturi",
+			"oquv-kurslari-jadvali": "O'quv kurslarini o'tkazish jadvali",
+			"qayta-tayyorlash-rejasi": "Qayta tayyorlash va malaka oshirish rejasi",
+			"oquv-uslubiy-materiallar": "O'quv uslubiy materiallar",
+			"dastur-bajarilishi": "Qayta tayyorlash va malaka oshirish dasturining bajarilishi",
+			"dars-jadvallari": "Dars jadvallari"
+		},
 		"science": {
 			"title": "Ilm-fan",
 			"ilmiy-tadqiqot": "Ilmiy tadqiqot dasturi",

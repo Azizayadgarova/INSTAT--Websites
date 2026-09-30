@@ -41,6 +41,15 @@ const RoyhatgaOlish = lazy(() => import('../pages/Axborot/RoyhatgaOlish'))
 const StatistikaAgentligi = lazy(() => import('../pages/Axborot/StatistikaAgentligi'))
 const InfoResurses = lazy(() => import('../pages/main/InfoResurses'))
 
+// O'quv faoliyati pages
+const OquvFaoliyati = lazy(() => import('../pages/main/OquvFaoliyati'))
+const OquvFaoliyatiSection = lazy(() => import('../pages/main/OquvFaoliyatiSection'))
+const QaytaTayyorlashDasturi = lazy(() => import('../pages/OquvFaoliyat/QaytaTayyorlashDasturi'))
+const OquvKurslariJadvali = lazy(() => import('../pages/OquvFaoliyat/OquvKurslariJadvali'))
+const QaytaTayyorlashRejasi = lazy(() => import('../pages/OquvFaoliyat/QaytaTayyorlashRejasi'))
+const DarsJadvallari = lazy(() => import('../pages/OquvFaoliyat/DarsJadvallari'))
+const DasturBajarilishi = lazy(() => import('../pages/OquvFaoliyat/DasturBajarilishi'))
+
 // Ilm-Fan pages
 const IlmiyTadqiqot = lazy(() => import('../pages/IlmFan/IlmiyTadqiqot'))
 const OliyTalim = lazy(() => import('../pages/IlmFan/OliyTalim'))
@@ -103,6 +112,20 @@ export const routes = [
 					{ path: 'rivojlanish-maqsadlari', element: s(RivojlanishMaqsadlari) },
 					{ path: 'royhatga-olish', element: s(RoyhatgaOlish) },
 					{ path: 'statistika-agentligi', element: s(StatistikaAgentligi) },
+				],
+			},
+
+			// O'quv faoliyati routes
+			{
+				path: 'oquv-faoliyati',
+				element: s(OquvFaoliyati),
+				children: [
+					{ path: 'qayta-tayyorlash-dasturi', element: s(QaytaTayyorlashDasturi) },
+					{ path: 'oquv-kurslari-jadvali', element: s(OquvKurslariJadvali) },
+					{ path: 'qayta-tayyorlash-rejasi', element: s(QaytaTayyorlashRejasi) },
+					{ path: 'dars-jadvallari', element: s(DarsJadvallari) },
+					{ path: 'dastur-bajarilishi', element: s(DasturBajarilishi) },
+					{ path: ':section', element: s(OquvFaoliyatiSection) },
 				],
 			},
 

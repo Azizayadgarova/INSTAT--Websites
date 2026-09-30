@@ -40,6 +40,15 @@
       "ochiq-malumotlar": "Портал открытых данных",
       "statistika-agentligi": "Методические материалы Агентства статистики"
     },
+    "oquvFaoliyati": {
+      "title": "Учебная деятельность",
+      "qayta-tayyorlash-dasturi": "Программа переподготовки и повышения квалификации",
+      "oquv-kurslari-jadvali": "График проведения учебных курсов",
+      "qayta-tayyorlash-rejasi": "План переподготовки и повышения квалификации",
+      "oquv-uslubiy-materiallar": "Учебно-методические материалы",
+      "dastur-bajarilishi": "Исполнение программы переподготовки и повышения квалификации",
+      "dars-jadvallari": "Расписание занятий"
+    },
     "science": {
       "title": "Наука",
       "ilmiy-tadqiqot": "Программа научных исследований",
