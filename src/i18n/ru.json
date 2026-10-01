@@ -547,6 +547,27 @@
       "platformada_chop_etilayotgan_yetakchi": "Ознакомьтесь с ведущими научными журналами, публикуемыми на платформе, и их новейшими выпусками.",
       "bu_qidiruv_boyicha_jurnal_topilmadi": "По данному запросу журналы не найдены"
     },
+    "maqolaDetail": {
+      "orqaga": "Назад",
+      "til": "Язык",
+      "annotatsiya": "Аннотация",
+      "kalit_sozlar": "Ключевые слова",
+      "kalit_soz": "Ключевое слово",
+      "faylni_ochish": "Открыть файл статьи",
+      "yangi_tabda": "Открыть в новой вкладке",
+      "yopish": "Закрыть",
+      "muallif_maqolalari": "Другие статьи автора",
+      "muallif_maqolalari_yoq": "Других статей автора нет",
+      "oxshash_maqolalar": "Похожие статьи",
+      "oxshash_maqolalar_yoq": "Похожие статьи не найдены",
+      "maqola_topilmadi": "Статьи не найдены",
+      "iqtibos": "Цитировать",
+      "iqtibos_tooltip": "Цитировать",
+      "iqtibos_yoq": "Цитата не найдена",
+      "iqtibos_xato": "Не удалось получить цитату",
+      "nusxalash": "Копировать",
+      "nusxalandi": "Скопировано"
+    },
     "jurnalDetail": {
       "yuklab_olish": "Скачать",
       "korish": "Просмотр",
