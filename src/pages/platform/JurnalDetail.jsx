@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { editionsApi, editionArticlesApi, reviewsApi } from '@/api/resources.api'
+import { editionsApi, editionArticlesApi } from '@/api/resources.api'
 import { useApiResource } from '@/hooks/useApiResource'
 import { Button2 } from '@/components/shared/Button2'
 import AsyncBoundary from '@/components/shared/AsyncBoundary'
@@ -61,24 +60,12 @@ const DownloadButton = ({ reviewId }) => {
 
 const PreviewButton = ({ reviewId }) => {
 	const { t } = useTranslation()
-	const [loading, setLoading] = useState(false)
-
-	const handleClick = async () => {
-		if (loading) return
-		setLoading(true)
-		try {
-			const review = await reviewsApi.getById(reviewId)
-			if (review?.main_file) window.open(review.main_file, '_blank', 'noopener,noreferrer')
-		} finally {
-			setLoading(false)
-		}
-	}
+	const navigate = useNavigate()
 
 	return (
 		<button
 			type='button'
-			onClick={handleClick}
-			disabled={loading}
+			onClick={() => navigate(`/platform/maqola/${reviewId}`)}
 			style={{
 				display: 'inline-flex',
 				alignItems: 'center',
@@ -91,8 +78,7 @@ const PreviewButton = ({ reviewId }) => {
 				fontWeight: 500,
 				fontFamily: 'var(--font-display)',
 				border: 'none',
-				cursor: loading ? 'default' : 'pointer',
-				opacity: loading ? 0.6 : 1,
+				cursor: 'pointer',
 				whiteSpace: 'nowrap',
 				flexShrink: 0,
 			}}
