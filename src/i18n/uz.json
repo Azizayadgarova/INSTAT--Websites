@@ -555,6 +555,27 @@
 			"platformada_chop_etilayotgan_yetakchi": "Platformada chop etilayotgan yetakchi ilmiy jurnallar hamda ularning eng yangi sonlari bilan tanishing.",
 			"bu_qidiruv_boyicha_jurnal_topilmadi": "Bu qidiruv bo'yicha jurnal topilmadi"
 		},
+		"maqolaDetail": {
+			"orqaga": "Orqaga",
+			"til": "Til",
+			"annotatsiya": "Annotatsiya",
+			"kalit_sozlar": "Kalit so'zlar",
+			"kalit_soz": "Kalit so'z",
+			"faylni_ochish": "Maqola faylini ochish",
+			"yangi_tabda": "Yangi tabda ochish",
+			"yopish": "Yopish",
+			"muallif_maqolalari": "Muallifning boshqa maqolalari",
+			"muallif_maqolalari_yoq": "Muallifning boshqa maqolalari yo'q",
+			"oxshash_maqolalar": "O'xshash maqolalar",
+			"oxshash_maqolalar_yoq": "O'xshash maqolalar topilmadi",
+			"maqola_topilmadi": "Maqolalar topilmadi",
+			"iqtibos": "Iqtibos keltirish",
+			"iqtibos_tooltip": "Iqtibos keltirish",
+			"iqtibos_yoq": "Iqtibos topilmadi",
+			"iqtibos_xato": "Iqtibosni olishda xatolik yuz berdi",
+			"nusxalash": "Nusxalash",
+			"nusxalandi": "Nusxalandi"
+		},
 		"jurnalDetail": {
 			"yuklab_olish": "Yuklab olish",
 			"korish": "Ko'rish",

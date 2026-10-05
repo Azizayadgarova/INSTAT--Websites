@@ -17,6 +17,8 @@ const BoshIshOrinlariPage  = lazy(() => import('../pages/platform/BoshIshOrinlar
 const KursDetail           = lazy(() => import('../pages/platform/KursDetail'))
 const KurslarKatalogiPage  = lazy(() => import('../pages/platform/KurslarKatalogiPage'))
 const JurnalDetail         = lazy(() => import('../pages/platform/JurnalDetail'))
+const MaqolaDetail         = lazy(() => import('../pages/platform/MaqolaDetail'))
+const MaqolalarKeywordPage = lazy(() => import('../pages/platform/MaqolalarKeywordPage'))
 const NashrDetail          = lazy(() => import('../pages/platform/NashrDetail'))
 const KitobDetail          = lazy(() => import('../pages/platform/KitobDetail'))
 
@@ -172,6 +174,8 @@ export const routes = [
 			{ path: 'elektron-jurnal',     element: s(ElektronJurnalPage) },
 			{ path: 'jurnal-katalogi',     element: s(JurnalKatalogiPage) },
 			{ path: 'jurnal/:id',          element: s(JurnalDetail) },
+			{ path: 'maqola/:id',          element: s(MaqolaDetail) },
+			{ path: 'maqolalar',           element: s(MaqolalarKeywordPage) },
 			{ path: 'mikro-malumotlar',    element: s(MikroMalumotlarPage) },
 			{ path: 'mikro-malumotlar-katalogi', element: s(MikroMalumotlarKatalogiPage) },
 			{ path: 'nashr/:id',           element: s(NashrDetail) },

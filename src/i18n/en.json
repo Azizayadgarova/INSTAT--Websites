@@ -555,6 +555,27 @@
       "platformada_chop_etilayotgan_yetakchi": "Explore the leading scientific journals published on the platform and their latest issues.",
       "bu_qidiruv_boyicha_jurnal_topilmadi": "No journals found for this search"
     },
+    "maqolaDetail": {
+      "orqaga": "Back",
+      "til": "Language",
+      "annotatsiya": "Abstract",
+      "kalit_sozlar": "Keywords",
+      "kalit_soz": "Keyword",
+      "faylni_ochish": "Open article file",
+      "yangi_tabda": "Open in new tab",
+      "yopish": "Close",
+      "muallif_maqolalari": "Other articles by the author",
+      "muallif_maqolalari_yoq": "No other articles by this author",
+      "oxshash_maqolalar": "Similar articles",
+      "oxshash_maqolalar_yoq": "No similar articles found",
+      "maqola_topilmadi": "No articles found",
+      "iqtibos": "Cite",
+      "iqtibos_tooltip": "Cite",
+      "iqtibos_yoq": "Citation not found",
+      "iqtibos_xato": "Failed to get the citation",
+      "nusxalash": "Copy",
+      "nusxalandi": "Copied"
+    },
     "jurnalDetail": {
       "yuklab_olish": "Download",
       "korish": "Preview",

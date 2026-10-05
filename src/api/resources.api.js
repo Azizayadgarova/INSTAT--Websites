@@ -129,7 +129,16 @@ export const academicDegreesApi = createResourceApi('academic-degrees')
 // --- Jurnal / nashr tizimi ----------------------------------------------
 export const articleTypesApi = createResourceApi('article-types')
 export const journalSectionsApi = createResourceApi('journal-sections')
-export const reviewsApi = createResourceApi('reviews')
+const flatList = data => (Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []))
+export const reviewsApi = {
+	...createResourceApi('reviews'),
+	/** Iqtibos matni — POST /reviews/{id}/quote/ → { text } */
+	quote: async id => (await api.post(`/reviews/${id}/quote/`)).data,
+	/** Muallifning boshqa maqolalari — /reviews/{id}/by-author/ */
+	getByAuthor: async id => flatList((await api.get(`/reviews/${id}/by-author/`)).data),
+	/** O'xshash (shu bo'limdagi) maqolalar — /reviews/{id}/by-section/ */
+	getBySection: async id => flatList((await api.get(`/reviews/${id}/by-section/`)).data),
+}
 export const reviewAuthorsApi = createResourceApi('review-authors')
 /**
  * DIQQAT: ro'yxat uchun GET /editions/ emas — /editions/items/active/ ishlatiladi
