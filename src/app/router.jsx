@@ -49,6 +49,7 @@ const OquvKurslariJadvali = lazy(() => import('../pages/OquvFaoliyat/OquvKurslar
 const QaytaTayyorlashRejasi = lazy(() => import('../pages/OquvFaoliyat/QaytaTayyorlashRejasi'))
 const DarsJadvallari = lazy(() => import('../pages/OquvFaoliyat/DarsJadvallari'))
 const DasturBajarilishi = lazy(() => import('../pages/OquvFaoliyat/DasturBajarilishi'))
+const OquvUslubiyMateriallar = lazy(() => import('../pages/OquvFaoliyat/OquvUslubiyMateriallar'))
 
 // Ilm-Fan pages
 const IlmiyTadqiqot = lazy(() => import('../pages/IlmFan/IlmiyTadqiqot'))
@@ -124,6 +125,7 @@ export const routes = [
 					{ path: 'oquv-kurslari-jadvali', element: s(OquvKurslariJadvali) },
 					{ path: 'qayta-tayyorlash-rejasi', element: s(QaytaTayyorlashRejasi) },
 					{ path: 'dars-jadvallari', element: s(DarsJadvallari) },
+					{ path: 'oquv-uslubiy-materiallar', element: s(OquvUslubiyMateriallar) },
 					{ path: 'dastur-bajarilishi', element: s(DasturBajarilishi) },
 					{ path: ':section', element: s(OquvFaoliyatiSection) },
 				],

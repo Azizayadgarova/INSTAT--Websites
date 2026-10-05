@@ -73,3 +73,5 @@ export const siteCorruptionDocsApi = createResourceApi('site-corruption-docs')
 export const siteCorruptionWorksApi = createResourceApi('site-corruption-works')
 /** DOC — dars jadvallari (o'quv faoliyati) */
 export const siteLessonDocsApi = createResourceApi('site-lesson-docs')
+/** DOC — o'quv uslubiy materiallar (o'quv faoliyati) */
+export const siteEducationMaterialsApi = createResourceApi('site-education-materials')

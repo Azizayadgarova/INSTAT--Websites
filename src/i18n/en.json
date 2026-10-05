@@ -13,6 +13,14 @@
     "collapse": "Collapse",
     "watch": "Watch"
   },
+  "eduMaterials": {
+    "education_plan_file": "Curriculum",
+    "education_program_file": "Syllabus",
+    "working_education_plan_file": "Working curriculum",
+    "working_education_program_file": "Working syllabus",
+    "lecture_file": "Lectures",
+    "tests_file": "Tests"
+  },
   "error": {
     "title": "Something went wrong",
     "text": "An unexpected error occurred while loading the page. Please try reloading.",

@@ -13,6 +13,14 @@
 		"collapse": "Yopish",
 		"watch": "Ko‘rish"
 	},
+	"eduMaterials": {
+		"education_plan_file": "O'quv reja",
+		"education_program_file": "O'quv dastur",
+		"working_education_plan_file": "Ishchi o'quv reja",
+		"working_education_program_file": "Ishchi o'quv dastur",
+		"lecture_file": "Ma'ruzalar",
+		"tests_file": "Testlar"
+	},
 	"error": {
 		"title": "Xatolik yuz berdi",
 		"text": "Sahifani yuklashda kutilmagan xatolik yuz berdi. Sahifani yangilab ko‘ring.",

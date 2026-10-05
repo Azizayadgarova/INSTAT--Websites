@@ -200,6 +200,26 @@ export const toDoc = (item, lang) => ({
 })
 
 /**
+ * EDUCATION MATERIAL: title_*, va 6 ta fayl maydoni — /api/site-education-materials/
+ * Fayl maydonlari (null bo'lishi mumkin) `EDUCATION_MATERIAL_FILES` tartibida
+ * `files` ga yig'iladi; bo'sh (yuklanmagan) fayllar tushirib qoldiriladi.
+ */
+export const EDUCATION_MATERIAL_FILES = [
+	'education_plan_file',
+	'education_program_file',
+	'working_education_plan_file',
+	'working_education_program_file',
+	'lecture_file',
+	'tests_file',
+]
+
+export const toEducationMaterial = (item, lang) => ({
+	id: item.id,
+	title: pickI18n(item, 'title', lang),
+	files: EDUCATION_MATERIAL_FILES.filter(key => item[key]).map(key => ({ key, url: item[key] })),
+})
+
+/**
  * VIDEO: link, label_* — /api/site-corruption-videos/items/all/
  * `link` — YouTube va h.k. havolasi (backendda hozir test qiymati bor).
  */

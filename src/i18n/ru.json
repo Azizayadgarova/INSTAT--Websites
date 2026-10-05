@@ -13,6 +13,14 @@
     "collapse": "Свернуть",
     "watch": "Смотреть"
   },
+  "eduMaterials": {
+    "education_plan_file": "Учебный план",
+    "education_program_file": "Учебная программа",
+    "working_education_plan_file": "Рабочий учебный план",
+    "working_education_program_file": "Рабочая учебная программа",
+    "lecture_file": "Лекции",
+    "tests_file": "Тесты"
+  },
   "error": {
     "title": "Произошла ошибка",
     "text": "При загрузке страницы возникла непредвиденная ошибка. Попробуйте обновить страницу.",
