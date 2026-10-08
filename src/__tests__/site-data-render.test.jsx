@@ -3,7 +3,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-// Haqiqiy API javobiga o'xshash namuna (test.avacoder.uz dan)
+// Haqiqiy API javobiga o'xshash namuna (api1.instat.uz dan)
 const API_SAMPLE = [
 	{ id: 17, module: 'about', type: 'string', key: 'about', value: '<p>To\'liq nomi - Institut</p>', value_uz: '<p>Umumiy malumot matni</p>', value_ru: null, value_en: null },
 	{ id: 19, module: 'hotel', type: 'string', key: 'hotel_text', value: '<p>YOTOQXONA NIZOMI matni</p>', value_uz: null, value_ru: null, value_en: null, path: 'https://x/nizom.pdf' },

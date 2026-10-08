@@ -149,7 +149,7 @@ const Footer = () => {
 
     const saytlar = SAYTLAR_PATHS.map(item => ({ to: item.to, label: t(`components.footer.${item.key}`) }))
     const support = SUPPORT_KEYS.map(key => t(`components.footer.${key.key}`))
-    const huquqiy = HUQUQIY_KEYS.map(key => t(`components.footer.${key}`))
+    const huquqiy = HUQUQIY_KEYS.map(key => ({ key, label: t(`components.footer.${key}`) }))
 
     return (
         <footer className='relative overflow-hidden' style={{ background: 'rgba(var(--bg-rgb),1)' }}>
@@ -240,11 +240,11 @@ const Footer = () => {
                         >
                             {huquqiy.map(item => (
                                 <li
-                                    key={item}
+                                    key={item.key}
                                     style={LINK}
                                     className='text-center md:text-left hover:text-white transition'
                                 >
-                                    {item}
+                                    {item.label}
                                 </li>
                             ))}
                         </ul>
