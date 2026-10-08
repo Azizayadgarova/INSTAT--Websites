@@ -3,7 +3,15 @@ import ContentPage from '@/components/shared/ContentPage'
 
 const Page = () => {
 	const { t } = useTranslation()
-	return <ContentPage module='odob' contentKey='odob' title={t('menu.about.odob-axloq')} showLabels previewable />
+	return (
+		<ContentPage
+			module='science'
+			contentKey='science_research'
+			title={t('menu.science.institut-tadqiqotlari')}
+			showLabels
+			previewable
+		/>
+	)
 }
 
 export default Page

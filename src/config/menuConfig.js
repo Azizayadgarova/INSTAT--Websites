@@ -40,7 +40,7 @@ export const menuConfig = {
 	},
 	science: {
 		base: '/science',
-		paths: ['ilmiy-tadqiqot', 'oliy-talim'],
+		paths: ['ilmiy-tadqiqot', 'oliy-talim', 'institut-tadqiqotlari'],
 	},
 	media: {
 		base: '/media-servises',

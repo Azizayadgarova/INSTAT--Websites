@@ -28,7 +28,7 @@ Har element: `{ id, module, type, key, label, value, value_uz, value_ru, value_e
 | corruption | QarshiKurash |
 | odob | OdobAxloq (PDF) |
 | hotel | Yotoqxona |
-| science | IlmiyTadqiqot, OliyTalim |
+| science | IlmiyTadqiqot, OliyTalim, InstitutTadqiqotlari (`science_research`: label + matn + PDF) |
 | press | Hamkorlik |
 | info_resource | 7 ta Axborot havola sahifasi |
 | education | OnlaynTalim statistika raqamlari |

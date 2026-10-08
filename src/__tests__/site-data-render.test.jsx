@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -7,8 +7,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const API_SAMPLE = [
 	{ id: 17, module: 'about', type: 'string', key: 'about', value: '<p>To\'liq nomi - Institut</p>', value_uz: '<p>Umumiy malumot matni</p>', value_ru: null, value_en: null },
 	{ id: 19, module: 'hotel', type: 'string', key: 'hotel_text', value: '<p>YOTOQXONA NIZOMI matni</p>', value_uz: null, value_ru: null, value_en: null, path: 'https://x/nizom.pdf' },
-	{ id: 21, module: 'odob', type: 'file', key: 'odob_file', value: null, value_uz: null, path: 'https://x/odob.pdf' },
+	{ id: 21, module: 'odob', type: 'file', key: 'odob_file', label: 'Odob-axloq qoidalari', value: null, value_uz: null, path: 'https://x/odob.pdf' },
 	{ id: 23, module: 'corruption', type: 'string', key: 'corruption_chairman', label: 'Komissiya raisi', value: 'Shukurov Sh.Z.', value_uz: null },
+	{ id: 129, module: 'science', type: 'string', key: 'science_research', label: 'Ilmiy tadqiqotlar', label_uz: 'Institut tadqiqotlari', value: null, value_uz: '<p>Tadqiqot matni</p>', path: 'https://x/research.pdf' },
 	{ id: 31, module: 'science', type: 'string', key: 'science_programme', value: 'ILMIY-TADQIQOTLAR DASTURI', value_uz: 'ILMIY-TADQIQOTLAR DASTURI' },
 	{ id: 35, module: 'info_resource', type: 'link', key: 'siat_stat', value: 'https://siat.stat.uz/', value_uz: 'Statistika Axborot Tizimi' },
 	{ id: 90, module: 'micro_data', type: 'string', key: 'micro_data_title6', label: 'Sahifa sarlavhasi 6', value: 'Statistik blok', value_uz: 'Statistik blok' },
@@ -44,6 +45,22 @@ describe('API kontenti sahifada ko‘rinadi', () => {
 	it('Yotoqxona — value_uz null bo‘lsa value ishlatiladi (fallback)', async () => {
 		wrap(<ContentPage module='hotel' contentKey='hotel_text' title='Yotoqxona' />)
 		await waitFor(() => expect(screen.getByText(/YOTOQXONA NIZOMI/)).toBeInTheDocument())
+	})
+
+	it('Odob-axloq — label chiqadi va preview drawer PDF ochadi', async () => {
+		const { container } = wrap(<ContentPage module='odob' contentKey='odob' title='Odob' showLabels previewable />)
+		await waitFor(() => expect(screen.getByRole('heading', { name: 'Odob-axloq qoidalari' })).toBeInTheDocument())
+		expect(container.querySelector('iframe')).toBeNull()
+		fireEvent.click(screen.getByRole('button', { name: /Oldindan ko'rish|Ko'rish/ }))
+		expect(container.querySelector('iframe')).toHaveAttribute('src', 'https://x/odob.pdf')
+	})
+
+	it('Institut tadqiqotlari — label, matn va PDF preview', async () => {
+		const { container } = wrap(<ContentPage module='science' contentKey='science_research' title='Tadqiqot' showLabels previewable />)
+		await waitFor(() => expect(screen.getByRole('heading', { name: 'Institut tadqiqotlari' })).toBeInTheDocument())
+		expect(container.textContent).toMatch(/Tadqiqot matni/)
+		fireEvent.click(screen.getByRole('button', { name: /Oldindan ko'rish|Ko'rish/ }))
+		expect(container.querySelector('iframe')).toHaveAttribute('src', 'https://x/research.pdf')
 	})
 
 	it('Odob-axloq — PDF yuklab olish tugmasi', async () => {

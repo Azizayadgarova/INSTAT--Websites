@@ -15,6 +15,11 @@ const INFO_LINKS = [
 		fallback: "Oliy ta'lim",
 		path: '/science/oliy-talim',
 	},
+	{
+		label: 'pages.science.institut_tadqiqotlari',
+		fallback: 'Institut tadqiqotlari',
+		path: '/science/institut-tadqiqotlari',
+	},
 ]
 
 const NavItem = ({ link }) => {

@@ -7,6 +7,7 @@
 		"comingSoonHint": "Materiallar tayyorlanmoqda. Tez orada shu yerda e’lon qilinadi.",
 		"language": "Til",
 		"download": "Yuklab olish",
+		"preview": "Oldindan ko'rish",
 		"openResource": "Resursga o‘tish",
 		"redirecting": "Tashqi resursga yo‘naltirilmoqda...",
 		"readMore": "To‘liq o‘qish",
@@ -60,7 +61,8 @@
 		"science": {
 			"title": "Ilm-fan",
 			"ilmiy-tadqiqot": "Ilmiy tadqiqot dasturi",
-			"oliy-talim": "Oliy ta’limdan keyingi ta’lim"
+			"oliy-talim": "Oliy ta’limdan keyingi ta’lim",
+			"institut-tadqiqotlari": "Institut tadqiqotlari"
 		},
 		"media": {
 			"title": "Matbuot xizmati",
@@ -718,7 +720,8 @@
 			"ortga": "Ortga",
 			"share_this_blog": "Ulashish",
 			"ilmiy_tadqiqot": "Ilmiy tadqiqot",
-			"oliy_talim": "Oliy ta'lim"
+			"oliy_talim": "Oliy ta'lim",
+			"institut_tadqiqotlari": "Institut tadqiqotlari"
 		}
 	},
 	"data": {

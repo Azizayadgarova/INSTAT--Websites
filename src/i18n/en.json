@@ -7,6 +7,7 @@
     "comingSoonHint": "The materials are being prepared and will be published here shortly.",
     "language": "Language",
     "download": "Download",
+    "preview": "Preview",
     "openResource": "Open resource",
     "redirecting": "Redirecting to the external resource...",
     "readMore": "Read more",
@@ -60,7 +61,8 @@
     "science": {
       "title": "Science",
       "ilmiy-tadqiqot": "Research programme",
-      "oliy-talim": "Postgraduate education"
+      "oliy-talim": "Postgraduate education",
+      "institut-tadqiqotlari": "Institute research"
     },
     "media": {
       "title": "Press service",
@@ -718,7 +720,8 @@
       "ortga": "Back",
       "share_this_blog": "Share this page",
       "ilmiy_tadqiqot": "Scientific Research",
-      "oliy_talim": "Higher Education"
+      "oliy_talim": "Higher Education",
+      "institut_tadqiqotlari": "Institute research"
     }
   },
   "data": {

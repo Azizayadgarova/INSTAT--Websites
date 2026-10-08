@@ -56,6 +56,7 @@ const OquvUslubiyMateriallar = lazy(() => import('../pages/OquvFaoliyat/OquvUslu
 // Ilm-Fan pages
 const IlmiyTadqiqot = lazy(() => import('../pages/IlmFan/IlmiyTadqiqot'))
 const OliyTalim = lazy(() => import('../pages/IlmFan/OliyTalim'))
+const InstitutTadqiqotlari = lazy(() => import('../pages/IlmFan/InstitutTadqiqotlari'))
 const Science = lazy(() => import('../pages/main/Science'))
 
 // Matbuot pages
@@ -140,6 +141,7 @@ export const routes = [
 				children: [
 					{ path: 'ilmiy-tadqiqot', element: s(IlmiyTadqiqot) },
 					{ path: 'oliy-talim', element: s(OliyTalim) },
+					{ path: 'institut-tadqiqotlari', element: s(InstitutTadqiqotlari) },
 				],
 			},
 
