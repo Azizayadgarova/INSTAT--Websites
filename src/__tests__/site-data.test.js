@@ -7,6 +7,14 @@ vi.mock('../api/axios', () => ({
 	infoResourceApi: { get: vi.fn() },
 }))
 
+// Standart holatda info_resource ham API_URL dan keladi (alohida so'rov yo'q).
+// Env orqali alohida manba berilgan holatni tekshirish uchun manzillar farqli
+// qilib mock'lanadi; teng holat pastda alohida testda.
+vi.mock('@/config/api', () => ({
+	API_URL: 'https://main.example/api',
+	API_INFO_RESOURCE_URL: 'https://info.example/api',
+}))
+
 import api, { infoResourceApi } from '../api/axios'
 import { getSiteData, getModule, getItem, resetSiteDataCache } from '../api/siteData.api'
 import { pickLang, pickLink } from '../utils/siteContent'
@@ -55,6 +63,21 @@ describe('siteData API', () => {
 		expect(byModuleKey.info_resource.siat_stat).toBeUndefined()
 		// Boshqa modullar asosiy manbada qoladi
 		expect(byModuleKey.all.email.value).toBe('info@instat.uz')
+	})
+
+	it('manbalar teng bo‘lsa (standart) info_resource uchun qo‘shimcha so‘rov yuborilmaydi', async () => {
+		vi.resetModules()
+		vi.doMock('@/config/api', () => ({
+			API_URL: 'https://main.example/api',
+			API_INFO_RESOURCE_URL: 'https://main.example/api',
+		}))
+		const axiosMod = await import('../api/axios')
+		const { getSiteData: freshGetSiteData } = await import('../api/siteData.api')
+		axiosMod.default.get.mockResolvedValue({ data: SAMPLE })
+		const { byModuleKey } = await freshGetSiteData()
+		expect(axiosMod.infoResourceApi.get).not.toHaveBeenCalled()
+		expect(byModuleKey.info_resource.siat_stat.value).toBe('https://siat.stat.uz/')
+		vi.doUnmock('@/config/api')
 	})
 
 	it('ikkilamchi manba yiqilsa asosiy javob buzilmaydi', async () => {

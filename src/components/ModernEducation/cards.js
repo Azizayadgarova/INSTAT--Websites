@@ -4,8 +4,6 @@ import Image3 from '@/assets/image3.webp'
 import Image4 from '@/assets/image4.webp'
 import Image5 from '@/assets/image5.webp'
 
-export const BUTTON_TEXT = 'Tizimga kirish'
-
 /**
  * API'dan kelgan FEATURE yozuvlarini statik kartochka maketiga qo'shadi.
  *

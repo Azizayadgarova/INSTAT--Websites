@@ -1,9 +1,10 @@
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { motion, useTransform } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { useNavigate } from 'react-router-dom'
-import { BUTTON_TEXT } from './cards'
 
 const FloatingCard = memo(({ card, index, progress, totalCards = 5 }) => {
+	const { t } = useTranslation()
 	const navigate = useNavigate()
 	const step = 1 / totalCards
 	const start = index * step
@@ -112,7 +113,7 @@ const FloatingCard = memo(({ card, index, progress, totalCards = 5 }) => {
 								e.currentTarget.style.boxShadow = 'none'
 							}}
 						>
-							{BUTTON_TEXT}
+							{t('components.navbar.tizimga_kirish')}
 						</button>
 					)}
 				</div>

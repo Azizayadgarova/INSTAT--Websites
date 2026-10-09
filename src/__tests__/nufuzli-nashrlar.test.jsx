@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-// Haqiqiy javoblarga o'xshash namunalar (test.avacoder.uz)
+// Haqiqiy javoblarga o'xshash namunalar (api1.instat.uz)
 const REPORTS = [
 	{
 		id: 1,

@@ -93,6 +93,10 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 			key: "education",
 			value: "onlayn_kurslar",
 		},
+		{
+			key: "vacancies",
+			value: "bosh_ish_orinlari",
+		},
 	]
 	const module_faq = module_faqs.find(item => item.key === module)?.value
 
@@ -118,7 +122,11 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 							subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
 							highlight=''
 							subtitle={
-								<>{t(`components.fAQSection.platforma_va_${module_faq}`)}<br />{t("components.fAQSection.eng_kop_beriladigan_savollarga")}</>
+								<>
+									{/* Modul xaritada bo'lmasa (masalan bosh sahifa) — prefikssiz, xom kalit chiqmasin */}
+									{module_faq && <>{t(`components.fAQSection.platforma_va_${module_faq}`)}<br /></>}
+									{t("components.fAQSection.eng_kop_beriladigan_savollarga")}
+								</>
 							}
 						/>
 					</AnimatedSection>
