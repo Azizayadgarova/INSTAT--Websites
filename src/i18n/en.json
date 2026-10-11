@@ -470,6 +470,28 @@
       "talabalarga_yuqori": "give students a",
       "sifatli_talim_va_qulay": "high-quality education and a comfortable learning environment."
     },
+    "modernEducation": {
+      "card1_title": "Modern online ",
+      "card1_highlight": "courses",
+      "card1_tags": "Online learning platform",
+      "card1_description": "Gain new knowledge and skills through courses created by experienced specialists. Access modern education with video lessons, practical assignments and certificates.",
+      "card2_title": "Library of ",
+      "card2_highlight": "scientific sources",
+      "card2_tags": "Electronic library",
+      "card2_description": "Get access to a vast electronic library of scientific books, study guides and academic materials. Enrich your knowledge with reliable sources.",
+      "card3_title": "Scientific articles and ",
+      "card3_highlight": "journals",
+      "card3_tags": "Scientific journals platform",
+      "card3_description": "The opportunity to publish research results in scientific journals, review articles and share knowledge with the academic community.",
+      "card4_title": "Microdata and research ",
+      "card4_highlight": "analysis",
+      "card4_tags": "Data laboratory",
+      "card4_description": "A dedicated platform for working with statistical and scientific microdata. Researchers can analyze data and produce scientific conclusions and new studies.",
+      "card5_title": "Job ",
+      "card5_highlight": "opportunities",
+      "card5_tags": "Career opportunities",
+      "card5_description": "The opportunity to find open positions, internships and professional projects for students, specialists and researchers."
+    },
     "header": {
       "beshta_platforma_orqali_oqish": "Five platforms for studying, research, learning and professional",
       "rivojlanish_imkoniyatlari": "development.",

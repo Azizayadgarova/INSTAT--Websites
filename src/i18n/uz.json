@@ -470,6 +470,28 @@
 			"talabalarga_yuqori": "talabalarga yuqori",
 			"sifatli_talim_va_qulay": "sifatli ta’lim va qulay o‘qish muhitini taqdim etadi."
 		},
+		"modernEducation": {
+			"card1_title": "Zamonaviy onlayn ",
+			"card1_highlight": "kurslar",
+			"card1_tags": "Onlayn ta'lim platformasi",
+			"card1_description": "Tajribali mutaxassislar tomonidan yaratilgan kurslar orqali yangi bilim va ko'nikmalarni egallang. Video darslar, amaliy topshiriqlar va sertifikatlar bilan zamonaviy ta'lim imkoniyatiga ega bo'ling.",
+			"card2_title": "Ilmiy manbalar ",
+			"card2_highlight": "kutubxonasi",
+			"card2_tags": "Elektron kutubxona",
+			"card2_description": "Ilmiy kitoblar, o'quv qo'llanmalar va akademik materiallardan iborat keng elektron kutubxonaga kirish imkoniyatini oling. Bilimlaringizni ishonchli manbalar bilan boyiting.",
+			"card3_title": "Ilmiy maqolalar va ",
+			"card3_highlight": "jurnallar",
+			"card3_tags": "Ilmiy jurnallar platformasi",
+			"card3_description": "Tadqiqot natijalarini ilmiy jurnallarda chop etish, maqolalarni ko'rib chiqish va akademik hamjamiyat bilan bilim almashish imkoniyati.",
+			"card4_title": "Mikroma'lumotlar va tadqiqot  ",
+			"card4_highlight": "tahlili",
+			"card4_tags": "Ma'lumotlar laboratoriyasi",
+			"card4_description": "Statistik va ilmiy mikroma'lumotlar bilan ishlash uchun maxsus platforma. Tadqiqotchilar ma'lumotlarni tahlil qilib, ilmiy xulosalar va yangi tadqiqotlar yaratishlari mumkin.",
+			"card5_title": "Bo'sh ish o'rinlari  ",
+			"card5_highlight": "imkoniyatlari",
+			"card5_tags": "Karyera imkoniyatlari",
+			"card5_description": "Talabalar, mutaxassislar va tadqiqotchilar uchun ochiq ish o'rinlari, stajirovkalar va professional loyihalarni topish imkoniyati."
+		},
 		"header": {
 			"beshta_platforma_orqali_oqish": "Beshta platforma orqali o'qish, tadqiqot qilish, bilim olish va professional",
 			"rivojlanish_imkoniyatlari": "rivojlanish imkoniyatlari.",
