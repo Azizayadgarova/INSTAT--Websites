@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { useSiteData } from '@/hooks/useSiteData'
 import { useSiteList } from '@/hooks/useSiteList'
 import { siteMainManagersApi, siteManagersApi } from '@/api/siteContent.api'
-import { pickField, pickLang, toPerson } from '@/utils/siteContent'
+import { pickField, pickI18n, pickLang, toPerson } from '@/utils/siteContent'
 import iconPhone from '@/assets/icons/Frame 2147238356.png'
 import iconEmail from '@/assets/icons/Frame 2147238356 (1).png'
 import iconClock from '@/assets/icons/Frame 2147238356 (2).png'
@@ -48,11 +48,11 @@ const leaders = [
  * kartochkada kun va vaqt turli rangda chiqadi, shuning uchun vergulda ajratamiz.
  */
 const toLeader = (item, lang) => {
-  const acceptance = (item.acceptance ?? '').trim()
+  const acceptance = pickI18n(item, 'acceptance', lang)
   const comma = acceptance.indexOf(',')
   return {
     id: item.id,
-    name: (item.full_name ?? '').trim(),
+    name: pickI18n(item, 'full_name', lang),
     position: pickField(item, 'description', lang),
     photo: item.path || null,
     phones: (item.phone_number ?? '').trim() ? [item.phone_number.trim()] : [],
