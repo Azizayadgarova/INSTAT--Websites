@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useSiteData } from '@/hooks/useSiteData'
 import { useSectionText } from '@/hooks/useSectionText'
-import { pickLang, splitHeading } from '@/utils/siteContent'
+import { pickLang, pickLangLabel, splitHeading } from '@/utils/siteContent'
 import { siteEducationFeaturesApi } from '@/api/siteContent.api'
 import heroImg from '@/assets/rasm_tiniq.jpg'
 import groupImg0 from '@/assets/Group 1000002879.webp'
@@ -379,7 +379,7 @@ export default function OnlaynTalim() {
 		const src = _eduKv?.[item.key]
 		if (!src) return item
 		const raw = pickLang(src, _lang).replace(/\s+/g, ' ').trim()
-		return raw ? { ...item, value: /[+MK]/i.test(raw) ? raw : `${raw}+`, label: src.label?.trim() || item.label } : item
+		return raw ? { ...item, value: /[+MK]/i.test(raw) ? raw : `${raw}+`, label: pickLangLabel(src, _lang) || item.label } : item
 	})
 
     const [statsRef, statsInView] = useInView(0.3)
