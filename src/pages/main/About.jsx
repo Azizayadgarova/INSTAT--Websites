@@ -46,7 +46,7 @@ const HOME_SECTIONS = [
   { id: 'mentors',     Component: MentorsSection,     height: '850px' },
   // { id: 'testimonials',Component: Testimonials,       height: '700px', suspenseHeight: '600px' },
   { id: 'integration', Component: IntegrationSection, height: '850px', suspenseHeight: '600px' },
-  { id: 'faq',         Component: FAQSection,         height: '600px' },
+  { id: 'faq',         Component: FAQSection,         height: '600px', props: { module: 'main' } },
 ]
 
 const NavItem = ({ link }) => {
@@ -363,11 +363,11 @@ const About = () => {
         </div>
       </motion.div>
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 0 }}>
-        {HOME_SECTIONS.map(({ id, Component, height, suspenseHeight, animated }) => {
+        {HOME_SECTIONS.map(({ id, Component, height, suspenseHeight, animated, props }) => {
           const sh = suspenseHeight || height
           const content = animated
-            ? <AnimatedSection style={{ width: '100%' }}><Component /></AnimatedSection>
-            : <Component />
+            ? <AnimatedSection style={{ width: '100%' }}><Component {...props} /></AnimatedSection>
+            : <Component {...props} />
           return (
             <LazyLoad key={id} fallback={<SectionFallback height={height} />}>
               <Suspense fallback={<SectionFallback height={sh} />}>

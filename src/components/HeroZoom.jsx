@@ -194,9 +194,9 @@ const HeroZoom = () => {
                                 ref={descRef}
                                 className='mt-6 text-[#BCBCBC] text-[10px] max-w-2xl font-normal mx-auto leading-relaxed opacity-80'
                             >
-                                {st('main_description4', t("components.heroZoom.zamonaviy_platforma_asosida_ishlab_2") + t("components.heroZoom.talabalarga_yuqori_sifatli_talim_2")).split(" ").slice(0, -st('main_description4', t("components.heroZoom.zamonaviy_platforma_asosida_ishlab_2") + t("components.heroZoom.talabalarga_yuqori_sifatli_talim_2")).split(" ")?.length / 2).join(" ")}
+                                {st('main_description4', '').split(" ").slice(0, -st('main_description4', '').split(" ")?.length / 2).join(" ")}
                                 <br/>
-                                {st('main_description4', t("components.heroZoom.zamonaviy_platforma_asosida_ishlab_2") + t("components.heroZoom.talabalarga_yuqori_sifatli_talim_2")).split(" ").slice( -st('main_description4', t("components.heroZoom.zamonaviy_platforma_asosida_ishlab_2") + t("components.heroZoom.talabalarga_yuqori_sifatli_talim_2")).split(" ")?.length / 2).join(" ")}
+                                {st('main_description4', '').split(" ").slice( -st('main_description4', '').split(" ")?.length / 2).join(" ")}
 
                             </p>
                         </div>
@@ -215,9 +215,10 @@ const HeroZoom = () => {
                 <div
                     ref={bottomTextRef}
                     className='absolute top-[90%] text-center text-white  text-[20px]  opacity-0'
-                >{t("components.heroZoom.zamonaviy_platforma_asosida_ishlab")}{' '}
-                    <span
-                        className='text-[rgba(var(--cyan-rgb),1)]'>{t("components.heroZoom.onlayn_kurslar")}</span>{' '}{t("components.heroZoom.talabalarga_yuqori")}<br/>{t("components.heroZoom.sifatli_talim_va_qulay")}
+                >
+                    {st('main_description4', '').split(" ").slice(0, -st('main_description4', '').split(" ")?.length / 2).join(" ")}
+                    <br/>
+                    {st('main_description4', '').split(" ").slice( -st('main_description4', '').split(" ")?.length / 2).join(" ")}
                 </div>
             </section>
         </>

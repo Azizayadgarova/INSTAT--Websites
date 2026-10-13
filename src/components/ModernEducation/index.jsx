@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { useScroll, useSpring } from 'framer-motion'
-import { cards, mergeCards } from './cards'
+import { useTranslation } from 'react-i18next'
+import { getCards, mergeCards } from './cards'
 import FloatingCard from './FloatingCard'
 import GridCard from './GridCard'
 import ModernEducationHeader from './Header'
@@ -72,6 +73,7 @@ export default function ModernEducation({
 	contentKey = 'site-main-features',
 	contentApi = siteMainFeaturesApi,
 } = {}) {
+	const { t } = useTranslation()
 	const containerRef = useRef(null)
 
 	const { scrollYProgress } = useScroll({
@@ -141,7 +143,7 @@ export default function ModernEducation({
 		}
 	}, [variant, scrollYProgress, smooth])
 
-	const layout = customCards || cards
+	const layout = customCards || getCards(t)
 	const { items: apiCards } = useSiteList(contentKey, contentApi, toFeature, [])
 	const displayCards = apiCards.length ? mergeCards(apiCards, layout) : layout
 

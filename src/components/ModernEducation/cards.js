@@ -25,14 +25,14 @@ export const mergeCards = (apiItems, layout) =>
 		}
 	})
 
-export const cards = [
+export const getCards = t => [
 	{
 		id: 1,
-		title: 'Zamonaviy onlayn ',
-		highlight: 'kurslar',
-		tags: "Onlayn ta'lim platformasi",
-		description:
-			"Tajribali mutaxassislar tomonidan yaratilgan kurslar orqali yangi bilim va ko'nikmalarni egallang. Video darslar, amaliy topshiriqlar va sertifikatlar bilan zamonaviy ta'lim imkoniyatiga ega bo'ling.",
+		title: t('components.modernEducation.card1_title', 'Zamonaviy onlayn '),
+		highlight: t('components.modernEducation.card1_highlight', 'kurslar'),
+		tags: t('components.modernEducation.card1_tags', "Onlayn ta'lim platformasi"),
+		description: t('components.modernEducation.card1_description',
+			"Tajribali mutaxassislar tomonidan yaratilgan kurslar orqali yangi bilim va ko'nikmalarni egallang. Video darslar, amaliy topshiriqlar va sertifikatlar bilan zamonaviy ta'lim imkoniyatiga ega bo'ling."),
 		img: Image1,
 		startX: '-10%',
 		startY: -10,
@@ -41,11 +41,11 @@ export const cards = [
 	},
 	{
 		id: 2,
-		title: 'Ilmiy manbalar ',
-		highlight: 'kutubxonasi',
-		tags: 'Elektron kutubxona',
-		description:
-			"Ilmiy kitoblar, o'quv qo'llanmalar va akademik materiallardan iborat keng elektron kutubxonaga kirish imkoniyatini oling. Bilimlaringizni ishonchli manbalar bilan boyiting.",
+		title: t('components.modernEducation.card2_title', 'Ilmiy manbalar '),
+		highlight: t('components.modernEducation.card2_highlight', 'kutubxonasi'),
+		tags: t('components.modernEducation.card2_tags', 'Elektron kutubxona'),
+		description: t('components.modernEducation.card2_description',
+			"Ilmiy kitoblar, o'quv qo'llanmalar va akademik materiallardan iborat keng elektron kutubxonaga kirish imkoniyatini oling. Bilimlaringizni ishonchli manbalar bilan boyiting."),
 		img: Image2,
 		startX: '50%',
 		startY: 30,
@@ -54,11 +54,11 @@ export const cards = [
 	},
 	{
 		id: 3,
-		title: 'Ilmiy maqolalar va ',
-		highlight: 'jurnallar',
-		tags: 'Ilmiy jurnallar platformasi',
-		description:
-			"Tadqiqot natijalarini ilmiy jurnallarda chop etish, maqolalarni ko'rib chiqish va akademik hamjamiyat bilan bilim almashish imkoniyati.",
+		title: t('components.modernEducation.card3_title', 'Ilmiy maqolalar va '),
+		highlight: t('components.modernEducation.card3_highlight', 'jurnallar'),
+		tags: t('components.modernEducation.card3_tags', 'Ilmiy jurnallar platformasi'),
+		description: t('components.modernEducation.card3_description',
+			"Tadqiqot natijalarini ilmiy jurnallarda chop etish, maqolalarni ko'rib chiqish va akademik hamjamiyat bilan bilim almashish imkoniyati."),
 		img: Image3,
 		startX: '-55%',
 		startY: 60,
@@ -67,11 +67,11 @@ export const cards = [
 	},
 	{
 		id: 4,
-		title: "Mikroma'lumotlar va tadqiqot  ",
-		highlight: 'tahlili',
-		tags: "Ma'lumotlar laboratoriyasi",
-		description:
-			"Statistik va ilmiy mikroma'lumotlar bilan ishlash uchun maxsus platforma. Tadqiqotchilar ma'lumotlarni tahlil qilib, ilmiy xulosalar va yangi tadqiqotlar yaratishlari mumkin.",
+		title: t('components.modernEducation.card4_title', "Mikroma'lumotlar va tadqiqot  "),
+		highlight: t('components.modernEducation.card4_highlight', 'tahlili'),
+		tags: t('components.modernEducation.card4_tags', "Ma'lumotlar laboratoriyasi"),
+		description: t('components.modernEducation.card4_description',
+			"Statistik va ilmiy mikroma'lumotlar bilan ishlash uchun maxsus platforma. Tadqiqotchilar ma'lumotlarni tahlil qilib, ilmiy xulosalar va yangi tadqiqotlar yaratishlari mumkin."),
 		img: Image4,
 		startX: '40%',
 		startY: -100,
@@ -80,11 +80,11 @@ export const cards = [
 	},
 	{
 		id: 5,
-		title: "Bo'sh ish o'rinlari  ",
-		highlight: 'imkoniyatlari',
-		tags: 'Karyera imkoniyatlari',
-		description:
-			"Talabalar, mutaxassislar va tadqiqotchilar uchun ochiq ish o'rinlari, stajirovkalar va professional loyihalarni topish imkoniyati.",
+		title: t('components.modernEducation.card5_title', "Bo'sh ish o'rinlari  "),
+		highlight: t('components.modernEducation.card5_highlight', 'imkoniyatlari'),
+		tags: t('components.modernEducation.card5_tags', 'Karyera imkoniyatlari'),
+		description: t('components.modernEducation.card5_description',
+			"Talabalar, mutaxassislar va tadqiqotchilar uchun ochiq ish o'rinlari, stajirovkalar va professional loyihalarni topish imkoniyati."),
 		img: Image5,
 		startX: '-20%',
 		startY: 20,
