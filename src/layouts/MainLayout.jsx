@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import ScrollToTop from '../components/shared/ScrollToTop'
+import Seo from '../components/shared/Seo'
 
 const CursorRing    = lazy(() => import('../components/shared/CursorRing'))
 const TopFooter     = lazy(() => import('../components/TopFooter'))
@@ -38,6 +39,8 @@ const MainLayout = () => {
 
 	return (
 		<div className='bg-[rgba(var(--bg-rgb),1)] min-h-screen'>
+			{/* Standart (tilga mos) title/meta — sahifaning o'z <Seo/> si bo'lsa, u ustun turadi */}
+			<Seo />
 			<ScrollToTop />
 			{mountCursor && <Suspense fallback={null}><CursorRing /></Suspense>}
 

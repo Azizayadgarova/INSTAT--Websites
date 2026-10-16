@@ -128,7 +128,7 @@ const HeroZoom = () => {
                     >
                         <img
                             src={stImg('main_title4')}
-                            alt='content'
+                            alt=''
                             loading='lazy'
                             decoding='async'
                             className='w-full h-full object-cover'
@@ -166,7 +166,7 @@ const HeroZoom = () => {
                         className='screen-box absolute top-[5%] left-[1%] w-[98%] h-[90%] overflow-hidden shadow-2xl z-10'>
                         <img
                             src={stImg('main_title4')}
-                            alt='content'
+                            alt=''
                             loading='lazy'
                             decoding='async'
                             className='absolute inset-0 w-full h-[92%] mt-[20px] object-cover'

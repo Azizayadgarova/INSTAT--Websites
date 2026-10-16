@@ -148,7 +148,6 @@ const Footer = () => {
 	},]
 
     const saytlar = SAYTLAR_PATHS.map(item => ({ to: item.to, label: t(`components.footer.${item.key}`) }))
-    const support = SUPPORT_KEYS.map(key => t(`components.footer.${key.key}`))
     const huquqiy = HUQUQIY_KEYS.map(key => ({ key, label: t(`components.footer.${key}`) }))
 
     return (
@@ -263,10 +262,10 @@ const Footer = () => {
             <div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 pt-[10px] pb-[10px] md:py-8 flex flex-col-reverse md:flex-row justify-center md:justify-between items-center gap-4 relative z-10'>
                         <p className='text-center md:text-left' style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>{t("components.footer.instat_inc_barcha_huquqlar")}</p>
                         <div className='flex gap-3'>
-                            {SOCIAL.map((icon, i) => (
+                            {SOCIAL.map(icon => (
                                 <a
 									href={icon.link}
-                                    key={i.icon}
+                                    key={icon.icon}
                                     className='w-10 h-10 rounded-xl flex items-center justify-center hover:opacity-80 transition cursor-pointer'
                                     style={{
                                         background:

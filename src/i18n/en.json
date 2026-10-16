@@ -12,7 +12,10 @@
     "redirecting": "Redirecting to the external resource...",
     "readMore": "Read more",
     "collapse": "Collapse",
-    "watch": "Watch"
+    "watch": "Watch",
+    "mobileApp": "Mobile app",
+    "mobileAppFront": "Mobile app — front view",
+    "mobileAppBack": "Mobile app — back view"
   },
   "eduMaterials": {
     "education_plan_file": "Curriculum",
@@ -31,7 +34,7 @@
   "menu": {
     "about": {
       "title": "About the Institute",
-      "umumiy-malumot": "General informations",
+      "umumiy-malumot": "General information",
       "tuzilma": "Structure",
       "rahbariyat": "Management",
       "qarshi-kurash": "Anti-corruption",
@@ -50,17 +53,17 @@
       "statistika-agentligi": "Methodological materials"
     },
     "oquvFaoliyati": {
-      "title": "Educational Activities",
-      "qayta-tayyorlash-dasturi": "Retraining and Advanced Training Program",
+      "title": "Educational activities",
+      "qayta-tayyorlash-dasturi": "Retraining and advanced training program",
       "oquv-kurslari-jadvali": "Course Schedule",
-      "qayta-tayyorlash-rejasi": "Retraining and Advanced Training Plan",
-      "oquv-uslubiy-materiallar": "Study and Methodological Materials",
-      "dastur-bajarilishi": "Implementation of the Retraining and Advanced Training Program",
-      "dars-jadvallari": "Class Schedule"
+      "qayta-tayyorlash-rejasi": "Retraining and advanced training plan",
+      "oquv-uslubiy-materiallar": "Study and methodological materials",
+      "dastur-bajarilishi": "Implementation of the retraining and advanced training program",
+      "dars-jadvallari": "Class schedule"
     },
     "science": {
       "title": "Science",
-      "ilmiy-tadqiqot": "Research programme",
+      "ilmiy-tadqiqot": "Research program",
       "oliy-talim": "Postgraduate education",
       "institut-tadqiqotlari": "Institute research"
     },
@@ -131,7 +134,7 @@
       "testimonial_1": "The online and offline learning options are incredibly convenient. I can review lessons anytime and download materials whenever I need them. Thanks to this platform, I've significantly improved my knowledge.",
       "testimonial_2": "The quality of education at the university is excellent. Courses developed by experts and the digital library have been a huge help to us. This platform has contributed to my growth as a statistics professional.",
       "testimonial_3": "This platform gave me not just knowledge, but practical skills as well. The database of scientific articles and research materials is extremely useful. Every lesson is structured clearly and is easy to understand.",
-      "testimonial_4": "This platform from the statistics agency is very convenient and modern. Having electronic journals, scientific articles, and study materials all in one place has boosted my work efficiency.",
+      "testimonial_4": "This platform from the National Statistics Committee is very convenient and modern. Having electronic journals, scientific articles, and study materials all in one place has boosted my work efficiency.",
       "fikrlar": "Reviews",
       "talabalar_fikri": "Student Feedback",
       "foydalanuvchilar_fikri": "User Feedback",
@@ -147,7 +150,7 @@
       "platformaning_asosiy_imkoniyatlari": "Key platform capabilities",
       "mikro_malumotlar_laboratoriyasi_foydalan": "The microdata laboratory offers modern, convenient tools for working effectively with statistical data.",
       "har_bir_detalni_aniqlik": "See every detail clearly",
-      "katta_hajmdagi_mikro_malumotlarni": "Analyse large volumes of microdata in depth with modern analytical tools and uncover important trends.",
+      "katta_hajmdagi_mikro_malumotlarni": "Analyze large volumes of microdata in depth with modern analytical tools and uncover important trends.",
       "tadqiqotlar_uchun_tayyor_platforma": "A platform ready for research",
       "statistik_modellar_eksperimental_tahlill": "An environment purpose-built for statistical models, experimental analysis and scientific work.",
       "soniyalar_ichida_natija": "Results in seconds",
@@ -162,7 +165,7 @@
     "elektronKutubxona": {
       "platformamizdagi_barcha_elektron_kitobla": "Discover every e-book on our platform in one place. Filter by genre, rating and price, and pick the right title with ease.",
       "barchasini_korish": "View all",
-      "elektron_kutubxona": "Digital Library",
+      "elektron_kutubxona": "Digital library",
       "kitoblar_katalogi": "Book Catalog"
     },
     "mikroMalumotlarHero": {
@@ -175,13 +178,13 @@
     },
     "kutubxona": {
       "kutubxona": "Library",
-      "step_01_title": "Online Search",
+      "step_01_title": "Online search",
       "step_01_desc": "Every book's page shows its real-time availability. The system tells you exactly how many copies the library holds and which section or shelf they're on. If an electronic version of the book exists, that is flagged separately as well.",
-      "step_02_title": "Find the Book",
+      "step_02_title": "Find the book",
       "step_02_desc": "Every book's page shows its real-time availability. The system tells you exactly how many copies the library holds and which section or shelf they're on. If an electronic version of the book exists, that is flagged separately as well.",
-      "step_03_title": "Easy Navigation",
+      "step_03_title": "Easy navigation",
       "step_03_desc": "You'll never lose your way in the library. Every section, cabinet, and shelf is clearly marked. You can see exactly where the book you're looking for is and get directions straight to it. The navigation system shows you the shortest route.",
-      "step_04_title": "Get the Book",
+      "step_04_title": "Get the book",
       "step_04_desc": "Reserve the book you need in advance and pick it up without waiting. The system automatically notifies you when the book is due back and when it's ready for pickup. Within minutes, the book will be in your hands.",
       "oflayn_kutubxona_toliq_nazorat": "Offline library – complete control",
       "oldindan_rejalashtiring": "Plan ahead: check a book's availability, find its exact location, and pick it up at the library without unnecessary waiting!"
@@ -256,7 +259,7 @@
       "uzs": "UZS",
       "0_uzs": "Free",
       "barcha_kurslar": "All courses",
-      "kurslar_katalogi": "Course Catalog"
+      "kurslar_katalogi": "Course catalog"
     },
     "ishOrinlariAfzalliklar": {
       "platforma_orqali_ish_topish": "Finding a job through the platform is now easy and effective",
@@ -269,7 +272,7 @@
       "saytlar": "Websites",
       "huquqiy": "Legal",
       "instat_inc_barcha_huquqlar": "© Instat Inc. All rights reserved.",
-      "onlayn_kurslar": "Online courses",
+      "onlayn_kurslar": "Online learning",
       "raqamli_kutubxona": "Digital library",
       "elektron_jurnal": "E-journal",
       "mikro_malumotlar": "Microdata",
@@ -314,11 +317,11 @@
     "navbar2": {
       "shaxsiy_kabinet": "My account",
       "menu": "Menu",
-      "onlayn_talim": "Online education",
+      "onlayn_talim": "Online learning",
       "raqamli_kutubxona": "Digital library",
       "elektron_jurnal": "E-journal",
       "mikro_malumotlar": "Microdata",
-      "bosh_ish_orinlari": "Job openings"
+      "bosh_ish_orinlari": "Vacancies"
     },
     "ishOrinlariHero": {
       "eng_dolzarb_ish_orinlari": "The most relevant jobs,",
@@ -365,7 +368,7 @@
     "foydalanishJarayoni": {
       "platforma_qanday_ishlaydi": "How does the platform work?",
       "raqamli_kutubxonadan_foydalanish_jarayon": "How to use the digital library — a short overview of selecting, purchasing and reading a book within the platform.",
-      "foydalanish_jarayoni": "Usage Process",
+      "foydalanish_jarayoni": "How it works",
       "keng_qamrovli_qidiruv": "Comprehensive Search",
       "janr_muallif_yoki_kalit_sozlar": "Find books quickly and precisely by genre, author, or keywords. You can also discover rare and unique works along the way.",
       "moslashuvchan_oqish_tajribasi": "Flexible Reading Experience",
@@ -424,7 +427,7 @@
       "foydalanish_jarayoni": "How it works"
     },
     "onlaynTalimHero": {
-      "onlayn_talim": "Online education",
+      "onlayn_talim": "Online learning",
       "title_line1": "Systematic development",
       "title_highlight": "of knowledge and skills",
       "subtitle": "Deepen your knowledge through courses developed using modern educational methods.",
@@ -450,12 +453,12 @@
     "fAQSection": {
       "kop_beriladigan": "Frequently asked",
       "savollar": "questions",
-      "platforma_va_onlayn_kurslar": "Answers to the most common questions",
-      "platforma_va_elektron_jurnal": "Answers to the most common questions",
-      "platforma_va_raqamli_kutubxona": "Answers to the most common questions",
-      "platforma_va_mikromalutmotlar": "Answers to the most common questions",
-      "platforma_va_bosh_ish_orinlari": "Answers to the most common questions",
-      "eng_kop_beriladigan_savollarga": "about the platform and online courses",
+      "platforma_va_onlayn_kurslar": "Answers to frequently asked questions about online learning",
+      "platforma_va_elektron_jurnal": "Answers to frequently asked questions about the e-journal",
+      "platforma_va_raqamli_kutubxona": "Answers to frequently asked questions about the digital library",
+      "platforma_va_mikromalutmotlar": "Answers to frequently asked questions about microdata",
+      "platforma_va_bosh_ish_orinlari": "Answers to frequently asked questions about vacancies",
+      "eng_kop_beriladigan_savollarga": "Answers to frequently asked questions",
       "foydalanuvchilardan_izohlar": "Comments from users"
     },
     "heroZoom": {
@@ -493,7 +496,7 @@
       "card5_description": "The opportunity to find open positions, internships and professional projects for students, specialists and researchers."
     },
     "header": {
-      "beshta_platforma_orqali_oqish": "Five platforms for studying, research, learning and professional",
+      "beshta_platforma_orqali_oqish": "Five platforms for learning, research and professional",
       "rivojlanish_imkoniyatlari": "development.",
       "bizning_platformalar": "Our platforms",
       "barcha_imkoniyatlar": "All capabilities"
@@ -551,7 +554,7 @@
       "bilimlaringizni_chuqurlashtiring": "modern teaching methods",
       "bizning_platforma_orqali_siz": "",
       "mahalliy_va_xorijiy_mutaxassislar": "",
-      "onlayn_talim": "Online education",
+      "onlayn_talim": "Online learning",
       "platforma_haqida": "About the platform",
       "tizimli_rivojlantirish": "of knowledge and skills",
       "zamonaviy_talim_comma": "Modern education,",
@@ -656,13 +659,13 @@
       "barcha_sohalar": "All fields",
       "malumotlar": "Data",
       "mikromalumotlar_katalogi": "Microdata catalog",
-      "statistika_agentligi_tomonidan": "Work with individual-level datasets collected by the Statistics Agency and enrich your research.",
+      "statistika_agentligi_tomonidan": "Work with individual-level datasets collected by the National Statistics Committee and enrich your research.",
       "malumot_nomi_boyicha_qidirish": "Search by data name...",
       "bu_qidiruv_boyicha_malumot_topilmadi": "No data found for this search"
     },
     "ishOrinlari": {
       "ishorinlari": "Vacancies",
-      "sarlavha": "Job openings",
+      "sarlavha": "Vacancies",
       "tavsif": "Explore the current vacancies at our institute",
       "lavozim": "Position",
       "bolim": "Department",
@@ -675,7 +678,7 @@
       "tel": "Tel:",
       "e_mail": "E-mail:",
       "fuqarolarni_qabul_qilish": "Public reception:",
-      "rahbariyat_haqida": "About the management",
+      "rahbariyat_haqida": "About the management team",
       "institut_faoliyati_ozbekiston_respublika": "The institute operates under Resolution No. PQ-103 of the President of the Republic of Uzbekistan, dated 13 March 2025, on measures to achieve high effectiveness by upgrading the qualifications of national statistical system specialists and further accelerating the adoption of digital technologies in the field.",
       "institut_ozbekiston_respublikasi_milliy": "The institute is a state educational and research institution within the unified system of the National Statistics Committee of the Republic of Uzbekistan and reports to the Committee in its activities."
     },
@@ -708,14 +711,14 @@
       "huquqiy_asos_1": "The Institute for Professional Development and Statistical Research under the State Statistics Committee is the legal successor of the former Center for Personnel Retraining and Statistical Research.",
       "huquqiy_asos_2": "The Institute carries out its activities in accordance with its Charter, approved by Order No. 94 of the State Statistics Committee dated 10 September 2019 (registered with the Public Services Center of the Mirzo-Ulugbek district of Tashkent city on 11 September 2019), as well as the annual advanced-training and retraining program for state statistics staff and the statistical research program, both approved by the State Statistics Committee.",
       "huquqiy_asos_3": "The Institute's core mission is to organize the advanced training of state statistics staff efficiently and systematically, to widely introduce information and communication technologies and innovative methods into the training process, and to conduct statistical research in the economic and social spheres, including sectoral and regional issues. For staff retraining and upskilling, the Institute has established 2 departments (chairs), and for statistical research in the economic and social spheres, as well as sectoral and regional issues, 3 divisions.",
-      "huquqiy_asos_4": "The Institute publishes the quarterly electronic scientific journal 'Statistical Bulletin of Uzbekistan' (www.statmirror.uz, certificate No. 1309 of the Information and Mass Communications Agency dated 27 August 2019). Under Resolution No. 269/2 of the Presidium of the Higher Attestation Commission dated 30 September 2019, a scientific council (No. DSc.30.09.2019.I.92.01) operates at the Institute, awarding the degree of Doctor of Economic Sciences in the specialties 'Econometrics and Statistics' and 'Information Systems and Technologies in Economics'. Accordingly, based on annually allocated admission quotas, basic doctoral and doctoral studies in these specialties are organized for researchers."
+      "huquqiy_asos_4": "The Institute publishes the quarterly electronic scientific journal “Statistical Bulletin of Uzbekistan” (www.statmirror.uz, certificate No. 1309 of the Information and Mass Communications Agency dated 27 August 2019). Under Resolution No. 269/2 of the Presidium of the Higher Attestation Commission dated 30 September 2019, a scientific council (No. DSc.30.09.2019.I.92.01) operates at the Institute, awarding the degree of Doctor of Economic Sciences in the specialties “Econometrics and Statistics” and “Information Systems and Technologies in Economics”. Accordingly, based on annually allocated admission quotas, basic doctoral and doctoral studies in these specialties are organized for researchers."
     },
     "yotoqxona": {
       "yotoqhona": "Dormitory"
     },
     "about": {
       "ortga": "Back",
-      "head_line": "Training and Statistical Research Institute",
+      "head_line": "Institute for Professional Development and Statistical Research",
       "share_this_blog": "Share this page",
       "malumotlar_va_tahlil_ilmi": "“Data and analytics science”",
       "raqamli_talim_platformasi": "Digital education platform",
@@ -723,9 +726,9 @@
       "umumiy_malumotlar": "General Information",
       "tuzilma": "Structure",
       "rahbariyat": "Management",
-      "korrupsiyaga_qarshi_kurashish": "Anti-Corruption",
+      "korrupsiyaga_qarshi_kurashish": "Anti-corruption",
       "bosh_ish_orinlari": "Vacancies",
-      "mehmonhona_turidagi_yotoqhona": "Hotel-Type Dormitory",
+      "mehmonhona_turidagi_yotoqhona": "Hotel-type dormitory",
       "odob_axloq_qoidalari": "Code of Ethics"
     },
     "mediaServise": {
@@ -742,8 +745,8 @@
     "science": {
       "ortga": "Back",
       "share_this_blog": "Share this page",
-      "ilmiy_tadqiqot": "Scientific Research",
-      "oliy_talim": "Higher Education",
+      "ilmiy_tadqiqot": "Research program",
+      "oliy_talim": "Postgraduate education",
       "institut_tadqiqotlari": "Institute research"
     }
   },
@@ -783,19 +786,19 @@
     "faq": {
       "faq-1": {
         "question": "What is the INSTAT platform?",
-        "answer": "INSTAT is the Institute for Professional Development and Statistical Research under the Statistics Agency of the President of the Republic of Uzbekistan. The platform brings together online courses, an e-library and statistical data."
+        "answer": "INSTAT is the Institute for Professional Development and Statistical Research under the National Statistics Committee of the Republic of Uzbekistan. The platform brings together online courses, an e-library and statistical data."
       },
       "faq-2": {
         "question": "What courses are available on the platform?",
         "answer": "Courses cover the system of national accounts, statistical methodology, industrial statistics, gender statistics, investment statistics and many other areas — for both beginner and professional levels."
       },
       "faq-3": {
-        "question": "How do I enrol in a course?",
-        "answer": "To register, click “Sign up”, enter your details and confirm your email. After that you can enrol in any course."
+        "question": "How do I enroll in a course?",
+        "answer": "To register, click “Sign up”, enter your details and confirm your email. After that you can enroll in any course."
       },
       "faq-4": {
         "question": "Are the courses paid or free?",
-        "answer": "The platform's core courses are free. Some specialised courses and certification programmes may be paid; prices are shown on each course page."
+        "answer": "The platform's core courses are free. Some specialized courses and certification programs may be paid; prices are shown on each course page."
       },
       "faq-5": {
         "question": "How do I use the e-library?",
@@ -825,7 +828,7 @@
       },
       "article-requirements-3": {
         "title": "Complete author details",
-        "desc": "Full name, academic degree, position, organisation, city/country, email and phone number must be given in the language of the main text."
+        "desc": "Full name, academic degree, position, organization, city/country, email and phone number must be given in the language of the main text."
       },
       "article-requirements-4": {
         "title": "Abstract in three languages",

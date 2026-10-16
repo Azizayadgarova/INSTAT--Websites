@@ -29,8 +29,8 @@ const INFO_LINKS = [
   { label: 'pages.about.rahbariyat', fallback: 'Rahbariyat', path: '/about/rahbariyat' },
   { label: 'pages.about.korrupsiyaga_qarshi_kurashish', fallback: 'Korrupsiyaga qarshi kurashish', path: '/about/qarshi-kurash' },
   { label: 'pages.about.bosh_ish_orinlari', fallback: "Bo'sh ish o'rinlari", path: '/about/ish-orinlar' },
-  { label: 'pages.about.mehmonhona_turidagi_yotoqhona', fallback: 'Mehmonhona turidagi yotoqhona', path: '/about/yotoqhona' },
-  { label: 'pages.about.odob_axloq_qoidalari', fallback: 'Odob axloq qoidalari', path: '/about/odob-axloq' },
+  { label: 'pages.about.mehmonhona_turidagi_yotoqhona', fallback: 'Mehmonxona turidagi yotoqxona', path: '/about/yotoqhona' },
+  { label: 'pages.about.odob_axloq_qoidalari', fallback: 'Odob-axloq qoidalari', path: '/about/odob-axloq' },
 ]
 
 const LINE_COLOR = 'rgba(var(--blue-rgb),0.4)'
@@ -278,7 +278,7 @@ const About = () => {
                     boxShadow: 'inset 0px 5px 20px rgba(255,255,255,0.05), 0px -10px 40px rgba(var(--blue-rgb),0.2)',
                   }}
                 >
-                  <img src={instanIcon} alt='logo' className='w-[220px] h-[220px] object-contain relative z-10' loading='lazy' decoding='async' />
+                  <img src={instanIcon} alt='INSTAT' className='w-[220px] h-[220px] object-contain relative z-10' loading='lazy' decoding='async' />
                 </div>
               </div>
             </motion.div>
@@ -340,7 +340,7 @@ const About = () => {
                     boxShadow: 'inset 0px 5px 20px rgba(255,255,255,0.05), 0px 0px 40px rgba(var(--blue-rgb),0.3)',
                   }}
                 >
-                  <img src={instanIcon} alt='logo' className='w-[110px] h-[110px] object-contain' loading='lazy' decoding='async' />
+                  <img src={instanIcon} alt='INSTAT' className='w-[110px] h-[110px] object-contain' loading='lazy' decoding='async' />
                 </div>
               </div>
             </motion.div>

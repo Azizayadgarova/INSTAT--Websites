@@ -51,7 +51,7 @@ describe('API kontenti sahifada ko‘rinadi', () => {
 		const { container } = wrap(<ContentPage module='odob' contentKey='odob' title='Odob' showLabels previewable />)
 		await waitFor(() => expect(screen.getByRole('heading', { name: 'Odob-axloq qoidalari' })).toBeInTheDocument())
 		expect(container.querySelector('iframe')).toBeNull()
-		fireEvent.click(screen.getByRole('button', { name: /Oldindan ko'rish|Ko'rish/ }))
+		fireEvent.click(screen.getByRole('button', { name: /Oldindan ko[ʻ'‘’]rish|Ko[ʻ'‘’]rish/ }))
 		expect(container.querySelector('iframe')).toHaveAttribute('src', 'https://x/odob.pdf')
 	})
 
@@ -59,7 +59,7 @@ describe('API kontenti sahifada ko‘rinadi', () => {
 		const { container } = wrap(<ContentPage module='science' contentKey='science_research' title='Tadqiqot' showLabels previewable />)
 		await waitFor(() => expect(screen.getByRole('heading', { name: 'Institut tadqiqotlari' })).toBeInTheDocument())
 		expect(container.textContent).toMatch(/Tadqiqot matni/)
-		fireEvent.click(screen.getByRole('button', { name: /Oldindan ko'rish|Ko'rish/ }))
+		fireEvent.click(screen.getByRole('button', { name: /Oldindan ko[ʻ'‘’]rish|Ko[ʻ'‘’]rish/ }))
 		expect(container.querySelector('iframe')).toHaveAttribute('src', 'https://x/research.pdf')
 	})
 

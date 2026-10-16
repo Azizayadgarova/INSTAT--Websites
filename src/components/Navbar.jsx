@@ -11,7 +11,7 @@ import facebook from '../assets/icons/facebook.png'
 import instagram from '../assets/icons/instaIcon.png'
 import twitter from '../assets/icons/social3.png'
 import useSectionText from "@/hooks/useSectionText.js";
-import { API_CABINET_URL } from '@/config/api'
+import { openCabinet } from '@/utils/cabinet'
 
 const Navbar = () => {
 	const contacts = useContacts()
@@ -36,7 +36,7 @@ const Navbar = () => {
 
 	function handleLogin()
 	{
-		window.open(API_CABINET_URL, '_blank')
+		openCabinet()
 	}
 
 
@@ -51,7 +51,7 @@ const Navbar = () => {
 				<div className='max-w-[1440px] mx-auto flex items-center justify-between py-[20px] px-5 md:px-[100px]'>
 					<img
 						src={logoImg}
-						alt='Logo'
+						alt='INSTAT'
 						fetchpriority='high'
 						width={208}
 						height={30}
@@ -70,7 +70,7 @@ const Navbar = () => {
 							border border-[#5FA2F0] text-white
 							w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2'
 						>
-							<img src={menuIcon} alt='Menu' width={16} loading='lazy' decoding='async' />
+							<img src={menuIcon} alt={t('components.navbar.menu')} width={16} loading='lazy' decoding='async' />
 							<span className='hidden md:inline'>{t("components.navbar.menyu")}</span>
 						</button>
 					</div>

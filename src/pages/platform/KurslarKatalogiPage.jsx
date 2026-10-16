@@ -142,7 +142,7 @@ const CourseCard = ({ course, i, lang, t, navigate }) => {
 						<img
 							key={starIdx}
 							src={StarIcon}
-							alt='star'
+							alt=''
 							className='w-4 h-4'
 							loading='lazy'
 							decoding='async'
@@ -153,7 +153,7 @@ const CourseCard = ({ course, i, lang, t, navigate }) => {
 			</div>
 			<div className='flex items-center justify-between mt-auto'>
 				<div className='flex items-center gap-1.5'>
-					<img src={ClockIcon} alt='clock' className='w-4 h-4' loading='lazy' decoding='async' />
+					<img src={ClockIcon} alt='' className='w-4 h-4' loading='lazy' decoding='async' />
 					<span className='text-[#BCBCBC] text-sm font-light'>
 						{durationValue}{t(`components.coursesSection.${durationUnit}`)}</span>
 				</div>

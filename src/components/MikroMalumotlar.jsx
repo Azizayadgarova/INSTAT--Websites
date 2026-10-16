@@ -353,7 +353,7 @@ function DatasetSection() {
 				fontSize: '16px', lineHeight: '140%', color: 'rgba(202,202,206,1)',
 				textAlign: 'center', maxWidth: '500px', margin: '16px 0 40px',
 			}}>
-				Statistika agentligi tomonidan yig'ilgan individual darajadagi ma'lumotlar to'plamlari
+				Milliy statistika qo'mitasi tomonidan yig'ilgan individual darajadagi ma'lumotlar to'plamlari
 				bilan ishlang va tadqiqotlaringizni boyiting.
 			</p>
 

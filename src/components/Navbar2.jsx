@@ -13,7 +13,7 @@ import useSectionText from "@/hooks/useSectionText.js";
 import useContacts from "@/hooks/useContacts.js";
 import useExternalMenuLink from "@/hooks/useExternalMenuLink.js";
 import MenuLink from "@/components/shared/MenuLink.jsx";
-import { API_CABINET_URL } from '@/config/api'
+import { openCabinet } from '@/utils/cabinet'
 
 const NAV_LINK_PATHS = [
 	{ key: 'onlayn_talim',       path: '/platform/onlayn-talim' },
@@ -24,7 +24,7 @@ const NAV_LINK_PATHS = [
 
 function handleLogin()
 {
-	window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
+	openCabinet()
 }
 
 const Navbar2 = () => {
@@ -181,7 +181,7 @@ const Navbar2 = () => {
 						onClick={handleLogin}
 						className='hidden md:flex gap-2 px-4 py-2'
 					>
-						<img src={userIcon} alt='user' width={16} height={16} loading='lazy' decoding='async' />
+						<img src={userIcon} alt='' width={16} height={16} loading='lazy' decoding='async' />
 						<span>{t("components.navbar2.shaxsiy_kabinet")}</span>
 					</button>
 					<button
@@ -191,7 +191,7 @@ const Navbar2 = () => {
 							border border-[#5FA2F0] text-white
 							w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2'
 					>
-						<img src={menuIcon} alt='Menu' width={16} loading='lazy' decoding='async' />
+						<img src={menuIcon} alt={t('components.navbar.menu')} width={16} loading='lazy' decoding='async' />
 						<span className='hidden md:inline'>{t("components.navbar.menyu")}</span>
 					</button>
 					{/* Mobile: hamburger tugmasi */}
