@@ -6,12 +6,11 @@ import userIcon from '@/assets/icons/user-line.png'
 import menuIcon from '@/assets/menu-line.png'
 import LanguageSwitcher from "@/components/shared/LanguageSwitcher.jsx";
 import useMenu from "@/hooks/useMenu.js";
-import twitter from "@/assets/icons/social3.png";
-import facebook from "@/assets/icons/facebook.png";
-import instagram from "@/assets/icons/instaIcon.png";
 import useSectionText from "@/hooks/useSectionText.js";
 import useContacts from "@/hooks/useContacts.js";
+import { useSocialLinks } from "@/hooks/useSocialLinks";
 import useExternalMenuLink from "@/hooks/useExternalMenuLink.js";
+import { useMenuNav } from "@/hooks/useMenuNav";
 import MenuLink from "@/components/shared/MenuLink.jsx";
 import { openCabinet } from '@/utils/cabinet'
 
@@ -34,19 +33,19 @@ const Navbar2 = () => {
 	const menuConfig = useMenu()
     const { pathname } = useLocation()
     const [isOpen, setIsOpen] = useState(false)
-	const [activeMenu, setActiveMenu] = useState('axborot')
-	const [activeLinkIndex, setActiveLinkIndex] = useState(null)
+	const { activeMenu, pickMenu, activeLinkIndex, setActiveLinkIndex, current, isCurrentLink } = useMenuNav(menuConfig, isOpen)
     const NAV_LINKS = NAV_LINK_PATHS.map(link => ({
 		path: link.path,
 		label: t(`components.navbar2.${link.key}`),
 	}))
 	const contacts = useContacts()
+	const socials = useSocialLinks()
 	const externalHref = useExternalMenuLink()
 
 	const st = useSectionText('all')
 
     const closeMenu = useCallback(() => setIsOpen(false), [])
-    const toggleMenu = useCallback(() => setIsOpen(!isOpen), [])
+    const toggleMenu = useCallback(() => setIsOpen(p => !p), [])
 
     useEffect(() => {
 		document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -270,10 +269,7 @@ const Navbar2 = () => {
 									{Object.entries(menuConfig).map(([key, item]) => (
 										<li key={key}>
 											<div
-												onClick={() => {
-													setActiveMenu(key)
-													setActiveLinkIndex(null)
-												}}
+												onClick={() => pickMenu(key)}
 												className={`text-[28px] md:text-[32px] font-inter font-semibold cursor-pointer transition-colors duration-200 ${
 													activeMenu === key
 														? 'text-cyan-300'
@@ -281,6 +277,10 @@ const Navbar2 = () => {
 												}`}
 											>
 												{item.title}
+												{/* Ochiq sahifa shu bo'limda, lekin boshqa bo'lim ko'rilayotgan bo'lsa — belgi */}
+												{current?.section === key && activeMenu !== key && (
+													<span aria-hidden='true' className='ml-3 inline-block h-[8px] w-[8px] rounded-full bg-cyan-300 align-middle' />
+												)}
 											</div>
 
 											{/* Mobile: active bo'lganda ichki bo'limlar inline */}
@@ -291,15 +291,17 @@ const Navbar2 = () => {
 															key={link.path}
 															onClick={() => setActiveLinkIndex(i)}
 															style={{
-																color: activeLinkIndex === i ? 'white' : 'rgba(90,98,117,1)',
+																color: activeLinkIndex === i || isCurrentLink(key, i) ? 'white' : 'rgba(90,98,117,1)',
 															}}
-															className='cursor-pointer text-[14px] font-inter hover:text-white transition-colors duration-200'
+															className={`cursor-pointer text-[14px] font-inter hover:text-white transition-colors duration-200 ${isCurrentLink(key, i) ? 'font-semibold' : ''}`}
 														>
 															<MenuLink
 																href={externalHref(key, link.path)}
 																to={`${menuConfig[activeMenu].base}/${link.path}`}
 																onClick={closeMenu}
+																aria-current={isCurrentLink(key, i) ? 'page' : undefined}
 															>
+																{isCurrentLink(key, i) && <span aria-hidden='true' className='mr-2 inline-block h-[6px] w-[6px] rounded-full bg-cyan-300 align-middle' />}
 																{link.name}
 															</MenuLink>
 														</li>
@@ -323,15 +325,17 @@ const Navbar2 = () => {
 												transform: isOpen ? 'translateX(0)' : 'translateX(50px)',
 												opacity: isOpen ? 1 : 0,
 												transition: `all 0.3s ease ${i * 0.05}s`,
-												color: activeLinkIndex === i ? 'white' : 'rgba(90,98,117,1)',
+												color: activeLinkIndex === i || isCurrentLink(activeMenu, i) ? 'white' : 'rgba(90,98,117,1)',
 											}}
-											className='cursor-pointer text-[15px] font-inter hover:text-white transition-colors duration-200'
+											className={`cursor-pointer text-[15px] font-inter hover:text-white transition-colors duration-200 ${isCurrentLink(activeMenu, i) ? 'font-semibold' : ''}`}
 										>
 											<MenuLink
 												href={externalHref(activeMenu, link.path)}
 												to={`${menuConfig[activeMenu].base}/${link.path}`}
 												onClick={closeMenu}
+												aria-current={isCurrentLink(activeMenu, i) ? 'page' : undefined}
 											>
+												{isCurrentLink(activeMenu, i) && <span aria-hidden='true' className='mr-2 inline-block h-[6px] w-[6px] rounded-full bg-cyan-300 align-middle' />}
 												{link.name}
 											</MenuLink>
 										</li>
@@ -358,19 +362,17 @@ const Navbar2 = () => {
 								<p className='mb-1 text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.manzil")}</p>
 								<p className='text-white'>{contacts.address.full}</p>
 							</div>
+							{socials.length > 0 && (
 							<div>
 								<div className='flex gap-4 mt-1'>
-									{[
-										{ src: twitter, label: 'X (Twitter)', href: contacts.social.twitter },
-										{ src: facebook, label: 'Facebook', href: contacts.social.facebook },
-										{ src: instagram, label: 'Instagram', href: contacts.social.instagram },
-									].map(({ src, label, href }) => (
-										<a key={label} href={href} target='_blank' rel='noopener noreferrer' aria-label={label}>
-											<img src={src} alt={label} className='w-6 h-6' loading='lazy' decoding='async' />
+									{socials.map(({ key, label, href, Icon }) => (
+										<a key={key} href={href} target='_blank' rel='noopener noreferrer' aria-label={label} title={label} className='text-white hover:opacity-70 transition'>
+											<Icon size={24} aria-hidden='true' />
 										</a>
 									))}
 								</div>
 							</div>
+						)}
 						</div>
 
 						{/* Desktop: gorizontal */}
@@ -387,20 +389,18 @@ const Navbar2 = () => {
 								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.manzil")}</p>
 								<p className='max-w-[320px] text-white'>{st('address', "")}</p>
 							</div>
+							{socials.length > 0 && (
 							<div>
 								<p className='mb-3 whitespace-nowrap text-[rgba(var(--muted-rgb),1)]'>{t("components.navbar.ijtimoiy_tarmoqlar")}</p>
 								<div className='flex gap-4'>
-									{[
-										{ src: twitter, label: 'X (Twitter)', href: st('twitter', contacts.social.twitter) },
-										{ src: facebook, label: 'Facebook', href:   st('facebook', contacts.social.facebook) },
-										{ src: instagram, label: 'Instagram', href: st('instagram', contacts.social.instagram) },
-									].map(({ src, label, href }) => (
-										<a key={label} href={href} target='_blank' rel='noopener noreferrer' aria-label={label}>
-											<img src={src} alt={label} className='w-6 h-6' loading='lazy' decoding='async' />
+									{socials.map(({ key, label, href, Icon }) => (
+										<a key={key} href={href} target='_blank' rel='noopener noreferrer' aria-label={label} title={label} className='text-white hover:opacity-70 transition'>
+											<Icon size={24} aria-hidden='true' />
 										</a>
 									))}
 								</div>
 							</div>
+						)}
 						</div>
 					</div>
 				</div>

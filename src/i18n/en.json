@@ -740,7 +740,8 @@
     },
     "yangiliklar": {
       "badge": "News",
-      "other": "Other news"
+      "back": "All news",
+      "not_found": "News item not found"
     },
     "science": {
       "ortga": "Back",

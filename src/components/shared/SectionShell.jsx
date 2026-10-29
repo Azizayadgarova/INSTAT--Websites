@@ -1,7 +1,8 @@
-import { Link, NavLink, useOutlet } from 'react-router-dom'
+import { NavLink, useOutlet } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Seo from './Seo'
 import SocialLinks from './SocialLinks'
+import MenuBackButton from '@/components/shared/MenuBackButton'
 
 /** Sidebar qatori — ichki (NavLink) va tashqi (<a>) havolada bir xil ko'rinadi. */
 const renderRow = (link, isActive) => (
@@ -51,8 +52,7 @@ const SectionShell = ({ title, description, links = [], showOutlet = true, child
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-6 px-5 py-8 md:flex-row md:gap-0 md:px-[60px] lg:px-[130px]'>
 				<aside className='w-full flex-shrink-0 md:sticky md:top-20 md:h-[calc(100vh-80px)] md:w-[320px] lg:w-[365px]'>
 					<div className='flex h-full flex-col overflow-y-auto pb-6 md:pt-[35px] md:pb-10'>
-						<Link
-							to='/'
+						<MenuBackButton
 							className='mb-6 flex h-10 w-[88px] items-center justify-center gap-2 rounded-[10px] px-[10px] text-[14px] font-medium text-white no-underline transition-all duration-300 md:mb-9'
 							style={{
 								background: 'rgba(var(--blue-rgb),0.05)',
@@ -64,7 +64,7 @@ const SectionShell = ({ title, description, links = [], showOutlet = true, child
 								<path d='M10 12L6 8L10 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
 							</svg>
 							<span>{t('common.back')}</span>
-						</Link>
+						</MenuBackButton>
 
 						<h1 className='mb-4 px-1 text-[22px] font-semibold text-white'>{title}</h1>
 

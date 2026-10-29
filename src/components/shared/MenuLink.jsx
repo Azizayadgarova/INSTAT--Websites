@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom'
  * `href` holatida ham <a> ishlatiladi (o'rta tugma / "havolani nusxalash"
  * ishlashi uchun), ochish esa window.open orqali.
  */
-const MenuLink = ({ href, to, onClick, children }) =>
+const MenuLink = ({ href, to, onClick, children, ...rest }) =>
 	href ? (
 		<a
+			{...rest}
 			href={href}
 			target='_blank'
 			rel='noopener noreferrer'
@@ -22,7 +23,7 @@ const MenuLink = ({ href, to, onClick, children }) =>
 			{children}
 		</a>
 	) : (
-		<Link to={to} onClick={onClick}>
+		<Link to={to} onClick={onClick} {...rest}>
 			{children}
 		</Link>
 	)

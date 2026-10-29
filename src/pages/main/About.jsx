@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { lazy, Suspense, useState } from 'react'
-import { Link, NavLink, useOutlet } from 'react-router-dom'
+import { NavLink, useOutlet } from 'react-router-dom'
 import AnimatedSection from '../../components/shared/AnimatedSection'
 import ParticleCanvas from '../../components/shared/ParticleCanvas'
 import AboutCard from '../../components/shared/AboutCard'
@@ -14,6 +14,7 @@ import { Button } from '../../components/shared/Button'
 import SocialLinks from '@/components/shared/SocialLinks'
 import { EASE_SMOOTH } from '../../constants/animations'
 import useSectionText from "@/hooks/useSectionText.js";
+import MenuBackButton from '@/components/shared/MenuBackButton'
 
 const ModernEducation = lazy(() => import('../../components/ModernEducation'))
 const HeroZoom = lazy(() => import('../../components/HeroZoom'))
@@ -124,15 +125,14 @@ const About = () => {
             }}>
               {/* Ortga button */}
               <div>
-                <Link
-                  to="/"
+                <MenuBackButton
                   className="w-[88px] h-[40px] flex items-center justify-center gap-2 rounded-[10px] px-[10px] mb-9 text-white no-underline text-[14px] font-medium bg-[rgba(var(--blue-rgb),0.05)] backdrop-blur-[16px] shadow-[inset_0_2px_6px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(var(--bg-rgb),0.3),0_16px_24px_-8px_rgba(var(--bg-rgb),0.1),0_0_0_1px_rgba(255,255,255,0.08)] hover:text-white hover:scale-[1.02] transition-all duration-300"
                 >
                   <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
                     <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <span>{t("pages.about.ortga")}</span>
-                </Link>
+                </MenuBackButton>
               </div>
 
               {/* Nav — har bir link border orqali uzluksiz chiziq hosil qiladi */}

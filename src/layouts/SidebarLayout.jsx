@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link, NavLink, useOutlet } from 'react-router-dom'
+import { NavLink, useOutlet } from 'react-router-dom'
 
 import SocialLinks from '@/components/shared/SocialLinks'
+import MenuBackButton from '@/components/shared/MenuBackButton'
 
 const NavItem = ({ link }) => {
 	const [hovered, setHovered] = useState(false)
@@ -87,12 +88,11 @@ const SidebarLayout = ({ links }) => {
 							paddingBottom: 40,
 						}}
 					>
-						<Link
-							to='/'
+						<MenuBackButton
 							className='w-[88px] h-[40px] flex items-center justify-center gap-2 rounded-[10px] px-[10px] mb-9 text-white no-underline text-[14px] font-medium bg-[rgba(var(--blue-rgb),0.05)] backdrop-blur-[16px] shadow-[inset_0_2px_6px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(var(--bg-rgb),0.3),0_16px_24px_-8px_rgba(var(--bg-rgb),0.1),0_0_0_1px_rgba(255,255,255,0.08)]'
 						>
 							{t('components.sidebarLayout.ortga')}
-						</Link>
+						</MenuBackButton>
 
 						<nav>
 							{links.map(item => (

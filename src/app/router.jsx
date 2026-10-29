@@ -64,6 +64,7 @@ const MediaServise = lazy(() => import('../pages/main/MediaServise'))
 const Hamkorlik = lazy(() => import('../pages/matbuot/Hamkorlik'))
 const Tadbirlar = lazy(() => import('../pages/matbuot/Tadbirlar'))
 const Yangiliklar = lazy(() => import('../pages/matbuot/Yangiliklar'))
+const YangilikDetail = lazy(() => import('../pages/matbuot/YangilikDetail'))
 
 const PageFallback = () => (
 	<div style={{ background: 'rgba(var(--bg-rgb),1)', minHeight: '100vh' }} />
@@ -153,6 +154,7 @@ export const routes = [
 					{ path: 'hamkorlik', element: s(Hamkorlik) },
 					{ path: 'tadbirlar', element: s(Tadbirlar) },
 					{ path: 'yangiliklar', element: s(Yangiliklar) },
+					{ path: 'yangiliklar/:id', element: s(YangilikDetail) },
 				],
 			},
 		],

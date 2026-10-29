@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import lobus from '@/assets/Countries.png'
-import fotIcon2 from '@/assets/EeUrJQfpXibXJa3MotZvgAm9tsY.svg fill.png'
-import fotIcon3 from '@/assets/iBEROwOJyQaiqZZ4k8N5Sj51w.svg.png'
-import fotIcon1 from '@/assets/icons/fUwXkleZJbkDUDDvw93zVo3gnls.svg fill.png'
 import icon1 from '@/assets/icons/InstatIcon.png'
 import { memo, useEffect, useRef } from 'react'
 import {Link} from "react-router-dom";
-import useSectionText from "@/hooks/useSectionText.js";
+import { useSocialLinks } from '@/hooks/useSocialLinks'
 
 const HEADING = {
 	fontFamily: 'Inter Display, sans-serif',
@@ -134,18 +131,7 @@ const Footer = () => {
         t
     } = useTranslation();
 
-	const st = useSectionText('all')
-
-	const SOCIAL = [{
-		link: st('twitter'),
-		icon: fotIcon1
-	},{
-		link: st('linkedin'),
-		icon: fotIcon2
-	},{
-		link: st('instagram'),
-		icon: fotIcon3
-	},]
+	const socials = useSocialLinks()
 
     const saytlar = SAYTLAR_PATHS.map(item => ({ to: item.to, label: t(`components.footer.${item.key}`) }))
     const huquqiy = HUQUQIY_KEYS.map(key => ({ key, label: t(`components.footer.${key}`) }))
@@ -261,21 +247,27 @@ const Footer = () => {
             </div>
             <div className='max-w-[1200px] mx-auto px-6 border-t border-white/10 pt-[10px] pb-[10px] md:py-8 flex flex-col-reverse md:flex-row justify-center md:justify-between items-center gap-4 relative z-10'>
                         <p className='text-center md:text-left' style={{ ...LINK, fontSize: '13px', color: 'rgba(255,255,255,1)' }}>{t("components.footer.instat_inc_barcha_huquqlar")}</p>
-                        <div className='flex gap-3'>
-                            {SOCIAL.map(icon => (
-                                <a
-									href={icon.link}
-                                    key={icon.icon}
-                                    className='w-10 h-10 rounded-xl flex items-center justify-center hover:opacity-80 transition cursor-pointer'
-                                    style={{
-                                        background:
-                                            'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)',
-                                    }}
-                                >
-                                    <img src={icon.icon} alt='' className='w-5 h-5' loading='lazy' decoding='async' />
-                                </a>
-                            ))}
-                        </div>
+                        {socials.length > 0 && (
+                            <div className='flex gap-3'>
+                                {socials.map(({ key, label, href, Icon }) => (
+                                    <a
+                                        href={href}
+                                        key={key}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        aria-label={label}
+                                        title={label}
+                                        className='w-10 h-10 rounded-xl flex items-center justify-center text-white hover:opacity-80 transition cursor-pointer'
+                                        style={{
+                                            background:
+                                                'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)',
+                                        }}
+                                    >
+                                        <Icon size={20} aria-hidden='true' />
+                                    </a>
+                                ))}
+                            </div>
+                        )}
                     </div>
         </footer>
     );

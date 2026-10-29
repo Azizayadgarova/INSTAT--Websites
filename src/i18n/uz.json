@@ -740,7 +740,8 @@
 		},
 		"yangiliklar": {
 			"badge": "Yangiliklar",
-			"other": "Boshqa yangiliklar"
+			"back": "Barcha yangiliklar",
+			"not_found": "Yangilik topilmadi"
 		},
 		"science": {
 			"ortga": "Ortga",
