@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { memo, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import logoImg from '@/assets/icons/InstatIcon.png'
 import menuIcon from '@/assets/menu-line.png'
 import { useContacts } from '../hooks/useContacts'
@@ -47,14 +48,16 @@ const Navbar = () => {
                 scroll progress, kursor) uchun bo'sh qoladi. */}
             <nav className='fixed w-full z-[1000] bg-[rgba(18,14,27,0.2)] backdrop-blur-[40px]'>
 				<div className='max-w-[1440px] mx-auto flex items-center justify-between py-[20px] px-5 md:px-[100px]'>
-					<img
-						src={logoImg}
-						alt='INSTAT'
-						fetchpriority='high'
-						width={208}
-						height={30}
-						className='w-52 h-7.5 md:h-auto'
-						style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} decoding='async' />
+					<Link to='/' aria-label='INSTAT'>
+						<img
+							src={logoImg}
+							alt='INSTAT'
+							fetchpriority='high'
+							width={208}
+							height={30}
+							className='w-52 h-7.5 md:h-auto'
+							style={{ paddingLeft: '10px', paddingRight: '10px', opacity: 1, objectFit: 'contain' }} decoding='async' />
+					</Link>
 					<div className='flex items-center gap-4'>
 
 						<LanguageSwitcher compact />
