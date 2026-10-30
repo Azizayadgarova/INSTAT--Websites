@@ -7,26 +7,15 @@ export const menuConfig = {
 		base: '/about',
 		paths: [
 			'umumiy-malumot',
-			'tuzilma',
 			'rahbariyat',
+			'tuzilma',
 			'qarshi-kurash',
 			'ish-orinlar',
 			'yotoqhona',
 			'odob-axloq',
 		],
 	},
-	axborot: {
-		base: '/information-resurses',
-		paths: [
-			'axborot-tizimi',
-			'rivojlanish-maqsadlari',
-			'gender-statistika',
-			'royhatga-olish',
-			'qishloq-xojaligi',
-			'ochiq-malumotlar',
-			'statistika-agentligi',
-		],
-	},
+
 	oquvFaoliyati: {
 		base: '/oquv-faoliyati',
 		paths: [
@@ -45,6 +34,18 @@ export const menuConfig = {
 	media: {
 		base: '/media-servises',
 		paths: ['yangiliklar', 'tadbirlar', 'hamkorlik'],
+	},
+	axborot: {
+		base: '/information-resurses',
+		paths: [
+			'axborot-tizimi',
+			'rivojlanish-maqsadlari',
+			'gender-statistika',
+			'royhatga-olish',
+			'qishloq-xojaligi',
+			'ochiq-malumotlar',
+			'statistika-agentligi',
+		],
 	},
 }
 

@@ -26,8 +26,8 @@ const FAQSection = lazy(() => import('../../components/FAQSection'))
 
 const INFO_LINKS = [
   { label: 'pages.about.umumiy_malumotlar', fallback: "Umumiy ma'lumotlar", path: '/about/umumiy-malumot' },
-  { label: 'pages.about.tuzilma', fallback: 'Tuzilma', path: '/about/tuzilma' },
   { label: 'pages.about.rahbariyat', fallback: 'Rahbariyat', path: '/about/rahbariyat' },
+  { label: 'pages.about.tuzilma', fallback: 'Tuzilma', path: '/about/tuzilma' },
   { label: 'pages.about.korrupsiyaga_qarshi_kurashish', fallback: 'Korrupsiyaga qarshi kurashish', path: '/about/qarshi-kurash' },
   { label: 'pages.about.bosh_ish_orinlari', fallback: "Bo'sh ish o'rinlari", path: '/about/ish-orinlar' },
   { label: 'pages.about.mehmonhona_turidagi_yotoqhona', fallback: 'Mehmonxona turidagi yotoqxona', path: '/about/yotoqhona' },

@@ -205,6 +205,34 @@ const Tuzilma = () => {
                 >{t("pages.tuzilma.kontakt")}</span>
             </div>
             <div className='grid grid-cols-1 gap-6 md:grid-cols-1  xl:grid-cols-1'>
+
+                {/* Tashkiliy tuzilma rasmi (API: module=structure) */}
+                {structureImg && (
+                    <div
+                        style={{
+                            background: 'rgba(31, 37, 51, 1)',
+                            borderRadius: '16px',
+                            padding: '16px',
+                            boxSizing: 'border-box',
+                        }}
+                    >
+                        <h3 style={{ ...TITLE, marginBottom: '16px' }}>{t("pages.tuzilma.tuzilma_rasmi")}</h3>
+                        <a href={structureImg} target='_blank' rel='noopener noreferrer'>
+                            <img
+                                src={structureImg}
+                                alt={t("pages.tuzilma.tuzilma_rasmi")}
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    display: 'block',
+                                    borderRadius: '12px',
+                                }}
+                                loading='lazy'
+                                decoding='async'
+                            />
+                        </a>
+                    </div>
+                )}
                 {/* Card 1 */}
                 <div
                     style={{
@@ -222,6 +250,8 @@ const Tuzilma = () => {
                     }}
                 >
                     <div>
+
+
                         <h3 style={TITLE}>{t("pages.tuzilma.biz_bilan_boglaning")}</h3>
 
                         <div
@@ -452,34 +482,6 @@ const Tuzilma = () => {
                 </div>
             </div>
 
-            {/* Tashkiliy tuzilma rasmi (API: module=structure) */}
-            {structureImg && (
-                <div
-                    style={{
-                        marginTop: '24px',
-                        background: 'rgba(31, 37, 51, 1)',
-                        borderRadius: '16px',
-                        padding: '16px',
-                        boxSizing: 'border-box',
-                    }}
-                >
-                    <h3 style={{ ...TITLE, marginBottom: '16px' }}>{t("pages.tuzilma.tuzilma_rasmi")}</h3>
-                    <a href={structureImg} target='_blank' rel='noopener noreferrer'>
-                        <img
-                            src={structureImg}
-                            alt={t("pages.tuzilma.tuzilma_rasmi")}
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                                display: 'block',
-                                borderRadius: '12px',
-                            }}
-                            loading='lazy'
-                            decoding='async'
-                        />
-                    </a>
-                </div>
-            )}
         </div>
     );
 }
