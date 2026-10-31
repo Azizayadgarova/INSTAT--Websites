@@ -538,6 +538,14 @@
 		}
 	},
 	"pages": {
+		"certificateDownload": {
+			"title": "Sertifikat",
+			"loading": "Sertifikat tayyorlanmoqda...",
+			"not_found": "Sertifikat topilmadi",
+			"error": "Sertifikatni yuklab bo'lmadi. Keyinroq qayta urinib ko'ring.",
+			"retry": "Qayta urinish",
+			"download": "Yuklab olish"
+		},
 		"raqamliKutibxona": {
 			"minglab_elektron_kitoblar": "Minglab elektron kitoblar",
 			"onlayn_kitoblarni_sotib_oling": "Onlayn kitoblarni sotib oling, bepul asarlarni kashf eting va ularni qulay o'qish rejimida",

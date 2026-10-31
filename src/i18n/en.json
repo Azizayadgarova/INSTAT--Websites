@@ -538,6 +538,14 @@
     }
   },
   "pages": {
+    "certificateDownload": {
+      "title": "Certificate",
+      "loading": "Preparing your certificate...",
+      "not_found": "Certificate not found",
+      "error": "Could not load the certificate. Please try again later.",
+      "retry": "Try again",
+      "download": "Download"
+    },
     "raqamliKutibxona": {
       "minglab_elektron_kitoblar": "Thousands of e-books",
       "onlayn_kitoblarni_sotib_oling": "Buy books online, discover free titles and read them comfortably",

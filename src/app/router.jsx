@@ -16,6 +16,7 @@ const MikroMalumotlarKatalogiPage = lazy(() => import('../pages/platform/MikroMa
 const BoshIshOrinlariPage  = lazy(() => import('../pages/platform/BoshIshOrinlariPage'))
 const KursDetail           = lazy(() => import('../pages/platform/KursDetail'))
 const KurslarKatalogiPage  = lazy(() => import('../pages/platform/KurslarKatalogiPage'))
+const CertificateDownload  = lazy(() => import('../pages/platform/CertificateDownload'))
 const JurnalDetail         = lazy(() => import('../pages/platform/JurnalDetail'))
 const MaqolaDetail         = lazy(() => import('../pages/platform/MaqolaDetail'))
 const MaqolalarKeywordPage = lazy(() => import('../pages/platform/MaqolalarKeywordPage'))
@@ -182,6 +183,18 @@ export const routes = [
 			{ path: 'mikro-malumotlar-katalogi', element: s(MikroMalumotlarKatalogiPage) },
 			{ path: 'nashr/:id',           element: s(NashrDetail) },
 			{ path: 'bosh-ish-orinlari',   element: s(BoshIshOrinlariPage) },
+		],
+	},
+	{
+		path: '/courses',
+		element: <SecondLayout />,
+		errorElement: (
+			<ErrorBoundary>
+				<NotFound />
+			</ErrorBoundary>
+		),
+		children: [
+			{ path: 'certificates/:id/download', element: s(CertificateDownload) },
 		],
 	},
 	{
