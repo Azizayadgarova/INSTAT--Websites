@@ -20,13 +20,15 @@ export const contacts = {
 			return `${this.line1} ${this.line2}`
 		},
 	},
+	// Ijtimoiy tarmoqlar faqat API'dan (site-data, module="all") keladi: qiymat
+	// bo'lmasa tarmoq ko'rsatilmaydi, shuning uchun bu yerda o'rinbosar havola yo'q.
 	social: {
-		telegram: 'https://t.me/',
-		facebook: 'https://facebook.com/',
-		instagram: 'https://instagram.com/',
-		twitter: 'https://x.com/',
-		youtube: 'https://youtube.com/',
-		linkedin: 'https://linkedin.com/',
+		telegram: '',
+		facebook: '',
+		instagram: '',
+		twitter: '',
+		youtube: '',
+		linkedin: '',
 	},
 }
 

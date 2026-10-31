@@ -11,6 +11,7 @@ import Skeleton, { SkeletonText } from '@/components/shared/Skeleton'
 import StarIcon from '@/assets/Star.png'
 import ClockIcon from '@/assets/icons/time-line.png'
 import DeviceIcon from '@/assets/icons/device-line.png'
+import { openCabinet } from '@/utils/cabinet'
 
 const STARS = [0, 1, 2, 3, 4]
 
@@ -193,7 +194,7 @@ const KursDetail = () => {
 	}, [course])
 	const filledStars = Math.round(rating)
 
-	const handleStart = () => window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
+	const handleStart = openCabinet
 
 	return (
 		<section style={{ width: '100%', background: 'rgba(var(--bg-rgb),1)', minHeight: '100vh', padding: '24px 16px 100px' }}>

@@ -18,10 +18,9 @@ export const useContacts = () => {
 		const addr = val('address').replace(/[\r\n]+/g, ' ').trim()
 		const fax = (val('fax').split(/[\r\n]/)[0] || '').trim() || fallback.fax
 		const transport = val('transport').replace(/[\r\n]+/g, ' ').trim() || fallback.transport
-		const link = (key, fb) => {
-			const v = val(key)
-			return v && v !== 'https://linkedin.com' ? v : fb
-		}
+		// Ijtimoiy tarmoq: API'da qiymat bo'lmasa bo'sh qator (o'rinbosar havola qo'yilmaydi) —
+		// bo'sh tarmoq @/hooks/useSocialLinks da ro'yxatdan tushib qoladi
+		const link = key => val(key).trim()
 		return {
 			loading, phone, phoneHref: `tel:${phone.replace(/[^\d+]/g, '')}`,
 			email, emailHref: `mailto:${email}`,
@@ -29,12 +28,12 @@ export const useContacts = () => {
 			transport,
 			address: { line1: addr || fallback.address.line1, line2: '', full: addr || fallback.address.full },
 			social: {
-				telegram: link('telegram', fallback.social.telegram),
-				facebook: link('facebook', fallback.social.facebook),
-				instagram: link('instagram', fallback.social.instagram),
-				twitter: link('twitter', fallback.social.twitter),
-				youtube: link('youtube', fallback.social.youtube),
-				linkedin: link('linkedin', fallback.social.linkedin),
+				telegram: link('telegram'),
+				facebook: link('facebook'),
+				instagram: link('instagram'),
+				twitter: link('twitter'),
+				youtube: link('youtube'),
+				linkedin: link('linkedin'),
 			},
 		}
 	}, [kv, lang, loading])

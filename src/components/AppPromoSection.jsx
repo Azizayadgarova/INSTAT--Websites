@@ -98,7 +98,7 @@ const AppPromoSection = () => {
                 opacity: visible ? 1 : 0,
                 transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0.2s, opacity 0.8s ease 0.2s',
               }}>
-                <img src={phone1} alt='Mobil ilova' loading='lazy' decoding='async' style={{ width: '100%', objectFit: 'contain' }} />
+                <img src={phone1} alt={t('common.mobileApp')} loading='lazy' decoding='async' style={{ width: '100%', objectFit: 'contain' }} />
               </div>
               <div style={{
                 position: 'absolute',
@@ -110,7 +110,7 @@ const AppPromoSection = () => {
                 opacity: visible ? 1 : 0,
                 transition: 'transform 1s cubic-bezier(0.16,1,0.3,1) 0.35s, opacity 0.8s ease 0.35s',
               }}>
-                <img src={phone2} alt='Mobil ilova' loading='lazy' decoding='async' style={{ width: '100%', objectFit: 'contain' }} />
+                <img src={phone2} alt={t('common.mobileApp')} loading='lazy' decoding='async' style={{ width: '100%', objectFit: 'contain' }} />
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ const AppPromoSection = () => {
             }}>
               <img
                 src={phone1}
-                alt='Mobil ilova — old ko&#39;rinish'
+                alt={t('common.mobileAppFront')}
                 loading='lazy'
                 decoding='async'
                 className='object-contain'
@@ -146,7 +146,7 @@ const AppPromoSection = () => {
             }}>
               <img
                 src={phone2}
-                alt='Mobil ilova — orqa ko&#39;rinish'
+                alt={t('common.mobileAppBack')}
                 loading='lazy'
                 decoding='async'
                 className='object-contain'

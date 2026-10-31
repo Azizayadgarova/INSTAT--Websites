@@ -3,7 +3,7 @@ export const faqData = [
 		id: 'faq-1',
 		question: 'INSTAT platformasi nima?',
 		answer:
-			"INSTAT — O'zbekiston Respublikasi Prezidenti huzuridagi Statistika agentligining kadrlar malakasini oshirish va statistik tadqiqotlar instituti. Platforma onlayn kurslar, elektron kutubxona va statistik ma'lumotlarni bir yerda taqdim etadi.",
+			"INSTAT — O'zbekiston Respublikasi Milliy statistika qo'mitasi huzuridagi Kadrlar malakasini oshirish va statistik tadqiqotlar instituti. Platforma onlayn kurslar, elektron kutubxona va statistik ma'lumotlarni bir yerda taqdim etadi.",
 	},
 	{
 		id: 'faq-2',

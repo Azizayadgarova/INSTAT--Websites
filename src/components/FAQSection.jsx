@@ -122,12 +122,12 @@ const FAQSection = ({ hideParticles = false, platformStyle = false, module }) =>
 							subtitleStyle={platformStyle ? { color: 'rgba(202,202,206,1)' } : undefined}
 							highlight=''
 							subtitle={
-								<>
-									{/* Modul xaritada bo'lmasa (masalan bosh sahifa) — prefikssiz, xom kalit chiqmasin */}
-									{module_faq && <>{t(`components.fAQSection.platforma_va_${module_faq}`)}<br /></>}
-									{t("components.fAQSection.eng_kop_beriladigan_savollarga")}
-								</>
-							}
+									// Har modul uchun to'liq jumla (gap tuzilishi tillarda farq qiladi, shuning uchun
+									// prefiks+suffiks yig'ilmaydi). Modul xaritada bo'lmasa — umumiy jumla.
+									module_faq
+										? t(`components.fAQSection.platforma_va_${module_faq}`)
+										: t('components.fAQSection.eng_kop_beriladigan_savollarga')
+								}
 						/>
 					</AnimatedSection>
 				</div>

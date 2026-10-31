@@ -1,13 +1,28 @@
 import { lazy, Suspense, useState, useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { Outlet, useLocation } from 'react-router-dom'
 import Navbar2 from '../components/Navbar2'
 import ScrollToTop from '../components/shared/ScrollToTop'
+import Seo from '../components/shared/Seo'
 import AppPromoSection from "@/components/AppPromoSection.jsx";
 
 const CursorRing = lazy(() => import('../components/shared/CursorRing'))
 const Footer     = lazy(() => import('../components/Footer.jsx'))
 
+// /platform/* sahifalari o'z <Seo/> sini bermaydi — brauzer tabidagi sarlavha shu yerdan tilga mos olinadi
+const PLATFORM_TITLE_KEYS = {
+	'onlayn-talim': 'components.navbar2.onlayn_talim',
+	'raqamli-kutubxona': 'components.navbar2.raqamli_kutubxona',
+	'elektron-jurnal': 'components.navbar2.elektron_jurnal',
+	'mikro-malumotlar': 'components.navbar2.mikro_malumotlar',
+	'bosh-ish-orinlari': 'components.navbar2.bosh_ish_orinlari',
+	'kutubxona-katalogi': 'components.kutubxonaKatalogi.sarlavha',
+}
+
 const SecondLayout = () => {
+	const { t } = useTranslation()
+	const { pathname } = useLocation()
+	const titleKey = PLATFORM_TITLE_KEYS[pathname.split('/')[2]]
 	const [mountCursor, setMountCursor] = useState(false)
 	useEffect(() => {
 		const mount = () => setMountCursor(true)
@@ -21,6 +36,7 @@ const SecondLayout = () => {
 
 	return (
 		<div className='bg-[rgba(var(--bg-rgb),1)] min-h-screen'>
+			<Seo title={titleKey ? t(titleKey) : undefined} />
 			<ScrollToTop />
 			{mountCursor && <Suspense fallback={null}><CursorRing /></Suspense>}
 			<Navbar2 />

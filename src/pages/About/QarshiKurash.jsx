@@ -11,7 +11,7 @@ import Seo from '@/components/shared/Seo'
 import { SkeletonText } from '@/components/shared/Skeleton'
 import { useSiteData } from '@/hooks/useSiteData'
 import { useSiteList } from '@/hooks/useSiteList'
-import { pickLang, pickPath, toDoc, toVideo } from '@/utils/siteContent'
+import { pickLang, pickLangLabel, pickPath, toDoc, toVideo } from '@/utils/siteContent'
 
 const Person = ({ role, name }) =>
 	name ? (
@@ -40,6 +40,7 @@ const QarshiKurash = () => {
 	const { data: kv, loading, error, retry } = useSiteData(d => d.byModuleKey.corruption ?? {})
 
 	const val = key => pickLang(kv?.[key], lang)
+	const label = key => pickLangLabel(kv?.[key], lang)
 	const attachment = pickPath(kv?.corruption_phone)
 
 	// Uch alohida endpoint — site-data'dagi matnlarga qo'shimcha ro'yxatlar.
@@ -58,20 +59,20 @@ const QarshiKurash = () => {
 				}
 				skeleton={<SkeletonText lines={6} />}>
 				<div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
-					<Person role={kv?.corruption_chairman?.label} name={val('corruption_chairman')} />
-					<Person role={kv?.corruption_deputy_chairman?.label} name={val('corruption_deputy_chairman')} />
-					<Person role={kv?.corruption_secretary?.label} name={val('corruption_secretary')} />
+					<Person role={label('corruption_chairman')} name={val('corruption_chairman')} />
+					<Person role={label('corruption_deputy_chairman')} name={val('corruption_deputy_chairman')} />
+					<Person role={label('corruption_secretary')} name={val('corruption_secretary')} />
 				</div>
 				{val('corruption_tasks') && (
 					<>
 						<h2 style={{ color: '#fff', fontSize: 20, fontWeight: 600, marginBottom: 12 }}>
-							{kv?.corruption_tasks?.label}
+							{label('corruption_tasks')}
 						</h2>
 						<RichContent html={val('corruption_tasks')} />
 					</>
 				)}
 				{attachment && (
-					<img src={attachment} alt={kv?.corruption_phone?.label ?? ''} loading='lazy' decoding='async'
+					<img src={attachment} alt={label('corruption_phone')} loading='lazy' decoding='async'
 						style={{ maxWidth: '100%', borderRadius: 12, marginTop: 24 }} />
 				)}
 

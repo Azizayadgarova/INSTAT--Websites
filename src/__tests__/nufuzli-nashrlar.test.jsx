@@ -74,7 +74,7 @@ describe('NufuzliNashrlar — data-reports API', () => {
 		expect(screen.queryByText('Kutubxona hisoboti')).not.toBeInTheDocument()
 		expect(screen.queryByText('Arxiv hisoboti')).not.toBeInTheDocument()
 		// API ma'lumot berdi -> statik fallback ro'yxati ishlatilmaydi
-		expect(screen.queryByText("Aholi soni va demografik o'sish")).not.toBeInTheDocument()
+		expect(screen.queryByText("Aholi soni va demografik oʻsish")).not.toBeInTheDocument()
 	})
 
 	it('sarlavha va tavsif micro_data modulidan keladi', async () => {
@@ -90,7 +90,7 @@ describe('NufuzliNashrlar — data-reports API', () => {
 		renderSection()
 
 		await waitFor(() =>
-			expect(screen.getByText("Aholi soni va demografik o'sish")).toBeInTheDocument(),
+			expect(screen.getByText("Aholi soni va demografik oʻsish")).toBeInTheDocument(),
 		)
 	})
 })

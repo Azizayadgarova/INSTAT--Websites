@@ -4,6 +4,9 @@ import { useLocation } from 'react-router-dom'
 
 const SITE_URL = import.meta.env.VITE_SITE_URL ?? 'https://instat.uz'
 
+// og:locale tilga qarab o'zgaradi (index.html'dagi statik qiymat faqat boshlang'ich — uz_UZ)
+const OG_LOCALE = { uz: 'uz_UZ', ru: 'ru_RU', en: 'en_US' }
+
 /**
  * Har bir sahifaga o‘z title/description/canonical'ini beradi.
  * Ishlatish:  <Seo title='Rahbariyat' description='...' />
@@ -26,6 +29,7 @@ const Seo = ({ title, description, image, noindex = false }) => {
 			{noindex && <meta name='robots' content='noindex, nofollow' />}
 
 			<meta property='og:type' content='website' />
+			<meta property='og:locale' content={OG_LOCALE[i18n.resolvedLanguage] ?? OG_LOCALE.uz} />
 			<meta property='og:site_name' content={siteName} />
 			<meta property='og:title' content={fullTitle} />
 			<meta property='og:description' content={desc} />

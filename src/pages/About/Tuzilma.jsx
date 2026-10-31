@@ -1,11 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { useContacts } from '@/hooks/useContacts'
+import { useSocialLinks } from '@/hooks/useSocialLinks'
 import { useSiteData } from '@/hooks/useSiteData'
 import { pickPath } from '@/utils/siteContent'
-import sIcon1 from '@/assets/icons/Major Brand Logos [1.1] (2).png'
-import sIcon2 from '@/assets/icons/Major Brand Logos [1.1] (3).png'
-import sIcon3 from '@/assets/icons/Major Brand Logos [1.1] (4).png'
-import sIcon4 from '@/assets/icons/Vector (16).png'
 import useSectionText from "@/hooks/useSectionText.js";
 
 const CARD = {
@@ -181,6 +178,7 @@ const Tuzilma = () => {
     } = useTranslation();
 
     const contacts = useContacts()
+    const socials = useSocialLinks()
     const structureImg = useSiteData(d => pickPath(d.byModuleKey.structure?.structure)).data
     const st = useSectionText('all')
 
@@ -207,6 +205,34 @@ const Tuzilma = () => {
                 >{t("pages.tuzilma.kontakt")}</span>
             </div>
             <div className='grid grid-cols-1 gap-6 md:grid-cols-1  xl:grid-cols-1'>
+
+                {/* Tashkiliy tuzilma rasmi (API: module=structure) */}
+                {structureImg && (
+                    <div
+                        style={{
+                            background: 'rgba(31, 37, 51, 1)',
+                            borderRadius: '16px',
+                            padding: '16px',
+                            boxSizing: 'border-box',
+                        }}
+                    >
+                        <h3 style={{ ...TITLE, marginBottom: '16px' }}>{t("pages.tuzilma.tuzilma_rasmi")}</h3>
+                        <a href={structureImg} target='_blank' rel='noopener noreferrer'>
+                            <img
+                                src={structureImg}
+                                alt={t("pages.tuzilma.tuzilma_rasmi")}
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    display: 'block',
+                                    borderRadius: '12px',
+                                }}
+                                loading='lazy'
+                                decoding='async'
+                            />
+                        </a>
+                    </div>
+                )}
                 {/* Card 1 */}
                 <div
                     style={{
@@ -224,6 +250,8 @@ const Tuzilma = () => {
                     }}
                 >
                     <div>
+
+
                         <h3 style={TITLE}>{t("pages.tuzilma.biz_bilan_boglaning")}</h3>
 
                         <div
@@ -277,34 +305,31 @@ const Tuzilma = () => {
                         </div>
                     </div>
 
-                    {/* Ijtimoiy tarmoqlar */}
-                    <div>
-                        <p style={SOCIAL_LABEL}>{t("pages.tuzilma.ijtimoiy_tarmoqlar")}</p>
-                        <div style={{ display: 'flex', gap: '29px', marginTop: '12px' }}>
-                            {[
-                                { src: sIcon1, href: st('instagram',  contacts.social.instagram), alt: 'Instagram', size: 40 },
-                                { src: sIcon2, href: st('twitter',  contacts.social.twitter), alt: 'X', size: 40 },
-                                { src: sIcon3, href: st('facebook',  contacts.social.facebook), alt: 'Facebook', size: 40 },
-                                { src: sIcon4, href: st('linkedin',  contacts.social.linkedin), alt: 'LinkedIn', size: 32, mt: 4 },
-                            ].map(({ src, href, alt, size, mt = 0 }) => (
-                                <a key={alt} href={href} target='_blank' rel='noopener noreferrer'
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        width: `${size}px`,
-                                        height: `${size}px`,
-                                        borderRadius: '8px',
-                                        overflow: 'hidden',
-                                        flexShrink: 0,
-                                        marginTop: `${mt}px`,
-                                    }}
-                                >
-                                    <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading='lazy' decoding='async' />
-                                </a>
-                            ))}
+                    {/* Ijtimoiy tarmoqlar — qiymati bo'sh tarmoq ko'rsatilmaydi */}
+                    {socials.length > 0 && (
+                        <div>
+                            <p style={SOCIAL_LABEL}>{t("pages.tuzilma.ijtimoiy_tarmoqlar")}</p>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '12px' }}>
+                                {socials.map(({ key, label, href, Icon }) => (
+                                    <a key={key} href={href} target='_blank' rel='noopener noreferrer' aria-label={label} title={label}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width: '40px',
+                                            height: '40px',
+                                            borderRadius: '8px',
+                                            background: 'rgba(255,255,255,0.08)',
+                                            color: '#fff',
+                                            flexShrink: 0,
+                                        }}
+                                    >
+                                        <Icon size={24} aria-hidden='true' />
+                                    </a>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Card 2: Manzil */}
@@ -457,34 +482,6 @@ const Tuzilma = () => {
                 </div>
             </div>
 
-            {/* Tashkiliy tuzilma rasmi (API: module=structure) */}
-            {structureImg && (
-                <div
-                    style={{
-                        marginTop: '24px',
-                        background: 'rgba(31, 37, 51, 1)',
-                        borderRadius: '16px',
-                        padding: '16px',
-                        boxSizing: 'border-box',
-                    }}
-                >
-                    <h3 style={{ ...TITLE, marginBottom: '16px' }}>{t("pages.tuzilma.tuzilma_rasmi")}</h3>
-                    <a href={structureImg} target='_blank' rel='noopener noreferrer'>
-                        <img
-                            src={structureImg}
-                            alt={t("pages.tuzilma.tuzilma_rasmi")}
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                                display: 'block',
-                                borderRadius: '12px',
-                            }}
-                            loading='lazy'
-                            decoding='async'
-                        />
-                    </a>
-                </div>
-            )}
         </div>
     );
 }

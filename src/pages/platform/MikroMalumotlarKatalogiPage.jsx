@@ -112,7 +112,7 @@ const MikroMalumotlarKatalogiPage = () => {
 						fontFamily: 'Inter,sans-serif', fontSize: '15px', lineHeight: 1.65,
 						color: 'rgba(155,163,185,1)', maxWidth: '480px', margin: 0,
 					}}>
-						{t('pages.mikroMalumotlarKatalogiPage.statistika_agentligi_tomonidan', "Statistika agentligi tomonidan yig'ilgan individual darajadagi ma'lumotlar to'plamlari bilan ishlang va tadqiqotlaringizni boyiting.")}
+						{t('pages.mikroMalumotlarKatalogiPage.statistika_agentligi_tomonidan', "Milliy statistika qo'mitasi tomonidan yig'ilgan individual darajadagi ma'lumotlar to'plamlari bilan ishlang va tadqiqotlaringizni boyiting.")}
 					</p>
 				</div>
 

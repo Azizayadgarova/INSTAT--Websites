@@ -205,7 +205,7 @@ export default function JurnalStatistika() {
 				<div className='grid grid-cols-1 md:grid-cols-3 md:gap-[42px]'>
 					{STATS.map((s, i) => (
 						<div
-							key={s.label}
+							key={i}
 							style={{ transitionDelay: `${i * 0.12}s` }}
 						>
 							<StatItem stat={s} animate={animate} />

@@ -23,7 +23,7 @@ import Testimonial from './Testimonial'
 import AnimatedSection from './shared/AnimatedSection'
 import AsyncBoundary from './shared/AsyncBoundary'
 import useSectionText from "@/hooks/useSectionText.js";
-import {API_CABINET_URL} from "@/config/api.js";
+import { openCabinet } from "@/utils/cabinet"
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -1203,7 +1203,7 @@ function HeroSection() {
 
 	function handleLogin()
 	{
-		window.open(API_CABINET_URL, '_blank')
+		openCabinet()
 	}
 	return (
 		<section

@@ -9,7 +9,8 @@ import AsyncBoundary from '@/components/shared/AsyncBoundary'
 import RichContent from '@/components/shared/RichContent'
 import Skeleton from '@/components/shared/Skeleton'
 import StarIcon from '@/assets/Star.png'
-import { API_ORIGIN, API_CABINET_URL, storageUrl } from '@/config/api'
+import { API_ORIGIN, storageUrl } from '@/config/api'
+import { openCabinet } from '@/utils/cabinet'
 
 const STARS = [0, 1, 2, 3, 4]
 
@@ -97,7 +98,7 @@ const KitobDetail = () => {
 	const rating = book?.comments_count > 0 ? book.stars_sum / book.comments_count : 0
 	const filledStars = Math.round(rating)
 
-	const handleStart = () => window.open(API_CABINET_URL, '_blank')
+	const handleStart = openCabinet
 
 	return (
 		<section style={{ width: '100%', background: 'rgba(var(--bg-rgb),1)', minHeight: '100vh', padding: '24px 16px 100px' }}>

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { openCabinet } from '@/utils/cabinet'
 import bottomBg from '@/assets/bgImg/Background (1).png'
 import WaterCanvas from './shared/WaterCanvas'
 import RippleButton from './shared/RippleButton'
@@ -20,7 +21,7 @@ export default function MikroMalumotlarHero() {
 	const title1 = pickLang(kv?.micro_data_title1, lang) || t("components.mikroMalumotlarHero.rasmiy_statistika_uchun")
 	const title2 = pickLang(kv?.micro_data_title2, lang) || t("components.mikroMalumotlarHero.raqamli_platforma")
 	const subtitle = pickLang(kv?.micro_data_description1, lang) || t("components.mikroMalumotlarHero.mikro_malumotlar_laboratoriyasi_foydalan")
-	const handleStart = () => window.open(import.meta.env.VITE_API_CABINET_URL, '_blank')
+	const handleStart = openCabinet
 
     return (
         <section style={{

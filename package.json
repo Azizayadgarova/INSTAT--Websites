@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@remixicon/react": "^4.9.0",
     "axios": "^1.18.1",
     "dompurify": "^3.4.12",
     "framer-motion": "^12.38.0",
