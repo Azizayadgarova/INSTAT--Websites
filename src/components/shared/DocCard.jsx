@@ -37,15 +37,15 @@ const DocCard = ({ title, description, kicker, path, onPreview, compact = false,
 
 	return (
 		<article className={`dc${compact ? ' sm' : ''}`}>
-			<div className='dc-art' aria-hidden='true' style={{ '--dc-badge': BADGE_COLORS[ext] ?? '#6b7385' }}>
-				<span className='dc-badge'>{ext}</span>
-				<div className='dc-paper'>
-					<i className='dc-ring' />
-					<i className='dc-bar a' />
-					<i className='dc-bar b' />
-					<i className='dc-lines' />
-				</div>
-			</div>
+			{/*<div className='dc-art' aria-hidden='true' style={{ '--dc-badge': BADGE_COLORS[ext] ?? '#6b7385' }}>*/}
+			{/*	<span className='dc-badge'>{ext}</span>*/}
+			{/*	<div className='dc-paper'>*/}
+			{/*		<i className='dc-ring' />*/}
+			{/*		<i className='dc-bar a' />*/}
+			{/*		<i className='dc-bar b' />*/}
+			{/*		<i className='dc-lines' />*/}
+			{/*	</div>*/}
+			{/*</div>*/}
 			<div className='dc-b'>
 				<div className='dc-k'>{kicker || t('common.docKicker')}</div>
 				{title && <Heading className='dc-t'>{title}</Heading>}
