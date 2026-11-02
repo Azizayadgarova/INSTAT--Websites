@@ -67,7 +67,7 @@ const MentorCard = ({ mentor, cfg, trackW, dimScale = 1, isActive, onShift, hide
 			style={{
 				position: 'absolute',
 				width: w,
-				height: h,
+				height: h * 1.2,
 				left: cx - w / 2,
 				top: isMobile ? '36%' : '40%',
 				transform: 'translateY(-50%)',
