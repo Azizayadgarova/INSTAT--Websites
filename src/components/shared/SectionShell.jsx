@@ -156,7 +156,7 @@ const SectionShell = ({ sectionKey, title, description, lead, links = [], showOu
 	return (
 		<PageFrame>
 			<Seo title={pageTitle} description={description} />
-			<main id='hero'>
+			<main id='hero' className='pg-main'>
 				<section className='pg-hero'>
 					<div className='grid' aria-hidden='true' />
 					<HeroDots />

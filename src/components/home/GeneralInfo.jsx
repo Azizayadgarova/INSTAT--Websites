@@ -64,16 +64,16 @@ export default function GeneralInfo() {
 				{about[1].map(p => (
 					<p key={p}>{p}</p>
 				))}
-				<figure className='pg-fig'>
-					<img src={instituteImg} alt={c.fig[0]} loading='lazy' decoding='async' />
-					<i className='cr a' />
-					<i className='cr b' />
-					<figcaption>
-						<b>{c.fig[0]}</b>
-						<span>{c.fig[1]}</span>
-					</figcaption>
-				</figure>
-				<div className='quote'>{about[2]}</div>
+				{/*<figure className='pg-fig'>*/}
+				{/*	<img src={instituteImg} alt={c.fig[0]} loading='lazy' decoding='async' />*/}
+				{/*	<i className='cr a' />*/}
+				{/*	<i className='cr b' />*/}
+				{/*	<figcaption>*/}
+				{/*		<b>{c.fig[0]}</b>*/}
+				{/*		<span>{c.fig[1]}</span>*/}
+				{/*	</figcaption>*/}
+				{/*</figure>*/}
+				{/*<div className='quote'>{about[2]}</div>*/}
 			</Block>
 
 			<Block n='02' title={facts[0]} threshold={0.15}>

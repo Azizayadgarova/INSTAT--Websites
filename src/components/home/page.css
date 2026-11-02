@@ -21,6 +21,8 @@
 
 .home .pg-body{max-width:1280px;margin:auto;padding:56px var(--pad) 110px;display:grid;grid-template-columns:250px minmax(0,1fr) 200px;gap:clamp(28px,4vw,56px);align-items:start}
 .home .side,.home .toc{position:sticky;top:104px}
+/* #hero (home.css) overflow:hidden qiladi va position:sticky ni buzadi — ichki sahifada "clip" (scroll konteyner yaratmaydi) */
+.home #hero.pg-main{overflow:clip}
 .home .side h4,.home .toc h4{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 .home .side nav{display:grid;border-left:1px solid var(--soft)}
 .home .side a{position:relative;padding:10px 0 10px 18px;font-size:14.5px;line-height:1.4;color:var(--muted);transition:color .25s,padding .3s var(--ease)}
