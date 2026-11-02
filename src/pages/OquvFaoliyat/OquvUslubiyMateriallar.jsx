@@ -44,9 +44,6 @@ const OquvUslubiyMateriallar = () => {
 	return (
 		<section>
 			<Seo title={t('menu.oquvFaoliyati.oquv-uslubiy-materiallar')} />
-			<h1 className='mb-6 text-[26px] font-semibold text-white md:text-[32px]'>
-				{t('menu.oquvFaoliyati.oquv-uslubiy-materiallar')}
-			</h1>
 			<AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={items.length === 0} skeleton={<SkeletonText lines={5} />}>
 				<ul style={{ display: 'flex', flexDirection: 'column', gap: 14, listStyle: 'none', margin: 0, padding: 0 }}>
 					{items.map(item => (

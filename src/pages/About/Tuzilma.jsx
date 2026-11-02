@@ -184,7 +184,7 @@ const Tuzilma = () => {
 
     return (
         <div
-            style={{ maxWidth: '900px', margin: '0 auto', padding: '59px 16px 80px' }}
+            style={{ maxWidth: '900px', margin: 0, padding: '0 0 80px' }}
         >
             {/* Badge */}
             <div style={{ marginBottom: '20px', display: 'inline-flex' }}>

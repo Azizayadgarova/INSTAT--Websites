@@ -15,9 +15,6 @@ const Tadbirlar = () => {
 	return (
 		<section>
 			<Seo title={t('menu.media.tadbirlar')} />
-			<h1 className='mb-6 text-[26px] font-semibold text-white md:text-[32px]'>
-				{t('menu.media.tadbirlar')}
-			</h1>
 			<AsyncBoundary
 				loading={loading}
 				error={error}

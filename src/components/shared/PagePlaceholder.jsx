@@ -11,7 +11,7 @@ const PagePlaceholder = ({ title, description }) => {
 	return (
 		<section className='flex min-h-[60vh] flex-col items-center justify-center gap-3 px-6 py-16 text-center'>
 			<Seo title={title} description={description} noindex />
-			<h1 className='text-[28px] font-semibold text-white md:text-[36px]'>{title}</h1>
+			<p className='text-[24px] font-semibold text-white md:text-[28px]'>{title}</p>
 			<p className='text-[18px]' style={{ color: 'rgba(var(--text-rgb),1)' }}>
 				{t('common.comingSoon')}
 			</p>

@@ -1022,5 +1022,228 @@
         "description": "On online platforms it is hard to fully judge a book's content and style before buying. It \\"
       }
     }
-  }
+  },
+	"home": {
+		"p_home": "Home",
+		"p_toc": "On this page",
+		"p_oth": "Other sections",
+		"p_prev": "Previous",
+		"p_next": "Next",
+		"c_label": "INSTAT online courses",
+		"nw_lab": "News",
+		"nw_t": "Institute|life",
+		"nw_all": "All news",
+		"nw_more": "Read more",
+		"ft_s": "Websites",
+		"ft_call": "Call us",
+		"ft_write": "Write to us",
+		"ft_sn": "Social media",
+		"ft_mq": "Data Science and Analytics",
+		"ft_h": "Support",
+		"ft_faq": "FAQ",
+		"ft_ct": "Contact us",
+		"ft_l": "Legal",
+		"ft_p": "Privacy policy",
+		"ft_t": "Terms of use",
+		"ft_c": "Cookie policy",
+		"ft_cp": "© 2026 INSTAT. All rights reserved.",
+		"ft_top": "Back to top",
+		"ct_lab": "Contact",
+		"ct_t": "Questions?|Get in touch",
+		"ct_sub": "Write to us about courses, registration or partnerships. Our specialists will reply.",
+		"ct_tel": "Phone",
+		"ct_adr": "Address",
+		"ct_adrv": "Tashkent, Mirzo Ulugbek district, Mustaqillik avenue, 42b",
+		"ct_city": "Tashkent · 41.31°N 69.24°E",
+		"ct_ft": "Send a message",
+		"ct_tp": [
+			"Courses",
+			"Registration",
+			"Partnership",
+			"Other"
+		],
+		"ct_n": "Your name",
+		"ct_p": "Phone number",
+		"ct_m": "Message",
+		"ct_s": "Send",
+		"ct_note": "We usually reply within 1 business day",
+		"ct_err": "Please enter your name and phone number.",
+		"ct_ok": "Thank you! Your message is received.",
+		"ap_lab": "Mobile app",
+		"ap_t": "Even easier with|the mobile app!",
+		"ap_sub": "Learning is simpler with our app. Download it now and continue your lessons anywhere.",
+		"ap_f": [
+			"Video lessons anywhere",
+			"Personal progress stats",
+			"Alerts about new lessons"
+		],
+		"ap_get": "Download on the",
+		"ap_get2": "Get it on",
+		"ap_p": {
+			"hi": "Welcome back",
+			"my": "My courses",
+			"c1": "Python basics",
+			"c2": "Regression analysis",
+			"st": "Weekly activity",
+			"tm": "Study time",
+			"tk": "Tasks completed",
+			"ce": "Certificate",
+			"dn": "Course completed"
+		},
+		"ap_n": [
+			[
+				"New lesson added",
+				"Python basics · module 8"
+			],
+			[
+				"Assignment accepted",
+				"Regression analysis"
+			],
+			[
+				"Certificate ready",
+				"In your account"
+			]
+		],
+		"fq_lab": "Q&A",
+		"fq_t": "Frequently asked|questions",
+		"fq_sub": "Answers to the most common questions about the platform, courses and certificates.",
+		"fq_c": [
+			"All",
+			"Registration",
+			"Courses",
+			"Payment",
+			"Certificate"
+		],
+		"fq_n": "questions in this section",
+		"fq_hb": "Didn’t find an answer?",
+		"fq_hs": "Send us your question and our team will reply shortly.",
+		"fq_hc": "Ask a question",
+		"ig_t": "Integrated|platforms",
+		"ig_sub": "Integrations that make learning convenient and efficient",
+		"ig_d": [
+			"Fast, secure course payments",
+			"One-tap online payment",
+			"Sign in with the single ID system",
+			"Biometric identity verification"
+		],
+		"c_mob": "Mobile app",
+		"c_capT": "Lessons now fit *in your pocket",
+		"c_cap2": "Continue your courses anywhere, any time with the INSTAT mobile app.",
+		"c_h": "Learn statistics and data analysis|at your own pace",
+		"c_title": "Start learning *modern professions* today!",
+		"c_cap": "Learning now fits in your pocket",
+		"c_cta2": "All programs",
+		"c_live": "Now studying",
+		"c_course": "Python basics",
+		"c_mod": "Module 7 / 9",
+		"c_sub": "Video lessons from experienced specialists, hands-on assignments and an official certificate. All on one platform.",
+		"c_ben": [
+			"Video lessons",
+			"Hands-on assignments",
+			"Official certificate"
+		],
+		"c_cta": "Browse courses",
+		"c_note": "At your own pace, on any device",
+		"c_steps": [
+			[
+				"Start",
+				"Foundations",
+				"Intro to statistics and Python"
+			],
+			[
+				"Practice",
+				"Data analysis",
+				"Cleaning, visualization, reports"
+			],
+			[
+				"Deep dive",
+				"Models",
+				"Regression and sample surveys"
+			],
+			[
+				"Result",
+				"Certificate",
+				"Final project and certificate"
+			]
+		],
+		"f_label": "Platforms",
+		"f_title": "Everything in one place",
+		"f_sub": "Platforms for learning, research and growth.",
+		"f_hint": "Dive in",
+		"f_go": "Sign in",
+		"fz": [
+			[
+				"Online learning platform",
+				"Modern online courses",
+				"Gain new knowledge and skills through courses built by experienced specialists. Discover modern education with video lessons, hands-on assignments and certificates.",
+				"Online learning"
+			],
+			[
+				"E-library",
+				"Library of scientific sources",
+				"Access a large e-library of scientific books, textbooks and academic materials. Build your knowledge on trusted sources.",
+				"Digital library"
+			],
+			[
+				"Research journals platform",
+				"Research articles and journals",
+				"Publish research results in scientific journals, review papers and share knowledge with the academic community.",
+				"E-journal"
+			],
+			[
+				"Data lab",
+				"Microdata and research analysis",
+				"A dedicated platform for working with statistical and scientific microdata. Researchers analyse data, draw conclusions and build new studies.",
+				"Microdata"
+			]
+		],
+		"n1": "Platforms",
+		"n2": "Courses",
+		"n3": "News",
+		"n4": "Institute",
+		"n5": "Contact",
+		"login": "Sign in to the platform",
+		"menu": "Menu",
+		"close": "Close",
+		"tel": "Phone",
+		"m_nav": "Menu",
+		"m_sites": "Sections",
+		"adr": "Address",
+		"sn": "Social media",
+		"eyebrow": "Institute for Staff Development and Statistical Research",
+		"h1a": "“Data Science and Analytics”",
+		"h1b": "Digital Learning Platform",
+		"sub": "One digital platform for education, science and careers. Statistical knowledge open to every region of the country.",
+		"cta1": "Go to the platform",
+		"cta2": "About the institute",
+		"d1": "Online learning",
+		"d2": "Microdata",
+		"d3": "Digital library",
+		"d4": "E-journal",
+		"uz": "Uzbekistan",
+		"regions": "14 regions",
+		"live": "Platform online",
+		"region": "Region",
+		"k1": "Users",
+		"k2": "Partners",
+		"k3": "Experts",
+		"k4": "Activity",
+		"scroll": "Scroll",
+		"r": [
+			"Tashkent city",
+			"Tashkent region",
+			"Andijan region",
+			"Namangan region",
+			"Fergana region",
+			"Syrdarya region",
+			"Jizzakh region",
+			"Samarkand region",
+			"Kashkadarya region",
+			"Surkhandarya region",
+			"Bukhara region",
+			"Navoi region",
+			"Khorezm region",
+			"Republic of Karakalpakstan"
+		]
+	}
 }

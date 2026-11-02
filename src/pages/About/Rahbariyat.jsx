@@ -292,7 +292,7 @@ const Rahbariyat = () => {
   }, [apiLeaders, corruption, lang])
 
   return (
-    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '59px 0 80px 0' }}>
+    <div style={{ maxWidth: '900px', margin: 0, padding: '0 0 80px 0' }}>
       {/* Heading badge */}
       <div style={{ marginBottom: '20px', display: 'inline-flex' }}>
         <span

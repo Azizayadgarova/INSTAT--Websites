@@ -1,115 +1,269 @@
-import { NavLink, useOutlet } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation, useOutlet } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import Seo from './Seo'
-import SocialLinks from './SocialLinks'
-import MenuBackButton from '@/components/shared/MenuBackButton'
 
-/** Sidebar qatori — ichki (NavLink) va tashqi (<a>) havolada bir xil ko'rinadi. */
-const renderRow = (link, isActive) => (
-	<div className='flex items-stretch'>
-		<span
-			aria-hidden='true'
-			style={{
-				width: 4,
-				minHeight: 40,
-				flexShrink: 0,
-				alignSelf: 'stretch',
-				borderRadius: isActive ? 999 : 0,
-				background: isActive ? 'rgba(74,144,226,1)' : 'rgba(34,37,48,1)',
-			}}
-		/>
-		<span
-			className='ml-2 w-full rounded px-3 py-2 text-[16px] leading-6 transition-colors duration-200'
-			style={{
-				color: isActive ? 'rgba(var(--cyan-rgb),1)' : '#fff',
-				fontWeight: isActive ? 600 : 500,
-				letterSpacing: '-0.02em',
-			}}
-		>
-			{link.name}
-		</span>
-	</div>
-)
+import PageFrame from '@/components/home/PageFrame'
+import { usePrefersReducedMotion } from '@/components/home/hooks'
+import { useMenu } from '@/hooks/useMenu'
+import Seo from './Seo'
+
+/** Sarlavhaning oxirgi so'zi alohida rangda ("Umumiy <span>ma'lumotlar</span>"). */
+const Title = ({ text }) => {
+	const words = (text ?? '').split(' ')
+	if (words.length < 2) return text
+	return (
+		<>
+			{words.slice(0, -1).join(' ')} <span>{words[words.length - 1]}</span>
+		</>
+	)
+}
+
+/** Hero o'ng tomonidagi yonib turuvchi nuqtalar (canvas). */
+function HeroDots() {
+	const ref = useRef(null)
+	const rm = usePrefersReducedMotion()
+	useEffect(() => {
+		const cv = ref.current
+		const x = cv?.getContext('2d')
+		if (!cv || !x) return
+		let w
+		let h
+		let pts = []
+		let raf
+		const init = () => {
+			const d = Math.min(window.devicePixelRatio || 1, 2)
+			w = cv.clientWidth
+			h = cv.clientHeight
+			if (!w) return
+			cv.width = w * d
+			cv.height = h * d
+			x.setTransform(d, 0, 0, d, 0, 0)
+			pts = []
+			const g = 18
+			for (let i = g / 2; i < w; i += g) {
+				for (let j = g / 2; j < h; j += g) {
+					const dx = (i - w * 0.6) / w
+					const dy = (j - h * 0.45) / h
+					if (dx * dx * 1.4 + dy * dy * 2 < 0.16) pts.push([i, j, Math.random() * 6.28])
+				}
+			}
+		}
+		const draw = t => {
+			x.clearRect(0, 0, w, h)
+			pts.forEach(p => {
+				const a = 0.25 + 0.35 * (0.5 + 0.5 * Math.sin(t / 900 + p[2]))
+				x.fillStyle = `rgba(0,230,252,${a})`
+				x.fillRect(p[0] - 1, p[1] - 1, 2, 2)
+			})
+			if (!rm) raf = requestAnimationFrame(draw)
+		}
+		init()
+		window.addEventListener('resize', init)
+		raf = requestAnimationFrame(draw)
+		return () => {
+			cancelAnimationFrame(raf)
+			window.removeEventListener('resize', init)
+		}
+	}, [rm])
+	return <canvas className='dots' ref={ref} aria-hidden='true' />
+}
 
 /**
- * Bo'lim sahifalari uchun umumiy qobiq: chapda sidebar, o'ngda <Outlet />.
- * Science / MediaServise / InfoResurses'da takrorlangan markup shu yerda birlashtirilgan.
+ * Menyu bo'limlari (Institut haqida, O'quv faoliyati, Ilm-fan, Matbuot, Axborot resurslari)
+ * uchun umumiy ichki sahifa qobig'i — prototip: INSTAT/page.html.
  *
- * `links`: [{ path, name, href? }] — `href` berilsa qator tashqi saytga
- * yangi oynada ochiladi (@/hooks/useExternalMenuLink).
+ * Hero (yo'l, sarlavha) + chapda bo'lim havolalari + o'rtada kontent (<Outlet />) +
+ * o'ngda sahifa ichidagi bo'limlar mundarijasi (kontentdagi <h2> lardan avtomatik) +
+ * oldingi/keyingi sahifa havolalari.
  *
- * `showOutlet={false}` — bola marshrut o'rniga `children` ko'rsatiladi (tashqi
- * resursga yo'naltirilayotgan sahifada kerak bo'ladi).
+ * `sectionKey`: menuConfig kaliti (about | oquvFaoliyati | science | media | axborot).
+ * `links`: [{ path, name, href? }] — `href` berilsa qator tashqi saytga yangi oynada ochiladi
+ *   (@/hooks/useExternalMenuLink).
+ * `showOutlet={false}` — bola marshrut o'rniga `children` ko'rsatiladi (tashqi resursga
+ *   yo'naltirilayotgan sahifada kerak bo'ladi).
  */
-const SectionShell = ({ title, description, links = [], showOutlet = true, children }) => {
+const SectionShell = ({ sectionKey, title, description, lead, links = [], showOutlet = true, children }) => {
 	const outlet = useOutlet()
+	const { pathname } = useLocation()
 	const { t } = useTranslation()
+	const menu = useMenu()
+	const sectionKeys = Object.keys(menu)
+	const sectionIdx = Math.max(0, sectionKeys.indexOf(sectionKey))
+
+	const active = links.find(l => !l.href && (pathname === l.path || pathname.startsWith(`${l.path}/`))) ?? null
+	const pageTitle = active?.name ?? title
+
+	const internal = links.filter(l => !l.href)
+	const at = internal.indexOf(active)
+	const prev = at > 0 ? internal[at - 1] : null
+	const next = at >= 0 && at < internal.length - 1 ? internal[at + 1] : null
+
+	// Kontentdagi <h2> lardan mundarija (sahifa ichidagi bo'limlar)
+	const articleRef = useRef(null)
+	const barRef = useRef(null)
+	const [toc, setToc] = useState([])
+	const [current, setCurrent] = useState(0)
+
+	useEffect(() => {
+		const el = articleRef.current
+		if (!el) return
+		let raf
+		const scan = () => {
+			const hs = [...el.querySelectorAll('h2')].filter(h => h.textContent.trim())
+			hs.forEach((h, i) => {
+				if (!h.id) h.id = `pg-s${i}`
+				h.style.scrollMarginTop = '110px'
+			})
+			const list = hs.map(h => ({ id: h.id, text: h.textContent.trim() }))
+			setToc(prevList => (JSON.stringify(prevList) === JSON.stringify(list) ? prevList : list))
+		}
+		const schedule = () => {
+			cancelAnimationFrame(raf)
+			raf = requestAnimationFrame(scan)
+		}
+		scan()
+		const mo = new MutationObserver(schedule)
+		mo.observe(el, { childList: true, subtree: true })
+		return () => {
+			cancelAnimationFrame(raf)
+			mo.disconnect()
+		}
+	}, [pathname])
+
+	useEffect(() => {
+		const onScroll = () => {
+			const el = articleRef.current
+			if (!el) return
+			let cur = 0
+			toc.forEach((s, i) => {
+				const node = document.getElementById(s.id)
+				if (node && node.getBoundingClientRect().top < window.innerHeight * 0.35) cur = i
+			})
+			setCurrent(cur)
+			const r = el.getBoundingClientRect()
+			const p = Math.min(1, Math.max(0, (window.innerHeight * 0.35 - r.top) / Math.max(1, r.height - window.innerHeight * 0.35)))
+			if (barRef.current) barRef.current.style.transform = `scaleX(${p})`
+		}
+		onScroll()
+		window.addEventListener('scroll', onScroll, { passive: true })
+		return () => window.removeEventListener('scroll', onScroll)
+	}, [toc])
+
+	// Juda uzun ro'yxat (kartochka sarlavhalari) mundarija bo'lmaydi
+	const showToc = toc.length > 1 && toc.length <= 8
+	const other = sectionKeys.filter(k => k !== sectionKey && menu[k].links.length)
 
 	return (
-		<div style={{ background: 'rgba(var(--card-rgb),1)', minHeight: '100vh' }}>
-			<Seo title={title} description={description} />
+		<PageFrame>
+			<Seo title={pageTitle} description={description} />
+			<main id='hero'>
+				<section className='pg-hero'>
+					<div className='grid' aria-hidden='true' />
+					<HeroDots />
+					<div className='pg-w'>
+						<div className='crumb st' style={{ '--i': 0 }}>
+							<Link to='/'>{t('home.p_home')}</Link>
+							<i>/</i>
+							<span>{title}</span>
+							{active && (
+								<>
+									<i>/</i>
+									<b>{active.name}</b>
+								</>
+							)}
+						</div>
+						<div className='pg-k st' style={{ '--i': 1 }}>
+							{`0${sectionIdx + 1} · ${title}`}
+						</div>
+						<h1 className='st' style={{ '--i': 2 }}>
+							<Title text={pageTitle} />
+						</h1>
+						{lead && (
+							<p className='pg-lead st' style={{ '--i': 3 }}>
+								{lead}
+							</p>
+						)}
+					</div>
+				</section>
 
-			<div className='mx-auto flex max-w-[1440px] flex-col gap-6 px-5 py-8 md:flex-row md:gap-0 md:px-[60px] lg:px-[130px]'>
-				<aside className='w-full flex-shrink-0 md:sticky md:top-20 md:h-[calc(100vh-80px)] md:w-[320px] lg:w-[365px]'>
-					<div className='flex h-full flex-col overflow-y-auto pb-6 md:pt-[35px] md:pb-10'>
-						<MenuBackButton
-							className='mb-6 flex h-10 w-[88px] items-center justify-center gap-2 rounded-[10px] px-[10px] text-[14px] font-medium text-white no-underline transition-all duration-300 md:mb-9'
-							style={{
-								background: 'rgba(var(--blue-rgb),0.05)',
-								backdropFilter: 'blur(16px)',
-								boxShadow: 'inset 0 2px 6px rgba(255,255,255,0.25), 0 0 0 1px rgba(255,255,255,0.08)',
-							}}
-						>
-							<svg width='18' height='18' viewBox='0 0 16 16' fill='none' aria-hidden='true'>
-								<path d='M10 12L6 8L10 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-							</svg>
-							<span>{t('common.back')}</span>
-						</MenuBackButton>
-
-						<h1 className='mb-4 px-1 text-[22px] font-semibold text-white'>{title}</h1>
-
-						<nav aria-label={title} className='flex w-full flex-col self-start'>
+				<div className={`pg-body${showToc ? '' : ' full'}`}>
+					<aside className='side'>
+						<h4>{title}</h4>
+						<nav aria-label={title}>
 							{links.map(link =>
-								/* `href` — tashqi portal (admin panelda sozlanadi), o'z sahifasi yo'q,
-								   shuning uchun hech qachon "active" bo'lmaydi va yangi oynada ochiladi. */
+								/* `href` — tashqi portal (admin panelda sozlanadi): o'z sahifasi yo'q, yangi oynada ochiladi */
 								link.href ? (
-									<a
-										key={link.path}
-										href={link.href}
-										target='_blank'
-										rel='noopener noreferrer'
-										style={{ textDecoration: 'none', display: 'block' }}
-										onClick={e => {
-											e.preventDefault()
-											window.open(link.href, '_blank', 'noopener,noreferrer')
-										}}
-									>
-										{renderRow(link, false)}
+									<a key={link.path} href={link.href} target='_blank' rel='noopener noreferrer'>
+										{link.name} ↗
 									</a>
 								) : (
-									<NavLink key={link.path} to={link.path} style={{ textDecoration: 'none', display: 'block' }}>
-										{({ isActive }) => renderRow(link, isActive)}
+									<NavLink key={link.path} to={link.path} className={({ isActive }) => (isActive ? 'on' : '')}>
+										{link.name}
 									</NavLink>
 								),
 							)}
 						</nav>
+						{other.length > 0 && (
+							<div className='other'>
+								<h4>{t('home.p_oth')}</h4>
+								{other.map(k => (
+									<Link key={k} to={`${menu[k].base}/${menu[k].links[0].path}`}>
+										{menu[k].title} →
+									</Link>
+								))}
+							</div>
+						)}
+					</aside>
 
-						{/* Boshqa bo'lim sidebar'laridagi (About, Science, MediaServise) bilan
-						    bir xil "ulashish" bloki */}
-						<div className='mt-8 pl-1.5'>
-							<p className='mb-3 text-[16px] leading-7' style={{ color: 'rgba(153,160,174,1)' }}>
-								{t('components.sidebarLayout.share_this_blog')}
-							</p>
-							<SocialLinks />
-						</div>
-					</div>
-				</aside>
+					<article className='ct-b' ref={articleRef}>
+						{(showOutlet ? outlet : null) ?? children}
+						{(prev || next) && (
+							<div className='pg-next'>
+								{prev ? (
+									<Link to={prev.path}>
+										<small>← {t('home.p_prev')}</small>
+										<span>{prev.name}</span>
+									</Link>
+								) : (
+									<span />
+								)}
+								{next && (
+									<Link className='r' to={next.path}>
+										<small>{t('home.p_next')} →</small>
+										<span>{next.name}</span>
+									</Link>
+								)}
+							</div>
+						)}
+					</article>
 
-				<main className='min-w-0 flex-1 pb-[60px] md:pl-[30px] md:pr-[60px]'>
-					{(showOutlet ? outlet : null) ?? children}
-				</main>
-			</div>
-		</div>
+					{showToc && (
+						<aside className='toc'>
+							<h4>{t('home.p_toc')}</h4>
+							<nav>
+								{toc.map((s, i) => (
+									<a
+										key={s.id}
+										href={`#${s.id}`}
+										className={i === current ? 'on' : ''}
+										onClick={e => {
+											e.preventDefault()
+											document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+										}}
+									>
+										<i>{String(i + 1).padStart(2, '0')}</i>
+										{s.text}
+									</a>
+								))}
+							</nav>
+							<div className='bar'>
+								<i ref={barRef} />
+							</div>
+						</aside>
+					)}
+				</div>
+			</main>
+		</PageFrame>
 	)
 }
 

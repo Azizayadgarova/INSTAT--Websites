@@ -53,9 +53,6 @@ const IshOrinlari = () => {
 		<section>
 			<Seo title={t('pages.ishOrinlari.sarlavha')} />
 
-			<h1 style={{ color: '#fff', fontSize: 24, fontWeight: 600, margin: '0 0 8px' }}>
-				{t('pages.ishOrinlari.sarlavha')}
-			</h1>
 			<p style={{ color: 'rgba(var(--muted-rgb),1)', fontSize: 15, lineHeight: 1.6, margin: '0 0 28px' }}>
 				{t('pages.ishOrinlari.tavsif')}
 			</p>

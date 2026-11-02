@@ -14,9 +14,6 @@ const DarsJadvallari = () => {
 	return (
 		<section>
 			<Seo title={t('menu.oquvFaoliyati.dars-jadvallari')} />
-			<h1 className='mb-6 text-[26px] font-semibold text-white md:text-[32px]'>
-				{t('menu.oquvFaoliyati.dars-jadvallari')}
-			</h1>
 			<AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={items.length === 0} skeleton={<SkeletonText lines={5} />}>
 				<DocList items={items} previewable />
 			</AsyncBoundary>

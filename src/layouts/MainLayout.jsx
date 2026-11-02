@@ -2,17 +2,19 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import ScrollToTop from '../components/shared/ScrollToTop'
+import { menuConfig } from '../config/menuConfig'
 import { MenuProvider } from '../context/MenuContext'
 import Seo from '../components/shared/Seo'
 
 const CursorRing    = lazy(() => import('../components/shared/CursorRing'))
-const TopFooter     = lazy(() => import('../components/TopFooter'))
 const Footer        = lazy(() => import('../components/Footer'))
-const AppPromoSection = lazy(() => import('../components/AppPromoSection'))
 
 const MainLayout = () => {
 	const { pathname } = useLocation()
+	// Bosh sahifa va menyu bo'limlari (/about, /science ...) yangi dizaynda: o'z navigatsiya va footer'i bor
 	const isHome = pathname === '/'
+	const isMenuPage = Object.values(menuConfig).some(({ base }) => pathname === base || pathname.startsWith(`${base}/`))
+	const ownFrame = isHome || isMenuPage
 	const progressRef = useRef(null)
 	const [mountCursor, setMountCursor] = useState(false)
 
@@ -36,7 +38,7 @@ const MainLayout = () => {
 		}
 		window.addEventListener('scroll', onScroll, { passive: true })
 		return () => window.removeEventListener('scroll', onScroll)
-	}, [])
+	}, [ownFrame])
 
 	return (
 		<MenuProvider>
@@ -44,10 +46,10 @@ const MainLayout = () => {
 			{/* Standart (tilga mos) title/meta — sahifaning o'z <Seo/> si bo'lsa, u ustun turadi */}
 			<Seo />
 			<ScrollToTop />
-			{mountCursor && <Suspense fallback={null}><CursorRing /></Suspense>}
+			{!ownFrame && mountCursor && <Suspense fallback={null}><CursorRing /></Suspense>}
 
-			{/* Global scroll progress */}
-			<div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '3px', zIndex: 9999, background: 'rgba(255,255,255,0.05)' }}>
+			{/* Global scroll progress (bosh sahifa o'zining navigatsiya/footer'iga ega — components/home) */}
+			{!ownFrame && <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '3px', zIndex: 9999, background: 'rgba(255,255,255,0.05)' }}>
 				<div
 					ref={progressRef}
 					style={{
@@ -73,20 +75,19 @@ const MainLayout = () => {
 						}}
 					/>
 				</div>
-			</div>
+			</div>}
 
-			<Navbar />
-
-			<main className='pt-20 relative'>
+			{ownFrame ? (
 				<Outlet />
-			</main>
-			{isHome && (
-				<Suspense fallback={null}>
-					<AppPromoSection />
-				</Suspense>
+			) : (
+				<>
+					<Navbar />
+					<main className='pt-20 relative'>
+						<Outlet />
+					</main>
+					<Suspense fallback={null}><Footer /></Suspense>
+				</>
 			)}
-			{isHome && <Suspense fallback={null}><TopFooter /></Suspense>}
-			<Suspense fallback={null}><Footer /></Suspense>
 		</div>
 		</MenuProvider>
 	)

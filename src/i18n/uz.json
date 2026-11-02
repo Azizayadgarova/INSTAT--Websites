@@ -1022,5 +1022,228 @@
 				"description": "Onlayn platformalarda kitobni sotib olishdan oldin uning mazmuni va uslubini toʻliq baholash qiyin. Uni \\"
 			}
 		}
+	},
+	"home": {
+		"p_home": "Bosh sahifa",
+		"p_toc": "Sahifada",
+		"p_oth": "Boshqa bo‘limlar",
+		"p_prev": "Oldingi",
+		"p_next": "Keyingi",
+		"c_label": "INSTAT onlayn kurslari",
+		"nw_lab": "Yangiliklar",
+		"nw_t": "Institut|hayotidan",
+		"nw_all": "Barcha yangiliklar",
+		"nw_more": "Batafsil",
+		"ft_s": "Saytlar",
+		"ft_call": "Qo‘ng‘iroq qiling",
+		"ft_write": "Yozing",
+		"ft_sn": "Ijtimoiy tarmoqlar",
+		"ft_mq": "Ma’lumotlar va tahlil ilmi",
+		"ft_h": "Qo‘llab-quvvatlash",
+		"ft_faq": "Ko‘p beriladigan savollar",
+		"ft_ct": "Biz bilan bog‘lanish",
+		"ft_l": "Huquqiy ma’lumot",
+		"ft_p": "Maxfiylik siyosati",
+		"ft_t": "Foydalanish shartlari",
+		"ft_c": "Cookie siyosati",
+		"ft_cp": "© 2026 INSTAT. Barcha huquqlar himoyalangan.",
+		"ft_top": "Yuqoriga",
+		"ct_lab": "Aloqa",
+		"ct_t": "Savollar bormi?|Biz bilan bog‘laning",
+		"ct_sub": "Kurslar, ro‘yxatdan o‘tish yoki hamkorlik bo‘yicha savollaringiz bo‘lsa, yozing. Mutaxassislarimiz javob beradi.",
+		"ct_tel": "Telefon",
+		"ct_adr": "Manzil",
+		"ct_adrv": "Toshkent, Mirzo Ulug‘bek tumani, Mustaqillik shoh ko‘chasi, 42b",
+		"ct_city": "Toshkent · 41.31°N 69.24°E",
+		"ct_ft": "Xabar yuboring",
+		"ct_tp": [
+			"Kurslar",
+			"Ro‘yxatdan o‘tish",
+			"Hamkorlik",
+			"Boshqa"
+		],
+		"ct_n": "Ismingiz",
+		"ct_p": "Telefon raqamingiz",
+		"ct_m": "Xabaringiz",
+		"ct_s": "Yuborish",
+		"ct_note": "Odatda 1 ish kuni ichida javob beramiz",
+		"ct_err": "Ism va telefon raqamini kiriting.",
+		"ct_ok": "Rahmat! Xabaringiz qabul qilindi.",
+		"ap_lab": "Mobil ilova",
+		"ap_t": "Mobil ilova bilan|yanada qulay!",
+		"ap_sub": "Mobil ilovamiz bilan o‘qish yanada oson. Ilovani hoziroq yuklab oling va darslarni istalgan joyda davom ettiring.",
+		"ap_f": [
+			"Video darslar istalgan joyda",
+			"Shaxsiy progress statistikasi",
+			"Yangi darslar haqida bildirishnomalar"
+		],
+		"ap_get": "Yuklab olish",
+		"ap_get2": "Yuklab olish",
+		"ap_p": {
+			"hi": "Xush kelibsiz",
+			"my": "Mening kurslarim",
+			"c1": "Python asoslari",
+			"c2": "Regressiya tahlili",
+			"st": "Haftalik faollik",
+			"tm": "O‘qish vaqti",
+			"tk": "Bajarilgan topshiriqlar",
+			"ce": "Sertifikat",
+			"dn": "Kurs muvaffaqiyatli yakunlandi"
+		},
+		"ap_n": [
+			[
+				"Yangi dars qo‘shildi",
+				"Python asoslari · 8-modul"
+			],
+			[
+				"Topshiriq qabul qilindi",
+				"Regressiya tahlili"
+			],
+			[
+				"Sertifikat tayyor",
+				"Shaxsiy kabinetda"
+			]
+		],
+		"fq_lab": "Savol-javob",
+		"fq_t": "Ko‘p beriladigan|savollar",
+		"fq_sub": "Platforma, kurslar va sertifikatlar haqida eng ko‘p so‘raladigan savollarga javoblar.",
+		"fq_c": [
+			"Barchasi",
+			"Ro‘yxatdan o‘tish",
+			"Kurslar",
+			"To‘lov",
+			"Sertifikat"
+		],
+		"fq_n": "ta savol shu bo‘limda",
+		"fq_hb": "Javob topa olmadingizmi?",
+		"fq_hs": "Savolingizni yozing, mutaxassislarimiz tez orada javob beradi.",
+		"fq_hc": "Savol yuborish",
+		"ig_t": "Integratsiyalashgan|platformalar",
+		"ig_sub": "Ta’lim jarayonini qulay va samarali qiluvchi integratsiyalar",
+		"ig_d": [
+			"Kurs to‘lovlarini tez va xavfsiz amalga oshirish",
+			"Bir bosishda onlayn to‘lov",
+			"Yagona identifikatsiya tizimi orqali kirish",
+			"Biometrik shaxsni tasdiqlash"
+		],
+		"c_mob": "Mobil ilova",
+		"c_capT": "Darslar endi *cho‘ntagingizda",
+		"c_cap2": "INSTAT mobil ilovasi bilan kurslarni istalgan joyda va istalgan vaqtda davom ettiring.",
+		"c_h": "Statistika va ma’lumotlar tahlilini|o‘z sur’atingizda o‘rganing",
+		"c_title": "*Zamonaviy kasblarni* bugunoq o‘rganishni boshlang!",
+		"c_cap": "Ta’lim endi cho‘ntagingizda",
+		"c_cta2": "Barcha yo‘nalishlar",
+		"c_live": "Hozir o‘qilmoqda",
+		"c_course": "Python asoslari",
+		"c_mod": "7 / 9 modul",
+		"c_sub": "Tajribali mutaxassislar tayyorlagan video darslar, amaliy topshiriqlar va rasmiy sertifikat. Barchasi bitta platformada.",
+		"c_ben": [
+			"Video darslar",
+			"Amaliy topshiriqlar",
+			"Rasmiy sertifikat"
+		],
+		"c_cta": "Kurslarni ko‘rish",
+		"c_note": "O‘z sur’atingizda, istalgan qurilmadan",
+		"c_steps": [
+			[
+				"Boshlanish",
+				"Asoslar",
+				"Statistika va Python’ga kirish"
+			],
+			[
+				"Amaliyot",
+				"Ma’lumotlar tahlili",
+				"Tozalash, vizualizatsiya, hisobot"
+			],
+			[
+				"Chuqurlashuv",
+				"Modellar",
+				"Regressiya va tanlanma kuzatuv"
+			],
+			[
+				"Natija",
+				"Sertifikat",
+				"Yakuniy loyiha va sertifikat"
+			]
+		],
+		"f_label": "Platformalar",
+		"f_title": "Barcha imkoniyatlar bir joyda",
+		"f_sub": "Ta’lim, tadqiqot va rivojlanish uchun platformalar.",
+		"f_hint": "Ichkariga kiring",
+		"f_go": "Kirish",
+		"fz": [
+			[
+				"Onlayn ta’lim platformasi",
+				"Zamonaviy onlayn kurslar",
+				"Tajribali mutaxassislar ishlab chiqqan kurslar orqali yangi bilim va ko‘nikmalarga ega bo‘ling. Video darslar, amaliy topshiriqlar va sertifikatlar bilan zamonaviy ta’lim imkoniyatlarini kashf eting.",
+				"Onlayn ta’lim"
+			],
+			[
+				"Elektron kutubxona",
+				"Ilmiy manbalar kutubxonasi",
+				"Ilmiy kitoblar, o‘quv qo‘llanmalar va akademik materiallardan iborat keng elektron kutubxonadan foydalaning. Bilimingizni ishonchli manbalar bilan boyiting.",
+				"Raqamli kutubxona"
+			],
+			[
+				"Ilmiy jurnallar platformasi",
+				"Ilmiy maqolalar va jurnallar",
+				"Tadqiqot natijalarini ilmiy jurnallarda chop etish, maqolalarga taqriz yozish va akademik hamjamiyat bilan bilim almashish imkoniyati.",
+				"Elektron jurnal"
+			],
+			[
+				"Ma’lumotlar laboratoriyasi",
+				"Mikroma’lumotlar va tadqiqot tahlili",
+				"Statistik va ilmiy mikroma’lumotlar bilan ishlash uchun maxsus platforma. Tadqiqotchilar ma’lumotlarni tahlil qilib, ilmiy xulosalar va yangi tadqiqotlar yaratadi.",
+				"Mikroma’lumotlar"
+			]
+		],
+		"n1": "Platformalar",
+		"n2": "Kurslar",
+		"n3": "Yangiliklar",
+		"n4": "Institut",
+		"n5": "Aloqa",
+		"login": "Platformaga kirish",
+		"menu": "Menyu",
+		"close": "Yopish",
+		"tel": "Telefon",
+		"m_nav": "Menyu",
+		"m_sites": "Bo‘limlar",
+		"adr": "Manzil",
+		"sn": "Ijtimoiy tarmoqlar",
+		"eyebrow": "Kadrlar malakasini oshirish va statistik tadqiqotlar instituti",
+		"h1a": "«Ma’lumotlar va tahlil ilmi»",
+		"h1b": "Raqamli ta’lim platformasi",
+		"sub": "Ta’lim, ilm-fan va karyera uchun yagona raqamli platforma. Statistik bilimlar mamlakatning barcha hududlari uchun ochiq.",
+		"cta1": "Platformaga kirish",
+		"cta2": "Institut haqida",
+		"d1": "Onlayn ta’lim",
+		"d2": "Mikroma’lumotlar",
+		"d3": "Raqamli kutubxona",
+		"d4": "Elektron jurnal",
+		"uz": "O‘zbekiston",
+		"regions": "14 hudud",
+		"live": "Platforma faol",
+		"region": "Hudud",
+		"k1": "Foydalanuvchilar",
+		"k2": "Hamkorlar",
+		"k3": "Ekspertlar",
+		"k4": "Faoliyat",
+		"scroll": "Pastga",
+		"r": [
+			"Toshkent shahri",
+			"Toshkent viloyati",
+			"Andijon viloyati",
+			"Namangan viloyati",
+			"Farg‘ona viloyati",
+			"Sirdaryo viloyati",
+			"Jizzax viloyati",
+			"Samarqand viloyati",
+			"Qashqadaryo viloyati",
+			"Surxondaryo viloyati",
+			"Buxoro viloyati",
+			"Navoiy viloyati",
+			"Xorazm viloyati",
+			"Qoraqalpog‘iston Respublikasi"
+		]
 	}
 }

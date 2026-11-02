@@ -14,7 +14,7 @@ const OquvFaoliyati = () => {
 	}))
 
 	return (
-		<SectionShell title={section.title} description={t('seo.defaultDescription')} links={links}>
+		<SectionShell sectionKey='oquvFaoliyati' title={section.title} description={t('seo.defaultDescription')} links={links}>
 			{/* Bola marshrut tanlanmagan holat */}
 			<PagePlaceholder title={section.title} />
 		</SectionShell>

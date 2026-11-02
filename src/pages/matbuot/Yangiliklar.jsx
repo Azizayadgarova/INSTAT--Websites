@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import AsyncBoundary from '@/components/shared/AsyncBoundary'
 import Seo from '@/components/shared/Seo'
 import { SkeletonText } from '@/components/shared/Skeleton'
-import { Badge, Thumb, formatPostDate, htmlToExcerpt } from '@/components/news/NewsParts'
+import { Thumb, formatPostDate, htmlToExcerpt } from '@/components/news/NewsParts'
 import { useNewsPosts } from '@/hooks/useNewsPosts'
 
 /** Bir sahifadagi kartochkalar soni */
@@ -170,10 +170,6 @@ const Yangiliklar = () => {
 				isEmpty={posts.length === 0}
 				skeleton={<SkeletonText lines={8} />}
 			>
-				<div style={{ marginBottom: 24 }}>
-					<Badge>{t('pages.yangiliklar.badge')}</Badge>
-				</div>
-
 				<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 xl:grid-cols-3'>
 					{pageItems.map(post => (
 						<NewsCard key={post.id} post={post} />

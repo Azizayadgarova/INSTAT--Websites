@@ -38,6 +38,7 @@ const InfoResurses = () => {
 
 	return (
 		<SectionShell
+			sectionKey='axborot'
 			title={section.title}
 			description={t('seo.defaultDescription')}
 			links={links}
