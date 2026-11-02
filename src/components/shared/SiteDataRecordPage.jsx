@@ -27,17 +27,24 @@ const SiteDataRecordPage = ({ module, contentKey, previewable = false }) => {
 	const title = pickLangLabel(record, lang)
 	const body = pickLang(record, lang)
 	const path = pickPath(record)
+	// Matnda jadval bo'lsa u kartaga sig'maydi: jadval yuqorida, fayl kartasi (PDF) uning pastida turadi
+	const hasTable = /<table[\s>]/i.test(body ?? '')
 
 	return (
 		<section>
 			<Seo title={title} />
 			<AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={!loading && !error && !record} skeleton={<SkeletonText lines={8} />}>
-				{path ? (
+				{path && !hasTable ? (
 					<DocCard title={title} description={body} path={path} onPreview={previewable ? () => setPreviewOpen(true) : undefined} />
 				) : (
 					<>
 						{title && <h1 className='mb-6 text-[26px] font-semibold text-white md:text-[32px]'>{title}</h1>}
 						<RichContent html={body} />
+						{path && (
+							<div style={{ marginTop: 40 }}>
+								<DocCard title={title} path={path} onPreview={previewable ? () => setPreviewOpen(true) : undefined} />
+							</div>
+						)}
 					</>
 				)}
 			</AsyncBoundary>

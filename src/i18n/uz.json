@@ -1,4 +1,21 @@
 {
+	"contactPage": {
+		"lead": "Savol va takliflaringiz boʻlsa, telefon, elektron pochta yoki ijtimoiy tarmoqlar orqali murojaat qiling.",
+		"channels": "Aloqa kanallari",
+		"phone": "Telefon",
+		"fax": "Faks",
+		"email": "Elektron pochta",
+		"hours": "Ish vaqti",
+		"hoursVal": "Du – Ju, 09:00 – 18:00",
+		"social": "Ijtimoiy tarmoqlar",
+		"openMap": "Xaritada ochish",
+		"route": "Yoʻnalish",
+		"address": "Manzil",
+		"transport": "Transport",
+		"copy": "Nusxalash",
+		"copied": "Nusxalandi",
+		"mapTitle": "INSTAT manzili"
+	},
 	"postgrad": {
 		"intro": "Kadrlar malakasini oshirish va statistik tadqiqotlar institutida tahsil olayotgan doktorant, tayanch doktorant va stajyor tadqiqotchilari toʻgʻrisida",
 		"info": "Ma’lumot",
@@ -53,7 +70,8 @@
 			"qarshi-kurash": "Korrupsiyaga qarshi kurashish",
 			"ish-orinlar": "Boʻsh ish oʻrinlari",
 			"yotoqhona": "Mehmonxona turidagi yotoqxona",
-			"odob-axloq": "Odob-axloq qoidalari"
+			"odob-axloq": "Odob-axloq qoidalari",
+			"kontakt": "Kontakt"
 		},
 		"axborot": {
 			"title": "Axborot resurslari",

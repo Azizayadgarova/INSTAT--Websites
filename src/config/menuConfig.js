@@ -13,6 +13,7 @@ export const menuConfig = {
 			'ish-orinlar',
 			'yotoqhona',
 			'odob-axloq',
+			'kontakt',
 		],
 	},
 

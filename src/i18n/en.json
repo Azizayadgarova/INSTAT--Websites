@@ -1,4 +1,21 @@
 {
+  "contactPage": {
+    "lead": "If you have questions or suggestions, contact us by phone, email or through social networks.",
+    "channels": "Contact channels",
+    "phone": "Phone",
+    "fax": "Fax",
+    "email": "Email",
+    "hours": "Working hours",
+    "hoursVal": "Mon – Fri, 09:00 – 18:00",
+    "social": "Social networks",
+    "openMap": "Open in maps",
+    "route": "Directions",
+    "address": "Address",
+    "transport": "Transport",
+    "copy": "Copy",
+    "copied": "Copied",
+    "mapTitle": "INSTAT location"
+  },
   "postgrad": {
     "intro": "Information on doctoral students, PhD candidates and research interns studying at the Institute for Advanced Training of Personnel and Statistical Research",
     "info": "Information",
@@ -53,7 +70,8 @@
       "qarshi-kurash": "Anti-corruption",
       "ish-orinlar": "Vacancies",
       "yotoqhona": "Hotel-type dormitory",
-      "odob-axloq": "Code of ethics"
+      "odob-axloq": "Code of ethics",
+      "kontakt": "Contact"
     },
     "axborot": {
       "title": "Information resources",

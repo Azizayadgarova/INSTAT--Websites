@@ -18,8 +18,10 @@ const About = () => {
   if (!outlet) return <Home />
 
   const links = section.links.map(l => ({ ...l, path: `${section.base}/${l.path}` }))
-  // "Umumiy ma'lumotlar" sahifasi hero'sida qisqa tavsif chiqadi (statik matn)
-  const lead = pathname.endsWith('/umumiy-malumot') ? (GENERAL_INFO[i18n.resolvedLanguage] ?? GENERAL_INFO.uz).l : undefined
+  // Ba'zi sahifalar hero'sida qisqa tavsif chiqadi (statik matn)
+  let lead
+  if (pathname.endsWith('/umumiy-malumot')) lead = (GENERAL_INFO[i18n.resolvedLanguage] ?? GENERAL_INFO.uz).l
+  else if (pathname.endsWith('/kontakt')) lead = t('contactPage.lead')
 
   return (
     <SectionShell sectionKey='about' title={section.title} description={t('seo.defaultDescription')} lead={lead} links={links} />

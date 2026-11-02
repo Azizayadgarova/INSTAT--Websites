@@ -31,6 +31,7 @@ const QarshiKurash = lazy(() => import('../pages/About/QarshiKurash.jsx'))
 const Rahbariyat = lazy(() => import('../pages/About/Rahbariyat.jsx'))
 const Tuzilma = lazy(() => import('../pages/About/Tuzilma.jsx'))
 const UmumiyMalumot = lazy(() => import('../pages/About/UmumiyMalumot.jsx'))
+const Kontakt = lazy(() => import('../pages/About/Kontakt.jsx'))
 const Yotoqhona = lazy(() => import('../pages/About/Yotoqxona.jsx'))
 const About = lazy(() => import('../pages/main/About'))
 
@@ -98,6 +99,7 @@ export const routes = [
 				children: [
 					{ path: 'ish-orinlar', element: s(IshOrinlari) },
 					{ path: 'odob-axloq', element: s(OdobAxloq) },
+					{ path: 'kontakt', element: s(Kontakt) },
 					{ path: 'qarshi-kurash', element: s(QarshiKurash) },
 					{ path: 'rahbariyat', element: s(Rahbariyat) },
 					{ path: 'tuzilma', element: s(Tuzilma) },
