@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useContacts } from '@/hooks/useContacts'
 import { useSocialLinks } from '@/hooks/useSocialLinks'
-import { useSiteData } from '@/hooks/useSiteData'
-import { pickPath } from '@/utils/siteContent'
+import OrgChart from '@/components/home/OrgChart'
 import useSectionText from "@/hooks/useSectionText.js";
 
 const CARD = {
@@ -179,13 +178,16 @@ const Tuzilma = () => {
 
     const contacts = useContacts()
     const socials = useSocialLinks()
-    const structureImg = useSiteData(d => pickPath(d.byModuleKey.structure?.structure)).data
     const st = useSectionText('all')
 
     return (
         <div
             style={{ maxWidth: '900px', margin: 0, padding: '0 0 80px' }}
         >
+            {/* Tashkiliy tuzilma — diagramma (prototip: page.html), rasm emas */}
+            <div style={{ marginBottom: '72px' }}>
+                <OrgChart />
+            </div>
             {/* Badge */}
             <div style={{ marginBottom: '20px', display: 'inline-flex' }}>
                 <span
@@ -206,33 +208,6 @@ const Tuzilma = () => {
             </div>
             <div className='grid grid-cols-1 gap-6 md:grid-cols-1  xl:grid-cols-1'>
 
-                {/* Tashkiliy tuzilma rasmi (API: module=structure) */}
-                {structureImg && (
-                    <div
-                        style={{
-                            background: 'rgba(31, 37, 51, 1)',
-                            borderRadius: '16px',
-                            padding: '16px',
-                            boxSizing: 'border-box',
-                        }}
-                    >
-                        <h3 style={{ ...TITLE, marginBottom: '16px' }}>{t("pages.tuzilma.tuzilma_rasmi")}</h3>
-                        <a href={structureImg} target='_blank' rel='noopener noreferrer'>
-                            <img
-                                src={structureImg}
-                                alt={t("pages.tuzilma.tuzilma_rasmi")}
-                                style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    display: 'block',
-                                    borderRadius: '12px',
-                                }}
-                                loading='lazy'
-                                decoding='async'
-                            />
-                        </a>
-                    </div>
-                )}
                 {/* Card 1 */}
                 <div
                     style={{

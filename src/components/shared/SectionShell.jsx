@@ -109,7 +109,7 @@ const SectionShell = ({ sectionKey, title, description, lead, links = [], showOu
 		if (!el) return
 		let raf
 		const scan = () => {
-			const hs = [...el.querySelectorAll('h2')].filter(h => h.textContent.trim())
+			const hs = [...el.querySelectorAll('h2')].filter(h => h.textContent.trim() && !h.closest('[data-no-toc]'))
 			hs.forEach((h, i) => {
 				if (!h.id) h.id = `pg-s${i}`
 				h.style.scrollMarginTop = '110px'
