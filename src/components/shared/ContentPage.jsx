@@ -3,46 +3,29 @@ import { useTranslation } from 'react-i18next'
 import { useSiteData } from '@/hooks/useSiteData'
 import { pickLang, pickLangLabel, pickPath } from '@/utils/siteContent'
 import AsyncBoundary from './AsyncBoundary'
+import DocCard from './DocCard'
 import FileDrawer from './FileDrawer'
 import RichContent from './RichContent'
 import Seo from './Seo'
 import { SkeletonText } from './Skeleton'
 
 const isImage = url => /\.(png|jpe?g|webp|gif|svg)$/i.test(url ?? '')
-const isPdf = url => /\.pdf($|\?)/i.test(url ?? '')
 
-const buttonStyle = {
-	display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 20px', borderRadius: 10,
-	border: '1px solid rgba(var(--blue-rgb),0.4)', background: 'rgba(var(--blue-rgb),0.1)',
-	color: '#fff', textDecoration: 'none', fontSize: 15, cursor: 'pointer', fontFamily: 'inherit',
-}
-
-/** `onPreview` berilsa va fayl PDF bo'lsa — yuklab olish yonida "Ko'rish" tugmasi chiqadi. */
-const Attachment = ({ path, label, onPreview }) => {
-	const { t } = useTranslation()
+/** `onPreview` berilsa va fayl PDF bo'lsa — "Oldindan ko'rish" tugmasi chiqadi. Rasm bo'lsa rasmning o'zi. */
+const Attachment = ({ path, label, description, onPreview, compact }) => {
 	if (!path) return null
 	if (isImage(path)) {
 		return <img src={path} alt={label ?? ''} loading='lazy' decoding='async'
 			style={{ maxWidth: '100%', borderRadius: 12, marginTop: 20 }} />
 	}
 	return (
-		<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 20 }}>
-			<a href={path} target='_blank' rel='noopener noreferrer' style={buttonStyle}>
-				<svg width='18' height='18' viewBox='0 0 24 24' fill='none' aria-hidden='true'>
-					<path d='M12 3v12m0 0l-4-4m4 4l4-4M5 21h14' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-				</svg>
-				{t('common.download', 'Yuklab olish')}
-			</a>
-			{onPreview && isPdf(path) && (
-				<button type='button' onClick={() => onPreview({ src: path, title: label })} style={buttonStyle}>
-					<svg width='18' height='18' viewBox='0 0 24 24' fill='none' aria-hidden='true'>
-						<path d='M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z' stroke='currentColor' strokeWidth='2' strokeLinejoin='round' />
-						<circle cx='12' cy='12' r='3' stroke='currentColor' strokeWidth='2' />
-					</svg>
-					{t('common.preview', "Ko'rish")}
-				</button>
-			)}
-		</div>
+		<DocCard
+			title={label}
+			description={description}
+			path={path}
+			compact={compact}
+			onPreview={onPreview ? () => onPreview({ src: path, title: label }) : undefined}
+		/>
 	)
 }
 
@@ -84,11 +67,21 @@ const ContentPage = ({ module, contentKey, title, description, showTitle = false
 				{showLabels ? (
 					entries.map(it => {
 						const label = pickLangLabel(it, lang)
+						const path = pickPath(it)
+						const onPreview = previewable ? setPreview : undefined
+						// Faylli yozuv — hujjat kartasi (sarlavha + matn + tugmalar), matnli yozuv — oddiy blok
+						if (path && !isImage(path)) {
+							return (
+								<div key={it.id} style={{ marginBottom: 24 }}>
+									<Attachment path={path} label={label} description={pickLang(it, lang)} onPreview={onPreview} />
+								</div>
+							)
+						}
 						return (
 							<article key={it.id} style={{ marginBottom: 32 }}>
 								{label && <h2 className='mb-3 text-[20px] font-semibold text-white md:text-[24px]'>{label}</h2>}
 								<RichContent html={pickLang(it, lang)} />
-								<Attachment path={pickPath(it)} label={label} onPreview={previewable ? setPreview : undefined} />
+								<Attachment path={path} label={label} onPreview={onPreview} />
 							</article>
 						)
 					})

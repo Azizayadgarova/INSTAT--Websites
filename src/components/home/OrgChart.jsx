@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ORG_COLORS, ORG_STAFF, ORG_STRUCTURE } from '@/data/orgStructure.data'
-import { useInView } from './hooks'
+import Block from './Block'
 
 const UserIcon = () => (
 	<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2.2'>
@@ -10,20 +10,6 @@ const UserIcon = () => (
 		<path d='M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6' />
 	</svg>
 )
-
-/** Ekranga kirganda `.in` klassi bilan "paydo bo'ladigan" blok (page.css dagi `.blk`). */
-const Block = ({ n, title, children }) => {
-	const [ref, inView] = useInView({ threshold: 0.08 })
-	return (
-		<section className={`blk${inView ? ' in' : ''}`} ref={ref}>
-			<h2>
-				<i>{n}</i>
-				{title}
-			</h2>
-			{children}
-		</section>
-	)
-}
 
 /**
  * Institut tashkiliy tuzilmasi (prototip: INSTAT/page.html): asosiy ko'rsatkichlar, yo'nalishlar

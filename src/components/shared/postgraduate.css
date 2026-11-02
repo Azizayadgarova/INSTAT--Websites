@@ -1,0 +1,59 @@
+/* "Oliy ta'limdan keyingi ta'lim": kurslar bo'yicha guruhlangan tadqiqotchi kartalari (PostgraduateList). Qoidalar .home ichida, 'home' layer'da. */
+@layer home {
+
+.home .pgl{display:grid;gap:44px}
+.home .pgl-intro{max-width:62ch;font-size:16px;line-height:1.7;color:var(--text)}
+.home .pgl-intro b{display:block;margin-top:8px;font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+
+.home .pgl-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.home .pgl-head h2{font:600 22px/1.2 var(--f-display);color:var(--white);letter-spacing:-.01em;margin:0}
+.home .pgl-head h2::after{content:attr(data-n);margin-left:12px;font:400 13px var(--f-mono);color:var(--muted);letter-spacing:0}
+.home .pgl-head i{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+.home .pgl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px;align-items:start;list-style:none}
+
+.home .pgc{
+  position:relative;display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;padding:16px;border-radius:18px;
+  border:1px solid var(--line);background:linear-gradient(170deg,#182032,#121722 75%);
+  transition:border-color .3s,box-shadow .3s,transform .3s var(--ease)
+}
+.home .pgc:hover,.home .pgc.open{border-color:rgba(0,230,252,.45);box-shadow:0 18px 44px -26px rgba(0,230,252,.55)}
+.home .pgc-ph{position:relative;align-self:start;width:96px;aspect-ratio:96/132;border-radius:14px;overflow:hidden;background:#0c111b}
+.home .pgc-ph img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.home .pgc-ph::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--blue)}
+.home .pgc.dsc .pgc-ph::after{background:var(--cyan)}
+.home .pgc-ph.no{display:grid;place-items:center;font:600 28px var(--f-display);color:var(--muted)}
+
+.home .pgc-b{min-width:0;display:flex;flex-direction:column;gap:10px}
+.home .pgc-n{position:absolute;top:14px;right:16px;font:400 12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.home .pgc-name{font:700 16px/1.25 var(--f-display);color:var(--white);padding-right:26px;letter-spacing:-.005em}
+.home .pgc-tags{display:flex;align-items:center;gap:6px;min-width:0}
+.home .pgc-deg{
+  flex:none;padding:2px 8px;border-radius:7px;border:1px solid rgba(43,117,204,.6);background:rgba(43,117,204,.14);color:#7fb4f5;
+  font:700 12px/1.5 var(--f-mono)
+}
+.home .pgc.dsc .pgc-deg{border-color:rgba(0,230,252,.55);background:rgba(0,230,252,.1);color:var(--cyan)}
+.home .pgc-sp{
+  flex:1;min-width:0;padding:2px 9px;border-radius:7px;border:1px solid var(--line);background:rgba(255,255,255,.02);
+  font:400 12px/1.5 var(--f-mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.home .pgc-t{font-size:14.5px;line-height:1.55;color:var(--text);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.home .pgc.open .pgc-t{display:block;-webkit-line-clamp:unset}
+.home .pgc-more{align-self:flex-start;font:700 12px var(--f-mono);letter-spacing:.02em;color:var(--cyan);cursor:pointer;padding:2px 0}
+.home .pgc-more:hover{text-decoration:underline;text-underline-offset:3px}
+
+.home .pgc-dl{display:grid;gap:8px;padding-top:10px;border-top:1px solid var(--soft)}
+.home .pgc-dl div{display:grid;gap:2px}
+.home .pgc-dl dt{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.home .pgc-dl dd{font-size:14px;line-height:1.5;color:var(--white)}
+
+@media (max-width:480px){
+  .home .pgc{grid-template-columns:76px minmax(0,1fr);gap:12px;padding:12px}
+  .home .pgc-ph{width:76px;border-radius:12px}
+  .home .pgc-n{top:10px;right:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .home .pgc{transition:none}
+}
+
+}

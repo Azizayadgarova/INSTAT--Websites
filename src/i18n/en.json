@@ -1,4 +1,13 @@
 {
+  "postgrad": {
+    "intro": "Information on doctoral students, PhD candidates and research interns studying at the Institute for Advanced Training of Personnel and Statistical Research",
+    "info": "Information",
+    "course": "Year {{n}}",
+    "more": "More",
+    "less": "Less",
+    "supervisor": "Scientific supervisor",
+    "specialty": "Specialty"
+  },
   "common": {
     "back": "Back",
     "home": "Back to home",
@@ -8,6 +17,10 @@
     "language": "Language",
     "download": "Download",
     "preview": "Preview",
+    "docKicker": "Document",
+    "docFormat": "Format",
+    "docLang": "Language",
+    "docLangName": "English",
     "openResource": "Open resource",
     "redirecting": "Redirecting to the external resource...",
     "readMore": "Read more",

@@ -1,4 +1,13 @@
 {
+	"postgrad": {
+		"intro": "Kadrlar malakasini oshirish va statistik tadqiqotlar institutida tahsil olayotgan doktorant, tayanch doktorant va stajyor tadqiqotchilari toʻgʻrisida",
+		"info": "Ma’lumot",
+		"course": "{{n}}-kurs",
+		"more": "Batafsil",
+		"less": "Yopish",
+		"supervisor": "Ilmiy rahbar",
+		"specialty": "Ixtisoslik"
+	},
 	"common": {
 		"back": "Ortga",
 		"home": "Bosh sahifaga qaytish",
@@ -8,6 +17,10 @@
 		"language": "Til",
 		"download": "Yuklab olish",
 		"preview": "Oldindan koʻrish",
+		"docKicker": "Hujjat",
+		"docFormat": "Format",
+		"docLang": "Til",
+		"docLangName": "Oʻzbekcha",
 		"openResource": "Resursga oʻtish",
 		"redirecting": "Tashqi resursga yoʻnaltirilmoqda...",
 		"readMore": "Toʻliq oʻqish",

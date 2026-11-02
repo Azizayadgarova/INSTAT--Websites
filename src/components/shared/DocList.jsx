@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import DocCard from './DocCard'
 import FileDrawer from './FileDrawer'
-import PreviewButton, { isPdf } from './PreviewButton'
 
 /**
  * `toDoc` shaklidagi ro'yxatlar uchun umumiy ko'rinish:
@@ -11,46 +10,12 @@ import PreviewButton, { isPdf } from './PreviewButton'
  * site-corruption-docs, site-corruption-works — shuning uchun kartochka
  * mantiqini bir joyda saqlaymiz.
  *
- * `path` bo'lsa yuklab olish havolasi chiqadi; rasm bo'lsa havola o'rniga
- * rasmning o'zi ko'rsatiladi (ContentPage dagi Attachment bilan bir xil qoida).
+ * `path` bo'lsa ixcham hujjat kartasi (DocCard) chiqadi: "Yuklab olish" tugmasi bilan; rasm bo'lsa
+ * havola o'rniga rasmning o'zi ko'rsatiladi (ContentPage dagi Attachment bilan bir xil qoida).
  * `previewable` bo'lsa PDF fayllar yonida "Oldindan ko'rish" tugmasi ham chiqadi
  * (PDF sahifadan chiqmasdan o'ng paneldagi iframe'da ochiladi).
  */
 const isImage = url => /\.(png|jpe?g|webp|gif|svg)$/i.test(url ?? '')
-
-const DownloadLink = ({ path }) => {
-	const { t } = useTranslation()
-	return (
-		<a
-			href={path}
-			target='_blank'
-			rel='noopener noreferrer'
-			style={{
-				display: 'inline-flex',
-				alignItems: 'center',
-				gap: 8,
-				padding: '10px 18px',
-				borderRadius: 10,
-				border: '1px solid rgba(var(--blue-rgb),0.4)',
-				background: 'rgba(var(--blue-rgb),0.1)',
-				color: '#fff',
-				textDecoration: 'none',
-				fontSize: 14,
-			}}
-		>
-			<svg width='17' height='17' viewBox='0 0 24 24' fill='none' aria-hidden='true'>
-				<path
-					d='M12 3v12m0 0l-4-4m4 4l4-4M5 21h14'
-					stroke='currentColor'
-					strokeWidth='2'
-					strokeLinecap='round'
-					strokeLinejoin='round'
-				/>
-			</svg>
-			{t('common.download')}
-		</a>
-	)
-}
 
 const DocList = ({ items, previewable = false }) => {
 	const [preview, setPreview] = useState(null)
@@ -61,6 +26,21 @@ const DocList = ({ items, previewable = false }) => {
 				{items.map(item => {
 					// `number` va `date` faqat hujjatlarda bo'ladi (PF-200 · 27.11.2023)
 					const meta = [item.number, item.date].filter(Boolean).join(' · ')
+					// Rasm bo'lsa havola o'rniga rasmning o'zi; fayl bo'lsa hujjat kartasi; faylsiz yozuv — oddiy karta
+					if (item.path && !isImage(item.path)) {
+						return (
+							<li key={item.id}>
+								<DocCard
+									compact
+									heading='h3'
+									kicker={meta}
+									title={item.label}
+									path={item.path}
+									onPreview={previewable ? () => setPreview({ src: item.path, title: item.label }) : undefined}
+								/>
+							</li>
+						)
+					}
 					return (
 						<li
 							key={item.id}
@@ -79,23 +59,15 @@ const DocList = ({ items, previewable = false }) => {
 							{item.label && (
 								<p style={{ color: '#fff', fontSize: 15, lineHeight: 1.6, margin: 0 }}>{item.label}</p>
 							)}
-							{item.path &&
-								(isImage(item.path) ? (
-									<img
-										src={item.path}
-										alt={item.label ?? ''}
-										loading='lazy'
-										decoding='async'
-										style={{ maxWidth: '100%', borderRadius: 10, marginTop: 14, display: 'block' }}
-									/>
-								) : (
-									<div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 14 }}>
-										<DownloadLink path={item.path} />
-										{previewable && isPdf(item.path) && (
-											<PreviewButton onClick={() => setPreview({ src: item.path, title: item.label })} />
-										)}
-									</div>
-								))}
+							{item.path && (
+								<img
+									src={item.path}
+									alt={item.label ?? ''}
+									loading='lazy'
+									decoding='async'
+									style={{ maxWidth: '100%', borderRadius: 10, marginTop: 14, display: 'block' }}
+								/>
+							)}
 						</li>
 					)
 				})}
