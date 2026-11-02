@@ -18,7 +18,7 @@ const DarsJadvallari = () => {
 				{t('menu.oquvFaoliyati.dars-jadvallari')}
 			</h1>
 			<AsyncBoundary loading={loading} error={error} onRetry={retry} isEmpty={items.length === 0} skeleton={<SkeletonText lines={5} />}>
-				<DocList items={items} />
+				<DocList items={items} previewable />
 			</AsyncBoundary>
 		</section>
 	)
