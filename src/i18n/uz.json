@@ -1,4 +1,12 @@
 {
+	"newsPage": {
+		"nw": "Yangi",
+		"more": "Batafsil oʻqish",
+		"of": "ta yangilik",
+		"sh": "Ulashish",
+		"cp": "Havolani nusxalash",
+		"rel": "Boshqa yangiliklar"
+	},
 	"contactPage": {
 		"lead": "Savol va takliflaringiz boʻlsa, telefon, elektron pochta yoki ijtimoiy tarmoqlar orqali murojaat qiling.",
 		"channels": "Aloqa kanallari",

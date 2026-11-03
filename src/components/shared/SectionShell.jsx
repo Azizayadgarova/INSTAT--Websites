@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next'
 
 import PageFrame from '@/components/home/PageFrame'
 import { usePrefersReducedMotion } from '@/components/home/hooks'
+import { PAGE_LEADS } from '@/data/pageLeads.data'
 import { useMenu } from '@/hooks/useMenu'
 import Seo from './Seo'
+import { ShellHeroContext } from './shellHero'
 
 /** Sarlavhaning oxirgi so'zi alohida rangda ("Umumiy <span>ma'lumotlar</span>"). */
 const Title = ({ text }) => {
@@ -85,13 +87,18 @@ function HeroDots() {
 const SectionShell = ({ sectionKey, title, description, lead, links = [], showOutlet = true, children }) => {
 	const outlet = useOutlet()
 	const { pathname } = useLocation()
-	const { t } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const menu = useMenu()
 	const sectionKeys = Object.keys(menu)
 	const sectionIdx = Math.max(0, sectionKeys.indexOf(sectionKey))
 
 	const active = links.find(l => !l.href && (pathname === l.path || pathname.startsWith(`${l.path}/`))) ?? null
 	const pageTitle = active?.name ?? title
+
+	// Sahifa hero'ni almashtirishi mumkin (yangilik: sana + sarlavha) — useShellHero
+	const [hero, setHero] = useState(null)
+	const lang = i18n.resolvedLanguage ?? 'uz'
+	const pageLead = hero ? undefined : (lead ?? PAGE_LEADS[active?.path.split('/').pop()]?.[lang])
 
 	const internal = links.filter(l => !l.href)
 	const at = internal.indexOf(active)
@@ -173,14 +180,14 @@ const SectionShell = ({ sectionKey, title, description, lead, links = [], showOu
 							)}
 						</div>
 						<div className='pg-k st' style={{ '--i': 1 }}>
-							{`0${sectionIdx + 1} · ${title}`}
+							{hero ? [hero.kicker, title].filter(Boolean).join(' · ') : `0${sectionIdx + 1} · ${title}`}
 						</div>
-						<h1 className='st' style={{ '--i': 2 }}>
-							<Title text={pageTitle} />
+						<h1 className='st' style={hero ? { '--i': 2, fontSize: 'clamp(26px,3.2vw,42px)', maxWidth: '28ch' } : { '--i': 2 }}>
+							{hero ? hero.title : <Title text={pageTitle} />}
 						</h1>
-						{lead && (
+						{pageLead && (
 							<p className='pg-lead st' style={{ '--i': 3 }}>
-								{lead}
+								{pageLead}
 							</p>
 						)}
 					</div>
@@ -216,7 +223,7 @@ const SectionShell = ({ sectionKey, title, description, lead, links = [], showOu
 					</aside>
 
 					<article className='ct-b' ref={articleRef}>
-						{(showOutlet ? outlet : null) ?? children}
+						<ShellHeroContext.Provider value={setHero}>{(showOutlet ? outlet : null) ?? children}</ShellHeroContext.Provider>
 						{(prev || next) && (
 							<div className='pg-next'>
 								{prev ? (

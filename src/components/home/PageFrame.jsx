@@ -6,6 +6,7 @@ import HomeNav from './HomeNav'
 import { usePrefersReducedMotion } from './hooks'
 import './home.css'
 import './page.css'
+import './pages.css'
 
 /**
  * Yangi dizaynning umumiy qobig'i: tepa navigatsiya + to'liq ekranli menyu + footer.

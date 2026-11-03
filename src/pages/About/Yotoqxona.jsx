@@ -1,9 +1,14 @@
 import { useTranslation } from 'react-i18next'
-import ContentPage from '@/components/shared/ContentPage'
+import Dormitory from '@/components/inner/Dormitory'
+import InnerPage from '@/components/inner/InnerPage'
 
 const Page = () => {
 	const { t } = useTranslation()
-	return <ContentPage module='hotel' contentKey='hotel' title={t('menu.about.yotoqhona')} />
+	return (
+		<InnerPage title={t('menu.about.yotoqhona')}>
+			<Dormitory />
+		</InnerPage>
+	)
 }
 
 export default Page

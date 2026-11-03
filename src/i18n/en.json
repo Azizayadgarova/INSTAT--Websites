@@ -1,4 +1,12 @@
 {
+  "newsPage": {
+    "nw": "New",
+    "more": "Read more",
+    "of": "news",
+    "sh": "Share",
+    "cp": "Copy link",
+    "rel": "More news"
+  },
   "contactPage": {
     "lead": "If you have questions or suggestions, contact us by phone, email or through social networks.",
     "channels": "Contact channels",
