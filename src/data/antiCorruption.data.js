@@ -11,7 +11,7 @@ export const COMMISSION_COLORS = [
 export const COMMISSION_PHOTOS = [
 	"commission-1.webp",
 	"commission-2.webp",
-	null
+	"commission-3.jpg",
 ]
 export const ANTI_CORRUPTION = {
 	"uz": {
