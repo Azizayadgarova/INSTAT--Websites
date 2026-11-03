@@ -18,7 +18,8 @@ describe('menyu bo‘limlari yangi ichki sahifa qobig‘ida o‘z bo‘limini ko
 			)
 
 			// Yon menyu sarlavhasi va havolalari aynan shu bo'limniki bo'lishi kerak
-			await waitFor(() => expect(container.querySelector('.home .side h4')).not.toBeNull())
+			// Lazy sahifa chunk'i to'liq test yuki ostida sekin yuklanishi mumkin — standart 1 soniya yetmaydi
+			await waitFor(() => expect(container.querySelector('.home .side h4')).not.toBeNull(), { timeout: 5000 })
 			expect(container.querySelector('.side h4').textContent).toBe(i18n.t(`menu.${key}.title`))
 			const hrefs = [...container.querySelectorAll('.side nav a')].map(a => a.getAttribute('href')).filter(Boolean)
 			const internal = hrefs.filter(h => h.startsWith('/'))

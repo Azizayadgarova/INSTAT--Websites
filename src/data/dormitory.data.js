@@ -3,11 +3,11 @@
  * `R`: [tur, matn] — tur: no | in | doc | ok; rasmlar: src/assets/pages/dorm-N.
  */
 export const DORM_PHOTOS = [
-	"dorm-1.webp",
-	"dorm-2.webp",
-	"dorm-3.webp",
-	"dorm-4.webp",
-	"dorm-5.webp"
+	"dorm-1.jpg",
+	"dorm-2.jpg",
+	"dorm-3.jpg",
+	"dorm-4.jpg",
+	"dorm-5.jpg"
 ]
 export const DORMITORY = {
 	"uz": {
