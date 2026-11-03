@@ -198,7 +198,7 @@
 .home .nd-th button.on,.home .nd-th button:hover{opacity:1;border-color:var(--cyan)}
 .home .nd-th img{width:100%;height:100%;object-fit:cover}
 .home .nd-tx{display:grid;gap:14px;margin-top:26px}
-.home .nd-tx p{font-size:16.5px!important;line-height:1.8!important;color:var(--text)!important;max-width:72ch}
+.home .nd-tx p{font-size:16.5px!important;line-height:1.8!important;color:var(--text)!important;}
 .home .nd-tx p b{color:var(--white)}
 .home .nd-tx h3{font:600 19px/1.4 var(--f-display);color:var(--white);margin-top:10px;padding-left:14px;border-left:3px solid var(--cyan)}
 .home .nd-sh{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:26px;padding-top:20px;border-top:1px solid var(--soft);font:500 12px var(--f-mono);color:var(--muted)}
