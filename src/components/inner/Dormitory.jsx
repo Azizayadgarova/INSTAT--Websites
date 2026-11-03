@@ -134,7 +134,7 @@ export default function Dormitory() {
 					</div>
 					<div className='bt'>
 						<a className='btn btn-p' href='tel:+998712038000'>
-							<IconPhone /> +998 71 203 80 00
+							<IconPhone /> +998 93 579 93 12
 						</a>
 						<a className='btn btn-g' href='mailto:info@instat.uz'>
 							<IconMail /> info@instat.uz
