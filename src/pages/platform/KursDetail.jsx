@@ -30,8 +30,11 @@ const ExpandableDescription = ({ html, t }) => {
 
 	useEffect(() => {
 		const el = contentRef.current
-		if (!el || typeof ResizeObserver === 'undefined') return
-		const observer = new ResizeObserver(() => setOverflowing(el.offsetHeight > DESCRIPTION_LIMIT))
+		if (!el) return
+		const measure = () => setOverflowing(el.offsetHeight > DESCRIPTION_LIMIT)
+		measure()
+		if (typeof ResizeObserver === 'undefined') return
+		const observer = new ResizeObserver(measure)
 		observer.observe(el)
 		return () => observer.disconnect()
 	}, [html])
