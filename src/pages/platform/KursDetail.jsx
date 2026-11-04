@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { coursesApi, courseFeaturesApi, courseBlocksApi, courseBlockLessonsApi } from '@/api/resources.api'
@@ -14,6 +14,53 @@ import DeviceIcon from '@/assets/icons/device-line.png'
 import { openCabinet } from '@/utils/cabinet'
 
 const STARS = [0, 1, 2, 3, 4]
+
+/** Tavsif shu balandlikdan (px) oshsa qisqartiriladi va "Batafsil ko'rish" tugmasi chiqadi. */
+const DESCRIPTION_LIMIT = 140
+
+/**
+ * Tavsif (HTML). Kontent DESCRIPTION_LIMIT dan oshmasa — to'liq ko'rsatiladi va
+ * tugma chiqmaydi. Balandlik haqiqiy renderdan o'lchanadi (rasm yuklanishi yoki
+ * oyna kengligi o'zgarishi hisobga olinadi — ResizeObserver).
+ */
+const ExpandableDescription = ({ html, t }) => {
+	const [expanded, setExpanded] = useState(false)
+	const [overflowing, setOverflowing] = useState(false)
+	const contentRef = useRef(null)
+
+	useEffect(() => {
+		const el = contentRef.current
+		if (!el || typeof ResizeObserver === 'undefined') return
+		const observer = new ResizeObserver(() => setOverflowing(el.offsetHeight > DESCRIPTION_LIMIT))
+		observer.observe(el)
+		return () => observer.disconnect()
+	}, [html])
+
+	const collapsed = overflowing && !expanded
+
+	return (
+		<>
+			<div style={{ maxHeight: collapsed ? `${DESCRIPTION_LIMIT}px` : 'none', overflow: 'hidden', position: 'relative' }}>
+				<div ref={contentRef}>
+					<RichContent html={html} />
+				</div>
+			</div>
+			{overflowing && (
+				<button
+					onClick={() => setExpanded(e => !e)}
+					style={{
+						display: 'flex', alignItems: 'center', gap: '6px', marginTop: '12px',
+						background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+						color: 'rgba(var(--cyan-rgb),1)', fontSize: '14px', fontFamily: 'var(--font-display)',
+					}}
+				>
+					{expanded ? t('pages.kursDetail.qisqartirish', 'Qisqartirish') : t('pages.kursDetail.batafsil_korish', "Batafsil ko'rish")}
+					<span style={{ transform: expanded ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>▾</span>
+				</button>
+			)}
+		</>
+	)
+}
 
 const getPerks = t => [
 	t('pages.kursDetail.tugatish_sertifikati', 'Tugatish sertifikati'),
@@ -168,7 +215,6 @@ const KursDetail = () => {
 	const { t, i18n } = useTranslation()
 	const lang = i18n.resolvedLanguage ?? 'uz'
 	const [tab, setTab] = useState('haqida')
-	const [expanded, setExpanded] = useState(false)
 
 	const { data: course, loading, error, retry } = useApiResource(
 		() => coursesApi.getById(id),
@@ -324,22 +370,7 @@ const KursDetail = () => {
 
 								{tab === 'haqida' ? (
 									description ? (
-										<>
-											<div style={{ maxHeight: expanded ? 'none' : '140px', overflow: 'hidden', position: 'relative' }}>
-												<RichContent html={description} />
-											</div>
-											<button
-												onClick={() => setExpanded(e => !e)}
-												style={{
-													display: 'flex', alignItems: 'center', gap: '6px', marginTop: '12px',
-													background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-													color: 'rgba(var(--cyan-rgb),1)', fontSize: '14px', fontFamily: 'var(--font-display)',
-												}}
-											>
-												{expanded ? t('pages.kursDetail.qisqartirish', 'Qisqartirish') : t('pages.kursDetail.batafsil_korish', "Batafsil ko'rish")}
-												<span style={{ transform: expanded ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>▾</span>
-											</button>
-										</>
+										<ExpandableDescription html={description} t={t} />
 									) : (
 										<p style={{ color: 'rgba(150,160,180,1)', fontSize: '14px', fontFamily: 'var(--font-display)' }}>
 											{t('common.comingSoonHint')}
