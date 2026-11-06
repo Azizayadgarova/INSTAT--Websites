@@ -73,5 +73,9 @@ export const siteCorruptionDocsApi = createResourceApi('site-corruption-docs')
 export const siteCorruptionWorksApi = createResourceApi('site-corruption-works')
 /** DOC — dars jadvallari (o'quv faoliyati) */
 export const siteLessonDocsApi = createResourceApi('site-lesson-docs')
+/** DOC — institut tadqiqotlari (ilm-fan): ko'p yozuv, fayl `file` maydonida */
+export const siteScienceResearchesApi = createResourceApi('site-science-researches')
+/** DOC — ilmiy tadqiqot dasturlari (ilm-fan): ko'p yozuv, fayl `file` maydonida */
+export const siteScienceProgramsApi = createResourceApi('site-science-programs')
 /** DOC — o'quv uslubiy materiallar (o'quv faoliyati) */
 export const siteEducationMaterialsApi = createResourceApi('site-education-materials')

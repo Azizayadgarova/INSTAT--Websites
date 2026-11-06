@@ -188,6 +188,8 @@ export const toPost = (item, lang) => ({
  *   site-events              (faqat label_* va path)
  *   site-corruption-docs     (label_*, date, number, path — hujjat fayli)
  *   site-corruption-works    (label_*, path)
+ *   site-science-researches, site-science-programs
+ *                            (label_*, file — fayl `path` emas, `file` nomida keladi)
  *
  * `path` — media faylga to'liq URL yoki null.
  */
@@ -196,7 +198,7 @@ export const toDoc = (item, lang) => ({
 	label: pickI18n(item, 'label', lang),
 	date: (item.date ?? '').toString().trim(),
 	number: (item.number ?? '').toString().trim(),
-	path: item.path || null,
+	path: item.path || item.file || null,
 })
 
 /**
